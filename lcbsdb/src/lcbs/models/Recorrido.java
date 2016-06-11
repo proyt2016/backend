@@ -1,11 +1,16 @@
 package lcbs.models;
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.hibernate.mapping.List;
+import java.util.List;
 
 @Entity
 @XmlRootElement
@@ -13,24 +18,25 @@ public class Recorrido implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     
     private String nombre;
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name="RecorridoId")
     private List<PuntoRecorrido> puntosDeRecorrido;
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name="RecorridoId")
     private List<GrupoHorario> horarios;
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name="RecorridoId")
     private List<Precio> precios;
     
  
 
-    public Recorrido() {
-        id = "";
-        nombre = "";
-        puntosDeRecorrido = List<PuntosRecorrido>();
-        horarios = new List<Horario>();
-        precios = new List<Precio>();
-    }
+    public Recorrido() {}
     
-    public Recorrido(String id, String nom, List<PuntoRecorrido> punRec, List<Horario> hor, List<Precio> prec) {
+    public Recorrido(String id, String nom, List<PuntoRecorrido> punRec, List<GrupoHorario> hor, List<Precio> prec) {
         this.id = id;
         this.nombre = nom;
         this.puntosDeRecorrido = punRec;
@@ -62,11 +68,11 @@ public class Recorrido implements Serializable{
         return this.puntosDeRecorrido;
     }
 
-    public void setHorarios(List<Horario> val){
+    public void setHorarios(List<GrupoHorario> val){
         this.horarios = val;
     }
     
-    public List<Horario> getHorarios(){
+    public List<GrupoHorario> getHorarios(){
         return this.horarios;
     }
 

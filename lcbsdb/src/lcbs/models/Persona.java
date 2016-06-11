@@ -1,16 +1,18 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Id;
-
-import java.io.Serializable;
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hibernate.mapping.List;
+import java.util.List;
 
 @Entity
 @XmlRootElement
@@ -18,23 +20,20 @@ public abstract class Persona implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     
     private String nombre;
-    private String apellido;    
+    private String apellido;
+    @Embedded
     private Email email;
+    @Embedded
     private List<Telefono> telefonosContacto;
+    @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
      
 
-    public Persona() {
-        id = "";
-        nombre = "";
-        apellido = "";
-        email = new Email();
-        telefonosContacto = new List<Telefono>();
-        fechaNacimiento = new Date();
-    }
+    public Persona() {}
     
     public Persona(String id, String nom, String ape, Email mail, List<Telefono> tels, Date fecNac) {
         this.id = id;

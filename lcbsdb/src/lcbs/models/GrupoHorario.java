@@ -1,12 +1,27 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import java.sql.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hibernate.mapping.List;
+import java.util.List;
+
 
 @Entity
 @XmlRootElement
@@ -14,24 +29,29 @@ public class GrupoHorario implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     
     private String nombre;
-    private List<EnumDias> diasSemana; //Lista de dias de la semana en los que funciona el grupo
+    @ElementCollection(targetClass = DiasSemana.class)
+    @CollectionTable(name = "dias", joinColumns = @JoinColumn(name = "GrupoHorarioId"))
+    @Column(name = "diasSemana")
+    @Enumerated(EnumType.STRING)
+    private List<DiasSemana> diasSemana; //Lista de dias de la semana en los que funciona el grupo
+    @ElementCollection
+    @CollectionTable(name="DiasGruposHorarios", joinColumns=@JoinColumn(name="GrupoHorarioId"))
+    @Column(name="DiasEspecificos")
+    @Temporal(TemporalType.TIMESTAMP)
     private List<Date> diasEspecificos; //Lista de dias especificos en los que funciona este grupo, por ejemplo, semana de turismo
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name="GrupoHorarioId")
     private List<Horario> horarios;
     
  
 
-    public GrupoHorario() {
-        id = "";
-        nombre = "";
-        diasSemana = List<EnumDias>();
-        diasEspecificos = new List<Date>();
-        horarios = new List<Horario>();
-    }
+    public GrupoHorario() {}
     
-    public GrupoHorario(String id, String nom, List<EnumDias> diasSemana, List<Date> diasEspec, List<Horario> hora) {
+    public GrupoHorario(String id, String nom, List<DiasSemana> diasSemana, List<Date> diasEspec, List<Horario> hora) {
         this.id = id;
         this.nombre = nom;
         this.diasSemana = diasSemana;
@@ -55,11 +75,11 @@ public class GrupoHorario implements Serializable{
         return this.nombre;
     }
 
-    public void setDiasSemana(List<EnumDias> val){
+    public void setDiasSemana(List<DiasSemana> val){
         this.diasSemana = val;
     }
     
-    public List<EnumDias> getDiasSemana(){
+    public List<DiasSemana> getDiasSemana(){
         return this.diasSemana;
     }
 

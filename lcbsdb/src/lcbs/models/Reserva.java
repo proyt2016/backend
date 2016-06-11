@@ -1,12 +1,18 @@
 package lcbs.models;
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
-import org.apache.james.mime4j.field.datetime.DateTime;
-import org.hibernate.mapping.List;
 
 @Entity
 @XmlRootElement
@@ -14,32 +20,35 @@ public class Reserva implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="ReservaId")
     private Viaje viaje;
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="ReservaId")
     private Precio precio;
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="ReservaOrigId")
     private PuntoRecorrido origen;
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="ReservaDestId")
     private PuntoRecorrido destino;
-    private DateTime fechaReserva;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaReserva;
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="ReservaId")
     private Usuario usuarioReserva;
     private String ciPersona;
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="ReservaId")
     private Empleado empleado;
     private boolean utilizada;
      
-    public Reserva() {
-        id = "";
-        viaje = new Viaje();
-        precio = new Precio();
-        origen = new PuntoRecorrido();
-        destino = new PuntoRecorrido();
-        fechaReserva = new DateTime();
-        usuarioReserva = new Usuario();
-        ciPersona = "";
-        empleado = new Empleado();
-        utilizada = false;
-    }
+    public Reserva() {}
     
-    public Reserva(String id, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, DateTime fecRes, Usuario usRes, String ciPer, Empleado emp, boolean usa) {
+    public Reserva(String id, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, Date fecRes, Usuario usRes, String ciPer, Empleado emp, boolean usa) {
         this.id = id;
         this.viaje = via;
         this.precio = prec;
@@ -92,11 +101,11 @@ public class Reserva implements Serializable{
 		this.destino = destino;
 	}
 
-	public DateTime getFechaReserva() {
+	public Date getFechaReserva() {
 		return fechaReserva;
 	}
 
-	public void setFechaReserva(DateTime fechaReserva) {
+	public void setFechaReserva(Date fechaReserva) {
 		this.fechaReserva = fechaReserva;
 	}
 

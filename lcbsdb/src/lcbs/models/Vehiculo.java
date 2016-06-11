@@ -1,19 +1,28 @@
 package lcbs.models;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
-import org.hibernate.mapping.List;
 
 @Entity
 @XmlRootElement
 public class Vehiculo implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     private String numeroVehiculo;
@@ -21,24 +30,16 @@ public class Vehiculo implements Serializable{
     private String marca;
     private String modelo;
     private Integer anioFabricacion;
+    @Temporal(TemporalType.DATE)
     private Date fechaAlta;
     private Integer cantidadAsientos;
     private Boolean conGuarda;
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name="VehiculoId")
     private List<MantenimientoVehiculo> mantenimientos;
    
 
-    public Vehiculo() {
-        id = "";
-        numeroVehiculo = "";
-        matricula = "";
-        marca = "";
-        modelo = "";
-        anioFabricacion = 0;
-        fechaAlta = new Date();
-        cantidadAsientos = 0;
-        conGuarda = false;
-        mantenimientos = new List<MantenimientoVehiculo>();
-    }
+    public Vehiculo() {}
     
     public Vehiculo(String id, String numV, String mat, String mar, String mod, Integer anioFab, Date fecAlta, Integer cantAs, Boolean conG, List<MantenimientoVehiculo> mant) {
         this.id = id;

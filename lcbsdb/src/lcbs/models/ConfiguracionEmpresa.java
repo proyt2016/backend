@@ -5,8 +5,10 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.hibernate.mapping.List;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import java.util.List;
+import javax.persistence.Embedded;
 
 @Entity
 @XmlRootElement
@@ -14,12 +16,15 @@ public class ConfiguracionEmpresa implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     
     private String nombre;
     private boolean aceptaCuponera;
     private String urlAcceso;
+    @Embedded
     private List<Telefono> telefonos;
+    @Embedded
     private List<Email> emails;
     private String urlLdap;
     private String usuarioLdap;

@@ -1,0 +1,66 @@
+package lcbs.models;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+
+@Entity
+@XmlRootElement
+public class HistorialEstadosEncomienda implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+    
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="HistorialId")
+    private EstadosEncomienda estado;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
+    
+ 
+
+    public HistorialEstadosEncomienda() {}
+    
+    public HistorialEstadosEncomienda(String id, EstadosEncomienda est, Date fec) {
+        this.id = id;
+        this.estado = est;
+        this.fecha = fec;
+    }
+    
+    public void setId(String val){
+        this.id = val;
+    }
+    
+    public String getId(){
+        return this.id;
+    }
+
+    public void setEstado(EstadosEncomienda val){
+        this.estado = val;
+    }
+    
+    public EstadosEncomienda getEstado(){
+        return this.estado;
+    }
+    
+    public void setFecha(Date val){
+        this.fecha = val;
+    }
+    
+    public Date getFecha(){
+        return this.fecha;
+    }
+}

@@ -2,11 +2,16 @@ package lcbs.models;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hibernate.mapping.List;
+import java.util.Date;
+import java.util.List;
+
 
 @Entity
 @XmlRootElement
@@ -17,17 +22,15 @@ public class Usuario extends Persona implements Serializable{
     private String clave;
     private String redSocialUsada;
     private String idRedSocial;
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private Cuponera cuponera;
+    @OneToMany(mappedBy="USUARIO_ENC")
+    private List<Encomienda> encomiendas;
 
  
 
-    public Usuario() {
-        nombreAMostrar = "";
-        clave = "";
-        redSocialUsada = "";
-        idRedSocial = "";
-        cuponera = new Cuponera();
-    }
+    public Usuario() {}
     
     public Usuario(String id, String nom, String ape, Email mail, List<Telefono> tels, Date fecNac, String nomMos, String clave, String redSoc, String idRedsoc, Cuponera cup) {
         super(id, nom, ape, mail, tels, fecNac);

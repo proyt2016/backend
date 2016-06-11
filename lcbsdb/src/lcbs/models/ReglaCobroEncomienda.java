@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -18,6 +20,7 @@ public class ReglaCobroEncomienda implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     
     private String nombre;
@@ -27,13 +30,7 @@ public class ReglaCobroEncomienda implements Serializable{
     
  
 
-    public ReglaCobroEncomienda() {
-        id = "";
-        nombre = "";
-        operador = "";
-        valor = 0;
-        precio = 0.0f;
-    }
+    public ReglaCobroEncomienda() {}
     
     public ReglaCobroEncomienda(String id, String nom, String oper, Integer val, float prec) {
         this.id = id;

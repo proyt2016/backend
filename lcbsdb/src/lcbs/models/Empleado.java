@@ -1,13 +1,14 @@
 package lcbs.models;
 import java.io.Serializable;
-
-import java.io.Serializable;
+import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hibernate.mapping.List;
+
 
 @Entity
 @XmlRootElement
@@ -15,6 +16,8 @@ public class Empleado extends Persona implements Serializable{
     private static final long serialVersionUID = 1L; 
     
     private String idEmpleadoLdap;
+    @ManyToOne
+    @JoinColumn(name = "PERFIL_FK")
     private Perfil perfil;
 
  

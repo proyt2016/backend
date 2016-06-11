@@ -2,11 +2,16 @@ package lcbs.models;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.hibernate.mapping.List;
+import java.util.List;
 
 @Entity
 @XmlRootElement
@@ -14,6 +19,7 @@ public class Perfil implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     
     private String nombre;
@@ -25,21 +31,12 @@ public class Perfil implements Serializable{
     private boolean modulo6;
     private boolean modulo7;
     private boolean modulo8;
+    @OneToMany(mappedBy="PERFIL")
+    private List<Empleado> empleados;
     
      
 
-    public Perfil() {
-        id = "";
-        nombre = "";
-        modulo1 = false;
-        modulo2 = false;
-        modulo3 = false;
-        modulo4 = false;
-        modulo5 = false;
-        modulo6 = false;
-        modulo7 = false;
-        modulo8 = false;
-    }
+    public Perfil() {}
     
     public Perfil(String id, String nom, boolean mod1, boolean mod2, boolean mod3, boolean mod4, boolean mod5, boolean mod6, boolean mod7, boolean mod8) {
         this.id = id;

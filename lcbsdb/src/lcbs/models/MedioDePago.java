@@ -2,6 +2,8 @@ package lcbs.models;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -13,6 +15,7 @@ public class MedioDePago implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     
     private String nombre;
@@ -23,16 +26,9 @@ public class MedioDePago implements Serializable{
     
     
 
-    public MedioDePago() {
-        id = "";
-        nombre = "";
-        activo = false;
-        cuenta = "";
-        usuario = "";
-        clave = "";
-    }
+    public MedioDePago() { }
     
-    public MedioDePago(String id, String nom, boolean, act, String cue, String usu, String clav) {
+    public MedioDePago(String id, String nom, boolean act, String cue, String usu, String clav) {
         this.id = id;
         this.nombre = nom;
         this.activo = act;

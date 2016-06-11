@@ -3,6 +3,8 @@ package lcbs.models;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,6 +16,7 @@ public abstract class PuntoRecorrido implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     
     private String nombre;
@@ -21,11 +24,7 @@ public abstract class PuntoRecorrido implements Serializable{
     
  
 
-    public PuntoRecorrido() {
-        id = "";
-        nombre = "";
-        ubicacionMapa = "";
-    }
+    public PuntoRecorrido() {}
     
     public PuntoRecorrido(String id, String nom, String uMap) {
         this.id = id;

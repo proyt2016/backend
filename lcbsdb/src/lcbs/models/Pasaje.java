@@ -1,16 +1,21 @@
 package lcbs.models;
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.james.mime4j.field.datetime.DateTime;
-import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hibernate.mapping.List;
 
 @Entity
 @XmlRootElement
@@ -18,32 +23,36 @@ public class Pasaje implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="PasajeId")
     private Viaje viaje;
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="PasajeId")
     private Precio precio;
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="PasajeOrigId")
     private PuntoRecorrido origen;
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="PasajeDestId")
     private PuntoRecorrido destino;
-    private DateTime fechaCompra;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaCompra;
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="PasajeDestId")
     private Usuario comprador;
     private String ciPersona;
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="PasajeDestId")
     private Empleado vendedor;
     
     
 
-    public Pasaje() {
-        id = "";
-        viaje = new Viaje();
-        precio = new Precio();
-        origen = new PuntoRecorrido();
-        destino = new PuntoRecorrido();
-        fechaCompra = new DateTime();
-        comprador = new Usuario();
-        ciPersona = "";
-        vendedor = new Empleado();
-    }
+    public Pasaje() {}
     
-    public Pasaje(String id, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, DateTime fecVen, Usuario comp, String ciPer, Empleado vend) {
+    public Pasaje(String id, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, Date fecVen, Usuario comp, String ciPer, Empleado vend) {
         this.id = id;
         this.viaje = via;
         this.precio = prec;
@@ -95,11 +104,11 @@ public class Pasaje implements Serializable{
         return this.destino;
     }
 
-    public void setFechaCompra(DateTime val){
+    public void setFechaCompra(Date val){
         this.fechaCompra = val;
     }
     
-    public DateTime getFechaCompra(){
+    public Date getFechaCompra(){
         return this.fechaCompra;
     }
 

@@ -1,65 +1,76 @@
 package lcbs.models;
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.apache.james.mime4j.field.datetime.DateTime;
-import org.hibernate.mapping.List;
+
 
 @Entity
 @XmlRootElement
 public class Encomienda implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="ORIGEN_ID")
     private PuntoRecorrido origen;
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="DESTINO_ID")
     private PuntoRecorrido destino;
+    @ManyToOne
+    @JoinColumn(name="USUARIO_ENC_FK")
     private Usuario emisor;
     private String ciEmisor;
+    @Embedded
     private Telefono telEmisor;
+    @ManyToOne
+    @JoinColumn(name="USUARIO_ENC_FK")
     private Usuario receptor;
     private String ciReceptor;
+    @Embedded
     private Telefono telReceptor;
     private String direccionReceptor;
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="REGLA_COBRO_ID")
     private ReglaCobroEncomienda reglaCobro;
     private float monto;
     private boolean pagaReceptor;
+    @ManyToOne
+    @JoinColumn(name="ENC_VIAJE_fk")
     private Viaje viajeAsignado;
-    private List<EstadoEncomienda> estados;
-    private EstadoEncomienda estadoActual;
-    private DateTime fechaIngreso;
-    private DateTime fechaEntrega;
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn(name="HIST_ESTADOS")
+    private List<HistorialEstadosEncomienda> estados;
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="ESTADO")
+    private EstadosEncomienda estadoActual;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaIngreso;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaEntrega;
     private boolean retiraEnSucursal;
 
  
 
-    public Encomienda() {
-        id = "";
-        origen = new PuntoRecorrido();
-        destino = new PuntoRecorrido();
-        emisor = new Usuario();
-        ciEmisor = "";
-        telEmisor = new Telefono();
-        receptor = new Usuario();
-        ciReceptor = "";
-        telReceptor = new Telefono();
-        direccionReceptor = "";
-        reglaCobro = new ReglaCobroEncomienda();
-        monto = 0.0f;
-        pagaReceptor = false;
-        viajeAsignado = new Viaje();
-        estados = new List<EstadoEncomienda>();
-        estadoActual = new EstadoEncomienda();
-        fechaIngreso = new DateTime();
-        fechaEntrega = new DateTime();
-        retiraEnSucursal = false;
-
-    }
+    public Encomienda() {}
     
-    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<EstadoEncomienda> estds, EstadoEncomienda estAc, DateTime fecIng, DateTime fecEn, boolean retiraSuc) {
+    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -128,6 +139,30 @@ public class Encomienda implements Serializable{
     public Telefono getTelEmisor(){
         return this.telEmisor;
     }
+    
+    public void setReceptor(Usuario val){
+        this.receptor = val;
+    }
+    
+    public Usuario getReceptor(){
+        return this.receptor;
+    }
+    
+    public void setCiReceptor(String val){
+        this.ciReceptor = val;
+    }
+    
+    public String getCiReceptor(){
+        return this.ciReceptor;
+    }
+    
+    public void setTelReceptor(Telefono val){
+        this.telReceptor = val;
+    }
+    
+    public Telefono getTelReceptor(){
+        return this.telReceptor;
+    }
 
     public void setDireccionReceptor(String val){
         this.direccionReceptor = val;
@@ -169,35 +204,35 @@ public class Encomienda implements Serializable{
         return this.viajeAsignado;
     }
 
-    public void setEstados(List<EstadoEncomienda> val){
+    public void setEstados(List<HistorialEstadosEncomienda> val){
         this.estados = val;
     }
     
-    public List<EstadoEncomienda> getEstados(){
+    public List<HistorialEstadosEncomienda> getEstados(){
         return this.estados;
     }
 
-    public void setEstadoActual(EstadoEncomienda val){
+    public void setEstadoActual(EstadosEncomienda val){
         this.estadoActual = val;
     }
     
-    public EstadoEncomienda getEstadoActual(){
+    public EstadosEncomienda getEstadoActual(){
         return this.estadoActual;
     }
 
-    public void setFechaIngreso(DateTime val){
+    public void setFechaIngreso(Date val){
         this.fechaIngreso = val;
     }
     
-    public DateTime getFechaIngreso(){
+    public Date getFechaIngreso(){
         return this.fechaIngreso;
     }
 
-    public void setFechaEntrega(DateTime val){
+    public void setFechaEntrega(Date val){
         this.fechaEntrega = val;
     }
     
-    public DateTime getFechaEntrega(){
+    public Date getFechaEntrega(){
         return this.fechaEntrega;
     }
 

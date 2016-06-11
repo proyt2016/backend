@@ -5,6 +5,11 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
 
 @Entity
 @XmlRootElement
@@ -12,16 +17,12 @@ public class Cuponera implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-    
-    private Usuario usuario;
     private float saldo;
  
 
-    public Cuponera() {
-        id = "";
-        saldo = 0.0f;
-    }
+    public Cuponera() {}
     
     public Cuponera(String id, float saldo) {
         this.id = id;
@@ -35,7 +36,7 @@ public class Cuponera implements Serializable{
     public String getId(){
         return this.id;
     }
-
+    
     public void setSaldo(float val){
         this.saldo = val;
     }

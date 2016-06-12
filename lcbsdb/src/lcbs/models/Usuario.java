@@ -32,8 +32,8 @@ public class Usuario extends Persona implements Serializable{
 
     public Usuario() {}
     
-    public Usuario(String id, String nom, String ape, Email mail, List<Telefono> tels, Date fecNac, String nomMos, String clave, String redSoc, String idRedsoc, Cuponera cup) {
-        super(id, nom, ape, mail, tels, fecNac);
+    public Usuario(String id, String nom, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, Cuponera cup) {
+        super(id, nom, ape, mail, tels, fecNac, elim);
         this.nombreAMostrar = nomMos;
         this.clave = clave;
         this.redSocialUsada = redSoc;

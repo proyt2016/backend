@@ -47,12 +47,15 @@ public class Pasaje implements Serializable{
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
     @JoinColumn(name="PasajeDestId")
     private Empleado vendedor;
+    private Boolean usado;
+    private Boolean pago;
+    private Boolean eliminado;
     
     
 
     public Pasaje() {}
     
-    public Pasaje(String id, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, Date fecVen, Usuario comp, String ciPer, Empleado vend) {
+    public Pasaje(String id, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, Date fecVen, Usuario comp, String ciPer, Empleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.id = id;
         this.viaje = via;
         this.precio = prec;
@@ -62,6 +65,9 @@ public class Pasaje implements Serializable{
         this.comprador = comp;
         this.ciPersona = ciPer;
         this.vendedor = vend;
+        this.usado = usd;
+        this.pago = pg;
+        this.eliminado = elim;
     }
     
     public void setId(String val){
@@ -134,5 +140,29 @@ public class Pasaje implements Serializable{
     
     public Empleado getVendedor(){
         return this.vendedor;
+    }
+    
+    public void setUsado(Boolean val){
+        this.usado = val;
+    }
+    
+    public Boolean getUsado(){
+        return this.usado;
+    }
+    
+    public void setPago(Boolean val){
+        this.pago = val;
+    }
+    
+    public Boolean getPago(){
+        return this.pago;
+    }
+    
+    public void setEliminado(Boolean val){
+        this.eliminado = val;
+    }
+    
+    public Boolean getEliminado(){
+        return this.eliminado;
     }
 }

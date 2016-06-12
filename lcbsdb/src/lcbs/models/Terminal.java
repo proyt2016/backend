@@ -24,8 +24,8 @@ public class Terminal extends PuntoRecorrido implements Serializable{
 
     public Terminal() {}
     
-    public Terminal(String id, String nom, String uMap, List<Telefono> tels, List<Email> mails, Boolean acEnc) {
-        super(id, nom, uMap);
+    public Terminal(String id, String nom, String uMap, List<Telefono> tels, List<Email> mails, Boolean acEnc, Boolean elim) {
+        super(id, nom, uMap, elim);
         this.telefonosContacto = tels;
         this.mailsDeContacto = mails;
         this.aceptaEncomiendas = acEnc;

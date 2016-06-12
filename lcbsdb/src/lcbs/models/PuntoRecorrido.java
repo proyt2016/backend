@@ -21,15 +21,17 @@ public abstract class PuntoRecorrido implements Serializable{
     
     private String nombre;
     private String ubicacionMapa;
+    private Boolean eliminado;
     
  
 
     public PuntoRecorrido() {}
     
-    public PuntoRecorrido(String id, String nom, String uMap) {
+    public PuntoRecorrido(String id, String nom, String uMap, Boolean elim) {
         this.id = id;
         this.nombre = nom;
         this.ubicacionMapa = uMap;
+        this.eliminado = elim;
     }
     
     public void setId(String val){
@@ -56,5 +58,11 @@ public abstract class PuntoRecorrido implements Serializable{
         return this.ubicacionMapa;
     }
 
+    public void setEliminado(Boolean val){
+        this.eliminado = val;
+    }
     
+    public Boolean getEliminado(){
+        return this.eliminado;
+    }
 }

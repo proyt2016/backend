@@ -15,8 +15,8 @@ public class Parada extends PuntoRecorrido implements Serializable{
     
     public Parada() {}
     
-    public Parada(String id, String nom, String uMap) {
-        super(id, nom, uMap);
+    public Parada(String id, String nom, String uMap, Boolean elim) {
+        super(id, nom, uMap, elim);
     }
     
 }

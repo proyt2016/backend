@@ -47,12 +47,21 @@ public class Viaje implements Serializable{
 
     public Viaje() {}
     
-    public Viaje(Recorrido rec, Horario hor, Date fecSalida, List<Empleado> emp, Vehiculo coche) {
-        this.recorrido = rec;
+    public Viaje(String id, Recorrido rec, Horario hor, Date fecSalida, List<Empleado> emp, Vehiculo coche) {
+        this.id = id;
+    	this.recorrido = rec;
         this.horario = hor;
         this.fechaSalida = fecSalida;
         this.empleados = emp;
         this.coche = coche;
+    }
+    
+    public void setId(String val){
+        this.id = val;
+    }
+    
+    public String getId(){
+        return this.id;
     }
     
     public void setRecorrido(Recorrido val){

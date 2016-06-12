@@ -31,17 +31,19 @@ public abstract class Persona implements Serializable{
     private List<Telefono> telefonosContacto;
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
+    private boolean eliminado;
      
 
     public Persona() {}
     
-    public Persona(String id, String nom, String ape, Email mail, List<Telefono> tels, Date fecNac) {
+    public Persona(String id, String nom, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim) {
         this.id = id;
         this.nombre = nom;
         this.apellido = ape;
         this.email = mail;
         this.telefonosContacto = tels;
         this.fechaNacimiento = fecNac;
+        this.eliminado = elim;
     }
     
     public void setId(String val){
@@ -90,5 +92,14 @@ public abstract class Persona implements Serializable{
     
     public Date getFechaNacimiento(){
         return this.fechaNacimiento;
+    }
+    
+
+    public void setEliminado(Boolean val){
+    	this.eliminado = val;
+    }
+    
+    public Boolean getEliminado(){
+    	return this.eliminado;
     }
 }

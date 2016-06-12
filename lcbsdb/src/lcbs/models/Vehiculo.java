@@ -37,11 +37,12 @@ public class Vehiculo implements Serializable{
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name="VehiculoId")
     private List<MantenimientoVehiculo> mantenimientos;
+    private Boolean eliminado;
    
 
     public Vehiculo() {}
     
-    public Vehiculo(String id, String numV, String mat, String mar, String mod, Integer anioFab, Date fecAlta, Integer cantAs, Boolean conG, List<MantenimientoVehiculo> mant) {
+    public Vehiculo(String id, String numV, String mat, String mar, String mod, Integer anioFab, Date fecAlta, Integer cantAs, Boolean conG, List<MantenimientoVehiculo> mant, Boolean elim) {
         this.id = id;
         this.numeroVehiculo = numV;
         this.matricula = mat;
@@ -52,6 +53,7 @@ public class Vehiculo implements Serializable{
         this.cantidadAsientos = cantAs;
         this.conGuarda = conG;
         this.mantenimientos = mant;
+        this.eliminado = elim;
     }
 
     public void setId(String val){
@@ -132,5 +134,13 @@ public class Vehiculo implements Serializable{
     
     public List<MantenimientoVehiculo> getMantenimientos(){
         return this.mantenimientos;
-    }   
+    }  
+    
+    public void setEliminado(Boolean val){
+        this.eliminado = val;
+    }
+    
+    public Boolean getEliminado(){
+        return this.eliminado;
+    }
 }

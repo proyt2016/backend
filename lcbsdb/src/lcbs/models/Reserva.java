@@ -45,10 +45,11 @@ public class Reserva implements Serializable{
     @JoinColumn(name="ReservaId")
     private Empleado empleado;
     private boolean utilizada;
+    private boolean eliminada;
      
     public Reserva() {}
     
-    public Reserva(String id, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, Date fecRes, Usuario usRes, String ciPer, Empleado emp, boolean usa) {
+    public Reserva(String id, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, Date fecRes, Usuario usRes, String ciPer, Empleado emp, boolean usa, boolean elim) {
         this.id = id;
         this.viaje = via;
         this.precio = prec;
@@ -59,6 +60,7 @@ public class Reserva implements Serializable{
         this.ciPersona = ciPer;
         this.empleado = emp;
         this.utilizada = usa;
+        this.eliminada = elim;
     }
 
 	public String getId() {
@@ -141,5 +143,11 @@ public class Reserva implements Serializable{
 		this.utilizada = utilizada;
 	}
     
-    
+	public boolean isEliminada() {
+		return eliminada;
+	}
+
+	public void setEliminada(boolean eliminada) {
+		this.eliminada = eliminada;
+	}
 }

@@ -31,17 +31,19 @@ public class Recorrido implements Serializable{
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name="RecorridoId")
     private List<Precio> precios;
+    private Boolean eliminado;
     
  
 
     public Recorrido() {}
     
-    public Recorrido(String id, String nom, List<PuntoRecorrido> punRec, List<GrupoHorario> hor, List<Precio> prec) {
+    public Recorrido(String id, String nom, List<PuntoRecorrido> punRec, List<GrupoHorario> hor, List<Precio> prec, Boolean elim) {
         this.id = id;
         this.nombre = nom;
         this.puntosDeRecorrido = punRec;
         this.horarios = hor;
         this.precios = prec;
+        this.eliminado = elim;
     }
     
     public void setId(String val){
@@ -84,5 +86,11 @@ public class Recorrido implements Serializable{
         return this.precios;
     }
 
+    public void setEliminado(Boolean val){
+        this.eliminado = val;
+    }
     
+    public Boolean getEliminado(){
+        return this.eliminado;
+    }
 }

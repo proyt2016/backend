@@ -1,38 +1,22 @@
-package lcbs.models;
-
-import java.io.Serializable;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.xml.bind.annotation.XmlRootElement;
+package lcbs.shares;
 
 import java.util.Date;
 import java.util.List;
 
-
-@Entity
-@XmlRootElement
-public class Usuario extends Persona implements Serializable{
-    private static final long serialVersionUID = 1L; 
+public class DataUsuario extends DataPersona{
     
     private String nombreAMostrar;
     private String clave;
     private String redSocialUsada;
     private String idRedSocial;
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Cuponera cuponera;
-    @OneToMany(mappedBy="USUARIO_ENC")
-    private List<Encomienda> encomiendas;
+    private DataCuponera cuponera;
+    private List<DataEncomienda> encomiendas;
 
  
 
-    public Usuario() {}
+    public DataUsuario() {}
     
-    public Usuario(String id, String nom, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, Cuponera cup, List<Encomienda> enc) {
+    public DataUsuario(String id, String nom, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, DataCuponera cup, List<DataEncomienda> enc) {
         super(id, nom, ape, mail, tels, fecNac, elim);
         this.nombreAMostrar = nomMos;
         this.clave = clave;
@@ -74,19 +58,19 @@ public class Usuario extends Persona implements Serializable{
         return this.idRedSocial;
     }
 
-    public void setCuponera(Cuponera val){
+    public void setDataCuponera(DataCuponera val){
         this.cuponera = val;
     }
     
-    public Cuponera getCuponera(){
+    public DataCuponera getDataCuponera(){
         return this.cuponera;
     }
     
-    public void setEncomiendas(List<Encomienda> val){
+    public void setDataEncomiendas(List<DataEncomienda> val){
         this.encomiendas = val;
     }
     
-    public List<Encomienda> getEncomiendas(){
+    public List<DataEncomienda> getDataEncomiendas(){
         return this.encomiendas;
     }
 }

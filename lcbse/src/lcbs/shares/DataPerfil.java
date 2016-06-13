@@ -1,26 +1,10 @@
-package lcbs.models;
+package lcbs.shares;
 
-import java.io.Serializable;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
-@Entity
-@XmlRootElement
-public class Perfil implements Serializable{
-    private static final long serialVersionUID = 1L;
+public class DataPerfil{
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+	private String id;
     
     private String nombre;
     private boolean modulo1;
@@ -31,14 +15,13 @@ public class Perfil implements Serializable{
     private boolean modulo6;
     private boolean modulo7;
     private boolean modulo8;
-    @OneToMany(mappedBy="PERFIL")
-    private List<Empleado> empleados;
+    private List<DataEmpleado> empleados;
     
      
 
-    public Perfil() {}
+    public DataPerfil() {}
     
-    public Perfil(String id, String nom, boolean mod1, boolean mod2, boolean mod3, boolean mod4, boolean mod5, boolean mod6, boolean mod7, boolean mod8, List<Empleado> emp) {
+    public DataPerfil(String id, String nom, boolean mod1, boolean mod2, boolean mod3, boolean mod4, boolean mod5, boolean mod6, boolean mod7, boolean mod8, List<DataEmpleado> emp) {
         this.id = id;
         this.nombre = nom;
         this.modulo1 = mod1;
@@ -132,11 +115,11 @@ public class Perfil implements Serializable{
         return this.modulo8;
     }
     
-    public void setEmpleados(List<Empleado> val){
+    public void setDataEmpleados(List<DataEmpleado> val){
         this.empleados = val;
     }
     
-    public List<Empleado> getEmpleados(){
+    public List<DataEmpleado> getDataEmpleados(){
         return this.empleados;
     }
 }

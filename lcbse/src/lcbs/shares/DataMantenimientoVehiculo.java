@@ -1,0 +1,75 @@
+package lcbs.shares;
+
+import java.util.Date;
+
+public class DataMantenimientoVehiculo{
+    
+	private String id;
+    
+    private String descripcionReducida;
+    private String descripcionCompleta;
+    private float costo;
+    private Date fechaIgreso;
+    private Date fechaCompleado;
+    
+    
+
+    public DataMantenimientoVehiculo() {}
+    
+    public DataMantenimientoVehiculo(String id, String decRes, String descComp, float costo, Date fecIng, Date fecComp) {
+        this.id = id;
+        this.descripcionReducida = decRes;
+        this.descripcionCompleta = descComp;
+        this.costo = costo;
+        this.fechaIgreso = fecIng;
+        this.fechaCompleado = fecComp;
+    }
+    
+    public void setId(String val){
+        this.id = val;
+    }
+    
+    public String getId(){
+        return this.id;
+    }
+
+    public void setDescripcionReducida(String val){
+        this.descripcionReducida = val;
+    }
+    
+    public String getDescripcionReducida(){
+        return this.descripcionReducida;
+    }
+
+    public void setDescripcionCompleta(String val){
+        this.descripcionCompleta = val;
+    }
+    
+    public String getDescripcionCompleta(){
+        return this.descripcionCompleta;
+    }
+
+    public void setCosto(float val){
+        this.costo = val;
+    }
+    
+    public float getCosto(){
+        return this.costo;
+    }
+
+    public void setFechaIgreso(Date val){
+        this.fechaIgreso = val;
+    }
+    
+    public Date getFechaIgreso(){
+        return this.fechaIgreso;
+    }
+
+    public void setFechaCompleado(Date val){
+        this.fechaCompleado = val;
+    }
+    
+    public Date getFechaCompleado(){
+        return this.fechaCompleado;
+    }
+}

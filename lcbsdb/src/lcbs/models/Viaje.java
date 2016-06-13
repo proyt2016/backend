@@ -47,13 +47,14 @@ public class Viaje implements Serializable{
 
     public Viaje() {}
     
-    public Viaje(String id, Recorrido rec, Horario hor, Date fecSalida, List<Empleado> emp, Vehiculo coche) {
+    public Viaje(String id, Recorrido rec, Horario hor, Date fecSalida, List<Empleado> emp, Vehiculo coche, List<Encomienda> enc) {
         this.id = id;
     	this.recorrido = rec;
         this.horario = hor;
         this.fechaSalida = fecSalida;
         this.empleados = emp;
         this.coche = coche;
+        this.encomiendas = enc;
     }
     
     public void setId(String val){
@@ -102,5 +103,13 @@ public class Viaje implements Serializable{
     
     public Vehiculo getCoche(){
         return this.coche;
+    }
+    
+    public void setEncomiendas(List<Encomienda> val){
+        this.encomiendas = val;
+    }
+    
+    public List<Encomienda> getEncomiendas(){
+        return this.encomiendas;
     }
 }

@@ -1,32 +1,15 @@
-package lcbs.models;
+package lcbs.shares;
 
-import java.io.Serializable;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.util.List;
-import javax.persistence.Embedded;
 
-@Entity
-@XmlRootElement
-public class ConfiguracionEmpresa implements Serializable{
-    private static final long serialVersionUID = 1L;
-    
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class DataConfiguracionEmpresa{
+
     private String id;
-    
     private String nombre;
     private boolean aceptaCuponera;
     private String urlAcceso;
-    @Embedded
-    private List<Telefono> telefonos;
-    @Embedded
-    private List<Email> emails;
+    private List<DataTelefono> telefonos;
+    private List<DataEmail> emails;
     private String urlLdap;
     private String usuarioLdap;
     private String claveLdap;
@@ -36,11 +19,11 @@ public class ConfiguracionEmpresa implements Serializable{
     private Integer validesReservasHoras;
     private boolean trasferirPasajes;
 
-    public ConfiguracionEmpresa() {
+    public DataConfiguracionEmpresa() {
        
     }
     
-    public ConfiguracionEmpresa(String id, String nom, boolean acCup, String urlAcc, List<Telefono> tels, List<Email> mails, String urlLdap, String usrLdap, String clLdap, boolean act, boolean pagOnCoche, boolean resePas, Integer valResHrs, boolean trasfPsjs) {
+    public DataConfiguracionEmpresa(String id, String nom, boolean acCup, String urlAcc, List<DataTelefono> tels, List<DataEmail> mails, String urlLdap, String usrLdap, String clLdap, boolean act, boolean pagOnCoche, boolean resePas, Integer valResHrs, boolean trasfPsjs) {
         this.id = id;
         this.nombre = nom;
         this.aceptaCuponera = acCup;
@@ -89,19 +72,19 @@ public class ConfiguracionEmpresa implements Serializable{
         return this.urlAcceso;
     }
 
-    public void setTelefonos(List<Telefono> val){
+    public void setTelefonos(List<DataTelefono> val){
         this.telefonos = val;
     }
     
-    public List<Telefono> getTelefonos(){
+    public List<DataTelefono> getTelefonos(){
         return this.telefonos;
     }
 
-    public void setEmails(List<Email> val){
+    public void setEmails(List<DataEmail> val){
         this.emails = val;
     }
     
-    public List<Email> getEmails(){
+    public List<DataEmail> getEmails(){
         return this.emails;
     }
 

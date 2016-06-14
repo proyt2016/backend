@@ -10,8 +10,8 @@ public class DataReserva{
     private DataPrecio precio;
     private DataPuntoRecorrido origen;
     private DataPuntoRecorrido destino;
-    private Date fechaDataReserva;
-    private Usuario usuarioDataReserva;
+    private Date fechaReserva;
+    private DataUsuario usuarioReserva;
     private String ciPersona;
     private DataEmpleado empleado;
     private boolean utilizada;
@@ -19,14 +19,14 @@ public class DataReserva{
      
     public DataReserva() {}
     
-    public DataReserva(String id, Viaje via, DataPrecio prec, DataPuntoRecorrido orig, DataPuntoRecorrido des, Date fecRes, Usuario usRes, String ciPer, DataEmpleado emp, boolean usa, boolean elim) {
+    public DataReserva(String id, DataViaje via, DataPrecio prec, DataPuntoRecorrido orig, DataPuntoRecorrido des, Date fecRes, DataUsuario usRes, String ciPer, DataEmpleado emp, boolean usa, boolean elim) {
         this.id = id;
         this.viaje = via;
         this.precio = prec;
         this.origen = orig;
         this.destino = des;
-        this.fechaDataReserva = fecRes;
-        this.usuarioDataReserva = usRes;
+        this.fechaReserva = fecRes;
+        this.usuarioReserva = usRes;
         this.ciPersona = ciPer;
         this.empleado = emp;
         this.utilizada = usa;
@@ -41,19 +41,19 @@ public class DataReserva{
 		this.id = id;
 	}
 
-	public Viaje getViaje() {
+	public DataViaje getViaje() {
 		return viaje;
 	}
 
-	public void setViaje(Viaje viaje) {
+	public void setViaje(DataViaje viaje) {
 		this.viaje = viaje;
 	}
 
-	public DataPrecio getDataPrecio() {
+	public DataPrecio getPrecio() {
 		return precio;
 	}
 
-	public void setDataPrecio(DataPrecio precio) {
+	public void setPrecio(DataPrecio precio) {
 		this.precio = precio;
 	}
 
@@ -73,20 +73,20 @@ public class DataReserva{
 		this.destino = destino;
 	}
 
-	public Date getFechaDataReserva() {
-		return fechaDataReserva;
+	public Date getFechaReserva() {
+		return fechaReserva;
 	}
 
-	public void setFechaDataReserva(Date fechaDataReserva) {
-		this.fechaDataReserva = fechaDataReserva;
+	public void setFechaReserva(Date fechaReserva) {
+		this.fechaReserva = fechaReserva;
 	}
 
-	public Usuario getUsuarioDataReserva() {
-		return usuarioDataReserva;
+	public DataUsuario getUsuarioReserva() {
+		return usuarioReserva;
 	}
 
-	public void setUsuarioDataReserva(Usuario usuarioDataReserva) {
-		this.usuarioDataReserva = usuarioDataReserva;
+	public void setUsuarioReserva(DataUsuario usuarioReserva) {
+		this.usuarioReserva = usuarioReserva;
 	}
 
 	public String getCiPersona() {
@@ -97,11 +97,11 @@ public class DataReserva{
 		this.ciPersona = ciPersona;
 	}
 
-	public DataEmpleado getDataEmpleado() {
+	public DataEmpleado getEmpleado() {
 		return empleado;
 	}
 
-	public void setDataEmpleado(DataEmpleado empleado) {
+	public void setEmpleado(DataEmpleado empleado) {
 		this.empleado = empleado;
 	}
 

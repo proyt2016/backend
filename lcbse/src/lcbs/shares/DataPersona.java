@@ -51,19 +51,19 @@ public abstract class DataPersona{
         return this.apellido;
     }
 
-    public void setDataEmail(DataEmail val){
+    public void setEmail(DataEmail val){
         this.email = val;
     }
     
-    public DataEmail getDataEmail(){
+    public DataEmail getEmail(){
         return this.email;
     }
 
-    public void setDataTelefonosContacto(List<DataTelefono> val){
+    public void setTelefonosContacto(List<DataTelefono> val){
         this.telefonosContacto = val;
     }
     
-    public List<DataTelefono> getDataTelefonosContacto(){
+    public List<DataTelefono> getTelefonosContacto(){
         return this.telefonosContacto;
     }
 

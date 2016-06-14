@@ -34,19 +34,19 @@ public class DataViaje{
         return this.id;
     }
     
-    public void setDataRecorrido(DataRecorrido val){
+    public void setRecorrido(DataRecorrido val){
         this.recorrido = val;
     }
     
-    public DataRecorrido getDataRecorrido(){
+    public DataRecorrido getRecorrido(){
         return this.recorrido;
     }
 
-    public void setDataHorario(DataHorario val){
+    public void setHorario(DataHorario val){
         this.horario = val;
     }
     
-    public DataHorario getDataHorario(){
+    public DataHorario getHorario(){
         return this.horario;
     }
 
@@ -58,11 +58,11 @@ public class DataViaje{
         return this.fechaSalida;
     }
 
-    public void setDataEmpleados(List<DataEmpleado> val){
+    public void setEmpleados(List<DataEmpleado> val){
         this.empleados = val;
     }
     
-    public List<DataEmpleado> getDataEmpleados(){
+    public List<DataEmpleado> getEmpleados(){
         return this.empleados;
     }
 
@@ -74,11 +74,11 @@ public class DataViaje{
         return this.coche;
     }
     
-    public void setDataEncomiendas(List<DataEncomienda> val){
+    public void setEncomiendas(List<DataEncomienda> val){
         this.encomiendas = val;
     }
     
-    public List<DataEncomienda> getDataEncomiendas(){
+    public List<DataEncomienda> getEncomiendas(){
         return this.encomiendas;
     }
 }

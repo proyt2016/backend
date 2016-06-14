@@ -115,11 +115,11 @@ public class DataPerfil{
         return this.modulo8;
     }
     
-    public void setDataEmpleados(List<DataEmpleado> val){
+    public void setEmpleados(List<DataEmpleado> val){
         this.empleados = val;
     }
     
-    public List<DataEmpleado> getDataEmpleados(){
+    public List<DataEmpleado> getEmpleados(){
         return this.empleados;
     }
 }

@@ -57,11 +57,11 @@ public class DataRecorrido{
         return this.horarios;
     }
 
-    public void setDataPrecios(List<DataPrecio> val){
+    public void setPrecios(List<DataPrecio> val){
         this.precios = val;
     }
     
-    public List<DataPrecio> getDataPrecios(){
+    public List<DataPrecio> getPrecios(){
         return this.precios;
     }
 

@@ -56,11 +56,11 @@ public class DataGrupoHorario{
         return this.diasEspecificos;
     }
 
-    public void setDataHorarios(List<DataHorario> val){
+    public void setHorarios(List<DataHorario> val){
         this.horarios = val;
     }
     
-    public List<DataHorario> getDataHorarios(){
+    public List<DataHorario> getHorarios(){
         return this.horarios;
     }
 }

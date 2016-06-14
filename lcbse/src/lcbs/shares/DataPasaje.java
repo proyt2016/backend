@@ -44,19 +44,19 @@ public class DataPasaje{
         return this.id;
     }
 
-    public void setDataViaje(DataViaje val){
+    public void setViaje(DataViaje val){
         this.viaje = val;
     }
     
-    public DataViaje getDataViaje(){
+    public DataViaje getViaje(){
         return this.viaje;
     }
 
-    public void setDataPrecio(DataPrecio val){
+    public void setPrecio(DataPrecio val){
         this.precio = val;
     }
     
-    public DataPrecio getDataPrecio(){
+    public DataPrecio getPrecio(){
         return this.precio;
     }
 

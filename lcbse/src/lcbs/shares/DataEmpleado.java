@@ -1,5 +1,8 @@
 package lcbs.shares;
 
+import java.util.Date;
+import java.util.List;
+
 public class DataEmpleado extends DataPersona{
     
     private String idEmpleadoLdap;
@@ -11,8 +14,8 @@ public class DataEmpleado extends DataPersona{
         idEmpleadoLdap = "";
     }
     
-    public DataEmpleado(String id, String nom, String ape, Email mail, List<Telefono> tels, Date fecNac, String idEmpLdap, DataPerfil perf) {
-        super(id, nom, ape, mail, tels, fecNac);
+    public DataEmpleado(String id, String nom, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, String idEmpLdap, DataPerfil perf, Boolean elim) {
+        super(id, nom, ape, mail, tels, fecNac, elim);
         this.idEmpleadoLdap = idEmpLdap;
         this.perfil = perf;
     }
@@ -25,11 +28,11 @@ public class DataEmpleado extends DataPersona{
         return this.idEmpleadoLdap;
     }
 
-    public void setDataPerfil(DataPerfil val){
+    public void setPerfil(DataPerfil val){
         this.perfil = val;
     }
     
-    public DataPerfil getDataPerfil(){
+    public DataPerfil getPerfil(){
         return this.perfil;
     }
 }

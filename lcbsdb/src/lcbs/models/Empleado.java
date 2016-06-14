@@ -26,8 +26,8 @@ public class Empleado extends Persona implements Serializable{
         idEmpleadoLdap = "";
     }
     
-    public Empleado(String id, String nom, String ape, Email mail, List<Telefono> tels, Date fecNac, String idEmpLdap, Perfil perf) {
-        super(id, nom, ape, mail, tels, fecNac);
+    public Empleado(String id, String nom, String ape, Email mail, List<Telefono> tels, Date fecNac, String idEmpLdap, Perfil perf, Boolean elim) {
+        super(id, nom, ape, mail, tels, fecNac, elim);
         this.idEmpleadoLdap = idEmpLdap;
         this.perfil = perf;
     }

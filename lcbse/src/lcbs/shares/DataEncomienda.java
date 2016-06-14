@@ -19,8 +19,8 @@ public class DataEncomienda {
     private DataReglaCobroEncomienda reglaCobro;
     private float monto;
     private boolean pagaReceptor;
-    private Viaje viajeAsignado;
-    private List<DataHistorialDataEstadosEncomienda> estados;
+    private DataViaje viajeAsignado;
+    private List<DataHistorialEstadosEncomienda> estados;
     private DataEstadosEncomienda estadoActual;
     private Date fechaIngreso;
     private Date fechaEntrega;
@@ -30,7 +30,7 @@ public class DataEncomienda {
 
     public DataEncomienda() {}
     
-    public DataEncomienda(String id, DataPuntoRecorrido orig, DataPuntoRecorrido dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<DataHistorialDataEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc) {
+    public DataEncomienda(String id, DataPuntoRecorrido orig, DataPuntoRecorrido dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, float mont, boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -156,19 +156,19 @@ public class DataEncomienda {
         return this.pagaReceptor;
     }
 
-    public void setViajeAsignado(Viaje val){
+    public void setViajeAsignado(DataViaje val){
         this.viajeAsignado = val;
     }
     
-    public Viaje getViajeAsignado(){
+    public DataViaje getViajeAsignado(){
         return this.viajeAsignado;
     }
 
-    public void setEstados(List<DataHistorialDataEstadosEncomienda> val){
+    public void setEstados(List<DataHistorialEstadosEncomienda> val){
         this.estados = val;
     }
     
-    public List<DataHistorialDataEstadosEncomienda> getEstados(){
+    public List<DataHistorialEstadosEncomienda> getEstados(){
         return this.estados;
     }
 

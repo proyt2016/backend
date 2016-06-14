@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,7 @@ public abstract class Persona implements Serializable{
     @Embedded
     private Email email;
     @Embedded
+    @ElementCollection
     private List<Telefono> telefonosContacto;
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;

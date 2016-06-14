@@ -1,11 +1,10 @@
 package lcbs.models;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
 
 @Entity
 @XmlRootElement

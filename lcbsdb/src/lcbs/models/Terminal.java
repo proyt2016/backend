@@ -1,22 +1,26 @@
 package lcbs.models;
 
 import java.io.Serializable;
-
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.IdClass;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
 @XmlRootElement
+@IdClass(PuntoRecorrido.class)
 public class Terminal extends PuntoRecorrido implements Serializable{
     private static final long serialVersionUID = 1L; 
     
     @Embedded
+    @ElementCollection
     private List<Telefono> telefonosContacto;
     @Embedded
+    @ElementCollection
     private List<Email> mailsDeContacto;
     private Boolean aceptaEncomiendas;
 

@@ -1,14 +1,15 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import java.util.List;
-import javax.persistence.Embedded;
+import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
@@ -24,8 +25,11 @@ public class ConfiguracionEmpresa implements Serializable{
     private boolean aceptaCuponera;
     private String urlAcceso;
     @Embedded
+    @ElementCollection
     private List<Telefono> telefonos;
+    
     @Embedded
+    @ElementCollection
     private List<Email> emails;
     private String urlLdap;
     private String usuarioLdap;

@@ -27,15 +27,12 @@ public class Viaje implements Serializable {
 	private String id;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(name = "VIAJE_ID")
 	private Recorrido recorrido;
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(name = "VIAJE_ID")
 	private Horario horario;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaSalida;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "VIAJE_ID")
 	private List<Empleado> empleados;
 	private Vehiculo coche;
 	@OneToMany

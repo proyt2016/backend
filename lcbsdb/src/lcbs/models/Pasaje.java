@@ -27,25 +27,19 @@ public class Pasaje implements Serializable{
     private String id;
     
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="PasajeId")
     private Viaje viaje;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="PasajeId")
     private Precio precio;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="PasajeOrigId")
     private PuntoRecorrido origen;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="PasajeDestId")
     private PuntoRecorrido destino;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCompra;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="PasajeDestId")
     private Usuario comprador;
     private String ciPersona;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="PasajeDestId")
     private Empleado vendedor;
     private Boolean usado;
     private Boolean pago;

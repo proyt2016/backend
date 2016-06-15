@@ -24,7 +24,6 @@ public class HistorialEstadosEncomienda implements Serializable{
     private String id;
     
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="HistorialId")
     private EstadosEncomienda estado;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;

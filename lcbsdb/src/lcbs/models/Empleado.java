@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -25,8 +25,8 @@ public class Empleado extends Persona implements Serializable{
         idEmpleadoLdap = "";
     }
     
-    public Empleado(String id, String nom, String ape, Email mail, List<Telefono> tels, Date fecNac, String idEmpLdap, Perfil perf, Boolean elim) {
-        super(id, nom, ape, mail, tels, fecNac, elim);
+    public Empleado(String id, String ape, Email mail, List<Telefono> tels, Date fecNac, String idEmpLdap, Perfil perf, Boolean elim) {
+        super(id, ape, mail, tels, fecNac, elim);
         this.idEmpleadoLdap = idEmpLdap;
         this.perfil = perf;
     }

@@ -37,7 +37,7 @@ public class PerfilSrv implements PerfilLocalApi {
     }
     
     public void modificarPerfil(Perfil prf){
-        if(em.find(Perfil.class, prd.getId()) == null){
+        if(em.find(Perfil.class, prf.getId()) == null){
            throw new IllegalArgumentException("El perfil no existe");
        }
        em.getTransaction().begin();

@@ -11,8 +11,8 @@ import lcbs.interfaces.EntityLocalApi;
 @Stateless
 public class EncomiendaCtrl implements LocalApi{
 	
-	@EJB(lookup="java:app/lcbsdb/EncomiendaSrv!lcbs.interfaces.EntityLocalApi")
-	EntityLocalApi srv;
+	//@EJB(lookup="java:app/lcbsdb/EncomiendaSrv!lcbs.interfaces.EntityLocalApi")
+	//EntityLocalApi srv;
     /**
      * Default constructor. 
      */
@@ -22,7 +22,7 @@ public class EncomiendaCtrl implements LocalApi{
     
     }
     public String getSape(){
-    	return  srv.GetSape();
+    	return "";  //srv.GetSape();
     }
 
 }

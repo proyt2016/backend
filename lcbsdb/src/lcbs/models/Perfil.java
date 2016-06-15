@@ -36,9 +36,8 @@ public class Perfil implements Serializable{
 
     public Perfil() {}
     
-    public Perfil(String id, String nom, boolean mod1, boolean mod2, boolean mod3, boolean mod4, boolean mod5, boolean mod6, boolean mod7, boolean mod8, List<Empleado> emp) {
+    public Perfil(String id, boolean mod1, boolean mod2, boolean mod3, boolean mod4, boolean mod5, boolean mod6, boolean mod7, boolean mod8, List<Empleado> emp) {
         this.id = id;
-        this.nombre = nom;
         this.modulo1 = mod1;
         this.modulo2 = mod2;
         this.modulo3 = mod3;
@@ -56,14 +55,6 @@ public class Perfil implements Serializable{
     
     public String getId(){
         return this.id;
-    }
-
-    public void setNombre(String val){
-        this.nombre = val;
-    }
-    
-    public String getNombre(){
-        return this.nombre;
     }
 
     public void setModulo1(boolean val){

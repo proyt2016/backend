@@ -35,7 +35,6 @@ public class Vehiculo implements Serializable{
     private Integer cantidadAsientos;
     private Boolean conGuarda;
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name="VehiculoId")
     private List<MantenimientoVehiculo> mantenimientos;
     private Boolean eliminado;
    

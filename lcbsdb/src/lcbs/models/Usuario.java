@@ -23,7 +23,6 @@ public class Usuario extends Persona implements Serializable{
     private String redSocialUsada;
     private String idRedSocial;
     @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
     private Cuponera cuponera;
     @OneToMany
     private List<Encomienda> encomiendas;

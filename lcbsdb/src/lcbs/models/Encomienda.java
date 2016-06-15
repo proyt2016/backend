@@ -28,35 +28,32 @@ public class Encomienda implements Serializable{
 	private String id;
 
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="ORIGEN_ID")
     private PuntoRecorrido origen;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="DESTINO_ID")
     private PuntoRecorrido destino;
     @ManyToOne
     private Usuario emisor;
     private String ciEmisor;
-    @Embedded
+    /*@Embedded
     private Telefono telEmisor;
+        */
+    @Embedded
+    private Telefono telReceptor;
+
     @ManyToOne
     private Usuario receptor;
     private String ciReceptor;
-    @Embedded
-    private Telefono telReceptor;
+   
     private String direccionReceptor;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="REGLA_COBRO_ID")
     private ReglaCobroEncomienda reglaCobro;
     private float monto;
     private boolean pagaReceptor;
     @ManyToOne
-    @JoinColumn(name="ENC_VIAJE_fk")
     private Viaje viajeAsignado;
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name="HIST_ESTADOS")
     private List<HistorialEstadosEncomienda> estados;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="ESTADO")
     private EstadosEncomienda estadoActual;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaIngreso;

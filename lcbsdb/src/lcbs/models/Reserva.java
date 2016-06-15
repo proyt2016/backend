@@ -22,26 +22,20 @@ public class Reserva implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-    
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
     private Viaje viaje;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="ReservaId")
     private Precio precio;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="ReservaOrigId")
     private PuntoRecorrido origen;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="ReservaDestId")
     private PuntoRecorrido destino;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaReserva;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="ReservaId")
     private Usuario usuarioReserva;
     private String ciPersona;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="ReservaId")
     private Empleado empleado;
     private boolean utilizada;
     private boolean eliminada;

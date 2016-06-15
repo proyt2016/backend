@@ -25,10 +25,8 @@ public class Precio implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="PrecioOrigId")
     private PuntoRecorrido origen;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="PreciosDestId")
     private PuntoRecorrido destino;
     private float monto;
      

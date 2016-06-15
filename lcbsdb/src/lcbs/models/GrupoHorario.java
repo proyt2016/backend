@@ -44,7 +44,6 @@ public class GrupoHorario implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     private List<Date> diasEspecificos; //Lista de dias especificos en los que funciona este grupo, por ejemplo, semana de turismo
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name="GrupoHorarioId")
     private List<Horario> horarios;
     
  

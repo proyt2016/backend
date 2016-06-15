@@ -20,16 +20,12 @@ public class Recorrido implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-    
     private String nombre;
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name="RecorridoId")
     private List<PuntoRecorrido> puntosDeRecorrido;
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name="RecorridoId")
     private List<GrupoHorario> horarios;
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name="RecorridoId")
     private List<Precio> precios;
     private Boolean eliminado;
     

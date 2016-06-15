@@ -39,9 +39,9 @@ public abstract class Persona implements Serializable{
 
     public Persona() {}
     
-    public Persona(String id, String nom, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim) {
+    public Persona(String id,   String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim) {
         this.id = id;
-        this.nombre = nom;
+     
         this.apellido = ape;
         this.email = mail;
         this.telefonosContacto = tels;
@@ -57,13 +57,7 @@ public abstract class Persona implements Serializable{
         return this.id;
     }
 
-    public void setNombre(String val){
-        this.nombre = val;
-    }
-    
-    public String getNombre(){
-        return this.nombre;
-    }
+ 
 
     public void setApellido(String val){
         this.apellido = val;

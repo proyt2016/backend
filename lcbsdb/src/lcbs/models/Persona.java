@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.ElementCollection;
@@ -24,7 +25,7 @@ public abstract class Persona implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     
-    private String nombre;
+   
     private String apellido;
     @Embedded
     private Email email;

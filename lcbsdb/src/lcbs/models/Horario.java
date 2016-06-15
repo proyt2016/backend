@@ -24,8 +24,6 @@ public class Horario implements Serializable{
     
     private String nombre;
     
- 
-
     public Horario() {
         id = "";
         nombre = "";

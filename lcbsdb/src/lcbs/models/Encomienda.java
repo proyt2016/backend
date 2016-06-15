@@ -34,13 +34,11 @@ public class Encomienda implements Serializable{
     @JoinColumn(name="DESTINO_ID")
     private PuntoRecorrido destino;
     @ManyToOne
-    @JoinColumn(name="USUARIO_ENC_FK")
     private Usuario emisor;
     private String ciEmisor;
     @Embedded
     private Telefono telEmisor;
     @ManyToOne
-    @JoinColumn(name="USUARIO_ENC_FK")
     private Usuario receptor;
     private String ciReceptor;
     @Embedded

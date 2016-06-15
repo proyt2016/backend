@@ -17,7 +17,6 @@ public class Empleado extends Persona implements Serializable{
     
     private String idEmpleadoLdap;
     @ManyToOne
-    @JoinColumn(name = "PERFIL_FK")
     private Perfil perfil;
 
  

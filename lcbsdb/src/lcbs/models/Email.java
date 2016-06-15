@@ -13,20 +13,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Email implements Serializable{
     private static final long serialVersionUID = 1L;
-    
- 
-    
-    private String nombre;
-    
-  
 
+    private String nombre;
     public Email() {
        
         nombre = "";
     }
-    
-    
-   
 
     public void setNombre(String val){
         this.nombre = val;

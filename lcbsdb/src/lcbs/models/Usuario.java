@@ -25,7 +25,7 @@ public class Usuario extends Persona implements Serializable{
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Cuponera cuponera;
-    @OneToMany(mappedBy="USUARIO_ENC")
+    @OneToMany
     private List<Encomienda> encomiendas;
 
  

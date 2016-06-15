@@ -21,8 +21,6 @@ public class Perfil implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-    
-    private String nombre;
     private boolean modulo1;
     private boolean modulo2;
     private boolean modulo3;
@@ -31,7 +29,7 @@ public class Perfil implements Serializable{
     private boolean modulo6;
     private boolean modulo7;
     private boolean modulo8;
-    @OneToMany(mappedBy="PERFIL")
+    @OneToMany
     private List<Empleado> empleados;
     
      

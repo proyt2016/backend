@@ -24,7 +24,6 @@ public class Reserva implements Serializable{
     private String id;
     
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
-    @JoinColumn(name="ReservaId")
     private Viaje viaje;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
     @JoinColumn(name="ReservaId")

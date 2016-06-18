@@ -65,11 +65,11 @@ public class GrupoHorario implements Serializable{
     public GrupoHorario(DataGrupoHorario dt){
     	this.setId(dt.getId());
     	this.setNombre(dt.getNombre());
-    	List<DiasSemana> aux = new ArrayList<DiasSemana>();
+    	/*List<DiasSemana> aux = new ArrayList<DiasSemana>();
     	dt.getDiasSemana().stream().forEach((ds) -> {
     		aux.add((DiasSemana)ds);
         });
-    	this.setDiasSemana(aux);
+    	this.setDiasSemana(aux)*/;
     	this.setDiasEspecificos(dt.getDiasEspecificos());
     	List<Horario> auxHr = new ArrayList<Horario>();
     	dt.getHorarios().stream().forEach((hr) -> {
@@ -82,11 +82,11 @@ public class GrupoHorario implements Serializable{
     	DataGrupoHorario result = new DataGrupoHorario();
     	result.setId(this.getId());
     	result.setNombre(this.getNombre());
-    	List<DataDiasSemana> aux = new ArrayList<DataDiasSemana>();
+    	/*List<DataDiasSemana> aux = new ArrayList<DataDiasSemana>();
     	this.getDiasSemana().stream().forEach((ds) -> {
     		aux.add((DataDiasSemana)ds);
         });
-    	result.setDiasSemana(aux);
+    	result.setDiasSemana(aux);*/
     	result.setDiasEspecificos(this.getDiasEspecificos());
     	List<DataHorario> auxHr = new ArrayList<DataHorario>();
     	this.getHorarios().stream().forEach((hr) -> {

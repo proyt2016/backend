@@ -17,7 +17,7 @@ public class DataUsuario extends DataPersona{
     public DataUsuario() {}
     
     public DataUsuario(String id, String nom, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, DataCuponera cup, List<DataEncomienda> enc) {
-        super(id, nom, ape, mail, tels, fecNac, elim);
+        super(id, ape, mail, tels, fecNac, elim);
         this.nombreAMostrar = nomMos;
         this.clave = clave;
         this.redSocialUsada = redSoc;

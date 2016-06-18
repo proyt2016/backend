@@ -15,7 +15,7 @@ public class DataEmpleado extends DataPersona{
     }
     
     public DataEmpleado(String id, String nom, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, String idEmpLdap, DataPerfil perf, Boolean elim) {
-        super(id, nom, ape, mail, tels, fecNac, elim);
+        super(id, ape, mail, tels, fecNac, elim);
         this.idEmpleadoLdap = idEmpLdap;
         this.perfil = perf;
     }

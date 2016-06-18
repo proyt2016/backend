@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import lcbs.shares.*;
+
 
 @Entity
 @XmlRootElement
@@ -36,6 +38,20 @@ public class HistorialEstadosEncomienda implements Serializable{
         this.id = id;
         this.estado = est;
         this.fecha = fec;
+    }
+    
+    public HistorialEstadosEncomienda(DataHistorialEstadosEncomienda dt){
+    	this.setId(dt.getId());
+    	this.setEstado(new EstadosEncomienda(dt.getEstado()));
+    	this.setFecha(dt.getFecha());
+    }
+    
+    public DataHistorialEstadosEncomienda getDatatype(){
+    	DataHistorialEstadosEncomienda result = new DataHistorialEstadosEncomienda();
+    	result.setId(this.getId());
+    	result.setEstado(this.getEstado().getDatatype());
+    	result.setFecha(this.getFecha());
+    	return result;
     }
     
     public void setId(String val){

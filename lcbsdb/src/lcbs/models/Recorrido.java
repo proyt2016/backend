@@ -1,5 +1,6 @@
 package lcbs.models;
 import java.io.Serializable;
+import lcbs.shares.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -40,6 +43,57 @@ public class Recorrido implements Serializable{
         this.horarios = hor;
         this.precios = prec;
         this.eliminado = elim;
+    }
+    
+    public Recorrido(DataRecorrido dt){
+    	this.setId(dt.getId());
+    	this.setNombre(dt.getNombre());
+    	List<PuntoRecorrido> auxPr = new ArrayList<PuntoRecorrido>();
+    	dt.getPuntosDeRecorrido().stream().forEach((pr) -> {
+    		if(pr instanceof DataTerminal){
+    			auxPr.add(new Terminal((DataTerminal)pr));
+        	}else{
+        		auxPr.add(new Parada((DataParada)pr));
+        	}
+        });
+    	this.setPuntosDeRecorrido(auxPr);
+    	List<GrupoHorario> auxHr = new ArrayList<GrupoHorario>();
+    	dt.getHorarios().stream().forEach((hr) -> {
+    		auxHr.add(new GrupoHorario(hr));
+        });
+    	this.setHorarios(auxHr);
+    	List<Precio> aux = new ArrayList<Precio>();
+    	dt.getPrecios().stream().forEach((pr) -> {
+    		aux.add(new Precio(pr));
+        });
+    	this.setPrecios(aux);
+    	this.setEliminado(dt.getEliminado());
+    }
+    
+    public DataRecorrido getDatatype(){
+    	DataRecorrido result = new DataRecorrido();
+    	result.setId(this.getId());
+    	result.setNombre(this.getNombre());
+    	List<DataPuntoRecorrido> auxPr = new ArrayList<DataPuntoRecorrido>();
+    	this.getPuntosDeRecorrido().stream().forEach((pr) -> {
+    		if(pr instanceof Terminal){
+    			auxPr.add(((Terminal)pr).getDatatype());
+        	}else{
+        		auxPr.add(((Parada)pr).getDatatype());
+        	}
+        });
+    	result.setPuntosDeRecorrido(auxPr);
+    	List<DataGrupoHorario> auxHr = new ArrayList<DataGrupoHorario>();
+    	this.getHorarios().stream().forEach((hr) -> {
+    		auxHr.add(hr.getDatatype());
+        });
+    	result.setHorarios(auxHr);
+    	List<DataPrecio> aux = new ArrayList<DataPrecio>();
+    	this.getPrecios().stream().forEach((pr) -> {
+    		aux.add(pr.getDatatype());
+        });
+    	result.setPrecios(aux);
+    	return result;
     }
     
     public void setId(String val){

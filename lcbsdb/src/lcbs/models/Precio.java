@@ -1,6 +1,7 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import lcbs.shares.*;
 
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -38,6 +39,36 @@ public class Precio implements Serializable{
         this.origen = orig;
         this.destino = dest;
         this.monto = monto;
+    }
+    
+    public Precio(DataPrecio dt){
+    	if(dt.getOrigen() instanceof DataTerminal){
+    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
+    	}else{
+    		this.setOrigen(new Parada((DataParada)dt.getOrigen()));
+    	}
+    	if(this.getDestino() instanceof Terminal){
+    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
+    	}else{
+    		this.setDestino(new Parada((DataParada)dt.getDestino()));
+    	}
+    	this.setMonto(dt.getMonto());
+    }
+    
+    public DataPrecio getDatatype(){
+    	DataPrecio result = new DataPrecio();
+    	if(this.getOrigen() instanceof Terminal){
+    		result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
+    	}else{
+    		result.setOrigen(((Parada)this.getOrigen()).getDatatype());
+    	}
+    	if(this.getDestino() instanceof Terminal){
+    		result.setDestino(((Terminal)this.getDestino()).getDatatype());
+    	}else{
+    		result.setDestino(((Parada)this.getDestino()).getDatatype());
+    	}
+    	result.setMonto(this.getMonto());
+    	return result;
     }
     
     public void setId(String val){

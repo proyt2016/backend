@@ -1,6 +1,9 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import lcbs.shares.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -59,6 +62,58 @@ public class ConfiguracionEmpresa implements Serializable{
         this.reservaPasajes = resePas;
         this.validesReservasHoras = valResHrs;
         this.trasferirPasajes = trasfPsjs;
+    }
+    
+    public ConfiguracionEmpresa(DataConfiguracionEmpresa dt){
+        this.setId(dt.getId());
+        this.setNombre(dt.getNombre());
+        this.setAceptaCuponera(dt.getAceptaCuponera());
+        this.setUrlAcceso(dt.getUrlAcceso());
+        this.telefonos = new ArrayList<Telefono>();
+        List<Telefono> aux = new ArrayList<Telefono>();
+        dt.getTelefonos().stream().forEach((tel) -> {
+        	aux.add(new Telefono(tel));
+        });
+        this.setTelefonos(aux);
+        List<Email> auxEm = new ArrayList<Email>();
+        dt.getEmails().stream().forEach((em) -> {
+        	auxEm.add(new Email(em));
+        });
+        this.setEmails(auxEm);
+        this.setUrlLdap(dt.getUrlLdap());
+        this.setUsuarioLdap(dt.getUsuarioLdap());
+        this.setClaveLdap(dt.getClaveLdap());
+        this.setActivo(dt.getActivo());
+        this.setPagoOnlineCoche(dt.getPagoOnlineCoche());
+        this.setReservaPasajes(dt.getReservaPasajes());
+        this.setValidesReservasHoras(dt.getValidesReservasHoras());
+        this.setTrasferirPasajes(dt.getTrasferirPasajes());    	
+    }
+    
+    public DataConfiguracionEmpresa getDatatype(){
+    	DataConfiguracionEmpresa result = new DataConfiguracionEmpresa();
+    	result.setId(this.getId());
+    	result.setNombre(this.getNombre());
+    	result.setAceptaCuponera(this.getAceptaCuponera());
+    	result.setUrlAcceso(this.getUrlAcceso());
+    	List<DataTelefono> aux = new ArrayList<DataTelefono>();
+    	this.telefonos.stream().forEach((tel) -> {
+    		aux.add(tel.getDatatype());
+        });
+    	result.setTelefonos(aux);
+    	List<DataEmail> auxEm = new ArrayList<DataEmail>();
+    	this.emails.stream().forEach((em) -> {
+    		auxEm.add(em.getDatatype());
+        });
+    	result.setEmails(auxEm);
+    	result.setUrlLdap(this.getUrlLdap());
+    	result.setUsuarioLdap(this.getUsuarioLdap());
+    	result.setClaveLdap(this.getClaveLdap());
+    	result.setActivo(this.getActivo());
+    	result.setPagoOnlineCoche(this.getPagoOnlineCoche());
+    	result.setValidesReservasHoras(this.getValidesReservasHoras());
+    	result.setTrasferirPasajes(this.getTrasferirPasajes());
+    	return result;
     }
     
     public void setId(String val){

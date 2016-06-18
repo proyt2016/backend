@@ -1,6 +1,7 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import lcbs.shares.*;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,7 +12,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hibernate.mapping.List;
 
 @Entity
 @XmlRootElement
@@ -26,7 +26,7 @@ public class MantenimientoVehiculo implements Serializable{
     private String descripcionCompleta;
     private float costo;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaIgreso;
+    private Date fechaIngreso;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCompleado;
     
@@ -39,8 +39,28 @@ public class MantenimientoVehiculo implements Serializable{
         this.descripcionReducida = decRes;
         this.descripcionCompleta = descComp;
         this.costo = costo;
-        this.fechaIgreso = fecIng;
+        this.fechaIngreso = fecIng;
         this.fechaCompleado = fecComp;
+    }
+    
+    public MantenimientoVehiculo(DataMantenimientoVehiculo dt){
+    	this.setId(dt.getId());
+    	this.setDescripcionReducida(dt.getDescripcionReducida());
+    	this.setDescripcionCompleta(dt.getDescripcionCompleta());
+    	this.setCosto(dt.getCosto());
+    	this.setFechaIngreso(dt.getFechaIngreso());
+    	this.setFechaCompleado(dt.getFechaCompleado());
+    }
+    
+    public DataMantenimientoVehiculo getDatatype(){
+    	DataMantenimientoVehiculo result = new DataMantenimientoVehiculo();
+    	result.setId(this.getId());
+    	result.setDescripcionReducida(this.getDescripcionReducida());
+    	result.setDescripcionCompleta(this.getDescripcionCompleta());
+    	result.setCosto(this.getCosto());
+    	result.setFechaIngreso(this.getFechaIngreso());
+    	result.setFechaCompleado(this.getFechaCompleado());
+    	return result;
     }
     
     public void setId(String val){
@@ -75,12 +95,12 @@ public class MantenimientoVehiculo implements Serializable{
         return this.costo;
     }
 
-    public void setFechaIgreso(Date val){
-        this.fechaIgreso = val;
+    public void setFechaIngreso(Date val){
+        this.fechaIngreso = val;
     }
     
-    public Date getFechaIgreso(){
-        return this.fechaIgreso;
+    public Date getFechaIngreso(){
+        return this.fechaIngreso;
     }
 
     public void setFechaCompleado(Date val){

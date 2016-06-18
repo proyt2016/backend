@@ -1,5 +1,6 @@
 package lcbs.models;
 import java.io.Serializable;
+import lcbs.shares.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,26 @@ public class MedioDePago implements Serializable{
         this.cuenta = cue;
         this.usuario = usu;
         this.clave = clav;
+    }
+    
+    public MedioDePago(DataMedioDePago dt){
+    	this.setId(dt.getId());
+    	this.setNombre(dt.getNombre());
+    	this.setActivo(dt.getActivo());
+    	this.setCuenta(dt.getClave());
+    	this.setUsuario(dt.getUsuario());
+    	this.setClave(dt.getClave());
+    }
+    
+    public DataMedioDePago getDatatype(){
+    	DataMedioDePago result = new DataMedioDePago();
+    	result.setId(this.getId());
+    	result.setNombre(this.getNombre());
+    	result.setActivo(this.getActivo());
+    	result.setCuenta(this.getCuenta());
+    	result.setUsuario(this.getUsuario());
+    	result.setClave(this.getClave());
+    	return result;
     }
     
     public void setId(String val){

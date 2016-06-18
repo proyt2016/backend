@@ -1,6 +1,9 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import lcbs.shares.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -33,6 +36,43 @@ public class Terminal extends PuntoRecorrido implements Serializable{
         this.telefonosContacto = tels;
         this.mailsDeContacto = mails;
         this.aceptaEncomiendas = acEnc;
+    }
+    
+    public Terminal(DataTerminal dt){
+    	this.setId(dt.getId());
+    	this.setNombre(dt.getNombre());
+    	this.setUbicacionMapa(dt.getUbicacionMapa());
+    	this.setEliminado(dt.getEliminado());
+    	List<Telefono> aux = new ArrayList<Telefono>();
+    	dt.getTelefonosContacto().stream().forEach((tel) -> {
+    		aux.add(new Telefono(tel));
+        });
+    	this.setTelefonosContacto(aux);
+    	List<Email> auxEm = new ArrayList<Email>();
+    	dt.getMailsDeContacto().stream().forEach((em) -> {
+    		auxEm.add(new Email(em));
+        });
+    	this.setMailsDeContacto(auxEm);
+    	this.setAceptaEncomiendas(dt.getAceptaEncomiendas());
+    }
+    
+    public DataTerminal getDatatype(){
+    	DataTerminal result = new DataTerminal();
+    	result.setId(this.getId());
+    	result.setNombre(this.getNombre());
+    	result.setUbicacionMapa(this.getUbicacionMapa());
+    	result.setEliminado(this.getEliminado());
+    	List<DataTelefono> aux = new ArrayList<DataTelefono>();
+    	this.getTelefonosContacto().stream().forEach((tel) -> {
+    		aux.add(tel.getDatatype());
+        });
+    	List<DataEmail> auxEm = new ArrayList<DataEmail>();
+    	this.getMailsDeContacto().stream().forEach((em) -> {
+    		auxEm.add(em.getDatatype());
+        });
+    	result.setMailsDeContacto(auxEm);
+    	result.setAceptaEncomiendas(this.getAceptaEncomiendas());
+    	return result;
     }
     
     public void setTelefonosContacto(List<Telefono> val){

@@ -43,11 +43,11 @@ public class DataVehiculo{
         return this.id;
     }
 
-    public void setNumeroDataVehiculo(String val){
+    public void setNumeroVehiculo(String val){
         this.numeroDataVehiculo = val;
     }
     
-    public String getNumeroDataVehiculo(){
+    public String getNumeroVehiculo(){
         return this.numeroDataVehiculo;
     }
 

@@ -1,5 +1,8 @@
 package lcbs.models;
 import java.io.Serializable;
+import lcbs.shares.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +32,38 @@ public class Empleado extends Persona implements Serializable{
         super(id, ape, mail, tels, fecNac, elim);
         this.idEmpleadoLdap = idEmpLdap;
         this.perfil = perf;
+    }
+    
+    public Empleado(DataEmpleado dt){
+    	this.setId(dt.getId());
+    	this.setApellido(dt.getApellido());
+    	this.setEmail(new Email(dt.getEmail()));
+    	List<Telefono> temp = new ArrayList<Telefono>();
+    	dt.getTelefonosContacto().stream().forEach((tel) -> {
+    		temp.add(new Telefono(tel));
+        });
+    	this.setTelefonosContacto(temp);
+    	this.setFechaNacimiento(dt.getFechaNacimiento());
+    	this.setEliminado(dt.getEliminado());
+    	this.setIdEmpleadoLdap(dt.getIdEmpleadoLdap());
+    	this.setPerfil(new Perfil(dt.getPerfil()));
+    }
+    
+    public DataEmpleado getDatatype(){
+    	DataEmpleado result = new DataEmpleado();
+    	result.setId(this.getId());
+    	result.setApellido(this.getApellido());
+    	result.setEmail(new DataEmail(this.getEmail().getEmail()));
+    	List<DataTelefono> temp = new ArrayList<DataTelefono>();
+    	this.getTelefonosContacto().stream().forEach((tel) -> {
+    		temp.add(tel.getDatatype());
+        });
+    	result.setTelefonosContacto(temp);
+    	result.setFechaNacimiento(this.getFechaNacimiento());
+    	result.setEliminado(this.getEliminado());
+    	result.setIdEmpleadoLdap(this.getIdEmpleadoLdap());
+    	result.setPerfil(this.getPerfil().getDatatype());
+    	return result;
     }
 
     public void setIdEmpleadoLdap(String val){

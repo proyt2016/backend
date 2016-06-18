@@ -1,6 +1,9 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import lcbs.shares.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,8 +46,7 @@ public class Viaje implements Serializable {
 	public Viaje() {
 	}
 
-	public Viaje(String id, Recorrido rec, Horario hor, Date fecSalida, List<Empleado> emp, Vehiculo coche,
-			List<Encomienda> enc) {
+	public Viaje(String id, Recorrido rec, Horario hor, Date fecSalida, List<Empleado> emp, Vehiculo coche, List<Encomienda> enc) {
 		this.id = id;
 		this.recorrido = rec;
 		this.horario = hor;
@@ -52,6 +54,44 @@ public class Viaje implements Serializable {
 		this.empleados = emp;
 		this.coche = coche;
 		this.encomiendas = enc;
+	}
+	
+	public Viaje(DataViaje dt){
+		this.setId(dt.getId());
+		this.setRecorrido(new Recorrido(dt.getRecorrido()));
+		this.setHorario(new Horario(dt.getHorario()));
+		this.setFechaSalida(dt.getFechaSalida());
+		List<Empleado> aux = new ArrayList<Empleado>();
+    	dt.getEmpleados().stream().forEach((emp) -> {
+    		aux.add(new Empleado(emp));
+        });
+    	this.setEmpleados(aux);
+		this.setCoche(new Vehiculo(dt.getCoche()));
+		List<Encomienda> auxEnc = new ArrayList<Encomienda>();
+    	dt.getEncomiendas().stream().forEach((enc) -> {
+    		auxEnc.add(new Encomienda(enc));
+        });
+    	this.setEncomiendas(auxEnc);
+	}
+	
+	public DataViaje getDatatype(){
+		DataViaje result = new DataViaje();
+		result.setId(this.getId());
+		result.setRecorrido(this.getRecorrido().getDatatype());
+		result.setHorario(this.getHorario().getDatatype());
+		result.setFechaSalida(this.getFechaSalida());
+		List<DataEmpleado> aux = new ArrayList<DataEmpleado>();
+		this.getEmpleados().stream().forEach((emp) -> {
+    		aux.add(emp.getDatatype());
+        });
+    	result.setEmpleados(aux);
+    	result.setCoche(this.getCoche().getDatatype());
+		List<DataEncomienda> auxEnc = new ArrayList<DataEncomienda>();
+		this.getEncomiendas().stream().forEach((enc) -> {
+    		auxEnc.add(enc.getDatatype());
+        });
+    	result.setEncomiendas(auxEnc);
+		return result;
 	}
 
 	public void setId(String val) {

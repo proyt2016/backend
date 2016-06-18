@@ -4,10 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 public abstract class DataPersona{
+    private String id;
     
-	private String id;
-    
-    private String nombre;
+   
     private String apellido;
     private DataEmail email;
     private List<DataTelefono> telefonosContacto;
@@ -17,9 +16,9 @@ public abstract class DataPersona{
 
     public DataPersona() {}
     
-    public DataPersona(String id, String nom, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, Boolean elim) {
+    public DataPersona(String id,   String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, Boolean elim) {
         this.id = id;
-        this.nombre = nom;
+     
         this.apellido = ape;
         this.email = mail;
         this.telefonosContacto = tels;
@@ -33,14 +32,6 @@ public abstract class DataPersona{
     
     public String getId(){
         return this.id;
-    }
-
-    public void setNombre(String val){
-        this.nombre = val;
-    }
-    
-    public String getNombre(){
-        return this.nombre;
     }
 
     public void setApellido(String val){

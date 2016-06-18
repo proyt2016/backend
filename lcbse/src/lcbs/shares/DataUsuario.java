@@ -58,19 +58,19 @@ public class DataUsuario extends DataPersona{
         return this.idRedSocial;
     }
 
-    public void setDataCuponera(DataCuponera val){
+    public void setCuponera(DataCuponera val){
         this.cuponera = val;
     }
     
-    public DataCuponera getDataCuponera(){
+    public DataCuponera getCuponera(){
         return this.cuponera;
     }
     
-    public void setDataEncomiendas(List<DataEncomienda> val){
+    public void setEncomiendas(List<DataEncomienda> val){
         this.encomiendas = val;
     }
     
-    public List<DataEncomienda> getDataEncomiendas(){
+    public List<DataEncomienda> getEncomiendas(){
         return this.encomiendas;
     }
 }

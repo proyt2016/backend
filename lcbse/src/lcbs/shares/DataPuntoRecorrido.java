@@ -1,8 +1,7 @@
 package lcbs.shares;
 
 public abstract class DataPuntoRecorrido{
-    
-	private String id;
+    private String id;
     
     private String nombre;
     private String ubicacionMapa;
@@ -17,7 +16,7 @@ public abstract class DataPuntoRecorrido{
         this.nombre = nom;
         this.ubicacionMapa = uMap;
         this.eliminado = elim;
-    }
+    }    
     
     public void setId(String val){
         this.id = val;

@@ -1,6 +1,7 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import lcbs.shares.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public abstract class PuntoRecorrido implements Serializable{
         this.nombre = nom;
         this.ubicacionMapa = uMap;
         this.eliminado = elim;
-    }
+    }    
     
     public void setId(String val){
         this.id = val;

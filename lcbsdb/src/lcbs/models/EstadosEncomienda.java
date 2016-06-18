@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.mapping.List;
 
+import lcbs.shares.DataEstadosEncomienda;
+
 @Entity
 @XmlRootElement
 public class EstadosEncomienda implements Serializable{
@@ -35,6 +37,18 @@ public class EstadosEncomienda implements Serializable{
     public EstadosEncomienda(String id, String nom) {
         this.id = id;
         this.nombre = nom;
+    }
+    
+    public EstadosEncomienda(DataEstadosEncomienda dt){
+    	this.setId(dt.getId());
+    	this.setNombre(dt.getNombre());
+    }
+    
+    public DataEstadosEncomienda getDatatype(){
+    	DataEstadosEncomienda result = new DataEstadosEncomienda();
+    	result.setId(this.getId());
+    	result.setNombre(this.getNombre());
+    	return result;
     }
     
     public void setId(String val){

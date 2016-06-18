@@ -8,7 +8,7 @@ public class DataGrupoHorario{
 	private String id;
     
     private String nombre;
-    private List<DiasSemana> diasSemana; //Lista de dias de la semana en los que funciona el grupo
+    private List<DataDiasSemana> diasSemana; //Lista de dias de la semana en los que funciona el grupo
     private List<Date> diasEspecificos; //Lista de dias especificos en los que funciona este grupo, por ejemplo, semana de turismo
     private List<DataHorario> horarios;
     
@@ -16,7 +16,7 @@ public class DataGrupoHorario{
 
     public DataGrupoHorario() {}
     
-    public DataGrupoHorario(String id, String nom, List<DiasSemana> diasSemana, List<Date> diasEspec, List<DataHorario> hora) {
+    public DataGrupoHorario(String id, String nom, List<DataDiasSemana> diasSemana, List<Date> diasEspec, List<DataHorario> hora) {
         this.id = id;
         this.nombre = nom;
         this.diasSemana = diasSemana;
@@ -40,11 +40,11 @@ public class DataGrupoHorario{
         return this.nombre;
     }
 
-    public void setDiasSemana(List<DiasSemana> val){
+    public void setDiasSemana(List<DataDiasSemana> val){
         this.diasSemana = val;
     }
     
-    public List<DiasSemana> getDiasSemana(){
+    public List<DataDiasSemana> getDiasSemana(){
         return this.diasSemana;
     }
 

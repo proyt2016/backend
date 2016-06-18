@@ -1,5 +1,8 @@
 package lcbs.models;
 import java.io.Serializable;
+import lcbs.shares.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -71,7 +74,6 @@ public class Encomienda implements Serializable{
         this.destino = dest;
         this.emisor = emi;
         this.ciEmisor = ciEm;
-        this.telEmisor = telEm;
         this.receptor = rec;
         this.ciReceptor = ciRec;
         this.telReceptor = telEm;
@@ -85,6 +87,74 @@ public class Encomienda implements Serializable{
         this.fechaIngreso = fecIng;
         this.fechaEntrega = fecEn;
         this.retiraEnSucursal = retiraSuc;
+    }
+    
+    public Encomienda(DataEncomienda dt){
+    	this.setId(dt.getId());
+    	if(dt.getOrigen() instanceof DataTerminal){
+    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
+    	}else{
+    		this.setOrigen(new Parada((DataParada)dt.getOrigen()));
+    	}
+    	if(this.getDestino() instanceof Terminal){
+    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
+    	}else{
+    		this.setDestino(new Parada((DataParada)dt.getDestino()));
+    	}
+    	this.setEmisor(new Usuario(dt.getEmisor()));
+    	this.setCiEmisor(dt.getCiEmisor());
+    	this.setReceptor(new Usuario(dt.getReceptor()));
+    	this.setCiReceptor(dt.getCiReceptor());
+    	this.setTelReceptor(new Telefono(dt.getTelReceptor()));
+    	this.setDireccionReceptor(dt.getDireccionReceptor());
+    	this.setReglaCobro(new ReglaCobroEncomienda(dt.getReglaCobro()));
+    	this.setMonto(dt.getMonto());
+    	this.setPagaReceptor(dt.getPagaReceptor());
+    	this.setViajeAsignado(new Viaje(dt.getViajeAsignado()));
+    	List<HistorialEstadosEncomienda> temp = new ArrayList<HistorialEstadosEncomienda>();
+    	dt.getEstados().stream().forEach((est) -> {
+    		temp.add(new HistorialEstadosEncomienda(est));
+        });
+    	this.setEstados(temp);
+    	this.setEstadoActual(new EstadosEncomienda(dt.getEstadoActual()));
+    	this.setFechaIngreso(dt.getFechaIngreso());
+    	this.setFechaEntrega(dt.getFechaEntrega());
+    	this.setRetiraEnSucursal(dt.getRetiraEnSucursal());	
+    }
+    
+    public DataEncomienda getDatatype(){
+    	DataEncomienda result = new DataEncomienda();
+    	result.setId(this.getId());
+    	if(this.getOrigen() instanceof Terminal){
+    		result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
+    	}else{
+    		result.setOrigen(((Parada)this.getOrigen()).getDatatype());
+    	}
+    	if(this.getDestino() instanceof Terminal){
+    		result.setDestino(((Terminal)this.getDestino()).getDatatype());
+    	}else{
+    		result.setDestino(((Parada)this.getDestino()).getDatatype());
+    	}
+    	result.setEmisor(this.getEmisor().getDatatype());
+    	result.setCiEmisor(this.getCiEmisor());
+    	result.setReceptor(this.getReceptor().getDatatype());
+    	result.setCiReceptor(this.getCiReceptor());
+    	result.setTelReceptor(this.getTelReceptor().getDatatype());
+    	result.setDireccionReceptor(this.getDireccionReceptor());
+    	result.setReglaCobro(this.getReglaCobro().getDatatype());
+    	result.setMonto(this.getMonto());
+    	result.setPagaReceptor(this.getPagaReceptor());
+    	result.setViajeAsignado(this.getViajeAsignado().getDatatype());
+    	List<DataHistorialEstadosEncomienda> temp = new ArrayList<DataHistorialEstadosEncomienda>();
+    	this.getEstados().stream().forEach((est) -> {
+    		temp.add(est.getDatatype());
+        });
+    	result.setEstados(temp);
+    	result.setEstadoActual(this.getEstadoActual().getDatatype());
+    	result.setFechaIngreso(this.getFechaIngreso());
+    	result.setFechaEntrega(this.getFechaEntrega());
+    	result.setRetiraEnSucursal(this.getRetiraEnSucursal());
+    	return result;
     }
     
     public void setId(String val){
@@ -125,14 +195,6 @@ public class Encomienda implements Serializable{
     
     public String getCiEmisor(){
         return this.ciEmisor;
-    }
-
-    public void setTelEmisor(Telefono val){
-        this.telEmisor = val;
-    }
-    
-    public Telefono getTelEmisor(){
-        return this.telEmisor;
     }
     
     public void setReceptor(Usuario val){

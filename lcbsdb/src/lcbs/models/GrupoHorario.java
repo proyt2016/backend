@@ -1,6 +1,8 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import lcbs.shares.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -19,6 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+
 
 import java.util.List;
 
@@ -56,6 +60,40 @@ public class GrupoHorario implements Serializable{
         this.diasSemana = diasSemana;
         this.diasEspecificos = diasEspec;
         this.horarios = hora;
+    }
+    
+    public GrupoHorario(DataGrupoHorario dt){
+    	this.setId(dt.getId());
+    	this.setNombre(dt.getNombre());
+    	List<DiasSemana> aux = new ArrayList<DiasSemana>();
+    	dt.getDiasSemana().stream().forEach((ds) -> {
+    		aux.add((DiasSemana)ds);
+        });
+    	this.setDiasSemana(aux);
+    	this.setDiasEspecificos(dt.getDiasEspecificos());
+    	List<Horario> auxHr = new ArrayList<Horario>();
+    	dt.getHorarios().stream().forEach((hr) -> {
+    		auxHr.add(new Horario(hr));
+        });
+    	this.setHorarios(auxHr);
+    }
+    
+    public DataGrupoHorario getDatatype(){
+    	DataGrupoHorario result = new DataGrupoHorario();
+    	result.setId(this.getId());
+    	result.setNombre(this.getNombre());
+    	List<DataDiasSemana> aux = new ArrayList<DataDiasSemana>();
+    	this.getDiasSemana().stream().forEach((ds) -> {
+    		aux.add((DataDiasSemana)ds);
+        });
+    	result.setDiasSemana(aux);
+    	result.setDiasEspecificos(this.getDiasEspecificos());
+    	List<DataHorario> auxHr = new ArrayList<DataHorario>();
+    	this.getHorarios().stream().forEach((hr) -> {
+    		auxHr.add(hr.getDatatype());
+        });
+    	result.setHorarios(auxHr);
+    	return result;
     }
     
     public void setId(String val){

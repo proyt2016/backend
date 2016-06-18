@@ -9,7 +9,7 @@ public class DataMantenimientoVehiculo{
     private String descripcionReducida;
     private String descripcionCompleta;
     private float costo;
-    private Date fechaIgreso;
+    private Date fechaIngreso;
     private Date fechaCompleado;
     
     
@@ -21,7 +21,7 @@ public class DataMantenimientoVehiculo{
         this.descripcionReducida = decRes;
         this.descripcionCompleta = descComp;
         this.costo = costo;
-        this.fechaIgreso = fecIng;
+        this.fechaIngreso = fecIng;
         this.fechaCompleado = fecComp;
     }
     
@@ -57,12 +57,12 @@ public class DataMantenimientoVehiculo{
         return this.costo;
     }
 
-    public void setFechaIgreso(Date val){
-        this.fechaIgreso = val;
+    public void setFechaIngreso(Date val){
+        this.fechaIngreso = val;
     }
     
-    public Date getFechaIgreso(){
-        return this.fechaIgreso;
+    public Date getFechaIngreso(){
+        return this.fechaIngreso;
     }
 
     public void setFechaCompleado(Date val){

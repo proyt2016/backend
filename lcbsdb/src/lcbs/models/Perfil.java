@@ -1,6 +1,7 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import lcbs.shares.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -48,6 +51,43 @@ public class Perfil implements Serializable{
         this.modulo8 = mod8;
         this.empleados = emp;
     }
+    
+    public Perfil(DataPerfil dt){
+    	this.setId(dt.getId());
+    	this.setModulo1(dt.getModulo1());
+    	this.setModulo2(dt.getModulo2());
+    	this.setModulo3(dt.getModulo3());
+    	this.setModulo4(dt.getModulo4());
+    	this.setModulo5(dt.getModulo5());
+    	this.setModulo6(dt.getModulo6());
+    	this.setModulo7(dt.getModulo7());
+    	this.setModulo8(dt.getModulo8());
+    	List<Empleado> aux = new ArrayList<Empleado>();
+    	dt.getEmpleados().stream().forEach((emp) -> {
+    		aux.add(new Empleado(emp));
+        });
+    	this.setEmpleados(aux);
+    }
+    
+    public DataPerfil getDatatype(){
+    	DataPerfil result = new DataPerfil();
+    	result.setId(this.getId());
+    	result.setModulo1(this.getModulo1());
+    	result.setModulo2(this.getModulo2());
+    	result.setModulo3(this.getModulo3());
+    	result.setModulo4(this.getModulo4());
+    	result.setModulo5(this.getModulo5());
+    	result.setModulo6(this.getModulo6());
+    	result.setModulo7(this.getModulo7());
+    	result.setModulo8(this.getModulo8());
+    	List<DataEmpleado> aux = new ArrayList<DataEmpleado>();
+    	this.getEmpleados().stream().forEach((emp) -> {
+    		aux.add(emp.getDatatype());
+        });
+    	result.setEmpleados(aux);
+    	return result;
+    }
+    
     
     public void setId(String val){
         this.id = val;

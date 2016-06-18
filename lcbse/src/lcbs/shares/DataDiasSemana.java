@@ -1,5 +1,5 @@
 package lcbs.shares;
 
-public enum DiasSemana {
+public enum DataDiasSemana {
 	Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo
 }

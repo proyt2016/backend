@@ -1,6 +1,9 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import lcbs.shares.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -53,6 +56,44 @@ public class Vehiculo implements Serializable{
         this.conGuarda = conG;
         this.mantenimientos = mant;
         this.eliminado = elim;
+    }
+    
+    public Vehiculo(DataVehiculo dt){
+    	this.setId(dt.getId());
+    	this.setNumeroVehiculo(dt.getNumeroVehiculo());
+    	this.setMatricula(dt.getMatricula());
+    	this.setMarca(dt.getMarca());
+    	this.setModelo(dt.getModelo());
+    	this.setAnioFabricacion(dt.getAnioFabricacion());
+    	this.setFechaAlta(dt.getFechaAlta());
+    	this.setCantidadAsientos(dt.getCantidadAsientos());
+    	this.setConGuarda(dt.getConGuarda());
+    	List<MantenimientoVehiculo> aux = new ArrayList<MantenimientoVehiculo>();
+    	dt.getMantenimientos().stream().forEach((mnt) -> {
+    		aux.add(new MantenimientoVehiculo(mnt));
+        });
+    	this.setMantenimientos(aux);
+    	this.setEliminado(dt.getEliminado());
+    }
+    
+    public DataVehiculo getDatatype(){
+    	DataVehiculo result = new DataVehiculo();
+    	result.setId(this.getId());
+    	result.setNumeroVehiculo(this.getNumeroVehiculo());
+    	result.setMatricula(this.getMatricula());
+    	result.setMarca(this.getMarca());
+    	result.setModelo(this.getModelo());
+    	result.setAnioFabricacion(this.getAnioFabricacion());
+    	result.setFechaAlta(this.getFechaAlta());
+    	result.setCantidadAsientos(this.getCantidadAsientos());
+    	result.setConGuarda(this.getConGuarda());
+    	List<DataMantenimientoVehiculo> aux = new ArrayList<DataMantenimientoVehiculo>();
+    	this.getMantenimientos().stream().forEach((mnt) -> {
+    		aux.add(mnt.getDatatype());
+        });
+    	result.setMantenimientos(aux);
+    	result.setEliminado(this.getEliminado());
+    	return result;
     }
 
     public void setId(String val){

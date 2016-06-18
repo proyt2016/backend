@@ -105,7 +105,7 @@ public class DataReserva{
 		this.empleado = empleado;
 	}
 
-	public boolean isUtilizada() {
+	public boolean getUtilizada() {
 		return utilizada;
 	}
 
@@ -113,7 +113,7 @@ public class DataReserva{
 		this.utilizada = utilizada;
 	}
     
-	public boolean isEliminada() {
+	public boolean getEliminada() {
 		return eliminada;
 	}
 

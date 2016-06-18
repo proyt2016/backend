@@ -1,6 +1,7 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import lcbs.shares.*;
 
 import javax.persistence.Id;
 
@@ -38,6 +39,24 @@ public class ReglaCobroEncomienda implements Serializable{
         this.operador = oper;
         this.valor = val;
         this.precio = prec;
+    }
+    
+    public ReglaCobroEncomienda(DataReglaCobroEncomienda dt){
+    	this.setId(dt.getId());
+    	this.setNombre(dt.getNombre());
+    	this.setOperador(dt.getOperador());
+    	this.setValor(dt.getValor());
+    	this.setPrecio(dt.getPrecio());
+    }
+    
+    public DataReglaCobroEncomienda getDatatype(){
+    	DataReglaCobroEncomienda result = new DataReglaCobroEncomienda();
+    	result.setId(this.getId());
+    	result.setNombre(this.getNombre());
+    	result.setOperador(this.getOperador());
+    	result.setValor(this.getValor());
+    	result.setPrecio(this.getPrecio());
+    	return result;
     }
     
     public void setId(String val){

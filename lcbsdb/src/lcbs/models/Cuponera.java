@@ -1,6 +1,7 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import lcbs.shares.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,6 +28,18 @@ public class Cuponera implements Serializable{
     public Cuponera(String id, float saldo) {
         this.id = id;
         this.saldo = saldo;
+    }
+    
+    public Cuponera(DataCuponera dt){
+    	this.setId(dt.getId());
+        this.setSaldo(dt.getSaldo());
+    }
+    
+    public DataCuponera getDatatype(){
+    	DataCuponera result = new DataCuponera();
+    	result.setId(this.getId());
+    	result.setSaldo(this.getSaldo());
+    	return result;
     }
     
     public void setId(String val){

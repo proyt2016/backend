@@ -1,5 +1,6 @@
 package lcbs.models;
 import java.io.Serializable;
+import lcbs.shares.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -54,6 +55,51 @@ public class Reserva implements Serializable{
         this.empleado = emp;
         this.utilizada = usa;
         this.eliminada = elim;
+    }
+    
+    public Reserva(DataReserva dt){
+    	this.setId(dt.getId());
+    	this.setViaje(new Viaje(dt.getViaje()));
+    	this.setPrecio(new Precio(dt.getPrecio()));
+    	if(dt.getOrigen() instanceof DataTerminal){
+    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
+    	}else{
+    		this.setOrigen(new Parada((DataParada)dt.getOrigen()));
+    	}
+    	if(this.getDestino() instanceof Terminal){
+    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
+    	}else{
+    		this.setDestino(new Parada((DataParada)dt.getDestino()));
+    	}
+    	this.setFechaReserva(dt.getFechaReserva());
+    	this.setUsuarioReserva(new Usuario(dt.getUsuarioReserva()));
+    	this.setEmpleado(new Empleado(dt.getEmpleado()));
+    	this.setUtilizada(dt.getUtilizada());
+    	this.setEliminada(dt.getEliminada()));
+    }
+    
+    public DataReserva getDatatype(){
+    	DataReserva result = new DataReserva();
+    	result.setId(this.getId());
+    	result.setViaje(this.getViaje().getDatatype());
+    	result.setPrecio(this.getPrecio().getDatatype());
+    	if(this.getOrigen() instanceof Terminal){
+    		result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
+    	}else{
+    		result.setOrigen(((Parada)this.getOrigen()).getDatatype());
+    	}
+    	if(this.getDestino() instanceof Terminal){
+    		result.setDestino(((Terminal)this.getDestino()).getDatatype());
+    	}else{
+    		result.setDestino(((Parada)this.getDestino()).getDatatype());
+    	}
+    	result.setFechaReserva(this.getFechaReserva());
+    	result.setUsuarioReserva(this.getUsuarioReserva().getDatatype());
+    	result.setCiPersona(this.getCiPersona());
+    	result.setEmpleado(this.getEmpleado().getDatatype());
+    	result.setUtilizada(this.getUtilizada());
+    	result.setEliminada(this.getEliminada());
+    	return result;
     }
 
 	public String getId() {
@@ -128,7 +174,7 @@ public class Reserva implements Serializable{
 		this.empleado = empleado;
 	}
 
-	public boolean isUtilizada() {
+	public boolean getUtilizada() {
 		return utilizada;
 	}
 
@@ -136,7 +182,7 @@ public class Reserva implements Serializable{
 		this.utilizada = utilizada;
 	}
     
-	public boolean isEliminada() {
+	public boolean getEliminada() {
 		return eliminada;
 	}
 

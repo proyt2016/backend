@@ -1,5 +1,6 @@
 package lcbs.models;
 import java.io.Serializable;
+import lcbs.shares.*;
 import java.util.Date;
 
 import javax.persistence.Id;
@@ -62,6 +63,54 @@ public class Pasaje implements Serializable{
         this.usado = usd;
         this.pago = pg;
         this.eliminado = elim;
+    }
+    
+    public Pasaje(DataPasaje dt){
+    	this.setId(dt.getId());
+    	this.setViaje(new Viaje(dt.getViaje()));
+    	this.setPrecio(new Precio(dt.getPrecio()));
+    	if(dt.getOrigen() instanceof DataTerminal){
+    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
+    	}else{
+    		this.setOrigen(new Parada((DataParada)dt.getOrigen()));
+    	}
+    	if(this.getDestino() instanceof Terminal){
+    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
+    	}else{
+    		this.setDestino(new Parada((DataParada)dt.getDestino()));
+    	}
+    	this.setFechaCompra(dt.getFechaCompra());
+    	this.setComprador(new Usuario(dt.getComprador()));
+    	this.setCiPersona(dt.getCiPersona());
+    	this.setVendedor(new Empleado(dt.getVendedor()));
+    	this.setUsado(dt.getUsado());
+    	this.setPago(dt.getPago());
+    	this.setEliminado(dt.getEliminado());
+    }
+    
+    public DataPasaje getDatatype(){
+    	DataPasaje result = new DataPasaje();
+    	result.setId(this.getId());
+    	result.setViaje(this.getViaje().getDatatype());
+    	result.setPrecio(this.getPrecio().getDatatype());
+    	if(this.getOrigen() instanceof Terminal){
+    		result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
+    	}else{
+    		result.setOrigen(((Parada)this.getOrigen()).getDatatype());
+    	}
+    	if(this.getDestino() instanceof Terminal){
+    		result.setDestino(((Terminal)this.getDestino()).getDatatype());
+    	}else{
+    		result.setDestino(((Parada)this.getDestino()).getDatatype());
+    	}
+    	result.setFechaCompra(this.getFechaCompra());
+    	result.setComprador(this.getComprador().getDatatype());
+    	result.setCiPersona(this.getCiPersona());
+    	result.setVendedor(this.getVendedor().getDatatype());
+    	result.setUsado(this.getUsado());
+    	result.setPago(this.getPago());
+    	result.setEliminado(this.getEliminado());
+    	return result;
     }
     
     public void setId(String val){

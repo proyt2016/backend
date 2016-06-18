@@ -1,6 +1,7 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import lcbs.shares.*;
 
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -32,6 +33,18 @@ public class Horario implements Serializable{
     public Horario(String id, String nom) {
         this.id = id;
         this.nombre = nom;
+    }
+    
+    public Horario(DataHorario dt){
+    	this.setId(dt.getId());
+    	this.setNombre(dt.getNombre());
+    }
+    
+    public DataHorario getDatatype(){
+    	DataHorario result = new DataHorario();
+    	result.setId(this.getId());
+    	result.setNombre(this.getNombre());
+    	return result;
     }
     
     public void setId(String val){

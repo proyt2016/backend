@@ -1,5 +1,6 @@
 package lcbs.models;
 import java.io.Serializable;
+import lcbs.shares.*;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -20,7 +21,15 @@ public class Telefono implements Serializable{
 
     public Telefono() {}
     
-     
+    public Telefono(DataTelefono dt){
+    	this.setTelefono(dt.getTelefono());
+    }
+    
+    public DataTelefono getDatatype(){
+    	DataTelefono result = new DataTelefono();
+    	result.setTelefono(this.getTelefono());
+    	return result;
+    }
     
   
     public void setTelefono(String val){

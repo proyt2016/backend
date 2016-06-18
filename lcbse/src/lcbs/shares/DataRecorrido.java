@@ -7,7 +7,7 @@ public class DataRecorrido{
 	private String id;
     
     private String nombre;
-    private List<DataPuntoRecorrido> puntosDeDataRecorrido;
+    private List<DataPuntoRecorrido> puntosDeRecorrido;
     private List<DataGrupoHorario> horarios;
     private List<DataPrecio> precios;
     private Boolean eliminado;
@@ -19,7 +19,7 @@ public class DataRecorrido{
     public DataRecorrido(String id, String nom, List<DataPuntoRecorrido> punRec, List<DataGrupoHorario> hor, List<DataPrecio> prec, Boolean elim) {
         this.id = id;
         this.nombre = nom;
-        this.puntosDeDataRecorrido = punRec;
+        this.puntosDeRecorrido = punRec;
         this.horarios = hor;
         this.precios = prec;
         this.eliminado = elim;
@@ -41,12 +41,12 @@ public class DataRecorrido{
         return this.nombre;
     }
 
-    public void setPuntosDeDataRecorrido(List<DataPuntoRecorrido> val){
-        this.puntosDeDataRecorrido = val;
+    public void setPuntosDeRecorrido(List<DataPuntoRecorrido> val){
+        this.puntosDeRecorrido = val;
     }
     
-    public List<DataPuntoRecorrido> getPuntosDeDataRecorrido(){
-        return this.puntosDeDataRecorrido;
+    public List<DataPuntoRecorrido> getPuntosDeRecorrido(){
+        return this.puntosDeRecorrido;
     }
 
     public void setHorarios(List<DataGrupoHorario> val){

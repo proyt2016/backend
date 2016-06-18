@@ -6,6 +6,7 @@
 		<project>lcbsapi</project>
 		<project>lcbsb</project>
 		<project>lcbsdb</project>
+		<project>lcbse</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -13,5 +13,8 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="lcbse.jar" deploy-path="/lib" handle="module:/resource/lcbse/lcbse">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

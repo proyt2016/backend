@@ -3,6 +3,8 @@
 	<name>lcbsapi</name>
 	<comment></comment>
 	<projects>
+		<project>lcbsb</project>
+		<project>lcbse</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

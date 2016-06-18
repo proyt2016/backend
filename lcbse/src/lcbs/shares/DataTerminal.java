@@ -8,12 +8,15 @@ public class DataTerminal extends DataPuntoRecorrido{
     private List<DataEmail> mailsDeContacto;
     private Boolean aceptaEncomiendas;
 
- 
-
+  
     public DataTerminal() {}
     
     public DataTerminal(String id, String nom, String uMap, List<DataTelefono> tels, List<DataEmail> mails, Boolean acEnc, Boolean elim) {
-        super(id, nom, uMap, elim);
+        setId(id);
+        setNombre(nom);
+        setUbicacionMapa(uMap);
+        setEliminado(elim);
+        
         this.telefonosContacto = tels;
         this.mailsDeContacto = mails;
         this.aceptaEncomiendas = acEnc;

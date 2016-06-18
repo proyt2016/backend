@@ -75,7 +75,7 @@ public class Reserva implements Serializable{
     	this.setUsuarioReserva(new Usuario(dt.getUsuarioReserva()));
     	this.setEmpleado(new Empleado(dt.getEmpleado()));
     	this.setUtilizada(dt.getUtilizada());
-    	this.setEliminada(dt.getEliminada()));
+    	this.setEliminada(dt.getEliminada());
     }
     
     public DataReserva getDatatype(){

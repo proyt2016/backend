@@ -1,0 +1,18 @@
+package lcbs.shares;
+
+public interface DataPuntoRecorrido{
+	public void setId(String val);
+    
+    public String getId();
+
+    public void setNombre(String val);
+    
+    public String getNombre();
+    public void setUbicacionMapa(String val);
+    
+    public String getUbicacionMapa();
+
+    public void setEliminado(Boolean val);
+    
+    public Boolean getEliminado();
+}

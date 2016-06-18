@@ -1,0 +1,24 @@
+package lcbs.controllers;
+
+import javax.ejb.Stateless;
+
+/**
+ * Session Bean implementation class EncomiendaSrv
+ */
+@Stateless
+public class EncomiendaCtrl implements LocalApi{
+	
+	//@EJB(lookup="java:app/lcbsdb/EncomiendaSrv!lcbs.interfaces.EntityLocalApi")
+	//EntityLocalApi srv;
+    /**
+     * Default constructor. 
+     */
+    public EncomiendaCtrl() {
+      
+    
+    }
+    public String getSape(){
+    	return "";  //srv.GetSape();
+    }
+
+}

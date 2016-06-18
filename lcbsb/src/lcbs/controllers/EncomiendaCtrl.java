@@ -3,7 +3,8 @@ package lcbs.controllers;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import lcbs.interfaces.EntityLocalApi;
+import lcbs.interfaces.EncomiendaLocalApi;
+import lcbs.models.Encomienda;
 
 /**
  * Session Bean implementation class EncomiendaSrv
@@ -11,18 +12,12 @@ import lcbs.interfaces.EntityLocalApi;
 @Stateless
 public class EncomiendaCtrl implements LocalApi{
 	
-	//@EJB(lookup="java:app/lcbsdb/EncomiendaSrv!lcbs.interfaces.EntityLocalApi")
-	//EntityLocalApi srv;
-    /**
-     * Default constructor. 
-     */
-    public EncomiendaCtrl() {
-        // TODO Auto-generated constructor stub
-    	System.out.println("sape");
-    
-    }
+	@EJB(lookup="java:app/lcbsdb/EncomiendaSrv!lcbs.interfaces.EncomiendaLocalApi")
+	EncomiendaLocalApi srv;
+  
     public String getSape(){
-    	return "";  //srv.GetSape();
+    	srv.crearEncomienda(new Encomienda());
+    	return "sape";
     }
 
 }

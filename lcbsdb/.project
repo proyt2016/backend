@@ -3,7 +3,6 @@
 	<name>lcbsdb</name>
 	<comment></comment>
 	<projects>
-		<project>lcbse</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -51,9 +51,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     
     public void crearEncomienda(Encomienda enc){
         //guardo la encomienda en bd
-        em.getTransaction().begin();
         em.persist(enc);
-        em.getTransaction().commit();
     }
     
     //TODO: Hacer busqueda con filtros

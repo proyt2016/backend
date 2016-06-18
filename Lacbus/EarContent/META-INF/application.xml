@@ -5,12 +5,12 @@
     <ejb>lcbsb.jar</ejb>
   </module>
   <module>
-    <ejb>lcbsdb.jar</ejb>
-  </module>
-  <module>
     <web>
       <web-uri>lcbsapi.war</web-uri>
       <context-root>lcbsapi</context-root>
     </web>
+  </module>
+  <module>
+    <ejb>lcbsdb.jar</ejb>
   </module>
 </application>

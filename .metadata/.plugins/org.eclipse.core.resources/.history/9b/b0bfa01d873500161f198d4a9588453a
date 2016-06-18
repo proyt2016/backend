@@ -1,0 +1,100 @@
+package lcbs.models;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@Entity
+@XmlRootElement
+public abstract class Persona implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+    
+   
+    private String apellido;
+    @Embedded
+    private Email email;
+    @Embedded
+    @ElementCollection
+    private List<Telefono> telefonosContacto;
+    @Temporal(TemporalType.DATE)
+    private Date fechaNacimiento;
+    private boolean eliminado;
+     
+
+    public Persona() {}
+    
+    public Persona(String id,   String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim) {
+        this.id = id;
+     
+        this.apellido = ape;
+        this.email = mail;
+        this.telefonosContacto = tels;
+        this.fechaNacimiento = fecNac;
+        this.eliminado = elim;
+    }
+    
+    public void setId(String val){
+        this.id = val;
+    }
+    
+    public String getId(){
+        return this.id;
+    }
+
+ 
+
+    public void setApellido(String val){
+        this.apellido = val;
+    }
+    
+    public String getApellido(){
+        return this.apellido;
+    }
+
+    public void setEmail(Email val){
+        this.email = val;
+    }
+    
+    public Email getEmail(){
+        return this.email;
+    }
+
+    public void setTelefonosContacto(List<Telefono> val){
+        this.telefonosContacto = val;
+    }
+    
+    public List<Telefono> getTelefonosContacto(){
+        return this.telefonosContacto;
+    }
+
+    public void setFechaNacimiento(Date val){
+        this.fechaNacimiento = val;
+    }
+    
+    public Date getFechaNacimiento(){
+        return this.fechaNacimiento;
+    }
+    
+
+    public void setEliminado(Boolean val){
+    	this.eliminado = val;
+    }
+    
+    public Boolean getEliminado(){
+    	return this.eliminado;
+    }
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="lcbsdb">
+        <wb-resource deploy-path="/" source-path="/src" tag="defaultRootSource"/>
+        <dependent-module archiveName="lcbse.jar" deploy-path="/" handle="module:/resource/lcbse/lcbse">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/lcbsdb/build/classes"/>
+    </wb-module>
+</project-modules>

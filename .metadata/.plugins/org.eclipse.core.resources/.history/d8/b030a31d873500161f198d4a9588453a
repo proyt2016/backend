@@ -1,0 +1,150 @@
+package lcbs.models;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import lcbs.shares.DataGrupoHorario;
+import lcbs.shares.DataParada;
+import lcbs.shares.DataPrecio;
+import lcbs.shares.DataPuntoRecorrido;
+import lcbs.shares.DataRecorrido;
+import lcbs.shares.DataTerminal;
+
+@Entity
+@XmlRootElement
+public class Recorrido implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+    private String nombre;
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private List<PuntoRecorrido> puntosDeRecorrido;
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private List<GrupoHorario> horarios;
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private List<Precio> precios;
+    private Boolean eliminado;
+    
+ 
+
+    public Recorrido() {}
+    
+    public Recorrido(String id, String nom, List<PuntoRecorrido> punRec, List<GrupoHorario> hor, List<Precio> prec, Boolean elim) {
+        this.id = id;
+        this.nombre = nom;
+        this.puntosDeRecorrido = punRec;
+        this.horarios = hor;
+        this.precios = prec;
+        this.eliminado = elim;
+    }
+    
+    public Recorrido(DataRecorrido dt){
+    	this.setId(dt.getId());
+    	this.setNombre(dt.getNombre());
+    	List<PuntoRecorrido> auxPr = new ArrayList<PuntoRecorrido>();
+    	dt.getPuntosDeRecorrido().stream().forEach((pr) -> {
+    		if(pr instanceof DataTerminal){
+    			auxPr.add(new Terminal((DataTerminal)pr));
+        	}else{
+        		auxPr.add(new Parada((DataParada)pr));
+        	}
+        });
+    	this.setPuntosDeRecorrido(auxPr);
+    	List<GrupoHorario> auxHr = new ArrayList<GrupoHorario>();
+    	dt.getHorarios().stream().forEach((hr) -> {
+    		auxHr.add(new GrupoHorario(hr));
+        });
+    	this.setHorarios(auxHr);
+    	List<Precio> aux = new ArrayList<Precio>();
+    	dt.getPrecios().stream().forEach((pr) -> {
+    		aux.add(new Precio(pr));
+        });
+    	this.setPrecios(aux);
+    	this.setEliminado(dt.getEliminado());
+    }
+    
+    public DataRecorrido getDatatype(){
+    	DataRecorrido result = new DataRecorrido();
+    	result.setId(this.getId());
+    	result.setNombre(this.getNombre());
+    	List<DataPuntoRecorrido> auxPr = new ArrayList<DataPuntoRecorrido>();
+    	this.getPuntosDeRecorrido().stream().forEach((pr) -> {
+    		if(pr instanceof Terminal){
+    			auxPr.add(((Terminal)pr).getDatatype());
+        	}else{
+        		auxPr.add(((Parada)pr).getDatatype());
+        	}
+        });
+    	result.setPuntosDeRecorrido(auxPr);
+    	List<DataGrupoHorario> auxHr = new ArrayList<DataGrupoHorario>();
+    	this.getHorarios().stream().forEach((hr) -> {
+    		auxHr.add(hr.getDatatype());
+        });
+    	result.setHorarios(auxHr);
+    	List<DataPrecio> aux = new ArrayList<DataPrecio>();
+    	this.getPrecios().stream().forEach((pr) -> {
+    		aux.add(pr.getDatatype());
+        });
+    	result.setPrecios(aux);
+    	return result;
+    }
+    
+    public void setId(String val){
+        this.id = val;
+    }
+    
+    public String getId(){
+        return this.id;
+    }
+
+    public void setNombre(String val){
+        this.nombre = val;
+    }
+    
+    public String getNombre(){
+        return this.nombre;
+    }
+
+    public void setPuntosDeRecorrido(List<PuntoRecorrido> val){
+        this.puntosDeRecorrido = val;
+    }
+    
+    public List<PuntoRecorrido> getPuntosDeRecorrido(){
+        return this.puntosDeRecorrido;
+    }
+
+    public void setHorarios(List<GrupoHorario> val){
+        this.horarios = val;
+    }
+    
+    public List<GrupoHorario> getHorarios(){
+        return this.horarios;
+    }
+
+    public void setPrecios(List<Precio> val){
+        this.precios = val;
+    }
+    
+    public List<Precio> getPrecios(){
+        return this.precios;
+    }
+
+    public void setEliminado(Boolean val){
+        this.eliminado = val;
+    }
+    
+    public Boolean getEliminado(){
+        return this.eliminado;
+    }
+}

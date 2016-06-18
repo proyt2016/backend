@@ -5,8 +5,8 @@
 	<projects>
 		<project>lcbsapi</project>
 		<project>lcbsb</project>
-		<project>lcbsdb</project>
 		<project>lcbse</project>
+		<project>lcbsdb</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

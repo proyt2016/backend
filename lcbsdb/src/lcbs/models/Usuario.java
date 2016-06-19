@@ -46,24 +46,32 @@ public class Usuario extends Persona implements Serializable{
     public Usuario(DataUsuario dt){
     	this.setId(dt.getId());
     	this.setApellido(dt.getApellido());
-    	this.setEmail(new Email(dt.getEmail()));
-    	List<Telefono> aux = new ArrayList<Telefono>();
-    	dt.getTelefonosContacto().stream().forEach((tel) -> {
-    		aux.add(new Telefono(tel));
-        });
-    	this.setTelefonosContacto(aux);
+    	if(dt.getEmail() != null){
+    		this.setEmail(new Email(dt.getEmail()));
+    	}
+    	if(dt.getTelefonosContacto() != null){
+	    	List<Telefono> aux = new ArrayList<Telefono>();
+	    	dt.getTelefonosContacto().stream().forEach((tel) -> {
+	    		aux.add(new Telefono(tel));
+	        });
+	    	this.setTelefonosContacto(aux);
+    	}
     	this.setFechaNacimiento(dt.getFechaNacimiento());
     	this.setEliminado(dt.getEliminado());
     	this.setNombreAMostrar(dt.getNombreAMostrar());
     	this.setClave(dt.getClave());
     	this.setRedSocialUsada(dt.getRedSocialUsada());
     	this.setIdRedSocial(dt.getIdRedSocial());
-    	this.setCuponera(new Cuponera(dt.getCuponera()));
-    	List<Encomienda> auxEnc = new ArrayList<Encomienda>();
-    	dt.getEncomiendas().stream().forEach((enc) -> {
-    		auxEnc.add(new Encomienda(enc));
-        });
-    	this.setEncomiendas(auxEnc);
+    	if(dt.getCuponera() != null){
+    		this.setCuponera(new Cuponera(dt.getCuponera()));
+    	}
+    	if(dt.getEncomiendas() != null){
+	    	List<Encomienda> auxEnc = new ArrayList<Encomienda>();
+	    	dt.getEncomiendas().stream().forEach((enc) -> {
+	    		auxEnc.add(new Encomienda(enc));
+	        });
+	    	this.setEncomiendas(auxEnc);
+    	}
     }
     
     public DataUsuario getDatatype(){

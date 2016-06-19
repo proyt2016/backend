@@ -4,13 +4,13 @@ import java.util.Map;
 
 import javax.ejb.Local;
 
-import lcbs.models.Reserva;
+import lcbs.shares.DataReserva;
 
 @Local
 public interface ReservaLocalApi {
-	public Map<String,Reserva> obtenerReservas();
-	public void modificarReserva(Reserva rce);
-	public Reserva getReserva(String rce);
-	public void crearReserva(Reserva rce);
-	public void darBajaReserva(Reserva rce);
+	public Map<String,DataReserva> obtenerReservas();
+	public void modificarReserva(DataReserva rce);
+	public DataReserva getReserva(String rce);
+	public void crearReserva(DataReserva rce);
+	public void darBajaReserva(DataReserva rce);
 }

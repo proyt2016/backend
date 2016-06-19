@@ -91,32 +91,44 @@ public class Encomienda implements Serializable{
     
     public Encomienda(DataEncomienda dt){
     	this.setId(dt.getId());
-    	if(dt.getOrigen() instanceof DataTerminal){
-    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
-    	}else{
-    		this.setOrigen(new Parada((DataParada)dt.getOrigen()));
+    	if(dt.getOrigen() != null){
+	    	if(dt.getOrigen() instanceof DataTerminal){
+	    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
+	    	}else{
+	    		this.setOrigen(new Parada((DataParada)dt.getOrigen()));
+	    	}
     	}
-    	if(this.getDestino() instanceof Terminal){
-    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
-    	}else{
-    		this.setDestino(new Parada((DataParada)dt.getDestino()));
+    	if(dt.getDestino() != null){
+	    	if(this.getDestino() instanceof Terminal){
+	    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
+	    	}else{
+	    		this.setDestino(new Parada((DataParada)dt.getDestino()));
+	    	}
     	}
-    	this.setEmisor(new Usuario(dt.getEmisor()));
+    	if(dt.getEmisor() != null)
+    		this.setEmisor(new Usuario(dt.getEmisor()));
     	this.setCiEmisor(dt.getCiEmisor());
-    	this.setReceptor(new Usuario(dt.getReceptor()));
+    	if(dt.getReceptor() != null)
+    		this.setReceptor(new Usuario(dt.getReceptor()));
     	this.setCiReceptor(dt.getCiReceptor());
-    	this.setTelReceptor(new Telefono(dt.getTelReceptor()));
+    	if(dt.getTelReceptor() != null)
+    		this.setTelReceptor(new Telefono(dt.getTelReceptor()));
     	this.setDireccionReceptor(dt.getDireccionReceptor());
-    	this.setReglaCobro(new ReglaCobroEncomienda(dt.getReglaCobro()));
+    	if(dt.getReglaCobro() != null)
+    		this.setReglaCobro(new ReglaCobroEncomienda(dt.getReglaCobro()));
     	this.setMonto(dt.getMonto());
     	this.setPagaReceptor(dt.getPagaReceptor());
-    	this.setViajeAsignado(new Viaje(dt.getViajeAsignado()));
-    	List<HistorialEstadosEncomienda> temp = new ArrayList<HistorialEstadosEncomienda>();
-    	dt.getEstados().stream().forEach((est) -> {
-    		temp.add(new HistorialEstadosEncomienda(est));
-        });
-    	this.setEstados(temp);
-    	this.setEstadoActual(new EstadosEncomienda(dt.getEstadoActual()));
+    	if(dt.getViajeAsignado() != null)
+    		this.setViajeAsignado(new Viaje(dt.getViajeAsignado()));
+    	if(dt.getEstados()!=null){
+	    	List<HistorialEstadosEncomienda> temp = new ArrayList<HistorialEstadosEncomienda>();
+	    	dt.getEstados().stream().forEach((est) -> {
+	    		temp.add(new HistorialEstadosEncomienda(est));
+	        });
+	    	this.setEstados(temp);
+    	}
+    	if(dt.getEstadoActual() != null)
+    		this.setEstadoActual(new EstadosEncomienda(dt.getEstadoActual()));
     	this.setFechaIngreso(dt.getFechaIngreso());
     	this.setFechaEntrega(dt.getFechaEntrega());
     	this.setRetiraEnSucursal(dt.getRetiraEnSucursal());	

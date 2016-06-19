@@ -62,11 +62,13 @@ public class Perfil implements Serializable{
     	this.setModulo6(dt.getModulo6());
     	this.setModulo7(dt.getModulo7());
     	this.setModulo8(dt.getModulo8());
-    	List<Empleado> aux = new ArrayList<Empleado>();
-    	dt.getEmpleados().stream().forEach((emp) -> {
-    		aux.add(new Empleado(emp));
-        });
-    	this.setEmpleados(aux);
+    	if(dt.getEmpleados() != null){
+	    	List<Empleado> aux = new ArrayList<Empleado>();
+	    	dt.getEmpleados().stream().forEach((emp) -> {
+	    		aux.add(new Empleado(emp));
+	        });
+	    	this.setEmpleados(aux);
+    	}
     }
     
     public DataPerfil getDatatype(){

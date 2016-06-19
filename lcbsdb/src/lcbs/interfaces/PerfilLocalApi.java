@@ -4,13 +4,13 @@ import java.util.Map;
 
 import javax.ejb.Local;
 
-import lcbs.models.Perfil;
+import lcbs.shares.DataPerfil;
 
 @Local
 public interface PerfilLocalApi {
-	public Map<String,Perfil> obtenerPerfils();
-	public void modificarPerfil(Perfil prf);
-	public Perfil getPerfil(String id);
-	public void crearPerfil(Perfil prf);
-	public void borrarPerfil(Perfil prf);
+	public Map<String,DataPerfil> obtenerPerfils();
+	public void modificarPerfil(DataPerfil prf);
+	public DataPerfil getPerfil(String id);
+	public void crearPerfil(DataPerfil prf);
+	public void borrarPerfil(DataPerfil prf);
 }

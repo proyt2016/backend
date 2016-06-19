@@ -42,7 +42,9 @@ public class HistorialEstadosEncomienda implements Serializable{
     
     public HistorialEstadosEncomienda(DataHistorialEstadosEncomienda dt){
     	this.setId(dt.getId());
-    	this.setEstado(new EstadosEncomienda(dt.getEstado()));
+    	if(dt.getEstado() != null){
+    		this.setEstado(new EstadosEncomienda(dt.getEstado()));
+    	}
     	this.setFecha(dt.getFecha());
     }
     

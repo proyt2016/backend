@@ -61,19 +61,27 @@ public class Reserva implements Serializable{
     	this.setId(dt.getId());
     	this.setViaje(new Viaje(dt.getViaje()));
     	this.setPrecio(new Precio(dt.getPrecio()));
-    	if(dt.getOrigen() instanceof DataTerminal){
-    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
-    	}else{
-    		this.setOrigen(new Parada((DataParada)dt.getOrigen()));
+    	if(dt.getOrigen() != null){
+	    	if(dt.getOrigen() instanceof DataTerminal){
+	    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
+	    	}else{
+	    		this.setOrigen(new Parada((DataParada)dt.getOrigen()));
+	    	}
     	}
-    	if(this.getDestino() instanceof Terminal){
-    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
-    	}else{
-    		this.setDestino(new Parada((DataParada)dt.getDestino()));
+    	if(dt.getDestino() != null){
+	    	if(this.getDestino() instanceof Terminal){
+	    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
+	    	}else{
+	    		this.setDestino(new Parada((DataParada)dt.getDestino()));
+	    	}
     	}
     	this.setFechaReserva(dt.getFechaReserva());
-    	this.setUsuarioReserva(new Usuario(dt.getUsuarioReserva()));
-    	this.setEmpleado(new Empleado(dt.getEmpleado()));
+    	if(dt.getUsuarioReserva() != null){
+    		this.setUsuarioReserva(new Usuario(dt.getUsuarioReserva()));
+    	}
+    	if(dt.getEmpleado() != null){
+    		this.setEmpleado(new Empleado(dt.getEmpleado()));
+    	}
     	this.setUtilizada(dt.getUtilizada());
     	this.setEliminada(dt.getEliminada());
     }

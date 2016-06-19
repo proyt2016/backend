@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import lcbs.interfaces.ParadaLocalApi;
 import lcbs.models.Parada;
+import lcbs.shares.DataParada;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -24,39 +25,38 @@ public class ParadaSrv implements ParadaLocalApi {
         
     }
     
-    public Map<String,Parada> obtenerParadas(){
-    	Map<String,Parada> paradas = new HashMap();
+    public Map<String,DataParada> obtenerParadas(){
+    	Map<String,DataParada> paradas = new HashMap();
         //obtengo todas las paradas de la bd
         Query query = em.createQuery("SELECT p FROM Parada p", Parada.class);
         
         List<Parada> listPds = query.getResultList();
         listPds.stream().forEach((prd) -> {
-        	paradas.put(prd.getId(), prd);
+        	paradas.put(prd.getId(), prd.getDatatype());
         });
         return paradas;
     }
     
-    public void modificarParada(Parada prd){
-        if(em.find(Parada.class, prd.getId()) == null){
+    public void modificarParada(DataParada prd){
+    	Parada realOb = new Parada(prd);
+        if(em.find(Parada.class, realOb.getId()) == null){
            throw new IllegalArgumentException("La parada no existe");
        }
-       em.getTransaction().begin();
-       em.merge(prd);
-       em.getTransaction().commit();
+       em.merge(realOb);
     }
     
-    public Parada getParada(String id){
+    public DataParada getParada(String id){
         return this.obtenerParadas().get(id);
     }
     
-    public void crearParada(Parada prd){
+    public void crearParada(DataParada prd){
+    	Parada realOb = new Parada(prd);
         //guardo la parada en bd
-        em.getTransaction().begin();
-        em.persist(prd);
-        em.getTransaction().commit();
+        em.persist(realOb);
     }
     
-    public void borrarParada(Parada prd){
-        em.remove(prd);
+    public void borrarParada(DataParada prd){
+    	Parada realOb = new Parada(prd);
+        em.remove(realOb);
     }
 }

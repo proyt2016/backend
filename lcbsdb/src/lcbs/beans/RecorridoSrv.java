@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import lcbs.interfaces.RecorridoLocalApi;
 import lcbs.models.Recorrido;
+import lcbs.shares.DataRecorrido;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -24,40 +25,38 @@ public class RecorridoSrv implements RecorridoLocalApi {
         
     }
     
-    public Map<String,Recorrido> obtenerRecorridos(){
-    	Map<String,Recorrido> Recorridos = new HashMap();
+    public Map<String,DataRecorrido> obtenerRecorridos(){
+    	Map<String,DataRecorrido> Recorridos = new HashMap();
         //obtengo todos los Recorridos de la bd
         Query query = em.createQuery("SELECT r FROM Recorrido r", Recorrido.class);
         
         List<Recorrido> listRec = query.getResultList();
         listRec.stream().forEach((rec) -> {
-        	Recorridos.put(rec.getId(), rec);
+        	Recorridos.put(rec.getId(), rec.getDatatype());
         });
         return Recorridos;
     }
     
-    public void modificarRecorrido(Recorrido rec){
-        if(em.find(Recorrido.class, rec.getId()) == null){
+    public void modificarRecorrido(DataRecorrido rec){
+    	Recorrido realObj = new Recorrido(rec);
+        if(em.find(Recorrido.class, realObj.getId()) == null){
            throw new IllegalArgumentException("El recorrido no existe");
        }
-       em.getTransaction().begin();
-       em.merge(rec);
-       em.getTransaction().commit();
+       em.merge(realObj);
     }
     
-    public Recorrido getRecorrido(String id){
+    public DataRecorrido getRecorrido(String id){
         return this.obtenerRecorridos().get(id);
     }
     
-    public void crearRecorrido(Recorrido rec){
+    public void crearRecorrido(DataRecorrido rec){
+    	Recorrido realObj = new Recorrido(rec);
         //guardo el Recorrido en bd
-        em.getTransaction().begin();
-        em.persist(rec);
-        em.getTransaction().commit();
+        em.persist(realObj);
     }
     
-    public void darBajaRecorrido(Recorrido rec){
-        rec.setEliminado(true);
+    public void darBajaRecorrido(DataRecorrido rec){
+    	rec.setEliminado(true);
         this.modificarRecorrido(rec);
     }
 }

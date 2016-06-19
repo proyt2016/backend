@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import lcbs.interfaces.ReglaCobroEncomiendaLocalApi;
 import lcbs.models.ReglaCobroEncomienda;
+import lcbs.shares.DataReglaCobroEncomienda;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -24,39 +25,38 @@ public class ReglaCobroEncomiendaSrv implements ReglaCobroEncomiendaLocalApi {
         
     }
     
-    public Map<String,ReglaCobroEncomienda> obtenerReglaCobroEncomiendas(){
-    	Map<String,ReglaCobroEncomienda> reglas = new HashMap();
+    public Map<String,DataReglaCobroEncomienda> obtenerReglaCobroEncomiendas(){
+    	Map<String,DataReglaCobroEncomienda> reglas = new HashMap();
         //obtengo todas las reglas de cobro de encomiendas de la bd
         Query query = em.createQuery("SELECT r FROM ReglaCobroEncomienda r", ReglaCobroEncomienda.class);
         
         List<ReglaCobroEncomienda> listRce = query.getResultList();
         listRce.stream().forEach((rce) -> {
-        	reglas.put(rce.getId(), rce);
+        	reglas.put(rce.getId(), rce.getDatatype());
         });
         return reglas;
     }
     
-    public void modificarReglaCobroEncomienda(ReglaCobroEncomienda rce){
-        if(em.find(ReglaCobroEncomienda.class, rce.getId()) == null){
+    public void modificarReglaCobroEncomienda(DataReglaCobroEncomienda rce){
+    	ReglaCobroEncomienda realObj = new ReglaCobroEncomienda(rce);
+        if(em.find(ReglaCobroEncomienda.class, realObj.getId()) == null){
            throw new IllegalArgumentException("La regla de cobro de encomiendas no existe");
        }
-       em.getTransaction().begin();
-       em.merge(rce);
-       em.getTransaction().commit();
+       em.merge(realObj);
     }
     
-    public ReglaCobroEncomienda getReglaCobroEncomienda(String id){
+    public DataReglaCobroEncomienda getReglaCobroEncomienda(String id){
         return this.obtenerReglaCobroEncomiendas().get(id);
     }
     
-    public void crearReglaCobroEncomienda(ReglaCobroEncomienda rce){
+    public void crearReglaCobroEncomienda(DataReglaCobroEncomienda rce){
+    	ReglaCobroEncomienda realObj = new ReglaCobroEncomienda(rce);
         //guardo la regla de cobro de encomiendas en bd
-        em.getTransaction().begin();
-        em.persist(rce);
-        em.getTransaction().commit();
+        em.persist(realObj);
     }
     
-    public void borrarReglaCobroEncomienda(ReglaCobroEncomienda rce){
-        em.remove(rce);
+    public void borrarReglaCobroEncomienda(DataReglaCobroEncomienda rce){
+    	ReglaCobroEncomienda realObj = new ReglaCobroEncomienda(rce);
+        em.remove(realObj);
     }
 }

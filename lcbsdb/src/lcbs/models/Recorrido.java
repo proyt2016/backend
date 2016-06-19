@@ -48,25 +48,31 @@ public class Recorrido implements Serializable{
     public Recorrido(DataRecorrido dt){
     	this.setId(dt.getId());
     	this.setNombre(dt.getNombre());
-    	List<PuntoRecorrido> auxPr = new ArrayList<PuntoRecorrido>();
-    	dt.getPuntosDeRecorrido().stream().forEach((pr) -> {
-    		if(pr instanceof DataTerminal){
-    			auxPr.add(new Terminal((DataTerminal)pr));
-        	}else{
-        		auxPr.add(new Parada((DataParada)pr));
-        	}
-        });
-    	this.setPuntosDeRecorrido(auxPr);
-    	List<GrupoHorario> auxHr = new ArrayList<GrupoHorario>();
-    	dt.getHorarios().stream().forEach((hr) -> {
-    		auxHr.add(new GrupoHorario(hr));
-        });
-    	this.setHorarios(auxHr);
-    	List<Precio> aux = new ArrayList<Precio>();
-    	dt.getPrecios().stream().forEach((pr) -> {
-    		aux.add(new Precio(pr));
-        });
-    	this.setPrecios(aux);
+    	if(dt.getPuntosDeRecorrido() != null){
+	    	List<PuntoRecorrido> auxPr = new ArrayList<PuntoRecorrido>();
+	    	dt.getPuntosDeRecorrido().stream().forEach((pr) -> {
+	    		if(pr instanceof DataTerminal){
+	    			auxPr.add(new Terminal((DataTerminal)pr));
+	        	}else{
+	        		auxPr.add(new Parada((DataParada)pr));
+	        	}
+	        });
+	    	this.setPuntosDeRecorrido(auxPr);
+    	}
+    	if(dt.getHorarios() != null){
+	    	List<GrupoHorario> auxHr = new ArrayList<GrupoHorario>();
+	    	dt.getHorarios().stream().forEach((hr) -> {
+	    		auxHr.add(new GrupoHorario(hr));
+	        });
+	    	this.setHorarios(auxHr);
+    	}
+    	if(dt.getPrecios() != null){
+	    	List<Precio> aux = new ArrayList<Precio>();
+	    	dt.getPrecios().stream().forEach((pr) -> {
+	    		aux.add(new Precio(pr));
+	        });
+	    	this.setPrecios(aux);
+    	}
     	this.setEliminado(dt.getEliminado());
     }
     

@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import lcbs.interfaces.UsuarioLocalApi;
 import lcbs.models.Usuario;
+import lcbs.shares.DataUsuario;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -24,39 +25,37 @@ public class UsuarioSrv implements UsuarioLocalApi {
         
     }
     
-    public Map<String,Usuario> obtenerUsuarios(){
-    	Map<String,Usuario> usuarios = new HashMap();
+    public Map<String,DataUsuario> obtenerUsuarios(){
+    	Map<String,DataUsuario> usuarios = new HashMap();
         //obtengo todos los usuarios de la bd
         Query query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
         
         List<Usuario> listUsu = query.getResultList();
         listUsu.stream().forEach((usu) -> {
-        	usuarios.put(usu.getId(), usu);
+        	usuarios.put(usu.getId(), usu.getDatatype());
         });
         return usuarios;
     }
     
-    public void modificarUsuario(Usuario usu){
-        if(em.find(Usuario.class, usu.getId()) == null){
+    public void modificarUsuario(DataUsuario usu){
+    	Usuario realObj = new Usuario(usu);
+        if(em.find(Usuario.class, realObj.getId()) == null){
            throw new IllegalArgumentException("El usuario no existe");
        }
-       em.getTransaction().begin();
-       em.merge(usu);
-       em.getTransaction().commit();
+       em.merge(realObj);
     }
     
-    public Usuario getUsuario(String id){
+    public DataUsuario getUsuario(String id){
         return this.obtenerUsuarios().get(id);
     }
     
-    public void crearUsuario(Usuario usu){
+    public void crearUsuario(DataUsuario usu){
+    	Usuario realObj = new Usuario(usu);
         //guardo el usuario en bd
-        em.getTransaction().begin();
-        em.persist(usu);
-        em.getTransaction().commit();
+        em.persist(realObj);
     }
     
-    public void darBajaUsuario(Usuario usu){
+    public void darBajaUsuario(DataUsuario usu){
         usu.setEliminado(true);
         this.modificarUsuario(usu);
     }

@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import lcbs.interfaces.VehiculoLocalApi;
 import lcbs.models.Vehiculo;
+import lcbs.shares.DataVehiculo;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -24,39 +25,37 @@ public class VehiculoSrv implements VehiculoLocalApi {
         
     }
     
-    public Map<String,Vehiculo> obtenerVehiculos(){
-    	Map<String,Vehiculo> vehiculos = new HashMap();
+    public Map<String,DataVehiculo> obtenerVehiculos(){
+    	Map<String,DataVehiculo> vehiculos = new HashMap();
         //obtengo todos los vehiculos de la bd
         Query query = em.createQuery("SELECT v FROM Vehiculo v", Vehiculo.class);
         
         List<Vehiculo> listVeh = query.getResultList();
         listVeh.stream().forEach((veh) -> {
-        	vehiculos.put(veh.getId(), veh);
+        	vehiculos.put(veh.getId(), veh.getDatatype());
         });
         return vehiculos;
     }
     
-    public void modificarVehiculo(Vehiculo veh){
-        if(em.find(Vehiculo.class, veh.getId()) == null){
+    public void modificarVehiculo(DataVehiculo veh){
+    	Vehiculo realObj = new Vehiculo(veh); 
+        if(em.find(Vehiculo.class, realObj.getId()) == null){
            throw new IllegalArgumentException("La Vehiculo no existe");
        }
-       em.getTransaction().begin();
-       em.merge(veh);
-       em.getTransaction().commit();
+       em.merge(realObj);
     }
     
-    public Vehiculo getVehiculo(String id){
+    public DataVehiculo getVehiculo(String id){
         return this.obtenerVehiculos().get(id);
     }
     
-    public void crearVehiculo(Vehiculo veh){
+    public void crearVehiculo(DataVehiculo veh){
+    	Vehiculo realObj = new Vehiculo(veh);
         //guardo el vehiculo en bd
-        em.getTransaction().begin();
-        em.persist(veh);
-        em.getTransaction().commit();
+        em.persist(realObj);
     }
     
-    public void darBajaVehiculo(Vehiculo veh){
+    public void darBajaVehiculo(DataVehiculo veh){
         veh.setEliminado(true);
         this.modificarVehiculo(veh);
     }

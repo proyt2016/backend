@@ -4,13 +4,13 @@ import java.util.Map;
 
 import javax.ejb.Local;
 
-import lcbs.models.Recorrido;
+import lcbs.shares.DataRecorrido;
 
 @Local
 public interface RecorridoLocalApi {
-	public Map<String,Recorrido> obtenerRecorridos();
-	public void modificarRecorrido(Recorrido rec);
-	public Recorrido getRecorrido(String rec);
-	public void crearRecorrido(Recorrido rec);
-	public void darBajaRecorrido(Recorrido rec);
+	public Map<String,DataRecorrido> obtenerRecorridos();
+	public void modificarRecorrido(DataRecorrido rec);
+	public DataRecorrido getRecorrido(String rec);
+	public void crearRecorrido(DataRecorrido rec);
+	public void darBajaRecorrido(DataRecorrido rec);
 }

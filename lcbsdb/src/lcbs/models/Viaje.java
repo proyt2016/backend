@@ -58,20 +58,30 @@ public class Viaje implements Serializable {
 	
 	public Viaje(DataViaje dt){
 		this.setId(dt.getId());
-		this.setRecorrido(new Recorrido(dt.getRecorrido()));
-		this.setHorario(new Horario(dt.getHorario()));
+		if(dt.getRecorrido() != null){
+			this.setRecorrido(new Recorrido(dt.getRecorrido()));
+		}
+		if(dt.getHorario() != null){
+			this.setHorario(new Horario(dt.getHorario()));
+		}
 		this.setFechaSalida(dt.getFechaSalida());
-		List<Empleado> aux = new ArrayList<Empleado>();
-    	dt.getEmpleados().stream().forEach((emp) -> {
-    		aux.add(new Empleado(emp));
-        });
-    	this.setEmpleados(aux);
-		this.setCoche(new Vehiculo(dt.getCoche()));
-		List<Encomienda> auxEnc = new ArrayList<Encomienda>();
-    	dt.getEncomiendas().stream().forEach((enc) -> {
-    		auxEnc.add(new Encomienda(enc));
-        });
-    	this.setEncomiendas(auxEnc);
+		if(dt.getEmpleados() != null){
+			List<Empleado> aux = new ArrayList<Empleado>();
+	    	dt.getEmpleados().stream().forEach((emp) -> {
+	    		aux.add(new Empleado(emp));
+	        });
+	    	this.setEmpleados(aux);
+		}
+		if(dt.getCoche() != null){
+			this.setCoche(new Vehiculo(dt.getCoche()));
+		}
+		if(dt.getEncomiendas() != null){
+			List<Encomienda> auxEnc = new ArrayList<Encomienda>();
+	    	dt.getEncomiendas().stream().forEach((enc) -> {
+	    		auxEnc.add(new Encomienda(enc));
+	        });
+	    	this.setEncomiendas(auxEnc);
+		}
 	}
 	
 	public DataViaje getDatatype(){

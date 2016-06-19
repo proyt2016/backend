@@ -71,11 +71,13 @@ public class GrupoHorario implements Serializable{
         });
     	this.setDiasSemana(aux)*/;
     	this.setDiasEspecificos(dt.getDiasEspecificos());
-    	List<Horario> auxHr = new ArrayList<Horario>();
-    	dt.getHorarios().stream().forEach((hr) -> {
-    		auxHr.add(new Horario(hr));
-        });
-    	this.setHorarios(auxHr);
+    	if(dt.getHorarios() != null){
+	    	List<Horario> auxHr = new ArrayList<Horario>();
+	    	dt.getHorarios().stream().forEach((hr) -> {
+	    		auxHr.add(new Horario(hr));
+	        });
+	    	this.setHorarios(auxHr);
+    	}
     }
     
     public DataGrupoHorario getDatatype(){

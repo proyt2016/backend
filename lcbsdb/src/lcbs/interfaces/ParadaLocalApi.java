@@ -4,13 +4,13 @@ import java.util.Map;
 
 import javax.ejb.Local;
 
-import lcbs.models.Parada;
+import lcbs.shares.DataParada;
 
 @Local
 public interface ParadaLocalApi {
-	public Map<String,Parada> obtenerParadas();
-	public void modificarParada(Parada prd);
-	public Parada getParada(String id);
-	public void crearParada(Parada prd);
-	public void borrarParada(Parada prd);
+	public Map<String,DataParada> obtenerParadas();
+	public void modificarParada(DataParada prd);
+	public DataParada getParada(String id);
+	public void crearParada(DataParada prd);
+	public void borrarParada(DataParada prd);
 }

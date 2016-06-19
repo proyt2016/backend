@@ -1,12 +1,11 @@
 package lcbs.interfaces;
 
 import javax.ejb.Local;
-
-import lcbs.models.ConfiguracionEmpresa;
+import lcbs.shares.*;
 
 @Local
 public interface ConfiguracionEmpresaLocalApi {
-	public ConfiguracionEmpresa getConfiguracionEmpresa();
-	public void modificarCuponera(ConfiguracionEmpresa conf);
-	public void crearConfiguracionEmpresa(ConfiguracionEmpresa conf);
+	public DataConfiguracionEmpresa getConfiguracionEmpresa();
+	public void modificarCuponera(DataConfiguracionEmpresa conf);
+	public void crearConfiguracionEmpresa(DataConfiguracionEmpresa conf);
 }

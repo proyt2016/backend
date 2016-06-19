@@ -4,13 +4,13 @@ import java.util.Map;
 
 import javax.ejb.Local;
 
-import lcbs.models.GrupoHorario;
+import lcbs.shares.DataGrupoHorario;
 
 @Local
 public interface GrupoHorarioLocalApi {
-	public Map<String,GrupoHorario> obtenerGrupoHorario();
-	public void modificarGrupoHorario(GrupoHorario grHor);
-	public GrupoHorario getGrupoHorario(String id);
-	public void crearGrupoHorario(GrupoHorario grp);
-	public void borrarGrupoHorario(GrupoHorario grp);
+	public Map<String,DataGrupoHorario> obtenerGrupoHorario();
+	public void modificarGrupoHorario(DataGrupoHorario grHor);
+	public DataGrupoHorario getGrupoHorario(String id);
+	public void crearGrupoHorario(DataGrupoHorario grp);
+	public void borrarGrupoHorario(DataGrupoHorario grp);
 }

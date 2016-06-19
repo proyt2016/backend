@@ -60,5 +60,8 @@ public class ViajeSrv implements ViajeLocalApi {
     public void borrarViaje(Viaje via){
         em.remove(via);
     }
+    
+    //TODO Busqueda de viaje por atrubutos
+    
    
 }

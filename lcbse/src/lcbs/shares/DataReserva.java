@@ -5,7 +5,6 @@ import java.util.Date;
 public class DataReserva{
     
 	private String id;
-    
     private DataViaje viaje;
     private DataPrecio precio;
     private DataPuntoRecorrido origen;

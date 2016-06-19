@@ -67,22 +67,32 @@ public class Pasaje implements Serializable{
     
     public Pasaje(DataPasaje dt){
     	this.setId(dt.getId());
-    	this.setViaje(new Viaje(dt.getViaje()));
-    	this.setPrecio(new Precio(dt.getPrecio()));
-    	if(dt.getOrigen() instanceof DataTerminal){
-    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
-    	}else{
-    		this.setOrigen(new Parada((DataParada)dt.getOrigen()));
+    	if(dt.getViaje() != null){
+    		this.setViaje(new Viaje(dt.getViaje()));
     	}
-    	if(this.getDestino() instanceof Terminal){
-    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
-    	}else{
-    		this.setDestino(new Parada((DataParada)dt.getDestino()));
+    	this.setPrecio(new Precio(dt.getPrecio()));
+    	if(dt.getOrigen() != null){
+	    	if(dt.getOrigen() instanceof DataTerminal){
+	    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
+	    	}else{
+	    		this.setOrigen(new Parada((DataParada)dt.getOrigen()));
+	    	}
+    	}
+    	if(dt.getDestino() != null){
+	    	if(this.getDestino() instanceof Terminal){
+	    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
+	    	}else{
+	    		this.setDestino(new Parada((DataParada)dt.getDestino()));
+	    	}
     	}
     	this.setFechaCompra(dt.getFechaCompra());
-    	this.setComprador(new Usuario(dt.getComprador()));
+    	if(dt.getComprador() != null){
+    		this.setComprador(new Usuario(dt.getComprador()));
+    	}
     	this.setCiPersona(dt.getCiPersona());
-    	this.setVendedor(new Empleado(dt.getVendedor()));
+    	if(dt.getVendedor() != null){
+    		this.setVendedor(new Empleado(dt.getVendedor()));
+    	}
     	this.setUsado(dt.getUsado());
     	this.setPago(dt.getPago());
     	this.setEliminado(dt.getEliminado());

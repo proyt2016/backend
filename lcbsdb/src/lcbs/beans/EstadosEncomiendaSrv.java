@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import lcbs.interfaces.EstadosEncomiendaLocalApi;
+import lcbs.shares.DataEstadosEncomienda;
 import lcbs.models.EstadosEncomienda;
 
 import java.util.Map;
@@ -24,39 +25,38 @@ public class EstadosEncomiendaSrv implements EstadosEncomiendaLocalApi {
         
     }
     
-    public Map<String,EstadosEncomienda> obtenerEstadosEncomienda(){
-    	Map<String,EstadosEncomienda> estados = new HashMap();
+    public Map<String,DataEstadosEncomienda> obtenerEstadosEncomienda(){
+    	Map<String,DataEstadosEncomienda> estados = new HashMap();
         //obtengo todas los estados de encomienda de la bd
         Query query = em.createQuery("SELECT e FROM EstadosEncomienda e", EstadosEncomienda.class);
         
         List<EstadosEncomienda> listEstEnc = query.getResultList();
         listEstEnc.stream().forEach((est) -> {
-        	estados.put(est.getId(), est);
+        	estados.put(est.getId(), est.getDatatype());
         });
         return estados;
     }
     
-    public void modificarEstadosEncomienda(EstadosEncomienda estEnc){
-        if(em.find(EstadosEncomienda.class, estEnc.getId()) == null){
+    public void modificarEstadosEncomienda(DataEstadosEncomienda estEnc){
+        EstadosEncomienda realObj = new EstadosEncomienda(estEnc);
+    	if(em.find(EstadosEncomienda.class, realObj.getId()) == null){
            throw new IllegalArgumentException("El estado no existe");
        }
-       em.getTransaction().begin();
-       em.merge(estEnc);
-       em.getTransaction().commit();
+       em.merge(realObj);
     }
     
-    public EstadosEncomienda getEstadosEncomienda(String id){
+    public DataEstadosEncomienda getEstadosEncomienda(String id){
         return this.obtenerEstadosEncomienda().get(id);
     }
     
-    public void crearEstadosEncomienda(EstadosEncomienda est){
+    public void crearEstadosEncomienda(DataEstadosEncomienda est){
+    	EstadosEncomienda realObj = new EstadosEncomienda(est);
         //guardo el estado de encomienda en bd
-        em.getTransaction().begin();
-        em.persist(est);
-        em.getTransaction().commit();
+        em.persist(realObj);
     }
     
-    public void borrarEstadosEncomienda(EstadosEncomienda emp){
-        em.remove(emp);
+    public void borrarEstadosEncomienda(DataEstadosEncomienda est){
+    	EstadosEncomienda realObj = new EstadosEncomienda(est);
+        em.remove(realObj);
     }
 }

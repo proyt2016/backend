@@ -1,6 +1,7 @@
 package lcbs.beans;
 
 import javax.ejb.Stateless;
+import lcbs.shares.*;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -24,34 +25,35 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         
     }
     
-    public Map<String,Encomienda> obtenerEncomiendas(){
-    	Map<String,Encomienda> encomiendas = new HashMap();
+    public Map<String,DataEncomienda> obtenerEncomiendas(){
+    	Map<String,DataEncomienda> encomiendas = new HashMap();
         //obtengo todas las encomiendas de la bd
         Query query = em.createQuery("SELECT e FROM Encomienda e", Encomienda.class);
         
         List<Encomienda> listEnc = query.getResultList();
         listEnc.stream().forEach((enc) -> {
-        	encomiendas.put(enc.getId(), enc);
+        	encomiendas.put(enc.getId(), enc.getDatatype());
         });
         return encomiendas;
     }
     
-    public void modificarEncomienda(Encomienda enc){
-        if(em.find(Encomienda.class, enc.getId()) == null){
+    public void modificarEncomienda(DataEncomienda enc){
+    	Encomienda realObj = new Encomienda(enc);
+        if(em.find(Encomienda.class, realObj.getId()) == null){
            throw new IllegalArgumentException("La encomienda no existe");
        }
-       em.getTransaction().begin();
-       em.merge(enc);
-       em.getTransaction().commit();
+       em.merge(realObj);
     }
     
-    public Encomienda getEncomienda(String id){
+    public DataEncomienda getEncomienda(String id){
         return this.obtenerEncomiendas().get(id);
     }
     
-    public void crearEncomienda(Encomienda enc){
+    public void crearEncomienda(DataEncomienda enc){
+    	Encomienda realObj = new Encomienda(enc);
         //guardo la encomienda en bd
-        em.persist(enc);
+        em.persist(realObj);
+        System.out.println("#################################################################################### "+realObj.getId());
     }
     
     //TODO: Hacer busqueda con filtros

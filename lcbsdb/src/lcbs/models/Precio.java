@@ -42,15 +42,19 @@ public class Precio implements Serializable{
     }
     
     public Precio(DataPrecio dt){
-    	if(dt.getOrigen() instanceof DataTerminal){
-    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
-    	}else{
-    		this.setOrigen(new Parada((DataParada)dt.getOrigen()));
+    	if(dt.getOrigen() != null){
+	    	if(dt.getOrigen() instanceof DataTerminal){
+	    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
+	    	}else{
+	    		this.setOrigen(new Parada((DataParada)dt.getOrigen()));
+	    	}
     	}
-    	if(this.getDestino() instanceof Terminal){
-    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
-    	}else{
-    		this.setDestino(new Parada((DataParada)dt.getDestino()));
+    	if(dt.getDestino() != null){
+	    	if(dt.getDestino() instanceof DataTerminal){
+	    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
+	    	}else{
+	    		this.setDestino(new Parada((DataParada)dt.getDestino()));
+	    	}
     	}
     	this.setMonto(dt.getMonto());
     }

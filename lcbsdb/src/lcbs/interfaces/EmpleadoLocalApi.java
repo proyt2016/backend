@@ -4,13 +4,13 @@ import java.util.Map;
 
 import javax.ejb.Local;
 
-import lcbs.models.Empleado;
+import lcbs.shares.DataEmpleado;
 
 @Local
 public interface EmpleadoLocalApi {
-	public Map<String,Empleado> obtenerEmpleados();
-	public void modificarEmpleado(Empleado emp);
-	public Empleado getEmpleado(String id);
-	public void crearCuponera(Empleado emp);
-	public void darBajaEmpleado(Empleado emp);
+	public Map<String,DataEmpleado> obtenerEmpleados();
+	public void modificarEmpleado(DataEmpleado emp);
+	public DataEmpleado getEmpleado(String id);
+	public void crearCuponera(DataEmpleado emp);
+	public void darBajaEmpleado(DataEmpleado emp);
 }

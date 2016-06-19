@@ -4,13 +4,13 @@ import java.util.Map;
 
 import javax.ejb.Local;
 
-import lcbs.models.ReglaCobroEncomienda;
+import lcbs.shares.DataReglaCobroEncomienda;
 
 @Local
 public interface ReglaCobroEncomiendaLocalApi {
-	public Map<String,ReglaCobroEncomienda> obtenerReglaCobroEncomiendas();
-	public void modificarReglaCobroEncomienda(ReglaCobroEncomienda rce);
-	public ReglaCobroEncomienda getReglaCobroEncomienda(String rce);
-	public void crearReglaCobroEncomienda(ReglaCobroEncomienda rce);
-	public void borrarReglaCobroEncomienda(ReglaCobroEncomienda rce);
+	public Map<String,DataReglaCobroEncomienda> obtenerReglaCobroEncomiendas();
+	public void modificarReglaCobroEncomienda(DataReglaCobroEncomienda rce);
+	public DataReglaCobroEncomienda getReglaCobroEncomienda(String rce);
+	public void crearReglaCobroEncomienda(DataReglaCobroEncomienda rce);
+	public void borrarReglaCobroEncomienda(DataReglaCobroEncomienda rce);
 }

@@ -4,11 +4,11 @@ import java.util.Map;
 
 import javax.ejb.Local;
 
-import lcbs.models.Cuponera;
+import lcbs.shares.DataCuponera;
 
 @Local
 public interface CuponeraLocalApi {
-	public Map<String,Cuponera> obtenerCuponera();
-	public void modificarCuponera(Cuponera cup);
-	public Cuponera getCuponera(String id);
+	public Map<String,DataCuponera> obtenerCuponera();
+	public void modificarCuponera(DataCuponera cup);
+	public DataCuponera getCuponera(String id);
 }

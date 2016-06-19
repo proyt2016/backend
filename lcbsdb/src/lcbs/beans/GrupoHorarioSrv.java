@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import lcbs.interfaces.GrupoHorarioLocalApi;
 import lcbs.models.GrupoHorario;
+import lcbs.shares.DataGrupoHorario;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -24,39 +25,38 @@ public class GrupoHorarioSrv implements GrupoHorarioLocalApi {
         
     }
     
-    public Map<String,GrupoHorario> obtenerGrupoHorario(){
-    	Map<String,GrupoHorario> grupos = new HashMap();
+    public Map<String,DataGrupoHorario> obtenerGrupoHorario(){
+    	Map<String,DataGrupoHorario> grupos = new HashMap();
         //obtengo todos los grupos de horarios de la bd
         Query query = em.createQuery("SELECT g FROM GrupoHorario g", GrupoHorario.class);
         
         List<GrupoHorario> listGrupHor = query.getResultList();
         listGrupHor.stream().forEach((grp) -> {
-        	grupos.put(grp.getId(), grp);
+        	grupos.put(grp.getId(), grp.getDatatype());
         });
         return grupos;
     }
     
-    public void modificarGrupoHorario(GrupoHorario grHor){
-        if(em.find(GrupoHorario.class, grHor.getId()) == null){
+    public void modificarGrupoHorario(DataGrupoHorario grHor){
+        GrupoHorario realObj = new GrupoHorario(grHor);
+    	if(em.find(GrupoHorario.class, realObj.getId()) == null){
            throw new IllegalArgumentException("El grupo horario no existe");
        }
-       em.getTransaction().begin();
-       em.merge(grHor);
-       em.getTransaction().commit();
+       em.merge(realObj);
     }
     
-    public GrupoHorario getGrupoHorario(String id){
+    public DataGrupoHorario getGrupoHorario(String id){
         return this.obtenerGrupoHorario().get(id);
     }
     
-    public void crearGrupoHorario(GrupoHorario grp){
+    public void crearGrupoHorario(DataGrupoHorario grp){
+    	GrupoHorario realObj = new GrupoHorario(grp);
         //guardo el grupo de horarios en bd
-        em.getTransaction().begin();
         em.persist(grp);
-        em.getTransaction().commit();
     }
     
-    public void borrarGrupoHorario(GrupoHorario grp){
-        em.remove(grp);
+    public void borrarGrupoHorario(DataGrupoHorario grp){
+    	GrupoHorario realObj = new GrupoHorario(grp);
+        em.remove(realObj);
     }
 }

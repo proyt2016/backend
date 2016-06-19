@@ -38,15 +38,19 @@ public class Empleado extends Persona implements Serializable{
     	this.setId(dt.getId());
     	this.setApellido(dt.getApellido());
     	this.setEmail(new Email(dt.getEmail()));
-    	List<Telefono> temp = new ArrayList<Telefono>();
-    	dt.getTelefonosContacto().stream().forEach((tel) -> {
-    		temp.add(new Telefono(tel));
-        });
-    	this.setTelefonosContacto(temp);
+    	if(dt.getTelefonosContacto() != null){
+	    	List<Telefono> temp = new ArrayList<Telefono>();
+	    	dt.getTelefonosContacto().stream().forEach((tel) -> {
+	    		temp.add(new Telefono(tel));
+	        });
+	    	this.setTelefonosContacto(temp);
+    	}
     	this.setFechaNacimiento(dt.getFechaNacimiento());
     	this.setEliminado(dt.getEliminado());
     	this.setIdEmpleadoLdap(dt.getIdEmpleadoLdap());
-    	this.setPerfil(new Perfil(dt.getPerfil()));
+    	if(dt.getPerfil() != null){
+    		this.setPerfil(new Perfil(dt.getPerfil()));
+    	}
     }
     
     public DataEmpleado getDatatype(){

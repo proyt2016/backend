@@ -70,16 +70,20 @@ public class ConfiguracionEmpresa implements Serializable{
         this.setAceptaCuponera(dt.getAceptaCuponera());
         this.setUrlAcceso(dt.getUrlAcceso());
         this.telefonos = new ArrayList<Telefono>();
-        List<Telefono> aux = new ArrayList<Telefono>();
-        dt.getTelefonos().stream().forEach((tel) -> {
-        	aux.add(new Telefono(tel));
-        });
-        this.setTelefonos(aux);
-        List<Email> auxEm = new ArrayList<Email>();
-        dt.getEmails().stream().forEach((em) -> {
-        	auxEm.add(new Email(em));
-        });
-        this.setEmails(auxEm);
+        if(dt.getTelefonos() != null){
+	        List<Telefono> aux = new ArrayList<Telefono>();
+	        dt.getTelefonos().stream().forEach((tel) -> {
+	        	aux.add(new Telefono(tel));
+	        });
+	        this.setTelefonos(aux);
+        }
+        if(dt.getEmails() != null){
+	        List<Email> auxEm = new ArrayList<Email>();
+	        dt.getEmails().stream().forEach((em) -> {
+	        	auxEm.add(new Email(em));
+	        });
+	        this.setEmails(auxEm);
+        }
         this.setUrlLdap(dt.getUrlLdap());
         this.setUsuarioLdap(dt.getUsuarioLdap());
         this.setClaveLdap(dt.getClaveLdap());

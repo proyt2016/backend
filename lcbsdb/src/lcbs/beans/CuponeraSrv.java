@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import lcbs.interfaces.CuponeraLocalApi;
 import lcbs.models.Cuponera;
+import lcbs.shares.*;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -24,35 +25,33 @@ public class CuponeraSrv implements CuponeraLocalApi {
         
     }
     
-    public Map<String,Cuponera> obtenerCuponera(){
-    	Map<String,Cuponera> cuponeras = new HashMap();
+    public Map<String,DataCuponera> obtenerCuponera(){
+    	Map<String,DataCuponera> cuponeras = new HashMap();
         //obtengo todas las cuponera de la bd
         Query query = em.createQuery("SELECT c FROM Cuponera c", Cuponera.class);
         
         List<Cuponera> listCup = query.getResultList();
         listCup.stream().forEach((cup) -> {
-        	cuponeras.put(cup.getId(), cup);
+        	cuponeras.put(cup.getId(), cup.getDatatype());
         });
         return cuponeras;
     }
     
-    public void modificarCuponera(Cuponera cup){
-        if(em.find(Cuponera.class, cup.getId()) == null){
+    public void modificarCuponera(DataCuponera cup){
+    	Cuponera realObj = new Cuponera(cup);
+        if(em.find(Cuponera.class, realObj.getId()) == null){
            throw new IllegalArgumentException("La cuponera no existe");
        }
-       em.getTransaction().begin();
-       em.merge(cup);
-       em.getTransaction().commit();
+       em.merge(realObj);
     }
     
-    public Cuponera getCuponera(String id){
+    public DataCuponera getCuponera(String id){
         return this.obtenerCuponera().get(id);
     }
     
-    public void crearCuponera(Cuponera cup){
+    public void crearCuponera(DataCuponera cup){
+    	Cuponera realObj = new Cuponera(cup);
         //guardo la cuponera en bd
-        em.getTransaction().begin();
-        em.persist(cup);
-        em.getTransaction().commit();
+        em.persist(realObj);
     }
 }

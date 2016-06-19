@@ -4,13 +4,13 @@ import java.util.Map;
 
 import javax.ejb.Local;
 
-import lcbs.models.Usuario;
+import lcbs.shares.DataUsuario;
 
 @Local
 public interface UsuarioLocalApi {
-	public Map<String,Usuario> obtenerUsuarios();
-	public void modificarUsuario(Usuario usu);
-	public Usuario getUsuario(String usu);
-	public void crearUsuario(Usuario usu);
-	public void darBajaUsuario(Usuario usu);
+	public Map<String,DataUsuario> obtenerUsuarios();
+	public void modificarUsuario(DataUsuario usu);
+	public DataUsuario getUsuario(String usu);
+	public void crearUsuario(DataUsuario usu);
+	public void darBajaUsuario(DataUsuario usu);
 }

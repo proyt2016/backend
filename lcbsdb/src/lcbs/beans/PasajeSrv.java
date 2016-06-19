@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import lcbs.interfaces.PasajeLocalApi;
 import lcbs.models.Pasaje;
+import lcbs.shares.DataPasaje;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -24,39 +25,37 @@ public class PasajeSrv implements PasajeLocalApi {
         
     }
     
-    public Map<String,Pasaje> obtenerPasajes(){
-    	Map<String,Pasaje> Pasajes = new HashMap();
+    public Map<String,DataPasaje> obtenerPasajes(){
+    	Map<String,DataPasaje> Pasajes = new HashMap();
         //obtengo todos los Pasajes de la bd
         Query query = em.createQuery("SELECT p FROM Pasaje p", Pasaje.class);
         
         List<Pasaje> listPsj = query.getResultList();
         listPsj.stream().forEach((psj) -> {
-        	Pasajes.put(psj.getId(), psj);
+        	Pasajes.put(psj.getId(), psj.getDatatype());
         });
         return Pasajes;
     }
     
-    public void modificarPasaje(Pasaje psj){
-        if(em.find(Pasaje.class, psj.getId()) == null){
+    public void modificarPasaje(DataPasaje psj){
+        Pasaje realOb = new Pasaje(psj);
+    	if(em.find(Pasaje.class, realOb.getId()) == null){
            throw new IllegalArgumentException("El Pasaje no existe");
        }
-       em.getTransaction().begin();
-       em.merge(psj);
-       em.getTransaction().commit();
+       em.merge(realOb);
     }
     
-    public Pasaje getPasaje(String id){
+    public DataPasaje getPasaje(String id){
         return this.obtenerPasajes().get(id);
     }
     
-    public void crearPasaje(Pasaje psj){
+    public void crearPasaje(DataPasaje psj){
+    	Pasaje realOb = new Pasaje(psj);
         //guardo el Pasaje en bd
-        em.getTransaction().begin();
-        em.persist(psj);
-        em.getTransaction().commit();
+        em.persist(realOb);
     }
     
-    public void darBajaPasaje(Pasaje psj){
+    public void darBajaPasaje(DataPasaje psj){
         psj.setEliminado(true);
         this.modificarPasaje(psj);
     }

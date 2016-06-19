@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import lcbs.interfaces.PerfilLocalApi;
 import lcbs.models.Perfil;
+import lcbs.shares.DataPerfil;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -24,39 +25,38 @@ public class PerfilSrv implements PerfilLocalApi {
         
     }
     
-    public Map<String,Perfil> obtenerPerfils(){
-    	Map<String,Perfil> Perfils = new HashMap();
+    public Map<String,DataPerfil> obtenerPerfils(){
+    	Map<String,DataPerfil> Perfils = new HashMap();
         //obtengo todos los Perfiles de la bd
         Query query = em.createQuery("SELECT p FROM Perfil p", Perfil.class);
         
         List<Perfil> listPds = query.getResultList();
         listPds.stream().forEach((prf) -> {
-        	Perfils.put(prf.getId(), prf);
+        	Perfils.put(prf.getId(), prf.getDatatype());
         });
         return Perfils;
     }
     
-    public void modificarPerfil(Perfil prf){
-        if(em.find(Perfil.class, prf.getId()) == null){
+    public void modificarPerfil(DataPerfil prf){
+    	Perfil realObj = new Perfil(prf);
+        if(em.find(Perfil.class, realObj.getId()) == null){
            throw new IllegalArgumentException("El perfil no existe");
        }
-       em.getTransaction().begin();
-       em.merge(prf);
-       em.getTransaction().commit();
+       em.merge(realObj);
     }
     
-    public Perfil getPerfil(String id){
+    public DataPerfil getPerfil(String id){
         return this.obtenerPerfils().get(id);
     }
     
-    public void crearPerfil(Perfil prf){
+    public void crearPerfil(DataPerfil prf){
+    	Perfil realObj = new Perfil(prf);
         //guardo la Perfil en bd
-        em.getTransaction().begin();
-        em.persist(prf);
-        em.getTransaction().commit();
+        em.persist(realObj);
     }
     
-    public void borrarPerfil(Perfil prf){
-        em.remove(prf);
+    public void borrarPerfil(DataPerfil prf){
+    	Perfil realObj = new Perfil(prf);
+        em.remove(realObj);
     }
 }

@@ -6,8 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import lcbs.interfaces.ViajeLocalApi;
-import lcbs.models.Perfil;
 import lcbs.models.Viaje;
+import lcbs.shares.DataViaje;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -25,40 +25,39 @@ public class ViajeSrv implements ViajeLocalApi {
         
     }
     
-    public Map<String,Viaje> obtenerViajes(){
-    	Map<String,Viaje> Viajes = new HashMap();
+    public Map<String,DataViaje> obtenerViajes(){
+    	Map<String,DataViaje> Viajes = new HashMap();
         //obtengo todos los Viajes de la bd
         Query query = em.createQuery("SELECT v FROM Viaje v", Viaje.class);
         
         List<Viaje> listTer = query.getResultList();
         listTer.stream().forEach((via) -> {
-        	Viajes.put(via.getId(), via);
+        	Viajes.put(via.getId(), via.getDatatype());
         });
         return Viajes;
     }
     
-    public void modificarViaje(Viaje via){
-        if(em.find(Viaje.class, via.getId()) == null){
+    public void modificarViaje(DataViaje via){
+    	Viaje realObj = new Viaje(via);
+        if(em.find(Viaje.class, realObj.getId()) == null){
            throw new IllegalArgumentException("El viaje no existe");
        }
-       em.getTransaction().begin();
-       em.merge(via);
-       em.getTransaction().commit();
+       em.merge(realObj);
     }
     
-    public Viaje getViaje(String id){
+    public DataViaje getViaje(String id){
         return this.obtenerViajes().get(id);
     }
     
-    public void crearViaje(Viaje via){
+    public void crearViaje(DataViaje via){
+    	Viaje realObj = new Viaje(via);
         //guardo el viaje en bd
-        em.getTransaction().begin();
-        em.persist(via);
-        em.getTransaction().commit();
+        em.persist(realObj);
     }
     
-    public void borrarViaje(Viaje via){
-        em.remove(via);
+    public void borrarViaje(DataViaje via){
+    	Viaje realObj = new Viaje(via);
+        em.remove(realObj);
     }
     
     //TODO Busqueda de viaje por atrubutos

@@ -21,7 +21,7 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
-import lcbs.controllers.LocalApi;
+import interfaces.IEncomienda;
 
 // The @Stateless annotation eliminates the need for manual transaction demarcation
 @Stateless
@@ -29,13 +29,9 @@ import lcbs.controllers.LocalApi;
 public class EncomiendaRepo {
 //  
 	 
-	@EJB(lookup =  "java:app/lcbsb/EncomiendaCtrl!lcbs.controllers.LocalApi")
-	LocalApi ctr;
-//	@EJB(lookup="java:app/lcbsdb/EncomiendaSrv!lcbs.interfaces.EntityLocalApi")
-//	EntityLocalApi ctr;
-//	@EJB(lookup =  "java:global/lcbsdb/EncomiendaSrv!beans.EncomiendaSrv")
-//	EncomiendaCtrl ctr;
-	public String getSape(){ 
-		return "###" + ctr.getSape();
+	@EJB(lookup =  "java:app/lcbsb/EncomiendaCtrl!interfaces.IEncomienda")
+	IEncomienda ctr;
+	public String getSape(){
+		return "###" + ctr.getRecorridos().size();
 	}
 }

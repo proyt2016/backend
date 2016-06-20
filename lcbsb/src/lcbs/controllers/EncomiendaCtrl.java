@@ -1,12 +1,12 @@
 package lcbs.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import interfaces.IEncomienda;
-import lcbs.beans.EncomiendaSrv;
 import lcbs.interfaces.EncomiendaLocalApi;
 import lcbs.interfaces.TerminalLocalApi;
 import lcbs.interfaces.UsuarioLocalApi;
@@ -84,7 +84,7 @@ public class EncomiendaCtrl implements IEncomienda{
 	@Override
 	public List<DataPuntoRecorrido> getRecorridos() {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<DataPuntoRecorrido>();
 	}
 
 	@Override

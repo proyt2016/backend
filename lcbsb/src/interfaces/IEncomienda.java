@@ -2,8 +2,17 @@
 
 import java.util.List;
 
-import lcbs.shares.*;
+import javax.ejb.Local;
 
+import lcbs.shares.DataEncomienda;
+import lcbs.shares.DataEstadosEncomienda;
+import lcbs.shares.DataHistorialEstadosEncomienda;
+import lcbs.shares.DataPuntoRecorrido;
+import lcbs.shares.DataReglaCobroEncomienda;
+import lcbs.shares.DataTerminal;
+import lcbs.shares.DataUsuario;
+import lcbs.shares.DataVehiculo;
+@Local
 public interface IEncomienda {
 	
 	public List<DataEncomienda> ListarEncomiendas();

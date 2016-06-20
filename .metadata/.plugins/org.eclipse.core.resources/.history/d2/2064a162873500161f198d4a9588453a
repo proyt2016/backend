@@ -1,5 +1,0 @@
-package lcbs.shares;
-
-public interface DataPuntoRecorrido{
-   
-}

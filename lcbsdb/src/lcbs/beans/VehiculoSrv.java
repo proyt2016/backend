@@ -49,10 +49,11 @@ public class VehiculoSrv implements VehiculoLocalApi {
         return this.obtenerVehiculos().get(id);
     }
     
-    public void crearVehiculo(DataVehiculo veh){
+    public DataVehiculo crearVehiculo(DataVehiculo veh){
     	Vehiculo realObj = new Vehiculo(veh);
         //guardo el vehiculo en bd
         em.persist(realObj);
+        return realObj.getDatatype();
     }
     
     public void darBajaVehiculo(DataVehiculo veh){

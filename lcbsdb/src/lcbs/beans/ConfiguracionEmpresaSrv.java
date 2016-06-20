@@ -39,9 +39,10 @@ public class ConfiguracionEmpresaSrv implements ConfiguracionEmpresaLocalApi {
     	em.merge(realObj);
     }
     
-    public void crearConfiguracionEmpresa(DataConfiguracionEmpresa conf){
+    public DataConfiguracionEmpresa crearConfiguracionEmpresa(DataConfiguracionEmpresa conf){
     	ConfiguracionEmpresa realObj = new ConfiguracionEmpresa(conf);
         //guardo la configuracion de empresa en bd
         em.persist(realObj);
+        return realObj.getDatatype();
     }
 }

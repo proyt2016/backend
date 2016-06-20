@@ -49,10 +49,11 @@ public class GrupoHorarioSrv implements GrupoHorarioLocalApi {
         return this.obtenerGrupoHorario().get(id);
     }
     
-    public void crearGrupoHorario(DataGrupoHorario grp){
+    public DataGrupoHorario crearGrupoHorario(DataGrupoHorario grp){
     	GrupoHorario realObj = new GrupoHorario(grp);
         //guardo el grupo de horarios en bd
         em.persist(grp);
+        return realObj.getDatatype();
     }
     
     public void borrarGrupoHorario(DataGrupoHorario grp){

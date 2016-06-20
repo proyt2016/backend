@@ -49,10 +49,11 @@ public class UsuarioSrv implements UsuarioLocalApi {
         return this.obtenerUsuarios().get(id);
     }
     
-    public void crearUsuario(DataUsuario usu){
+    public DataUsuario crearUsuario(DataUsuario usu){
     	Usuario realObj = new Usuario(usu);
         //guardo el usuario en bd
         em.persist(realObj);
+        return realObj.getDatatype();
     }
     
     public void darBajaUsuario(DataUsuario usu){

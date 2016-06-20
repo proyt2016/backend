@@ -49,10 +49,11 @@ public class ViajeSrv implements ViajeLocalApi {
         return this.obtenerViajes().get(id);
     }
     
-    public void crearViaje(DataViaje via){
+    public DataViaje crearViaje(DataViaje via){
     	Viaje realObj = new Viaje(via);
         //guardo el viaje en bd
         em.persist(realObj);
+        return realObj.getDatatype();
     }
     
     public void borrarViaje(DataViaje via){

@@ -49,10 +49,11 @@ public class PerfilSrv implements PerfilLocalApi {
         return this.obtenerPerfils().get(id);
     }
     
-    public void crearPerfil(DataPerfil prf){
+    public DataPerfil crearPerfil(DataPerfil prf){
     	Perfil realObj = new Perfil(prf);
         //guardo la Perfil en bd
         em.persist(realObj);
+        return realObj.getDatatype();
     }
     
     public void borrarPerfil(DataPerfil prf){

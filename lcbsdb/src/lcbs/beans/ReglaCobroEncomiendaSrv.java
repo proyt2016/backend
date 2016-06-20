@@ -49,10 +49,11 @@ public class ReglaCobroEncomiendaSrv implements ReglaCobroEncomiendaLocalApi {
         return this.obtenerReglaCobroEncomiendas().get(id);
     }
     
-    public void crearReglaCobroEncomienda(DataReglaCobroEncomienda rce){
+    public DataReglaCobroEncomienda crearReglaCobroEncomienda(DataReglaCobroEncomienda rce){
     	ReglaCobroEncomienda realObj = new ReglaCobroEncomienda(rce);
         //guardo la regla de cobro de encomiendas en bd
         em.persist(realObj);
+        return realObj.getDatatype();
     }
     
     public void borrarReglaCobroEncomienda(DataReglaCobroEncomienda rce){

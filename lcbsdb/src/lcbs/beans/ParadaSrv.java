@@ -38,21 +38,22 @@ public class ParadaSrv implements ParadaLocalApi {
     }
     
     public void modificarParada(DataParada prd){
-    	Parada realOb = new Parada(prd);
-        if(em.find(Parada.class, realOb.getId()) == null){
+    	Parada realObj = new Parada(prd);
+        if(em.find(Parada.class, realObj.getId()) == null){
            throw new IllegalArgumentException("La parada no existe");
        }
-       em.merge(realOb);
+       em.merge(realObj);
     }
     
     public DataParada getParada(String id){
         return this.obtenerParadas().get(id);
     }
     
-    public void crearParada(DataParada prd){
-    	Parada realOb = new Parada(prd);
+    public DataParada crearParada(DataParada prd){
+    	Parada realObj = new Parada(prd);
         //guardo la parada en bd
-        em.persist(realOb);
+        em.persist(realObj);
+        return realObj.getDatatype();
     }
     
     public void borrarParada(DataParada prd){

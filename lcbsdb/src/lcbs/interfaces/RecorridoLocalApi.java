@@ -11,6 +11,6 @@ public interface RecorridoLocalApi {
 	public Map<String,DataRecorrido> obtenerRecorridos();
 	public void modificarRecorrido(DataRecorrido rec);
 	public DataRecorrido getRecorrido(String rec);
-	public void crearRecorrido(DataRecorrido rec);
+	public DataRecorrido crearRecorrido(DataRecorrido rec);
 	public void darBajaRecorrido(DataRecorrido rec);
 }

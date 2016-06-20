@@ -49,9 +49,10 @@ public class CuponeraSrv implements CuponeraLocalApi {
         return this.obtenerCuponera().get(id);
     }
     
-    public void crearCuponera(DataCuponera cup){
+    public DataCuponera crearCuponera(DataCuponera cup){
     	Cuponera realObj = new Cuponera(cup);
         //guardo la cuponera en bd
         em.persist(realObj);
+        return realObj.getDatatype();
     }
 }

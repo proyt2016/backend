@@ -49,10 +49,11 @@ public class RecorridoSrv implements RecorridoLocalApi {
         return this.obtenerRecorridos().get(id);
     }
     
-    public void crearRecorrido(DataRecorrido rec){
+    public DataRecorrido crearRecorrido(DataRecorrido rec){
     	Recorrido realObj = new Recorrido(rec);
         //guardo el Recorrido en bd
         em.persist(realObj);
+        return realObj.getDatatype();
     }
     
     public void darBajaRecorrido(DataRecorrido rec){

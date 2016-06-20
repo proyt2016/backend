@@ -11,6 +11,6 @@ public interface ParadaLocalApi {
 	public Map<String,DataParada> obtenerParadas();
 	public void modificarParada(DataParada prd);
 	public DataParada getParada(String id);
-	public void crearParada(DataParada prd);
+	public DataParada crearParada(DataParada prd);
 	public void borrarParada(DataParada prd);
 }

@@ -49,10 +49,11 @@ public class TerminalSrv implements TerminalLocalApi {
         return this.obtenerTerminals().get(id);
     }
     
-    public void crearTerminal(DataTerminal ter){
+    public DataTerminal crearTerminal(DataTerminal ter){
     	Terminal realObj = new Terminal(ter);
         //guardo la Terminal en bd
         em.persist(realObj);
+        return realObj.getDatatype();
     }
     
     public void darBajaTerminal(DataTerminal ter){

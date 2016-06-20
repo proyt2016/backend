@@ -49,10 +49,11 @@ public class ReservaSrv implements ReservaLocalApi {
         return this.obtenerReservas().get(id);
     }
     
-    public void crearReserva(DataReserva res){
+    public DataReserva crearReserva(DataReserva res){
     	Reserva realObj = new Reserva(res);
         //guardo la reserva en bd
         em.persist(realObj);
+        return realObj.getDatatype();
     }
     
     public void darBajaReserva(DataReserva res){

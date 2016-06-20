@@ -11,6 +11,6 @@ public interface ReglaCobroEncomiendaLocalApi {
 	public Map<String,DataReglaCobroEncomienda> obtenerReglaCobroEncomiendas();
 	public void modificarReglaCobroEncomienda(DataReglaCobroEncomienda rce);
 	public DataReglaCobroEncomienda getReglaCobroEncomienda(String rce);
-	public void crearReglaCobroEncomienda(DataReglaCobroEncomienda rce);
+	public DataReglaCobroEncomienda crearReglaCobroEncomienda(DataReglaCobroEncomienda rce);
 	public void borrarReglaCobroEncomienda(DataReglaCobroEncomienda rce);
 }

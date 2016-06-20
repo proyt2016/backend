@@ -11,6 +11,6 @@ public interface ReservaLocalApi {
 	public Map<String,DataReserva> obtenerReservas();
 	public void modificarReserva(DataReserva rce);
 	public DataReserva getReserva(String rce);
-	public void crearReserva(DataReserva rce);
+	public DataReserva crearReserva(DataReserva rce);
 	public void darBajaReserva(DataReserva rce);
 }

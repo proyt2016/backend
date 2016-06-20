@@ -38,21 +38,22 @@ public class PasajeSrv implements PasajeLocalApi {
     }
     
     public void modificarPasaje(DataPasaje psj){
-        Pasaje realOb = new Pasaje(psj);
-    	if(em.find(Pasaje.class, realOb.getId()) == null){
+        Pasaje realObj = new Pasaje(psj);
+    	if(em.find(Pasaje.class, realObj.getId()) == null){
            throw new IllegalArgumentException("El Pasaje no existe");
        }
-       em.merge(realOb);
+       em.merge(realObj);
     }
     
     public DataPasaje getPasaje(String id){
         return this.obtenerPasajes().get(id);
     }
     
-    public void crearPasaje(DataPasaje psj){
-    	Pasaje realOb = new Pasaje(psj);
+    public DataPasaje crearPasaje(DataPasaje psj){
+    	Pasaje realObj = new Pasaje(psj);
         //guardo el Pasaje en bd
-        em.persist(realOb);
+        em.persist(realObj);
+        return realObj.getDatatype();
     }
     
     public void darBajaPasaje(DataPasaje psj){

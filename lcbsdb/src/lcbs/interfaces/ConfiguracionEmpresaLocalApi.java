@@ -7,5 +7,5 @@ import lcbs.shares.*;
 public interface ConfiguracionEmpresaLocalApi {
 	public DataConfiguracionEmpresa getConfiguracionEmpresa();
 	public void modificarCuponera(DataConfiguracionEmpresa conf);
-	public void crearConfiguracionEmpresa(DataConfiguracionEmpresa conf);
+	public DataConfiguracionEmpresa crearConfiguracionEmpresa(DataConfiguracionEmpresa conf);
 }

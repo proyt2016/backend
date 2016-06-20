@@ -49,10 +49,11 @@ public class EstadosEncomiendaSrv implements EstadosEncomiendaLocalApi {
         return this.obtenerEstadosEncomienda().get(id);
     }
     
-    public void crearEstadosEncomienda(DataEstadosEncomienda est){
+    public DataEstadosEncomienda crearEstadosEncomienda(DataEstadosEncomienda est){
     	EstadosEncomienda realObj = new EstadosEncomienda(est);
         //guardo el estado de encomienda en bd
         em.persist(realObj);
+        return realObj.getDatatype();
     }
     
     public void borrarEstadosEncomienda(DataEstadosEncomienda est){

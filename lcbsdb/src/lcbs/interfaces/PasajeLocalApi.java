@@ -11,6 +11,6 @@ public interface PasajeLocalApi {
 	public Map<String,DataPasaje> obtenerPasajes();
 	public void modificarPasaje(DataPasaje psj);
 	public DataPasaje getPasaje(String id);
-	public void crearPasaje(DataPasaje psj);
+	public DataPasaje crearPasaje(DataPasaje psj);
 	public void darBajaPasaje(DataPasaje psj);
 }

@@ -49,11 +49,11 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         return this.obtenerEncomiendas().get(id);
     }
     
-    public void crearEncomienda(DataEncomienda enc){
+    public DataEncomienda crearEncomienda(DataEncomienda enc){
     	Encomienda realObj = new Encomienda(enc);
         //guardo la encomienda en bd
         em.persist(realObj);
-        System.out.println("#################################################################################### "+realObj.getId());
+        return realObj.getDatatype();
     }
     
     //TODO: Hacer busqueda con filtros

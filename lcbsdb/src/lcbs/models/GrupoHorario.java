@@ -90,11 +90,13 @@ public class GrupoHorario implements Serializable{
         });
     	result.setDiasSemana(aux);*/
     	result.setDiasEspecificos(this.getDiasEspecificos());
+    	if(this.getHorarios()!=null){
     	List<DataHorario> auxHr = new ArrayList<DataHorario>();
     	this.getHorarios().stream().forEach((hr) -> {
     		auxHr.add(hr.getDatatype());
         });
     	result.setHorarios(auxHr);
+    	}
     	return result;
     }
     

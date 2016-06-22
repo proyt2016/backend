@@ -80,6 +80,7 @@ public class Recorrido implements Serializable{
     	DataRecorrido result = new DataRecorrido();
     	result.setId(this.getId());
     	result.setNombre(this.getNombre());
+    	if(this.getPuntosDeRecorrido()!=null){
     	List<DataPuntoRecorrido> auxPr = new ArrayList<DataPuntoRecorrido>();
     	this.getPuntosDeRecorrido().stream().forEach((pr) -> {
     		if(pr instanceof Terminal){
@@ -89,16 +90,19 @@ public class Recorrido implements Serializable{
         	}
         });
     	result.setPuntosDeRecorrido(auxPr);
+    	}
+    	if(this.getHorarios()!=null){
     	List<DataGrupoHorario> auxHr = new ArrayList<DataGrupoHorario>();
     	this.getHorarios().stream().forEach((hr) -> {
     		auxHr.add(hr.getDatatype());
         });
-    	result.setHorarios(auxHr);
+    	result.setHorarios(auxHr);}
+    	if(this.getPrecios()!=null){
     	List<DataPrecio> aux = new ArrayList<DataPrecio>();
     	this.getPrecios().stream().forEach((pr) -> {
     		aux.add(pr.getDatatype());
         });
-    	result.setPrecios(aux);
+    	result.setPrecios(aux);}
     	return result;
     }
     

@@ -82,11 +82,12 @@ public class Perfil implements Serializable{
     	result.setModulo6(this.getModulo6());
     	result.setModulo7(this.getModulo7());
     	result.setModulo8(this.getModulo8());
+    	if(this.getEmpleados()!=null){
     	List<DataEmpleado> aux = new ArrayList<DataEmpleado>();
     	this.getEmpleados().stream().forEach((emp) -> {
     		aux.add(emp.getDatatype());
         });
-    	result.setEmpleados(aux);
+    	result.setEmpleados(aux);}
     	return result;
     }
     

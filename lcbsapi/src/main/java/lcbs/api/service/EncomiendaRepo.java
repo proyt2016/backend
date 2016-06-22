@@ -22,6 +22,8 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import interfaces.IEncomienda;
+import lcbs.shares.DataEncomienda;
+import lcbs.shares.DataEstadosEncomienda;
 
 // The @Stateless annotation eliminates the need for manual transaction demarcation
 @Stateless
@@ -32,6 +34,9 @@ public class EncomiendaRepo {
 	@EJB(lookup =  "java:app/lcbsb/EncomiendaCtrl!interfaces.IEncomienda")
 	IEncomienda ctr;
 	public String getSape(){
-		return "###" + ctr.getRecorridos().size();
+		
+		
+		ctr.AsignarEncomiendasVehiculo("1", "1", "1");
+		return "###";
 	}
 }

@@ -51,7 +51,8 @@ public class HistorialEstadosEncomienda implements Serializable{
     public DataHistorialEstadosEncomienda getDatatype(){
     	DataHistorialEstadosEncomienda result = new DataHistorialEstadosEncomienda();
     	result.setId(this.getId());
-    	result.setEstado(this.getEstado().getDatatype());
+    	if(this.getEstado()!=null)
+    		result.setEstado(this.getEstado().getDatatype());
     	result.setFecha(this.getFecha());
     	return result;
     }

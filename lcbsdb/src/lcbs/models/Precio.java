@@ -61,14 +61,20 @@ public class Precio implements Serializable{
     
     public DataPrecio getDatatype(){
     	DataPrecio result = new DataPrecio();
+    	if(this.getOrigen()!=null)
     	if(this.getOrigen() instanceof Terminal){
+    		if(this.getOrigen()!=null)
     		result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
     	}else{
+    		if(this.getOrigen()!=null)
     		result.setOrigen(((Parada)this.getOrigen()).getDatatype());
     	}
+    	if(this.getDestino()!=null)
     	if(this.getDestino() instanceof Terminal){
+    		if(this.getDestino()!=null)
     		result.setDestino(((Terminal)this.getDestino()).getDatatype());
     	}else{
+    		if(this.getDestino()!=null)
     		result.setDestino(((Parada)this.getDestino()).getDatatype());
     	}
     	result.setMonto(this.getMonto());

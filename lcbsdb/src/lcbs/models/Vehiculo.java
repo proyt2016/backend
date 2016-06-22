@@ -89,11 +89,12 @@ public class Vehiculo implements Serializable{
     	result.setFechaAlta(this.getFechaAlta());
     	result.setCantidadAsientos(this.getCantidadAsientos());
     	result.setConGuarda(this.getConGuarda());
+    	if(this.getMantenimientos()!=null){
     	List<DataMantenimientoVehiculo> aux = new ArrayList<DataMantenimientoVehiculo>();
     	this.getMantenimientos().stream().forEach((mnt) -> {
     		aux.add(mnt.getDatatype());
         });
-    	result.setMantenimientos(aux);
+    	result.setMantenimientos(aux);}
     	result.setEliminado(this.getEliminado());
     	return result;
     }

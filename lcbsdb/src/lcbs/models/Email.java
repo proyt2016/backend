@@ -26,7 +26,7 @@ public class Email implements Serializable{
     }
     
     public DataEmail getDatatype(){
-    	DataEmail result = new DataEmail();
+       	DataEmail result = new DataEmail();
     	result.setEmail(this.email);
     	return result;
     }

@@ -87,20 +87,25 @@ public class Viaje implements Serializable {
 	public DataViaje getDatatype(){
 		DataViaje result = new DataViaje();
 		result.setId(this.getId());
-		result.setRecorrido(this.getRecorrido().getDatatype());
-		result.setHorario(this.getHorario().getDatatype());
+		if(this.getRecorrido()!=null)
+			result.setRecorrido(this.getRecorrido().getDatatype());
+		if(this.getHorario()!=null)
+			result.setHorario(this.getHorario().getDatatype());
 		result.setFechaSalida(this.getFechaSalida());
+		if(this.getEmpleados()!=null){
 		List<DataEmpleado> aux = new ArrayList<DataEmpleado>();
 		this.getEmpleados().stream().forEach((emp) -> {
     		aux.add(emp.getDatatype());
         });
-    	result.setEmpleados(aux);
-    	result.setCoche(this.getCoche().getDatatype());
+    	result.setEmpleados(aux);}
+		if(this.getCoche()!=null)
+			result.setCoche(this.getCoche().getDatatype());
+		if(this.getEncomiendas()!=null){
 		List<DataEncomienda> auxEnc = new ArrayList<DataEncomienda>();
 		this.getEncomiendas().stream().forEach((enc) -> {
     		auxEnc.add(enc.getDatatype());
         });
-    	result.setEncomiendas(auxEnc);
+    	result.setEncomiendas(auxEnc);}
 		return result;
 	}
 

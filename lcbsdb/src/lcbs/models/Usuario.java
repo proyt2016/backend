@@ -78,24 +78,29 @@ public class Usuario extends Persona implements Serializable{
     	DataUsuario result = new DataUsuario();
     	result.setId(this.getId());
     	result.setApellido(this.getApellido());
-    	result.setEmail(this.getEmail().getDatatype());
+    	if(this.getEmail()!=null)
+    		result.setEmail(this.getEmail().getDatatype());
+    	if(this.getTelefonosContacto()!=null){
     	List<DataTelefono> aux = new ArrayList<DataTelefono>();
     	this.getTelefonosContacto().stream().forEach((tel) -> {
     		aux.add(tel.getDatatype());
         });
     	result.setTelefonosContacto(aux);
+    	}
     	result.setFechaNacimiento(this.getFechaNacimiento());
     	result.setEliminado(this.getEliminado());
     	result.setNombreAMostrar(this.getNombreAMostrar());
     	result.setClave(this.getClave());
     	result.setRedSocialUsada(this.getRedSocialUsada());
     	this.setIdRedSocial(this.getIdRedSocial());
-    	result.setCuponera(this.getCuponera().getDatatype());
+    	if(this.getCuponera()!=null)
+    		result.setCuponera(this.getCuponera().getDatatype());
+    	if(this.getEncomiendas()!=null){
     	List<DataEncomienda> auxEnc = new ArrayList<DataEncomienda>();
     	this.getEncomiendas().stream().forEach((enc) -> {
     		auxEnc.add(enc.getDatatype());
         });
-    	result.setEncomiendas(auxEnc);
+    	result.setEncomiendas(auxEnc);}
     	return result;
     }
     

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import lcbs.shares.*;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -28,12 +30,15 @@ public class Usuario extends Persona implements Serializable{
     private Cuponera cuponera;
     @OneToMany
     private List<Encomienda> encomiendas;
+    @Embedded
+    @ElementCollection
+    private List<Notificacion> notificaciones;
 
  
 
     public Usuario() {}
     
-    public Usuario(String id, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, Cuponera cup, List<Encomienda> enc) {
+    public Usuario(String id, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, Cuponera cup, List<Encomienda> enc, List<Notificacion> not) {
         super(id, ape, mail, tels, fecNac, elim);
         this.nombreAMostrar = nomMos;
         this.clave = clave;
@@ -41,6 +46,7 @@ public class Usuario extends Persona implements Serializable{
         this.idRedSocial = idRedsoc;
         this.cuponera = cup;
         this.encomiendas = enc;
+        this.notificaciones = not;
     }
     
     public Usuario(DataUsuario dt){
@@ -78,24 +84,29 @@ public class Usuario extends Persona implements Serializable{
     	DataUsuario result = new DataUsuario();
     	result.setId(this.getId());
     	result.setApellido(this.getApellido());
-    	result.setEmail(this.getEmail().getDatatype());
+    	if(this.getEmail()!=null)
+    		result.setEmail(this.getEmail().getDatatype());
+    	if(this.getTelefonosContacto()!=null){
     	List<DataTelefono> aux = new ArrayList<DataTelefono>();
     	this.getTelefonosContacto().stream().forEach((tel) -> {
     		aux.add(tel.getDatatype());
         });
     	result.setTelefonosContacto(aux);
+    	}
     	result.setFechaNacimiento(this.getFechaNacimiento());
     	result.setEliminado(this.getEliminado());
     	result.setNombreAMostrar(this.getNombreAMostrar());
     	result.setClave(this.getClave());
     	result.setRedSocialUsada(this.getRedSocialUsada());
     	this.setIdRedSocial(this.getIdRedSocial());
-    	result.setCuponera(this.getCuponera().getDatatype());
+    	if(this.getCuponera()!=null)
+    		result.setCuponera(this.getCuponera().getDatatype());
+    	if(this.getEncomiendas()!=null){
     	List<DataEncomienda> auxEnc = new ArrayList<DataEncomienda>();
     	this.getEncomiendas().stream().forEach((enc) -> {
     		auxEnc.add(enc.getDatatype());
         });
-    	result.setEncomiendas(auxEnc);
+    	result.setEncomiendas(auxEnc);}
     	return result;
     }
     
@@ -145,5 +156,13 @@ public class Usuario extends Persona implements Serializable{
     
     public List<Encomienda> getEncomiendas(){
         return this.encomiendas;
+    }
+    
+    public void setNotificaciones(List<Notificacion> val){
+        this.notificaciones = val;
+    }
+    
+    public List<Notificacion> getNotificaciones(){
+        return this.notificaciones;
     }
 }

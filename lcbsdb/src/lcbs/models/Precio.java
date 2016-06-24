@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.mapping.List;
 
 @Entity
@@ -23,7 +24,8 @@ import org.hibernate.mapping.List;
 public class Precio implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
     private PuntoRecorrido origen;
@@ -61,14 +63,20 @@ public class Precio implements Serializable{
     
     public DataPrecio getDatatype(){
     	DataPrecio result = new DataPrecio();
+    	if(this.getOrigen()!=null)
     	if(this.getOrigen() instanceof Terminal){
+    		if(this.getOrigen()!=null)
     		result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
     	}else{
+    		if(this.getOrigen()!=null)
     		result.setOrigen(((Parada)this.getOrigen()).getDatatype());
     	}
+    	if(this.getDestino()!=null)
     	if(this.getDestino() instanceof Terminal){
+    		if(this.getDestino()!=null)
     		result.setDestino(((Terminal)this.getDestino()).getDatatype());
     	}else{
+    		if(this.getDestino()!=null)
     		result.setDestino(((Parada)this.getDestino()).getDatatype());
     	}
     	result.setMonto(this.getMonto());

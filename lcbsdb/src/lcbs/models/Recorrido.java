@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,8 @@ public class Recorrido implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String nombre;
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
@@ -80,6 +83,7 @@ public class Recorrido implements Serializable{
     	DataRecorrido result = new DataRecorrido();
     	result.setId(this.getId());
     	result.setNombre(this.getNombre());
+    	if(this.getPuntosDeRecorrido()!=null){
     	List<DataPuntoRecorrido> auxPr = new ArrayList<DataPuntoRecorrido>();
     	this.getPuntosDeRecorrido().stream().forEach((pr) -> {
     		if(pr instanceof Terminal){
@@ -89,16 +93,19 @@ public class Recorrido implements Serializable{
         	}
         });
     	result.setPuntosDeRecorrido(auxPr);
+    	}
+    	if(this.getHorarios()!=null){
     	List<DataGrupoHorario> auxHr = new ArrayList<DataGrupoHorario>();
     	this.getHorarios().stream().forEach((hr) -> {
     		auxHr.add(hr.getDatatype());
         });
-    	result.setHorarios(auxHr);
+    	result.setHorarios(auxHr);}
+    	if(this.getPrecios()!=null){
     	List<DataPrecio> aux = new ArrayList<DataPrecio>();
     	this.getPrecios().stream().forEach((pr) -> {
     		aux.add(pr.getDatatype());
         });
-    	result.setPrecios(aux);
+    	result.setPrecios(aux);}
     	return result;
     }
     

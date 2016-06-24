@@ -1,6 +1,7 @@
 package lcbs.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -8,17 +9,22 @@ import javax.ejb.Stateless;
 
 import interfaces.IEncomienda;
 import lcbs.interfaces.EncomiendaLocalApi;
+import lcbs.interfaces.EstadosEncomiendaLocalApi;
+import lcbs.interfaces.RecorridoLocalApi;
+import lcbs.interfaces.ReglaCobroEncomiendaLocalApi;
 import lcbs.interfaces.TerminalLocalApi;
 import lcbs.interfaces.UsuarioLocalApi;
 import lcbs.interfaces.VehiculoLocalApi;
+import lcbs.interfaces.ViajeLocalApi;
 import lcbs.shares.DataEncomienda;
 import lcbs.shares.DataEstadosEncomienda;
 import lcbs.shares.DataHistorialEstadosEncomienda;
-import lcbs.shares.DataPuntoRecorrido;
+import lcbs.shares.DataRecorrido;
 import lcbs.shares.DataReglaCobroEncomienda;
 import lcbs.shares.DataTerminal;
 import lcbs.shares.DataUsuario;
 import lcbs.shares.DataVehiculo;
+import lcbs.shares.DataViaje;
 
 
 /**
@@ -36,121 +42,140 @@ public class EncomiendaCtrl implements IEncomienda{
 	UsuarioLocalApi srvUsuario;
 	@EJB(lookup="java:app/lcbsdb/VehiculoSrv!lcbs.interfaces.VehiculoLocalApi")
 	VehiculoLocalApi srvVehiculo;
+	@EJB(lookup="java:app/lcbsdb/ReglaCobroEncomiendaSrv!lcbs.interfaces.ReglaCobroEncomiendaLocalApi")
+	ReglaCobroEncomiendaLocalApi srvReglaCobro;
+	@EJB(lookup="java:app/lcbsdb/RecorridoSrv!lcbs.interfaces.RecorridoLocalApi")
+	RecorridoLocalApi srvRecorrido;
+	@EJB(lookup="java:app/lcbsdb/EstadosEncomiendaSrv!lcbs.interfaces.EstadosEncomiendaLocalApi")
+	EstadosEncomiendaLocalApi srvEstadosEncomienda;
+	@EJB(lookup="java:app/lcbsdb/ViajeSrv!lcbs.interfaces.ViajeLocalApi")
+	ViajeLocalApi srvViaje;
 	
 
 	@Override
 	public List<DataEncomienda> ListarEncomiendas() {
-		List<DataEncomienda> listaEncomiendas = (List<DataEncomienda>) srvEncomienda.obtenerEncomiendas();
+		List<DataEncomienda> listaEncomiendas = new ArrayList( srvEncomienda.obtenerEncomiendas().values());
 		return listaEncomiendas;
 		
 	}
 
 	@Override
 	public List<DataTerminal> ListarTerminales() {
-		List<DataTerminal> listaTerminales = (List<DataTerminal>) srvTerminal.obtenerTerminals();
+		@SuppressWarnings("unchecked")
+		List<DataTerminal> listaTerminales = new ArrayList( srvTerminal.obtenerTerminals().values());
 		return listaTerminales;
 	}
 
 	@Override
 	public List<DataVehiculo> ListarVehiculos() {
-	    List<DataVehiculo> listaVehiculos = (List<DataVehiculo>) srvVehiculo.obtenerVehiculos();
+	    @SuppressWarnings("unchecked")
+		List<DataVehiculo> listaVehiculos = new ArrayList( srvVehiculo.obtenerVehiculos().values());
 		return listaVehiculos;
 	}
 
 	@Override
 	public List<DataUsuario> ListarUsuarios() {
-		List<DataUsuario> listaUsuarios = (List<DataUsuario>) srvUsuario.obtenerUsuarios();
+		@SuppressWarnings("unchecked")
+		List<DataUsuario> listaUsuarios = new ArrayList(srvUsuario.obtenerUsuarios().values());
 		return listaUsuarios;
 	}
 
 	@Override
 	public List<DataReglaCobroEncomienda> getReglasDeCobro() {
-		// TODO Auto-generated method stub
-		return null;
+		@SuppressWarnings("unchecked")
+		List<DataReglaCobroEncomienda> listaReglaCobro = new ArrayList(srvReglaCobro.obtenerReglaCobroEncomiendas().values());
+		return listaReglaCobro;
 	}
 
 	@Override
 	public DataReglaCobroEncomienda getReglaDeCobro(String idEncomieda) {
-		// TODO Auto-generated method stub
-		return null;
+		DataReglaCobroEncomienda dataReglaCobro = srvReglaCobro.getReglaCobroEncomienda(idEncomieda);
+		return dataReglaCobro;
 	}
 
 	@Override
 	public void AltaEncomienda(DataEncomienda encomienda) {
-		// TODO Auto-generated method stub
-		
+		srvEncomienda.crearEncomienda(encomienda);
 	}
 
 	@Override
-	public List<DataPuntoRecorrido> getRecorridos() {
-		// TODO Auto-generated method stub
-		return new ArrayList<DataPuntoRecorrido>();
+	public List<DataRecorrido> getRecorridos() {
+		List<DataRecorrido> listaRecorridos = new ArrayList(srvRecorrido.obtenerRecorridos().values());
+		return listaRecorridos;
 	}
 
 	@Override
 	public List<DataHistorialEstadosEncomienda> getHistorialEstado(String idEncomienda) {
-		// TODO Auto-generated method stub
-		return null;
+		List<DataHistorialEstadosEncomienda> listaHistoriales = new ArrayList(srvEstadosEncomienda.obtenerEstadosEncomienda().values());
+		return listaHistoriales;
+		
 	}
 
 	@Override
 	public DataEstadosEncomienda getUltimoEstado(String idEncomienda) {
-		// TODO Auto-generated method stub
-		return null;
+		DataEncomienda dataEncomienda = srvEncomienda.getEncomienda(idEncomienda);
+		return dataEncomienda.getEstadoActual();
 	}
 
 	@Override
 	public DataVehiculo getVehiculo(String idVehiculo) {
-		// TODO Auto-generated method stub
-		return null;
+		return srvVehiculo.getVehiculo(idVehiculo);
 	}
 
 	@Override
 	public DataEncomienda getEncomienda(String idEncomienda) {
-		// TODO Auto-generated method stub
-		return null;
+		return srvEncomienda.getEncomienda(idEncomienda);
 	}
 
 	@Override
 	public DataTerminal getTerminal(String idTerminal) {
-		// TODO Auto-generated method stub
-		return null;
+		return srvTerminal.getTerminal(idTerminal);
 	}
 
 	@Override
-	public boolean setEstadoEncomiendaIndividual(String idEncomienda, DataEstadosEncomienda dataEstado) {
-		// TODO Auto-generated method stub
-		return false;
+	public void setEstadoEncomienda(String idEncomienda, DataEstadosEncomienda dataEstado) {
+		Date fecha = new Date();
+		DataEncomienda encomienda = srvEncomienda.getEncomienda(idEncomienda);
+		encomienda.setEstadoActual(dataEstado);
+		DataHistorialEstadosEncomienda historialEstados = new DataHistorialEstadosEncomienda();
+		historialEstados.setEstado(dataEstado);
+		historialEstados.setFecha(fecha);
+		encomienda.getEstados().add(historialEstados);
+		srvEncomienda.modificarEncomienda(encomienda);
 	}
 
 	@Override
-	public List<DataEncomienda> getEncomiendasPorVehiculo(String idVehiculo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<DataEncomienda> getEncomiendasPorVehiculo(String idVehiculo, String idViaje) {
+		List<DataEncomienda> listaEncomiendas = new ArrayList<DataEncomienda>();
+		DataViaje viaje = srvViaje.getViaje(idViaje);
+		for(DataEncomienda de : viaje.getEncomiendas()){
+			if(viaje.getCoche().getId() == idVehiculo){
+				listaEncomiendas.add(de);
+			}
+		}
+		return listaEncomiendas;
 	}
 
 	@Override
-	public boolean setEstadoEncomiendaPorVehiculo(String idEncomienda, DataEstadosEncomienda estado) {
-		// TODO Auto-generated method stub
-		return false;
+	public void AsignarEncomiendasVehiculo(String idVehiculo, String IdEncomienda,String idViaje) {
+		DataViaje viaje = srvViaje.getViaje(idViaje);
+		DataEncomienda encomienda = srvEncomienda.getEncomienda(IdEncomienda);
+		if(viaje.getCoche().getId()==idVehiculo){
+			viaje.getEncomiendas().add(encomienda);
+		}
 	}
 
 	@Override
-	public void AsignarEncomiendasVehiculo(DataVehiculo vehiculo, String IdEncomienda) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<DataHistorialEstadosEncomienda> VerEstadoEncomienda(String idEncomienda) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<DataHistorialEstadosEncomienda> VerEstadosEncomienda(String idEncomienda) {
+		DataEncomienda encomienda = srvEncomienda.getEncomienda(idEncomienda);
+		return encomienda.getEstados();
 	}
 
 	@Override
 	public void SetPrecioEncomienda(String idEncomienda, DataReglaCobroEncomienda dataCobro) {
-		// TODO Auto-generated method stub
-		
+		DataEncomienda encomienda = srvEncomienda.getEncomienda(idEncomienda);
+		encomienda.setReglaCobro(dataCobro);
+		srvEncomienda.modificarEncomienda(encomienda);
 	}
   
 

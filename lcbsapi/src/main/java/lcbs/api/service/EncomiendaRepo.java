@@ -22,6 +22,8 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import interfaces.IEncomienda;
+import interfaces.IViaje;
+import lcbs.shares.*;
 
 // The @Stateless annotation eliminates the need for manual transaction demarcation
 @Stateless
@@ -29,9 +31,28 @@ import interfaces.IEncomienda;
 public class EncomiendaRepo {
 //  
 	 
+	@EJB(lookup =  "java:app/lcbsb/ViajeCtrl!interfaces.IViaje")
+	IViaje ctrViaje;
 	@EJB(lookup =  "java:app/lcbsb/EncomiendaCtrl!interfaces.IEncomienda")
-	IEncomienda ctr;
+	IEncomienda ctrEncomienda;
 	public String getSape(){
-		return "###" + ctr.getRecorridos().size();
+		
+		
+		DataParada nuevaParada = new DataParada();
+		nuevaParada.setEliminado(false);
+		nuevaParada.setNombre("Av italia y Comercio");
+		nuevaParada.setUbicacionMapa("324fd234de324");
+		nuevaParada = ctrViaje.AltaParadas(nuevaParada);
+		
+		String idInsertada = nuevaParada.getId();
+		
+		nuevaParada = new DataParada();
+		nuevaParada.setEliminado(false);
+		nuevaParada.setNombre("Propios y Comercio");
+		nuevaParada.setUbicacionMapa("324fd234de324");
+		nuevaParada = ctrViaje.AltaParadas(nuevaParada);
+		
+		nuevaParada = ctrViaje.obtenerParada(idInsertada);
+		return "###"+nuevaParada.getNombre();
 	}
 }

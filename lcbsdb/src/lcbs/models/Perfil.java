@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,8 @@ public class Perfil implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private boolean modulo1;
     private boolean modulo2;
@@ -82,11 +85,12 @@ public class Perfil implements Serializable{
     	result.setModulo6(this.getModulo6());
     	result.setModulo7(this.getModulo7());
     	result.setModulo8(this.getModulo8());
+    	if(this.getEmpleados()!=null){
     	List<DataEmpleado> aux = new ArrayList<DataEmpleado>();
     	this.getEmpleados().stream().forEach((emp) -> {
     		aux.add(emp.getDatatype());
         });
-    	result.setEmpleados(aux);
+    	result.setEmpleados(aux);}
     	return result;
     }
     

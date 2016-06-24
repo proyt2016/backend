@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import lcbs.shares.*;
 
 
@@ -22,7 +24,8 @@ public class HistorialEstadosEncomienda implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
@@ -51,7 +54,8 @@ public class HistorialEstadosEncomienda implements Serializable{
     public DataHistorialEstadosEncomienda getDatatype(){
     	DataHistorialEstadosEncomienda result = new DataHistorialEstadosEncomienda();
     	result.setId(this.getId());
-    	result.setEstado(this.getEstado().getDatatype());
+    	if(this.getEstado()!=null)
+    		result.setEstado(this.getEstado().getDatatype());
     	result.setFecha(this.getFecha());
     	return result;
     }

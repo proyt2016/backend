@@ -20,6 +20,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.GenericGenerator;
+
 
 
 @Entity
@@ -27,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Encomienda implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
@@ -137,32 +140,44 @@ public class Encomienda implements Serializable{
     public DataEncomienda getDatatype(){
     	DataEncomienda result = new DataEncomienda();
     	result.setId(this.getId());
-    	if(this.getOrigen() instanceof Terminal){
-    		result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
-    	}else{
-    		result.setOrigen(((Parada)this.getOrigen()).getDatatype());
-    	}
+    	if(this.getOrigen()!=null)
+    		if(this.getOrigen() instanceof Terminal){
+    			result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
+    		}else{
+    			if(this.getOrigen()!=null)
+    			result.setOrigen(((Parada)this.getOrigen()).getDatatype());
+    			}
     	if(this.getDestino() instanceof Terminal){
-    		result.setDestino(((Terminal)this.getDestino()).getDatatype());
-    	}else{
-    		result.setDestino(((Parada)this.getDestino()).getDatatype());
-    	}
-    	result.setEmisor(this.getEmisor().getDatatype());
+    			if(this.getDestino()!=null)
+    				result.setDestino(((Terminal)this.getDestino()).getDatatype());
+    		}else{
+    			if(this.getDestino()!=null)
+    				result.setDestino(((Parada)this.getDestino()).getDatatype());
+    		}
+    	if(this.getEmisor()!=null)
+    		result.setEmisor(this.getEmisor().getDatatype());
     	result.setCiEmisor(this.getCiEmisor());
-    	result.setReceptor(this.getReceptor().getDatatype());
+    	if(this.getReceptor()!=null)
+    		result.setReceptor(this.getReceptor().getDatatype());
     	result.setCiReceptor(this.getCiReceptor());
-    	result.setTelReceptor(this.getTelReceptor().getDatatype());
+    	if(this.getTelReceptor()!=null)
+    		result.setTelReceptor(this.getTelReceptor().getDatatype());
     	result.setDireccionReceptor(this.getDireccionReceptor());
-    	result.setReglaCobro(this.getReglaCobro().getDatatype());
+    	if(this.getReglaCobro()!=null)
+    		result.setReglaCobro(this.getReglaCobro().getDatatype());
     	result.setMonto(this.getMonto());
     	result.setPagaReceptor(this.getPagaReceptor());
-    	result.setViajeAsignado(this.getViajeAsignado().getDatatype());
+    	if(this.getViajeAsignado()!=null)
+    		result.setViajeAsignado(this.getViajeAsignado().getDatatype());
+    	if(this.getEstados()!=null){
     	List<DataHistorialEstadosEncomienda> temp = new ArrayList<DataHistorialEstadosEncomienda>();
     	this.getEstados().stream().forEach((est) -> {
     		temp.add(est.getDatatype());
         });
     	result.setEstados(temp);
-    	result.setEstadoActual(this.getEstadoActual().getDatatype());
+    	}
+    	if(this.getEstadoActual()!=null)
+    		result.setEstadoActual(this.getEstadoActual().getDatatype());
     	result.setFechaIngreso(this.getFechaIngreso());
     	result.setFechaEntrega(this.getFechaEntrega());
     	result.setRetiraEnSucursal(this.getRetiraEnSucursal());

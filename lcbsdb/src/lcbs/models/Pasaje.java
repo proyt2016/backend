@@ -10,6 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.apache.james.mime4j.field.datetime.DateTime;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,7 +25,8 @@ public class Pasaje implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
@@ -101,22 +103,30 @@ public class Pasaje implements Serializable{
     public DataPasaje getDatatype(){
     	DataPasaje result = new DataPasaje();
     	result.setId(this.getId());
-    	result.setViaje(this.getViaje().getDatatype());
-    	result.setPrecio(this.getPrecio().getDatatype());
+    	if(this.getViaje()!=null)
+    		result.setViaje(this.getViaje().getDatatype());
+    	if(this.getPrecio()!=null)
+    		result.setPrecio(this.getPrecio().getDatatype());
     	if(this.getOrigen() instanceof Terminal){
-    		result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
+    		if(this.getOrigen()!=null)
+    			result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
     	}else{
-    		result.setOrigen(((Parada)this.getOrigen()).getDatatype());
+    		if(this.getOrigen()!=null)
+    			result.setOrigen(((Parada)this.getOrigen()).getDatatype());
     	}
     	if(this.getDestino() instanceof Terminal){
-    		result.setDestino(((Terminal)this.getDestino()).getDatatype());
+    		if(this.getDestino()!=null)
+    			result.setDestino(((Terminal)this.getDestino()).getDatatype());
     	}else{
-    		result.setDestino(((Parada)this.getDestino()).getDatatype());
+    		if(this.getDestino()!=null)
+    			result.setDestino(((Parada)this.getDestino()).getDatatype());
     	}
     	result.setFechaCompra(this.getFechaCompra());
-    	result.setComprador(this.getComprador().getDatatype());
+    	if(this.getComprador()!=null)
+    		result.setComprador(this.getComprador().getDatatype());
     	result.setCiPersona(this.getCiPersona());
-    	result.setVendedor(this.getVendedor().getDatatype());
+    	if(this.getVendedor()!=null)
+    		result.setVendedor(this.getVendedor().getDatatype());
     	result.setUsado(this.getUsado());
     	result.setPago(this.getPago());
     	result.setEliminado(this.getEliminado());

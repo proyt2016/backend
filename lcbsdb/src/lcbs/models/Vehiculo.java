@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import java.util.List;
 
 
@@ -25,7 +28,8 @@ import java.util.List;
 public class Vehiculo implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
     private String numeroVehiculo;
@@ -89,11 +93,12 @@ public class Vehiculo implements Serializable{
     	result.setFechaAlta(this.getFechaAlta());
     	result.setCantidadAsientos(this.getCantidadAsientos());
     	result.setConGuarda(this.getConGuarda());
+    	if(this.getMantenimientos()!=null){
     	List<DataMantenimientoVehiculo> aux = new ArrayList<DataMantenimientoVehiculo>();
     	this.getMantenimientos().stream().forEach((mnt) -> {
     		aux.add(mnt.getDatatype());
         });
-    	result.setMantenimientos(aux);
+    	result.setMantenimientos(aux);}
     	result.setEliminado(this.getEliminado());
     	return result;
     }

@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @XmlRootElement
 public class ConfiguracionEmpresa implements Serializable{
@@ -21,7 +23,8 @@ public class ConfiguracionEmpresa implements Serializable{
     
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     
     private String nombre;
@@ -100,16 +103,20 @@ public class ConfiguracionEmpresa implements Serializable{
     	result.setNombre(this.getNombre());
     	result.setAceptaCuponera(this.getAceptaCuponera());
     	result.setUrlAcceso(this.getUrlAcceso());
-    	List<DataTelefono> aux = new ArrayList<DataTelefono>();
-    	this.telefonos.stream().forEach((tel) -> {
-    		aux.add(tel.getDatatype());
-        });
-    	result.setTelefonos(aux);
+    	if(this.telefonos != null){
+	    	List<DataTelefono> aux = new ArrayList<DataTelefono>();
+	    	this.telefonos.stream().forEach((tel) -> {
+	    		aux.add(tel.getDatatype());
+	        });
+	    	result.setTelefonos(aux);
+    	}
+    	if(this.emails != null){    	
     	List<DataEmail> auxEm = new ArrayList<DataEmail>();
     	this.emails.stream().forEach((em) -> {
     		auxEm.add(em.getDatatype());
         });
     	result.setEmails(auxEm);
+    	}
     	result.setUrlLdap(this.getUrlLdap());
     	result.setUsuarioLdap(this.getUsuarioLdap());
     	result.setClaveLdap(this.getClaveLdap());

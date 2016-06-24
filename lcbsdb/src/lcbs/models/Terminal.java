@@ -66,15 +66,19 @@ public class Terminal extends PuntoRecorrido implements Serializable{
     	result.setNombre(this.getNombre());
     	result.setUbicacionMapa(this.getUbicacionMapa());
     	result.setEliminado(this.getEliminado());
+    	if(this.getTelefonosContacto()!=null){
     	List<DataTelefono> aux = new ArrayList<DataTelefono>();
     	this.getTelefonosContacto().stream().forEach((tel) -> {
     		aux.add(tel.getDatatype());
         });
+    	}
+    	if(this.getMailsDeContacto()!=null){
     	List<DataEmail> auxEm = new ArrayList<DataEmail>();
     	this.getMailsDeContacto().stream().forEach((em) -> {
     		auxEm.add(em.getDatatype());
         });
     	result.setMailsDeContacto(auxEm);
+    	}
     	result.setAceptaEncomiendas(this.getAceptaEncomiendas());
     	return result;
     }

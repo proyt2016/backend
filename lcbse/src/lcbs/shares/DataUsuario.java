@@ -11,12 +11,13 @@ public class DataUsuario extends DataPersona{
     private String idRedSocial;
     private DataCuponera cuponera;
     private List<DataEncomienda> encomiendas;
+    private List<DataNotificacion> notificaciones;
 
  
 
     public DataUsuario() {}
     
-    public DataUsuario(String id, String nom, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, DataCuponera cup, List<DataEncomienda> enc) {
+    public DataUsuario(String id, String nom, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, DataCuponera cup, List<DataEncomienda> enc, List<DataNotificacion> not) {
         super(id, ape, mail, tels, fecNac, elim);
         this.nombreAMostrar = nomMos;
         this.clave = clave;
@@ -24,6 +25,7 @@ public class DataUsuario extends DataPersona{
         this.idRedSocial = idRedsoc;
         this.cuponera = cup;
         this.encomiendas = enc;
+        this.notificaciones = not;
     }
     
     public void setNombreAMostrar(String val){
@@ -72,5 +74,13 @@ public class DataUsuario extends DataPersona{
     
     public List<DataEncomienda> getEncomiendas(){
         return this.encomiendas;
+    }
+    
+    public void setNotificaciones(List<DataNotificacion> val){
+        this.notificaciones = val;
+    }
+    
+    public List<DataNotificacion> getNotificaciones(){
+        return this.notificaciones;
     }
 }

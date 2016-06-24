@@ -60,4 +60,18 @@ public class PasajeSrv implements PasajeLocalApi {
         psj.setEliminado(true);
         this.modificarPasaje(psj);
     }
+
+	@Override
+	public Map<String, DataPasaje> obtenerPasajesPorPersona(String idUsuario) {
+		Map<String,DataPasaje> Pasajes = new HashMap();
+        //obtengo todos los Pasajes de la bd
+        Query query = em.createQuery("SELECT p FROM Pasaje p", Pasaje.class);
+        //TODO: Listar por usuario
+        
+        List<Pasaje> listPsj = query.getResultList();
+        listPsj.stream().forEach((psj) -> {
+        	Pasajes.put(psj.getId(), psj.getDatatype());
+        });
+        return Pasajes;
+	}
 }

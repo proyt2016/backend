@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import java.util.Date;
 
 
@@ -21,7 +24,8 @@ public class Reserva implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
     private Viaje viaje;
@@ -89,22 +93,34 @@ public class Reserva implements Serializable{
     public DataReserva getDatatype(){
     	DataReserva result = new DataReserva();
     	result.setId(this.getId());
-    	result.setViaje(this.getViaje().getDatatype());
-    	result.setPrecio(this.getPrecio().getDatatype());
+    	if(this.getViaje()!=null)
+    		result.setViaje(this.getViaje().getDatatype());
+    	if(this.getPrecio()!=null)
+    		result.setPrecio(this.getPrecio().getDatatype());
+    	if(this.getOrigen()!=null){
     	if(this.getOrigen() instanceof Terminal){
-    		result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
+    		if(this.getOrigen()!=null)
+    			result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
     	}else{
-    		result.setOrigen(((Parada)this.getOrigen()).getDatatype());
+    		if(this.getOrigen()!=null)
+    			result.setOrigen(((Parada)this.getOrigen()).getDatatype());
     	}
+    	}
+    	if(this.getDestino()!=null){
     	if(this.getDestino() instanceof Terminal){
-    		result.setDestino(((Terminal)this.getDestino()).getDatatype());
+    		if(this.getDestino()!=null)
+    			result.setDestino(((Terminal)this.getDestino()).getDatatype());
     	}else{
-    		result.setDestino(((Parada)this.getDestino()).getDatatype());
+    		if(this.getDestino()!=null)
+    			result.setDestino(((Parada)this.getDestino()).getDatatype());
+    	}
     	}
     	result.setFechaReserva(this.getFechaReserva());
-    	result.setUsuarioReserva(this.getUsuarioReserva().getDatatype());
+    	if(this.getUsuarioReserva()!=null)
+    		result.setUsuarioReserva(this.getUsuarioReserva().getDatatype());
     	result.setCiPersona(this.getCiPersona());
-    	result.setEmpleado(this.getEmpleado().getDatatype());
+    	if(this.getEmpleado()!=null)
+    		result.setEmpleado(this.getEmpleado().getDatatype());
     	result.setUtilizada(this.getUtilizada());
     	result.setEliminada(this.getEliminada());
     	return result;

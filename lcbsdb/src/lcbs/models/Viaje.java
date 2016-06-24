@@ -20,13 +20,16 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @XmlRootElement
 public class Viaje implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
@@ -87,20 +90,25 @@ public class Viaje implements Serializable {
 	public DataViaje getDatatype(){
 		DataViaje result = new DataViaje();
 		result.setId(this.getId());
-		result.setRecorrido(this.getRecorrido().getDatatype());
-		result.setHorario(this.getHorario().getDatatype());
+		if(this.getRecorrido()!=null)
+			result.setRecorrido(this.getRecorrido().getDatatype());
+		if(this.getHorario()!=null)
+			result.setHorario(this.getHorario().getDatatype());
 		result.setFechaSalida(this.getFechaSalida());
+		if(this.getEmpleados()!=null){
 		List<DataEmpleado> aux = new ArrayList<DataEmpleado>();
 		this.getEmpleados().stream().forEach((emp) -> {
     		aux.add(emp.getDatatype());
         });
-    	result.setEmpleados(aux);
-    	result.setCoche(this.getCoche().getDatatype());
+    	result.setEmpleados(aux);}
+		if(this.getCoche()!=null)
+			result.setCoche(this.getCoche().getDatatype());
+		if(this.getEncomiendas()!=null){
 		List<DataEncomienda> auxEnc = new ArrayList<DataEncomienda>();
 		this.getEncomiendas().stream().forEach((enc) -> {
     		auxEnc.add(enc.getDatatype());
         });
-    	result.setEncomiendas(auxEnc);
+    	result.setEncomiendas(auxEnc);}
 		return result;
 	}
 

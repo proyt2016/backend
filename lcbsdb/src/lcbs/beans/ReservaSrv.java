@@ -5,8 +5,13 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
 import lcbs.interfaces.ReservaLocalApi;
 import lcbs.models.Reserva;
+import lcbs.models.Viaje;
 import lcbs.shares.DataReserva;
 
 import java.util.Map;
@@ -31,6 +36,21 @@ public class ReservaSrv implements ReservaLocalApi {
         Query query = em.createQuery("SELECT r FROM Reserva r", Reserva.class);
         
         List<Reserva> listRes = query.getResultList();
+        listRes.stream().forEach((rec) -> {
+        	reservas.put(rec.getId(), rec.getDatatype());
+        });
+        return reservas;
+    }
+    
+    public Map<String,DataReserva> listarReservasPorUsuario(String idUsuario){
+    	Map<String,DataReserva> reservas = new HashMap();
+        //obtengo todas las Reservas de la bd
+    	Session session = (Session) em.getDelegate();
+        
+        Criteria c = session.createCriteria(Reserva.class);
+        c.add(Restrictions.eq("usuario.id", idUsuario)); //TODO: Fixear filtro
+        List<Reserva> listRes = c.list();
+        
         listRes.stream().forEach((rec) -> {
         	reservas.put(rec.getId(), rec.getDatatype());
         });

@@ -1,6 +1,8 @@
 package lcbs.beans;
 
 import javax.ejb.Stateless;
+import org.hibernate.Session;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -28,9 +30,9 @@ public class ViajeSrv implements ViajeLocalApi {
     public Map<String,DataViaje> obtenerViajes(){
     	Map<String,DataViaje> Viajes = new HashMap();
         //obtengo todos los Viajes de la bd
-        Query query = em.createQuery("SELECT v FROM Viaje v", Viaje.class);
+        Session session = (Session) em.getDelegate();
+        List<Viaje> listTer = session.createCriteria(Viaje.class).list();
         
-        List<Viaje> listTer = query.getResultList();
         listTer.stream().forEach((via) -> {
         	Viajes.put(via.getId(), via.getDatatype());
         });
@@ -60,8 +62,13 @@ public class ViajeSrv implements ViajeLocalApi {
     	Viaje realObj = new Viaje(via);
         em.remove(realObj);
     }
+
+	@Override
+	public Map<String, DataViaje> buscarViaje(DataViaje filtro) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
-    //TODO Busqueda de viaje por atrubutos
     
    
 }

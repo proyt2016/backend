@@ -4,6 +4,8 @@ import java.io.Serializable;
 import lcbs.shares.*;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -28,12 +30,15 @@ public class Usuario extends Persona implements Serializable{
     private Cuponera cuponera;
     @OneToMany
     private List<Encomienda> encomiendas;
+    @Embedded
+    @ElementCollection
+    private List<Notificacion> notificaciones;
 
  
 
     public Usuario() {}
     
-    public Usuario(String id, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, Cuponera cup, List<Encomienda> enc) {
+    public Usuario(String id, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, Cuponera cup, List<Encomienda> enc, List<Notificacion> not) {
         super(id, ape, mail, tels, fecNac, elim);
         this.nombreAMostrar = nomMos;
         this.clave = clave;
@@ -41,6 +46,7 @@ public class Usuario extends Persona implements Serializable{
         this.idRedSocial = idRedsoc;
         this.cuponera = cup;
         this.encomiendas = enc;
+        this.notificaciones = not;
     }
     
     public Usuario(DataUsuario dt){
@@ -150,5 +156,13 @@ public class Usuario extends Persona implements Serializable{
     
     public List<Encomienda> getEncomiendas(){
         return this.encomiendas;
+    }
+    
+    public void setNotificaciones(List<Notificacion> val){
+        this.notificaciones = val;
+    }
+    
+    public List<Notificacion> getNotificaciones(){
+        return this.notificaciones;
     }
 }

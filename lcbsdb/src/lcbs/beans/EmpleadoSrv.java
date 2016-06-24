@@ -49,7 +49,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
         return this.obtenerEmpleados().get(id);
     }
     
-    public DataEmpleado crearCuponera(DataEmpleado emp){
+    public DataEmpleado crearEmpleado(DataEmpleado emp){
     	Empleado realObj = new Empleado(emp);
         //guardo al empleado en bd
         em.persist(emp);

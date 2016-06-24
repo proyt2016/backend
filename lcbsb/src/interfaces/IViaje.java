@@ -1,38 +1,30 @@
 package interfaces;
 
-import java.util.List;
+import java.util.Map;
 
 import lcbs.shares.*;
 public interface IViaje {
 	
-	public List<DataViaje> BuscarViaje(DataViaje viaje);
-	public void ComprarPasaje(DataPasaje pasaje);
+	public Map<String, DataViaje> BuscarViaje(DataViaje filtro);
+	public DataPasaje ComprarPasaje(DataPasaje pasaje);
 	public void CambiarHorarioPasaje(String idPasaje, DataViaje viaje);
-	public void ReservarPasaje(DataReserva reserva);
+	public DataReserva ReservarPasaje(DataReserva reserva);
 	
 	public void TransferirPasajeComprado(String idPasaje, String idUsuario);//idUsuario a Transferir
-	public boolean CancelarReserva(String idReserva);
-	public List<DataReserva> ListarReservas();
-	public boolean ProcesarPasajes(String idPasaje);
-	public void AltaParadas(DataParada parada);
+	public void CancelarReserva(String idReserva);
+	public Map<String, DataReserva> ListarReservas(String idUsuario);
+	public void ProcesarPasajes(String idPasaje);
+	public DataParada AltaParadas(DataParada parada);
 	public void AltaTerminal(DataTerminal terminal);
 	public void EditarParada(DataParada parada);
 	public void EditarTerminal(DataTerminal terminal);
 	public void CrearRecorrido(DataRecorrido recorrido);
 	public void EditarRecorrido(DataRecorrido recorrido);
 	
-	
-	public List<DataReserva> BuscarReserva(String CiUsr);
-	public boolean ComprarPasajeReservado(DataReserva reserva);
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
+	public DataPasaje ComprarPasajeReservado(DataReserva reserva);
+	public DataParada obtenerParada(String IdParada);
+	public Map<String, DataPasaje> obtenerHistorialPasajes(String idUsuario);
+	public DataPasaje verDetallePasaje(String idPasaje);
+	public DataTerminal obtenerTerminal(String IdTerminal);
 
 }

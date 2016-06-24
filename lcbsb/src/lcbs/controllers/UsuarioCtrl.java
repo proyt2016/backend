@@ -28,6 +28,9 @@ public class UsuarioCtrl implements IUsuario{
 	
 	@EJB(lookup="java:app/lcbsdb/CuponeraSrv!lcbs.interfaces.CuponeraLocalApi")
 	CuponeraLocalApi srvCuponera;
+	
+	@EJB(lookup="java:app/lcbsdb/PerfilSrv!lcbs.interfaces.PerfilLocalApi")
+	PerfilLocalApi srvPerfil;
 
 	@Override
 	public DataUsuario AltaUsuario(DataUsuario usuario) {
@@ -75,5 +78,28 @@ public class UsuarioCtrl implements IUsuario{
 	public void BajaEmpleado(DataEmpleado empleado) {
 		srvEmpleado.darBajaEmpleado(empleado);
 	}
-
+	
+	@Override
+	public void AltaPerfil(DataPerfil perfil){
+		srvPerfil.crearPerfil(perfil);
+	}
+	
+	@Override
+	public void EditarPerfil(DataPerfil perfil){
+		srvPerfil.modificarPerfil(perfil);
+	}
+	
+	@Override
+	public void EliminarPerfil(DataPerfil perfil){
+		srvPerfil.borrarPerfil(perfil);
+	}
+	
+	@Override
+	public void AsignarPerfil(String idEmpleado, DataPerfil perfil){
+		DataEmpleado empleado = srvEmpleado.getEmpleado(idEmpleado);
+		empleado.setPerfil(perfil);
+		srvEmpleado.modificarEmpleado(empleado);
+	}
+	
+	
 }

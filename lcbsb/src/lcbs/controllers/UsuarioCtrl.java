@@ -59,8 +59,8 @@ public class UsuarioCtrl implements IUsuario{
 	}
 
 	@Override
-	public void BajaUsuario(DataUsuario usuario) {
-		srvUsuario.darBajaUsuario(usuario);
+	public void BajaUsuario(String idUsuario) {
+		srvUsuario.darBajaUsuario(idUsuario);
 	}
 
 	@Override
@@ -75,8 +75,8 @@ public class UsuarioCtrl implements IUsuario{
 	}
 
 	@Override
-	public void BajaEmpleado(DataEmpleado empleado) {
-		srvEmpleado.darBajaEmpleado(empleado);
+	public void BajaEmpleado(String idEmpleado) {
+		srvEmpleado.darBajaEmpleado(idEmpleado);
 	}
 	
 	@Override
@@ -90,8 +90,8 @@ public class UsuarioCtrl implements IUsuario{
 	}
 	
 	@Override
-	public void EliminarPerfil(DataPerfil perfil){
-		srvPerfil.borrarPerfil(perfil);
+	public void EliminarPerfil(String idPerfil){
+		srvPerfil.borrarPerfil(idPerfil);
 	}
 	
 	@Override

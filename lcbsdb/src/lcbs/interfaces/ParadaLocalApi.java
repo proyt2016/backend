@@ -12,5 +12,5 @@ public interface ParadaLocalApi {
 	public void modificarParada(DataParada prd);
 	public DataParada getParada(String id);
 	public DataParada crearParada(DataParada prd);
-	public void borrarParada(DataParada prd);
+	public void borrarParada(String idParada);
 }

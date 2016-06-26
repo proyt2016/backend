@@ -12,6 +12,6 @@ public interface ViajeLocalApi {
 	public void modificarViaje(DataViaje via);
 	public DataViaje getViaje(String via);
 	public DataViaje crearViaje(DataViaje via);
-	public void borrarViaje(DataViaje via);
+	public void borrarViaje(String idViaje);
 	public Map<String, DataViaje> buscarViaje(DataViaje filtro);
 }

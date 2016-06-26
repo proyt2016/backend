@@ -12,5 +12,5 @@ public interface GrupoHorarioLocalApi {
 	public void modificarGrupoHorario(DataGrupoHorario grHor);
 	public DataGrupoHorario getGrupoHorario(String id);
 	public DataGrupoHorario crearGrupoHorario(DataGrupoHorario grp);
-	public void borrarGrupoHorario(DataGrupoHorario grp);
+	public void borrarGrupoHorario(String idGrp);
 }

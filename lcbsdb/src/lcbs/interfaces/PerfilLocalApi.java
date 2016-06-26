@@ -12,5 +12,5 @@ public interface PerfilLocalApi {
 	public void modificarPerfil(DataPerfil prf);
 	public DataPerfil getPerfil(String id);
 	public DataPerfil crearPerfil(DataPerfil prf);
-	public void borrarPerfil(DataPerfil prf);
+	public void borrarPerfil(String idPerfil);
 }

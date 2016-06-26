@@ -56,7 +56,8 @@ public class PasajeSrv implements PasajeLocalApi {
         return realObj.getDatatype();
     }
     
-    public void darBajaPasaje(DataPasaje psj){
+    public void darBajaPasaje(String idPasaje){
+    	DataPasaje psj = getPasaje(idPasaje);
         psj.setEliminado(true);
         this.modificarPasaje(psj);
     }

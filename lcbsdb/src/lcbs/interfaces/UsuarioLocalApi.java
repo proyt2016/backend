@@ -12,5 +12,5 @@ public interface UsuarioLocalApi {
 	public void modificarUsuario(DataUsuario usu);
 	public DataUsuario getUsuario(String usu);
 	public DataUsuario crearUsuario(DataUsuario usu);
-	public void darBajaUsuario(DataUsuario usu);
+	public void darBajaUsuario(String idUsuario);
 }

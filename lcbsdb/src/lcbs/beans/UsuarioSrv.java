@@ -56,7 +56,8 @@ public class UsuarioSrv implements UsuarioLocalApi {
         return realObj.getDatatype();
     }
     
-    public void darBajaUsuario(DataUsuario usu){
+    public void darBajaUsuario(String idUsuario){
+    	DataUsuario usu = getUsuario(idUsuario);
         usu.setEliminado(true);
         this.modificarUsuario(usu);
     }

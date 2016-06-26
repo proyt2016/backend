@@ -27,4 +27,7 @@ public interface IViaje {
 	public DataPasaje verDetallePasaje(String idPasaje);
 	public DataTerminal obtenerTerminal(String IdTerminal);
 
+	public void crearViaje(DataViaje viaje);
+	public void editarViaje(DataViaje viaje);
+	public void eliminarViaje(String idViaje);
 }

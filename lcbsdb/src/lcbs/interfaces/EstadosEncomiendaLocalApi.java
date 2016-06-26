@@ -11,5 +11,5 @@ public interface EstadosEncomiendaLocalApi {
 	public Map<String,DataEstadosEncomienda> obtenerEstadosEncomienda();
 	public void modificarEstadosEncomienda(DataEstadosEncomienda estEnc);
 	public DataEstadosEncomienda crearEstadosEncomienda(DataEstadosEncomienda est);
-	public void borrarEstadosEncomienda(DataEstadosEncomienda emp);
+	public void borrarEstadosEncomienda(String idEmpleado);
 }

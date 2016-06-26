@@ -56,7 +56,8 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
         return realObj.getDatatype();
     }
     
-    public void darBajaEmpleado(DataEmpleado emp){
+    public void darBajaEmpleado(String idEmpleado){
+    	DataEmpleado emp = getEmpleado(idEmpleado);
     	emp.setEliminado(true);
         this.modificarEmpleado(emp);
     }

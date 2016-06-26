@@ -58,8 +58,8 @@ public class ViajeSrv implements ViajeLocalApi {
         return realObj.getDatatype();
     }
     
-    public void borrarViaje(DataViaje via){
-    	Viaje realObj = new Viaje(via);
+    public void borrarViaje(String idViaje){
+    	Viaje realObj = new Viaje(this.getViaje(idViaje));
         em.remove(realObj);
     }
 

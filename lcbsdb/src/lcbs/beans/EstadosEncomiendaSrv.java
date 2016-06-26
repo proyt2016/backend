@@ -56,7 +56,8 @@ public class EstadosEncomiendaSrv implements EstadosEncomiendaLocalApi {
         return realObj.getDatatype();
     }
     
-    public void borrarEstadosEncomienda(DataEstadosEncomienda est){
+    public void borrarEstadosEncomienda(String idEst){
+    	DataEstadosEncomienda est = getEstadosEncomienda(idEst);
     	EstadosEncomienda realObj = new EstadosEncomienda(est);
         em.remove(realObj);
     }

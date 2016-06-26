@@ -56,7 +56,8 @@ public class TerminalSrv implements TerminalLocalApi {
         return realObj.getDatatype();
     }
     
-    public void darBajaTerminal(DataTerminal ter){
+    public void darBajaTerminal(String idTerminal){
+    	DataTerminal ter = getTerminal(idTerminal);
         ter.setEliminado(true);
         this.modificarTerminal(ter);
     }

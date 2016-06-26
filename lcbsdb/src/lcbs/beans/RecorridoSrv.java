@@ -56,7 +56,8 @@ public class RecorridoSrv implements RecorridoLocalApi {
         return realObj.getDatatype();
     }
     
-    public void darBajaRecorrido(DataRecorrido rec){
+    public void darBajaRecorrido(String idRecorrido){
+    	DataRecorrido rec = getRecorrido(idRecorrido);
     	rec.setEliminado(true);
         this.modificarRecorrido(rec);
     }

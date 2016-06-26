@@ -56,7 +56,8 @@ public class PerfilSrv implements PerfilLocalApi {
         return realObj.getDatatype();
     }
     
-    public void borrarPerfil(DataPerfil prf){
+    public void borrarPerfil(String idPerfil){
+    	DataPerfil prf = getPerfil(idPerfil);
     	Perfil realObj = new Perfil(prf);
         em.remove(realObj);
     }

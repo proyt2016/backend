@@ -56,7 +56,8 @@ public class VehiculoSrv implements VehiculoLocalApi {
         return realObj.getDatatype();
     }
     
-    public void darBajaVehiculo(DataVehiculo veh){
+    public void darBajaVehiculo(String idVehiculo){
+    	DataVehiculo veh = getVehiculo(idVehiculo);
         veh.setEliminado(true);
         this.modificarVehiculo(veh);
     }

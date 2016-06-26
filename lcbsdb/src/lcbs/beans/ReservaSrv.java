@@ -76,7 +76,8 @@ public class ReservaSrv implements ReservaLocalApi {
         return realObj.getDatatype();
     }
     
-    public void darBajaReserva(DataReserva res){
+    public void darBajaReserva(String idReserva){
+    	DataReserva res = getReserva(idReserva);
         res.setEliminada(true);
         this.modificarReserva(res);
     }

@@ -66,12 +66,13 @@ public class Encomienda implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEntrega;
     private boolean retiraEnSucursal;
+    private boolean eliminada;
 
  
 
     public Encomienda() {}
     
-    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc) {
+    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -90,6 +91,7 @@ public class Encomienda implements Serializable{
         this.fechaIngreso = fecIng;
         this.fechaEntrega = fecEn;
         this.retiraEnSucursal = retiraSuc;
+        this.eliminada = elim;
     }
     
     public Encomienda(DataEncomienda dt){
@@ -326,5 +328,13 @@ public class Encomienda implements Serializable{
     
     public boolean getRetiraEnSucursal(){
         return this.retiraEnSucursal;
+    }
+    
+    public void setEliminada(boolean val){
+        this.eliminada = val;
+    }
+    
+    public boolean getEliminada(){
+        return this.eliminada;
     }
 }

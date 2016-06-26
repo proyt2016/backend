@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import java.util.Map;
 import lcbs.shares.DataEncomienda;
 import lcbs.shares.DataEstadosEncomienda;
 import lcbs.shares.DataHistorialEstadosEncomienda;
@@ -17,21 +18,18 @@ import lcbs.shares.DataVehiculo;
 public interface IEncomienda {
 	
 	public List<DataEncomienda> ListarEncomiendas();
-	public List<DataTerminal> ListarTerminales();
-	public List<DataVehiculo> ListarVehiculos();
-	public List<DataUsuario> ListarUsuarios();
 	public List<DataReglaCobroEncomienda> getReglasDeCobro();
 	public DataReglaCobroEncomienda getReglaDeCobro(String idEncomieda);
 	public void AltaEncomienda(DataEncomienda encomienda);
-	public List<DataRecorrido> getRecorridos();
 	public List<DataHistorialEstadosEncomienda> getHistorialEstado(String idEncomienda);
 	public DataEstadosEncomienda getUltimoEstado(String idEncomienda);
-	public DataVehiculo getVehiculo(String idVehiculo);
 	public DataEncomienda getEncomienda(String idEncomienda);
-	public DataTerminal getTerminal(String idTerminal);
 	public void setEstadoEncomienda(String idEncomienda, DataEstadosEncomienda dataEstado);
-	public List<DataEncomienda> getEncomiendasPorVehiculo(String idVehiculo, String idViaje);
-	public void AsignarEncomiendasVehiculo(String idVehiculo,String IdEncomienda, String idViaje);
+	public List<DataEncomienda> getEncomiendasPorVehiculo(String idViaje);
+	public void AsignarEncomiendasVehiculo(String IdEncomienda, String idViaje);
 	public List<DataHistorialEstadosEncomienda> VerEstadosEncomienda(String idEncomienda);
-	public void SetPrecioEncomienda(String idEncomienda, DataReglaCobroEncomienda dataCobro);
+	public void crearReglaDeCobro(DataReglaCobroEncomienda rdc);
+	public void editarEncomienda(DataEncomienda encomienda);
+	public void bajaEncomienda(String idEncomienda);
+	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro);
 }

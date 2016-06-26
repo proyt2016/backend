@@ -56,7 +56,8 @@ public class GrupoHorarioSrv implements GrupoHorarioLocalApi {
         return realObj.getDatatype();
     }
     
-    public void borrarGrupoHorario(DataGrupoHorario grp){
+    public void borrarGrupoHorario(String idGrp){
+    	DataGrupoHorario grp = getGrupoHorario(idGrp);
     	GrupoHorario realObj = new GrupoHorario(grp);
         em.remove(realObj);
     }

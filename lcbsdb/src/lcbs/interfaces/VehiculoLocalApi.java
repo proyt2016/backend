@@ -12,5 +12,5 @@ public interface VehiculoLocalApi {
 	public void modificarVehiculo(DataVehiculo veh);
 	public DataVehiculo getVehiculo(String veh);
 	public DataVehiculo crearVehiculo(DataVehiculo veh);
-	public void darBajaVehiculo(DataVehiculo veh);
+	public void darBajaVehiculo(String idVeiculo);
 }

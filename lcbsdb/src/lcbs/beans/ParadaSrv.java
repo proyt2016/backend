@@ -56,7 +56,8 @@ public class ParadaSrv implements ParadaLocalApi {
         return realObj.getDatatype();
     }
     
-    public void borrarParada(DataParada prd){
+    public void borrarParada(String idParada){
+    	DataParada prd = getParada(idParada);
     	Parada realOb = new Parada(prd);
         em.remove(realOb);
     }

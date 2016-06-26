@@ -12,5 +12,5 @@ public interface TerminalLocalApi {
 	public void modificarTerminal(DataTerminal ter);
 	public DataTerminal getTerminal(String ter);
 	public DataTerminal crearTerminal(DataTerminal ter);
-	public void darBajaTerminal(DataTerminal ter);
+	public void darBajaTerminal(String idTerminal);
 }

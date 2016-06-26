@@ -12,5 +12,5 @@ public interface EmpleadoLocalApi {
 	public void modificarEmpleado(DataEmpleado emp);
 	public DataEmpleado getEmpleado(String id);
 	public DataEmpleado crearEmpleado(DataEmpleado emp);
-	public void darBajaEmpleado(DataEmpleado emp);
+	public void darBajaEmpleado(String idEmpleado);
 }

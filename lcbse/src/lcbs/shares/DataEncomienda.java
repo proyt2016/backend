@@ -25,12 +25,13 @@ public class DataEncomienda {
     private Date fechaIngreso;
     private Date fechaEntrega;
     private boolean retiraEnSucursal;
+    private boolean eliminada;
 
  
 
     public DataEncomienda() {}
     
-    public DataEncomienda(String id, DataPuntoRecorrido orig, DataPuntoRecorrido dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, float mont, boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc) {
+    public DataEncomienda(String id, DataPuntoRecorrido orig, DataPuntoRecorrido dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, float mont, boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -50,6 +51,7 @@ public class DataEncomienda {
         this.fechaIngreso = fecIng;
         this.fechaEntrega = fecEn;
         this.retiraEnSucursal = retiraSuc;
+        this.eliminada = elim;
     }
     
     public void setId(String val){
@@ -202,5 +204,13 @@ public class DataEncomienda {
     
     public boolean getRetiraEnSucursal(){
         return this.retiraEnSucursal;
+    }
+    
+    public void setEliminada(boolean val){
+        this.eliminada = val;
+    }
+    
+    public boolean getEliminada(){
+        return this.eliminada;
     }
 }

@@ -22,7 +22,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 
-import lcbs.api.model.Encomienda;
+import lcbs.shares.*;
 import lcbs.api.service.EncomiendaRepo;
 import lcbs.controllers.EncomiendaCtrl;
 
@@ -44,7 +44,7 @@ public class EncomiendaApi {
 	* @return
 	*/
 	@POST
-	public Response create(final Encomienda encomienda) {
+	public Response create(final DataEncomienda encomienda) {
 		//TODO: process the given encomienda 
 		//here we use Encomienda#getId(), assuming that it provides the identifier to retrieve the created Encomienda resource. 
 		return Response
@@ -60,7 +60,7 @@ public class EncomiendaApi {
 	@Path("/{id:[0-9][0-9]*}")
 	public Response findById(@PathParam("id") final Long id) {
 		//TODO: retrieve the encomienda 
-		Encomienda encomienda = null;
+		DataEncomienda encomienda = null;
 		if (encomienda == null) {
 			return Response.status(Status.NOT_FOUND).build();
 		}
@@ -73,16 +73,15 @@ public class EncomiendaApi {
 	* @return
 	*/
 	@GET
-	public List<Encomienda> listAll(@QueryParam("start") final Integer startPosition,
+	public List<DataEncomienda> listAll(@QueryParam("start") final Integer startPosition,
 			@QueryParam("max") final Integer maxResult) {
 		//TODO: retrieve the encomiendas 
-		final List<Encomienda> encomiendas = new ArrayList<Encomienda>();//[new Encomienda()];
-		Encomienda e = new Encomienda();
-		e.setEmail("mujica@asd.com"+repo.getSape());
+		final List<DataEncomienda> encomiendas = new ArrayList<DataEncomienda>();//[new Encomienda()];
+		DataEncomienda e = new DataEncomienda();
 		
 		encomiendas.add(e);
-		e = new Encomienda();
-		e.setEmail("mujic2a@asd.com");
+		e = new DataEncomienda();
+		e.setCiEmisor("3456789");
 		encomiendas.add(e); 
 		return encomiendas;
 	}
@@ -94,7 +93,7 @@ public class EncomiendaApi {
 	*/
 	@PUT
 	@Path("/{id:[0-9][0-9]*}")
-	public Response update(@PathParam("id") Long id, final Encomienda encomienda) {
+	public Response update(@PathParam("id") Long id, final DataEncomienda encomienda) {
 		//TODO: process the given encomienda 
 		return Response.noContent().build();
 	}

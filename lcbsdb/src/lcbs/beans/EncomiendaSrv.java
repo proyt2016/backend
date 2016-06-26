@@ -56,5 +56,14 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         return realObj.getDatatype();
     }
     
+    public void darBajaEncomienda(String idEncomienda){
+    	DataEncomienda enc = getEncomienda(idEncomienda);
+        enc.setEliminada(true);
+        this.modificarEncomienda(enc);
+    }
+    
+    public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro){
+    	return new HashMap<String, DataEncomienda>();
+    }
     //TODO: Hacer busqueda con filtros
 }

@@ -56,8 +56,8 @@ public class ReglaCobroEncomiendaSrv implements ReglaCobroEncomiendaLocalApi {
         return realObj.getDatatype();
     }
     
-    public void borrarReglaCobroEncomienda(DataReglaCobroEncomienda rce){
-    	ReglaCobroEncomienda realObj = new ReglaCobroEncomienda(rce);
+    public void borrarReglaCobroEncomienda(String idRce){
+    	ReglaCobroEncomienda realObj = new ReglaCobroEncomienda(getReglaCobroEncomienda(idRce));
         em.remove(realObj);
     }
 }

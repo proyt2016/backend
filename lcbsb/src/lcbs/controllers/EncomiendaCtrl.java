@@ -3,28 +3,14 @@ package lcbs.controllers;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import interfaces.IEncomienda;
-import lcbs.interfaces.EncomiendaLocalApi;
-import lcbs.interfaces.EstadosEncomiendaLocalApi;
-import lcbs.interfaces.RecorridoLocalApi;
-import lcbs.interfaces.ReglaCobroEncomiendaLocalApi;
-import lcbs.interfaces.TerminalLocalApi;
-import lcbs.interfaces.UsuarioLocalApi;
-import lcbs.interfaces.VehiculoLocalApi;
-import lcbs.interfaces.ViajeLocalApi;
-import lcbs.shares.DataEncomienda;
-import lcbs.shares.DataEstadosEncomienda;
-import lcbs.shares.DataHistorialEstadosEncomienda;
-import lcbs.shares.DataRecorrido;
-import lcbs.shares.DataReglaCobroEncomienda;
-import lcbs.shares.DataTerminal;
-import lcbs.shares.DataUsuario;
-import lcbs.shares.DataVehiculo;
-import lcbs.shares.DataViaje;
+import lcbs.interfaces.*;
+import lcbs.shares.*;
 
 
 /**
@@ -60,31 +46,15 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 
 	@Override
-	public List<DataTerminal> ListarTerminales() {
-		@SuppressWarnings("unchecked")
-		List<DataTerminal> listaTerminales = new ArrayList( srvTerminal.obtenerTerminals().values());
-		return listaTerminales;
-	}
-
-	@Override
-	public List<DataVehiculo> ListarVehiculos() {
-	    @SuppressWarnings("unchecked")
-		List<DataVehiculo> listaVehiculos = new ArrayList( srvVehiculo.obtenerVehiculos().values());
-		return listaVehiculos;
-	}
-
-	@Override
-	public List<DataUsuario> ListarUsuarios() {
-		@SuppressWarnings("unchecked")
-		List<DataUsuario> listaUsuarios = new ArrayList(srvUsuario.obtenerUsuarios().values());
-		return listaUsuarios;
-	}
-
-	@Override
 	public List<DataReglaCobroEncomienda> getReglasDeCobro() {
 		@SuppressWarnings("unchecked")
 		List<DataReglaCobroEncomienda> listaReglaCobro = new ArrayList(srvReglaCobro.obtenerReglaCobroEncomiendas().values());
 		return listaReglaCobro;
+	}
+	
+	@Override
+	public void crearReglaDeCobro(DataReglaCobroEncomienda rdc){
+		srvReglaCobro.crearReglaCobroEncomienda(rdc);
 	}
 
 	@Override
@@ -96,12 +66,6 @@ public class EncomiendaCtrl implements IEncomienda{
 	@Override
 	public void AltaEncomienda(DataEncomienda encomienda) {
 		srvEncomienda.crearEncomienda(encomienda);
-	}
-
-	@Override
-	public List<DataRecorrido> getRecorridos() {
-		List<DataRecorrido> listaRecorridos = new ArrayList(srvRecorrido.obtenerRecorridos().values());
-		return listaRecorridos;
 	}
 
 	@Override
@@ -118,18 +82,8 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 
 	@Override
-	public DataVehiculo getVehiculo(String idVehiculo) {
-		return srvVehiculo.getVehiculo(idVehiculo);
-	}
-
-	@Override
 	public DataEncomienda getEncomienda(String idEncomienda) {
 		return srvEncomienda.getEncomienda(idEncomienda);
-	}
-
-	@Override
-	public DataTerminal getTerminal(String idTerminal) {
-		return srvTerminal.getTerminal(idTerminal);
 	}
 
 	@Override
@@ -145,24 +99,19 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 
 	@Override
-	public List<DataEncomienda> getEncomiendasPorVehiculo(String idVehiculo, String idViaje) {
-		List<DataEncomienda> listaEncomiendas = new ArrayList<DataEncomienda>();
+	public List<DataEncomienda> getEncomiendasPorVehiculo(String idViaje) {
 		DataViaje viaje = srvViaje.getViaje(idViaje);
-		for(DataEncomienda de : viaje.getEncomiendas()){
-			if(viaje.getCoche().getId() == idVehiculo){
-				listaEncomiendas.add(de);
-			}
-		}
-		return listaEncomiendas;
+		return viaje.getEncomiendas();
 	}
 
 	@Override
-	public void AsignarEncomiendasVehiculo(String idVehiculo, String IdEncomienda,String idViaje) {
+	public void AsignarEncomiendasVehiculo(String IdEncomienda,String idViaje) {
 		DataViaje viaje = srvViaje.getViaje(idViaje);
 		DataEncomienda encomienda = srvEncomienda.getEncomienda(IdEncomienda);
-		if(viaje.getCoche().getId()==idVehiculo){
-			viaje.getEncomiendas().add(encomienda);
-		}
+		List<DataEncomienda> encomiendas = viaje.getEncomiendas();
+		encomiendas.add(encomienda);
+		viaje.setEncomiendas(encomiendas);
+		srvViaje.modificarViaje(viaje);;
 	}
 
 	@Override
@@ -172,12 +121,17 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 
 	@Override
-	public void SetPrecioEncomienda(String idEncomienda, DataReglaCobroEncomienda dataCobro) {
-		DataEncomienda encomienda = srvEncomienda.getEncomienda(idEncomienda);
-		encomienda.setReglaCobro(dataCobro);
+	public void editarEncomienda(DataEncomienda encomienda) {
 		srvEncomienda.modificarEncomienda(encomienda);
 	}
-  
+	
+	@Override
+	public void bajaEncomienda(String idEncomienda) {
+		srvEncomienda.darBajaEncomienda(idEncomienda);
+	}
 
-
+	@Override
+	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro) {
+		return srvEncomienda.buscarEncomienda(filtro);
+	}
 }

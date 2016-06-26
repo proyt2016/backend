@@ -16,13 +16,14 @@
  */
 package lcbs.api.service;
 
- 
+import java.util.List;
+import java.util.Map;
+
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
-import interfaces.IEncomienda;
-import interfaces.IViaje;
+import interfaces.*;
 import lcbs.shares.*;
 
 // The @Stateless annotation eliminates the need for manual transaction demarcation
@@ -31,28 +32,72 @@ import lcbs.shares.*;
 public class EncomiendaRepo {
 //  
 	 
-	@EJB(lookup =  "java:app/lcbsb/ViajeCtrl!interfaces.IViaje")
-	IViaje ctrViaje;
+	
 	@EJB(lookup =  "java:app/lcbsb/EncomiendaCtrl!interfaces.IEncomienda")
 	IEncomienda ctrEncomienda;
-	public String getSape(){
-		
-		
-		DataParada nuevaParada = new DataParada();
-		nuevaParada.setEliminado(false);
-		nuevaParada.setNombre("Av italia y Comercio");
-		nuevaParada.setUbicacionMapa("324fd234de324");
-		nuevaParada = ctrViaje.AltaParadas(nuevaParada);
-		
-		String idInsertada = nuevaParada.getId();
-		
-		nuevaParada = new DataParada();
-		nuevaParada.setEliminado(false);
-		nuevaParada.setNombre("Propios y Comercio");
-		nuevaParada.setUbicacionMapa("324fd234de324");
-		nuevaParada = ctrViaje.AltaParadas(nuevaParada);
-		
-		nuevaParada = ctrViaje.obtenerParada(idInsertada);
-		return "###"+nuevaParada.getNombre();
+	
+	public List<DataEncomienda> ListarEncomiendas(){
+		return ctrEncomienda.ListarEncomiendas();
 	}
+	
+	
+	public List<DataReglaCobroEncomienda> getReglasDeCobro(){
+		return ctrEncomienda.getReglasDeCobro();
+	}
+	
+	
+	public DataReglaCobroEncomienda getReglaDeCobro(String idEncomieda){
+		return ctrEncomienda.getReglaDeCobro(idEncomieda);
+	}
+	
+	
+	public void AltaEncomienda(DataEncomienda encomienda){
+		ctrEncomienda.AltaEncomienda(encomienda);
+	}	
+	
+	public List<DataHistorialEstadosEncomienda> getHistorialEstado(String idEncomienda){
+		return ctrEncomienda.getHistorialEstado(idEncomienda);
+	}
+	
+	
+	public DataEstadosEncomienda getUltimoEstado(String idEncomienda){
+		return ctrEncomienda.getUltimoEstado(idEncomienda);
+	}
+	
+	
+	public DataEncomienda getEncomienda(String idEncomienda){
+		return ctrEncomienda.getEncomienda(idEncomienda);
+	}
+	
+	public void setEstadoEncomienda(String idEncomienda, DataEstadosEncomienda dataEstado){
+		ctrEncomienda.setEstadoEncomienda(idEncomienda, dataEstado);
+	}
+	
+	
+	public List<DataEncomienda> getEncomiendasPorVehiculo(String idViaje){
+		return ctrEncomienda.getEncomiendasPorVehiculo(idViaje);
+	}
+	
+	
+	public void AsignarEncomiendasVehiculo(String IdEncomienda, String idViaje){
+		ctrEncomienda.AsignarEncomiendasVehiculo(IdEncomienda, idViaje);
+	}
+	
+	
+	public List<DataHistorialEstadosEncomienda> VerEstadosEncomienda(String idEncomienda){
+		return ctrEncomienda.VerEstadosEncomienda(idEncomienda);
+	}
+	
+	public void editarEncomienda(DataEncomienda encomienda) {
+		ctrEncomienda.editarEncomienda(encomienda);
+	}
+	
+	public void bajaEncomienda(String idEncomienda) {
+		ctrEncomienda.bajaEncomienda(idEncomienda);
+	}
+
+	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro) {
+		return ctrEncomienda.buscarEncomienda(filtro);
+	}
+	
 }

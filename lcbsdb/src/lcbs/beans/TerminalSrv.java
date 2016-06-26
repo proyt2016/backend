@@ -5,7 +5,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+
 import lcbs.interfaces.TerminalLocalApi;
+import lcbs.models.Reserva;
 import lcbs.models.Terminal;
 import lcbs.shares.DataTerminal;
 
@@ -28,9 +31,9 @@ public class TerminalSrv implements TerminalLocalApi {
     public Map<String,DataTerminal> obtenerTerminals(){
     	Map<String,DataTerminal> terminales = new HashMap();
         //obtengo todas las terminales de la bd
-        Query query = em.createQuery("SELECT t FROM Terminal t", Terminal.class);
+        Session session = (Session) em.getDelegate();
+        List<Terminal> listTer = session.createCriteria(Terminal.class).list();
         
-        List<Terminal> listTer = query.getResultList();
         listTer.stream().forEach((ter) -> {
         	terminales.put(ter.getId(), ter.getDatatype());
         });

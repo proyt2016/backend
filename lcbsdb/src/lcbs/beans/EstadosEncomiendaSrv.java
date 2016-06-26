@@ -5,8 +5,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+
 import lcbs.interfaces.EstadosEncomiendaLocalApi;
 import lcbs.shares.DataEstadosEncomienda;
+import lcbs.models.Empleado;
 import lcbs.models.EstadosEncomienda;
 
 import java.util.Map;
@@ -28,9 +31,9 @@ public class EstadosEncomiendaSrv implements EstadosEncomiendaLocalApi {
     public Map<String,DataEstadosEncomienda> obtenerEstadosEncomienda(){
     	Map<String,DataEstadosEncomienda> estados = new HashMap();
         //obtengo todas los estados de encomienda de la bd
-        Query query = em.createQuery("SELECT e FROM EstadosEncomienda e", EstadosEncomienda.class);
+        Session session = (Session) em.getDelegate();
+        List<EstadosEncomienda> listEstEnc = session.createCriteria(EstadosEncomienda.class).list();
         
-        List<EstadosEncomienda> listEstEnc = query.getResultList();
         listEstEnc.stream().forEach((est) -> {
         	estados.put(est.getId(), est.getDatatype());
         });

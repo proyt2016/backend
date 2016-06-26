@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.IndexColumn;
 
 @Entity
 @XmlRootElement
@@ -32,10 +33,12 @@ public class ConfiguracionEmpresa implements Serializable{
     private String urlAcceso;
     @Embedded
     @ElementCollection
+    @IndexColumn(name="LIST_INDEX")
     private List<Telefono> telefonos;
     
     @Embedded
     @ElementCollection
+    @IndexColumn(name="LIST_INDEX")
     private List<Email> emails;
     private String urlLdap;
     private String usuarioLdap;

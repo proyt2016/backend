@@ -5,7 +5,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+
 import lcbs.interfaces.PasajeLocalApi;
+import lcbs.models.Parada;
 import lcbs.models.Pasaje;
 import lcbs.shares.DataPasaje;
 
@@ -28,9 +31,9 @@ public class PasajeSrv implements PasajeLocalApi {
     public Map<String,DataPasaje> obtenerPasajes(){
     	Map<String,DataPasaje> Pasajes = new HashMap();
         //obtengo todos los Pasajes de la bd
-        Query query = em.createQuery("SELECT p FROM Pasaje p", Pasaje.class);
+        Session session = (Session) em.getDelegate();
+        List<Pasaje> listPsj = session.createCriteria(Pasaje.class).list();
         
-        List<Pasaje> listPsj = query.getResultList();
         listPsj.stream().forEach((psj) -> {
         	Pasajes.put(psj.getId(), psj.getDatatype());
         });

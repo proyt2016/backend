@@ -5,7 +5,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+
 import lcbs.interfaces.VehiculoLocalApi;
+import lcbs.models.Usuario;
 import lcbs.models.Vehiculo;
 import lcbs.shares.DataVehiculo;
 
@@ -28,9 +31,9 @@ public class VehiculoSrv implements VehiculoLocalApi {
     public Map<String,DataVehiculo> obtenerVehiculos(){
     	Map<String,DataVehiculo> vehiculos = new HashMap();
         //obtengo todos los vehiculos de la bd
-        Query query = em.createQuery("SELECT v FROM Vehiculo v", Vehiculo.class);
+        Session session = (Session) em.getDelegate();
+        List<Vehiculo> listVeh = session.createCriteria(Vehiculo.class).list();
         
-        List<Vehiculo> listVeh = query.getResultList();
         listVeh.stream().forEach((veh) -> {
         	vehiculos.put(veh.getId(), veh.getDatatype());
         });

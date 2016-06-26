@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.IndexColumn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class Perfil implements Serializable{
     private boolean modulo7;
     private boolean modulo8;
     @OneToMany
+    @IndexColumn(name="LIST_INDEX")
     private List<Empleado> empleados;
     
      

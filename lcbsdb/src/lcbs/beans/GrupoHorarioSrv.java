@@ -5,7 +5,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+
 import lcbs.interfaces.GrupoHorarioLocalApi;
+import lcbs.models.EstadosEncomienda;
 import lcbs.models.GrupoHorario;
 import lcbs.shares.DataGrupoHorario;
 
@@ -28,9 +31,9 @@ public class GrupoHorarioSrv implements GrupoHorarioLocalApi {
     public Map<String,DataGrupoHorario> obtenerGrupoHorario(){
     	Map<String,DataGrupoHorario> grupos = new HashMap();
         //obtengo todos los grupos de horarios de la bd
-        Query query = em.createQuery("SELECT g FROM GrupoHorario g", GrupoHorario.class);
+        Session session = (Session) em.getDelegate();
+        List<GrupoHorario> listGrupHor = session.createCriteria(GrupoHorario.class).list();
         
-        List<GrupoHorario> listGrupHor = query.getResultList();
         listGrupHor.stream().forEach((grp) -> {
         	grupos.put(grp.getId(), grp.getDatatype());
         });

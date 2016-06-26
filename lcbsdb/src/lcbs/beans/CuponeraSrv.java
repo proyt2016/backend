@@ -5,7 +5,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+
 import lcbs.interfaces.CuponeraLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Cuponera;
 import lcbs.shares.*;
 
@@ -28,9 +31,9 @@ public class CuponeraSrv implements CuponeraLocalApi {
     public Map<String,DataCuponera> obtenerCuponera(){
     	Map<String,DataCuponera> cuponeras = new HashMap();
         //obtengo todas las cuponera de la bd
-        Query query = em.createQuery("SELECT c FROM Cuponera c", Cuponera.class);
+        Session session = (Session) em.getDelegate();
+        List<Cuponera> listCup = session.createCriteria(Cuponera.class).list();
         
-        List<Cuponera> listCup = query.getResultList();
         listCup.stream().forEach((cup) -> {
         	cuponeras.put(cup.getId(), cup.getDatatype());
         });

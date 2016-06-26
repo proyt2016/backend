@@ -5,7 +5,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+
 import lcbs.interfaces.ParadaLocalApi;
+import lcbs.models.GrupoHorario;
 import lcbs.models.Parada;
 import lcbs.shares.DataParada;
 
@@ -28,9 +31,9 @@ public class ParadaSrv implements ParadaLocalApi {
     public Map<String,DataParada> obtenerParadas(){
     	Map<String,DataParada> paradas = new HashMap();
         //obtengo todas las paradas de la bd
-        Query query = em.createQuery("SELECT p FROM Parada p", Parada.class);
+        Session session = (Session) em.getDelegate();
+        List<Parada> listPds = session.createCriteria(Parada.class).list();
         
-        List<Parada> listPds = query.getResultList();
         listPds.stream().forEach((prd) -> {
         	paradas.put(prd.getId(), prd.getDatatype());
         });

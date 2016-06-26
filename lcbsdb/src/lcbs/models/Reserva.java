@@ -4,6 +4,7 @@ import lcbs.shares.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,20 +28,20 @@ public class Reserva implements Serializable{
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private Viaje viaje;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private Precio precio;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private PuntoRecorrido origen;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private PuntoRecorrido destino;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaReserva;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private Usuario usuarioReserva;
     private String ciPersona;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private Empleado empleado;
     private boolean utilizada;
     private boolean eliminada;

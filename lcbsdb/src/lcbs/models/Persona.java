@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.IndexColumn;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public abstract class Persona implements Serializable{
     private Email email;
     @Embedded
     @ElementCollection
+    @IndexColumn(name="LIST_INDEX")
     private List<Telefono> telefonosContacto;
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;

@@ -31,5 +31,8 @@ public interface IEncomienda {
 	public void crearReglaDeCobro(DataReglaCobroEncomienda rdc);
 	public void editarEncomienda(DataEncomienda encomienda);
 	public void bajaEncomienda(String idEncomienda);
-	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro);
+	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina);
+	public void borrarEstadoEncomienda(String idEstadoEncomienda);
+	public Map<String, DataEstadosEncomienda> listarEstadoEncomienda();
+	public DataEstadosEncomienda crearEstadoEncomienda(DataEstadosEncomienda estado);
 }

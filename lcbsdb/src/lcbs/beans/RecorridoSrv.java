@@ -5,7 +5,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+
 import lcbs.interfaces.RecorridoLocalApi;
+import lcbs.models.Perfil;
 import lcbs.models.Recorrido;
 import lcbs.shares.DataRecorrido;
 
@@ -28,9 +31,9 @@ public class RecorridoSrv implements RecorridoLocalApi {
     public Map<String,DataRecorrido> obtenerRecorridos(){
     	Map<String,DataRecorrido> Recorridos = new HashMap();
         //obtengo todos los Recorridos de la bd
-        Query query = em.createQuery("SELECT r FROM Recorrido r", Recorrido.class);
+        Session session = (Session) em.getDelegate();
+        List<Recorrido> listRec = session.createCriteria(Recorrido.class).list();
         
-        List<Recorrido> listRec = query.getResultList();
         listRec.stream().forEach((rec) -> {
         	Recorridos.put(rec.getId(), rec.getDatatype());
         });

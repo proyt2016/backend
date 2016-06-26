@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.IndexColumn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +28,14 @@ public class Recorrido implements Serializable{
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String nombre;
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.EAGER)
+    @IndexColumn(name="LIST_INDEX")
     private List<PuntoRecorrido> puntosDeRecorrido;
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.EAGER)
+    @IndexColumn(name="LIST_INDEX")
     private List<GrupoHorario> horarios;
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.EAGER)
+    @IndexColumn(name="LIST_INDEX")
     private List<Precio> precios;
     private Boolean eliminado;
     

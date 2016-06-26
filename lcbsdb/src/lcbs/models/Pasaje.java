@@ -14,6 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -29,20 +30,20 @@ public class Pasaje implements Serializable{
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private Viaje viaje;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private Precio precio;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private PuntoRecorrido origen;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private PuntoRecorrido destino;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCompra;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private Usuario comprador;
     private String ciPersona;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private Empleado vendedor;
     private Boolean usado;
     private Boolean pago;

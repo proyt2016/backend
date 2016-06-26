@@ -5,7 +5,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+
 import lcbs.interfaces.UsuarioLocalApi;
+import lcbs.models.Terminal;
 import lcbs.models.Usuario;
 import lcbs.shares.DataUsuario;
 
@@ -28,9 +31,9 @@ public class UsuarioSrv implements UsuarioLocalApi {
     public Map<String,DataUsuario> obtenerUsuarios(){
     	Map<String,DataUsuario> usuarios = new HashMap();
         //obtengo todos los usuarios de la bd
-        Query query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
+        Session session = (Session) em.getDelegate();
+        List<Usuario> listUsu = session.createCriteria(Usuario.class).list();
         
-        List<Usuario> listUsu = query.getResultList();
         listUsu.stream().forEach((usu) -> {
         	usuarios.put(usu.getId(), usu.getDatatype());
         });

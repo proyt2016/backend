@@ -85,6 +85,21 @@ public class EncomiendaCtrl implements IEncomienda{
 	public DataEncomienda getEncomienda(String idEncomienda) {
 		return srvEncomienda.getEncomienda(idEncomienda);
 	}
+	
+	@Override
+	public DataEstadosEncomienda crearEstadoEncomienda(DataEstadosEncomienda estado) {
+		return srvEstadosEncomienda.crearEstadosEncomienda(estado);
+	}
+	
+	@Override
+	public Map<String, DataEstadosEncomienda> listarEstadoEncomienda() {
+		return srvEstadosEncomienda.obtenerEstadosEncomienda();
+	}
+	
+	@Override
+	public void borrarEstadoEncomienda(String idEstadoEncomienda) {
+		srvEstadosEncomienda.borrarEstadosEncomienda(idEstadoEncomienda);
+	}
 
 	@Override
 	public void setEstadoEncomienda(String idEncomienda, DataEstadosEncomienda dataEstado) {
@@ -131,7 +146,7 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 
 	@Override
-	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro) {
-		return srvEncomienda.buscarEncomienda(filtro);
+	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina) {
+		return srvEncomienda.buscarEncomienda(filtro, pagina, ElementosPagina);
 	}
 }

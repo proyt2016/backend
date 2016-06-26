@@ -13,5 +13,5 @@ public interface EncomiendaLocalApi {
 	public DataEncomienda getEncomienda(String id);
 	public DataEncomienda crearEncomienda(DataEncomienda enc);
 	public void darBajaEncomienda(String idEncomienda);
-	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro);
+	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina);
 }

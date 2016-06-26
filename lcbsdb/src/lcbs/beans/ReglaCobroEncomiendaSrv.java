@@ -5,7 +5,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+
 import lcbs.interfaces.ReglaCobroEncomiendaLocalApi;
+import lcbs.models.Recorrido;
 import lcbs.models.ReglaCobroEncomienda;
 import lcbs.shares.DataReglaCobroEncomienda;
 
@@ -28,9 +31,9 @@ public class ReglaCobroEncomiendaSrv implements ReglaCobroEncomiendaLocalApi {
     public Map<String,DataReglaCobroEncomienda> obtenerReglaCobroEncomiendas(){
     	Map<String,DataReglaCobroEncomienda> reglas = new HashMap();
         //obtengo todas las reglas de cobro de encomiendas de la bd
-        Query query = em.createQuery("SELECT r FROM ReglaCobroEncomienda r", ReglaCobroEncomienda.class);
+        Session session = (Session) em.getDelegate();
+        List<ReglaCobroEncomienda> listRce = session.createCriteria(ReglaCobroEncomienda.class).list();
         
-        List<ReglaCobroEncomienda> listRce = query.getResultList();
         listRce.stream().forEach((rce) -> {
         	reglas.put(rce.getId(), rce.getDatatype());
         });

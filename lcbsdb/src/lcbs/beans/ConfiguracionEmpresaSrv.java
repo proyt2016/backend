@@ -1,13 +1,18 @@
 package lcbs.beans;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import lcbs.shares.*;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+
 import lcbs.interfaces.ConfiguracionEmpresaLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
+import lcbs.models.Encomienda;
 
 
 /**
@@ -24,9 +29,10 @@ public class ConfiguracionEmpresaSrv implements ConfiguracionEmpresaLocalApi {
     
     public DataConfiguracionEmpresa getConfiguracionEmpresa(){
         //obtengo la configuracion de empresa de la bd
-        Query query = em.createQuery("SELECT c FROM Cuponera c", ConfiguracionEmpresa.class);
+        Session session = (Session) em.getDelegate();
+        List<ConfiguracionEmpresa> listEnc = session.createCriteria(ConfiguracionEmpresa.class).list();
         
-        ConfiguracionEmpresa conf = (ConfiguracionEmpresa)query.getResultList().get(0);
+        ConfiguracionEmpresa conf = listEnc.get(0);
         
         return conf.getDatatype();
     }

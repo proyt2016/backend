@@ -6,7 +6,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+
 import lcbs.interfaces.EmpleadoLocalApi;
+import lcbs.models.Cuponera;
 import lcbs.models.Empleado;
 
 import java.util.Map;
@@ -28,9 +31,9 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
     public Map<String,DataEmpleado> obtenerEmpleados(){
     	Map<String,DataEmpleado> empleados = new HashMap();
         //obtengo todos los empleados de la bd
-        Query query = em.createQuery("SELECT e FROM Empleado e", Empleado.class);
+        Session session = (Session) em.getDelegate();
+        List<Empleado> listEmp = session.createCriteria(Empleado.class).list();
         
-        List<Empleado> listEmp = query.getResultList();
         listEmp.stream().forEach((emp) -> {
         	empleados.put(emp.getId(), emp.getDatatype());
         });

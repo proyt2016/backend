@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.IndexColumn;
 
 
 
@@ -51,15 +52,16 @@ public class Encomienda implements Serializable{
     private String ciReceptor;
    
     private String direccionReceptor;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private ReglaCobroEncomienda reglaCobro;
     private float monto;
     private boolean pagaReceptor;
     @ManyToOne
     private Viaje viajeAsignado;
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.EAGER)
+    @IndexColumn(name="LIST_INDEX")
     private List<HistorialEstadosEncomienda> estados;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private EstadosEncomienda estadoActual;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaIngreso;

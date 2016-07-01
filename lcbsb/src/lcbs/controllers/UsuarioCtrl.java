@@ -47,7 +47,8 @@ public class UsuarioCtrl implements IUsuario{
 	}
 	
 	@Override
-	public void CargarSaldoCuponera(DataUsuario usuario, Float saldo){
+	public void CargarSaldoCuponera(String idUsuario, Float saldo){
+		DataUsuario usuario = srvUsuario.getUsuario(idUsuario);
 		DataCuponera cuponera = usuario.getCuponera();
 		cuponera.setSaldo(cuponera.getSaldo() + saldo);
 		srvCuponera.modificarCuponera(cuponera);
@@ -96,9 +97,10 @@ public class UsuarioCtrl implements IUsuario{
 	}
 	
 	@Override
-	public void AsignarPerfil(String idEmpleado, DataPerfil perfil){
+	public void AsignarPerfil(String idEmpleado, String perfil){
 		DataEmpleado empleado = srvEmpleado.getEmpleado(idEmpleado);
-		empleado.setPerfil(perfil);
+		DataPerfil perf = srvPerfil.getPerfil(perfil);
+		empleado.setPerfil(perf);
 		srvEmpleado.modificarEmpleado(empleado);
 	}
 

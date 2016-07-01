@@ -57,8 +57,8 @@ public class UsuarioRepo {
 		ctrUsuario.BajaEmpleado(idEmpleado);
 	}
 	
-	public void CargarSaldoCuponera(DataUsuario usuario, Float saldo){
-		ctrUsuario.CargarSaldoCuponera(usuario, saldo);
+	public void CargarSaldoCuponera(String idUsuario, Float saldo){
+		ctrUsuario.CargarSaldoCuponera(idUsuario, saldo);
 	}
 	
 	public List<DataNotificacion> listarNotificaciones(String idUsuario){
@@ -77,7 +77,7 @@ public class UsuarioRepo {
 		ctrUsuario.EliminarPerfil(idPerfil);
 	}
 	
-	public void AsignarPerfil(String idEmpleado, DataPerfil perfil){
+	public void AsignarPerfil(String idEmpleado, String perfil){
 		ctrUsuario.AsignarPerfil(idEmpleado, perfil);
 	}
 	

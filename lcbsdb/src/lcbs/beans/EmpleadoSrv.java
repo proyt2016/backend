@@ -64,7 +64,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
     public DataEmpleado crearEmpleado(DataEmpleado emp){
     	Empleado realObj = new Empleado(emp);
         //guardo al empleado en bd
-        em.persist(emp);
+        em.persist(realObj);
         return realObj.getDatatype();
     }
     

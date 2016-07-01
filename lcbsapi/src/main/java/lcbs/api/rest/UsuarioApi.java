@@ -66,14 +66,15 @@ public class UsuarioApi {
 	}
 	
 	@POST
-	@Path("/baaempleado/")
+	@Path("/bajaempleado/")
 	public void BajaEmpleado(String idEmpleado){
 		repo.BajaEmpleado(idEmpleado);
 	}
 	
-	
-	public void CargarSaldoCuponera(DataUsuario usuario, Float saldo){
-		repo.CargarSaldoCuponera(usuario, saldo);
+	@POST
+	@Path("/cargarcuponera/{idUsuario}")
+	public void CargarSaldoCuponera(@PathParam("idUsuario") final String idUsuario, Float saldo) throws Exception{
+		repo.CargarSaldoCuponera(idUsuario, saldo);
 	}
 	
 	@POST
@@ -82,7 +83,6 @@ public class UsuarioApi {
 		return repo.listarNotificaciones(idUsuario);
 	}
 	
-
 	@POST
 	@Path("/altaperfil/")
 	public void AltaPerfil(final DataPerfil perfil) {
@@ -101,7 +101,9 @@ public class UsuarioApi {
 		repo.EliminarPerfil(idPerfil);
 	}
 	
-	public void AsignarPerfil(String idEmpleado, DataPerfil perfil){
+	@POST
+	@Path("/asignarperfil/{idEmpleado}")
+	public void AsignarPerfil(@PathParam("idEmpleado") final String idEmpleado, String perfil){
 		repo.AsignarPerfil(idEmpleado, perfil);
 	}
 	
@@ -109,7 +111,6 @@ public class UsuarioApi {
 		return repo.loginUsuario(usuario, clave);
 	}
 
-	
 	@GET
 	@Path("/getusuario/{idUsuario}")
 	public DataUsuario getUsuario(@PathParam("idUsuario") final String idUsuario){

@@ -16,13 +16,13 @@ public interface IUsuario {
 	public DataEmpleado AltaEmpleado(DataEmpleado empleado);
 	public void ModificarEmpleado(DataEmpleado empleado);
 	public void BajaEmpleado(String idEmpleado);
-	public void CargarSaldoCuponera(DataUsuario usuario, Float saldo);
+	public void CargarSaldoCuponera(String idUsuario, Float saldo);
 	public List<DataNotificacion> listarNotificaciones(String idUsuario);
 	public DataPerfil getPerfil(String idPerfil);
 	public void AltaPerfil(DataPerfil perfil);
 	public void EditarPerfil(DataPerfil perfil);
 	public void EliminarPerfil(String idPerfil);
 	public Map<String, DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina);
-	public void AsignarPerfil(String idEmpleado, DataPerfil perfil);
+	public void AsignarPerfil(String idEmpleado, String perfil);
 	
 }

@@ -46,6 +46,11 @@ public class EncomiendaRepo {
 	}
 	
 	
+	public void AltaReglaCobro(DataReglaCobroEncomienda drce){
+		ctrEncomienda.crearReglaDeCobro(drce);
+	}
+	
+	
 	public DataReglaCobroEncomienda getReglaDeCobro(String idEncomieda){
 		return ctrEncomienda.getReglaDeCobro(idEncomieda);
 	}

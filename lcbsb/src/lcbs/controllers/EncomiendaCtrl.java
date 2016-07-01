@@ -44,7 +44,7 @@ public class EncomiendaCtrl implements IEncomienda{
 		return listaEncomiendas;
 		
 	}
-
+	
 	@Override
 	public List<DataReglaCobroEncomienda> getReglasDeCobro(Integer pagina, Integer elementosPagina) {
 		@SuppressWarnings("unchecked")

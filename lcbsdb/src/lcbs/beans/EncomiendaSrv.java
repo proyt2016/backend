@@ -38,7 +38,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         //obtengo todas las encomiendas de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Encomienda.class);
-    	criteria.add(Restrictions.eq("Eliminada", false));
+    	criteria.add(Restrictions.eq("eliminada", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
         List<Encomienda> listEnc = criteria.list();

@@ -5,6 +5,7 @@ package lcbs.api.rest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -39,12 +40,117 @@ public class EncomiendaApi {
 	
 	@EJB
 	EncomiendaRepo repo;
-	
+		
 	
 	@POST
 	@Path("/altaencomienda/")
 	public DataEncomienda AltaEncomienda(DataEncomienda enc){
 		return repo.AltaEncomienda(enc);
 	}
+	
+	@POST
+	@Path("/borrarestadoencomienda/")
+	public void borrarEstadoEncomienda(String idEstadoEncomienda){
+		repo.borrarEstadoEncomienda(idEstadoEncomienda);
+	}
+	
+	@POST
+	@Path("/setestadoencomienda/{idEncomienda}/")
+	public void setEstadoEncomienda(@PathParam("idEncomienda")final String idEncomienda,final DataEstadosEncomienda dataEstado){
+		repo.setEstadoEncomienda(idEncomienda, dataEstado);
+	}
+	
+	@POST
+	@Path("/asignarencomiendavehiculo/{IdEncomienda}/{idViaje}")
+	public void AsignarEncomiendaVehiculo(@PathParam("IdEncomienda")final String IdEncomienda,@PathParam("idViaje")final String idViaje){
+		repo.AsignarEncomiendasVehiculo(IdEncomienda, idViaje);
+	}
+	
+		
+	@POST
+	@Path("/altaestadoencomienda/")
+	public void AltaEstadoEncomienda(DataEstadosEncomienda dataEstado){
+		repo.crearEstadoEncomienda(dataEstado);
+	}
+	
+	@POST
+	@Path("/altareglacobro/")
+	public void AltaReglaCobro(DataReglaCobroEncomienda dataRegla){
+		repo.AltaReglaCobro(dataRegla);
+	}
+	
+	@POST
+	@Path("/editarencomienda/")
+	public void editarEncomienda(DataEncomienda encomienda){
+		repo.editarEncomienda(encomienda);
+	}
+	
+	@POST
+	@Path("/borrarencomienda/")
+	public void borrarEncomienda(String idEncomienda){
+		 repo.bajaEncomienda(idEncomienda);
+	}
+	
+	@GET
+	@Path("/getencomiendasporvehiculo/")
+	public List<DataEncomienda> getEncomiendasPorVehiculo(String idViaje){
+		return repo.getEncomiendasPorVehiculo(idViaje);
+	}
+	
+	@GET
+	@Path("/buscarencomienda/{pagina:[0-9][0-9]*}/{elementosPagina:[0-9][0-9]*}")
+	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro, @PathParam("pagina") final Integer pagina,@PathParam("elementosPagina") final Integer ElementosPagina){
+		return repo.buscarEncomienda(filtro, pagina, ElementosPagina);
+	}
+	
+	
+	@GET
+	@Path("/getencomienda/{idEncomienda}")
+	public DataEncomienda getEncomienda(@PathParam("idEncomienda") final String idEncomienda){
+		return repo.getEncomienda(idEncomienda);
+	}
+	
+	@GET
+	@Path("/getreglacobro/{idEncomienda}")
+	public DataReglaCobroEncomienda getReglaCobro(@PathParam("idEncomienda") final String idEncomieda){
+		return repo.getReglaDeCobro(idEncomieda);
+	}
+	
+	@GET
+	@Path("/getencomiendas/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataEncomienda> getEncomiendas(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
+		return repo.ListarEncomiendas(pagina, elementosPagina);
+	}
+	
+	@GET
+	@Path("/getreglascobro/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataReglaCobroEncomienda> getReglasCobro(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
+		return repo.getReglasDeCobro(pagina, elementosPagina);
+	}
+	
+	@GET
+	@Path("/gethistorialestados/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}/{idEncomienda}")
+	public List<DataHistorialEstadosEncomienda> getHistorialEstadosEncomienda(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina, @PathParam("idEncomienda") final String idEncomienda){
+		return repo.getHistorialEstado(idEncomienda);
+	}
+	
+	@GET
+	@Path("/getreglacobro/{idEncomienda}")
+	public DataEstadosEncomienda getUltimoEstado(@PathParam("idEncomienda")final String idEncomienda){
+		return repo.getUltimoEstado(idEncomienda);
+	}
+	
+	@GET
+	@Path("/listarestadosencomienda/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public Map<String, DataEstadosEncomienda> listarEstadoEncomienda(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
+		return repo.listarEstadoEncomienda(pagina, elementosPagina);
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

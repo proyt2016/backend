@@ -64,8 +64,8 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 
 	@Override
-	public void AltaEncomienda(DataEncomienda encomienda) {
-		srvEncomienda.crearEncomienda(encomienda);
+	public DataEncomienda AltaEncomienda(DataEncomienda encomienda) {
+		return srvEncomienda.crearEncomienda(encomienda);
 	}
 
 	@Override

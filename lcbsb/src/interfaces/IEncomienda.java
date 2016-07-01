@@ -20,7 +20,7 @@ public interface IEncomienda {
 	public List<DataEncomienda> ListarEncomiendas(Integer pagina, Integer elementosPagina);
 	public List<DataReglaCobroEncomienda> getReglasDeCobro(Integer pagina, Integer elementosPagina);
 	public DataReglaCobroEncomienda getReglaDeCobro(String idEncomieda);
-	public void AltaEncomienda(DataEncomienda encomienda);
+	public DataEncomienda AltaEncomienda(DataEncomienda encomienda);
 	public List<DataHistorialEstadosEncomienda> getHistorialEstado(String idEncomienda);
 	public DataEstadosEncomienda getUltimoEstado(String idEncomienda);
 	public DataEncomienda getEncomienda(String idEncomienda);

@@ -51,8 +51,8 @@ public class EncomiendaRepo {
 	}
 	
 	
-	public void AltaEncomienda(DataEncomienda encomienda){
-		ctrEncomienda.AltaEncomienda(encomienda);
+	public DataEncomienda AltaEncomienda(DataEncomienda encomienda){
+		return ctrEncomienda.AltaEncomienda(encomienda);
 	}	
 	
 	public List<DataHistorialEstadosEncomienda> getHistorialEstado(String idEncomienda){

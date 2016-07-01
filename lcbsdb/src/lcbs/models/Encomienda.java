@@ -148,16 +148,15 @@ public class Encomienda implements Serializable{
     		if(this.getOrigen() instanceof Terminal){
     			result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
     		}else{
-    			if(this.getOrigen()!=null)
     			result.setOrigen(((Parada)this.getOrigen()).getDatatype());
-    			}
-    	if(this.getDestino() instanceof Terminal){
-    			if(this.getDestino()!=null)
-    				result.setDestino(((Terminal)this.getDestino()).getDatatype());
-    		}else{
-    			if(this.getDestino()!=null)
-    				result.setDestino(((Parada)this.getDestino()).getDatatype());
     		}
+    	if(this.getDestino()!=null){
+    		if(this.getDestino() instanceof Terminal){
+    			result.setDestino(((Terminal)this.getDestino()).getDatatype());
+    		}else{
+    			result.setDestino(((Parada)this.getDestino()).getDatatype());
+    		}
+    	}
     	if(this.getEmisor()!=null)
     		result.setEmisor(this.getEmisor().getDatatype());
     	result.setCiEmisor(this.getCiEmisor());
@@ -174,11 +173,11 @@ public class Encomienda implements Serializable{
     	if(this.getViajeAsignado()!=null)
     		result.setViajeAsignado(this.getViajeAsignado().getDatatype());
     	if(this.getEstados()!=null){
-    	List<DataHistorialEstadosEncomienda> temp = new ArrayList<DataHistorialEstadosEncomienda>();
-    	this.getEstados().stream().forEach((est) -> {
-    		temp.add(est.getDatatype());
-        });
-    	result.setEstados(temp);
+	    	List<DataHistorialEstadosEncomienda> temp = new ArrayList<DataHistorialEstadosEncomienda>();
+	    	this.getEstados().stream().forEach((est) -> {
+	    		temp.add(est.getDatatype());
+	        });
+	    	result.setEstados(temp);
     	}
     	if(this.getEstadoActual()!=null)
     		result.setEstadoActual(this.getEstadoActual().getDatatype());

@@ -5,9 +5,13 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import lcbs.interfaces.PasajeLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
+import lcbs.models.GrupoHorario;
 import lcbs.models.Parada;
 import lcbs.models.Pasaje;
 import lcbs.shares.DataPasaje;
@@ -28,11 +32,15 @@ public class PasajeSrv implements PasajeLocalApi {
         
     }
     
-    public Map<String,DataPasaje> obtenerPasajes(){
+    public Map<String,DataPasaje> obtenerPasajes(Integer pagina, Integer elementosPagina){
     	Map<String,DataPasaje> Pasajes = new HashMap();
         //obtengo todos los Pasajes de la bd
-        Session session = (Session) em.getDelegate();
-        List<Pasaje> listPsj = session.createCriteria(Pasaje.class).list();
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Pasaje.class);
+    	criteria.add(Restrictions.eq("Eliminado", false));
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<Pasaje> listPsj = criteria.list();
         
         listPsj.stream().forEach((psj) -> {
         	Pasajes.put(psj.getId(), psj.getDatatype());
@@ -49,7 +57,9 @@ public class PasajeSrv implements PasajeLocalApi {
     }
     
     public DataPasaje getPasaje(String id){
-        return this.obtenerPasajes().get(id);
+    	Session session = (Session) em.getDelegate();
+    	Pasaje realObj = (Pasaje) session.get(Pasaje.class, id);
+		return realObj.getDatatype();
     }
     
     public DataPasaje crearPasaje(DataPasaje psj){

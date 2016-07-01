@@ -8,7 +8,7 @@ import lcbs.shares.DataTerminal;
 
 @Local
 public interface TerminalLocalApi {
-	public Map<String,DataTerminal> obtenerTerminals();
+	public Map<String,DataTerminal> obtenerTerminals(Integer pagina, Integer elementosPagina);
 	public void modificarTerminal(DataTerminal ter);
 	public DataTerminal getTerminal(String ter);
 	public DataTerminal crearTerminal(DataTerminal ter);

@@ -8,7 +8,7 @@ import lcbs.shares.DataCuponera;
 
 @Local
 public interface CuponeraLocalApi {
-	public Map<String,DataCuponera> obtenerCuponera();
+	public Map<String,DataCuponera> obtenerCuponera(Integer pagina, Integer elementosPagina);
 	public void modificarCuponera(DataCuponera cup);
 	public DataCuponera getCuponera(String id);
 }

@@ -5,11 +5,13 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import lcbs.interfaces.CuponeraLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Cuponera;
+import lcbs.models.Perfil;
 import lcbs.shares.*;
 
 import java.util.Map;
@@ -28,11 +30,15 @@ public class CuponeraSrv implements CuponeraLocalApi {
         
     }
     
-    public Map<String,DataCuponera> obtenerCuponera(){
+    public Map<String,DataCuponera> obtenerCuponera(Integer pagina, Integer elementosPagina){
     	Map<String,DataCuponera> cuponeras = new HashMap();
         //obtengo todas las cuponera de la bd
-        Session session = (Session) em.getDelegate();
-        List<Cuponera> listCup = session.createCriteria(Cuponera.class).list();
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Cuponera.class);
+        
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<Cuponera> listCup = criteria.list();
         
         listCup.stream().forEach((cup) -> {
         	cuponeras.put(cup.getId(), cup.getDatatype());
@@ -49,7 +55,9 @@ public class CuponeraSrv implements CuponeraLocalApi {
     }
     
     public DataCuponera getCuponera(String id){
-        return this.obtenerCuponera().get(id);
+    	Session session = (Session) em.getDelegate();
+		Cuponera realObj = (Cuponera) session.get(Cuponera.class, id);
+		return realObj.getDatatype();
     }
     
     public DataCuponera crearCuponera(DataCuponera cup){

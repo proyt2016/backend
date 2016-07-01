@@ -5,9 +5,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import lcbs.interfaces.ReglaCobroEncomiendaLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Recorrido;
 import lcbs.models.ReglaCobroEncomienda;
 import lcbs.shares.DataReglaCobroEncomienda;
@@ -28,11 +30,15 @@ public class ReglaCobroEncomiendaSrv implements ReglaCobroEncomiendaLocalApi {
         
     }
     
-    public Map<String,DataReglaCobroEncomienda> obtenerReglaCobroEncomiendas(){
+    public Map<String,DataReglaCobroEncomienda> obtenerReglaCobroEncomiendas(Integer pagina, Integer elementosPagina){
     	Map<String,DataReglaCobroEncomienda> reglas = new HashMap();
         //obtengo todas las reglas de cobro de encomiendas de la bd
-        Session session = (Session) em.getDelegate();
-        List<ReglaCobroEncomienda> listRce = session.createCriteria(ReglaCobroEncomienda.class).list();
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(ReglaCobroEncomienda.class);
+        
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<ReglaCobroEncomienda> listRce = criteria.list();
         
         listRce.stream().forEach((rce) -> {
         	reglas.put(rce.getId(), rce.getDatatype());
@@ -49,7 +55,9 @@ public class ReglaCobroEncomiendaSrv implements ReglaCobroEncomiendaLocalApi {
     }
     
     public DataReglaCobroEncomienda getReglaCobroEncomienda(String id){
-        return this.obtenerReglaCobroEncomiendas().get(id);
+    	Session session = (Session) em.getDelegate();
+    	ReglaCobroEncomienda realObj = (ReglaCobroEncomienda) session.get(ReglaCobroEncomienda.class, id);
+		return realObj.getDatatype();
     }
     
     public DataReglaCobroEncomienda crearReglaCobroEncomienda(DataReglaCobroEncomienda rce){

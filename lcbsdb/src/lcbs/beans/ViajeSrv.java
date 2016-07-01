@@ -1,6 +1,8 @@
 package lcbs.beans;
 
 import javax.ejb.Stateless;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import javax.inject.Inject;
@@ -8,6 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import lcbs.interfaces.ViajeLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
+import lcbs.models.Vehiculo;
 import lcbs.models.Viaje;
 import lcbs.shares.DataViaje;
 
@@ -27,11 +31,15 @@ public class ViajeSrv implements ViajeLocalApi {
         
     }
     
-    public Map<String,DataViaje> obtenerViajes(){
+    public Map<String,DataViaje> obtenerViajes(Integer pagina, Integer elementosPagina){
     	Map<String,DataViaje> Viajes = new HashMap();
         //obtengo todos los Viajes de la bd
-        Session session = (Session) em.getDelegate();
-        List<Viaje> listTer = session.createCriteria(Viaje.class).list();
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Viaje.class);
+        
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<Viaje> listTer = criteria.list();
         
         listTer.stream().forEach((via) -> {
         	Viajes.put(via.getId(), via.getDatatype());
@@ -48,7 +56,9 @@ public class ViajeSrv implements ViajeLocalApi {
     }
     
     public DataViaje getViaje(String id){
-        return this.obtenerViajes().get(id);
+    	Session session = (Session) em.getDelegate();
+    	Viaje realObj = (Viaje) session.get(Viaje.class, id);
+		return realObj.getDatatype();
     }
     
     public DataViaje crearViaje(DataViaje via){

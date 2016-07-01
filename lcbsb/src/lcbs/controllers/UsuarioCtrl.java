@@ -3,6 +3,7 @@ package lcbs.controllers;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import interfaces.IUsuario;
@@ -99,6 +100,38 @@ public class UsuarioCtrl implements IUsuario{
 		DataEmpleado empleado = srvEmpleado.getEmpleado(idEmpleado);
 		empleado.setPerfil(perfil);
 		srvEmpleado.modificarEmpleado(empleado);
+	}
+
+	@Override
+	public boolean loginUsuario(String usuario, String clave) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public DataUsuario getUsuario(String idUsuario) {
+		return srvUsuario.getUsuario(idUsuario);
+	}
+
+	@Override
+	public boolean loginEmpleado(String usuario, String clave) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public DataEmpleado getEmpleado(String idEmpleado) {
+		return srvEmpleado.getEmpleado(idEmpleado);
+	}
+
+	@Override
+	public DataPerfil getPerfil(String idPerfil) {
+		return srvPerfil.getPerfil(idPerfil);
+	}
+
+	@Override
+	public Map<String, DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
+		return srvPerfil.obtenerPerfils(pagina, elementosPagina);
 	}
 	
 	

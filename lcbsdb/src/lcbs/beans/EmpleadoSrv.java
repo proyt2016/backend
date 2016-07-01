@@ -6,9 +6,12 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import lcbs.interfaces.EmpleadoLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Cuponera;
 import lcbs.models.Empleado;
 
@@ -28,11 +31,15 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
         
     }
     
-    public Map<String,DataEmpleado> obtenerEmpleados(){
+    public Map<String,DataEmpleado> obtenerEmpleados(Integer pagina, Integer elementosPagina){
     	Map<String,DataEmpleado> empleados = new HashMap();
         //obtengo todos los empleados de la bd
-        Session session = (Session) em.getDelegate();
-        List<Empleado> listEmp = session.createCriteria(Empleado.class).list();
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Empleado.class);
+    	criteria.add(Restrictions.eq("Eliminado", false));
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<Empleado> listEmp = criteria.list();
         
         listEmp.stream().forEach((emp) -> {
         	empleados.put(emp.getId(), emp.getDatatype());
@@ -49,7 +56,9 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
     }
     
     public DataEmpleado getEmpleado(String id){
-        return this.obtenerEmpleados().get(id);
+    	Session session = (Session) em.getDelegate();
+    	Empleado realObj = (Empleado) session.get(Empleado.class, id);
+		return realObj.getDatatype();
     }
     
     public DataEmpleado crearEmpleado(DataEmpleado emp){

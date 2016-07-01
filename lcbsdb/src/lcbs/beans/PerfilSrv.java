@@ -5,9 +5,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import lcbs.interfaces.PerfilLocalApi;
+import lcbs.models.Encomienda;
 import lcbs.models.Pasaje;
 import lcbs.models.Perfil;
 import lcbs.shares.DataPerfil;
@@ -28,12 +30,15 @@ public class PerfilSrv implements PerfilLocalApi {
         
     }
     
-    public Map<String,DataPerfil> obtenerPerfils(){
+    public Map<String,DataPerfil> obtenerPerfils(Integer pagina, Integer elementosPagina){
     	Map<String,DataPerfil> Perfils = new HashMap();
         //obtengo todos los Perfiles de la bd
         Session session = (Session) em.getDelegate();
-        List<Perfil> listPds = session.createCriteria(Perfil.class).list();
+    	Criteria criteria = session.createCriteria(Perfil.class);
         
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+    	List<Perfil> listPds = criteria.list();
         listPds.stream().forEach((prf) -> {
         	Perfils.put(prf.getId(), prf.getDatatype());
         });
@@ -49,7 +54,9 @@ public class PerfilSrv implements PerfilLocalApi {
     }
     
     public DataPerfil getPerfil(String id){
-        return this.obtenerPerfils().get(id);
+    	Session session = (Session) em.getDelegate();
+		Perfil realObj = (Perfil) session.get(Perfil.class, id);
+		return realObj.getDatatype();
     }
     
     public DataPerfil crearPerfil(DataPerfil prf){

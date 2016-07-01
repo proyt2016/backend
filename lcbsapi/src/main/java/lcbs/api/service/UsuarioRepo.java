@@ -17,6 +17,7 @@
 package lcbs.api.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -80,5 +81,28 @@ public class UsuarioRepo {
 		ctrUsuario.AsignarPerfil(idEmpleado, perfil);
 	}
 	
+	public boolean loginUsuario(String usuario, String clave) {
+		return ctrUsuario.loginUsuario(usuario, clave);
+	}
+
+	public DataUsuario getUsuario(String idUsuario) {
+		return ctrUsuario.getUsuario(idUsuario);
+	}
+
+	public boolean loginEmpleado(String usuario, String clave) {
+		return ctrUsuario.loginEmpleado(usuario, clave);
+	}
+
+	public DataEmpleado getEmpleado(String idEmpleado) {
+		return ctrUsuario.getEmpleado(idEmpleado);
+	}
+
+	public DataPerfil getPerfil(String idPerfil) {
+		return ctrUsuario.getPerfil(idPerfil);
+	}
+
+	public Map<String, DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
+		return ctrUsuario.listarPerfiles(pagina, elementosPagina);
+	}
 	
 }

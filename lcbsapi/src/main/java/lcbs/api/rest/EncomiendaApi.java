@@ -43,7 +43,6 @@ public class EncomiendaApi {
 	* @param encomienda
 	* @return
 	*/
-	@POST
 	public Response create(final DataEncomienda encomienda) {
 		//TODO: process the given encomienda 
 		//here we use Encomienda#getId(), assuming that it provides the identifier to retrieve the created Encomienda resource. 
@@ -73,16 +72,44 @@ public class EncomiendaApi {
 	* @return
 	*/
 	@GET
+	@Path("/sape/")
 	public List<DataEncomienda> listAll(@QueryParam("start") final Integer startPosition,
 			@QueryParam("max") final Integer maxResult) {
 		//TODO: retrieve the encomiendas 
-		final List<DataEncomienda> encomiendas = new ArrayList<DataEncomienda>();//[new Encomienda()];
-		DataEncomienda e = new DataEncomienda();
+		DataEstadosEncomienda estado = new DataEstadosEncomienda(); 
+		estado.setNombre("rota");
+		DataEstadosEncomienda estados = new DataEstadosEncomienda(); 
+		estado.setNombre("sana");
 		
-		encomiendas.add(e);
-		e = new DataEncomienda();
-		e.setCiEmisor("3456789");
-		encomiendas.add(e); 
+		estado = repo.crearEstadoEncomienda(estado);
+		estados = repo.crearEstadoEncomienda(estados);
+		DataEncomienda aInsertar = new DataEncomienda();
+		aInsertar.setCiEmisor("111111");
+		repo.AltaEncomienda(aInsertar);
+		aInsertar = new DataEncomienda();
+		aInsertar.setCiEmisor("222222");
+		repo.AltaEncomienda(aInsertar);
+		aInsertar = new DataEncomienda();
+		aInsertar.setCiEmisor("333333");
+		repo.AltaEncomienda(aInsertar);
+		aInsertar = new DataEncomienda();
+		aInsertar.setCiEmisor("444444");
+		repo.AltaEncomienda(aInsertar);
+		aInsertar = new DataEncomienda();
+		aInsertar.setCiEmisor("555555");
+		aInsertar.setEstadoActual(estado);
+		repo.AltaEncomienda(aInsertar);
+		aInsertar = new DataEncomienda();
+		aInsertar.setCiEmisor("666666");
+		repo.AltaEncomienda(aInsertar);
+		DataEncomienda aBuscar = new DataEncomienda();
+		aBuscar.setCiEmisor("555555");
+		aBuscar.setEstadoActual(estado);
+		List<DataEncomienda> todas = new ArrayList(repo.buscarEncomienda(aBuscar, 1, 50).values());
+		String recienInsertada = todas.get(0).getId();
+		
+		final List<DataEncomienda> encomiendas = new ArrayList<DataEncomienda>();//[new Encomienda()];
+		encomiendas.add(repo.getEncomienda(recienInsertada));
 		return encomiendas;
 	}
 

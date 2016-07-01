@@ -5,10 +5,13 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import lcbs.interfaces.EstadosEncomiendaLocalApi;
 import lcbs.shares.DataEstadosEncomienda;
+import lcbs.models.ConfiguracionEmpresa;
+import lcbs.models.Cuponera;
 import lcbs.models.Empleado;
 import lcbs.models.EstadosEncomienda;
 
@@ -28,11 +31,15 @@ public class EstadosEncomiendaSrv implements EstadosEncomiendaLocalApi {
         
     }
     
-    public Map<String,DataEstadosEncomienda> obtenerEstadosEncomienda(){
+    public Map<String,DataEstadosEncomienda> obtenerEstadosEncomienda(Integer pagina, Integer elementosPagina){
     	Map<String,DataEstadosEncomienda> estados = new HashMap();
         //obtengo todas los estados de encomienda de la bd
-        Session session = (Session) em.getDelegate();
-        List<EstadosEncomienda> listEstEnc = session.createCriteria(EstadosEncomienda.class).list();
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(EstadosEncomienda.class);
+        
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<EstadosEncomienda> listEstEnc = criteria.list();
         
         listEstEnc.stream().forEach((est) -> {
         	estados.put(est.getId(), est.getDatatype());
@@ -49,7 +56,9 @@ public class EstadosEncomiendaSrv implements EstadosEncomiendaLocalApi {
     }
     
     public DataEstadosEncomienda getEstadosEncomienda(String id){
-        return this.obtenerEstadosEncomienda().get(id);
+    	Session session = (Session) em.getDelegate();
+    	EstadosEncomienda realObj = (EstadosEncomienda) session.get(EstadosEncomienda.class, id);
+		return realObj.getDatatype();
     }
     
     public DataEstadosEncomienda crearEstadosEncomienda(DataEstadosEncomienda est){

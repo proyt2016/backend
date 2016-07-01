@@ -17,8 +17,8 @@ import lcbs.shares.DataVehiculo;
 @Local
 public interface IEncomienda {
 	
-	public List<DataEncomienda> ListarEncomiendas();
-	public List<DataReglaCobroEncomienda> getReglasDeCobro();
+	public List<DataEncomienda> ListarEncomiendas(Integer pagina, Integer elementosPagina);
+	public List<DataReglaCobroEncomienda> getReglasDeCobro(Integer pagina, Integer elementosPagina);
 	public DataReglaCobroEncomienda getReglaDeCobro(String idEncomieda);
 	public void AltaEncomienda(DataEncomienda encomienda);
 	public List<DataHistorialEstadosEncomienda> getHistorialEstado(String idEncomienda);
@@ -33,6 +33,6 @@ public interface IEncomienda {
 	public void bajaEncomienda(String idEncomienda);
 	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina);
 	public void borrarEstadoEncomienda(String idEstadoEncomienda);
-	public Map<String, DataEstadosEncomienda> listarEstadoEncomienda();
+	public Map<String, DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina);
 	public DataEstadosEncomienda crearEstadoEncomienda(DataEstadosEncomienda estado);
 }

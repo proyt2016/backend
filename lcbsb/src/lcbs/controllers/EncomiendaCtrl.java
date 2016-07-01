@@ -39,16 +39,16 @@ public class EncomiendaCtrl implements IEncomienda{
 	
 
 	@Override
-	public List<DataEncomienda> ListarEncomiendas() {
-		List<DataEncomienda> listaEncomiendas = new ArrayList( srvEncomienda.obtenerEncomiendas().values());
+	public List<DataEncomienda> ListarEncomiendas(Integer pagina, Integer elementosPagina) {
+		List<DataEncomienda> listaEncomiendas = new ArrayList( srvEncomienda.obtenerEncomiendas(pagina, elementosPagina).values());
 		return listaEncomiendas;
 		
 	}
 
 	@Override
-	public List<DataReglaCobroEncomienda> getReglasDeCobro() {
+	public List<DataReglaCobroEncomienda> getReglasDeCobro(Integer pagina, Integer elementosPagina) {
 		@SuppressWarnings("unchecked")
-		List<DataReglaCobroEncomienda> listaReglaCobro = new ArrayList(srvReglaCobro.obtenerReglaCobroEncomiendas().values());
+		List<DataReglaCobroEncomienda> listaReglaCobro = new ArrayList(srvReglaCobro.obtenerReglaCobroEncomiendas(pagina, elementosPagina).values());
 		return listaReglaCobro;
 	}
 	
@@ -70,8 +70,7 @@ public class EncomiendaCtrl implements IEncomienda{
 
 	@Override
 	public List<DataHistorialEstadosEncomienda> getHistorialEstado(String idEncomienda) {
-		List<DataHistorialEstadosEncomienda> listaHistoriales = new ArrayList(srvEstadosEncomienda.obtenerEstadosEncomienda().values());
-		return listaHistoriales;
+		return srvEncomienda.getEncomienda(idEncomienda).getEstados();
 		
 	}
 
@@ -92,8 +91,8 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 	
 	@Override
-	public Map<String, DataEstadosEncomienda> listarEstadoEncomienda() {
-		return srvEstadosEncomienda.obtenerEstadosEncomienda();
+	public Map<String, DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina) {
+		return srvEstadosEncomienda.obtenerEstadosEncomienda(pagina, elementosPagina);
 	}
 	
 	@Override

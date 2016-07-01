@@ -8,7 +8,7 @@ import lcbs.shares.DataPerfil;
 
 @Local
 public interface PerfilLocalApi {
-	public Map<String,DataPerfil> obtenerPerfils();
+	public Map<String,DataPerfil> obtenerPerfils(Integer pagina, Integer elementosPagina);
 	public void modificarPerfil(DataPerfil prf);
 	public DataPerfil getPerfil(String id);
 	public DataPerfil crearPerfil(DataPerfil prf);

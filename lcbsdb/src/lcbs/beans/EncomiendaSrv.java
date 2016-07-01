@@ -13,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.mapping.Column;
 
 import lcbs.interfaces.EncomiendaLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Encomienda;
 import lcbs.models.Viaje;
 
@@ -32,11 +33,15 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         
     }
     
-    public Map<String,DataEncomienda> obtenerEncomiendas(){
+    public Map<String,DataEncomienda> obtenerEncomiendas(Integer pagina, Integer elementosPagina){
     	Map<String,DataEncomienda> encomiendas = new HashMap();
         //obtengo todas las encomiendas de la bd
-        Session session = (Session) em.getDelegate();
-        List<Encomienda> listEnc = session.createCriteria(Encomienda.class).list();
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Encomienda.class);
+    	criteria.add(Restrictions.eq("Eliminada", false));
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<Encomienda> listEnc = criteria.list();
         
         listEnc.stream().forEach((enc) -> {
         	encomiendas.put(enc.getId(), enc.getDatatype());

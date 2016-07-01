@@ -36,13 +36,13 @@ public class EncomiendaRepo {
 	@EJB(lookup =  "java:app/lcbsb/EncomiendaCtrl!interfaces.IEncomienda")
 	IEncomienda ctrEncomienda;
 	
-	public List<DataEncomienda> ListarEncomiendas(){
-		return ctrEncomienda.ListarEncomiendas();
+	public List<DataEncomienda> ListarEncomiendas(Integer pagina, Integer elementosPagina){
+		return ctrEncomienda.ListarEncomiendas(pagina, elementosPagina);
 	}
 	
 	
-	public List<DataReglaCobroEncomienda> getReglasDeCobro(){
-		return ctrEncomienda.getReglasDeCobro();
+	public List<DataReglaCobroEncomienda> getReglasDeCobro(Integer pagina, Integer elementosPagina){
+		return ctrEncomienda.getReglasDeCobro(pagina, elementosPagina);
 	}
 	
 	
@@ -96,8 +96,18 @@ public class EncomiendaRepo {
 		ctrEncomienda.bajaEncomienda(idEncomienda);
 	}
 
-	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro) {
-		return ctrEncomienda.buscarEncomienda(filtro);
+	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina) {
+		return ctrEncomienda.buscarEncomienda(filtro, pagina, ElementosPagina);
+	}
+	
+	public void borrarEstadoEncomienda(String idEstadoEncomienda){
+		ctrEncomienda.borrarEstadoEncomienda(idEstadoEncomienda);
+	}
+	public Map<String, DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina){
+		return ctrEncomienda.listarEstadoEncomienda(pagina, elementosPagina);
+	}
+	public DataEstadosEncomienda crearEstadoEncomienda(DataEstadosEncomienda estado){
+		return ctrEncomienda.crearEstadoEncomienda(estado);
 	}
 	
 }

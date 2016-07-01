@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import lcbs.interfaces.ReservaLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.ReglaCobroEncomienda;
 import lcbs.models.Reserva;
 import lcbs.models.Viaje;
@@ -31,11 +32,15 @@ public class ReservaSrv implements ReservaLocalApi {
         
     }
     
-    public Map<String,DataReserva> obtenerReservas(){
+    public Map<String,DataReserva> obtenerReservas(Integer pagina, Integer elementosPagina){
     	Map<String,DataReserva> reservas = new HashMap();
         //obtengo todas las Reservas de la bd
-        Session session = (Session) em.getDelegate();
-        List<Reserva> listRes = session.createCriteria(Reserva.class).list();
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Reserva.class);
+    	criteria.add(Restrictions.eq("Eliminada", false));
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<Reserva> listRes = criteria.list();
         
         listRes.stream().forEach((rec) -> {
         	reservas.put(rec.getId(), rec.getDatatype());
@@ -67,7 +72,9 @@ public class ReservaSrv implements ReservaLocalApi {
     }
     
     public DataReserva getReserva(String id){
-        return this.obtenerReservas().get(id);
+    	Session session = (Session) em.getDelegate();
+    	Reserva realObj = (Reserva) session.get(Reserva.class, id);
+		return realObj.getDatatype();
     }
     
     public DataReserva crearReserva(DataReserva res){

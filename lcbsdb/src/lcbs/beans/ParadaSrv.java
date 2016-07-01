@@ -5,9 +5,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import lcbs.interfaces.ParadaLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.GrupoHorario;
 import lcbs.models.Parada;
 import lcbs.shares.DataParada;
@@ -28,11 +30,15 @@ public class ParadaSrv implements ParadaLocalApi {
         
     }
     
-    public Map<String,DataParada> obtenerParadas(){
+    public Map<String,DataParada> obtenerParadas(Integer pagina, Integer elementosPagina){
     	Map<String,DataParada> paradas = new HashMap();
         //obtengo todas las paradas de la bd
-        Session session = (Session) em.getDelegate();
-        List<Parada> listPds = session.createCriteria(Parada.class).list();
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Parada.class);
+        
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<Parada> listPds = criteria.list();
         
         listPds.stream().forEach((prd) -> {
         	paradas.put(prd.getId(), prd.getDatatype());
@@ -49,7 +55,9 @@ public class ParadaSrv implements ParadaLocalApi {
     }
     
     public DataParada getParada(String id){
-        return this.obtenerParadas().get(id);
+    	Session session = (Session) em.getDelegate();
+    	Parada realObj = (Parada) session.get(Parada.class, id);
+		return realObj.getDatatype();
     }
     
     public DataParada crearParada(DataParada prd){

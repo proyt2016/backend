@@ -8,7 +8,7 @@ import lcbs.shares.DataUsuario;
 
 @Local
 public interface UsuarioLocalApi {
-	public Map<String,DataUsuario> obtenerUsuarios();
+	public Map<String,DataUsuario> obtenerUsuarios(Integer pagina, Integer elementosPagina);
 	public void modificarUsuario(DataUsuario usu);
 	public DataUsuario getUsuario(String usu);
 	public DataUsuario crearUsuario(DataUsuario usu);

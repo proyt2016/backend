@@ -5,9 +5,13 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import lcbs.interfaces.UsuarioLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
+import lcbs.models.Reserva;
 import lcbs.models.Terminal;
 import lcbs.models.Usuario;
 import lcbs.shares.DataUsuario;
@@ -28,11 +32,15 @@ public class UsuarioSrv implements UsuarioLocalApi {
         
     }
     
-    public Map<String,DataUsuario> obtenerUsuarios(){
+    public Map<String,DataUsuario> obtenerUsuarios(Integer pagina, Integer elementosPagina){
     	Map<String,DataUsuario> usuarios = new HashMap();
         //obtengo todos los usuarios de la bd
-        Session session = (Session) em.getDelegate();
-        List<Usuario> listUsu = session.createCriteria(Usuario.class).list();
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Usuario.class);
+    	criteria.add(Restrictions.eq("Eliminado", false));
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<Usuario> listUsu = criteria.list();
         
         listUsu.stream().forEach((usu) -> {
         	usuarios.put(usu.getId(), usu.getDatatype());
@@ -49,7 +57,9 @@ public class UsuarioSrv implements UsuarioLocalApi {
     }
     
     public DataUsuario getUsuario(String id){
-        return this.obtenerUsuarios().get(id);
+    	Session session = (Session) em.getDelegate();
+    	Usuario realObj = (Usuario) session.get(Usuario.class, id);
+		return realObj.getDatatype();
     }
     
     public DataUsuario crearUsuario(DataUsuario usu){

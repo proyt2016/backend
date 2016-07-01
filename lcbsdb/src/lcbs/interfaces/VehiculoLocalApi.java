@@ -8,7 +8,7 @@ import lcbs.shares.DataVehiculo;
 
 @Local
 public interface VehiculoLocalApi {
-	public Map<String,DataVehiculo> obtenerVehiculos();
+	public Map<String,DataVehiculo> obtenerVehiculos(Integer pagina, Integer elementosPagina);
 	public void modificarVehiculo(DataVehiculo veh);
 	public DataVehiculo getVehiculo(String veh);
 	public DataVehiculo crearVehiculo(DataVehiculo veh);

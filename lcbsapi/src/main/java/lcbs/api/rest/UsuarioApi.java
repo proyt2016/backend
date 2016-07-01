@@ -107,17 +107,21 @@ public class UsuarioApi {
 		repo.AsignarPerfil(idEmpleado, perfil);
 	}
 	
-	public boolean loginUsuario(String usuario, String clave) {
+	@POST
+	@Path("/loginusuario/{idUsuario}")
+	public boolean loginUsuario(@PathParam("idUsuario") final String usuario, String clave) {
 		return repo.loginUsuario(usuario, clave);
 	}
 
 	@GET
-	@Path("/getusuario/{idUsuario}")
-	public DataUsuario getUsuario(@PathParam("idUsuario") final String idUsuario){
+	@Path("/getusuario/{mailUsuario}")
+	public DataUsuario getUsuario(@PathParam("mailUsuario") final String idUsuario){
 		return repo.getUsuario(idUsuario);
 	}
-
-	public boolean loginEmpleado(String usuario, String clave) {
+	
+	@POST
+	@Path("/loginempleado/{idEmpleado}")
+	public boolean loginEmpleado(@PathParam("idEmpleado") final String usuario, String clave) {
 		return repo.loginEmpleado(usuario, clave);
 	}
 	
@@ -133,11 +137,6 @@ public class UsuarioApi {
 		return repo.getPerfil(idPerfil);
 	}
 
-	/**
-	* @param pagina
-	* @param paginasAMostrar
-	* @return
-	*/
 	@GET
 	@Path("/listarperfiles/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
 	public Map<String, DataPerfil> listarPerfiles(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {

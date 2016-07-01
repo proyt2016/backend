@@ -7,7 +7,7 @@ public interface IViaje {
 	
 	public Map<String, DataViaje> BuscarViaje(DataViaje filtro);
 	public DataPasaje ComprarPasaje(DataPasaje pasaje);
-	public void CambiarHorarioPasaje(String idPasaje, DataViaje viaje);
+	public void CambiarHorarioPasaje(String idPasaje, String viaje);
 	public DataReserva ReservarPasaje(DataReserva reserva);
 	
 	public void TransferirPasajeComprado(String idPasaje, String idUsuario);//idUsuario a Transferir

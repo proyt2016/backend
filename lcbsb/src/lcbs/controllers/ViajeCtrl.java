@@ -66,9 +66,10 @@ public class ViajeCtrl implements IViaje{
 	}
 
 	@Override
-	public void CambiarHorarioPasaje(String idPasaje, DataViaje viaje) {
+	public void CambiarHorarioPasaje(String idPasaje, String viaje) {
+		DataViaje viajeAAsignar = srvViaje.getViaje(viaje);
 		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje);
-		pasajeAModificar.setViaje(viaje);
+		pasajeAModificar.setViaje(viajeAAsignar);
 		srvPasaje.modificarPasaje(pasajeAModificar);
 		
 	}

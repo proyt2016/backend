@@ -14,6 +14,7 @@ import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Reserva;
 import lcbs.models.Terminal;
 import lcbs.models.Usuario;
+import lcbs.shares.DataEmpleado;
 import lcbs.shares.DataUsuario;
 
 import java.util.Map;
@@ -46,6 +47,18 @@ public class UsuarioSrv implements UsuarioLocalApi {
         	usuarios.put(usu.getId(), usu.getDatatype());
         });
         return usuarios;
+    }
+    
+    public boolean loginUsuario(String mailUsuario, String clave){
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Usuario.class);
+    	criteria.add(Restrictions.eq("email.email", mailUsuario));
+        List<Usuario> listUsu = criteria.list();
+        if(listUsu.size() == 1){
+	    	DataUsuario usuario = listUsu.get(0).getDatatype();
+	        return usuario.getClave().equals(clave);
+        }
+        return false;
     }
     
     public void modificarUsuario(DataUsuario usu){

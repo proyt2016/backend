@@ -40,7 +40,7 @@ public class ViajeRepo {
 		return ctrViaje.ComprarPasaje(pasaje);
 	}
 	
-	public void CambiarHorarioPasaje(String idPasaje, DataViaje viaje){
+	public void CambiarHorarioPasaje(String idPasaje, String viaje){
 		ctrViaje.CambiarHorarioPasaje(idPasaje, viaje);
 	}
 	

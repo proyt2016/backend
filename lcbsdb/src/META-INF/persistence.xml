@@ -3,13 +3,8 @@
 	<persistence-unit name="lcbsdb">
 		<jta-data-source>java:/PostgresDS</jta-data-source>
 		<properties>
-			<property name="connection.provider_class" value="org.hibernate.c3p0.internal.C3P0ConnectionProvider"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
-			<property name="hibernate.multi_tenant_connection_provider"
-                      value="lcbs.schema.MultiTenantConnectionProviderImpl"/>
-            <property name="hibernate.tenant_identifier_resolver"
-                      value="lcbs.schema.CurrentTenantIdentifierResolverImpl"/>
-            <property name="hibernate.multiTenancy" value="SCHEMA"/>
 		</properties>
 	</persistence-unit>
 </persistence>

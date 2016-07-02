@@ -8,8 +8,8 @@ import lcbs.shares.DataEstadosEncomienda;
 
 @Local
 public interface EstadosEncomiendaLocalApi {
-	public Map<String,DataEstadosEncomienda> obtenerEstadosEncomienda();
+	public Map<String,DataEstadosEncomienda> obtenerEstadosEncomienda(Integer pagina, Integer elementosPagina);
 	public void modificarEstadosEncomienda(DataEstadosEncomienda estEnc);
 	public DataEstadosEncomienda crearEstadosEncomienda(DataEstadosEncomienda est);
-	public void borrarEstadosEncomienda(DataEstadosEncomienda emp);
+	public void borrarEstadosEncomienda(String idEmpleado);
 }

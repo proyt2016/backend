@@ -10,6 +10,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import lcbs.interfaces.ReservaLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
+import lcbs.models.ReglaCobroEncomienda;
 import lcbs.models.Reserva;
 import lcbs.models.Viaje;
 import lcbs.shares.DataReserva;
@@ -30,12 +32,16 @@ public class ReservaSrv implements ReservaLocalApi {
         
     }
     
-    public Map<String,DataReserva> obtenerReservas(){
+    public Map<String,DataReserva> obtenerReservas(Integer pagina, Integer elementosPagina){
     	Map<String,DataReserva> reservas = new HashMap();
         //obtengo todas las Reservas de la bd
-        Query query = em.createQuery("SELECT r FROM Reserva r", Reserva.class);
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Reserva.class);
+    	criteria.add(Restrictions.eq("Eliminada", false));
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<Reserva> listRes = criteria.list();
         
-        List<Reserva> listRes = query.getResultList();
         listRes.stream().forEach((rec) -> {
         	reservas.put(rec.getId(), rec.getDatatype());
         });
@@ -66,7 +72,9 @@ public class ReservaSrv implements ReservaLocalApi {
     }
     
     public DataReserva getReserva(String id){
-        return this.obtenerReservas().get(id);
+    	Session session = (Session) em.getDelegate();
+    	Reserva realObj = (Reserva) session.get(Reserva.class, id);
+		return realObj.getDatatype();
     }
     
     public DataReserva crearReserva(DataReserva res){
@@ -76,7 +84,8 @@ public class ReservaSrv implements ReservaLocalApi {
         return realObj.getDatatype();
     }
     
-    public void darBajaReserva(DataReserva res){
+    public void darBajaReserva(String idReserva){
+    	DataReserva res = getReserva(idReserva);
         res.setEliminada(true);
         this.modificarReserva(res);
     }

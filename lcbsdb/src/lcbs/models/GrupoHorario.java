@@ -23,6 +23,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.IndexColumn;
 
 import java.util.List;
 
@@ -42,13 +43,16 @@ public class GrupoHorario implements Serializable{
     @CollectionTable(name = "dias", joinColumns = @JoinColumn(name = "GrupoHorarioId"))
     @Column(name = "diasSemana")
     @Enumerated(EnumType.STRING)
+    @IndexColumn(name="LIST_INDEX")
     private List<DiasSemana> diasSemana; //Lista de dias de la semana en los que funciona el grupo
     @ElementCollection
     @CollectionTable(name="DiasGruposHorarios", joinColumns=@JoinColumn(name="GrupoHorarioId"))
     @Column(name="DiasEspecificos")
     @Temporal(TemporalType.TIMESTAMP)
+    @IndexColumn(name="LIST_INDEX")
     private List<Date> diasEspecificos; //Lista de dias especificos en los que funciona este grupo, por ejemplo, semana de turismo
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.EAGER)
+    @IndexColumn(name="LIST_INDEX")
     private List<Horario> horarios;
     
  

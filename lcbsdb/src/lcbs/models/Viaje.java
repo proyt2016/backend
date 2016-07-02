@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.IndexColumn;
 
 @Entity
 @XmlRootElement
@@ -32,18 +33,21 @@ public class Viaje implements Serializable {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Recorrido recorrido;
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Horario horario;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaSalida;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(fetch=FetchType.EAGER)
+	@IndexColumn(name="LIST_INDEX")
 	private List<Empleado> empleados;
 	private Vehiculo coche;
 	@OneToMany
+	@IndexColumn(name="LIST_INDEX")
 	private List<Encomienda> encomiendas;
 	@OneToMany
+	@IndexColumn(name="LIST_INDEX")
 	private List<Reserva> reservas;
 
 	public Viaje() {

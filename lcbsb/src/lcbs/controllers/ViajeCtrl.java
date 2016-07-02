@@ -7,21 +7,8 @@ import java.util.Map;
 
 import javax.ejb.EJB;
 import interfaces.IViaje;
-import lcbs.interfaces.ParadaLocalApi;
-import lcbs.interfaces.PasajeLocalApi;
-import lcbs.interfaces.RecorridoLocalApi;
-import lcbs.interfaces.ReservaLocalApi;
-import lcbs.interfaces.TerminalLocalApi;
-import lcbs.interfaces.UsuarioLocalApi;
-import lcbs.interfaces.ViajeLocalApi;
-import lcbs.shares.DataEncomienda;
-import lcbs.shares.DataParada;
-import lcbs.shares.DataPasaje;
-import lcbs.shares.DataRecorrido;
-import lcbs.shares.DataReserva;
-import lcbs.shares.DataTerminal;
-import lcbs.shares.DataUsuario;
-import lcbs.shares.DataViaje;
+import lcbs.interfaces.*;
+import lcbs.shares.*;
 
 import javax.ejb.Stateless;
 
@@ -79,9 +66,10 @@ public class ViajeCtrl implements IViaje{
 	}
 
 	@Override
-	public void CambiarHorarioPasaje(String idPasaje, DataViaje viaje) {
+	public void CambiarHorarioPasaje(String idPasaje, String viaje) {
+		DataViaje viajeAAsignar = srvViaje.getViaje(viaje);
 		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje);
-		pasajeAModificar.setViaje(viaje);
+		pasajeAModificar.setViaje(viajeAAsignar);
 		srvPasaje.modificarPasaje(pasajeAModificar);
 		
 	}
@@ -103,8 +91,7 @@ public class ViajeCtrl implements IViaje{
 
 	@Override
 	public void CancelarReserva(String idReserva) {
-		DataReserva reservaACancelar = srvReserva.getReserva(idReserva);
-		srvReserva.darBajaReserva(reservaACancelar);
+		srvReserva.darBajaReserva(idReserva);
 	}
 
 	@Override
@@ -180,6 +167,21 @@ public class ViajeCtrl implements IViaje{
 		pasajeACrear.setVendedor(reserva.getEmpleado());
 		pasajeACrear.setViaje(reserva.getViaje());
 		return srvPasaje.crearPasaje(pasajeACrear);
+	}
+
+	@Override
+	public void crearViaje(DataViaje viaje) {
+		srvViaje.crearViaje(viaje);
+	}
+
+	@Override
+	public void editarViaje(DataViaje viaje) {
+		srvViaje.modificarViaje(viaje);
+	}
+
+	@Override
+	public void eliminarViaje(String idViaje) {
+		srvViaje.borrarViaje(idViaje);
 	}
 
 }

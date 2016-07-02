@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.IndexColumn;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,9 +31,11 @@ public class Usuario extends Persona implements Serializable{
     @OneToOne(cascade = CascadeType.ALL)
     private Cuponera cuponera;
     @OneToMany
+    @IndexColumn(name="LIST_INDEX")
     private List<Encomienda> encomiendas;
     @Embedded
     @ElementCollection
+    @IndexColumn(name="LIST_INDEX")
     private List<Notificacion> notificaciones;
 
  

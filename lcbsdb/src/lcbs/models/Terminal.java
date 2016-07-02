@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.IdClass;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.IndexColumn;
+
 
 @Entity
 @XmlRootElement
@@ -21,9 +23,11 @@ public class Terminal extends PuntoRecorrido implements Serializable{
     
     @Embedded
     @ElementCollection
+    @IndexColumn(name="LIST_INDEX")
     private List<Telefono> telefonosContacto;
     @Embedded
     @ElementCollection
+    @IndexColumn(name="LIST_INDEX")
     private List<Email> mailsDeContacto;
     private Boolean aceptaEncomiendas;
 

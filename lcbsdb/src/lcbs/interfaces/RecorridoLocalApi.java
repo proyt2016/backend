@@ -8,9 +8,9 @@ import lcbs.shares.DataRecorrido;
 
 @Local
 public interface RecorridoLocalApi {
-	public Map<String,DataRecorrido> obtenerRecorridos();
+	public Map<String,DataRecorrido> obtenerRecorridos(Integer pagina, Integer elementosPagina);
 	public void modificarRecorrido(DataRecorrido rec);
 	public DataRecorrido getRecorrido(String rec);
 	public DataRecorrido crearRecorrido(DataRecorrido rec);
-	public void darBajaRecorrido(DataRecorrido rec);
+	public void darBajaRecorrido(String idRecorrido);
 }

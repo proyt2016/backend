@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.IndexColumn;
 
 import java.util.List;
 
@@ -41,7 +42,8 @@ public class Vehiculo implements Serializable{
     private Date fechaAlta;
     private Integer cantidadAsientos;
     private Boolean conGuarda;
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.EAGER)
+    @IndexColumn(name="LIST_INDEX")
     private List<MantenimientoVehiculo> mantenimientos;
     private Boolean eliminado;
    

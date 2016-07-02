@@ -8,9 +8,9 @@ import lcbs.shares.DataGrupoHorario;
 
 @Local
 public interface GrupoHorarioLocalApi {
-	public Map<String,DataGrupoHorario> obtenerGrupoHorario();
+	public Map<String,DataGrupoHorario> obtenerGrupoHorario(Integer pagina, Integer elementosPagina);
 	public void modificarGrupoHorario(DataGrupoHorario grHor);
 	public DataGrupoHorario getGrupoHorario(String id);
 	public DataGrupoHorario crearGrupoHorario(DataGrupoHorario grp);
-	public void borrarGrupoHorario(DataGrupoHorario grp);
+	public void borrarGrupoHorario(String idGrp);
 }

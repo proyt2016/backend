@@ -8,9 +8,9 @@ import lcbs.shares.DataParada;
 
 @Local
 public interface ParadaLocalApi {
-	public Map<String,DataParada> obtenerParadas();
+	public Map<String,DataParada> obtenerParadas(Integer pagina, Integer elementosPagina);
 	public void modificarParada(DataParada prd);
 	public DataParada getParada(String id);
 	public DataParada crearParada(DataParada prd);
-	public void borrarParada(DataParada prd);
+	public void borrarParada(String idParada);
 }

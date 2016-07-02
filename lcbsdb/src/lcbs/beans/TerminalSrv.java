@@ -5,7 +5,13 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
 import lcbs.interfaces.TerminalLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
+import lcbs.models.Reserva;
 import lcbs.models.Terminal;
 import lcbs.shares.DataTerminal;
 
@@ -25,12 +31,16 @@ public class TerminalSrv implements TerminalLocalApi {
         
     }
     
-    public Map<String,DataTerminal> obtenerTerminals(){
+    public Map<String,DataTerminal> obtenerTerminals(Integer pagina, Integer elementosPagina){
     	Map<String,DataTerminal> terminales = new HashMap();
         //obtengo todas las terminales de la bd
-        Query query = em.createQuery("SELECT t FROM Terminal t", Terminal.class);
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Terminal.class);
+    	criteria.add(Restrictions.eq("Eliminado", false));
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<Terminal> listTer = criteria.list();
         
-        List<Terminal> listTer = query.getResultList();
         listTer.stream().forEach((ter) -> {
         	terminales.put(ter.getId(), ter.getDatatype());
         });
@@ -46,7 +56,9 @@ public class TerminalSrv implements TerminalLocalApi {
     }
     
     public DataTerminal getTerminal(String id){
-        return this.obtenerTerminals().get(id);
+    	Session session = (Session) em.getDelegate();
+    	Terminal realObj = (Terminal) session.get(Terminal.class, id);
+		return realObj.getDatatype();
     }
     
     public DataTerminal crearTerminal(DataTerminal ter){
@@ -56,7 +68,8 @@ public class TerminalSrv implements TerminalLocalApi {
         return realObj.getDatatype();
     }
     
-    public void darBajaTerminal(DataTerminal ter){
+    public void darBajaTerminal(String idTerminal){
+    	DataTerminal ter = getTerminal(idTerminal);
         ter.setEliminado(true);
         this.modificarTerminal(ter);
     }

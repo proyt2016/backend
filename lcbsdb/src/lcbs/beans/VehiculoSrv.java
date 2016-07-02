@@ -5,7 +5,14 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
 import lcbs.interfaces.VehiculoLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
+import lcbs.models.Terminal;
+import lcbs.models.Usuario;
 import lcbs.models.Vehiculo;
 import lcbs.shares.DataVehiculo;
 
@@ -25,12 +32,16 @@ public class VehiculoSrv implements VehiculoLocalApi {
         
     }
     
-    public Map<String,DataVehiculo> obtenerVehiculos(){
+    public Map<String,DataVehiculo> obtenerVehiculos(Integer pagina, Integer elementosPagina){
     	Map<String,DataVehiculo> vehiculos = new HashMap();
         //obtengo todos los vehiculos de la bd
-        Query query = em.createQuery("SELECT v FROM Vehiculo v", Vehiculo.class);
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Vehiculo.class);
+    	criteria.add(Restrictions.eq("Eliminado", false));
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<Vehiculo> listVeh = criteria.list();
         
-        List<Vehiculo> listVeh = query.getResultList();
         listVeh.stream().forEach((veh) -> {
         	vehiculos.put(veh.getId(), veh.getDatatype());
         });
@@ -46,7 +57,9 @@ public class VehiculoSrv implements VehiculoLocalApi {
     }
     
     public DataVehiculo getVehiculo(String id){
-        return this.obtenerVehiculos().get(id);
+    	Session session = (Session) em.getDelegate();
+    	Vehiculo realObj = (Vehiculo) session.get(Vehiculo.class, id);
+		return realObj.getDatatype();
     }
     
     public DataVehiculo crearVehiculo(DataVehiculo veh){
@@ -56,7 +69,8 @@ public class VehiculoSrv implements VehiculoLocalApi {
         return realObj.getDatatype();
     }
     
-    public void darBajaVehiculo(DataVehiculo veh){
+    public void darBajaVehiculo(String idVehiculo){
+    	DataVehiculo veh = getVehiculo(idVehiculo);
         veh.setEliminado(true);
         this.modificarVehiculo(veh);
     }

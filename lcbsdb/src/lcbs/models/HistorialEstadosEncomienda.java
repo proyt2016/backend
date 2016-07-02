@@ -9,6 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -28,7 +29,7 @@ public class HistorialEstadosEncomienda implements Serializable{
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private EstadosEncomienda estado;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;

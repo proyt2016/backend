@@ -5,7 +5,13 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+
 import lcbs.interfaces.GrupoHorarioLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
+import lcbs.models.Empleado;
+import lcbs.models.EstadosEncomienda;
 import lcbs.models.GrupoHorario;
 import lcbs.shares.DataGrupoHorario;
 
@@ -25,12 +31,16 @@ public class GrupoHorarioSrv implements GrupoHorarioLocalApi {
         
     }
     
-    public Map<String,DataGrupoHorario> obtenerGrupoHorario(){
+    public Map<String,DataGrupoHorario> obtenerGrupoHorario(Integer pagina, Integer elementosPagina){
     	Map<String,DataGrupoHorario> grupos = new HashMap();
         //obtengo todos los grupos de horarios de la bd
-        Query query = em.createQuery("SELECT g FROM GrupoHorario g", GrupoHorario.class);
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(GrupoHorario.class);
         
-        List<GrupoHorario> listGrupHor = query.getResultList();
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<GrupoHorario> listGrupHor = criteria.list();
+        
         listGrupHor.stream().forEach((grp) -> {
         	grupos.put(grp.getId(), grp.getDatatype());
         });
@@ -46,7 +56,9 @@ public class GrupoHorarioSrv implements GrupoHorarioLocalApi {
     }
     
     public DataGrupoHorario getGrupoHorario(String id){
-        return this.obtenerGrupoHorario().get(id);
+    	Session session = (Session) em.getDelegate();
+    	GrupoHorario realObj = (GrupoHorario) session.get(GrupoHorario.class, id);
+		return realObj.getDatatype();
     }
     
     public DataGrupoHorario crearGrupoHorario(DataGrupoHorario grp){
@@ -56,7 +68,8 @@ public class GrupoHorarioSrv implements GrupoHorarioLocalApi {
         return realObj.getDatatype();
     }
     
-    public void borrarGrupoHorario(DataGrupoHorario grp){
+    public void borrarGrupoHorario(String idGrp){
+    	DataGrupoHorario grp = getGrupoHorario(idGrp);
     	GrupoHorario realObj = new GrupoHorario(grp);
         em.remove(realObj);
     }

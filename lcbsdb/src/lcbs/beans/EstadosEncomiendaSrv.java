@@ -5,8 +5,14 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+
 import lcbs.interfaces.EstadosEncomiendaLocalApi;
 import lcbs.shares.DataEstadosEncomienda;
+import lcbs.models.ConfiguracionEmpresa;
+import lcbs.models.Cuponera;
+import lcbs.models.Empleado;
 import lcbs.models.EstadosEncomienda;
 
 import java.util.Map;
@@ -25,12 +31,16 @@ public class EstadosEncomiendaSrv implements EstadosEncomiendaLocalApi {
         
     }
     
-    public Map<String,DataEstadosEncomienda> obtenerEstadosEncomienda(){
+    public Map<String,DataEstadosEncomienda> obtenerEstadosEncomienda(Integer pagina, Integer elementosPagina){
     	Map<String,DataEstadosEncomienda> estados = new HashMap();
         //obtengo todas los estados de encomienda de la bd
-        Query query = em.createQuery("SELECT e FROM EstadosEncomienda e", EstadosEncomienda.class);
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(EstadosEncomienda.class);
         
-        List<EstadosEncomienda> listEstEnc = query.getResultList();
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<EstadosEncomienda> listEstEnc = criteria.list();
+        
         listEstEnc.stream().forEach((est) -> {
         	estados.put(est.getId(), est.getDatatype());
         });
@@ -46,7 +56,9 @@ public class EstadosEncomiendaSrv implements EstadosEncomiendaLocalApi {
     }
     
     public DataEstadosEncomienda getEstadosEncomienda(String id){
-        return this.obtenerEstadosEncomienda().get(id);
+    	Session session = (Session) em.getDelegate();
+    	EstadosEncomienda realObj = (EstadosEncomienda) session.get(EstadosEncomienda.class, id);
+		return realObj.getDatatype();
     }
     
     public DataEstadosEncomienda crearEstadosEncomienda(DataEstadosEncomienda est){
@@ -56,7 +68,8 @@ public class EstadosEncomiendaSrv implements EstadosEncomiendaLocalApi {
         return realObj.getDatatype();
     }
     
-    public void borrarEstadosEncomienda(DataEstadosEncomienda est){
+    public void borrarEstadosEncomienda(String idEst){
+    	DataEstadosEncomienda est = getEstadosEncomienda(idEst);
     	EstadosEncomienda realObj = new EstadosEncomienda(est);
         em.remove(realObj);
     }

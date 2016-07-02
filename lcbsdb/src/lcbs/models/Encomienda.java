@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.IndexColumn;
 
 
 
@@ -51,27 +52,29 @@ public class Encomienda implements Serializable{
     private String ciReceptor;
    
     private String direccionReceptor;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private ReglaCobroEncomienda reglaCobro;
     private float monto;
     private boolean pagaReceptor;
     @ManyToOne
     private Viaje viajeAsignado;
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.EAGER)
+    @IndexColumn(name="LIST_INDEX")
     private List<HistorialEstadosEncomienda> estados;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(fetch=FetchType.EAGER)
     private EstadosEncomienda estadoActual;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaIngreso;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEntrega;
     private boolean retiraEnSucursal;
+    private boolean eliminada;
 
  
 
     public Encomienda() {}
     
-    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc) {
+    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -90,6 +93,7 @@ public class Encomienda implements Serializable{
         this.fechaIngreso = fecIng;
         this.fechaEntrega = fecEn;
         this.retiraEnSucursal = retiraSuc;
+        this.eliminada = elim;
     }
     
     public Encomienda(DataEncomienda dt){
@@ -144,16 +148,15 @@ public class Encomienda implements Serializable{
     		if(this.getOrigen() instanceof Terminal){
     			result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
     		}else{
-    			if(this.getOrigen()!=null)
     			result.setOrigen(((Parada)this.getOrigen()).getDatatype());
-    			}
-    	if(this.getDestino() instanceof Terminal){
-    			if(this.getDestino()!=null)
-    				result.setDestino(((Terminal)this.getDestino()).getDatatype());
-    		}else{
-    			if(this.getDestino()!=null)
-    				result.setDestino(((Parada)this.getDestino()).getDatatype());
     		}
+    	if(this.getDestino()!=null){
+    		if(this.getDestino() instanceof Terminal){
+    			result.setDestino(((Terminal)this.getDestino()).getDatatype());
+    		}else{
+    			result.setDestino(((Parada)this.getDestino()).getDatatype());
+    		}
+    	}
     	if(this.getEmisor()!=null)
     		result.setEmisor(this.getEmisor().getDatatype());
     	result.setCiEmisor(this.getCiEmisor());
@@ -170,11 +173,11 @@ public class Encomienda implements Serializable{
     	if(this.getViajeAsignado()!=null)
     		result.setViajeAsignado(this.getViajeAsignado().getDatatype());
     	if(this.getEstados()!=null){
-    	List<DataHistorialEstadosEncomienda> temp = new ArrayList<DataHistorialEstadosEncomienda>();
-    	this.getEstados().stream().forEach((est) -> {
-    		temp.add(est.getDatatype());
-        });
-    	result.setEstados(temp);
+	    	List<DataHistorialEstadosEncomienda> temp = new ArrayList<DataHistorialEstadosEncomienda>();
+	    	this.getEstados().stream().forEach((est) -> {
+	    		temp.add(est.getDatatype());
+	        });
+	    	result.setEstados(temp);
     	}
     	if(this.getEstadoActual()!=null)
     		result.setEstadoActual(this.getEstadoActual().getDatatype());
@@ -326,5 +329,13 @@ public class Encomienda implements Serializable{
     
     public boolean getRetiraEnSucursal(){
         return this.retiraEnSucursal;
+    }
+    
+    public void setEliminada(boolean val){
+        this.eliminada = val;
+    }
+    
+    public boolean getEliminada(){
+        return this.eliminada;
     }
 }

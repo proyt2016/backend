@@ -3,6 +3,7 @@ package lcbs.controllers;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import interfaces.IUsuario;
@@ -46,7 +47,8 @@ public class UsuarioCtrl implements IUsuario{
 	}
 	
 	@Override
-	public void CargarSaldoCuponera(DataUsuario usuario, Float saldo){
+	public void CargarSaldoCuponera(String idUsuario, Float saldo){
+		DataUsuario usuario = srvUsuario.getUsuario(idUsuario);
 		DataCuponera cuponera = usuario.getCuponera();
 		cuponera.setSaldo(cuponera.getSaldo() + saldo);
 		srvCuponera.modificarCuponera(cuponera);
@@ -59,8 +61,8 @@ public class UsuarioCtrl implements IUsuario{
 	}
 
 	@Override
-	public void BajaUsuario(DataUsuario usuario) {
-		srvUsuario.darBajaUsuario(usuario);
+	public void BajaUsuario(String idUsuario) {
+		srvUsuario.darBajaUsuario(idUsuario);
 	}
 
 	@Override
@@ -75,8 +77,8 @@ public class UsuarioCtrl implements IUsuario{
 	}
 
 	@Override
-	public void BajaEmpleado(DataEmpleado empleado) {
-		srvEmpleado.darBajaEmpleado(empleado);
+	public void BajaEmpleado(String idEmpleado) {
+		srvEmpleado.darBajaEmpleado(idEmpleado);
 	}
 	
 	@Override
@@ -90,15 +92,47 @@ public class UsuarioCtrl implements IUsuario{
 	}
 	
 	@Override
-	public void EliminarPerfil(DataPerfil perfil){
-		srvPerfil.borrarPerfil(perfil);
+	public void EliminarPerfil(String idPerfil){
+		srvPerfil.borrarPerfil(idPerfil);
 	}
 	
 	@Override
-	public void AsignarPerfil(String idEmpleado, DataPerfil perfil){
+	public void AsignarPerfil(String idEmpleado, String perfil){
 		DataEmpleado empleado = srvEmpleado.getEmpleado(idEmpleado);
-		empleado.setPerfil(perfil);
+		DataPerfil perf = srvPerfil.getPerfil(perfil);
+		empleado.setPerfil(perf);
 		srvEmpleado.modificarEmpleado(empleado);
+	}
+
+	@Override
+	public boolean loginUsuario(String usuario, String clave) {
+		return srvUsuario.loginUsuario(usuario, clave);
+	}
+
+	@Override
+	public DataUsuario getUsuario(String idUsuario) {
+		return srvUsuario.getUsuario(idUsuario);
+	}
+
+	@Override
+	public boolean loginEmpleado(String usuario, String clave) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public DataEmpleado getEmpleado(String idEmpleado) {
+		return srvEmpleado.getEmpleado(idEmpleado);
+	}
+
+	@Override
+	public DataPerfil getPerfil(String idPerfil) {
+		return srvPerfil.getPerfil(idPerfil);
+	}
+
+	@Override
+	public Map<String, DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
+		return srvPerfil.obtenerPerfils(pagina, elementosPagina);
 	}
 	
 	

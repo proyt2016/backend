@@ -16,7 +16,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
@@ -27,17 +27,17 @@ import lcbs.api.service.ViajeRepo;
 
 @RequestScoped
 @Path("/viajes/")
-@Produces({ "application/json" })
 @Consumes({ "application/json" })
+@Produces({ "application/json" })
 public class ViajeApi {																														
 	
 	@EJB
 	ViajeRepo repo;
 	
 	@POST
-	@Path("/buscarviaje/")
-	public Map<String, DataViaje> BuscarViaje(DataViaje filtro){
-		return repo.BuscarViaje(filtro);
+	@Path("/buscarviaje/{pagina}/{elementosPagina}")
+	public Map<String, DataViaje> BuscarViaje(DataViaje filtro, @PathParam("pagina") final Integer pagina, @PathParam("elementosPagina") final Integer ElementosPagina){
+		return repo.BuscarViaje(filtro, pagina, ElementosPagina);
 	}
 	
 	@POST
@@ -48,7 +48,7 @@ public class ViajeApi {
 	
 	@POST
 	@Path("/cambiarhorariopasaje/{idPasaje}")
-	public void CambiarHorarioPasaje(@QueryParam("idPasaje") final String idPasaje, String viaje){
+	public void CambiarHorarioPasaje(@PathParam("idPasaje") final String idPasaje, String viaje){
 		repo.CambiarHorarioPasaje(idPasaje, viaje);
 	}
 	
@@ -60,7 +60,7 @@ public class ViajeApi {
 	
 	@POST
 	@Path("/transferirpasaje/{idPasaje}")
-	public void TransferirPasajeComprado(@QueryParam("idPasaje") final String idPasaje, String idUsuario){
+	public void TransferirPasajeComprado(@PathParam("idPasaje") final String idPasaje, String idUsuario){
 		repo.TransferirPasajeComprado(idPasaje, idUsuario);
 	}
 	
@@ -72,7 +72,7 @@ public class ViajeApi {
 	
 	@GET
 	@Path("/listarreservas/{idUsuario}")
-	public Map<String, DataReserva> ListarReservas(@QueryParam("idUsuario") final String idUsuario){
+	public Map<String, DataReserva> ListarReservas(@PathParam("idUsuario") final String idUsuario){
 		return repo.ListarReservas(idUsuario);
 	}
 	
@@ -90,8 +90,8 @@ public class ViajeApi {
 	
 	@POST
 	@Path("/altaterminal/")
-	public void AltaTerminal(DataTerminal terminal){
-		repo.AltaTerminal(terminal);
+	public DataTerminal AltaTerminal(DataTerminal terminal){
+		return repo.AltaTerminal(terminal);
 	}
 	
 	@POST
@@ -108,14 +108,21 @@ public class ViajeApi {
 	
 	@POST
 	@Path("/crearrecorrido/")
-	public void CrearRecorrido(DataRecorrido recorrido){
-		repo.CrearRecorrido(recorrido);
+	public DataRecorrido CrearRecorrido(DataRecorrido recorrido){
+		return repo.CrearRecorrido(recorrido);
 	}
 	
 	@POST
 	@Path("/editarrecorrido/")
-	public void EditarRecorrido(DataRecorrido recorrido){
+	public void EditarRecorrido(DataRecorridoConvertor pseudoRecorrido){
+		DataRecorrido recorrido = pseudoRecorrido.getRecorrido();
 		repo.EditarRecorrido(recorrido);
+	}
+	
+	@GET
+	@Path("/getrecorrido/{idRecorrido}")
+	public DataRecorrido obtenerRecorrido(@PathParam("idRecorrido") final String idRecorrido){
+		return repo.obtenerRecorrido(idRecorrido);
 	}
 	
 	@POST
@@ -126,13 +133,13 @@ public class ViajeApi {
 	
 	@GET
 	@Path("/getparada/{idParada}")
-	public DataParada obtenerParada(@QueryParam("idParada") final String IdParada){
+	public DataParada obtenerParada(@PathParam("idParada") final String IdParada){
 		return repo.obtenerParada(IdParada);
 	}
 	
 	@GET
 	@Path("/listarhistorialpasajes/{idUsuario}")
-	public Map<String, DataPasaje> obtenerHistorialPasajes(@QueryParam("idUsuario") final String idUsuario){
+	public Map<String, DataPasaje> obtenerHistorialPasajes(@PathParam("idUsuario") final String idUsuario){
 		return repo.obtenerHistorialPasajes(idUsuario);
 	}
 	
@@ -144,7 +151,7 @@ public class ViajeApi {
 	
 	@GET
 	@Path("/getterminal/{idTerminal}")
-	public DataTerminal obtenerTerminal(@QueryParam("idTerminal") final String IdTerminal){
+	public DataTerminal obtenerTerminal(@PathParam("idTerminal") final String IdTerminal){
 		return repo.obtenerTerminal(IdTerminal);
 	}
 	

@@ -108,14 +108,14 @@ public class UsuarioApi {
 	}
 	
 	@POST
-	@Path("/loginusuario/{idUsuario}")
-	public boolean loginUsuario(@PathParam("idUsuario") final String usuario, String clave) {
+	@Path("/loginusuario/{mailUsuario}")
+	public boolean loginUsuario(@PathParam("mailUsuario") final String usuario, String clave) {
 		return repo.loginUsuario(usuario, clave);
 	}
 
 	@GET
-	@Path("/getusuario/{mailUsuario}")
-	public DataUsuario getUsuario(@PathParam("mailUsuario") final String idUsuario){
+	@Path("/getusuario/{idUsuario}")
+	public DataUsuario getUsuario(@PathParam("idUsuario") final String idUsuario){
 		return repo.getUsuario(idUsuario);
 	}
 	

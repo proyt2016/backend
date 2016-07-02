@@ -32,8 +32,8 @@ public class ViajeRepo {
 	@EJB(lookup =  "java:app/lcbsb/ViajeCtrl!interfaces.IViaje")
 	IViaje ctrViaje;
 	
-	public Map<String, DataViaje> BuscarViaje(DataViaje filtro){
-		return ctrViaje.BuscarViaje(filtro);
+	public Map<String, DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina){
+		return ctrViaje.BuscarViaje(filtro, pagina, ElementosPagina);
 	}
 	
 	public DataPasaje ComprarPasaje(DataPasaje pasaje){
@@ -68,8 +68,8 @@ public class ViajeRepo {
 		return ctrViaje.AltaParadas(parada);
 	}
 	
-	public void AltaTerminal(DataTerminal terminal){
-		ctrViaje.AltaTerminal(terminal);
+	public DataTerminal AltaTerminal(DataTerminal terminal){
+		return ctrViaje.AltaTerminal(terminal);
 	}
 	
 	public void EditarParada(DataParada parada){
@@ -80,12 +80,16 @@ public class ViajeRepo {
 		ctrViaje.EditarTerminal(terminal);
 	}
 	
-	public void CrearRecorrido(DataRecorrido recorrido){
-		ctrViaje.CrearRecorrido(recorrido);
+	public DataRecorrido CrearRecorrido(DataRecorrido recorrido){
+		return ctrViaje.CrearRecorrido(recorrido);
 	}
 	
 	public void EditarRecorrido(DataRecorrido recorrido){
 		ctrViaje.EditarRecorrido(recorrido);
+	}
+	
+	public DataRecorrido obtenerRecorrido(String idRecorrido){
+		return ctrViaje.obtenerRecorrido(idRecorrido);
 	}
 	
 	public DataPasaje ComprarPasajeReservado(DataReserva reserva){

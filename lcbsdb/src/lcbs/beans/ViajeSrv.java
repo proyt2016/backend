@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -11,8 +12,10 @@ import javax.persistence.Query;
 
 import lcbs.interfaces.ViajeLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
+import lcbs.models.Encomienda;
 import lcbs.models.Vehiculo;
 import lcbs.models.Viaje;
+import lcbs.shares.DataEncomienda;
 import lcbs.shares.DataViaje;
 
 import java.util.Map;
@@ -74,9 +77,37 @@ public class ViajeSrv implements ViajeLocalApi {
     }
 
 	@Override
-	public Map<String, DataViaje> buscarViaje(DataViaje filtro) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, DataViaje> buscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina) {
+		Map<String, DataViaje> viajes = new HashMap();
+        Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Encomienda.class);
+    	if(filtro.getRecorrido() != null)
+    		criteria.add(Restrictions.eq("recorrido.id", filtro.getRecorrido().getId()));
+    	if(filtro.getHorario() != null)
+    		criteria.add(Restrictions.eq("horario.id", filtro.getHorario().getId()));
+    	if(filtro.getFechaSalida() != null)
+    		criteria.add(Restrictions.eq("fechaSalida", filtro.getFechaSalida()));
+    	//if(filtro.getEmpleados() != null)
+    	//	criteria.createCriteria("empleados").add(Restrictions.eq("id", filtro.getEmpleados().getId()));
+    	if(filtro.getCoche() != null)
+    		criteria.add(Restrictions.eq("coche", filtro.getCoche().getId()));
+    	//if(filtro.getEncomiendas() != null)
+    	//	criteria.createCriteria("encomiendas").add(Restrictions.eq("id", filtro.getEncomiendas().getId()));
+    	
+    	//Asi se obtiene el numero de resultados
+    	/*Criteria criteriaCount = criteria;
+    	criteriaCount.setProjection(Projections.rowCount());
+    	Long count = (Long) criteriaCount.uniqueResult();*/
+    	
+    	criteria.setFirstResult((pagina - 1) * ElementosPagina);
+    	criteria.setMaxResults(ElementosPagina);
+    	
+        List<Viaje> listViaje = criteria.list();
+        
+        listViaje.stream().forEach((via) -> {
+        	viajes.put(via.getId(), via.getDatatype());
+        });
+        return viajes;
 	}
     
     

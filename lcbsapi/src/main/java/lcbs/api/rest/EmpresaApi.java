@@ -32,7 +32,7 @@ import lcbs.controllers.EmpresaCtrl;
  *
  */
 @RequestScoped
-@Path("/encomiendas")
+@Path("/empresa")
 @Produces({ "application/json" })
 @Consumes({ "application/json" })
 public class EmpresaApi {

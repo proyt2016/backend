@@ -32,7 +32,7 @@ import lcbs.controllers.VehiculoCtrl;
  *
  */
 @RequestScoped
-@Path("/encomiendas")
+@Path("/vehiculos")
 @Produces({ "application/json" })
 @Consumes({ "application/json" })
 public class VehiculoApi {

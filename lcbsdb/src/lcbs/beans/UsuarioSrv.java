@@ -38,7 +38,7 @@ public class UsuarioSrv implements UsuarioLocalApi {
         //obtengo todos los usuarios de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Usuario.class);
-    	criteria.add(Restrictions.eq("Eliminado", false));
+    	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
         List<Usuario> listUsu = criteria.list();
@@ -77,6 +77,7 @@ public class UsuarioSrv implements UsuarioLocalApi {
     
     public DataUsuario crearUsuario(DataUsuario usu){
     	Usuario realObj = new Usuario(usu);
+    	realObj.setEliminado(false);
         //guardo el usuario en bd
         em.persist(realObj);
         return realObj.getDatatype();

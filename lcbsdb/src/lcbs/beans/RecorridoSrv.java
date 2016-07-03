@@ -37,7 +37,7 @@ public class RecorridoSrv implements RecorridoLocalApi {
         //obtengo todos los Recorridos de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Recorrido.class);
-    	criteria.add(Restrictions.eq("Eliminado", false));
+    	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
         List<Recorrido> listRec = criteria.list();
@@ -64,6 +64,7 @@ public class RecorridoSrv implements RecorridoLocalApi {
     
     public DataRecorrido crearRecorrido(DataRecorrido rec){
     	Recorrido realObj = new Recorrido(rec);
+    	realObj.setEliminado(false);
         //guardo el Recorrido en bd
         em.persist(realObj);
         return realObj.getDatatype();

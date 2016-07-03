@@ -37,7 +37,7 @@ public class VehiculoSrv implements VehiculoLocalApi {
         //obtengo todos los vehiculos de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Vehiculo.class);
-    	criteria.add(Restrictions.eq("Eliminado", false));
+    	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
         List<Vehiculo> listVeh = criteria.list();
@@ -64,6 +64,7 @@ public class VehiculoSrv implements VehiculoLocalApi {
     
     public DataVehiculo crearVehiculo(DataVehiculo veh){
     	Vehiculo realObj = new Vehiculo(veh);
+    	realObj.setEliminado(false);
         //guardo el vehiculo en bd
         em.persist(realObj);
         return realObj.getDatatype();

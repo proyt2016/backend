@@ -12,5 +12,5 @@ public interface IVehiculo {
 	public void editarVehiculo(DataVehiculo vehiculo);
 	public void bajaVehiculo(String idVehiculo);
 	public List<DataMantenimientoVehiculo> mantenimientosPorVehiculo(String idVehiculo);
-
+	public DataVehiculo obtenerVehiculo(String idVehiculo);
 }

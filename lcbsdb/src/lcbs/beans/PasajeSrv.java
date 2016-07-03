@@ -37,7 +37,7 @@ public class PasajeSrv implements PasajeLocalApi {
         //obtengo todos los Pasajes de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Pasaje.class);
-    	criteria.add(Restrictions.eq("Eliminado", false));
+    	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
         List<Pasaje> listPsj = criteria.list();
@@ -64,6 +64,7 @@ public class PasajeSrv implements PasajeLocalApi {
     
     public DataPasaje crearPasaje(DataPasaje psj){
     	Pasaje realObj = new Pasaje(psj);
+    	realObj.setEliminado(false);
         //guardo el Pasaje en bd
         em.persist(realObj);
         return realObj.getDatatype();

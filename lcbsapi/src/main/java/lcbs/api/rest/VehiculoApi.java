@@ -41,18 +41,21 @@ public class VehiculoApi {
 	@EJB
 	VehiculoRepo repo;
 	
+	//tested
 	@POST
 	@Path("/altavehiculo/")
 	public DataVehiculo AltaVehiculo(DataVehiculo dataVehiculo){
 		return repo.altaVehiculo(dataVehiculo);
 	}
 	
+	//tested
 	@POST
 	@Path("/editarvehiculo/")
 	public void editarVehiculo(DataVehiculo vehiculo){
 		 repo.editarVehiculo(vehiculo);
 	}
 	
+	//tested
 	@POST
 	@Path("/bajavehiculo/")
 	public void bajaVehiculo(String idVehiculo){
@@ -66,14 +69,11 @@ public class VehiculoApi {
 	}
 	
 	
-	
-	
-		
-	
-	
-	
-	
-	
+	@GET
+	@Path("/getvehiculo/{idVehiculo}")
+	public DataVehiculo getVechiulo(@PathParam("idVehiculo")final String idVehiculo){
+		return repo.obtenerVehiculo(idVehiculo);
+	}
 	
 
 }

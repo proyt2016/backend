@@ -48,4 +48,8 @@ public class VehiculoRepo {
 	public List<DataMantenimientoVehiculo> mantenimientosPorVehiculo(String idVehiculo){
 		return ctrVehiculo.mantenimientosPorVehiculo(idVehiculo);
 	}
+	
+	public DataVehiculo obtenerVehiculo(String idVehiculo){
+		return ctrVehiculo.obtenerVehiculo(idVehiculo);
+	}
 }

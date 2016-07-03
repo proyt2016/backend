@@ -21,6 +21,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import org.json.JSONObject;
+
 import javax.ws.rs.core.UriBuilder;
 
 import lcbs.shares.*;
@@ -61,9 +64,10 @@ public class EncomiendaApi {
 	}
 	
 	@POST
-	@Path("/asignarencomiendavehiculo/{IdEncomienda}/{idViaje}")
-	public void AsignarEncomiendaVehiculo(@PathParam("IdEncomienda")final String IdEncomienda,@PathParam("idViaje")final String idViaje){
-		repo.AsignarEncomiendasVehiculo(IdEncomienda, idViaje);
+	@Path("/asignarencomiendavehiculo/")
+	public void AsignarEncomiendaVehiculo(String data) {
+		JSONObject obj = new JSONObject(data);
+		repo.AsignarEncomiendasVehiculo(obj.getString("IdEncomienda"), obj.getString("idViaje"));
 	}
 	
 		

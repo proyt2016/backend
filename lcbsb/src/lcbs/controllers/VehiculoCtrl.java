@@ -44,5 +44,9 @@ public class VehiculoCtrl implements IVehiculo{
 		return vehiculo.getMantenimientos();
 	}
 	
+	@Override
+	public DataVehiculo obtenerVehiculo(String idVehiculo){
+		return srvVehiculo.getVehiculo(idVehiculo);
+	}
 	
 }

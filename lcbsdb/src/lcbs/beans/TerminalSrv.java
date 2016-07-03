@@ -36,7 +36,7 @@ public class TerminalSrv implements TerminalLocalApi {
         //obtengo todas las terminales de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Terminal.class);
-    	criteria.add(Restrictions.eq("Eliminado", false));
+    	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
         List<Terminal> listTer = criteria.list();
@@ -63,6 +63,7 @@ public class TerminalSrv implements TerminalLocalApi {
     
     public DataTerminal crearTerminal(DataTerminal ter){
     	Terminal realObj = new Terminal(ter);
+    	realObj.setEliminado(false);
         //guardo la Terminal en bd
         em.persist(realObj);
         return realObj.getDatatype();

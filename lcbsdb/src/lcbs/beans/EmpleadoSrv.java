@@ -36,7 +36,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
         //obtengo todos los empleados de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Empleado.class);
-    	criteria.add(Restrictions.eq("Eliminado", false));
+    	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
         List<Empleado> listEmp = criteria.list();
@@ -63,6 +63,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
     
     public DataEmpleado crearEmpleado(DataEmpleado emp){
     	Empleado realObj = new Empleado(emp);
+    	realObj.setEliminado(false);
         //guardo al empleado en bd
         em.persist(realObj);
         return realObj.getDatatype();

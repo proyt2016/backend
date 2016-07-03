@@ -76,9 +76,10 @@ public class UsuarioApi {
 	}
 	
 	@POST
-	@Path("/cargarcuponera/{idUsuario}")
-	public void CargarSaldoCuponera(@PathParam("idUsuario") final String idUsuario, Float saldo) throws Exception{
-		repo.CargarSaldoCuponera(idUsuario, saldo);
+	@Path("/cargarcuponera/")
+	public void CargarSaldoCuponera(String data) {
+		JSONObject obj = new JSONObject(data);
+		repo.CargarSaldoCuponera(obj.getString("idUsuario"), Float.parseFloat(obj.getString("saldo")));
 	}
 	
 	@POST
@@ -106,9 +107,10 @@ public class UsuarioApi {
 	}
 	
 	@POST
-	@Path("/asignarperfil/{idEmpleado}")
-	public void AsignarPerfil(@PathParam("idEmpleado") final String idEmpleado, String perfil){
-		repo.AsignarPerfil(idEmpleado, perfil);
+	@Path("/asignarperfil/")
+	public void AsignarPerfil(String data) {
+		JSONObject obj = new JSONObject(data);
+		repo.AsignarPerfil(obj.getString("idEmpleado"), obj.getString("perfil"));
 	}
 	
 	@POST
@@ -125,9 +127,10 @@ public class UsuarioApi {
 	}
 	
 	@POST
-	@Path("/loginempleado/{idEmpleado}")
-	public boolean loginEmpleado(@PathParam("idEmpleado") final String usuario, String clave) {
-		return repo.loginEmpleado(usuario, clave);
+	@Path("/loginempleado/")
+	public boolean loginEmpleado(String data) {
+		JSONObject obj = new JSONObject(data);
+		return repo.loginEmpleado(obj.getString("usuario"), obj.getString("clave"));
 	}
 	
 	@GET

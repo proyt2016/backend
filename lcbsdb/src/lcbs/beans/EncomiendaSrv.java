@@ -65,6 +65,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     
     public DataEncomienda crearEncomienda(DataEncomienda enc){
     	Encomienda realObj = new Encomienda(enc);
+    	realObj.setEliminada(false);
         //guardo la encomienda en bd
         em.persist(realObj);
         return realObj.getDatatype();

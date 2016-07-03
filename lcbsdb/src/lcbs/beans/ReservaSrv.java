@@ -37,7 +37,7 @@ public class ReservaSrv implements ReservaLocalApi {
         //obtengo todas las Reservas de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Reserva.class);
-    	criteria.add(Restrictions.eq("Eliminada", false));
+    	criteria.add(Restrictions.eq("eliminada", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
         List<Reserva> listRes = criteria.list();
@@ -79,6 +79,7 @@ public class ReservaSrv implements ReservaLocalApi {
     
     public DataReserva crearReserva(DataReserva res){
     	Reserva realObj = new Reserva(res);
+    	realObj.setEliminada(false);
         //guardo la reserva en bd
         em.persist(realObj);
         return realObj.getDatatype();

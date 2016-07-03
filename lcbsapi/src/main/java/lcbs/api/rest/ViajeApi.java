@@ -19,6 +19,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import org.json.JSONObject;
+
 import javax.ws.rs.core.UriBuilder;
 
 import lcbs.shares.*;
@@ -47,9 +50,10 @@ public class ViajeApi {
 	}
 	
 	@POST
-	@Path("/cambiarhorariopasaje/{idPasaje}")
-	public void CambiarHorarioPasaje(@PathParam("idPasaje") final String idPasaje, String viaje){
-		repo.CambiarHorarioPasaje(idPasaje, viaje);
+	@Path("/cambiarhorariopasaje/")
+	public void CambiarHorarioPasaje(String data) {
+		JSONObject obj = new JSONObject(data);
+		repo.CambiarHorarioPasaje(obj.getString("idPasaje"), obj.getString("idViaje"));
 	}
 	
 	@POST
@@ -59,9 +63,10 @@ public class ViajeApi {
 	}
 	
 	@POST
-	@Path("/transferirpasaje/{idPasaje}")
-	public void TransferirPasajeComprado(@PathParam("idPasaje") final String idPasaje, String idUsuario){
-		repo.TransferirPasajeComprado(idPasaje, idUsuario);
+	@Path("/transferirpasaje/")
+	public void TransferirPasajeComprado(String data) {
+		JSONObject obj = new JSONObject(data);
+		repo.TransferirPasajeComprado(obj.getString("idPasaje"), obj.getString("idUsuario"));
 	}
 	
 	@POST
@@ -71,9 +76,10 @@ public class ViajeApi {
 	}
 	
 	@GET
-	@Path("/listarreservas/{idUsuario}")
-	public Map<String, DataReserva> ListarReservas(@PathParam("idUsuario") final String idUsuario){
-		return repo.ListarReservas(idUsuario);
+	@Path("/listarreservas/")
+	public Map<String, DataReserva> ListarReservas(String data) {
+		JSONObject obj = new JSONObject(data);
+		return repo.ListarReservas(obj.getString("idUsuario"));
 	}
 	
 	@POST
@@ -82,36 +88,42 @@ public class ViajeApi {
 		repo.ProcesarPasajes(idPasaje);
 	}
 	
+	//tested
 	@POST
 	@Path("/altaparada/")
 	public DataParada AltaParadas(DataParada parada){
 		return repo.AltaParadas(parada);
 	}
 	
+	//tested
 	@POST
 	@Path("/altaterminal/")
 	public DataTerminal AltaTerminal(DataTerminal terminal){
 		return repo.AltaTerminal(terminal);
 	}
 	
+	//tested
 	@POST
 	@Path("/editarparada/")
 	public void EditarParada(DataParada parada){
 		repo.EditarParada(parada);
 	}
 	
+	//test
 	@POST
 	@Path("/editarterminal/")
 	public void EditarTerminal(DataTerminal terminal){
 		repo.EditarTerminal(terminal);
 	}
 	
+	//tested
 	@POST
 	@Path("/crearrecorrido/")
 	public DataRecorrido CrearRecorrido(DataRecorrido recorrido){
 		return repo.CrearRecorrido(recorrido);
 	}
 	
+	//tested
 	@POST
 	@Path("/editarrecorrido/")
 	public void EditarRecorrido(DataRecorridoConvertor pseudoRecorrido){
@@ -119,6 +131,7 @@ public class ViajeApi {
 		repo.EditarRecorrido(recorrido);
 	}
 	
+	//tested
 	@GET
 	@Path("/getrecorrido/{idRecorrido}")
 	public DataRecorrido obtenerRecorrido(@PathParam("idRecorrido") final String idRecorrido){
@@ -131,6 +144,7 @@ public class ViajeApi {
 		return repo.ComprarPasajeReservado(reserva);
 	}
 	
+	//tested
 	@GET
 	@Path("/getparada/{idParada}")
 	public DataParada obtenerParada(@PathParam("idParada") final String IdParada){
@@ -149,6 +163,7 @@ public class ViajeApi {
 		return repo.verDetallePasaje(idPasaje);
 	}
 	
+	//tested
 	@GET
 	@Path("/getterminal/{idTerminal}")
 	public DataTerminal obtenerTerminal(@PathParam("idTerminal") final String IdTerminal){

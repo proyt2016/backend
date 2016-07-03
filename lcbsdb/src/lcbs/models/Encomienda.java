@@ -141,7 +141,7 @@ public class Encomienda implements Serializable{
     	this.setRetiraEnSucursal(dt.getRetiraEnSucursal());	
     }
     
-    public DataEncomienda getDatatype(){
+    public DataEncomienda getDatatype(Boolean conHijos){
     	DataEncomienda result = new DataEncomienda();
     	result.setId(this.getId());
     	if(this.getOrigen()!=null)
@@ -158,10 +158,10 @@ public class Encomienda implements Serializable{
     		}
     	}
     	if(this.getEmisor()!=null)
-    		result.setEmisor(this.getEmisor().getDatatype());
+    		result.setEmisor(this.getEmisor().getDatatype(false));
     	result.setCiEmisor(this.getCiEmisor());
     	if(this.getReceptor()!=null)
-    		result.setReceptor(this.getReceptor().getDatatype());
+    		result.setReceptor(this.getReceptor().getDatatype(false));
     	result.setCiReceptor(this.getCiReceptor());
     	if(this.getTelReceptor()!=null)
     		result.setTelReceptor(this.getTelReceptor().getDatatype());
@@ -171,8 +171,8 @@ public class Encomienda implements Serializable{
     	result.setMonto(this.getMonto());
     	result.setPagaReceptor(this.getPagaReceptor());
     	if(this.getViajeAsignado()!=null)
-    		result.setViajeAsignado(this.getViajeAsignado().getDatatype());
-    	if(this.getEstados()!=null){
+    		result.setViajeAsignado(this.getViajeAsignado().getDatatype(false));
+    	if(this.getEstados()!=null && conHijos){
 	    	List<DataHistorialEstadosEncomienda> temp = new ArrayList<DataHistorialEstadosEncomienda>();
 	    	this.getEstados().stream().forEach((est) -> {
 	    		temp.add(est.getDatatype());

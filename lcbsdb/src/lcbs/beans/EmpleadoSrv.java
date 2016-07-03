@@ -42,7 +42,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
         List<Empleado> listEmp = criteria.list();
         
         listEmp.stream().forEach((emp) -> {
-        	empleados.put(emp.getId(), emp.getDatatype());
+        	empleados.put(emp.getId(), emp.getDatatype(true));
         });
         return empleados;
     }
@@ -58,7 +58,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
     public DataEmpleado getEmpleado(String id){
     	Session session = (Session) em.getDelegate();
     	Empleado realObj = (Empleado) session.get(Empleado.class, id);
-		return realObj.getDatatype();
+		return realObj.getDatatype(true);
     }
     
     public DataEmpleado crearEmpleado(DataEmpleado emp){
@@ -66,7 +66,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
     	realObj.setEliminado(false);
         //guardo al empleado en bd
         em.persist(realObj);
-        return realObj.getDatatype();
+        return realObj.getDatatype(true);
     }
     
     public void darBajaEmpleado(String idEmpleado){

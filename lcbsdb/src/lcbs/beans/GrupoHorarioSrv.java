@@ -42,7 +42,7 @@ public class GrupoHorarioSrv implements GrupoHorarioLocalApi {
         List<GrupoHorario> listGrupHor = criteria.list();
         
         listGrupHor.stream().forEach((grp) -> {
-        	grupos.put(grp.getId(), grp.getDatatype());
+        	grupos.put(grp.getId(), grp.getDatatype(true));
         });
         return grupos;
     }
@@ -58,14 +58,14 @@ public class GrupoHorarioSrv implements GrupoHorarioLocalApi {
     public DataGrupoHorario getGrupoHorario(String id){
     	Session session = (Session) em.getDelegate();
     	GrupoHorario realObj = (GrupoHorario) session.get(GrupoHorario.class, id);
-		return realObj.getDatatype();
+		return realObj.getDatatype(true);
     }
     
     public DataGrupoHorario crearGrupoHorario(DataGrupoHorario grp){
     	GrupoHorario realObj = new GrupoHorario(grp);
         //guardo el grupo de horarios en bd
         em.persist(grp);
-        return realObj.getDatatype();
+        return realObj.getDatatype(true);
     }
     
     public void borrarGrupoHorario(String idGrp){

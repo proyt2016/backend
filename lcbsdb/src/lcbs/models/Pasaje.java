@@ -105,7 +105,7 @@ public class Pasaje implements Serializable{
     	DataPasaje result = new DataPasaje();
     	result.setId(this.getId());
     	if(this.getViaje()!=null)
-    		result.setViaje(this.getViaje().getDatatype());
+    		result.setViaje(this.getViaje().getDatatype(false));
     	if(this.getPrecio()!=null)
     		result.setPrecio(this.getPrecio().getDatatype());
     	if(this.getOrigen() instanceof Terminal){
@@ -124,10 +124,10 @@ public class Pasaje implements Serializable{
     	}
     	result.setFechaCompra(this.getFechaCompra());
     	if(this.getComprador()!=null)
-    		result.setComprador(this.getComprador().getDatatype());
+    		result.setComprador(this.getComprador().getDatatype(false));
     	result.setCiPersona(this.getCiPersona());
     	if(this.getVendedor()!=null)
-    		result.setVendedor(this.getVendedor().getDatatype());
+    		result.setVendedor(this.getVendedor().getDatatype(false));
     	result.setUsado(this.getUsado());
     	result.setPago(this.getPago());
     	result.setEliminado(this.getEliminado());

@@ -83,33 +83,35 @@ public class Recorrido implements Serializable{
     	this.setEliminado(dt.getEliminado());
     }
     
-    public DataRecorrido getDatatype(){
+    public DataRecorrido getDatatype(Boolean conHijos){
     	DataRecorrido result = new DataRecorrido();
     	result.setId(this.getId());
     	result.setNombre(this.getNombre());
-    	if(this.getPuntosDeRecorrido()!=null){
-    	List<DataPuntoRecorrido> auxPr = new ArrayList<DataPuntoRecorrido>();
-    	this.getPuntosDeRecorrido().stream().forEach((pr) -> {
-    		if(pr instanceof Terminal){
-    			auxPr.add(((Terminal)pr).getDatatype());
-        	}else{
-        		auxPr.add(((Parada)pr).getDatatype());
-        	}
-        });
-    	result.setPuntosDeRecorrido(auxPr);
+    	if(this.getPuntosDeRecorrido()!=null && conHijos){
+	    	List<DataPuntoRecorrido> auxPr = new ArrayList<DataPuntoRecorrido>();
+	    	this.getPuntosDeRecorrido().stream().forEach((pr) -> {
+	    		if(pr instanceof Terminal){
+	    			auxPr.add(((Terminal)pr).getDatatype());
+	        	}else{
+	        		auxPr.add(((Parada)pr).getDatatype());
+	        	}
+	        });
+	    	result.setPuntosDeRecorrido(auxPr);
     	}
-    	if(this.getHorarios()!=null){
-    	List<DataGrupoHorario> auxHr = new ArrayList<DataGrupoHorario>();
-    	this.getHorarios().stream().forEach((hr) -> {
-    		auxHr.add(hr.getDatatype());
-        });
-    	result.setHorarios(auxHr);}
-    	if(this.getPrecios()!=null){
-    	List<DataPrecio> aux = new ArrayList<DataPrecio>();
-    	this.getPrecios().stream().forEach((pr) -> {
-    		aux.add(pr.getDatatype());
-        });
-    	result.setPrecios(aux);}
+    	if(this.getHorarios()!=null && conHijos){
+	    	List<DataGrupoHorario> auxHr = new ArrayList<DataGrupoHorario>();
+	    	this.getHorarios().stream().forEach((hr) -> {
+	    		auxHr.add(hr.getDatatype(false));
+	        });
+	    	result.setHorarios(auxHr);
+    	}
+    	if(this.getPrecios()!=null && conHijos){
+	    	List<DataPrecio> aux = new ArrayList<DataPrecio>();
+	    	this.getPrecios().stream().forEach((pr) -> {
+	    		aux.add(pr.getDatatype());
+	        });
+	    	result.setPrecios(aux);
+    	}
     	result.setEliminado(this.getEliminado());
     	return result;
     }

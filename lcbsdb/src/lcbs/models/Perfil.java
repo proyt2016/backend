@@ -76,7 +76,7 @@ public class Perfil implements Serializable{
     	}
     }
     
-    public DataPerfil getDatatype(){
+    public DataPerfil getDatatype(Boolean conHijos){
     	DataPerfil result = new DataPerfil();
     	result.setId(this.getId());
     	result.setModulo1(this.getModulo1());
@@ -87,10 +87,10 @@ public class Perfil implements Serializable{
     	result.setModulo6(this.getModulo6());
     	result.setModulo7(this.getModulo7());
     	result.setModulo8(this.getModulo8());
-    	if(this.getEmpleados()!=null){
+    	if(this.getEmpleados()!=null && conHijos){
     	List<DataEmpleado> aux = new ArrayList<DataEmpleado>();
     	this.getEmpleados().stream().forEach((emp) -> {
-    		aux.add(emp.getDatatype());
+    		aux.add(emp.getDatatype(false));
         });
     	result.setEmpleados(aux);}
     	return result;

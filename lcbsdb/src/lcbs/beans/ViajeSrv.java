@@ -45,7 +45,7 @@ public class ViajeSrv implements ViajeLocalApi {
         List<Viaje> listTer = criteria.list();
         
         listTer.stream().forEach((via) -> {
-        	Viajes.put(via.getId(), via.getDatatype());
+        	Viajes.put(via.getId(), via.getDatatype(true));
         });
         return Viajes;
     }
@@ -61,14 +61,14 @@ public class ViajeSrv implements ViajeLocalApi {
     public DataViaje getViaje(String id){
     	Session session = (Session) em.getDelegate();
     	Viaje realObj = (Viaje) session.get(Viaje.class, id);
-		return realObj.getDatatype();
+		return realObj.getDatatype(true);
     }
     
     public DataViaje crearViaje(DataViaje via){
     	Viaje realObj = new Viaje(via);
         //guardo el viaje en bd
         em.persist(realObj);
-        return realObj.getDatatype();
+        return realObj.getDatatype(true);
     }
     
     public void borrarViaje(String idViaje){
@@ -105,7 +105,7 @@ public class ViajeSrv implements ViajeLocalApi {
         List<Viaje> listViaje = criteria.list();
         
         listViaje.stream().forEach((via) -> {
-        	viajes.put(via.getId(), via.getDatatype());
+        	viajes.put(via.getId(), via.getDatatype(true));
         });
         return viajes;
 	}

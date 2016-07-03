@@ -138,6 +138,12 @@ public class UsuarioApi {
 	public DataEmpleado getEmpleado(@PathParam("idEmpleado") final String idEmpleado) {
 		return repo.getEmpleado(idEmpleado);
 	}
+	
+	@GET
+	@Path("/listarempleados/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public Map<String, DataEmpleado> listarEmpleados(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
+		return repo.listarEmpleados(pagina, elementosPagina);
+	}
 
 	@GET
 	@Path("/getperfil/{idPerfil}")

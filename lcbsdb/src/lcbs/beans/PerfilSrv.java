@@ -40,7 +40,7 @@ public class PerfilSrv implements PerfilLocalApi {
     	criteria.setMaxResults(elementosPagina);
     	List<Perfil> listPds = criteria.list();
         listPds.stream().forEach((prf) -> {
-        	Perfils.put(prf.getId(), prf.getDatatype());
+        	Perfils.put(prf.getId(), prf.getDatatype(true));
         });
         return Perfils;
     }
@@ -56,14 +56,14 @@ public class PerfilSrv implements PerfilLocalApi {
     public DataPerfil getPerfil(String id){
     	Session session = (Session) em.getDelegate();
 		Perfil realObj = (Perfil) session.get(Perfil.class, id);
-		return realObj.getDatatype();
+		return realObj.getDatatype(true);
     }
     
     public DataPerfil crearPerfil(DataPerfil prf){
     	Perfil realObj = new Perfil(prf);
         //guardo la Perfil en bd
         em.persist(realObj);
-        return realObj.getDatatype();
+        return realObj.getDatatype(true);
     }
     
     public void borrarPerfil(String idPerfil){

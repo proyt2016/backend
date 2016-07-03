@@ -44,7 +44,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         List<Encomienda> listEnc = criteria.list();
         
         listEnc.stream().forEach((enc) -> {
-        	encomiendas.put(enc.getId(), enc.getDatatype());
+        	encomiendas.put(enc.getId(), enc.getDatatype(true));
         });
         return encomiendas;
     }
@@ -60,7 +60,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     public DataEncomienda getEncomienda(String id){
 		Session session = (Session) em.getDelegate();
 		Encomienda realObj = (Encomienda) session.get(Encomienda.class, id);
-		return realObj.getDatatype();
+		return realObj.getDatatype(true);
     }
     
     public DataEncomienda crearEncomienda(DataEncomienda enc){
@@ -68,7 +68,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     	realObj.setEliminada(false);
         //guardo la encomienda en bd
         em.persist(realObj);
-        return realObj.getDatatype();
+        return realObj.getDatatype(true);
     }
     
     public void darBajaEncomienda(String idEncomienda){
@@ -112,7 +112,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         List<Encomienda> listEnc = criteria.list();
         
         listEnc.stream().forEach((enc) -> {
-        	encomiendas.put(enc.getId(), enc.getDatatype());
+        	encomiendas.put(enc.getId(), enc.getDatatype(true));
         });
         return encomiendas;
     }

@@ -140,6 +140,15 @@ public class ViajeCtrl implements IViaje{
 		return srvTerminal.getTerminal(IdTerminal);
 		
 	}
+	
+	@Override
+	public List<DataTerminal> getTerminales(int pagina, int elementos) {
+		 List<DataTerminal> listaTerminales = new ArrayList(srvTerminal.obtenerTerminals(pagina, elementos).values());
+		return listaTerminales;
+		
+	}
+	
+	
 
 	@Override
 	public DataRecorrido CrearRecorrido(DataRecorrido recorrido) {

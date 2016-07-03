@@ -33,7 +33,7 @@ public class DataRecorridoConvertor{
     	result.setId(this.getId());
     	result.setNombre(this.getNombre());
     	result.setPrecios(this.getPrecios());
-    	List<DataPuntoRecorrido> puntos = new ArrayList<DataPuntoRecorrido>();
+    	final List<DataPuntoRecorrido> puntos = new ArrayList<DataPuntoRecorrido>();
     	if(this.getPuntosDeRecorrido() != null){
     		this.getPuntosDeRecorrido().stream().forEach((pr) -> {
         		if(pr.getTipo().equals("Parada")){

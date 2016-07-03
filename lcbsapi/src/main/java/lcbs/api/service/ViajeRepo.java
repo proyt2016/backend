@@ -16,6 +16,7 @@
  */
 package lcbs.api.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
@@ -122,5 +123,8 @@ public class ViajeRepo {
 	
 	public void eliminarViaje(String idViaje){
 		ctrViaje.eliminarViaje(idViaje);
+	}
+	public List<DataTerminal> getTerminales(int pagina, int elementos){
+		return ctrViaje.getTerminales(pagina, elementos);
 	}
 }

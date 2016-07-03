@@ -53,7 +53,7 @@ public class Viaje implements Serializable {
 	public Viaje() {
 	}
 
-	public Viaje(String id, Recorrido rec, Horario hor, Date fecSalida, List<Empleado> emp, Vehiculo coche, List<Encomienda> enc) {
+	public Viaje(String id, Recorrido rec, Horario hor, Date fecSalida, List<Empleado> emp, Vehiculo coche, List<Encomienda> enc, List<Reserva> res) {
 		this.id = id;
 		this.recorrido = rec;
 		this.horario = hor;
@@ -61,6 +61,7 @@ public class Viaje implements Serializable {
 		this.empleados = emp;
 		this.coche = coche;
 		this.encomiendas = enc;
+		this.reservas = res;
 	}
 	
 	public Viaje(DataViaje dt){
@@ -89,30 +90,46 @@ public class Viaje implements Serializable {
 	        });
 	    	this.setEncomiendas(auxEnc);
 		}
+		if(dt.getReservas() != null){
+			List<Reserva> auxRes = new ArrayList<Reserva>();
+	    	dt.getReservas().stream().forEach((res) -> {
+	    		auxRes.add(new Reserva(res));
+	        });
+	    	this.setReservas(auxRes);
+		}
 	}
 	
-	public DataViaje getDatatype(){
+	public DataViaje getDatatype(Boolean conHijos){
 		DataViaje result = new DataViaje();
 		result.setId(this.getId());
 		if(this.getRecorrido()!=null)
-			result.setRecorrido(this.getRecorrido().getDatatype());
+			result.setRecorrido(this.getRecorrido().getDatatype(false));
 		if(this.getHorario()!=null)
 			result.setHorario(this.getHorario().getDatatype());
 		result.setFechaSalida(this.getFechaSalida());
-		if(this.getEmpleados()!=null){
-		List<DataEmpleado> aux = new ArrayList<DataEmpleado>();
-		this.getEmpleados().stream().forEach((emp) -> {
-    		aux.add(emp.getDatatype());
-        });
-    	result.setEmpleados(aux);}
+		if(this.getEmpleados()!=null && conHijos){
+			List<DataEmpleado> aux = new ArrayList<DataEmpleado>();
+			this.getEmpleados().stream().forEach((emp) -> {
+	    		aux.add(emp.getDatatype(false));
+	        });
+	    	result.setEmpleados(aux);
+    	}
 		if(this.getCoche()!=null)
-			result.setCoche(this.getCoche().getDatatype());
-		if(this.getEncomiendas()!=null){
-		List<DataEncomienda> auxEnc = new ArrayList<DataEncomienda>();
-		this.getEncomiendas().stream().forEach((enc) -> {
-    		auxEnc.add(enc.getDatatype());
-        });
-    	result.setEncomiendas(auxEnc);}
+			result.setCoche(this.getCoche().getDatatype(false));
+		if(this.getEncomiendas()!=null && conHijos){
+			List<DataEncomienda> auxEnc = new ArrayList<DataEncomienda>();
+			this.getEncomiendas().stream().forEach((enc) -> {
+	    		auxEnc.add(enc.getDatatype(false));
+	        });
+	    	result.setEncomiendas(auxEnc);
+    	}
+		if(this.getReservas()!=null && conHijos){
+			List<DataReserva> auxRes = new ArrayList<DataReserva>();
+			this.getReservas().stream().forEach((res) -> {
+	    		auxRes.add(res.getDatatype());
+	        });
+	    	result.setReservas(auxRes);
+    	}
 		return result;
 	}
 
@@ -170,5 +187,13 @@ public class Viaje implements Serializable {
 
 	public List<Encomienda> getEncomiendas() {
 		return this.encomiendas;
+	}
+	
+	public void setReservas(List<Reserva> val) {
+		this.reservas = val;
+	}
+
+	public List<Reserva> getReservas() {
+		return this.reservas;
 	}
 }

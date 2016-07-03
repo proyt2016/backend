@@ -158,6 +158,11 @@ public class ViajeCtrl implements IViaje{
 		return srvRecorrido.getRecorrido(idRecorrido);
 		
 	}
+	
+	@Override
+	public List<DataRecorrido> listarRecorridos(Integer pagina, Integer elementosPagina) {
+		return srvRecorrido.obtenerRecorridos(pagina, elementosPagina);
+	}
 
 	@Override
 	public DataPasaje ComprarPasajeReservado(DataReserva reserva) {

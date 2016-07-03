@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Atlas2 | Admin</title>
+  <title>Lacbus | Admin</title>
 
   <!-- Bootstrap core CSS -->
 
@@ -42,7 +42,7 @@
 </head>
 
 
-<body class="nav-md" ng-app="atlas2">
+<body class="nav-md" ng-app="lacbus">
 
   <div class="container body">
 
@@ -54,7 +54,7 @@
         <div class="left_col scroll-view">
 
           <div class="navbar nav_title" style="border: 0;">
-            <a href="#" class="site_title"><i class="fa fa-gamepad"></i> <span>Atlas2 - Admin</span></a>
+            <a href="#" class="site_title"><i class="fa fa-gamepad"></i> <span>Lacbus - Admin</span></a>
           </div>
           <div class="clearfix"></div>
 
@@ -79,39 +79,26 @@
                 <li>
                   <a href="#/"><i class="fa fa-home"></i> Inicio </a>
                 </li>
-              </ul>
-
-              <ul class="nav side-menu">
                 <li>
-                  <a><i class="fa fa-magic"></i> Wizard <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li>
-                      <a href="#/mapa">Mapa</a>
-                    </li>
-                    <li>
-                      <a href="#/recurso">Recursos</a>
-                    </li>
-                    <li>
-                      <a href="#/destacamento">Destacamentos</a>
-                    </li>
-                    <li>
-                      <a href="#/edificio">Edificios</a>
-                    </li>
-                    <li>
-                      <a href="#/tecnologia">Tecnologías</a>
-                    </li>
-                    <li>
-                      <a href="#/dependencia">Dependencias</a>
-                    </li>
-                    <li>
-                      <a href="#/agrupacione">Agrupaciones</a>
-                    </li>
-                    <li>
-                      <a href="#/iteraccione">Iteracciones</a>
-                    </li>
-                  </ul>
+                  <a href="#/viajes"><i class="fa fa-home"></i> Viajes </a>
+                </li>
+                <li>
+                  <a href="#/encomiendas"><i class="fa fa-home"></i> Encomiendas </a>
+                </li>
+                <li>
+                  <a href="#/empleados"><i class="fa fa-home"></i> Empleados </a>
+                </li>
+                <li>
+                  <a href="#/vehiculos"><i class="fa fa-home"></i> Vehiculos </a>
+                </li>
+                <li>
+                  <a href="#/configuracion"><i class="fa fa-home"></i> Configuracion </a>
+                </li>
+                <li>
+                  <a href="#/reportes"><i class="fa fa-home"></i> Reportes </a>
                 </li>
               </ul>
+
             </div>
 
           </div>
@@ -167,7 +154,7 @@
       <!-- footer content -->
       <footer>
         <div class="pull-right">
-          .NET - Grupo 15
+          Proyecto 2016
         </div>
         <div class="clearfix"></div>
       </footer>
@@ -181,12 +168,22 @@
 
   <script src="app/app.js"></script>
   
-  <!-- services -->
-  <script src="app/services/recurso.js"></script>
+   <!-- services -->
+  <script src="app/services/configuracion.js"></script>
+  <script src="app/services/encomiendas.js"></script>
+  <script src="app/services/reportes.js"></script>
+  <script src="app/services/empleados.js"></script>
+  <script src="app/services/vehiculos.js"></script>
+  <script src="app/services/viajes.js"></script>
   
   <!-- controllers -->
   <script src="app/controllers/home.js"></script>
-  <script src="app/controllers/recurso.js"></script>
+  <script src="app/controllers/configuracion.js"></script>
+  <script src="app/controllers/encomiendas.js"></script>
+  <script src="app/controllers/reportes.js"></script>
+  <script src="app/controllers/empleados.js"></script>
+  <script src="app/controllers/vehiculos.js"></script>
+  <script src="app/controllers/viajes.js"></script>
 
 </body>
 

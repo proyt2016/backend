@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.util.List;
 import java.util.Map;
 
 import lcbs.shares.*;
@@ -20,7 +21,7 @@ public interface IViaje {
 	public void EditarTerminal(DataTerminal terminal);
 	public DataRecorrido CrearRecorrido(DataRecorrido recorrido);
 	public void EditarRecorrido(DataRecorrido recorrido);
-	
+	public List<DataRecorrido> listarRecorridos(Integer pagina, Integer elementosPagina);
 	public DataPasaje ComprarPasajeReservado(DataReserva reserva);
 	public DataParada obtenerParada(String IdParada);
 	public Map<String, DataPasaje> obtenerHistorialPasajes(String idUsuario);

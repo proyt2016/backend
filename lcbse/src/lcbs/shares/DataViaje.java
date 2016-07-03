@@ -11,12 +11,13 @@ public class DataViaje{
     private List<DataEmpleado> empleados;
     private DataVehiculo coche;
     private List<DataEncomienda> encomiendas;
+    private List<DataReserva> reservas;
     
   
 
     public DataViaje() {}
     
-    public DataViaje(String id, DataRecorrido rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, DataVehiculo coche, List<DataEncomienda> enc) {
+    public DataViaje(String id, DataRecorrido rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, DataVehiculo coche, List<DataEncomienda> enc, List<DataReserva> res) {
         this.id = id;
     	this.recorrido = rec;
         this.horario = hor;
@@ -24,6 +25,7 @@ public class DataViaje{
         this.empleados = emp;
         this.coche = coche;
         this.encomiendas = enc;
+        this.reservas = res;
     }
     
     public void setId(String val){
@@ -80,5 +82,13 @@ public class DataViaje{
     
     public List<DataEncomienda> getEncomiendas(){
         return this.encomiendas;
+    }
+    
+    public void setReservas(List<DataReserva> val){
+        this.reservas = val;
+    }
+    
+    public List<DataReserva> getReservas(){
+        return this.reservas;
     }
 }

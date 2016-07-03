@@ -22,6 +22,7 @@ import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.ws.rs.PathParam;
 
 import interfaces.*;
 import lcbs.shares.*;
@@ -95,6 +96,10 @@ public class UsuarioRepo {
 
 	public DataEmpleado getEmpleado(String idEmpleado) {
 		return ctrUsuario.getEmpleado(idEmpleado);
+	}
+	
+	public Map<String, DataEmpleado> listarEmpleados(Integer pagina, Integer elementosPagina) {
+		return ctrUsuario.listarEmpleados(pagina, elementosPagina);
 	}
 
 	public DataPerfil getPerfil(String idPerfil) {

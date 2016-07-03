@@ -16,11 +16,13 @@
  */
 package lcbs.api.service;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.ws.rs.PathParam;
 
 import interfaces.*;
 import lcbs.shares.*;
@@ -90,6 +92,10 @@ public class ViajeRepo {
 	
 	public DataRecorrido obtenerRecorrido(String idRecorrido){
 		return ctrViaje.obtenerRecorrido(idRecorrido);
+	}
+	
+	public List<DataRecorrido> listarRecorridos(Integer pagina, Integer elementosPagina) {
+		return ctrViaje.listarRecorridos(pagina, elementosPagina);
 	}
 	
 	public DataPasaje ComprarPasajeReservado(DataReserva reserva){

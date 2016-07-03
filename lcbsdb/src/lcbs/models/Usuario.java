@@ -84,18 +84,18 @@ public class Usuario extends Persona implements Serializable{
     	}
     }
     
-    public DataUsuario getDatatype(){
+    public DataUsuario getDatatype(Boolean conHijos){
     	DataUsuario result = new DataUsuario();
     	result.setId(this.getId());
     	result.setApellido(this.getApellido());
     	if(this.getEmail()!=null)
     		result.setEmail(this.getEmail().getDatatype());
-    	if(this.getTelefonosContacto()!=null){
-    	List<DataTelefono> aux = new ArrayList<DataTelefono>();
-    	this.getTelefonosContacto().stream().forEach((tel) -> {
-    		aux.add(tel.getDatatype());
-        });
-    	result.setTelefonosContacto(aux);
+    	if(this.getTelefonosContacto()!=null && conHijos){
+	    	List<DataTelefono> aux = new ArrayList<DataTelefono>();
+	    	this.getTelefonosContacto().stream().forEach((tel) -> {
+	    		aux.add(tel.getDatatype());
+	        });
+	    	result.setTelefonosContacto(aux);
     	}
     	result.setFechaNacimiento(this.getFechaNacimiento());
     	result.setEliminado(this.getEliminado());
@@ -105,12 +105,13 @@ public class Usuario extends Persona implements Serializable{
     	this.setIdRedSocial(this.getIdRedSocial());
     	if(this.getCuponera()!=null)
     		result.setCuponera(this.getCuponera().getDatatype());
-    	if(this.getEncomiendas()!=null){
-    	List<DataEncomienda> auxEnc = new ArrayList<DataEncomienda>();
-    	this.getEncomiendas().stream().forEach((enc) -> {
-    		auxEnc.add(enc.getDatatype());
-        });
-    	result.setEncomiendas(auxEnc);}
+    	if(this.getEncomiendas()!=null && conHijos){
+	    	List<DataEncomienda> auxEnc = new ArrayList<DataEncomienda>();
+	    	this.getEncomiendas().stream().forEach((enc) -> {
+	    		auxEnc.add(enc.getDatatype(false));
+	        });
+	    	result.setEncomiendas(auxEnc);
+	    }
     	return result;
     }
     

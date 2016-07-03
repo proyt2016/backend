@@ -43,7 +43,7 @@ public class VehiculoSrv implements VehiculoLocalApi {
         List<Vehiculo> listVeh = criteria.list();
         
         listVeh.stream().forEach((veh) -> {
-        	vehiculos.put(veh.getId(), veh.getDatatype());
+        	vehiculos.put(veh.getId(), veh.getDatatype(true));
         });
         return vehiculos;
     }
@@ -59,7 +59,7 @@ public class VehiculoSrv implements VehiculoLocalApi {
     public DataVehiculo getVehiculo(String id){
     	Session session = (Session) em.getDelegate();
     	Vehiculo realObj = (Vehiculo) session.get(Vehiculo.class, id);
-		return realObj.getDatatype();
+		return realObj.getDatatype(true);
     }
     
     public DataVehiculo crearVehiculo(DataVehiculo veh){
@@ -67,7 +67,7 @@ public class VehiculoSrv implements VehiculoLocalApi {
     	realObj.setEliminado(false);
         //guardo el vehiculo en bd
         em.persist(realObj);
-        return realObj.getDatatype();
+        return realObj.getDatatype(true);
     }
     
     public void darBajaVehiculo(String idVehiculo){

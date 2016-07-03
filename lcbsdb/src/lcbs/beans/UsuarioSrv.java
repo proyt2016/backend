@@ -44,7 +44,7 @@ public class UsuarioSrv implements UsuarioLocalApi {
         List<Usuario> listUsu = criteria.list();
         
         listUsu.stream().forEach((usu) -> {
-        	usuarios.put(usu.getId(), usu.getDatatype());
+        	usuarios.put(usu.getId(), usu.getDatatype(true));
         });
         return usuarios;
     }
@@ -55,7 +55,7 @@ public class UsuarioSrv implements UsuarioLocalApi {
     	criteria.add(Restrictions.eq("email.email", mailUsuario));
         List<Usuario> listUsu = criteria.list();
         if(listUsu.size() == 1){
-	    	DataUsuario usuario = listUsu.get(0).getDatatype();
+	    	DataUsuario usuario = listUsu.get(0).getDatatype(true);
 	        return usuario.getClave().equals(clave);
         }
         return false;
@@ -72,7 +72,7 @@ public class UsuarioSrv implements UsuarioLocalApi {
     public DataUsuario getUsuario(String id){
     	Session session = (Session) em.getDelegate();
     	Usuario realObj = (Usuario) session.get(Usuario.class, id);
-		return realObj.getDatatype();
+		return realObj.getDatatype(true);
     }
     
     public DataUsuario crearUsuario(DataUsuario usu){
@@ -80,7 +80,7 @@ public class UsuarioSrv implements UsuarioLocalApi {
     	realObj.setEliminado(false);
         //guardo el usuario en bd
         em.persist(realObj);
-        return realObj.getDatatype();
+        return realObj.getDatatype(true);
     }
     
     public void darBajaUsuario(String idUsuario){

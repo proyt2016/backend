@@ -124,6 +124,11 @@ public class UsuarioCtrl implements IUsuario{
 	public DataEmpleado getEmpleado(String idEmpleado) {
 		return srvEmpleado.getEmpleado(idEmpleado);
 	}
+	
+	@Override
+	public Map<String, DataEmpleado> listarEmpleados(Integer pagina, Integer elementosPagina) {
+		return srvEmpleado.obtenerEmpleados(pagina, elementosPagina);
+	}
 
 	@Override
 	public DataPerfil getPerfil(String idPerfil) {

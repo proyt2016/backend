@@ -14,6 +14,7 @@ public interface IUsuario {
 	public boolean loginEmpleado(String usuario, String clave);
 	public DataEmpleado getEmpleado(String idEmpleado);
 	public DataEmpleado AltaEmpleado(DataEmpleado empleado);
+	public Map<String, DataEmpleado> listarEmpleados(Integer pagina, Integer elementosPagina);
 	public void ModificarEmpleado(DataEmpleado empleado);
 	public void BajaEmpleado(String idEmpleado);
 	public void CargarSaldoCuponera(String idUsuario, Float saldo);

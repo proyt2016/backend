@@ -54,13 +54,13 @@ public class Empleado extends Persona implements Serializable{
     	}
     }
     
-    public DataEmpleado getDatatype(){
+    public DataEmpleado getDatatype(Boolean conHijos){
     	DataEmpleado result = new DataEmpleado();
     	result.setId(this.getId());
     	result.setApellido(this.getApellido());
     	if(this.getEmail()!=null)
     		result.setEmail(new DataEmail(this.getEmail().getEmail()));
-    	if(this.getTelefonosContacto()!=null){
+    	if(this.getTelefonosContacto()!=null && conHijos){
 	    	List<DataTelefono> temp = new ArrayList<DataTelefono>();
 	    	this.getTelefonosContacto().stream().forEach((tel) -> {
 	    		temp.add(tel.getDatatype());
@@ -71,7 +71,7 @@ public class Empleado extends Persona implements Serializable{
     	result.setEliminado(this.getEliminado());
     	result.setIdEmpleadoLdap(this.getIdEmpleadoLdap());
     	if(this.getPerfil()!=null)
-    		result.setPerfil(this.getPerfil().getDatatype());
+    		result.setPerfil(this.getPerfil().getDatatype(false));
     	return result;
     }
 

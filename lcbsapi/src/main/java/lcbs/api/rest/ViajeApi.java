@@ -138,6 +138,12 @@ public class ViajeApi {
 		return repo.obtenerRecorrido(idRecorrido);
 	}
 	
+	@GET
+	@Path("/listarrecorridos/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataRecorrido> listarRecorridos(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar") final Integer elementosPagina) {
+		return repo.listarRecorridos(pagina, elementosPagina);
+	}
+	
 	@POST
 	@Path("/comprarpasajereservado/")
 	public DataPasaje ComprarPasajeReservado(DataReserva reserva){

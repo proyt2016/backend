@@ -12,7 +12,7 @@
                 defer.resolve(usuarios);
             })
             .error(function(){
-                defer.reject('server error')
+                defer.reject('server error');
             });
 
             return defer.promise;

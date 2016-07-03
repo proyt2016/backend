@@ -1,4 +1,4 @@
-lcbsapi: Assortment of technologies including Arquillian
+lcbsclient: Assortment of technologies including Arquillian
 ========================
 Author: Pete Muir
 Level: Intermediate

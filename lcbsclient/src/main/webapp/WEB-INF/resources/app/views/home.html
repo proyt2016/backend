@@ -9,26 +9,14 @@
           <div class="row">
 						<div class="col-md-6 form-group">
 							<label>Origen</label>
-							<select class="form-control select2" style="width: 100%;">
-								<option selected="selected">Alabama</option>
-								<option>Alaska</option>
-								<option>California</option>
-								<option>Delaware</option>
-								<option>Tennessee</option>
-								<option>Texas</option>
-								<option>Washington</option>
+							<select class="form-control select2" style="width: 100%;" name="origen">
+								<option ng-repeat="terminal in terminales" value="{{ terminal.id }}">{{ terminal.nombre }}</option>
 							</select>
 						</div>
             <div class="col-md-6 form-group">
               <label>Destino</label>
-              <select class="form-control select2" style="width: 100%;">
-                <option selected="selected">Alabama</option>
-                <option>Alaska</option>
-                <option>California</option>
-                <option>Delaware</option>
-                <option>Tennessee</option>
-                <option>Texas</option>
-                <option>Washington</option>
+              <select class="form-control select2" style="width: 100%;" name="destino">
+                <option ng-repeat="terminal in terminales" value="{{ terminal.id }}">{{terminal.nombre}}</option>
               </select>
             </div>
             <div class="col-md-6 form-group">
@@ -37,16 +25,16 @@
                 <div class="input-group-addon">
                   <i class="fa fa-calendar"></i>
                 </div>
-                <input type="text" class="form-control pull-right datepicker">
+                <input type="text" class="form-control pull-right datepicker" name="fechaIda">
               </div>
             </div>
-		        <div class="col-md-6 form-group">
+		        <div class="col-md-6 form-group" ng-show="filter.idaVuelta == 'vuelta'">
 		          <label>Fecha de Vuelta:</label>
 		          <div class="input-group date">
 		            <div class="input-group-addon">
 		              <i class="fa fa-calendar"></i>
 		            </div>
-		            <input type="text" class="form-control pull-right datepicker">
+		            <input type="text" class="form-control pull-right datepicker" name="fechaVuelta">
 		          </div>
 		        </div>
 			    </div>
@@ -64,23 +52,20 @@
                 <div class="box-body">
                   <div class="col-md-6 form-group">
                     <label>Lineas</label>
-                    <select class="form-control select2" style="width: 100%;">
-                      <option selected="selected">Linea 1</option>
-                      <option>Linea 2</option>
-                      <option>Linea 3</option>
-                      <option>Linea 4</option>
+                    <select class="form-control select2" style="width: 100%;" name="recorrido">
+                      <option ng-repeat="recorrido in recorridos" value="{{ recorrido.id }}">{{ recorrido.nombre }}</option>
                     </select>
                   </div>
                   <div class="col-md-6 form-group">
                     <label>Viajes</label>
                     <div class="radio">
                       <label>
-                        <input type="radio" name="viajes" value="todos" checked>
+                        <input type="radio" name="viajes" value="todos" ng-model="filter.viajes">
                         No aplica
                       </label>
                       &nbsp;&nbsp;|&nbsp;&nbsp;
                       <label>
-                        <input type="radio" name="viajes" value="directos">
+                        <input type="radio" name="viajes" value="directos" ng-model="filter.viajes">
                         Solo viajes directos
                       </label>
                     </div>
@@ -89,12 +74,12 @@
                     <label>Asientos</label>
                     <div class="radio">
                       <label>
-                        <input type="radio" name="asientos" value="todos" checked>
+                        <input type="radio" name="asientos" value="todos" ng-model="filter.asientos">
                         No aplica
                       </label>
                       &nbsp;&nbsp;|&nbsp;&nbsp;
                       <label>
-                        <input type="radio" name="asientos" value="disponible">
+                        <input type="radio" name="asientos" value="disponible" ng-model="filter.asientos">
                         Solo asientos disponibles
                       </label>
                     </div>
@@ -108,23 +93,24 @@
           <div class="pull-left">
             <div class="radio">
               <label>
-                <input type="radio" name="idaVuelta" value="vuelta" checked>
+                <input type="radio" name="idaVuelta" value="vuelta" ng-model="filter.idaVuelta">
                 Ida y Vuelta
               </label>
               &nbsp;&nbsp;|&nbsp;&nbsp;
               <label>
-                <input type="radio" name="idaVuelta" value="ida">
+                <input type="radio" name="idaVuelta" value="ida" ng-model="filter.idaVuelta">
                 Solo  Ida
               </label>
             </div>
           </div>
-          <button type="submit" class="btn btn-info pull-right">Buscar</button>
+          <button type="button" class="btn btn-info pull-right" ng-click="buscar()">Buscar</button>
         </div>
       </form>
 		</div>
 	</div>
 </div>
-<div class="row">
+
+<div class="row" ng-if="resultados.length">
   <div class="col-md-12 col-xs-12">
     <div class="box box-success">
       <div class="box-header">
@@ -224,15 +210,3 @@
         </div>
     </div>
 </div>
-
-<script>
-  $(function () {
-    //Initialize Select2 Elements
-    $(".select2").select2();
-
-    //Date picker
-    $('.datepicker').datepicker({
-      autoclose : true
-    });
-  });
-</script>

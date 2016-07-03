@@ -129,4 +129,7 @@ public class ViajeRepo {
 	public void eliminarViaje(String idViaje){
 		ctrViaje.eliminarViaje(idViaje);
 	}
+	public List<DataTerminal> getTerminales(int pagina, int elementos){
+		return ctrViaje.getTerminales(pagina, elementos);
+	}
 }

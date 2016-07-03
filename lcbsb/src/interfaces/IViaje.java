@@ -10,6 +10,7 @@ public interface IViaje {
 	public DataPasaje ComprarPasaje(DataPasaje pasaje);
 	public void CambiarHorarioPasaje(String idPasaje, String viaje);
 	public DataReserva ReservarPasaje(DataReserva reserva);
+	public List<DataTerminal> getTerminales(int pagina, int elementos);
 	
 	public void TransferirPasajeComprado(String idPasaje, String idUsuario);//idUsuario a Transferir
 	public void CancelarReserva(String idReserva);

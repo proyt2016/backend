@@ -37,6 +37,12 @@ public class ViajeApi {
 	@EJB
 	ViajeRepo repo;
 	
+	@GET
+	@Path("/getterminales/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataTerminal> getTerminales(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
+		return repo.getTerminales(pagina, elementosPagina);
+	}
+	
 	@POST
 	@Path("/buscarviaje/{pagina}/{elementosPagina}")
 	public Map<String, DataViaje> BuscarViaje(DataViaje filtro, @PathParam("pagina") final Integer pagina, @PathParam("elementosPagina") final Integer ElementosPagina){
@@ -187,10 +193,11 @@ public class ViajeApi {
 	public void editarViaje(DataViaje viaje){
 		repo.editarViaje(viaje);
 	}
-	
+		
 	@POST
 	@Path("/eliminarviaje/")
 	public void eliminarViaje(String idViaje){
 		repo.eliminarViaje(idViaje);
 	}
+	
 }

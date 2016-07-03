@@ -24,8 +24,11 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.ws.rs.PathParam;
 
-import interfaces.*;
-import lcbs.shares.*;
+import interfaces.IUsuario;
+import lcbs.shares.DataEmpleado;
+import lcbs.shares.DataNotificacion;
+import lcbs.shares.DataPerfil;
+import lcbs.shares.DataUsuario;
 
 // The @Stateless annotation eliminates the need for manual transaction demarcation
 @Stateless

@@ -1,0 +1,80 @@
+<div class="row">
+	<div class="col-md-4">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Detalle</h3>
+      </div>
+      <div class="box-body">
+        <p><strong><i class="fa fa-map margin-r-5"></i> Origien y Destino</strong></p>
+        <p>Montevideo <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> Paysandu</p>
+        <hr>
+        <p><i class="fa fa-map-marker margin-r-5"></i> Linea 150</p>
+        <hr>
+        <p><i class="fa fa-calendar margin-r-5"></i> 08:05 a 11:05</p>
+        <hr>
+        <strong><i class="fa fa-file-text-o margin-r-5"></i> Descripci&oacute;n</strong>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+      </div>
+      <div class="box-footer">
+        <a class="btn btn-info pull-left" ng-click="reservar()">Reservar</a>
+        <a href="#/comprar/1" class="btn btn-success pull-right">Comprar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Recorrido</h3>
+      </div>
+      <div class="box-body">
+        <p class="text-center">
+          <img src="http://placehold.it/500x400/39CCCC/ffffff&amp;text=MAPA"/>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-reservar">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <form class="">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4>Reservar Pasaje</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-xs-4">
+                  <p><strong>Origien y Destino</strong></p>
+                  <p>Montevideo <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> Paysandu</p>
+                </div>
+                <div class="col-xs-4">
+                  <p><strong>Linea</strong></p>
+                  <p>Linea 150</p>
+                </div>
+                <div class="col-xs-4">
+                  <p><strong>Horario</strong></p>
+                  <p>08:05 a 11:05</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label>Cantidad de pasajes</label>
+                    <input class="form-control" type="number" name="cantida" value="1" align="right" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <a class="btn btn-success pull-right">Reservar</a>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>

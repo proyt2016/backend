@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>ClientApp</title>
+</head>
+<body>
+	<h1>chupala</h1>
+	<script src="https://code.jquery.com/jquery-git.min.js" />
+	<script>
+    $(document).ready(function(){
+    	$.ajax({url:"http://localhost:8080/lcbsapi/rest/tenant/list"}).done(function(data){
+			console.log(data);
+			})
+        })
+		
+    </script>
+</body>
+</html>

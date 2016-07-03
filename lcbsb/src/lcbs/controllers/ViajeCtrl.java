@@ -43,8 +43,8 @@ public class ViajeCtrl implements IViaje{
 	RecorridoLocalApi srvRecorrido;
 	
 	@Override
-	public Map<String, DataViaje> BuscarViaje(DataViaje filtro) {
-		Map<String, DataViaje> listaViajes = srvViaje.buscarViaje(filtro);
+	public Map<String, DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina) {
+		Map<String, DataViaje> listaViajes = srvViaje.buscarViaje(filtro, pagina, ElementosPagina);
 		return listaViajes;
 	}
 
@@ -124,8 +124,8 @@ public class ViajeCtrl implements IViaje{
 	}
 
 	@Override
-	public void AltaTerminal(DataTerminal terminal) {
-		srvTerminal.crearTerminal(terminal);
+	public DataTerminal AltaTerminal(DataTerminal terminal) {
+		return srvTerminal.crearTerminal(terminal);
 		
 	}
 
@@ -142,14 +142,20 @@ public class ViajeCtrl implements IViaje{
 	}
 
 	@Override
-	public void CrearRecorrido(DataRecorrido recorrido) {
-		srvRecorrido.crearRecorrido(recorrido);
+	public DataRecorrido CrearRecorrido(DataRecorrido recorrido) {
+		return srvRecorrido.crearRecorrido(recorrido);
 		
 	}
 
 	@Override
 	public void EditarRecorrido(DataRecorrido recorrido) {
 		srvRecorrido.modificarRecorrido(recorrido);
+		
+	}
+	
+	@Override
+	public DataRecorrido obtenerRecorrido(String idRecorrido) {
+		return srvRecorrido.getRecorrido(idRecorrido);
 		
 	}
 
@@ -170,8 +176,8 @@ public class ViajeCtrl implements IViaje{
 	}
 
 	@Override
-	public void crearViaje(DataViaje viaje) {
-		srvViaje.crearViaje(viaje);
+	public DataViaje crearViaje(DataViaje viaje) {
+		return srvViaje.crearViaje(viaje);
 	}
 
 	@Override

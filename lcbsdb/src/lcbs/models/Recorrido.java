@@ -110,6 +110,7 @@ public class Recorrido implements Serializable{
     		aux.add(pr.getDatatype());
         });
     	result.setPrecios(aux);}
+    	result.setEliminado(this.getEliminado());
     	return result;
     }
     

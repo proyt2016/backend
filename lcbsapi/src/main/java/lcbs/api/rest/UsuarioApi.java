@@ -19,6 +19,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import org.json.*;
+
+import org.jboss.dmr.JSONParser;
+
 import javax.ws.rs.core.UriBuilder;
 
 import lcbs.shares.*;
@@ -108,14 +112,15 @@ public class UsuarioApi {
 	}
 	
 	@POST
-	@Path("/loginusuario/{idUsuario}")
-	public boolean loginUsuario(@PathParam("idUsuario") final String usuario, String clave) {
-		return repo.loginUsuario(usuario, clave);
+	@Path("/loginusuario/")
+	public boolean loginUsuario(String data) {
+		JSONObject obj = new JSONObject(data);
+		return repo.loginUsuario(obj.getString("usuario"), obj.getString("clave"));
 	}
 
 	@GET
-	@Path("/getusuario/{mailUsuario}")
-	public DataUsuario getUsuario(@PathParam("mailUsuario") final String idUsuario){
+	@Path("/getusuario/{idUsuario}")
+	public DataUsuario getUsuario(@PathParam("idUsuario") final String idUsuario){
 		return repo.getUsuario(idUsuario);
 	}
 	

@@ -47,5 +47,8 @@ public class DataTerminal extends DataPuntoRecorrido{
         return this.aceptaEncomiendas;
     }
 
+    public String getTipo(){
+        return "Terminal";
+    }
     
 }

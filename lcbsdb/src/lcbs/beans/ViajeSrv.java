@@ -19,6 +19,7 @@ import lcbs.shares.DataEncomienda;
 import lcbs.shares.DataViaje;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -77,8 +78,8 @@ public class ViajeSrv implements ViajeLocalApi {
     }
 
 	@Override
-	public Map<String, DataViaje> buscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina) {
-		Map<String, DataViaje> viajes = new HashMap();
+	public List<DataViaje> buscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina) {
+		List<DataViaje> viajes = new ArrayList();
         Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Encomienda.class);
     	if(filtro.getRecorrido() != null)
@@ -105,7 +106,7 @@ public class ViajeSrv implements ViajeLocalApi {
         List<Viaje> listViaje = criteria.list();
         
         listViaje.stream().forEach((via) -> {
-        	viajes.put(via.getId(), via.getDatatype(true));
+        	viajes.add(via.getDatatype(true));
         });
         return viajes;
 	}

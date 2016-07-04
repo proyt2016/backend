@@ -88,10 +88,11 @@ public class UsuarioApi {
 		return repo.listarNotificaciones(idUsuario);
 	}
 	
+	//tested
 	@POST
 	@Path("/altaperfil/")
-	public void AltaPerfil(final DataPerfil perfil) {
-		repo.AltaPerfil(perfil);
+	public DataPerfil AltaPerfil(final DataPerfil perfil) {
+		return repo.AltaPerfil(perfil);
 	}
 	
 	@POST
@@ -106,6 +107,7 @@ public class UsuarioApi {
 		repo.EliminarPerfil(idPerfil);
 	}
 	
+	//tested
 	@POST
 	@Path("/asignarperfil/")
 	public void AsignarPerfil(String data) {
@@ -141,7 +143,7 @@ public class UsuarioApi {
 	
 	@GET
 	@Path("/listarempleados/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
-	public Map<String, DataEmpleado> listarEmpleados(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
+	public List<DataEmpleado> listarEmpleados(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
 		return repo.listarEmpleados(pagina, elementosPagina);
 	}
 

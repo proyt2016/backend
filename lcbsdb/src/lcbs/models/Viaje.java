@@ -76,7 +76,7 @@ public class Viaje implements Serializable {
 		if(dt.getEmpleados() != null){
 			List<Empleado> aux = new ArrayList<Empleado>();
 	    	dt.getEmpleados().stream().forEach((emp) -> {
-	    		aux.add(new Empleado(emp));
+	    		aux.add(new Empleado(emp,true));
 	        });
 	    	this.setEmpleados(aux);
 		}

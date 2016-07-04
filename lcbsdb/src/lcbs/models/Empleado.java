@@ -34,7 +34,7 @@ public class Empleado extends Persona implements Serializable{
         this.perfil = perf;
     }
     
-    public Empleado(DataEmpleado dt){
+    public Empleado(DataEmpleado dt, Boolean conHijos){
     	this.setId(dt.getId());
     	this.setApellido(dt.getApellido());
     	if(dt.getEmail() != null)
@@ -49,8 +49,8 @@ public class Empleado extends Persona implements Serializable{
     	this.setFechaNacimiento(dt.getFechaNacimiento());
     	this.setEliminado(dt.getEliminado());
     	this.setIdEmpleadoLdap(dt.getIdEmpleadoLdap());
-    	if(dt.getPerfil() != null){
-    		this.setPerfil(new Perfil(dt.getPerfil()));
+    	if(dt.getPerfil() != null && conHijos){
+    		this.setPerfil(new Perfil(dt.getPerfil(), false));
     	}
     }
     

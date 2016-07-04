@@ -1,5 +1,6 @@
 package lcbs.interfaces;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Local;
@@ -13,5 +14,5 @@ public interface PasajeLocalApi {
 	public DataPasaje getPasaje(String id);
 	public DataPasaje crearPasaje(DataPasaje psj);
 	public void darBajaPasaje(String idPasaje);
-	public Map<String, DataPasaje> obtenerPasajesPorPersona(String idUsuario);
+	public List<DataPasaje> obtenerPasajesPorPersona(String idUsuario);
 }

@@ -46,7 +46,7 @@ public class PerfilSrv implements PerfilLocalApi {
     }
     
     public void modificarPerfil(DataPerfil prf){
-    	Perfil realObj = new Perfil(prf);
+    	Perfil realObj = new Perfil(prf,true);
         if(em.find(Perfil.class, realObj.getId()) == null){
            throw new IllegalArgumentException("El perfil no existe");
        }
@@ -60,7 +60,7 @@ public class PerfilSrv implements PerfilLocalApi {
     }
     
     public DataPerfil crearPerfil(DataPerfil prf){
-    	Perfil realObj = new Perfil(prf);
+    	Perfil realObj = new Perfil(prf,true);
         //guardo la Perfil en bd
         em.persist(realObj);
         return realObj.getDatatype(true);
@@ -68,7 +68,7 @@ public class PerfilSrv implements PerfilLocalApi {
     
     public void borrarPerfil(String idPerfil){
     	DataPerfil prf = getPerfil(idPerfil);
-    	Perfil realObj = new Perfil(prf);
+    	Perfil realObj = new Perfil(prf,true);
         em.remove(realObj);
     }
 }

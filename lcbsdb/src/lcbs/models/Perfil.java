@@ -57,7 +57,7 @@ public class Perfil implements Serializable{
         this.empleados = emp;
     }
     
-    public Perfil(DataPerfil dt){
+    public Perfil(DataPerfil dt, Boolean conHijos){
     	this.setId(dt.getId());
     	this.setModulo1(dt.getModulo1());
     	this.setModulo2(dt.getModulo2());
@@ -67,10 +67,10 @@ public class Perfil implements Serializable{
     	this.setModulo6(dt.getModulo6());
     	this.setModulo7(dt.getModulo7());
     	this.setModulo8(dt.getModulo8());
-    	if(dt.getEmpleados() != null){
+    	if(dt.getEmpleados() != null && conHijos){
 	    	List<Empleado> aux = new ArrayList<Empleado>();
 	    	dt.getEmpleados().stream().forEach((emp) -> {
-	    		aux.add(new Empleado(emp));
+	    		aux.add(new Empleado(emp, false));
 	        });
 	    	this.setEmpleados(aux);
     	}

@@ -146,7 +146,7 @@ public class EncomiendaApi {
 	
 	@GET
 	@Path("/listarestadosencomienda/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
-	public Map<String, DataEstadosEncomienda> listarEstadoEncomienda(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
+	public List<DataEstadosEncomienda> listarEstadoEncomienda(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
 		return repo.listarEstadoEncomienda(pagina, elementosPagina);
 	}
 	

@@ -94,7 +94,7 @@ public class Pasaje implements Serializable{
     	}
     	this.setCiPersona(dt.getCiPersona());
     	if(dt.getVendedor() != null){
-    		this.setVendedor(new Empleado(dt.getVendedor()));
+    		this.setVendedor(new Empleado(dt.getVendedor(),true));
     	}
     	this.setUsado(dt.getUsado());
     	this.setPago(dt.getPago());

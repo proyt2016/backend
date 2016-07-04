@@ -43,9 +43,8 @@ public class ViajeCtrl implements IViaje{
 	RecorridoLocalApi srvRecorrido;
 	
 	@Override
-	public Map<String, DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina) {
-		Map<String, DataViaje> listaViajes = srvViaje.buscarViaje(filtro, pagina, ElementosPagina);
-		return listaViajes;
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina) {
+		return srvViaje.buscarViaje(filtro, pagina, ElementosPagina);
 	}
 
 	@Override
@@ -56,7 +55,7 @@ public class ViajeCtrl implements IViaje{
 	}
 	
 	@Override
-	public Map<String, DataPasaje> obtenerHistorialPasajes(String idUsuario) {
+	public List<DataPasaje> obtenerHistorialPasajes(String idUsuario) {
 		return srvPasaje.obtenerPasajesPorPersona(idUsuario);
 	}
 	
@@ -95,7 +94,7 @@ public class ViajeCtrl implements IViaje{
 	}
 
 	@Override
-	public Map<String, DataReserva> ListarReservas(String idUsuario) {
+	public List< DataReserva> ListarReservas(String idUsuario) {
 		return srvReserva.listarReservasPorUsuario(idUsuario);
 	}
 

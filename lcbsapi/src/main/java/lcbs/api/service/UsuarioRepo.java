@@ -69,8 +69,8 @@ public class UsuarioRepo {
 		return ctrUsuario.listarNotificaciones(idUsuario);
 	}
 	
-	public void AltaPerfil(DataPerfil perfil){
-		ctrUsuario.AltaPerfil(perfil);
+	public DataPerfil AltaPerfil(DataPerfil perfil){
+		return ctrUsuario.AltaPerfil(perfil);
 	}
 	
 	public void EditarPerfil(DataPerfil perfil){
@@ -101,7 +101,7 @@ public class UsuarioRepo {
 		return ctrUsuario.getEmpleado(idEmpleado);
 	}
 	
-	public Map<String, DataEmpleado> listarEmpleados(Integer pagina, Integer elementosPagina) {
+	public List<DataEmpleado> listarEmpleados(Integer pagina, Integer elementosPagina) {
 		return ctrUsuario.listarEmpleados(pagina, elementosPagina);
 	}
 

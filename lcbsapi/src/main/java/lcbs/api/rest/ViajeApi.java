@@ -45,7 +45,7 @@ public class ViajeApi {
 	
 	@POST
 	@Path("/buscarviaje/{pagina}/{elementosPagina}")
-	public Map<String, DataViaje> BuscarViaje(DataViaje filtro, @PathParam("pagina") final Integer pagina, @PathParam("elementosPagina") final Integer ElementosPagina){
+	public List<DataViaje> BuscarViaje(DataViaje filtro, @PathParam("pagina") final Integer pagina, @PathParam("elementosPagina") final Integer ElementosPagina){
 		return repo.BuscarViaje(filtro, pagina, ElementosPagina);
 	}
 	
@@ -83,7 +83,7 @@ public class ViajeApi {
 	
 	@GET
 	@Path("/listarreservas/")
-	public Map<String, DataReserva> ListarReservas(String data) {
+	public List<DataReserva> ListarReservas(String data) {
 		JSONObject obj = new JSONObject(data);
 		return repo.ListarReservas(obj.getString("idUsuario"));
 	}
@@ -165,7 +165,7 @@ public class ViajeApi {
 	
 	@GET
 	@Path("/listarhistorialpasajes/{idUsuario}")
-	public Map<String, DataPasaje> obtenerHistorialPasajes(@PathParam("idUsuario") final String idUsuario){
+	public List<DataPasaje> obtenerHistorialPasajes(@PathParam("idUsuario") final String idUsuario){
 		return repo.obtenerHistorialPasajes(idUsuario);
 	}
 	

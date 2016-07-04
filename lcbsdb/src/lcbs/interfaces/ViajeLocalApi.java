@@ -1,5 +1,6 @@
 package lcbs.interfaces;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Local;
@@ -13,5 +14,5 @@ public interface ViajeLocalApi {
 	public DataViaje getViaje(String via);
 	public DataViaje crearViaje(DataViaje via);
 	public void borrarViaje(String idViaje);
-	public Map<String, DataViaje> buscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina);
+	public List<DataViaje> buscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina);
 }

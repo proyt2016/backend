@@ -16,6 +16,7 @@ import lcbs.models.Empleado;
 import lcbs.models.EstadosEncomienda;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,8 +32,8 @@ public class EstadosEncomiendaSrv implements EstadosEncomiendaLocalApi {
         
     }
     
-    public Map<String,DataEstadosEncomienda> obtenerEstadosEncomienda(Integer pagina, Integer elementosPagina){
-    	Map<String,DataEstadosEncomienda> estados = new HashMap();
+    public List<DataEstadosEncomienda> obtenerEstadosEncomienda(Integer pagina, Integer elementosPagina){
+    	List<DataEstadosEncomienda> estados = new ArrayList();
         //obtengo todas los estados de encomienda de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(EstadosEncomienda.class);
@@ -42,7 +43,7 @@ public class EstadosEncomiendaSrv implements EstadosEncomiendaLocalApi {
         List<EstadosEncomienda> listEstEnc = criteria.list();
         
         listEstEnc.stream().forEach((est) -> {
-        	estados.put(est.getId(), est.getDatatype());
+        	estados.add(est.getDatatype());
         });
         return estados;
     }

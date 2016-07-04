@@ -91,7 +91,7 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 	
 	@Override
-	public Map<String, DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina) {
+	public List<DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina) {
 		return srvEstadosEncomienda.obtenerEstadosEncomienda(pagina, elementosPagina);
 	}
 	

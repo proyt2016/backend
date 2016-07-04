@@ -6,7 +6,7 @@ import java.util.Map;
 import lcbs.shares.*;
 public interface IViaje {
 	
-	public Map<String, DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina);
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina);
 	public DataPasaje ComprarPasaje(DataPasaje pasaje);
 	public void CambiarHorarioPasaje(String idPasaje, String viaje);
 	public DataReserva ReservarPasaje(DataReserva reserva);
@@ -14,7 +14,7 @@ public interface IViaje {
 	
 	public void TransferirPasajeComprado(String idPasaje, String idUsuario);//idUsuario a Transferir
 	public void CancelarReserva(String idReserva);
-	public Map<String, DataReserva> ListarReservas(String idUsuario);
+	public List<DataReserva> ListarReservas(String idUsuario);
 	public void ProcesarPasajes(String idPasaje);
 	public DataParada AltaParadas(DataParada parada);
 	public DataTerminal AltaTerminal(DataTerminal terminal);
@@ -25,7 +25,7 @@ public interface IViaje {
 	public List<DataRecorrido> listarRecorridos(Integer pagina, Integer elementosPagina);
 	public DataPasaje ComprarPasajeReservado(DataReserva reserva);
 	public DataParada obtenerParada(String IdParada);
-	public Map<String, DataPasaje> obtenerHistorialPasajes(String idUsuario);
+	public List<DataPasaje> obtenerHistorialPasajes(String idUsuario);
 	public DataPasaje verDetallePasaje(String idPasaje);
 	public DataTerminal obtenerTerminal(String IdTerminal);
 

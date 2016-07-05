@@ -85,21 +85,34 @@
                 <li>
                   <a href="#/encomiendas"><i class="fa fa-home"></i> Encomiendas </a>
                 </li>
-                <li>
-                  <a href="#/perfil"><i class="fa fa-home"></i> Perfiles </a>
-                </li>
-                <li>
-                  <a href="#/empleados"><i class="fa fa-home"></i> Empleados </a>
-                </li>
-                <li>
-                  <a href="#/vehiculos"><i class="fa fa-home"></i> Vehiculos </a>
-                </li>
-                <li>
-                  <a href="#/configuracion"><i class="fa fa-home"></i> Configuracion </a>
-                </li>
-                <li>
-                  <a href="#/reportes"><i class="fa fa-home"></i> Reportes </a>
-                </li>
+                <ul class="nav side-menu">
+                  <li>
+                    <a><i class="fa fa-magic"></i> Cofiguraciones <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none">
+                      <li>
+                        <a href="#/configuracion"><i class="fa fa-home"></i> Basicas </a>
+                      </li>
+                      <li>
+                        <a href="#/perfil"><i class="fa fa-home"></i> Perfiles </a>
+                      </li>
+                      <li>
+                        <a href="#/empleados"><i class="fa fa-home"></i> Empleados </a>
+                      </li>
+                      <li>
+                        <a href="#/vehiculos"><i class="fa fa-home"></i> Vehiculos </a>
+                      </li>
+                      <li>
+                        <a href="#/puntosrecorrido"><i class="fa fa-home"></i> Puntos de recorridos </a>
+                      </li>
+                      <li>
+                        <a href="#/recorridos"><i class="fa fa-home"></i> Recorridos </a>
+                      </li>
+                      <li>
+                        <a href="#/reportes"><i class="fa fa-home"></i> Reportes </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
               </ul>
 
             </div>
@@ -179,6 +192,8 @@
   <script src="app/services/vehiculos.js"></script>
   <script src="app/services/viajes.js"></script>
   <script src="app/services/perfil.js"></script>
+  <script src="app/services/recorridos.js"></script>
+  <script src="app/services/puntosrecorrido.js"></script>
   
   <!-- controllers -->
   <script src="app/controllers/home.js"></script>
@@ -189,6 +204,8 @@
   <script src="app/controllers/vehiculos.js"></script>
   <script src="app/controllers/viajes.js"></script>
   <script src="app/controllers/perfil.js"></script>
+  <script src="app/controllers/recorridos.js"></script>
+  <script src="app/controllers/puntosrecorrido.js"></script>
 
 </body>
 

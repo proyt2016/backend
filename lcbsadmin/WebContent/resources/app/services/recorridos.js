@@ -1,15 +1,15 @@
 (function () {
     'use strict';
-    angular.module('lacbus').service('perfilService', ["$http", "$q", perfilService]);
+    angular.module('lacbus').service('recorridosService', ["$http", "$q", recorridosService]);
 
-    function perfilService($http, $q) {
+    function recorridosService($http, $q) {
 
         var getAll = function(){
             var defer = $q.defer();
 
-             $http.get('/lcbsapi/rest/usuarios/listarperfiles/1/10000')
-             .success(function (perfil) {
-                 defer.resolve(perfil);
+             $http.get('/lcbsapi/rest/viajes/listarrecorridos/1/10000')
+             .success(function (recorridos) {
+                 defer.resolve(recorridos);
              })
              .error(function(){
                  defer.reject('server error')
@@ -18,12 +18,11 @@
             return defer.promise;
         };
 
-        var add = function(perfil){
+        var add = function(recorrido){
             var defer = $q.defer();
-            console.info(perfil);
-            $http.post('/lcbsapi/rest/usuarios/altaperfil', perfil)
-            .success(function (perf) {
-                defer.resolve(perf);
+            $http.post('/lcbsapi/rest/viajes/crearrecorrido', recorrido)
+            .success(function (rec) {
+                defer.resolve(rec);
             })
             .error(function(){
                 defer.reject('server error')
@@ -32,12 +31,12 @@
             return defer.promise;
         };
 
-        var edit = function(perfil){
+        var edit = function(recorrido){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/usuarios/editarperfil', perfil)
-            .success(function (perf) {
-                defer.resolve(perf);
+            $http.post('/lcbsapi/rest/viajes/editarrecorrido', recorrido)
+            .success(function (rec) {
+                defer.resolve(rec);
             })
             .error(function(){
                 defer.reject('server error')
@@ -48,9 +47,10 @@
 
         var borrar = function(id){
             var defer = $q.defer();
-            $http.delete('/lcbsapi/rest/usuarios/eliminarperfil/'+id)
-            .success(function (perfil) {
-                defer.resolve(perfil);
+            var aEliminar = { 'idRecorrido' : id}
+            $http.post('/lcbsapi/rest/viajes/bajarecorrido',aEliminar)
+            .success(function (rec) {
+                defer.resolve(rec);
             })
             .error(function(){
                 defer.reject('server error')
@@ -62,9 +62,9 @@
         var getId = function(id){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/usuarios/getperfil/'+id)
-            .success(function (perfil) {
-                defer.resolve(perfil);
+            $http.get('/lcbsapi/rest/viajes/getrecorrido/'+id)
+            .success(function (rec) {
+                defer.resolve(rec);
             })
             .error(function(){
                 defer.reject('server error')

@@ -32,5 +32,7 @@ public interface IViaje {
 	public DataViaje crearViaje(DataViaje viaje);
 	public void editarViaje(DataViaje viaje);
 	public void eliminarViaje(String idViaje);
-	DataRecorrido obtenerRecorrido(String idRecorrido);
+	public DataRecorrido obtenerRecorrido(String idRecorrido);
+	public void BajaRecorrido(String idRecorrido);
+	public List<DataParada> getParadas(Integer pagina, Integer elementosPagina);
 }

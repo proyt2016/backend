@@ -22,6 +22,7 @@ import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.ws.rs.PathParam;
 
 import interfaces.IUsuario;
 import lcbs.shares.DataEmpleado;
@@ -68,8 +69,8 @@ public class UsuarioRepo {
 		return ctrUsuario.listarNotificaciones(idUsuario);
 	}
 	
-	public void AltaPerfil(DataPerfil perfil){
-		ctrUsuario.AltaPerfil(perfil);
+	public DataPerfil AltaPerfil(DataPerfil perfil){
+		return ctrUsuario.AltaPerfil(perfil);
 	}
 	
 	public void EditarPerfil(DataPerfil perfil){
@@ -99,12 +100,16 @@ public class UsuarioRepo {
 	public DataEmpleado getEmpleado(String idEmpleado) {
 		return ctrUsuario.getEmpleado(idEmpleado);
 	}
+	
+	public List<DataEmpleado> listarEmpleados(Integer pagina, Integer elementosPagina) {
+		return ctrUsuario.listarEmpleados(pagina, elementosPagina);
+	}
 
 	public DataPerfil getPerfil(String idPerfil) {
 		return ctrUsuario.getPerfil(idPerfil);
 	}
 
-	public Map<String, DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
+	public List<DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
 		return ctrUsuario.listarPerfiles(pagina, elementosPagina);
 	}
 	

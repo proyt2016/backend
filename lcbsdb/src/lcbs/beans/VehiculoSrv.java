@@ -17,6 +17,7 @@ import lcbs.models.Vehiculo;
 import lcbs.shares.DataVehiculo;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,8 +33,8 @@ public class VehiculoSrv implements VehiculoLocalApi {
         
     }
     
-    public Map<String,DataVehiculo> obtenerVehiculos(Integer pagina, Integer elementosPagina){
-    	Map<String,DataVehiculo> vehiculos = new HashMap();
+    public List<DataVehiculo> obtenerVehiculos(Integer pagina, Integer elementosPagina){
+    	List<DataVehiculo> vehiculos = new ArrayList();
         //obtengo todos los vehiculos de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Vehiculo.class);
@@ -43,7 +44,7 @@ public class VehiculoSrv implements VehiculoLocalApi {
         List<Vehiculo> listVeh = criteria.list();
         
         listVeh.stream().forEach((veh) -> {
-        	vehiculos.put(veh.getId(), veh.getDatatype());
+        	vehiculos.add(veh.getDatatype(true));
         });
         return vehiculos;
     }
@@ -59,7 +60,7 @@ public class VehiculoSrv implements VehiculoLocalApi {
     public DataVehiculo getVehiculo(String id){
     	Session session = (Session) em.getDelegate();
     	Vehiculo realObj = (Vehiculo) session.get(Vehiculo.class, id);
-		return realObj.getDatatype();
+		return realObj.getDatatype(true);
     }
     
     public DataVehiculo crearVehiculo(DataVehiculo veh){
@@ -67,7 +68,7 @@ public class VehiculoSrv implements VehiculoLocalApi {
     	realObj.setEliminado(false);
         //guardo el vehiculo en bd
         em.persist(realObj);
-        return realObj.getDatatype();
+        return realObj.getDatatype(true);
     }
     
     public void darBajaVehiculo(String idVehiculo){

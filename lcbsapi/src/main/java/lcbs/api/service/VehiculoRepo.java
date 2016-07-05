@@ -52,4 +52,8 @@ public class VehiculoRepo {
 	public DataVehiculo obtenerVehiculo(String idVehiculo){
 		return ctrVehiculo.obtenerVehiculo(idVehiculo);
 	}
+
+	public List<DataVehiculo> listarVehiculos(Integer pagina, Integer elementosPagina) {
+		return ctrVehiculo.listarVehiculos(pagina, elementosPagina);
+	}
 }

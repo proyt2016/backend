@@ -1,0 +1,212 @@
+<div class="row">
+	<div class="col-md-12 col-xs-12">
+		<div class="box box-info">
+			<div class="box-header with-border">
+			  <h2 class="box-title">¿A dónde querés ir?</h2>
+			</div>
+      <form role="form">
+  			<div class="box-body">
+          <div class="row">
+						<div class="col-md-6 form-group">
+							<label>Origen</label>
+							<select class="form-control select2" style="width: 100%;" name="origen">
+								<option ng-repeat="terminal in terminales" value="{{ terminal.id }}">{{ terminal.nombre }}</option>
+							</select>
+						</div>
+            <div class="col-md-6 form-group">
+              <label>Destino</label>
+              <select class="form-control select2" style="width: 100%;" name="destino">
+                <option ng-repeat="terminal in terminales" value="{{ terminal.id }}">{{terminal.nombre}}</option>
+              </select>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Fecha de Ida:</label>
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control pull-right datepicker" name="fechaIda">
+              </div>
+            </div>
+		        <div class="col-md-6 form-group" ng-show="filter.idaVuelta == 'vuelta'">
+		          <label>Fecha de Vuelta:</label>
+		          <div class="input-group date">
+		            <div class="input-group-addon">
+		              <i class="fa fa-calendar"></i>
+		            </div>
+		            <input type="text" class="form-control pull-right datepicker" name="fechaVuelta">
+		          </div>
+		        </div>
+			    </div>
+          <div class="box-group" id="accordion">
+            <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+            <div class="panel box box-primary">
+              <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse" style="cursor:pointer">
+                <div class="box-header">
+                  <h4 class="box-title">
+                      Busqueda Avanzada
+                  </h4>
+                </div>
+              </a>
+              <div id="collapse" class="panel-collapse collapse">
+                <div class="box-body">
+                  <div class="col-md-6 form-group">
+                    <label>Lineas</label>
+                    <select class="form-control select2" style="width: 100%;" name="recorrido">
+                      <option ng-repeat="recorrido in recorridos" value="{{ recorrido.id }}">{{ recorrido.nombre }}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>Viajes</label>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="viajes" value="todos" ng-model="filter.viajes">
+                        No aplica
+                      </label>
+                      &nbsp;&nbsp;|&nbsp;&nbsp;
+                      <label>
+                        <input type="radio" name="viajes" value="directos" ng-model="filter.viajes">
+                        Solo viajes directos
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <label>Asientos</label>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="asientos" value="todos" ng-model="filter.asientos">
+                        No aplica
+                      </label>
+                      &nbsp;&nbsp;|&nbsp;&nbsp;
+                      <label>
+                        <input type="radio" name="asientos" value="disponible" ng-model="filter.asientos">
+                        Solo asientos disponibles
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box-footer">
+          <div class="pull-left">
+            <div class="radio">
+              <label>
+                <input type="radio" name="idaVuelta" value="vuelta" ng-model="filter.idaVuelta">
+                Ida y Vuelta
+              </label>
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+              <label>
+                <input type="radio" name="idaVuelta" value="ida" ng-model="filter.idaVuelta">
+                Solo  Ida
+              </label>
+            </div>
+          </div>
+          <button type="button" class="btn btn-info pull-right" ng-click="buscar()">Buscar</button>
+        </div>
+      </form>
+		</div>
+	</div>
+</div>
+
+<div class="row" ng-if="resultados.length">
+  <div class="col-md-12 col-xs-12">
+    <div class="box box-success">
+      <div class="box-header">
+        <h2 class="box-title">Resultado de busqueda</h2>
+      </div>
+      
+      <div class="box-body table-responsive">
+        <blockquote>
+          <p>Linea 1</p>
+        </blockquote>
+        <table class="table table-hover">
+          <tr>
+            <th>Salida</th>
+            <th>Llegada</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td>08:05</td>
+            <td>11:05</td>
+            <td>Montevideo</td>
+            <td>Paysandu</td>
+            <td>
+              <a href="#/detalle/1" class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
+              <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="reservar()"><i class="fa fa-bookmark"></i></a>
+              <a href="#/comprar/1" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>08:05</td>
+            <td>11:05</td>
+            <td>Montevideo</td>
+            <td>Paysandu</td>
+            <td>
+              <a href="#/detalle/2" class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
+              <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="reservar()"><i class="fa fa-bookmark"></i></a>
+              <a href="#/comprar/2" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>08:05</td>
+            <td>11:05</td>
+            <td>Montevideo</td>
+            <td>Paysandu</td>
+            <td>
+              <a href="#/detalle/3" class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
+              <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="reservar()"><i class="fa fa-bookmark"></i></a>
+              <a href="#/comprar/3" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-reservar">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <form class="">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4>Reservar Pasaje</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-xs-4">
+                  <p><strong>Origien y Destino</strong></p>
+                  <p>Montevideo <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> Paysandu</p>
+                </div>
+                <div class="col-xs-4">
+                  <p><strong>Linea</strong></p>
+                  <p>Linea 150</p>
+                </div>
+                <div class="col-xs-4">
+                  <p><strong>Horario</strong></p>
+                  <p>08:05 a 11:05</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label>Cantidad de pasajes</label>
+                    <input class="form-control" type="number" name="cantida" value="1" align="right" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <a class="btn btn-success pull-right">Reservar</a>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>

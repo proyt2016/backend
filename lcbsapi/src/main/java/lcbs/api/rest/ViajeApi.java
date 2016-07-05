@@ -43,9 +43,15 @@ public class ViajeApi {
 		return repo.getTerminales(pagina, elementosPagina);
 	}
 	
+	@GET
+	@Path("/getparadas/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataParada> getParadas(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
+		return repo.getParadas(pagina, elementosPagina);
+	}
+	
 	@POST
 	@Path("/buscarviaje/{pagina}/{elementosPagina}")
-	public Map<String, DataViaje> BuscarViaje(DataViaje filtro, @PathParam("pagina") final Integer pagina, @PathParam("elementosPagina") final Integer ElementosPagina){
+	public List<DataViaje> BuscarViaje(DataViaje filtro, @PathParam("pagina") final Integer pagina, @PathParam("elementosPagina") final Integer ElementosPagina){
 		return repo.BuscarViaje(filtro, pagina, ElementosPagina);
 	}
 	
@@ -83,7 +89,7 @@ public class ViajeApi {
 	
 	@GET
 	@Path("/listarreservas/")
-	public Map<String, DataReserva> ListarReservas(String data) {
+	public List<DataReserva> ListarReservas(String data) {
 		JSONObject obj = new JSONObject(data);
 		return repo.ListarReservas(obj.getString("idUsuario"));
 	}
@@ -137,11 +143,24 @@ public class ViajeApi {
 		repo.EditarRecorrido(recorrido);
 	}
 	
+	@POST
+	@Path("/bajarecorrido/")
+	public void BajaRecorrido(String data){
+		JSONObject obj = new JSONObject(data);
+		repo.BajaRecorrido(obj.getString("idRecorrido"));
+	}
+	
 	//tested
 	@GET
 	@Path("/getrecorrido/{idRecorrido}")
 	public DataRecorrido obtenerRecorrido(@PathParam("idRecorrido") final String idRecorrido){
 		return repo.obtenerRecorrido(idRecorrido);
+	}
+	
+	@GET
+	@Path("/listarrecorridos/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataRecorrido> listarRecorridos(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar") final Integer elementosPagina) {
+		return repo.listarRecorridos(pagina, elementosPagina);
 	}
 	
 	@POST
@@ -159,7 +178,7 @@ public class ViajeApi {
 	
 	@GET
 	@Path("/listarhistorialpasajes/{idUsuario}")
-	public Map<String, DataPasaje> obtenerHistorialPasajes(@PathParam("idUsuario") final String idUsuario){
+	public List<DataPasaje> obtenerHistorialPasajes(@PathParam("idUsuario") final String idUsuario){
 		return repo.obtenerHistorialPasajes(idUsuario);
 	}
 	

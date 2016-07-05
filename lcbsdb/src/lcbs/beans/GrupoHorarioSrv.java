@@ -16,6 +16,7 @@ import lcbs.models.GrupoHorario;
 import lcbs.shares.DataGrupoHorario;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,8 +32,8 @@ public class GrupoHorarioSrv implements GrupoHorarioLocalApi {
         
     }
     
-    public Map<String,DataGrupoHorario> obtenerGrupoHorario(Integer pagina, Integer elementosPagina){
-    	Map<String,DataGrupoHorario> grupos = new HashMap();
+    public List<DataGrupoHorario> obtenerGrupoHorario(Integer pagina, Integer elementosPagina){
+    	List<DataGrupoHorario> grupos = new ArrayList();
         //obtengo todos los grupos de horarios de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(GrupoHorario.class);
@@ -42,7 +43,7 @@ public class GrupoHorarioSrv implements GrupoHorarioLocalApi {
         List<GrupoHorario> listGrupHor = criteria.list();
         
         listGrupHor.stream().forEach((grp) -> {
-        	grupos.put(grp.getId(), grp.getDatatype());
+        	grupos.add(grp.getDatatype(true));
         });
         return grupos;
     }
@@ -58,14 +59,14 @@ public class GrupoHorarioSrv implements GrupoHorarioLocalApi {
     public DataGrupoHorario getGrupoHorario(String id){
     	Session session = (Session) em.getDelegate();
     	GrupoHorario realObj = (GrupoHorario) session.get(GrupoHorario.class, id);
-		return realObj.getDatatype();
+		return realObj.getDatatype(true);
     }
     
     public DataGrupoHorario crearGrupoHorario(DataGrupoHorario grp){
     	GrupoHorario realObj = new GrupoHorario(grp);
         //guardo el grupo de horarios en bd
         em.persist(grp);
-        return realObj.getDatatype();
+        return realObj.getDatatype(true);
     }
     
     public void borrarGrupoHorario(String idGrp){

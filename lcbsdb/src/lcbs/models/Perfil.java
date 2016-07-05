@@ -28,6 +28,7 @@ public class Perfil implements Serializable{
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+    private String nombrePerfil;
     private boolean modulo1;
     private boolean modulo2;
     private boolean modulo3;
@@ -44,8 +45,9 @@ public class Perfil implements Serializable{
 
     public Perfil() {}
     
-    public Perfil(String id, boolean mod1, boolean mod2, boolean mod3, boolean mod4, boolean mod5, boolean mod6, boolean mod7, boolean mod8, List<Empleado> emp) {
+    public Perfil(String id, String nom, boolean mod1, boolean mod2, boolean mod3, boolean mod4, boolean mod5, boolean mod6, boolean mod7, boolean mod8, List<Empleado> emp) {
         this.id = id;
+        this.nombrePerfil = nom;
         this.modulo1 = mod1;
         this.modulo2 = mod2;
         this.modulo3 = mod3;
@@ -57,8 +59,9 @@ public class Perfil implements Serializable{
         this.empleados = emp;
     }
     
-    public Perfil(DataPerfil dt){
+    public Perfil(DataPerfil dt, Boolean conHijos){
     	this.setId(dt.getId());
+    	this.setNombrePerfil(dt.getNombre());
     	this.setModulo1(dt.getModulo1());
     	this.setModulo2(dt.getModulo2());
     	this.setModulo3(dt.getModulo3());
@@ -67,18 +70,19 @@ public class Perfil implements Serializable{
     	this.setModulo6(dt.getModulo6());
     	this.setModulo7(dt.getModulo7());
     	this.setModulo8(dt.getModulo8());
-    	if(dt.getEmpleados() != null){
+    	if(dt.getEmpleados() != null && conHijos){
 	    	List<Empleado> aux = new ArrayList<Empleado>();
 	    	dt.getEmpleados().stream().forEach((emp) -> {
-	    		aux.add(new Empleado(emp));
+	    		aux.add(new Empleado(emp, false));
 	        });
 	    	this.setEmpleados(aux);
     	}
     }
     
-    public DataPerfil getDatatype(){
+    public DataPerfil getDatatype(Boolean conHijos){
     	DataPerfil result = new DataPerfil();
     	result.setId(this.getId());
+    	result.setNombre(this.getNombrePerfil());
     	result.setModulo1(this.getModulo1());
     	result.setModulo2(this.getModulo2());
     	result.setModulo3(this.getModulo3());
@@ -87,10 +91,10 @@ public class Perfil implements Serializable{
     	result.setModulo6(this.getModulo6());
     	result.setModulo7(this.getModulo7());
     	result.setModulo8(this.getModulo8());
-    	if(this.getEmpleados()!=null){
+    	if(this.getEmpleados()!=null && conHijos){
     	List<DataEmpleado> aux = new ArrayList<DataEmpleado>();
     	this.getEmpleados().stream().forEach((emp) -> {
-    		aux.add(emp.getDatatype());
+    		aux.add(emp.getDatatype(false));
         });
     	result.setEmpleados(aux);}
     	return result;
@@ -103,6 +107,14 @@ public class Perfil implements Serializable{
     
     public String getId(){
         return this.id;
+    }
+    
+    public void setNombrePerfil(String val){
+        this.nombrePerfil = val;
+    }
+    
+    public String getNombrePerfil(){
+        return this.nombrePerfil;
     }
 
     public void setModulo1(boolean val){

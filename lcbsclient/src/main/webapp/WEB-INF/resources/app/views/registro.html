@@ -1,0 +1,40 @@
+<div class="register-box">
+  <div class="register-box-body">
+    <p class="login-box-msg">Registrarse</p>
+
+    <form name="registroForm" ng-submit="registroForm.$valid && registrarse()" novalidate>
+      <div class="form-group has-feedback" ng-class="{ 'has-error' : submitted && registroForm.nombre.$invalid }">
+        <input type="text" class="form-control" placeholder="Nombre" ng-model="usuario.nombre" name="nombre" required>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback" ng-class="{ 'has-error' : submitted && registroForm.email.$invalid }">
+        <input type="email" class="form-control" placeholder="Email" ng-model="usuario.email" name="email" required>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback" ng-class="{ 'has-error' : submitted && registroForm.clave.$invalid }">
+        <input type="password" class="form-control" placeholder="Clave" ng-model="usuario.clave" name="clave" required>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback" ng-class="{ 'has-error' : submitted && (registroForm.rep_clave.$invalid || registroForm.rep_clave.$error.pattern) }">
+        <input type="password" class="form-control" placeholder="Repetir clave" ng-model="usuario.rep_clave" name="rep_clave" ng-pattern="usuario.clave" required>
+        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        <p class="help-block" ng-show="submitted && registroForm.rep_clave.$error.pattern">Las claves no coinciden</p>
+      </div>
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat" ng-click="submitted=true">Guardar</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+    <div class="social-auth-links text-center">
+      <p>- O -</p>
+      <a class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Ingresar usando
+        Facebook</a>
+    </div>
+
+    <a href="#/login" class="text-center">Ya estoy registrado</a>
+  </div>
+</div>

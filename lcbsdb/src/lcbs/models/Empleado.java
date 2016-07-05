@@ -28,14 +28,15 @@ public class Empleado extends Persona implements Serializable{
         idEmpleadoLdap = "";
     }
     
-    public Empleado(String id, String ape, Email mail, List<Telefono> tels, Date fecNac, String idEmpLdap, Perfil perf, Boolean elim) {
-        super(id, ape, mail, tels, fecNac, elim);
+    public Empleado(String id, String nm, String ape, Email mail, List<Telefono> tels, Date fecNac, String idEmpLdap, Perfil perf, Boolean elim) {
+        super(id, nm, ape, mail, tels, fecNac, elim);
         this.idEmpleadoLdap = idEmpLdap;
         this.perfil = perf;
     }
     
-    public Empleado(DataEmpleado dt){
+    public Empleado(DataEmpleado dt, Boolean conHijos){
     	this.setId(dt.getId());
+    	this.setNombrePila(dt.getNombrePila());
     	this.setApellido(dt.getApellido());
     	if(dt.getEmail() != null)
     		this.setEmail(new Email(dt.getEmail()));
@@ -49,18 +50,19 @@ public class Empleado extends Persona implements Serializable{
     	this.setFechaNacimiento(dt.getFechaNacimiento());
     	this.setEliminado(dt.getEliminado());
     	this.setIdEmpleadoLdap(dt.getIdEmpleadoLdap());
-    	if(dt.getPerfil() != null){
-    		this.setPerfil(new Perfil(dt.getPerfil()));
+    	if(dt.getPerfil() != null && conHijos){
+    		this.setPerfil(new Perfil(dt.getPerfil(), false));
     	}
     }
     
-    public DataEmpleado getDatatype(){
+    public DataEmpleado getDatatype(Boolean conHijos){
     	DataEmpleado result = new DataEmpleado();
     	result.setId(this.getId());
+    	result.setNombrePila(this.getNombrePila());
     	result.setApellido(this.getApellido());
     	if(this.getEmail()!=null)
     		result.setEmail(new DataEmail(this.getEmail().getEmail()));
-    	if(this.getTelefonosContacto()!=null){
+    	if(this.getTelefonosContacto()!=null && conHijos){
 	    	List<DataTelefono> temp = new ArrayList<DataTelefono>();
 	    	this.getTelefonosContacto().stream().forEach((tel) -> {
 	    		temp.add(tel.getDatatype());
@@ -71,7 +73,7 @@ public class Empleado extends Persona implements Serializable{
     	result.setEliminado(this.getEliminado());
     	result.setIdEmpleadoLdap(this.getIdEmpleadoLdap());
     	if(this.getPerfil()!=null)
-    		result.setPerfil(this.getPerfil().getDatatype());
+    		result.setPerfil(this.getPerfil().getDatatype(false));
     	return result;
     }
 

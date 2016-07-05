@@ -71,8 +71,9 @@ public class UsuarioApi {
 	
 	@POST
 	@Path("/bajaempleado/")
-	public void BajaEmpleado(String idEmpleado){
-		repo.BajaEmpleado(idEmpleado);
+	public void BajaEmpleado(String data){
+		JSONObject obj = new JSONObject(data);
+		repo.BajaEmpleado(obj.getString("idEmpleado"));
 	}
 	
 	@POST
@@ -88,10 +89,11 @@ public class UsuarioApi {
 		return repo.listarNotificaciones(idUsuario);
 	}
 	
+	//tested
 	@POST
 	@Path("/altaperfil/")
-	public void AltaPerfil(final DataPerfil perfil) {
-		repo.AltaPerfil(perfil);
+	public DataPerfil AltaPerfil(final DataPerfil perfil) {
+		return repo.AltaPerfil(perfil);
 	}
 	
 	@POST
@@ -100,12 +102,13 @@ public class UsuarioApi {
 		repo.EditarPerfil(perfil);
 	}
 	
-	@POST
-	@Path("/eliminarperfil/")
-	public void EliminarPerfil(String idPerfil){
+	@DELETE
+	@Path("/eliminarperfil/{idPerfil}")
+	public void EliminarPerfil(@PathParam("idPerfil") String idPerfil){
 		repo.EliminarPerfil(idPerfil);
 	}
 	
+	//tested
 	@POST
 	@Path("/asignarperfil/")
 	public void AsignarPerfil(String data) {
@@ -138,6 +141,12 @@ public class UsuarioApi {
 	public DataEmpleado getEmpleado(@PathParam("idEmpleado") final String idEmpleado) {
 		return repo.getEmpleado(idEmpleado);
 	}
+	
+	@GET
+	@Path("/listarempleados/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataEmpleado> listarEmpleados(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
+		return repo.listarEmpleados(pagina, elementosPagina);
+	}
 
 	@GET
 	@Path("/getperfil/{idPerfil}")
@@ -147,7 +156,7 @@ public class UsuarioApi {
 
 	@GET
 	@Path("/listarperfiles/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
-	public Map<String, DataPerfil> listarPerfiles(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
+	public List<DataPerfil> listarPerfiles(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
 		return repo.listarPerfiles(pagina, elementosPagina);
 	}
 }

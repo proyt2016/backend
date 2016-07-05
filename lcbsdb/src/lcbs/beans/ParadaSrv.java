@@ -15,6 +15,7 @@ import lcbs.models.Parada;
 import lcbs.shares.DataParada;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,8 +31,8 @@ public class ParadaSrv implements ParadaLocalApi {
         
     }
     
-    public Map<String,DataParada> obtenerParadas(Integer pagina, Integer elementosPagina){
-    	Map<String,DataParada> paradas = new HashMap();
+    public List<DataParada> obtenerParadas(Integer pagina, Integer elementosPagina){
+    	List<DataParada> paradas = new ArrayList();
         //obtengo todas las paradas de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Parada.class);
@@ -41,7 +42,7 @@ public class ParadaSrv implements ParadaLocalApi {
         List<Parada> listPds = criteria.list();
         
         listPds.stream().forEach((prd) -> {
-        	paradas.put(prd.getId(), prd.getDatatype());
+        	paradas.add(prd.getDatatype());
         });
         return paradas;
     }

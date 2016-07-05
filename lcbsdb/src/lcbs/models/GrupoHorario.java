@@ -85,7 +85,7 @@ public class GrupoHorario implements Serializable{
     	}
     }
     
-    public DataGrupoHorario getDatatype(){
+    public DataGrupoHorario getDatatype(Boolean conHijos){
     	DataGrupoHorario result = new DataGrupoHorario();
     	result.setId(this.getId());
     	result.setNombre(this.getNombre());
@@ -95,12 +95,12 @@ public class GrupoHorario implements Serializable{
         });
     	result.setDiasSemana(aux);*/
     	result.setDiasEspecificos(this.getDiasEspecificos());
-    	if(this.getHorarios()!=null){
-    	List<DataHorario> auxHr = new ArrayList<DataHorario>();
-    	this.getHorarios().stream().forEach((hr) -> {
-    		auxHr.add(hr.getDatatype());
-        });
-    	result.setHorarios(auxHr);
+    	if(this.getHorarios()!=null && conHijos){
+	    	List<DataHorario> auxHr = new ArrayList<DataHorario>();
+	    	this.getHorarios().stream().forEach((hr) -> {
+	    		auxHr.add(hr.getDatatype());
+	        });
+	    	result.setHorarios(auxHr);
     	}
     	return result;
     }

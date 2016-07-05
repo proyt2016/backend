@@ -17,9 +17,14 @@ public class DataUsuario extends DataPersona{
 
     public DataUsuario() {}
     
-    public DataUsuario(String id, String nom, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, DataCuponera cup, List<DataEncomienda> enc, List<DataNotificacion> not) {
-        super(id, ape, mail, tels, fecNac, elim);
-        this.nombreAMostrar = nomMos;
+    public DataUsuario(String id, String nm, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, DataCuponera cup, List<DataEncomienda> enc, List<DataNotificacion> not) {
+    	super.setId(id);
+        super.setNombrePila(nm);
+        super.setApellido(ape);
+        super.setEmail(mail);
+        super.setTelefonosContacto(tels);
+        super.setFechaNacimiento(fecNac);
+        super.setEliminado(elim);
         this.clave = clave;
         this.redSocialUsada = redSoc;
         this.idRedSocial = idRedsoc;
@@ -28,14 +33,6 @@ public class DataUsuario extends DataPersona{
         this.notificaciones = not;
     }
     
-    public void setNombreAMostrar(String val){
-        this.nombreAMostrar = val;
-    }
-    
-    public String getNombreAMostrar(){
-        return this.nombreAMostrar;
-    }
-
     public void setClave(String val){
         this.clave = val;
     }

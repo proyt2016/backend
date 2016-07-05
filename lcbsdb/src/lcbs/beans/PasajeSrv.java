@@ -17,6 +17,7 @@ import lcbs.models.Pasaje;
 import lcbs.shares.DataPasaje;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,8 +33,8 @@ public class PasajeSrv implements PasajeLocalApi {
         
     }
     
-    public Map<String,DataPasaje> obtenerPasajes(Integer pagina, Integer elementosPagina){
-    	Map<String,DataPasaje> Pasajes = new HashMap();
+    public List<DataPasaje> obtenerPasajes(Integer pagina, Integer elementosPagina){
+    	List<DataPasaje> Pasajes = new ArrayList();
         //obtengo todos los Pasajes de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Pasaje.class);
@@ -43,7 +44,7 @@ public class PasajeSrv implements PasajeLocalApi {
         List<Pasaje> listPsj = criteria.list();
         
         listPsj.stream().forEach((psj) -> {
-        	Pasajes.put(psj.getId(), psj.getDatatype());
+        	Pasajes.add(psj.getDatatype());
         });
         return Pasajes;
     }
@@ -77,15 +78,15 @@ public class PasajeSrv implements PasajeLocalApi {
     }
 
 	@Override
-	public Map<String, DataPasaje> obtenerPasajesPorPersona(String idUsuario) {
-		Map<String,DataPasaje> Pasajes = new HashMap();
+	public List<DataPasaje> obtenerPasajesPorPersona(String idUsuario) {
+		List<DataPasaje> Pasajes = new ArrayList();
         //obtengo todos los Pasajes de la bd
         Query query = em.createQuery("SELECT p FROM Pasaje p", Pasaje.class);
         //TODO: Listar por usuario
         
         List<Pasaje> listPsj = query.getResultList();
         listPsj.stream().forEach((psj) -> {
-        	Pasajes.put(psj.getId(), psj.getDatatype());
+        	Pasajes.add(psj.getDatatype());
         });
         return Pasajes;
 	}

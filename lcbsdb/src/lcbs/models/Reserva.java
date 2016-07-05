@@ -85,7 +85,7 @@ public class Reserva implements Serializable{
     		this.setUsuarioReserva(new Usuario(dt.getUsuarioReserva()));
     	}
     	if(dt.getEmpleado() != null){
-    		this.setEmpleado(new Empleado(dt.getEmpleado()));
+    		this.setEmpleado(new Empleado(dt.getEmpleado(),true));
     	}
     	this.setUtilizada(dt.getUtilizada());
     	this.setEliminada(dt.getEliminada());
@@ -95,7 +95,7 @@ public class Reserva implements Serializable{
     	DataReserva result = new DataReserva();
     	result.setId(this.getId());
     	if(this.getViaje()!=null)
-    		result.setViaje(this.getViaje().getDatatype());
+    		result.setViaje(this.getViaje().getDatatype(false));
     	if(this.getPrecio()!=null)
     		result.setPrecio(this.getPrecio().getDatatype());
     	if(this.getOrigen()!=null){
@@ -118,10 +118,10 @@ public class Reserva implements Serializable{
     	}
     	result.setFechaReserva(this.getFechaReserva());
     	if(this.getUsuarioReserva()!=null)
-    		result.setUsuarioReserva(this.getUsuarioReserva().getDatatype());
+    		result.setUsuarioReserva(this.getUsuarioReserva().getDatatype(false));
     	result.setCiPersona(this.getCiPersona());
     	if(this.getEmpleado()!=null)
-    		result.setEmpleado(this.getEmpleado().getDatatype());
+    		result.setEmpleado(this.getEmpleado().getDatatype(false));
     	result.setUtilizada(this.getUtilizada());
     	result.setEliminada(this.getEliminada());
     	return result;

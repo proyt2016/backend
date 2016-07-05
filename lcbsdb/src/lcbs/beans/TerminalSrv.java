@@ -18,6 +18,14 @@ import lcbs.interfaces.TerminalLocalApi;
 import lcbs.models.Terminal;
 import lcbs.shares.DataTerminal;
 
+<<<<<<< HEAD
+=======
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+>>>>>>> 27f9cf075deda715314305027d10318b1060832c
 /**
  * Session Bean implementation class TerminalSrv
  */
@@ -34,9 +42,14 @@ public class TerminalSrv implements TerminalLocalApi {
         
     }
     
+<<<<<<< HEAD
     public Map<String,DataTerminal> obtenerTerminals(Integer pagina, Integer elementosPagina){
     	this.log("que onda man");    	
     	Map<String,DataTerminal> terminales = new HashMap();
+=======
+    public List<DataTerminal> obtenerTerminals(Integer pagina, Integer elementosPagina){
+    	List<DataTerminal> terminales = new ArrayList();
+>>>>>>> 27f9cf075deda715314305027d10318b1060832c
         //obtengo todas las terminales de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Terminal.class);
@@ -47,7 +60,7 @@ public class TerminalSrv implements TerminalLocalApi {
         this.log(String.valueOf(listTer.size()));
         this.log("que onda man");
         listTer.stream().forEach((ter) -> {
-        	terminales.put(ter.getId(), ter.getDatatype());
+        	terminales.add(ter.getDatatype());
         });
         return terminales;
     }

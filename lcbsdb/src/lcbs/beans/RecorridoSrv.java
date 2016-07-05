@@ -17,6 +17,7 @@ import lcbs.models.Recorrido;
 import lcbs.shares.DataRecorrido;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,8 +33,8 @@ public class RecorridoSrv implements RecorridoLocalApi {
         
     }
     
-    public Map<String,DataRecorrido> obtenerRecorridos(Integer pagina, Integer elementosPagina){
-    	Map<String,DataRecorrido> Recorridos = new HashMap();
+    public List<DataRecorrido> obtenerRecorridos(Integer pagina, Integer elementosPagina){
+    	List<DataRecorrido> Recorridos = new ArrayList();
         //obtengo todos los Recorridos de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Recorrido.class);
@@ -43,7 +44,7 @@ public class RecorridoSrv implements RecorridoLocalApi {
         List<Recorrido> listRec = criteria.list();
         
         listRec.stream().forEach((rec) -> {
-        	Recorridos.put(rec.getId(), rec.getDatatype());
+        	Recorridos.add(rec.getDatatype(true));
         });
         return Recorridos;
     }
@@ -59,7 +60,7 @@ public class RecorridoSrv implements RecorridoLocalApi {
     public DataRecorrido getRecorrido(String id){
     	Session session = (Session) em.getDelegate();
     	Recorrido realObj = (Recorrido) session.get(Recorrido.class, id);
-		return realObj.getDatatype();
+		return realObj.getDatatype(true);
     }
     
     public DataRecorrido crearRecorrido(DataRecorrido rec){
@@ -67,7 +68,7 @@ public class RecorridoSrv implements RecorridoLocalApi {
     	realObj.setEliminado(false);
         //guardo el Recorrido en bd
         em.persist(realObj);
-        return realObj.getDatatype();
+        return realObj.getDatatype(true);
     }
     
     public void darBajaRecorrido(String idRecorrido){

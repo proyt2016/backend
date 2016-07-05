@@ -1,17 +1,141 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>ClientApp</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.css">
+  <!-- AdminLTE Skins -->
+  <link rel="stylesheet" href="dist/css/skins/skin-red-light.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="libs/select2/select2.min.css">
+  <!-- Toast style -->
+  <link rel="stylesheet" href="dist/css/angular-toastr.css">
+  </style>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <title>LacBus</title>
 </head>
-<body>
-	<h1>chupala</h1>
-	<script src="https://code.jquery.com/jquery-git.min.js" />
-	<script>
-    $(document).ready(function(){
-    	$.ajax({url:"http://localhost:8080/lcbsapi/rest/tenant/list"}).done(function(data){
-			console.log(data);
-			})
-        })
-		
-    </script>
+
+<body class="hold-transition skin-red-light layout-top-nav" ng-app="lacbus">
+  <!-- Site wrapper -->
+  <div class="wrapper">
+
+    <header class="main-header">
+      <nav class="navbar navbar-static-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a href="#/" class="navbar-brand"><b>L</b>ac<b>B</b>us</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+              <i class="fa fa-bars"></i>
+            </button>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="#/">Inicio</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#/login">Iniciar Sesi&oacute;n</a></li>
+              <li><a href="#/registro">Registrarse</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">Andrulo <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#/historial-compra">Compras</a></li>
+                  <li><a href="#/cuponera">Cuponera</a></li>
+                  <li><a href="#/historial-reserva">Reservas</a></li>
+                  <li><a href="#/encomiendas">Encomiendas</a></li>
+                  <li><a href="#/historial-notifacion">Notificaciones</a></li>
+                  <li class="divider"></li>
+                  <li><a>Cerrar Sesion</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+    </header>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" >
+
+      <!-- Main content -->
+      <div class="container">
+        
+        <section class="content">
+          <div class="row">
+
+            <div class="col-md-12" ng-view>
+              
+            </div>
+          
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+      <strong>Copyright &copy; LacBus.</strong> All rights reserved.
+    </footer>
+  </div>
+  <!-- ./wrapper -->
+  
+  <script src="dist/js/angular.min.js"></script>
+  <script src="dist/js/angular-route.min.js"></script>
+  <script src="dist/js/angular-animate.min.js"></script>
+  <script src="dist/js/angular-toastr.tpls.min.js"></script>
+
+  <!-- jQuery 2.2.0 -->
+  <script src="libs/jQuery/jQuery-2.2.0.min.js"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <!-- Select2 -->
+  <script src="libs/select2/select2.full.min.js"></script>
+  <!-- bootstrap datepicker -->
+  <script src="libs/datepicker/bootstrap-datepicker.js"></script>
+  <!-- AdminLTE App -->
+  <script src="dist/js/app.min.js"></script>
+  <script src="libs/moment.js"></script>
+  
+  <!-- app -->
+  <script src="app/app.js"></script>
+  
+  <!-- services -->
+  <script src="app/services/usuario.js"></script>
+  <script src="app/services/terminal.js"></script>
+  <script src="app/services/recorrido.js"></script>
+  <script src="app/services/viaje.js"></script>
+  
+  <!-- controllers -->
+  <script src="app/controllers/home.js"></script>
+  <script src="app/controllers/registro.js"></script>
+  <script src="app/controllers/login.js"></script>
+  <script src="app/controllers/detalle.js"></script>
+  <script src="app/controllers/comprar.js"></script>
+  <script src="app/controllers/encomienda.js"></script>
+  <script src="app/controllers/cuponera.js"></script>
+  <script src="app/controllers/historial-compra.js"></script>
+  <script src="app/controllers/historial-reserva.js"></script>
+  <script src="app/controllers/comprar-reserva.js"></script>
+  <script src="app/controllers/historial-notificacion.js"></script>
+
 </body>
+
 </html>

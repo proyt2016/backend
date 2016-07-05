@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+default.configuration=lcbsapi
+=======
 default.configuration=lcbsapi (1)
+>>>>>>> cd5611903f0a6a1bff680b7c21fd734a87ef5b40
 eclipse.preferences.version=1
 hibernate3.enabled=true

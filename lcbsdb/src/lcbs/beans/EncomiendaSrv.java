@@ -18,6 +18,7 @@ import lcbs.models.Encomienda;
 import lcbs.models.Viaje;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,8 +34,8 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         
     }
     
-    public Map<String,DataEncomienda> obtenerEncomiendas(Integer pagina, Integer elementosPagina){
-    	Map<String,DataEncomienda> encomiendas = new HashMap();
+    public List<DataEncomienda> obtenerEncomiendas(Integer pagina, Integer elementosPagina){
+    	List<DataEncomienda> encomiendas = new ArrayList();
         //obtengo todas las encomiendas de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Encomienda.class);
@@ -44,7 +45,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         List<Encomienda> listEnc = criteria.list();
         
         listEnc.stream().forEach((enc) -> {
-        	encomiendas.put(enc.getId(), enc.getDatatype());
+        	encomiendas.add(enc.getDatatype(true));
         });
         return encomiendas;
     }
@@ -60,7 +61,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     public DataEncomienda getEncomienda(String id){
 		Session session = (Session) em.getDelegate();
 		Encomienda realObj = (Encomienda) session.get(Encomienda.class, id);
-		return realObj.getDatatype();
+		return realObj.getDatatype(true);
     }
     
     public DataEncomienda crearEncomienda(DataEncomienda enc){
@@ -68,7 +69,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     	realObj.setEliminada(false);
         //guardo la encomienda en bd
         em.persist(realObj);
-        return realObj.getDatatype();
+        return realObj.getDatatype(true);
     }
     
     public void darBajaEncomienda(String idEncomienda){
@@ -77,8 +78,8 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         this.modificarEncomienda(enc);
     }
     
-    public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina){
-    	Map<String,DataEncomienda> encomiendas = new HashMap();
+    public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina){
+    	List<DataEncomienda> encomiendas = new ArrayList();
         Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Encomienda.class);
     	if(filtro.getOrigen() != null)
@@ -112,7 +113,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         List<Encomienda> listEnc = criteria.list();
         
         listEnc.stream().forEach((enc) -> {
-        	encomiendas.put(enc.getId(), enc.getDatatype());
+        	encomiendas.add(enc.getDatatype(true));
         });
         return encomiendas;
     }

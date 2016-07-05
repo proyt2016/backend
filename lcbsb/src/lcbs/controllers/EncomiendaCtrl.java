@@ -40,16 +40,13 @@ public class EncomiendaCtrl implements IEncomienda{
 
 	@Override
 	public List<DataEncomienda> ListarEncomiendas(Integer pagina, Integer elementosPagina) {
-		List<DataEncomienda> listaEncomiendas = new ArrayList( srvEncomienda.obtenerEncomiendas(pagina, elementosPagina).values());
-		return listaEncomiendas;
+		return srvEncomienda.obtenerEncomiendas(pagina, elementosPagina);
 		
 	}
 	
 	@Override
 	public List<DataReglaCobroEncomienda> getReglasDeCobro(Integer pagina, Integer elementosPagina) {
-		@SuppressWarnings("unchecked")
-		List<DataReglaCobroEncomienda> listaReglaCobro = new ArrayList(srvReglaCobro.obtenerReglaCobroEncomiendas(pagina, elementosPagina).values());
-		return listaReglaCobro;
+		return srvReglaCobro.obtenerReglaCobroEncomiendas(pagina, elementosPagina);
 	}
 	
 	@Override
@@ -91,7 +88,7 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 	
 	@Override
-	public Map<String, DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina) {
+	public List<DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina) {
 		return srvEstadosEncomienda.obtenerEstadosEncomienda(pagina, elementosPagina);
 	}
 	
@@ -145,7 +142,7 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 
 	@Override
-	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina) {
+	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina) {
 		return srvEncomienda.buscarEncomienda(filtro, pagina, ElementosPagina);
 	}
 }

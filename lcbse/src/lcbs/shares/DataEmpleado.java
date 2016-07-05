@@ -14,12 +14,18 @@ public class DataEmpleado extends DataPersona{
         idEmpleadoLdap = "";
     }
     
-    public DataEmpleado(String id, String nom, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, String idEmpLdap, DataPerfil perf, Boolean elim) {
-        super(id, ape, mail, tels, fecNac, elim);
+    public DataEmpleado(String id, String nm, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, String idEmpLdap, DataPerfil perf, Boolean elim) {
+        super.setId(id);
+        super.setNombrePila(nm);
+        super.setApellido(ape);
+        super.setEmail(mail);
+        super.setTelefonosContacto(tels);
+        super.setFechaNacimiento(fecNac);
+        super.setEliminado(elim);
         this.idEmpleadoLdap = idEmpLdap;
         this.perfil = perf;
     }
-
+ 
     public void setIdEmpleadoLdap(String val){
         this.idEmpleadoLdap = val;
     }

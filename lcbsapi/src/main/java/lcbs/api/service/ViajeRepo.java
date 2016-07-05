@@ -22,6 +22,7 @@ import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.ws.rs.PathParam;
 
 import interfaces.*;
 import lcbs.shares.*;
@@ -33,7 +34,7 @@ public class ViajeRepo {
 	@EJB(lookup =  "java:app/lcbsb/ViajeCtrl!interfaces.IViaje")
 	IViaje ctrViaje;
 	
-	public Map<String, DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina){
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina){
 		return ctrViaje.BuscarViaje(filtro, pagina, ElementosPagina);
 	}
 	
@@ -57,7 +58,7 @@ public class ViajeRepo {
 		ctrViaje.CancelarReserva(idReserva);
 	}
 	
-	public Map<String, DataReserva> ListarReservas(String idUsuario){
+	public List<DataReserva> ListarReservas(String idUsuario){
 		return ctrViaje.ListarReservas(idUsuario);
 	}
 	
@@ -93,6 +94,10 @@ public class ViajeRepo {
 		return ctrViaje.obtenerRecorrido(idRecorrido);
 	}
 	
+	public List<DataRecorrido> listarRecorridos(Integer pagina, Integer elementosPagina) {
+		return ctrViaje.listarRecorridos(pagina, elementosPagina);
+	}
+	
 	public DataPasaje ComprarPasajeReservado(DataReserva reserva){
 		return ctrViaje.ComprarPasajeReservado(reserva);
 	}
@@ -101,7 +106,7 @@ public class ViajeRepo {
 		return ctrViaje.obtenerParada(IdParada);
 	}
 	
-	public Map<String, DataPasaje> obtenerHistorialPasajes(String idUsuario){
+	public List<DataPasaje> obtenerHistorialPasajes(String idUsuario){
 		return ctrViaje.obtenerHistorialPasajes(idUsuario);
 	}
 	
@@ -126,5 +131,13 @@ public class ViajeRepo {
 	}
 	public List<DataTerminal> getTerminales(int pagina, int elementos){
 		return ctrViaje.getTerminales(pagina, elementos);
+	}
+	
+	public List<DataParada> getParadas(Integer pagina, Integer elementosPagina) {
+		return ctrViaje.getParadas(pagina, elementosPagina);
+	}
+
+	public void BajaRecorrido(String idRecorrido) {
+		ctrViaje.BajaRecorrido(idRecorrido);		
 	}
 }

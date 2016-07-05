@@ -18,7 +18,7 @@
     </div>
   </div>
 </div>
-<div class="col-md-12 col-sm-12 col-xs-12" id="elementoParaMapa" ng-controller="puntosrecorridoCtrl">
+<div class="col-md-12 col-sm-12 col-xs-12" id="elementoParaMapa">
   <div class="x_panel">
     <div class="x_title">
       <h2>Mapa de puntos de recorrido</h2>
@@ -76,11 +76,3 @@
     </div>
   </div>
 </div>
-<script>
-
-initMap = function () {
-    angular.element(document.getElementById('elementoParaMapa')).scope().initMap();
-}
-
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVL227yFvpTa6b0oolhl3PW_BPGLFMnwI&signed_in=true&callback=initMap"></script>

@@ -11,12 +11,14 @@
         
         puntosrecorridoService.getTerminales().then(function (data) {
             $scope.puntosrecorridoLst = data;
+            puntosrecorridoService.getParadas().then(function (data) {
+                var newArray = $scope.puntosrecorridoLst.concat(data);
+                $scope.puntosrecorridoLst = newArray;
+                initMap();
+            });
         });
 
-        puntosrecorridoService.getParadas().then(function (data) {
-            var newArray = $scope.puntosrecorridoLst.concat(data);
-            $scope.puntosrecorridoLst = newArray;
-        });
+        
 
         $scope.add = function(){
             $scope.saving   = true;
@@ -72,7 +74,7 @@
             }
         }
 
-        $scope.initMap = function () {
+        var initMap = function () {
 
             //usamos la API para geolocalizar el usuario
             navigator.geolocation.getCurrentPosition(
@@ -81,7 +83,7 @@
                   lng: position.coords.longitude,
                   lat: position.coords.latitude
                 };
-                $scope.setMapa(coords);  //pasamos las coordenadas al metodo para crear el mapa
+                setMapa(coords);  //pasamos las coordenadas al metodo para crear el mapa
                 
                
               },function(error){console.log(error);});
@@ -89,7 +91,7 @@
         }
 
 
-        $scope.setMapa = function (coords) {
+        var setMapa = function (coords) {
           //Se crea una nueva instancia del objeto mapa
           var map = new google.maps.Map(document.getElementById('map'),
           {
@@ -100,17 +102,17 @@
 
           for(var i in $scope.puntosrecorridoLst){
             var lats = $scope.puntosrecorridoLst[i].ubicacionMapa.split(",");
-            $scope.placeMarkerAndPanTo(new google.maps.LatLng(lats[0],lats[1]), map);
+            placeMarkerAndPanTo(new google.maps.LatLng(lats[0],lats[1]), map);
           }
 
           $('#ubicacionMapa').val('');
 
           map.addListener('click', function(e) {
-            $scope.placeMarkerAndPanTo(e.latLng, map);
+            placeMarkerAndPanTo(e.latLng, map);
           });
         }
 
-        $scope.placeMarkerAndPanTo = function (latLng, map) {
+        var placeMarkerAndPanTo = function (latLng, map) {
           var marker = new google.maps.Marker({
             position: latLng,
             draggable: true,
@@ -140,6 +142,8 @@
                 $('#ubicacionMapa').val(this.getPosition().lat()+","+ this.getPosition().lng()).trigger('input');
               });
         }
+
+        
 
     }
 

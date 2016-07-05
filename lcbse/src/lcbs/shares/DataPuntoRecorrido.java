@@ -4,7 +4,8 @@ public abstract class DataPuntoRecorrido{
 	  	private String id;
 	    private String nombre;
 	    private String ubicacionMapa;
-	    private Boolean eliminado;    
+	    private Boolean eliminado; 
+	    
 	    public void setId(String val){
 	        this.id = val;
 	    }

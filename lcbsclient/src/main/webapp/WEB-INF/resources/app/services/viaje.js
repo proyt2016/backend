@@ -1,13 +1,13 @@
 (function () {
     'use strict';
-    angular.module('lacbus').service('recorridoService', ['$http', '$q', recorridoService]);
+    angular.module('lacbus').service('viajeService', ['$http', '$q', viajeService]);
 
-    function recorridoService($http, $q) {
+    function viajeService($http, $q) {
 
-        var getAll = function(){
+        var buscar = function(filtro){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/listarrecorridos/1/1000')
+            $http.post('/lcbsapi/rest/viajes/buscarviaje/1/1000', filtro)
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -21,7 +21,7 @@
         var getId = function(id){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/getrecorrido/' + id)
+            $http.get('/lcbsapi/rest/viajes/getterminal/' + id)
             .success(function (dato) {
                 defer.resolve(dato);
             })
@@ -33,7 +33,7 @@
         };
 
         return {
-            getAll  : getAll,
+            buscar  : buscar,
             getId   : getId
         }
 

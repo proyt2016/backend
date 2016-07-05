@@ -18,6 +18,7 @@ import lcbs.shares.DataEmpleado;
 import lcbs.shares.DataUsuario;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,8 +34,8 @@ public class UsuarioSrv implements UsuarioLocalApi {
         
     }
     
-    public Map<String,DataUsuario> obtenerUsuarios(Integer pagina, Integer elementosPagina){
-    	Map<String,DataUsuario> usuarios = new HashMap();
+    public List<DataUsuario> obtenerUsuarios(Integer pagina, Integer elementosPagina){
+    	List<DataUsuario> usuarios = new ArrayList();
         //obtengo todos los usuarios de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Usuario.class);
@@ -44,7 +45,7 @@ public class UsuarioSrv implements UsuarioLocalApi {
         List<Usuario> listUsu = criteria.list();
         
         listUsu.stream().forEach((usu) -> {
-        	usuarios.put(usu.getId(), usu.getDatatype(true));
+        	usuarios.add(usu.getDatatype(true));
         });
         return usuarios;
     }

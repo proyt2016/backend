@@ -101,14 +101,14 @@ public class EncomiendaRepo {
 		ctrEncomienda.bajaEncomienda(idEncomienda);
 	}
 
-	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina) {
+	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina) {
 		return ctrEncomienda.buscarEncomienda(filtro, pagina, ElementosPagina);
 	}
 	
 	public void borrarEstadoEncomienda(String idEstadoEncomienda){
 		ctrEncomienda.borrarEstadoEncomienda(idEstadoEncomienda);
 	}
-	public Map<String, DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina){
+	public List<DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina){
 		return ctrEncomienda.listarEstadoEncomienda(pagina, elementosPagina);
 	}
 	public DataEstadosEncomienda crearEstadoEncomienda(DataEstadosEncomienda estado){

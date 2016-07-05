@@ -9,12 +9,7 @@
 
              $http.get('/lcbsapi/rest/usuarios/listarempleados/1/10000')
 	    	 .success(function (empleados) {
-	    		 var empleadoArray = [];
-	    		 for(var i in empleados){
-	    			 empleadoArray.push(empleados[i]);
-	    		 }
-	    		 console.log(empleadoArray);
-	    	     defer.resolve(empleadoArray);
+	    	     defer.resolve(empleados);
 	    	 })
 	    	 .error(function(){
 	    	     defer.reject('server error')
@@ -23,8 +18,43 @@
             return defer.promise;
         };
 
+        var add = function(empleado){
+            var defer = $q.defer();
+
+            $http.post('/lcbsapi/rest/usuarios/altaempleado', empleado)
+            .success(function (emp) {
+                defer.resolve(emp);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
+
+            return defer.promise;
+        };
+
         return {
-            getAll : getAll
+            getAll : getAll,
+            add     : add
+        }
+
+        var edit = function(empleado){
+            var defer = $q.defer();
+
+            $http.post('/lcbsapi/rest/usuarios/editarempleado', empleado)
+            .success(function (emp) {
+                defer.resolve(emp);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
+
+            return defer.promise;
+        };
+
+        return {
+            getAll : getAll,
+            add     : add,
+            edit     : edit
         }
 
     }

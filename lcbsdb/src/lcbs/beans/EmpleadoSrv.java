@@ -16,6 +16,7 @@ import lcbs.models.Cuponera;
 import lcbs.models.Empleado;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,8 +32,8 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
         
     }
     
-    public Map<String,DataEmpleado> obtenerEmpleados(Integer pagina, Integer elementosPagina){
-    	Map<String,DataEmpleado> empleados = new HashMap();
+    public List<DataEmpleado> obtenerEmpleados(Integer pagina, Integer elementosPagina){
+    	List<DataEmpleado> empleados = new ArrayList();
         //obtengo todos los empleados de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Empleado.class);
@@ -42,13 +43,13 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
         List<Empleado> listEmp = criteria.list();
         
         listEmp.stream().forEach((emp) -> {
-        	empleados.put(emp.getId(), emp.getDatatype(true));
+        	empleados.add(emp.getDatatype(true));
         });
         return empleados;
     }
     
     public void modificarEmpleado(DataEmpleado emp){
-    	Empleado realObj = new Empleado(emp);
+    	Empleado realObj = new Empleado(emp,true);
         if(em.find(Empleado.class, realObj.getId()) == null){
            throw new IllegalArgumentException("El empleado no existe");
        }
@@ -62,7 +63,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
     }
     
     public DataEmpleado crearEmpleado(DataEmpleado emp){
-    	Empleado realObj = new Empleado(emp);
+    	Empleado realObj = new Empleado(emp,true);
     	realObj.setEliminado(false);
         //guardo al empleado en bd
         em.persist(realObj);

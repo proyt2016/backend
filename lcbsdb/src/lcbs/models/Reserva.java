@@ -85,7 +85,7 @@ public class Reserva implements Serializable{
     		this.setUsuarioReserva(new Usuario(dt.getUsuarioReserva()));
     	}
     	if(dt.getEmpleado() != null){
-    		this.setEmpleado(new Empleado(dt.getEmpleado()));
+    		this.setEmpleado(new Empleado(dt.getEmpleado(),true));
     	}
     	this.setUtilizada(dt.getUtilizada());
     	this.setEliminada(dt.getEliminada());

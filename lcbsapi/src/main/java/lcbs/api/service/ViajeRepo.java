@@ -34,7 +34,7 @@ public class ViajeRepo {
 	@EJB(lookup =  "java:app/lcbsb/ViajeCtrl!interfaces.IViaje")
 	IViaje ctrViaje;
 	
-	public Map<String, DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina){
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina){
 		return ctrViaje.BuscarViaje(filtro, pagina, ElementosPagina);
 	}
 	
@@ -58,7 +58,7 @@ public class ViajeRepo {
 		ctrViaje.CancelarReserva(idReserva);
 	}
 	
-	public Map<String, DataReserva> ListarReservas(String idUsuario){
+	public List<DataReserva> ListarReservas(String idUsuario){
 		return ctrViaje.ListarReservas(idUsuario);
 	}
 	
@@ -106,7 +106,7 @@ public class ViajeRepo {
 		return ctrViaje.obtenerParada(IdParada);
 	}
 	
-	public Map<String, DataPasaje> obtenerHistorialPasajes(String idUsuario){
+	public List<DataPasaje> obtenerHistorialPasajes(String idUsuario){
 		return ctrViaje.obtenerHistorialPasajes(idUsuario);
 	}
 	

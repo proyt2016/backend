@@ -85,6 +85,18 @@
 		    templateUrl : "app/views/reportes/edit.html",
 		    controller  : 'reportesCtrl'
 		});
+
+		// ruta de perfiles
+		$routeProvider.when("/perfil", {
+		    templateUrl : "app/views/perfil/list.html",
+		    controller  : 'perfilCtrl'
+		}).when("/perfil/add", {
+		    templateUrl : "app/views/perfil/add.html",
+		    controller  : 'perfilCtrl'
+		}).when("/perfil/edit/:id", {
+		    templateUrl : "app/views/perfil/edit.html",
+		    controller  : 'perfilCtrl'
+		});
     }
 
 })();

@@ -82,8 +82,8 @@ public class UsuarioCtrl implements IUsuario{
 	}
 	
 	@Override
-	public void AltaPerfil(DataPerfil perfil){
-		srvPerfil.crearPerfil(perfil);
+	public DataPerfil AltaPerfil(DataPerfil perfil){
+		return srvPerfil.crearPerfil(perfil);
 	}
 	
 	@Override
@@ -102,6 +102,10 @@ public class UsuarioCtrl implements IUsuario{
 		DataPerfil perf = srvPerfil.getPerfil(perfil);
 		empleado.setPerfil(perf);
 		srvEmpleado.modificarEmpleado(empleado);
+		List<DataEmpleado> empList = perf.getEmpleados();
+		empList.add(empList.size(), empleado);
+		perf.setEmpleados(empList);
+		srvPerfil.modificarPerfil(perf);
 	}
 
 	@Override
@@ -126,7 +130,7 @@ public class UsuarioCtrl implements IUsuario{
 	}
 	
 	@Override
-	public Map<String, DataEmpleado> listarEmpleados(Integer pagina, Integer elementosPagina) {
+	public List<DataEmpleado> listarEmpleados(Integer pagina, Integer elementosPagina) {
 		return srvEmpleado.obtenerEmpleados(pagina, elementosPagina);
 	}
 
@@ -136,7 +140,7 @@ public class UsuarioCtrl implements IUsuario{
 	}
 
 	@Override
-	public Map<String, DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
+	public List<DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
 		return srvPerfil.obtenerPerfils(pagina, elementosPagina);
 	}
 	

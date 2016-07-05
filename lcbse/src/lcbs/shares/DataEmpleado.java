@@ -14,12 +14,12 @@ public class DataEmpleado extends DataPersona{
         idEmpleadoLdap = "";
     }
     
-    public DataEmpleado(String id, String nm, String nom, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, String idEmpLdap, DataPerfil perf, Boolean elim) {
+    public DataEmpleado(String id, String nm, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, String idEmpLdap, DataPerfil perf, Boolean elim) {
         super(id, nm, ape, mail, tels, fecNac, elim);
         this.idEmpleadoLdap = idEmpLdap;
         this.perfil = perf;
     }
-
+ 
     public void setIdEmpleadoLdap(String val){
         this.idEmpleadoLdap = val;
     }

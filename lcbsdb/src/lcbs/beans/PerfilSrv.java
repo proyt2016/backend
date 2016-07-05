@@ -15,6 +15,7 @@ import lcbs.models.Perfil;
 import lcbs.shares.DataPerfil;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,8 +31,8 @@ public class PerfilSrv implements PerfilLocalApi {
         
     }
     
-    public Map<String,DataPerfil> obtenerPerfils(Integer pagina, Integer elementosPagina){
-    	Map<String,DataPerfil> Perfils = new HashMap();
+    public List<DataPerfil> obtenerPerfils(Integer pagina, Integer elementosPagina){
+    	List<DataPerfil> Perfils = new ArrayList();
         //obtengo todos los Perfiles de la bd
         Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Perfil.class);
@@ -40,7 +41,7 @@ public class PerfilSrv implements PerfilLocalApi {
     	criteria.setMaxResults(elementosPagina);
     	List<Perfil> listPds = criteria.list();
         listPds.stream().forEach((prf) -> {
-        	Perfils.put(prf.getId(), prf.getDatatype(true));
+        	Perfils.add(prf.getDatatype(true));
         });
         return Perfils;
     }
@@ -69,6 +70,7 @@ public class PerfilSrv implements PerfilLocalApi {
     public void borrarPerfil(String idPerfil){
     	DataPerfil prf = getPerfil(idPerfil);
     	Perfil realObj = new Perfil(prf,true);
+    	realObj = em.merge(realObj);
         em.remove(realObj);
     }
 }

@@ -101,7 +101,7 @@ public class EncomiendaRepo {
 		ctrEncomienda.bajaEncomienda(idEncomienda);
 	}
 
-	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina) {
+	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina) {
 		return ctrEncomienda.buscarEncomienda(filtro, pagina, ElementosPagina);
 	}
 	

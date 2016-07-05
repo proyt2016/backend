@@ -35,8 +35,8 @@ public class ViajeSrv implements ViajeLocalApi {
         
     }
     
-    public Map<String,DataViaje> obtenerViajes(Integer pagina, Integer elementosPagina){
-    	Map<String,DataViaje> Viajes = new HashMap();
+    public List<DataViaje> obtenerViajes(Integer pagina, Integer elementosPagina){
+    	List<DataViaje> Viajes = new ArrayList();
         //obtengo todos los Viajes de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Viaje.class);
@@ -46,7 +46,7 @@ public class ViajeSrv implements ViajeLocalApi {
         List<Viaje> listTer = criteria.list();
         
         listTer.stream().forEach((via) -> {
-        	Viajes.put(via.getId(), via.getDatatype(true));
+        	Viajes.add(via.getDatatype(true));
         });
         return Viajes;
     }

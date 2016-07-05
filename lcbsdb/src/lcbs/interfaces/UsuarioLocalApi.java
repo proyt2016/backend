@@ -1,5 +1,6 @@
 package lcbs.interfaces;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Local;
@@ -8,7 +9,7 @@ import lcbs.shares.DataUsuario;
 
 @Local
 public interface UsuarioLocalApi {
-	public Map<String,DataUsuario> obtenerUsuarios(Integer pagina, Integer elementosPagina);
+	public List<DataUsuario> obtenerUsuarios(Integer pagina, Integer elementosPagina);
 	public boolean loginUsuario(String mailUsuario, String clave);
 	public void modificarUsuario(DataUsuario usu);
 	public DataUsuario getUsuario(String usu);

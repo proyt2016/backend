@@ -24,7 +24,6 @@ import java.util.List;
 public class Usuario extends Persona implements Serializable{
     private static final long serialVersionUID = 1L; 
     
-    private String nombreAMostrar;
     private String clave;
     private String redSocialUsada;
     private String idRedSocial;
@@ -42,9 +41,8 @@ public class Usuario extends Persona implements Serializable{
 
     public Usuario() {}
     
-    public Usuario(String id, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, Cuponera cup, List<Encomienda> enc, List<Notificacion> not) {
-        super(id, ape, mail, tels, fecNac, elim);
-        this.nombreAMostrar = nomMos;
+    public Usuario(String id, String nm, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim, String clave, String redSoc, String idRedsoc, Cuponera cup, List<Encomienda> enc, List<Notificacion> not) {
+        super(id, nm, ape, mail, tels, fecNac, elim);
         this.clave = clave;
         this.redSocialUsada = redSoc;
         this.idRedSocial = idRedsoc;
@@ -55,6 +53,7 @@ public class Usuario extends Persona implements Serializable{
     
     public Usuario(DataUsuario dt){
     	this.setId(dt.getId());
+    	this.setNombrePila(dt.getNombrePila());
     	this.setApellido(dt.getApellido());
     	if(dt.getEmail() != null){
     		this.setEmail(new Email(dt.getEmail()));
@@ -68,7 +67,6 @@ public class Usuario extends Persona implements Serializable{
     	}
     	this.setFechaNacimiento(dt.getFechaNacimiento());
     	this.setEliminado(dt.getEliminado());
-    	this.setNombreAMostrar(dt.getNombreAMostrar());
     	this.setClave(dt.getClave());
     	this.setRedSocialUsada(dt.getRedSocialUsada());
     	this.setIdRedSocial(dt.getIdRedSocial());
@@ -87,6 +85,7 @@ public class Usuario extends Persona implements Serializable{
     public DataUsuario getDatatype(Boolean conHijos){
     	DataUsuario result = new DataUsuario();
     	result.setId(this.getId());
+    	result.setNombrePila(this.getNombrePila());
     	result.setApellido(this.getApellido());
     	if(this.getEmail()!=null)
     		result.setEmail(this.getEmail().getDatatype());
@@ -99,7 +98,6 @@ public class Usuario extends Persona implements Serializable{
     	}
     	result.setFechaNacimiento(this.getFechaNacimiento());
     	result.setEliminado(this.getEliminado());
-    	result.setNombreAMostrar(this.getNombreAMostrar());
     	result.setClave(this.getClave());
     	result.setRedSocialUsada(this.getRedSocialUsada());
     	this.setIdRedSocial(this.getIdRedSocial());
@@ -115,14 +113,6 @@ public class Usuario extends Persona implements Serializable{
     	return result;
     }
     
-    public void setNombreAMostrar(String val){
-        this.nombreAMostrar = val;
-    }
-    
-    public String getNombreAMostrar(){
-        return this.nombreAMostrar;
-    }
-
     public void setClave(String val){
         this.clave = val;
     }

@@ -9,7 +9,7 @@ import lcbs.shares.DataViaje;
 
 @Local
 public interface ViajeLocalApi {
-	public Map<String,DataViaje> obtenerViajes(Integer pagina, Integer elementosPagina);
+	public List<DataViaje> obtenerViajes(Integer pagina, Integer elementosPagina);
 	public void modificarViaje(DataViaje via);
 	public DataViaje getViaje(String via);
 	public DataViaje crearViaje(DataViaje via);

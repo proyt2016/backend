@@ -9,7 +9,7 @@ import lcbs.shares.DataReserva;
 
 @Local
 public interface ReservaLocalApi {
-	public Map<String,DataReserva> obtenerReservas(Integer pagina, Integer elementosPagina);
+	public List<DataReserva> obtenerReservas(Integer pagina, Integer elementosPagina);
 	public List<DataReserva> listarReservasPorUsuario(String idUsuario);
 	public void modificarReserva(DataReserva rce);
 	public DataReserva getReserva(String rce);

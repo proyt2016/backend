@@ -101,9 +101,9 @@ public class UsuarioApi {
 		repo.EditarPerfil(perfil);
 	}
 	
-	@POST
-	@Path("/eliminarperfil/")
-	public void EliminarPerfil(String idPerfil){
+	@DELETE
+	@Path("/eliminarperfil/{idPerfil}")
+	public void EliminarPerfil(@PathParam("idPerfil") String idPerfil){
 		repo.EliminarPerfil(idPerfil);
 	}
 	
@@ -155,7 +155,7 @@ public class UsuarioApi {
 
 	@GET
 	@Path("/listarperfiles/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
-	public Map<String, DataPerfil> listarPerfiles(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
+	public List<DataPerfil> listarPerfiles(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
 		return repo.listarPerfiles(pagina, elementosPagina);
 	}
 }

@@ -15,6 +15,7 @@ import lcbs.models.ReglaCobroEncomienda;
 import lcbs.shares.DataReglaCobroEncomienda;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,8 +31,8 @@ public class ReglaCobroEncomiendaSrv implements ReglaCobroEncomiendaLocalApi {
         
     }
     
-    public Map<String,DataReglaCobroEncomienda> obtenerReglaCobroEncomiendas(Integer pagina, Integer elementosPagina){
-    	Map<String,DataReglaCobroEncomienda> reglas = new HashMap();
+    public List<DataReglaCobroEncomienda> obtenerReglaCobroEncomiendas(Integer pagina, Integer elementosPagina){
+    	List<DataReglaCobroEncomienda> reglas = new ArrayList();
         //obtengo todas las reglas de cobro de encomiendas de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(ReglaCobroEncomienda.class);
@@ -41,7 +42,7 @@ public class ReglaCobroEncomiendaSrv implements ReglaCobroEncomiendaLocalApi {
         List<ReglaCobroEncomienda> listRce = criteria.list();
         
         listRce.stream().forEach((rce) -> {
-        	reglas.put(rce.getId(), rce.getDatatype());
+        	reglas.add(rce.getDatatype());
         });
         return reglas;
     }

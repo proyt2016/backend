@@ -33,8 +33,8 @@ public class PasajeSrv implements PasajeLocalApi {
         
     }
     
-    public Map<String,DataPasaje> obtenerPasajes(Integer pagina, Integer elementosPagina){
-    	Map<String,DataPasaje> Pasajes = new HashMap();
+    public List<DataPasaje> obtenerPasajes(Integer pagina, Integer elementosPagina){
+    	List<DataPasaje> Pasajes = new ArrayList();
         //obtengo todos los Pasajes de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Pasaje.class);
@@ -44,7 +44,7 @@ public class PasajeSrv implements PasajeLocalApi {
         List<Pasaje> listPsj = criteria.list();
         
         listPsj.stream().forEach((psj) -> {
-        	Pasajes.put(psj.getId(), psj.getDatatype());
+        	Pasajes.add(psj.getDatatype());
         });
         return Pasajes;
     }

@@ -33,8 +33,8 @@ public class ReservaSrv implements ReservaLocalApi {
         
     }
     
-    public Map<String,DataReserva> obtenerReservas(Integer pagina, Integer elementosPagina){
-    	Map<String,DataReserva> reservas = new HashMap();
+    public List<DataReserva> obtenerReservas(Integer pagina, Integer elementosPagina){
+    	List<DataReserva> reservas = new ArrayList();
         //obtengo todas las Reservas de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Reserva.class);
@@ -44,7 +44,7 @@ public class ReservaSrv implements ReservaLocalApi {
         List<Reserva> listRes = criteria.list();
         
         listRes.stream().forEach((rec) -> {
-        	reservas.put(rec.getId(), rec.getDatatype());
+        	reservas.add(rec.getDatatype());
         });
         return reservas;
     }

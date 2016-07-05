@@ -103,7 +103,7 @@ public class EncomiendaApi {
 	
 	@GET
 	@Path("/buscarencomienda/{pagina:[0-9][0-9]*}/{elementosPagina:[0-9][0-9]*}")
-	public Map<String, DataEncomienda> buscarEncomienda(DataEncomienda filtro, @PathParam("pagina") final Integer pagina,@PathParam("elementosPagina") final Integer ElementosPagina){
+	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, @PathParam("pagina") final Integer pagina,@PathParam("elementosPagina") final Integer ElementosPagina){
 		return repo.buscarEncomienda(filtro, pagina, ElementosPagina);
 	}
 	

@@ -16,6 +16,7 @@ import lcbs.models.Terminal;
 import lcbs.shares.DataTerminal;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,8 +32,8 @@ public class TerminalSrv implements TerminalLocalApi {
         
     }
     
-    public Map<String,DataTerminal> obtenerTerminals(Integer pagina, Integer elementosPagina){
-    	Map<String,DataTerminal> terminales = new HashMap();
+    public List<DataTerminal> obtenerTerminals(Integer pagina, Integer elementosPagina){
+    	List<DataTerminal> terminales = new ArrayList();
         //obtengo todas las terminales de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Terminal.class);
@@ -42,7 +43,7 @@ public class TerminalSrv implements TerminalLocalApi {
         List<Terminal> listTer = criteria.list();
         
         listTer.stream().forEach((ter) -> {
-        	terminales.put(ter.getId(), ter.getDatatype());
+        	terminales.add(ter.getDatatype());
         });
         return terminales;
     }

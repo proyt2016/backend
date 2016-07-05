@@ -23,7 +23,7 @@ public interface IUsuario {
 	public DataPerfil AltaPerfil(DataPerfil perfil);
 	public void EditarPerfil(DataPerfil perfil);
 	public void EliminarPerfil(String idPerfil);
-	public Map<String, DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina);
+	public List<DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina);
 	public void AsignarPerfil(String idEmpleado, String perfil);
 	
 }

@@ -9,7 +9,7 @@ import lcbs.shares.DataPasaje;
 
 @Local
 public interface PasajeLocalApi {
-	public Map<String,DataPasaje> obtenerPasajes(Integer pagina, Integer elementosPagina);
+	public List<DataPasaje> obtenerPasajes(Integer pagina, Integer elementosPagina);
 	public void modificarPasaje(DataPasaje psj);
 	public DataPasaje getPasaje(String id);
 	public DataPasaje crearPasaje(DataPasaje psj);

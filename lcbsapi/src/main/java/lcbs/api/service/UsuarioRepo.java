@@ -109,7 +109,7 @@ public class UsuarioRepo {
 		return ctrUsuario.getPerfil(idPerfil);
 	}
 
-	public Map<String, DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
+	public List<DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
 		return ctrUsuario.listarPerfiles(pagina, elementosPagina);
 	}
 	

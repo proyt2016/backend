@@ -140,7 +140,7 @@ public class UsuarioCtrl implements IUsuario{
 	}
 
 	@Override
-	public Map<String, DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
+	public List<DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
 		return srvPerfil.obtenerPerfils(pagina, elementosPagina);
 	}
 	

@@ -15,6 +15,7 @@ import lcbs.models.Perfil;
 import lcbs.shares.*;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,8 +31,8 @@ public class CuponeraSrv implements CuponeraLocalApi {
         
     }
     
-    public Map<String,DataCuponera> obtenerCuponera(Integer pagina, Integer elementosPagina){
-    	Map<String,DataCuponera> cuponeras = new HashMap();
+    public List<DataCuponera> obtenerCuponera(Integer pagina, Integer elementosPagina){
+    	List<DataCuponera> cuponeras = new ArrayList();
         //obtengo todas las cuponera de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Cuponera.class);
@@ -41,7 +42,7 @@ public class CuponeraSrv implements CuponeraLocalApi {
         List<Cuponera> listCup = criteria.list();
         
         listCup.stream().forEach((cup) -> {
-        	cuponeras.put(cup.getId(), cup.getDatatype());
+        	cuponeras.add(cup.getDatatype());
         });
         return cuponeras;
     }

@@ -4,10 +4,24 @@
 
     function puntosrecorridoService($http, $q) {
 
-        var getAll = function(){
+        var getTerminales = function(){
             var defer = $q.defer();
 
-             $http.get('/lcbsapi/rest/viajes/listarrecorridos/1/10000')
+             $http.get('/lcbsapi/rest/viajes/getterminales/1/10000')
+             .success(function (puntosrecorrido) {
+                 defer.resolve(puntosrecorrido);
+             })
+             .error(function(){
+                 defer.reject('server error')
+             });
+
+            return defer.promise;
+        };
+
+        var getParadas = function(){
+            var defer = $q.defer();
+
+             $http.get('/lcbsapi/rest/viajes/getparadas/1/10000')
              .success(function (puntosrecorrido) {
                  defer.resolve(puntosrecorrido);
              })
@@ -80,7 +94,8 @@
         };
 
         return {
-            getAll  : getAll,
+            getTerminales  : getTerminales,
+            getParadas  : getParadas,
             getId   : getId,
             add     : add,
             borrar  : borrar,

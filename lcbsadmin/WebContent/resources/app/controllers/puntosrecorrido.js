@@ -9,15 +9,19 @@
         $scope.showAlert    = false;
 
         
-        puntosrecorridoService.getAll().then(function (data) {
+        puntosrecorridoService.getTerminales().then(function (data) {
             $scope.puntosrecorridoLst = data;
+        });
+
+        puntosrecorridoService.getParadas().then(function (data) {
+            var newArray = $scope.puntosrecorridoLst.concat(data);
+            $scope.puntosrecorridoLst = newArray;
         });
 
         $scope.add = function(){
             $scope.saving   = true;
             var puntosrecorrido     = this.puntosrecorrido;
             var tipodepunto = this.tipodepunto;
-            console.info(puntosrecorrido);
             puntosrecorridoService.add(puntosrecorrido, tipodepunto).then(
                 function (data) {
                     $scope.saving = false;
@@ -50,7 +54,6 @@
         }
 
         $scope.borrar = function (index) {
-            console.log($scope.puntosrecorridoLst);
             $scope.saving = true;
             var puntosrecorrido = this.puntosrecorrido;
 
@@ -94,6 +97,13 @@
             center:new google.maps.LatLng(coords.lat,coords.lng),
 
           });
+
+          for(var i in $scope.puntosrecorridoLst){
+            var lats = $scope.puntosrecorridoLst[i].ubicacionMapa.split(",");
+            $scope.placeMarkerAndPanTo(new google.maps.LatLng(lats[0],lats[1]), map);
+          }
+
+          $('#ubicacionMapa').val('');
 
           map.addListener('click', function(e) {
             $scope.placeMarkerAndPanTo(e.latLng, map);

@@ -48,5 +48,10 @@ public class VehiculoCtrl implements IVehiculo{
 	public DataVehiculo obtenerVehiculo(String idVehiculo){
 		return srvVehiculo.getVehiculo(idVehiculo);
 	}
+
+	@Override
+	public List<DataVehiculo> listarVehiculos(Integer pagina, Integer elementosPagina) {
+		return srvVehiculo.obtenerVehiculos(pagina, elementosPagina);
+	}
 	
 }

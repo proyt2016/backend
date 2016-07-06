@@ -1,31 +1,31 @@
-﻿(function () {
+(function () {
     'use strict';
-    angular.module('lacbus').controller('empleadosCtrl', ['$scope', '$routeParams', 'empleadosService', empleadosCtrl]);
+    angular.module('lacbus').controller('recorridosCtrl', ['$scope', '$routeParams', 'recorridosService', recorridosCtrl]);
 
-    function empleadosCtrl($scope, $routeParams, empleadosService) {
-        $scope.empleados     = [];
-        $scope.empleado     = null;
+    function recorridosCtrl($scope, $routeParams, recorridosService) {
+        $scope.recorridos     = [];
+        $scope.recorrido     = null;
         $scope.showAlert    = false;
 
         var initialize = function(){
             var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null
             if(id){
-                empleadosService.getId(id).then(function (data) {
-                    $scope.empleado = data;
+                recorridosService.getId(id).then(function (data) {
+                    $scope.recorrido = data;
                 });
             }else{
                 console.info("no tengo id"+id);
-                empleadosService.getAll().then(function (data) {
-                    $scope.empleados = data;
+                recorridosService.getAll().then(function (data) {
+                    $scope.recorridos = data;
                 });
             }
         }
 
         $scope.add = function(){
             $scope.saving   = true;
-            var empleado     = this.empleado;
-            console.info(empleado);
-            empleadosService.add(empleado).then(
+            var recorrido     = this.recorrido;
+            console.info(recorrido);
+            recorridosService.add(recorrido).then(
                 function (data) {
                     $scope.saving = false;
                 
@@ -41,8 +41,8 @@
 
         $scope.edit = function(){
             $scope.saving   = true;
-            var empleado     = this.empleado;
-            empleadosService.edit(empleado).then(
+            var recorrido     = this.recorrido;
+            recorridosService.edit(recorrido).then(
                 function (data) {
                     $scope.saving = false;
                 
@@ -57,15 +57,15 @@
         }
 
         $scope.borrar = function (index) {
-            console.log($scope.empleados);
+            console.log($scope.recorridos);
             $scope.saving = true;
-            var empleado = this.empleado;
+            var recorrido = this.recorrido;
 
             var r = confirm("Seguro que quiere borrar?");
             if (r == true) {
-                empleadosService.borrar(empleado.id).then(
+                recorridosService.borrar(recorrido.id).then(
                  function () {
-                     $scope.empleados.splice(index, 1);
+                     $scope.recorridos.splice(index, 1);
                      $scope.saving = false;
 
                  }, function () {

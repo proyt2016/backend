@@ -202,4 +202,15 @@ public class ViajeCtrl implements IViaje{
 		srvViaje.borrarViaje(idViaje);
 	}
 
+	@Override
+	public void BajaRecorrido(String idRecorrido) {
+		srvRecorrido.darBajaRecorrido(idRecorrido);
+		
+	}
+
+	@Override
+	public List<DataParada> getParadas(Integer pagina, Integer elementosPagina) {
+		return srvParada.obtenerParadas(pagina, elementosPagina);
+	}
+
 }

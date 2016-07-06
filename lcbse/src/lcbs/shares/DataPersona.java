@@ -11,19 +11,6 @@ public abstract class DataPersona{
     private List<DataTelefono> telefonosContacto;
     private Date fechaNacimiento;
     private boolean eliminado;
-     
-
-    public DataPersona() {}
-    
-    public DataPersona(String id, String nm, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, Boolean elim) {
-        this.id = id;
-        this.nombrePila = nm;
-        this.apellido = ape;
-        this.email = mail;
-        this.telefonosContacto = tels;
-        this.fechaNacimiento = fecNac;
-        this.eliminado = elim;
-    }
     
     public void setId(String val){
         this.id = val;

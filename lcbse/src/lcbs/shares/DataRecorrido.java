@@ -9,6 +9,8 @@ public class DataRecorrido{
     private String nombre;
     private List<DataPuntoRecorrido> puntosDeRecorrido;
     private List<DataGrupoHorario> horarios;
+    private String idOrigen;
+    private String idDestino;
     private List<DataPrecio> precios;
     private Boolean eliminado;
     
@@ -71,5 +73,23 @@ public class DataRecorrido{
     
     public Boolean getEliminado(){
         return this.eliminado;
+    }
+    
+    public String getIdOrigen(){
+    	DataPuntoRecorrido result = puntosDeRecorrido.get(0);
+    	return result.getId();
+    }
+    
+    public void setIdOrigen(String val){
+    	this.idOrigen = val;
+    }
+    
+    public String getIdDestino(){
+    	DataPuntoRecorrido result = puntosDeRecorrido.get(puntosDeRecorrido.size());
+    	return result.getId();
+    }
+    
+    public void setIdDestino(String val){
+    	this.idDestino = val;
     }
 }

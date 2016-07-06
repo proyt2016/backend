@@ -21,6 +21,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import org.json.JSONObject;
+
 import javax.ws.rs.core.UriBuilder;
 
 import lcbs.shares.*;
@@ -58,8 +61,15 @@ public class VehiculoApi {
 	//tested
 	@POST
 	@Path("/bajavehiculo/")
-	public void bajaVehiculo(String idVehiculo){
-		 repo.bajaVehiculo(idVehiculo);
+	public void bajaVehiculo(String data){
+		 JSONObject obj = new JSONObject(data);
+		 repo.bajaVehiculo(obj.getString("idVehiculo"));
+	}
+	
+	@GET
+	@Path("/listarvehiculos/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataVehiculo> listarVehiculos(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar") final Integer elementosPagina) {
+		return repo.listarVehiculos(pagina, elementosPagina);
 	}
 	
 	@GET

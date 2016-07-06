@@ -43,6 +43,12 @@ public class ViajeApi {
 		return repo.getTerminales(pagina, elementosPagina);
 	}
 	
+	@GET
+	@Path("/getparadas/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataParada> getParadas(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
+		return repo.getParadas(pagina, elementosPagina);
+	}
+	
 	@POST
 	@Path("/buscarviaje/{pagina}/{elementosPagina}")
 	public List<DataViaje> BuscarViaje(DataViaje filtro, @PathParam("pagina") final Integer pagina, @PathParam("elementosPagina") final Integer ElementosPagina){
@@ -135,6 +141,13 @@ public class ViajeApi {
 	public void EditarRecorrido(DataRecorridoConvertor pseudoRecorrido){
 		DataRecorrido recorrido = pseudoRecorrido.getRecorrido();
 		repo.EditarRecorrido(recorrido);
+	}
+	
+	@POST
+	@Path("/bajarecorrido/")
+	public void BajaRecorrido(String data){
+		JSONObject obj = new JSONObject(data);
+		repo.BajaRecorrido(obj.getString("idRecorrido"));
 	}
 	
 	//tested

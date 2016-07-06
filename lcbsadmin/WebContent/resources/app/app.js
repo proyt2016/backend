@@ -97,6 +97,24 @@
 		    templateUrl : "app/views/perfil/edit.html",
 		    controller  : 'perfilCtrl'
 		});
+
+		// ruta de recorridos
+		$routeProvider.when("/recorridos", {
+		    templateUrl : "app/views/recorridos/list.html",
+		    controller  : 'recorridosCtrl'
+		}).when("/recorridos/add", {
+		    templateUrl : "app/views/recorridos/add.html",
+		    controller  : 'recorridosCtrl'
+		}).when("/recorridos/edit/:id", {
+		    templateUrl : "app/views/recorridos/edit.html",
+		    controller  : 'recorridosCtrl'
+		});
+
+		// ruta de recorridos
+		$routeProvider.when("/puntosrecorrido", {
+		    templateUrl : "app/views/puntosrecorrido/map.html",
+		    controller  : 'puntosrecorridoCtrl'
+		})
     }
 
 })();

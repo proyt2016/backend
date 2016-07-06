@@ -71,8 +71,9 @@ public class UsuarioApi {
 	
 	@POST
 	@Path("/bajaempleado/")
-	public void BajaEmpleado(String idEmpleado){
-		repo.BajaEmpleado(idEmpleado);
+	public void BajaEmpleado(String data){
+		JSONObject obj = new JSONObject(data);
+		repo.BajaEmpleado(obj.getString("idEmpleado"));
 	}
 	
 	@POST

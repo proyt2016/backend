@@ -1,7 +1,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="page-title">
     <div class="title_left">
-      <h3>Editar Empleado</h3>
+      <h3>Editar Recorrido</h3>
     </div>
   </div>
 </div>
@@ -9,7 +9,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
     <div class="x_title">
-      <h2>{{empleado.nombrePila}} {{empleado.apellido}}</h2>
+      <h2>{{recorrido.nombre}}</h2>
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
@@ -20,20 +20,13 @@
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="nombre" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="empleado.nombrePila"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="apeillido">Apellido <span class="required">*</span>
-          </label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="apellido" name="apellido" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="0978" ng-model="empleado.apellido"><ul class="parsley-errors-list" id="parsley-id-0978"></ul>
+            <input type="text" id="nombre" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="recorrido.nombre"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
           </div>
         </div>
         <div class="ln_solid"></div>
         <div class="form-group">
           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-            <a href="#/empleados" class="btn btn-primary">Cancelar</a>
+            <a href="#/recorridos" class="btn btn-primary">Cancelar</a>
             <button class="btn btn-success" ng-disabled="saving">Guardar</button>
           </div>
         </div>

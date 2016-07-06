@@ -1,39 +1,44 @@
 package lcbs.beans;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import lcbs.interfaces.TerminalLocalApi;
-import lcbs.models.ConfiguracionEmpresa;
-import lcbs.models.Reserva;
 import lcbs.models.Terminal;
 import lcbs.shares.DataTerminal;
 
-import java.util.Map;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Session Bean implementation class TerminalSrv
  */
 @Stateless
 public class TerminalSrv implements TerminalLocalApi {
+	private static final Log log = LogFactory.getLog(TerminalSrv.class);
 	@Inject
     EntityManager em;
-	
+	public static void log(String s){
+
+		log.info("------->"+s);		
+	}
     private TerminalSrv(){
         
     }
     
     public List<DataTerminal> obtenerTerminals(Integer pagina, Integer elementosPagina){
     	List<DataTerminal> terminales = new ArrayList();
+    	this.log("que onda man");   
         //obtengo todas las terminales de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Terminal.class);
@@ -41,7 +46,8 @@ public class TerminalSrv implements TerminalLocalApi {
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
         List<Terminal> listTer = criteria.list();
-        
+        this.log(String.valueOf(listTer.size()));
+        this.log("que onda man");
         listTer.stream().forEach((ter) -> {
         	terminales.add(ter.getDatatype());
         });

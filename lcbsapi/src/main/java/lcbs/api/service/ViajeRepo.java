@@ -132,4 +132,12 @@ public class ViajeRepo {
 	public List<DataTerminal> getTerminales(int pagina, int elementos){
 		return ctrViaje.getTerminales(pagina, elementos);
 	}
+	
+	public List<DataParada> getParadas(Integer pagina, Integer elementosPagina) {
+		return ctrViaje.getParadas(pagina, elementosPagina);
+	}
+
+	public void BajaRecorrido(String idRecorrido) {
+		ctrViaje.BajaRecorrido(idRecorrido);		
+	}
 }

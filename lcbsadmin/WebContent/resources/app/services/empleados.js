@@ -20,7 +20,7 @@
 
         var add = function(empleado){
             var defer = $q.defer();
-
+            console.info(empleado);
             $http.post('/lcbsapi/rest/usuarios/altaempleado', empleado)
             .success(function (emp) {
                 defer.resolve(emp);
@@ -31,11 +31,6 @@
 
             return defer.promise;
         };
-
-        return {
-            getAll : getAll,
-            add     : add
-        }
 
         var edit = function(empleado){
             var defer = $q.defer();
@@ -51,10 +46,40 @@
             return defer.promise;
         };
 
+        var borrar = function(id){
+            var defer = $q.defer();
+            var aEliminar = { 'idEmpleado' : id}
+            $http.post('/lcbsapi/rest/usuarios/bajaempleado',aEliminar)
+            .success(function (emp) {
+                defer.resolve(emp);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
+
+            return defer.promise;
+        };
+
+        var getId = function(id){
+            var defer = $q.defer();
+
+            $http.get('/lcbsapi/rest/usuarios/getempleado/'+id)
+            .success(function (emp) {
+                defer.resolve(emp);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
+
+            return defer.promise;
+        };
+
         return {
-            getAll : getAll,
+            getAll  : getAll,
+            getId   : getId,
             add     : add,
-            edit     : edit
+            borrar  : borrar,
+            edit    : edit
         }
 
     }

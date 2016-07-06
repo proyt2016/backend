@@ -28,7 +28,7 @@ public class TenantCtrl implements ITenant{
 	public DataTenant get(DataTenant tenant) { 
 		return srvTenant.get(tenant);
 	}
-	public DataTenant create(DataTenant tenant) throws TenantException { 
+	public DataTenant create(DataTenant tenant) throws TenantException, Exception { 
 		DataTenant dt = srvTenant.get(tenant);
 		try{
 			if(dt == null){
@@ -38,7 +38,7 @@ public class TenantCtrl implements ITenant{
 				throw new TenantException("Tenant Already Exist");
 			}
 		}catch(SchemaException e){
-			throw new TenantException("Tenant Already Exist");
+			throw e;//new TenantException("Something went wrong");
 		}
 		
 	}

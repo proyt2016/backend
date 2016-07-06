@@ -36,7 +36,7 @@ public class TenantApi {
 	}
 	@POST
 	@Path("/create/")
-	public DataTenant create(DataTenant tenant) throws TenantException{
+	public DataTenant create(DataTenant tenant) throws TenantException, Exception{
 		return repo.create(tenant);
 	}
 	@POST

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
@@ -13,13 +17,14 @@ import org.hibernate.criterion.Restrictions;
 
 import lcbs.interfaces.TenantLocalApi;
 import lcbs.models.Tenant;
-import lcbs.models.Terminal;
 import lcbs.shares.DataTenant;
 
 /**
  * Session Bean implementation class CuponeraSrv
  */
 @Stateless
+@TransactionManagement(value=TransactionManagementType.CONTAINER)
+@TransactionAttribute(value=TransactionAttributeType.REQUIRES_NEW)
 public class TenantSrv implements TenantLocalApi {
 	@Inject
 	EntityManager em;
@@ -69,6 +74,7 @@ public class TenantSrv implements TenantLocalApi {
 
 	@Override
 	public DataTenant create(DataTenant tenant) {
+		em.createNativeQuery("SET SCHEMA 'public'").executeUpdate();
 		Tenant realObj = new Tenant(tenant);
         em.persist(realObj);
         return realObj.getDatatype();
@@ -77,6 +83,7 @@ public class TenantSrv implements TenantLocalApi {
 	@Override
 	public Boolean delete(DataTenant tenant) {
 		Tenant realObj = new Tenant(tenant);
+		realObj.setIsDelete(true);
         em.merge(realObj);
         return realObj.getIsDelete();
 	}

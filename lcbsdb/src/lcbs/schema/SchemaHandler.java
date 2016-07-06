@@ -2,11 +2,14 @@
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -16,7 +19,9 @@ import org.apache.commons.logging.LogFactory;
 
 import lcbs.exceptions.SchemaException;
 import lcbs.interfaces.ISchemaHandler;
+import static javax.ejb.TransactionAttributeType.*; 
 @Stateless
+@TransactionManagement(value=TransactionManagementType.CONTAINER)
 public class SchemaHandler implements ISchemaHandler{
 
 	private static final Log log = LogFactory.getLog(SchemaHandler.class);
@@ -26,6 +31,7 @@ public class SchemaHandler implements ISchemaHandler{
 	EntityManager em;
 	
 	@RequestScoped
+	@TransactionAttribute(value=TransactionAttributeType.REQUIRES_NEW)
 	public void createSchema(String name) throws SchemaException {
 		try {
 			if (em.isJoinedToTransaction()) {
@@ -58,7 +64,6 @@ public class SchemaHandler implements ISchemaHandler{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		em.createNativeQuery("SET SCHEMA 'public'").executeUpdate();
 	}
 
 	private void create(EntityManager em) throws IOException {

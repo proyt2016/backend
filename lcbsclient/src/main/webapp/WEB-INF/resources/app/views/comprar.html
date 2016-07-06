@@ -6,20 +6,20 @@
       </div>
       <div class="box-body">
         <p><strong><i class="fa fa-map margin-r-5"></i> Origien y Destino</strong></p>
-        <p>Montevideo <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> Paysandu</p>
+        <p>{{ pasaje.origen.nombre }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ pasaje.destino.nombre }}</p>
         <hr>
-        <p><i class="fa fa-map-marker margin-r-5"></i> Linea 150</p>
+        <p><i class="fa fa-map-marker margin-r-5"></i> {{ pasaje.recorrido.nombre }}</p>
         <hr>
-        <p><i class="fa fa-calendar margin-r-5"></i> 08:05 a 11:05</p>
+        <p><i class="fa fa-calendar margin-r-5"></i> {{ pasaje.salida }} a {{ pasaje.llegada }}</p>
         <hr>
         <strong><i class="fa fa-file-text-o margin-r-5"></i> Descripci&oacute;n</strong>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+        <p>{{ pasaje.descripcion }}</p>
       </div>
     </div>
   </div>
 
   <div class="col-md-8">
-    <form role="form">
+    <form name="comprarForm" ng-submit="comprarForm.$valid && comprar()" novalidate>
       <div class="box box-info">
         <div class="box-header with-border">
           <h3 class="box-title">Procesar pago</h3>
@@ -31,26 +31,26 @@
               <div class="form-group">
                 <div class="radio">
                   <label>
-                    <input type="radio" name="pagos" value="paypal" checked>
-                    <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+                    <input type="radio" name="pagos" value="paypal" ng-model="pagos">
+                    <img src="dist/img/credit/paypal2.png" alt="Paypal">
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="pagos" value="visa">
-                    <img src="../../dist/img/credit/visa.png" alt="Visa">
+                    <input type="radio" name="pagos" value="visa" ng-model="pagos">
+                    <img src="dist/img/credit/visa.png" alt="Visa">
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="pagos" value="master">
-                    <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
+                    <input type="radio" name="pagos" value="master" ng-model="pagos">
+                    <img src="dist/img/credit/mastercard.png" alt="Mastercard">
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="pagos" value="amex">
-                    <img src="../../dist/img/credit/american-express.png" alt="American Express">
+                    <input type="radio" name="pagos" value="amex" ng-model="pagos">
+                    <img src="dist/img/credit/american-express.png" alt="American Express">
                   </label>
                 </div>
                 <div class="radio">
@@ -63,7 +63,6 @@
             </div>
             <div class="col-xs-8">
             <p class="lead">Monto a pagar</p>
-
             <div class="table-responsive">
               <table class="table">
                 <tbody>
@@ -73,7 +72,7 @@
                   </tr>
                   <tr>
                     <th>Cantidad de pasajes</th>
-                    <td><input type="number" name="cantida" value="1" align="right" /></td>
+                    <td><input type="number" name="cantidad" value="1" align="right" ng-model="cantidad" required/></td>
                   </tr>
                   <tr>
                     <th>Total:</th>
@@ -86,7 +85,7 @@
           </div>
         </div>
         <div class="box-footer">
-          <a class="btn btn-success pull-right">Confirmar Pago</a>
+          <button type="submit" class="btn btn-success pull-right" ng-click="submitted=true">Confirmar Pago</a>
         </div>
       </form>
     </div>

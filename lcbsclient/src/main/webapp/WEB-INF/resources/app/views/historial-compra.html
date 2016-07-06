@@ -8,7 +8,6 @@
       <div class="box-body table-responsive">
         <table class="table table-hover">
           <tr>
-            <th>#</th>
             <th>Fecha</th>
             <th>Linea</th>
             <th>Origen</th>
@@ -17,46 +16,17 @@
             <th>Precio</th>
             <th></th>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>23/06/16</td>
-            <td>150</td>
-            <td>Montevideo</td>
-            <td>Paysandu</td>
-            <td>3</td>
-            <td>$250</td>
+          <tr ng-repeat="compra in compras">
+            <td>{{ compra.fecha || 'dd/MM/yy' }}</td>
+            <td>{{ compra.recorrido.nombre }}</td>
+            <td>{{ compra.origen.nombre }}</td>
+            <td>{{ compra.destino.nombre }}</td>
+            <td>{{ compra.cantidad }}</td>
+            <td>${{ compra.precio }}</td>
             <td>
-              <a class="btn btn-primary btn-flat btn-sm" title="detalle" ng-click="mostrarInfo()"><i class="fa fa-search"></i></a>
-              <a class="btn btn-info btn-flat btn-sm" title="cambiar horario" ng-click="cambiarHorario()"><i class="fa fa-calendar"></i></a>
-              <a class="btn btn-success btn-flat btn-sm" title="transferir pasaje" ng-click="transferirPasaje()"><i class="fa fa-exchange"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>23/06/16</td>
-            <td>150</td>
-            <td>Montevideo</td>
-            <td>Paysandu</td>
-            <td>3</td>
-            <td>$250</td>
-            <td>
-              <a class="btn btn-primary btn-flat btn-sm" title="detalle" ng-click="mostrarInfo()"><i class="fa fa-search"></i></a>
-              <a class="btn btn-info btn-flat btn-sm" title="cambiar horario" ng-click="cambiarHorario()"><i class="fa fa-calendar"></i></a>
-              <a class="btn btn-success btn-flat btn-sm" title="transferir pasaje" ng-click="transferirPasaje()"><i class="fa fa-exchange"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>23/06/16</td>
-            <td>150</td>
-            <td>Montevideo</td>
-            <td>Paysandu</td>
-            <td>3</td>
-            <td>$250</td>
-            <td>
-              <a class="btn btn-primary btn-flat btn-sm" title="detalle" ng-click="mostrarInfo()"><i class="fa fa-search"></i></a>
-              <a class="btn btn-info btn-flat btn-sm" title="cambiar horario" ng-click="cambiarHorario()"><i class="fa fa-calendar"></i></a>
-              <a class="btn btn-success btn-flat btn-sm" title="transferir pasaje" ng-click="transferirPasaje()"><i class="fa fa-exchange"></i></a>
+              <a class="btn btn-primary btn-flat btn-sm" title="detalle" ng-click="mostrarInfo(compra)"><i class="fa fa-search"></i></a>
+              <a class="btn btn-info btn-flat btn-sm" title="cambiar horario" ng-click="mostrarHorarios(compra)"><i class="fa fa-calendar"></i></a>
+              <a class="btn btn-success btn-flat btn-sm" title="transferir pasaje" ng-click="mostrarPasajes(compra)"><i class="fa fa-exchange"></i></a>
             </td>
           </tr>
         </table>
@@ -76,12 +46,9 @@
             </div>
             <div class="modal-body">
                 <p><strong><i class="fa fa-dollar margin-r-5"></i> Medio de pago</strong></p>
-                <p>Paypal</p>
+                <p>{{ info.medioPago }}</p>
                 <hr>
-                <p><i class="fa fa-calendar margin-r-5"></i> 08:05 a 11:05</p>
-            </div>
-            <div class="modal-footer">
-
+                <p><i class="fa fa-calendar margin-r-5"></i> {{ info.salida }} a {{ info.llegada }}</p>
             </div>
         </div>
     </div>
@@ -100,15 +67,15 @@
               <div class="row">
                 <div class="col-xs-4">
                   <p><strong>Origien y Destino</strong></p>
-                  <p>Montevideo <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> Paysandu</p>
+                  <p>{{ info.origen.nombre }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ info.destino.nombre }} </p>
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Linea</strong></p>
-                  <p>Linea 150</p>
+                  <p>{{ info.recorrido.nombre }} </p>
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Horario</strong></p>
-                  <p>08:05 a 11:05</p>
+                  <p>{{ info.salida }} a {{ info.llegada }}</p>
                 </div>
               </div>
             </div>
@@ -121,12 +88,12 @@
                   <th>Llegada</th>
                   <th></th>
                 </tr>
-                <tr>
-                  <td>25/06/16</td>
-                  <td>08:05</td>
-                  <td>11:05</td>
+                <tr ng-repeat="horario in horarios">
+                  <td>{{ horario.fecha || 'dd/MM/yy' }}</td>
+                  <td>{{ horario.salida }}</td>
+                  <td>{{ horario.llegada }}</td>
                   <td>
-                    <a class="btn btn-success btn-flat btn-xs"><i class="fa fa-check"></i></a>
+                    <a class="btn btn-success btn-flat btn-xs" ng-click="cambiarHorario(info.id, horario)"><i class="fa fa-check"></i></a>
                   </td>
                 </tr>
               </table>
@@ -149,15 +116,15 @@
               <div class="row">
                 <div class="col-xs-4">
                   <p><strong>Origien y Destino</strong></p>
-                  <p>Montevideo <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> Paysandu</p>
+                  <p>{{ info.origen.nombre }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ info.destino.nombre }} </p>
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Linea</strong></p>
-                  <p>Linea 150</p>
+                  <p>{{ info.recorrido.nombre }} </p>
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Horario</strong></p>
-                  <p>08:05 a 11:05</p>
+                  <p>{{ info.salida }} a {{ info.llegada }}</p>
                 </div>
               </div>
               <hr>
@@ -166,17 +133,14 @@
                   <div class="form-group">
                     <label>Transferir pasaje a</label>
                     <select class="form-control select2">
-                      <option selected="selected">andrulo</option>
-                      <option>dario</option>
-                      <option>rodrigo</option>
-                      <option>maxi</option>
+                      <option ng-repeat="usuario in usuarios" value="{{ usuario.id }}">{{ usuario.nombre }}</option>
                     </select>
                   </div>
                 </div>
               </div>
             </div>
             <div class="box-footer">
-              <a class="btn btn-success pull-right">Transferir</a>
+              <a class="btn btn-success pull-right" ng-click="transferirPasaje(info.id)">Transferir</a>
             </div>
           </form>
         </div>

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <form role="form">
+    <form name="cuponeraForm" ng-submit="cuponeraForm.$valid && recargar()" novalidate>
       <div class="box box-info">
         <div class="box-header with-border">
           <h3 class="box-title">Recargar cuponera</h3>
@@ -19,9 +19,9 @@
                     <tr>
                       <th>Recargar:</th>
                       <td>
-                        <div class="input-group">
+                        <div class="input-group" ng-class="{ 'has-error' : submitted && cuponeraForm.recarga.$invalid }">
                           <span class="input-group-addon" style="padding:6px 12px 4px 12px; border:0;"><i class="fa fa-dollar"></i></span>
-                          <input type="number" name="recarga" align="right"/>
+                          <input type="number" name="recarga" align="right" ng-model="recarga" required />
                         </div>
                       </td>
                     </tr>
@@ -34,26 +34,26 @@
               <div class="form-group">
                 <div class="radio">
                   <label>
-                    <input type="radio" name="pagos" value="paypal" checked>
-                    <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+                    <input type="radio" name="pagos" value="paypal" ng-model="pagos">
+                    <img src="dist/img/credit/paypal2.png" alt="Paypal">
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="pagos" value="visa">
-                    <img src="../../dist/img/credit/visa.png" alt="Visa">
+                    <input type="radio" name="pagos" value="visa" ng-model="pagos">
+                    <img src="dist/img/credit/visa.png" alt="Visa">
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="pagos" value="master">
-                    <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
+                    <input type="radio" name="pagos" value="master" ng-model="pagos">
+                    <img src="dist/img/credit/mastercard.png" alt="Mastercard">
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="pagos" value="amex">
-                    <img src="../../dist/img/credit/american-express.png" alt="American Express">
+                    <input type="radio" name="pagos" value="amex" ng-model="pagos">
+                    <img src="dist/img/credit/american-express.png" alt="American Express">
                   </label>
                 </div>
               </div>  
@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="box-footer">
-          <a class="btn btn-success pull-right">Recargar</a>
+          <button type="submit" class="btn btn-success pull-right" ng-click="submitted=true">Recargar</button>
         </div>
       </form>
     </div>

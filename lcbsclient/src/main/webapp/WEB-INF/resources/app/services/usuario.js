@@ -7,7 +7,7 @@
         var add = function(usuario){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/usuarios/altausuario/', usuario)
+            $http.post('/lcbsapi/rest/usuarios/altausuario', usuario)
             .success(function (usuario) {
                 defer.resolve(usuario);
             })
@@ -18,10 +18,10 @@
             return defer.promise;
         };
 
-        var edit = function(id, usuario){
+        var edit = function(usuario){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/usuarios/altausuario/' + id, usuario)
+            $http.post('/lcbsapi/rest/usuarios/editarusuario', usuario)
             .success(function (usuario) {
                 defer.resolve(usuario);
             })
@@ -35,9 +35,23 @@
         var getId = function(id){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/usuarios/altausuario/' + id)
+            $http.get('/lcbsapi/rest/usuarios/getusuario/' + id)
             .success(function (usuario) {
                 defer.resolve(usuario);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
+
+            return defer.promise;
+        };
+
+        var login = function(usuario){
+            var defer = $q.defer();
+
+            $http.post('/lcbsapi/rest/usuarios/loginusuario', usuario)
+            .success(function (dato) {
+                defer.resolve(dato);
             })
             .error(function(){
                 defer.reject('server error')
@@ -49,7 +63,8 @@
         return {
             getId   : getId,
             add     : add,
-            edit    : edit
+            edit    : edit,
+            login   : login
         }
 
     }

@@ -83,9 +83,9 @@ public class UsuarioApi {
 		repo.CargarSaldoCuponera(obj.getString("idUsuario"), Float.parseFloat(obj.getString("saldo")));
 	}
 	
-	@POST
-	@Path("/listanotificaciones/")
-	public List<DataNotificacion> listarNotificaciones(String idUsuario){
+	@GET
+	@Path("/listanotificaciones/{idUsuario}")
+	public List<DataNotificacion> listarNotificaciones(@PathParam("idUsuario") final String idUsuario){
 		return repo.listarNotificaciones(idUsuario);
 	}
 	

@@ -149,6 +149,11 @@ public class EncomiendaApi {
 	public List<DataEstadosEncomienda> listarEstadoEncomienda(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
 		return repo.listarEstadoEncomienda(pagina, elementosPagina);
 	}
+	@GET
+	@Path("/listarencomiendasusuario/{idUsuario}/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataEncomienda> listarEncomiendasPorUsuario(@PathParam("idUsuario") final String idUsuario, @PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
+		return repo.listarEncomiendasPorUsuario(idUsuario, pagina, elementosPagina);
+	}
 	
 	
 	

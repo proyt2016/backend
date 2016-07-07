@@ -35,4 +35,6 @@ public interface IViaje {
 	public DataRecorrido obtenerRecorrido(String idRecorrido);
 	public void BajaRecorrido(String idRecorrido);
 	public List<DataParada> getParadas(Integer pagina, Integer elementosPagina);
+	public DataPuntoRecorrido obtenerPuntoRecorrido(String idPunto);
+	public DataPuntoRecorrido obtenerPuntoPorCoordenada(String coord);
 }

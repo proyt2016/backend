@@ -2,14 +2,24 @@ package lcbs.shares;
 
 public class DataTelefono{
     
+	private String descripcion;
 	private String telefono;
     
  
 
     public DataTelefono() {}
     
-    public DataTelefono(String tel) {
-        this.telefono = tel;
+    public DataTelefono(String desc, String tel) {
+    	this.descripcion = desc;
+    	this.telefono = tel;
+    }
+    
+    public void setDescripcion(String val){
+        this.descripcion = val;
+    }
+    
+    public String getDescripcion(){
+        return this.descripcion;
     }
 
     public void setTelefono(String val){

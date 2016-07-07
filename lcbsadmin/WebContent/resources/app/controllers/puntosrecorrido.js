@@ -5,8 +5,11 @@
     function puntosrecorridoCtrl($scope, $routeParams, puntosrecorridoService) {
         $scope.puntosrecorridoLst     = [];
         $scope.puntosrecorrido     = null;
-        $scope.tipodepunto = null;
+        $scope.tipodepunto = "Parada";
         $scope.showAlert    = false;
+        $scope.ubicacionInicial = null;
+        $scope.emailsTerminal = [];
+        $scope.telsTerminal = [];
 
         
         puntosrecorridoService.getTerminales().then(function (data) {
@@ -20,28 +23,15 @@
 
         
 
-        $scope.add = function(){
+        $scope.addEdit = function(){
             $scope.saving   = true;
             var puntosrecorrido     = this.puntosrecorrido;
             var tipodepunto = this.tipodepunto;
-            puntosrecorridoService.add(puntosrecorrido, tipodepunto).then(
-                function (data) {
-                    $scope.saving = false;
-                
-                    //mostrarNotificacion('success');
-                    window.history.back();
-                }, function() {
-                    $scope.saving = false;
-
-                    //mostrarNotificacion('error');
-                }
-            );
-        }
-
-        $scope.edit = function(){
-            $scope.saving   = true;
-            var puntosrecorrido     = this.puntosrecorrido;
-            puntosrecorridoService.edit(puntosrecorrido).then(
+            if(tipodepunto === 'Terminal'){
+                puntosrecorrido.mailsDeContacto = $scope.emailsTerminal;
+                puntosrecorrido.telefonosContacto = $scope.telsTerminal;
+            }
+            puntosrecorridoService.addEdit(puntosrecorrido, tipodepunto).then(
                 function (data) {
                     $scope.saving = false;
                 
@@ -74,6 +64,26 @@
             }
         }
 
+        $scope.addRelation = function (type) {
+            if(type == 'email'){
+                var nuevoEmail = {'descripcion':'','email':''};
+                $scope.emailsTerminal.push(nuevoEmail);
+            }
+            if(type == 'tels'){
+                var nuevoTel = {'descripcion':'','telefono':''};
+                $scope.telsTerminal.push(nuevoTel);
+            }
+        }
+
+        $scope.removeRelation = function (type, index) {
+            if(type == 'email'){
+                $scope.emailsTerminal.splice(index, 1);
+            }
+            if(type == 'tels'){
+                $scope.telsTerminal.splice(index, 1);
+            }
+        }
+
         var initMap = function () {
 
             //usamos la API para geolocalizar el usuario
@@ -102,45 +112,76 @@
 
           for(var i in $scope.puntosrecorridoLst){
             var lats = $scope.puntosrecorridoLst[i].ubicacionMapa.split(",");
-            placeMarkerAndPanTo(new google.maps.LatLng(lats[0],lats[1]), map);
+            var icon;
+            if($scope.puntosrecorridoLst[i].tipo == 'Terminal'){
+                icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/bus.png';
+            }else{
+                icon = 'https://maps.gstatic.com/mapfiles/ms2/micons/flag.png';
+            }
+            placeMarkerAndPanTo(new google.maps.LatLng(lats[0],lats[1]), map, $scope.puntosrecorridoLst[i].nombre,icon);
           }
 
           $('#ubicacionMapa').val('');
 
           map.addListener('click', function(e) {
-            placeMarkerAndPanTo(e.latLng, map);
+            placeMarkerAndPanTo(e.latLng, map, 'Nuevo punto');
           });
         }
 
-        var placeMarkerAndPanTo = function (latLng, map) {
-          var marker = new google.maps.Marker({
-            position: latLng,
-            draggable: true,
-            map: map
-          });
-
+        var placeMarkerAndPanTo = function (latLng, map, title, icon) {
+          var marker;
+          if(icon != null){
+              marker = new google.maps.Marker({
+                position: latLng,
+                draggable: true,
+                map: map,
+                title: title,
+                icon: icon
+              });
+          }else{
+              marker = new google.maps.Marker({
+                position: latLng,
+                draggable: true,
+                map: map,
+                title: title
+              });
+          }
+          
           map.panTo(latLng);
+          $scope.puntosrecorrido = null;
+          $scope.tipodepunto = "Parada";
 
           $('#ubicacionMapa').val(marker.position.lat()+","+marker.position.lng()).trigger('input');
               
           marker.addListener( 'click', function (event){
             $('#ubicacionMapa').val(this.position.lat()+","+this.position.lng()).trigger('input');
+            puntosrecorridoService.getPorCoord(this.position.lat()+","+this.position.lng()).then(function (data) {
+                $scope.puntosrecorrido = data;
+                $scope.tipodepunto = data.tipo;
+                if($scope.tipodepunto == 'Terminal'){
+                    $scope.emailsTerminal = $scope.puntosrecorrido.mailsDeContacto;
+                    $scope.telsTerminal = $scope.puntosrecorrido.telefonosContacto;
+                }
+            });
           })
-          
 
+          ubicacionMapaOriginal
           marker.addListener( 'dragstart', function (event)
-              {
-                //escribimos las coordenadas de la posicion actual del marcador dentro del input #coords
-                document.getElementById("coordsOrig").value = this.getPosition().lat()+","+ this.getPosition().lng();
-              });
+          {
+            $('#ubicacionMapaOriginal').val(this.getPosition().lat()+","+ this.getPosition().lng()).trigger('input');
+          });    
+
 
           marker.addListener( 'dragend', function (event)
-              {
-                this.position = new google.maps.LatLng(this.getPosition().lat(),this.getPosition().lng())
-                //escribimos las coordenadas de la posicion actual del marcador dentro del input #coords
-                document.getElementById("ubicacionMapa").value = this.getPosition().lat()+","+ this.getPosition().lng();
-                $('#ubicacionMapa').val(this.getPosition().lat()+","+ this.getPosition().lng()).trigger('input');
-              });
+          {
+            this.position = new google.maps.LatLng(this.getPosition().lat(),this.getPosition().lng())
+            var position = this.getPosition().lat()+","+ this.getPosition().lng();
+            puntosrecorridoService.getPorCoord($scope.ubicacionInicial).then(function (data) {
+                $scope.puntosrecorrido = data;
+                $scope.tipodepunto = data.tipo;
+                $('#ubicacionMapa').val(position).trigger('input');
+            });
+          });
         }
 
         

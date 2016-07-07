@@ -117,6 +117,23 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         });
         return encomiendas;
     }
+
+	@Override
+	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina) {
+		List<DataEncomienda> encomiendas = new ArrayList();
+        //obtengo todas las encomiendas de la bd
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Encomienda.class);
+    	criteria.add(Restrictions.eq("eliminada", false));
+    	criteria.add(Restrictions.or(Restrictions.eq("emisor.id", idUsuario),Restrictions.eq("receptor.id", idUsuario)));
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<Encomienda> listEnc = criteria.list();
+        
+        listEnc.stream().forEach((enc) -> {
+        	encomiendas.add(enc.getDatatype(true));
+        });
+        return encomiendas;
+	}
     
-    //TODO: Hacer busqueda con filtros
 }

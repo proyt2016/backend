@@ -32,31 +32,25 @@
             return defer.promise;
         };
 
-        var add = function(puntosrecorrido, tipodepunto){
+        var addEdit = function(puntosrecorrido, tipodepunto){
             var defer = $q.defer();
             var apiAUsar;
             if(tipodepunto == "Terminal"){
-                apiAUsar = '/lcbsapi/rest/viajes/altaterminal';
+                if(puntosrecorrido.id == null){
+                    apiAUsar = '/lcbsapi/rest/viajes/altaterminal';
+                }else{
+                    apiAUsar = '/lcbsapi/rest/viajes/editarterminal';
+                }
             }else{
-                apiAUsar = '/lcbsapi/rest/viajes/altaparada';
+                if(puntosrecorrido.id == null){
+                    apiAUsar = '/lcbsapi/rest/viajes/altaparada';
+                }else{
+                    apiAUsar = '/lcbsapi/rest/viajes/editarparada';
+                }
             }
             $http.post(apiAUsar, puntosrecorrido)
             .success(function (ptorec) {
                 defer.resolve(ptorec);
-            })
-            .error(function(){
-                defer.reject('server error')
-            });
-
-            return defer.promise;
-        };
-
-        var edit = function(puntosrecorrido){
-            var defer = $q.defer();
-
-            $http.post('/lcbsapi/rest/viajes/editarrecorrido', puntosrecorrido)
-            .success(function (rec) {
-                defer.resolve(rec);
             })
             .error(function(){
                 defer.reject('server error')
@@ -79,10 +73,10 @@
             return defer.promise;
         };
 
-        var getId = function(id){
+        var getPorCoord = function(coord){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/getrecorrido/'+id)
+            $http.get('/lcbsapi/rest/viajes/getpuntoporcoordenada/'+coord)
             .success(function (ptorec) {
                 defer.resolve(ptorec);
             })
@@ -96,10 +90,9 @@
         return {
             getTerminales  : getTerminales,
             getParadas  : getParadas,
-            getId   : getId,
-            add     : add,
-            borrar  : borrar,
-            edit    : edit
+            getPorCoord   : getPorCoord,
+            addEdit     : addEdit,
+            borrar  : borrar
         }
 
     }

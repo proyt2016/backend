@@ -14,4 +14,6 @@ public class DataParada extends DataPuntoRecorrido{
 	public String getTipo(){
 	    return "Parada";
 	}
+	
+	public void setTipo(String val){}
 }

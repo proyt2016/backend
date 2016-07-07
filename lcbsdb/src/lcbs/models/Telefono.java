@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Telefono implements Serializable{
     private static final long serialVersionUID = 1L;
     
-    
+    private String descripcion;
     private String telefono;
     
  
@@ -22,15 +22,24 @@ public class Telefono implements Serializable{
     public Telefono() {}
     
     public Telefono(DataTelefono dt){
+    	this.setDescripcion(dt.getDescripcion());
     	this.setTelefono(dt.getTelefono());
     }
     
     public DataTelefono getDatatype(){
     	DataTelefono result = new DataTelefono();
+    	result.setDescripcion(this.getDescripcion());
     	result.setTelefono(this.getTelefono());
     	return result;
     }
     
+    public void setDescripcion(String val){
+        this.descripcion = val;
+    }
+    
+    public String getDescripcion(){
+        return this.descripcion;
+    }    
   
     public void setTelefono(String val){
         this.telefono = val;

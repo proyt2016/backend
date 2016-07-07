@@ -145,4 +145,9 @@ public class EncomiendaCtrl implements IEncomienda{
 	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina) {
 		return srvEncomienda.buscarEncomienda(filtro, pagina, ElementosPagina);
 	}
+
+	@Override
+	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina) {
+		return srvEncomienda.listarEncomiendasPorUsuario(idUsuario, pagina, elementosPagina);
+	}
 }

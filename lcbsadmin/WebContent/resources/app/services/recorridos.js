@@ -33,7 +33,7 @@
 
         var edit = function(recorrido){
             var defer = $q.defer();
-
+            console.info(recorrido);
             $http.post('/lcbsapi/rest/viajes/editarrecorrido', recorrido)
             .success(function (rec) {
                 defer.resolve(rec);

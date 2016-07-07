@@ -1,8 +1,10 @@
 ﻿(function () {
 
-    angular.module('lacbus', ['ngRoute', 'ngAnimate', 'toastr']);
+    angular.module('lacbus', ['ngRoute', 'ngAnimate', 'toastr', 'ngStorage']);
 
     angular.module('lacbus').config(['$routeProvider', 'toastrConfig', configFunction]);
+    
+    angular.module('lacbus').controller('appCtrl', ['$scope', '$location', '$localStorage', appCtrl]);
 
     /*@ngInject*/
     function configFunction($routeProvider, toastrConfig) {
@@ -69,6 +71,20 @@
         $routeProvider.when('/historial-notifacion', {
             templateUrl: 'app/views/historial-notificacion.html',
             controller: 'historialNotificacionCtrl'
+        });
+    }
+    
+    function appCtrl($scope, $location, $localStorage) {
+        $scope.usuarioLogueado = $localStorage.usuarioLogueado;
+        
+        $scope.logout = function(){
+        	$localStorage.$reset();
+        	$scope.usuarioLogueado = null;
+        	$location.url('/');
+        }
+        
+        $scope.$on('localStorage:changed', function(event, data){
+        	$scope.usuarioLogueado = $localStorage.usuarioLogueado;
         });
     }
 

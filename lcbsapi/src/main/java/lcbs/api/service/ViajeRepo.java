@@ -148,4 +148,8 @@ public class ViajeRepo {
 	public DataPuntoRecorrido obtenerPuntoPorCoordenada(String coord) {
 		return ctrViaje.obtenerPuntoPorCoordenada(coord);
 	}
+
+	public DataViaje getViaje(String idViaje) {
+		return ctrViaje.getViaje(idViaje);
+	}
 }

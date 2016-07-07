@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import lcbs.interfaces.ViajeLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Encomienda;
+import lcbs.models.Recorrido;
 import lcbs.models.Vehiculo;
 import lcbs.models.Viaje;
 import lcbs.shares.DataEncomienda;
@@ -21,6 +22,7 @@ import lcbs.shares.DataViaje;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -43,7 +45,7 @@ public class ViajeSrv implements ViajeLocalApi {
         
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<Viaje> listTer = criteria.list();
+    	List<Viaje> listTer = new ArrayList<Viaje>(new LinkedHashSet( criteria.list() ));
         
         listTer.stream().forEach((via) -> {
         	Viajes.add(via.getDatatype(true));
@@ -77,14 +79,28 @@ public class ViajeSrv implements ViajeLocalApi {
         em.remove(realObj);
     }
     
-    /*public List<DataViaje> viajesPorTerminal(String idterminal){
+    public List<DataViaje> viajesPorTerminal(String idterminal, Integer pagina, Integer ElementosPagina){
+    	List<DataViaje> viajes = new ArrayList();
+        Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Viaje.class, "viaje");
+    	criteria.createAlias("viaje.recorrido.puntosderecorrido", "puntos");
+    	criteria.add(Restrictions.eq("puntos.id", idterminal));
     	
-    }*/
+    	criteria.setFirstResult((pagina - 1) * ElementosPagina);
+    	criteria.setMaxResults(ElementosPagina);
+    	
+        List<Viaje> listViaje = new ArrayList<Viaje>(new LinkedHashSet( criteria.list() ));
+        
+        listViaje.stream().forEach((via) -> {
+        	viajes.add(via.getDatatype(true));
+        });
+        return viajes;
+    }
 
 	public List<DataViaje> buscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina) {
 		List<DataViaje> viajes = new ArrayList();
         Session session = (Session) em.getDelegate();
-    	Criteria criteria = session.createCriteria(Encomienda.class);
+    	Criteria criteria = session.createCriteria(Viaje.class);
     	if(filtro.getRecorrido() != null)
     		criteria.add(Restrictions.eq("recorrido.id", filtro.getRecorrido().getId()));
     	if(filtro.getHorario() != null)
@@ -106,7 +122,7 @@ public class ViajeSrv implements ViajeLocalApi {
     	criteria.setFirstResult((pagina - 1) * ElementosPagina);
     	criteria.setMaxResults(ElementosPagina);
     	
-        List<Viaje> listViaje = criteria.list();
+    	List<Viaje> listViaje = new ArrayList<Viaje>(new LinkedHashSet( criteria.list() ));
         
         listViaje.stream().forEach((via) -> {
         	viajes.add(via.getDatatype(true));

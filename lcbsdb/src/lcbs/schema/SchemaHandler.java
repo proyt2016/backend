@@ -42,6 +42,7 @@ public class SchemaHandler implements ISchemaHandler{
 			ut.begin();
 			em.createNativeQuery("CREATE SCHEMA " + name).executeUpdate();
 			em.createNativeQuery("SET SCHEMA '"+ name+"'").executeUpdate();
+			em.createNativeQuery("SET search_path TO "+ name).executeUpdate();
 			ut.commit();
 		} catch (Exception e) {
 			log.info("failing to create schema" + name);
@@ -62,6 +63,7 @@ public class SchemaHandler implements ISchemaHandler{
 			create(em);
 			ut.begin();
 			em.createNativeQuery("SET SCHEMA 'public'").executeUpdate();
+			em.createNativeQuery("SET search_path TO public").executeUpdate();
 			log.info("setSchema-end");
 			ut.commit();
 		} catch (Exception e) {

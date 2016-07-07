@@ -76,8 +76,11 @@ public class ViajeSrv implements ViajeLocalApi {
     	Viaje realObj = new Viaje(this.getViaje(idViaje));
         em.remove(realObj);
     }
+    
+    /*public List<DataViaje> viajesPorTerminal(String idterminal){
+    	
+    }*/
 
-	@Override
 	public List<DataViaje> buscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina) {
 		List<DataViaje> viajes = new ArrayList();
         Session session = (Session) em.getDelegate();

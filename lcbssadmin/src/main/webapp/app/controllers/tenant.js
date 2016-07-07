@@ -17,8 +17,8 @@
     	 
     	$scope.headers = Object.keys($scope.tenantTmp);
     	$scope.create = function(){
-    		service.create($scope.tenantTmp).then(function(){
-    			
+    		service.create($scope.tenantTmp).then(function(data){
+    			console.info(data);
     		});
     	};
     	$scope.list= function(){

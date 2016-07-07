@@ -41,6 +41,7 @@ public class SchemaHandler implements ISchemaHandler{
 			log.info("Create schema if not exist"+name);
 			ut.begin();
 			em.createNativeQuery("CREATE SCHEMA " + name).executeUpdate();
+			em.createNativeQuery("SET SCHEMA '"+ name+"'").executeUpdate();
 			ut.commit();
 		} catch (Exception e) {
 			log.info("failing to create schema" + name);
@@ -48,14 +49,8 @@ public class SchemaHandler implements ISchemaHandler{
 		}
 		log.info("Changing current Schema to: "+ name);
 		try {  
-			ut.begin();
-			em.createNativeQuery("SET SCHEMA '" + name+"'").executeUpdate();
-			ut.commit();
-			File file =  new File("META-INF/schema.ddl");
 			
-			log.info(file.getAbsoluteFile());
-			log.info("=====");
-			log.info(file.getAbsolutePath());
+			File file =  new File("META-INF/schema.ddl");
 			log.info("====="); 
 			Scanner scanner = new Scanner(file).useDelimiter(delimiter);
 		    while(scanner.hasNext()) {
@@ -63,10 +58,9 @@ public class SchemaHandler implements ISchemaHandler{
 		    	if(!sql.isEmpty())
 		        createSQL.add(sql + delimiter);
 		    }
-		
+			log.info("setSchema-start");
 			create(em);
 			ut.begin();
-			log.info("setSchema-start");
 			em.createNativeQuery("SET SCHEMA 'public'").executeUpdate();
 			log.info("setSchema-end");
 			ut.commit();
@@ -95,7 +89,6 @@ public class SchemaHandler implements ISchemaHandler{
 				em.createNativeQuery(createSQsL[j]).executeUpdate();
 				ut.commit();
 			} catch (Exception e) {
-				// exceptions.add( e );
 				log.error("Unsuccessful: " + createSQsL[j]);
 				log.error(e.getMessage());
 			}

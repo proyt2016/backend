@@ -7,7 +7,7 @@
         var recargar = function(recarga){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/usuarios/cargarcuponera', recarga)
+            $http.post('/lcbsapi/rest/usuarios/cargarcuponera', recarga)
             .success(function (datos) {
                 defer.resolve(datos);
             })

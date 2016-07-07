@@ -7,15 +7,17 @@
       <form role="form">
   			<div class="box-body">
           <div class="row">
-						<div class="col-md-6 form-group">
-							<label>Origen</label>
-							<select class="form-control select2" style="width: 100%;" name="origen">
-								<option ng-repeat="terminal in terminales" value="{{ terminal.id }}">{{ terminal.nombre }}</option>
-							</select>
-						</div>
+			<div class="col-md-6 form-group">
+				<label>Origen</label>
+				<select class="form-control select2" style="width: 100%;" name="origen">
+					<option></option>
+					<option ng-repeat="terminal in terminales" value="{{ terminal.id }}">{{ terminal.nombre }}</option>
+				</select>
+			</div>
             <div class="col-md-6 form-group">
               <label>Destino</label>
               <select class="form-control select2" style="width: 100%;" name="destino">
+              	<option></option>
                 <option ng-repeat="terminal in terminales" value="{{ terminal.id }}">{{terminal.nombre}}</option>
               </select>
             </div>
@@ -53,7 +55,8 @@
                   <div class="col-md-6 form-group">
                     <label>Lineas</label>
                     <select class="form-control select2" style="width: 100%;" name="recorrido">
-                      <option ng-repeat="recorrido in recorridos" value="{{ recorrido.id }}">{{ recorrido.nombre }}</option>
+                    	<option></option>
+                      	<option ng-repeat="recorrido in recorridos" value="{{ recorrido.id }}">{{ recorrido.nombre }}</option>
                     </select>
                   </div>
                   <div class="col-md-6 form-group">
@@ -110,7 +113,7 @@
 	</div>
 </div>
 
-<div class="row" ng-if="resultados.length">
+<div class="row" ng-if="resultadosIda.length">
   <div class="col-md-12 col-xs-12">
     <div class="box box-success">
       <div class="box-header">
@@ -129,14 +132,50 @@
             <th>Destino</th>
             <th></th>
           </tr>
-          <tr ng-repeat="resultado in resultados">
+          <tr ng-repeat="resultado in resultadosIda">
             <td>{{ resultado.salida }}</td>
             <td>{{ resultado.llegada }}</td>
             <td>{{ resultado.origen.nombre }}</td>
             <td>{{ resultado.destino.nombre }}</td>
             <td>
               <a href="#/detalle/{{ resultado.id }}" class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
-              <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="reservar(resultado)"><i class="fa fa-bookmark"></i></a>
+              <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="mostrarReservar(resultado)"><i class="fa fa-bookmark"></i></a>
+              <a href="#/comprar/{{ resultado.id }}" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" ng-if="resultadosVuelta.length">
+  <div class="col-md-12 col-xs-12">
+    <div class="box box-success">
+      <div class="box-header">
+        <h2 class="box-title">Resultado de busqueda</h2>
+      </div>
+      
+      <div class="box-body table-responsive">
+        <blockquote>
+          <p>Linea 1</p>
+        </blockquote>
+        <table class="table table-hover">
+          <tr>
+            <th>Salida</th>
+            <th>Llegada</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th></th>
+          </tr>
+          <tr ng-repeat="resultado in resultadosVuelta">
+            <td>{{ resultado.salida }}</td>
+            <td>{{ resultado.llegada }}</td>
+            <td>{{ resultado.origen.nombre }}</td>
+            <td>{{ resultado.destino.nombre }}</td>
+            <td>
+              <a href="#/detalle/{{ resultado.id }}" class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
+              <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="mostrarReservar(resultado)"><i class="fa fa-bookmark"></i></a>
               <a href="#/comprar/{{ resultado.id }}" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
             </td>
           </tr>

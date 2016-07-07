@@ -150,4 +150,14 @@ public class EncomiendaCtrl implements IEncomienda{
 	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina) {
 		return srvEncomienda.listarEncomiendasPorUsuario(idUsuario, pagina, elementosPagina);
 	}
+
+	@Override
+	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado) {
+		srvEstadosEncomienda.modificarEstadosEncomienda(dataEstado);
+	}
+
+	@Override
+	public DataEstadosEncomienda getEstadoEncomienda(String idEstadoEncomienda) {
+		return srvEstadosEncomienda.getEstadosEncomienda(idEstadoEncomienda);
+	}
 }

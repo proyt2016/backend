@@ -110,11 +110,25 @@
 		    controller  : 'recorridosCtrl'
 		});
 
-		// ruta de recorridos
+		// ruta de estadosencomienda
+		$routeProvider.when("/estadosencomienda", {
+		    templateUrl : "app/views/estadosencomienda/list.html",
+		    controller  : 'estadosencomiendaCtrl'
+		}).when("/estadosencomienda/add", {
+		    templateUrl : "app/views/estadosencomienda/add.html",
+		    controller  : 'estadosencomiendaCtrl'
+		}).when("/estadosencomienda/edit/:id", {
+		    templateUrl : "app/views/estadosencomienda/edit.html",
+		    controller  : 'estadosencomiendaCtrl'
+		});
+
+		// ruta de puntosrecorrido
 		$routeProvider.when("/puntosrecorrido", {
 		    templateUrl : "app/views/puntosrecorrido/map.html",
 		    controller  : 'puntosrecorridoCtrl'
 		})
+
+		
     }
 
 })();

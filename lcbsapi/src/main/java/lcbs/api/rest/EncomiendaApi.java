@@ -51,9 +51,9 @@ public class EncomiendaApi {
 		return repo.AltaEncomienda(enc);
 	}
 	
-	@POST
-	@Path("/borrarestadoencomienda/")
-	public void borrarEstadoEncomienda(String idEstadoEncomienda){
+	@DELETE
+	@Path("/borrarestadoencomienda/{idEstadoEncomienda}")
+	public void borrarEstadoEncomienda(@PathParam("idEstadoEncomienda") final String idEstadoEncomienda){
 		repo.borrarEstadoEncomienda(idEstadoEncomienda);
 	}
 	
@@ -75,6 +75,18 @@ public class EncomiendaApi {
 	@Path("/altaestadoencomienda/")
 	public void AltaEstadoEncomienda(DataEstadosEncomienda dataEstado){
 		repo.crearEstadoEncomienda(dataEstado);
+	}
+	
+	@POST
+	@Path("/editarestadoencomienda/")
+	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado){
+		repo.EditarEstadoEncomienda(dataEstado);
+	}
+	
+	@GET
+	@Path("/getestadoencomienda/{idEstadoEncomienda}")
+	public DataEstadosEncomienda getEstadoEncomienda(@PathParam("idEstadoEncomienda") final String idEstadoEncomienda){
+		return repo.getEstadoEncomienda(idEstadoEncomienda);
 	}
 	
 	@POST

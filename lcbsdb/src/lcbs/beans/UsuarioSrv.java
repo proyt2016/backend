@@ -50,16 +50,17 @@ public class UsuarioSrv implements UsuarioLocalApi {
         return usuarios;
     }
     
-    public boolean loginUsuario(String mailUsuario, String clave){
+    public DataUsuario loginUsuario(String mailUsuario, String clave){
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Usuario.class);
     	criteria.add(Restrictions.eq("email.email", mailUsuario));
         List<Usuario> listUsu = criteria.list();
         if(listUsu.size() == 1){
 	    	DataUsuario usuario = listUsu.get(0).getDatatype(true);
-	        return usuario.getClave().equals(clave);
+	    	if(usuario.getClave().equals(clave))
+	        return usuario;
         }
-        return false;
+        return null;
     }
     
     public void modificarUsuario(DataUsuario usu){

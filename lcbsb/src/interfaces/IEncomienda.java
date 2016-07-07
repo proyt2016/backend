@@ -36,4 +36,6 @@ public interface IEncomienda {
 	public List<DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina);
 	public DataEstadosEncomienda crearEstadoEncomienda(DataEstadosEncomienda estado);
 	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina);
+	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado);
+	public DataEstadosEncomienda getEstadoEncomienda(String idEstadoEncomienda);
 }

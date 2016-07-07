@@ -118,7 +118,7 @@ public class UsuarioApi {
 	
 	@POST
 	@Path("/loginusuario/")
-	public boolean loginUsuario(String data) {
+	public DataUsuario loginUsuario(String data) {
 		JSONObject obj = new JSONObject(data);
 		return repo.loginUsuario(obj.getString("usuario"), obj.getString("clave"));
 	}

@@ -119,5 +119,16 @@ public class EncomiendaRepo {
 	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina) {
 		return ctrEncomienda.listarEncomiendasPorUsuario(idUsuario, pagina, elementosPagina);
 	}
+
+
+	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado) {
+		ctrEncomienda.EditarEstadoEncomienda(dataEstado);
+		
+	}
+
+
+	public DataEstadosEncomienda getEstadoEncomienda(String idEstadoEncomienda) {
+		return ctrEncomienda.getEstadoEncomienda(idEstadoEncomienda);
+	}
 	
 }

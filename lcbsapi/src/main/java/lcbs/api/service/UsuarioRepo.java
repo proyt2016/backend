@@ -85,7 +85,7 @@ public class UsuarioRepo {
 		ctrUsuario.AsignarPerfil(idEmpleado, perfil);
 	}
 	
-	public boolean loginUsuario(String usuario, String clave) {
+	public DataUsuario loginUsuario(String usuario, String clave) {
 		return ctrUsuario.loginUsuario(usuario, clave);
 	}
 

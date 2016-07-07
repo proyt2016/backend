@@ -109,7 +109,7 @@ public class UsuarioCtrl implements IUsuario{
 	}
 
 	@Override
-	public boolean loginUsuario(String usuario, String clave) {
+	public DataUsuario loginUsuario(String usuario, String clave) {
 		return srvUsuario.loginUsuario(usuario, clave);
 	}
 

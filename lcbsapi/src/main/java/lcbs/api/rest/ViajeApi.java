@@ -207,6 +207,12 @@ public class ViajeApi {
 		return repo.obtenerPuntoPorCoordenada(coord);
 	}
 	
+	@GET
+	@Path("/getviaje/{idViaje}")
+	public DataViaje getViaje(@PathParam("idViaje") final String idViaje){
+		return repo.getViaje(idViaje);
+	}
+	
 	@POST
 	@Path("/altaviaje/")
 	public void crearViaje(DataViaje viaje){

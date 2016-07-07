@@ -239,4 +239,9 @@ public class ViajeCtrl implements IViaje{
 		return null;
 	}
 
+	@Override
+	public DataViaje getViaje(String idViaje) {
+		return srvViaje.getViaje(idViaje);
+	}
+
 }

@@ -15,4 +15,5 @@ public interface EncomiendaLocalApi {
 	public DataEncomienda crearEncomienda(DataEncomienda enc);
 	public void darBajaEncomienda(String idEncomienda);
 	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina);
+	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina);
 }

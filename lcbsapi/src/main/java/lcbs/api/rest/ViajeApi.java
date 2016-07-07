@@ -88,10 +88,9 @@ public class ViajeApi {
 	}
 	
 	@GET
-	@Path("/listarreservas/")
-	public List<DataReserva> ListarReservas(String data) {
-		JSONObject obj = new JSONObject(data);
-		return repo.ListarReservas(obj.getString("idUsuario"));
+	@Path("/listarreservas/{idUsuario}")
+	public List<DataReserva> ListarReservas(@PathParam("idUsuario") final String idUsuario) {
+		return repo.ListarReservas(idUsuario);
 	}
 	
 	@POST
@@ -131,7 +130,8 @@ public class ViajeApi {
 	//tested
 	@POST
 	@Path("/crearrecorrido/")
-	public DataRecorrido CrearRecorrido(DataRecorrido recorrido){
+	public DataRecorrido CrearRecorrido(DataRecorridoConvertor pseudoRecorrido){
+		DataRecorrido recorrido = pseudoRecorrido.getRecorrido();
 		return repo.CrearRecorrido(recorrido);
 	}
 	
@@ -193,6 +193,18 @@ public class ViajeApi {
 	@Path("/getterminal/{idTerminal}")
 	public DataTerminal obtenerTerminal(@PathParam("idTerminal") final String IdTerminal){
 		return repo.obtenerTerminal(IdTerminal);
+	}
+	
+	@GET
+	@Path("/getpuntorecorrido/{idPunto}")
+	public DataPuntoRecorrido obtenerPuntoRecorrido(@PathParam("idPunto") final String idPunto){
+		return repo.obtenerPuntoRecorrido(idPunto);
+	}
+	
+	@GET
+	@Path("/getpuntoporcoordenada/{coord}")
+	public DataPuntoRecorrido getPuntoPorCoordenada(@PathParam("coord") final String coord){
+		return repo.obtenerPuntoPorCoordenada(coord);
 	}
 	
 	@POST

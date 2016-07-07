@@ -140,4 +140,12 @@ public class ViajeRepo {
 	public void BajaRecorrido(String idRecorrido) {
 		ctrViaje.BajaRecorrido(idRecorrido);		
 	}
+
+	public DataPuntoRecorrido obtenerPuntoRecorrido(String idPunto) {
+		return ctrViaje.obtenerPuntoRecorrido(idPunto);
+	}
+
+	public DataPuntoRecorrido obtenerPuntoPorCoordenada(String coord) {
+		return ctrViaje.obtenerPuntoPorCoordenada(coord);
+	}
 }

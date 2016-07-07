@@ -1,13 +1,13 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('loginCtrl', ['$scope', 'usuarioService', loginCtrl]);
+    angular.module('lacbus').controller('loginCtrl', ['$rootScope', '$scope', '$location', '$localStorage', 'usuarioService', loginCtrl]);
 
-    function loginCtrl($scope, usuarioService) {
+    function loginCtrl($rootScope, $scope, $location, $localStorage, usuarioService) {
         $scope.login = function(){
-        	console.log(this.usuario);
-
         	usuarioService.login(this.usuario).then(function (datos) {
-                console.log(datos);
+        		$localStorage.usuarioLogueado = datos;
+        		$rootScope.$broadcast('localStorage:changed');
+        		$location.url('/');
             });
         }
     }

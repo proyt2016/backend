@@ -7,12 +7,14 @@ import javax.persistence.Query;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import lcbs.interfaces.ParadaLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.GrupoHorario;
 import lcbs.models.Parada;
 import lcbs.shares.DataParada;
+import lcbs.shares.DataPuntoRecorrido;
 
 import java.util.Map;
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ public class ParadaSrv implements ParadaLocalApi {
         //obtengo todas las paradas de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Parada.class);
-        
+    	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
         List<Parada> listPds = criteria.list();
@@ -63,6 +65,7 @@ public class ParadaSrv implements ParadaLocalApi {
     
     public DataParada crearParada(DataParada prd){
     	Parada realObj = new Parada(prd);
+    	realObj.setEliminado(false);
         //guardo la parada en bd
         em.persist(realObj);
         return realObj.getDatatype();
@@ -73,4 +76,19 @@ public class ParadaSrv implements ParadaLocalApi {
     	Parada realOb = new Parada(prd);
         em.remove(realOb);
     }
+
+	@Override
+	public DataPuntoRecorrido getParadaPorCoordenada(String coord) {
+		List<DataParada> paradas = new ArrayList();
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Parada.class);
+    	criteria.add(Restrictions.eq("eliminado", false));
+    	criteria.add(Restrictions.eq("ubicacionMapa", coord));
+        List<Parada> listPds = criteria.list();
+        
+        listPds.stream().forEach((prd) -> {
+        	paradas.add(prd.getDatatype());
+        });
+        return paradas.size() > 0 ? paradas.get(0) : null;
+	}
 }

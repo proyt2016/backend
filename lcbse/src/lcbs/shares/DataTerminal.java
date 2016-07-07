@@ -51,4 +51,6 @@ public class DataTerminal extends DataPuntoRecorrido{
         return "Terminal";
     }
     
+    public void setTipo(String val){}
+    
 }

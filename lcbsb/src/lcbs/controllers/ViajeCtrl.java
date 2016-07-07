@@ -213,4 +213,30 @@ public class ViajeCtrl implements IViaje{
 		return srvParada.obtenerParadas(pagina, elementosPagina);
 	}
 
+	@Override
+	public DataPuntoRecorrido obtenerPuntoRecorrido(String idPunto) {
+		DataPuntoRecorrido terminal = obtenerTerminal(idPunto);
+		if(terminal != null){
+			return terminal;
+		}
+		DataPuntoRecorrido parada = obtenerParada(idPunto);
+		if(parada != null){
+			return parada;
+		}
+		return null;
+	}
+
+	@Override
+	public DataPuntoRecorrido obtenerPuntoPorCoordenada(String coord) {
+		DataPuntoRecorrido terminal = srvTerminal.getTerminalPorCoordenada(coord);
+		if(terminal != null){
+			return terminal;
+		}
+		DataPuntoRecorrido parada = srvParada.getParadaPorCoordenada(coord);
+		if(parada != null){
+			return parada;
+		}
+		return null;
+	}
+
 }

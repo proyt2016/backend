@@ -1,13 +1,23 @@
 package lcbs.shares;
 
 public class DataEmail{
+	private String descripcion;
     private String email;
     
 
     public DataEmail(){}
     
-    public DataEmail(String em) {
-        this.email = em;
+    public DataEmail(String desc, String em) {
+    	this.descripcion = desc;
+    	this.email = em;
+    }
+    
+    public void setDescripcion(String val){
+        this.descripcion = val;
+    }
+    
+    public String getDescripcion(){
+        return this.descripcion;
     }
     
     public void setEmail(String val){

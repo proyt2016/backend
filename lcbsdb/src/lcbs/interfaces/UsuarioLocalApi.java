@@ -10,7 +10,7 @@ import lcbs.shares.DataUsuario;
 @Local
 public interface UsuarioLocalApi {
 	public List<DataUsuario> obtenerUsuarios(Integer pagina, Integer elementosPagina);
-	public boolean loginUsuario(String mailUsuario, String clave);
+	public DataUsuario loginUsuario(String mailUsuario, String clave);
 	public void modificarUsuario(DataUsuario usu);
 	public DataUsuario getUsuario(String usu);
 	public DataUsuario crearUsuario(DataUsuario usu);

@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -18,7 +20,9 @@ import lcbs.shares.DataRecorrido;
 
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -26,9 +30,15 @@ import java.util.List;
  */
 @Stateless
 public class RecorridoSrv implements RecorridoLocalApi {
+	private static final Log log = LogFactory.getLog(TerminalSrv.class);
 	@Inject
     EntityManager em;
 	
+	
+	public static void log(String s){
+
+		log.info("------->"+s);		
+	}
     private RecorridoSrv(){
         
     }
@@ -41,8 +51,7 @@ public class RecorridoSrv implements RecorridoLocalApi {
     	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<Recorrido> listRec = criteria.list();
-        
+        List<Recorrido> listRec = new ArrayList<Recorrido>(new LinkedHashSet( criteria.list() ));
         listRec.stream().forEach((rec) -> {
         	Recorridos.add(rec.getDatatype(true));
         });

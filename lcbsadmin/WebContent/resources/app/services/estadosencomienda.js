@@ -1,15 +1,15 @@
 (function () {
     'use strict';
-    angular.module('lacbus').service('recorridosService', ["$http", "$q", recorridosService]);
+    angular.module('lacbus').service('estadosencomiendaService', ["$http", "$q", estadosencomiendaService]);
 
-    function recorridosService($http, $q) {
+    function estadosencomiendaService($http, $q) {
 
         var getAll = function(){
             var defer = $q.defer();
 
-             $http.get('/lcbsapi/rest/viajes/listarrecorridos/1/10000')
-             .success(function (recorridos) {
-                 defer.resolve(recorridos);
+             $http.get('/lcbsapi/rest/encomiendas/listarestadosencomienda/1/10000')
+             .success(function (estadosencomienda) {
+                 defer.resolve(estadosencomienda);
              })
              .error(function(){
                  defer.reject('server error')
@@ -18,11 +18,12 @@
             return defer.promise;
         };
 
-        var add = function(recorrido){
+        var add = function(estadosencomienda){
             var defer = $q.defer();
-            $http.post('/lcbsapi/rest/viajes/crearrecorrido', recorrido)
-            .success(function (rec) {
-                defer.resolve(rec);
+            console.info(estadosencomienda);
+            $http.post('/lcbsapi/rest/encomiendas/altaestadoencomienda', estadosencomienda)
+            .success(function (estadosencomienda) {
+                defer.resolve(estadosencomienda);
             })
             .error(function(){
                 defer.reject('server error')
@@ -31,12 +32,12 @@
             return defer.promise;
         };
 
-        var edit = function(recorrido){
+        var edit = function(estadosencomienda){
             var defer = $q.defer();
-            console.info(recorrido);
-            $http.post('/lcbsapi/rest/viajes/editarrecorrido', recorrido)
-            .success(function (rec) {
-                defer.resolve(rec);
+
+            $http.post('/lcbsapi/rest/encomiendas/editarestadoencomienda', estadosencomienda)
+            .success(function (estadosencomienda) {
+                defer.resolve(estadosencomienda);
             })
             .error(function(){
                 defer.reject('server error')
@@ -47,10 +48,9 @@
 
         var borrar = function(id){
             var defer = $q.defer();
-            var aEliminar = { 'idRecorrido' : id}
-            $http.post('/lcbsapi/rest/viajes/bajarecorrido',aEliminar)
-            .success(function (rec) {
-                defer.resolve(rec);
+            $http.delete('/lcbsapi/rest/encomiendas/borrarestadoencomienda/'+id)
+            .success(function (estadosencomienda) {
+                defer.resolve(estadosencomienda);
             })
             .error(function(){
                 defer.reject('server error')
@@ -62,9 +62,9 @@
         var getId = function(id){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/getrecorrido/'+id)
-            .success(function (rec) {
-                defer.resolve(rec);
+            $http.get('/lcbsapi/rest/encomiendas/getestadoencomienda/'+id)
+            .success(function (estadosencomienda) {
+                defer.resolve(estadosencomienda);
             })
             .error(function(){
                 defer.reject('server error')

@@ -76,8 +76,10 @@ public class DataRecorrido{
     }
     
     public String getIdOrigen(){
-    	DataPuntoRecorrido result = puntosDeRecorrido.get(0);
-    	return result.getId();
+    	String result = null;
+    	if(puntosDeRecorrido.size() > 0)
+    		result = puntosDeRecorrido.get(0).getId();
+    	return result;
     }
     
     public void setIdOrigen(String val){
@@ -85,8 +87,10 @@ public class DataRecorrido{
     }
     
     public String getIdDestino(){
-    	DataPuntoRecorrido result = puntosDeRecorrido.get(puntosDeRecorrido.size());
-    	return result.getId();
+    	String result = null;
+    	if(puntosDeRecorrido.size() > 0)
+    		result = puntosDeRecorrido.get(puntosDeRecorrido.size()-1).getId();
+    	return result;
     }
     
     public void setIdDestino(String val){

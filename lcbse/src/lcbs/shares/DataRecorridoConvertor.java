@@ -10,6 +10,8 @@ public class DataRecorridoConvertor{
     private String nombre;
     private List<DataPuntoRecorridoConverter> puntosDeRecorrido;
     private List<DataGrupoHorario> horarios;
+    private String idOrigen;
+    private String idDestino;
     private List<DataPrecio> precios;
     private Boolean eliminado;
     
@@ -93,5 +95,21 @@ public class DataRecorridoConvertor{
     
     public Boolean getEliminado(){
         return this.eliminado;
+    }
+    
+    public String getIdOrigen(){
+    	return idOrigen;
+    }
+    
+    public void setIdOrigen(String val){
+    	this.idOrigen = val;
+    }
+    
+    public String getIdDestino(){
+    	return idDestino;
+    }
+    
+    public void setIdDestino(String val){
+    	this.idDestino = val;
     }
 }

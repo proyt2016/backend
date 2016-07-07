@@ -83,9 +83,9 @@ public class UsuarioApi {
 		repo.CargarSaldoCuponera(obj.getString("idUsuario"), Float.parseFloat(obj.getString("saldo")));
 	}
 	
-	@POST
-	@Path("/listanotificaciones/")
-	public List<DataNotificacion> listarNotificaciones(String idUsuario){
+	@GET
+	@Path("/listanotificaciones/{idUsuario}")
+	public List<DataNotificacion> listarNotificaciones(@PathParam("idUsuario") final String idUsuario){
 		return repo.listarNotificaciones(idUsuario);
 	}
 	
@@ -118,7 +118,7 @@ public class UsuarioApi {
 	
 	@POST
 	@Path("/loginusuario/")
-	public boolean loginUsuario(String data) {
+	public DataUsuario loginUsuario(String data) {
 		JSONObject obj = new JSONObject(data);
 		return repo.loginUsuario(obj.getString("usuario"), obj.getString("clave"));
 	}

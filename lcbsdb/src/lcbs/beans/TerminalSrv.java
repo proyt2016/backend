@@ -16,6 +16,7 @@ import org.hibernate.criterion.Restrictions;
 
 import lcbs.interfaces.TerminalLocalApi;
 import lcbs.models.Terminal;
+import lcbs.shares.DataPuntoRecorrido;
 import lcbs.shares.DataTerminal;
 
 import java.util.ArrayList;
@@ -28,17 +29,13 @@ public class TerminalSrv implements TerminalLocalApi {
 	private static final Log log = LogFactory.getLog(TerminalSrv.class);
 	@Inject
     EntityManager em;
-	public static void log(String s){
-
-		log.info("------->"+s);		
-	}
+	
     private TerminalSrv(){
         
     }
     
     public List<DataTerminal> obtenerTerminals(Integer pagina, Integer elementosPagina){
-    	List<DataTerminal> terminales = new ArrayList();
-    	this.log("que onda man");   
+    	List<DataTerminal> terminales = new ArrayList();   
         //obtengo todas las terminales de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Terminal.class);
@@ -46,8 +43,6 @@ public class TerminalSrv implements TerminalLocalApi {
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
         List<Terminal> listTer = criteria.list();
-        this.log(String.valueOf(listTer.size()));
-        this.log("que onda man");
         listTer.stream().forEach((ter) -> {
         	terminales.add(ter.getDatatype());
         });
@@ -81,5 +76,19 @@ public class TerminalSrv implements TerminalLocalApi {
         ter.setEliminado(true);
         this.modificarTerminal(ter);
     }
+	@Override
+	public DataPuntoRecorrido getTerminalPorCoordenada(String coord) {
+		List<DataTerminal> terminales = new ArrayList(); 
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Terminal.class);
+    	criteria.add(Restrictions.eq("eliminado", false));
+    	criteria.add(Restrictions.eq("ubicacionMapa", coord));
+        List<Terminal> listTer = criteria.list();
+        
+        listTer.stream().forEach((ter) -> {
+        	terminales.add(ter.getDatatype());
+        });
+        return terminales.size() > 0 ? terminales.get(0) : null;
+	}
    
 }

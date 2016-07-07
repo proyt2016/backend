@@ -1,32 +1,29 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('perfilCtrl', ['$scope', '$routeParams', 'perfilService', perfilCtrl]);
+    angular.module('lacbus').controller('estadosencomiendaCtrl', ['$scope', '$routeParams', 'estadosencomiendaService', estadosencomiendaCtrl]);
 
-    function perfilCtrl($scope, $routeParams, perfilService) {
-        $scope.perfiles     = [];
-        $scope.perfil     = null;
+    function estadosencomiendaCtrl($scope, $routeParams, estadosencomiendaService) {
+        $scope.estadosencomiendas     = [];
+        $scope.estadosencomienda     = null;
         $scope.showAlert    = false;
 
         var initialize = function(){
             var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null
             if(id){
-                console.info("tengo id"+id);
-                perfilService.getId(id).then(function (data) {
-                    $scope.perfil = data;
+                estadosencomiendaService.getId(id).then(function (data) {
+                    $scope.estadosencomienda = data;
                 });
             }else{
-                console.info("no tengo id"+id);
-                perfilService.getAll().then(function (data) {
-                    $scope.perfiles = data;
+                estadosencomiendaService.getAll().then(function (data) {
+                    $scope.estadosencomiendas = data;
                 });
             }
         }
 
         $scope.add = function(){
             $scope.saving   = true;
-            var perfil     = this.perfil;
-            console.info(perfil);
-            perfilService.add(perfil).then(
+            var estadosencomienda     = this.estadosencomienda;
+            estadosencomiendaService.add(estadosencomienda).then(
                 function (data) {
                     $scope.saving = false;
                 
@@ -40,8 +37,8 @@
 
         $scope.edit = function(){
             $scope.saving   = true;
-            var perfil     = this.perfil;
-            perfilService.edit(perfil).then(
+            var estadosencomienda     = this.estadosencomienda;
+            estadosencomiendaService.edit(estadosencomienda).then(
                 function (data) {
                     $scope.saving = false;
                 
@@ -55,13 +52,13 @@
 
         $scope.borrar = function (index) {
             $scope.saving = true;
-            var perfil = this.perfil;
-
+            var estadosencomienda = this.estadosencomienda;
+            console.info(estadosencomienda);
             var r = confirm("Seguro que quiere borrar?");
             if (r == true) {
-                perfilService.borrar(perfil.id).then(
+                estadosencomiendaService.borrar(estadosencomienda.id).then(
                  function () {
-                     $scope.perfiles.splice(index, 1);
+                     $scope.estadosencomiendas.splice(index, 1);
                      $scope.saving = false;
 
                  }, function () {

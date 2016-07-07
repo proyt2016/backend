@@ -6,7 +6,7 @@ import java.util.Map;
 import lcbs.shares.*;
 public interface IUsuario {
 	
-	public boolean loginUsuario(String usuario, String clave);
+	public DataUsuario loginUsuario(String usuario, String clave);
 	public DataUsuario getUsuario(String idUsuario);
 	public DataUsuario AltaUsuario(DataUsuario usuario);
 	public void ModificarUsuario(DataUsuario usuario);

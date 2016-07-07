@@ -11,6 +11,8 @@ import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -23,12 +25,11 @@ import lcbs.shares.DataTenant;
  * Session Bean implementation class CuponeraSrv
  */
 @Stateless
-@TransactionManagement(value=TransactionManagementType.CONTAINER)
-@TransactionAttribute(value=TransactionAttributeType.REQUIRES_NEW)
+
 public class TenantSrv implements TenantLocalApi {
 	@Inject
 	EntityManager em;
-
+	private static final Log log  =  LogFactory.getLog(TenantSrv.class);
 	public List<DataTenant> filter(DataTenant filtro) {
 		List<DataTenant> tenants = new ArrayList<DataTenant>();
 		Session session = (Session) em.getDelegate();
@@ -49,7 +50,7 @@ public class TenantSrv implements TenantLocalApi {
 			if (filtro.getId() != null && !filtro.getId().isEmpty() ) {
 				criteria.add(Restrictions.eq("id", filtro.getId()));
 			}
-		}
+		} 
 		List<Tenant> list = criteria.list();
 		list.stream().forEach((tenant) -> {
 			tenants.add(tenant.getDatatype());
@@ -74,7 +75,6 @@ public class TenantSrv implements TenantLocalApi {
 
 	@Override
 	public DataTenant create(DataTenant tenant) {
-		em.createNativeQuery("SET SCHEMA 'public'").executeUpdate();
 		Tenant realObj = new Tenant(tenant);
         em.persist(realObj);
         return realObj.getDatatype();

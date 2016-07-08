@@ -73,7 +73,8 @@ public class Pasaje implements Serializable{
     	if(dt.getViaje() != null){
     		this.setViaje(new Viaje(dt.getViaje()));
     	}
-    	this.setPrecio(new Precio(dt.getPrecio()));
+    	if(dt.getPrecio() != null)
+    		this.setPrecio(new Precio(dt.getPrecio()));
     	if(dt.getOrigen() != null){
 	    	if(dt.getOrigen() instanceof DataTerminal){
 	    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
@@ -88,7 +89,8 @@ public class Pasaje implements Serializable{
 	    		this.setDestino(new Parada((DataParada)dt.getDestino()));
 	    	}
     	}
-    	this.setFechaCompra(dt.getFechaCompra());
+    	if(dt.getFechaCompra() != null)
+    		this.setFechaCompra(dt.getFechaCompra());
     	if(dt.getComprador() != null){
     		this.setComprador(new Usuario(dt.getComprador()));
     	}

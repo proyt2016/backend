@@ -1,12 +1,13 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').controller('homeCtrl', ['$scope', 'toastr', 'terminalService', 'recorridoService', 'viajeService', homeCtrl]);
+    angular.module('lacbus').controller('homeCtrl', ['$scope', 'toastr', '$localStorage', 'terminalService', 'recorridoService', 'viajeService', 'pasajeService', homeCtrl]);
 
-    function homeCtrl($scope, toastr, terminalService, recorridoService, viajeService) {
-        $scope.terminales 	= null;
-        $scope.recorridos 	= null;
-        $scope.resultados 	= null;
-        $scope.info 		= null;
+    function homeCtrl($scope, toastr, $localStorage, terminalService, recorridoService, viajeService, pasajeService) {
+        $scope.terminales 		= null;
+        $scope.recorridos 		= null;
+        $scope.resultados 		= null;
+        $scope.info 			= null;
+        $scope.usuarioLogueado 	= $localStorage.usuarioLogueado;
 
         $scope.filter = {
             origen : null,
@@ -91,6 +92,23 @@
         	$scope.info = resultado;
             $('#modal-reservar').modal('show');
         }
+        
+        $scope.reservar = function() {
+        	var pasaje = {
+    			viaje : {
+    				id : this.reservar.viaje
+    			},
+        		usuarioReserva : {
+        			id : $scope.usuarioLogueado.id
+        		},
+        		fechaReserva : moment().format('YYYY-MM-DD')
+        	}
+        	
+        	pasajeService.reservar(pasaje).then(function (datos) {
+                $scope.resultadosVuelta = datos;
+            });
+        	
+        }
 
         $('#modal-reservar').on('hidden.bs.modal', function (e) {
         	$scope.info = null;
@@ -99,7 +117,8 @@
         $( document ).ready(function() {
             //Initialize Select2 Elements
             $('.select2').select2({
-                placeholder: 'Seleccione'
+                placeholder: 'Seleccione',
+                allowClear: true
             }).on('select2:select', function (evt) {
               $scope.filter[evt.currentTarget.name] = evt.currentTarget.value
             });

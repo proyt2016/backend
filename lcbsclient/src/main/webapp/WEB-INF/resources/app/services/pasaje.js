@@ -60,7 +60,7 @@
             return defer.promise;
         };
 
-        var transferir = function(usuarioId){
+        var transferir = function(pasaje){
             var defer = $q.defer();
 
             $http.post('/lcbsapi/rest/viajes/transferirpasaje', pasaje)
@@ -74,7 +74,7 @@
             return defer.promise;
         };
 
-        var reservar = function(usuarioId){
+        var reservar = function(pasaje){
             var defer = $q.defer();
 
             $http.post('/lcbsapi/rest/viajes/reservapasaje', pasaje)

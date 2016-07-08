@@ -25,7 +25,7 @@ public interface IViaje {
 	public List<DataRecorrido> listarRecorridos(Integer pagina, Integer elementosPagina);
 	public DataPasaje ComprarPasajeReservado(DataReserva reserva);
 	public DataParada obtenerParada(String IdParada);
-	public List<DataPasaje> obtenerHistorialPasajes(String idUsuario);
+	public List<DataPasaje> obtenerHistorialPasajes(String idUsuario, Integer pagina, Integer elementosPagina);
 	public DataPasaje verDetallePasaje(String idPasaje);
 	public DataTerminal obtenerTerminal(String IdTerminal);
 

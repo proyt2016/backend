@@ -147,6 +147,12 @@ public class UsuarioApi {
 	public List<DataEmpleado> listarEmpleados(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
 		return repo.listarEmpleados(pagina, elementosPagina);
 	}
+	
+	@GET
+	@Path("/listarusuarios/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataUsuario> listarUsuarios(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
+		return repo.listarUsuarios(pagina, elementosPagina);
+	}
 
 	@GET
 	@Path("/getperfil/{idPerfil}")

@@ -106,8 +106,8 @@ public class ViajeRepo {
 		return ctrViaje.obtenerParada(IdParada);
 	}
 	
-	public List<DataPasaje> obtenerHistorialPasajes(String idUsuario){
-		return ctrViaje.obtenerHistorialPasajes(idUsuario);
+	public List<DataPasaje> obtenerHistorialPasajes(String idUsuario, Integer pagina, Integer elementosPagina){
+		return ctrViaje.obtenerHistorialPasajes(idUsuario, pagina, elementosPagina);
 	}
 	
 	public DataPasaje verDetallePasaje(String idPasaje){

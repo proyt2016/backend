@@ -25,5 +25,6 @@ public interface IUsuario {
 	public void EliminarPerfil(String idPerfil);
 	public List<DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina);
 	public void AsignarPerfil(String idEmpleado, String perfil);
+	public List<DataUsuario> listarUsuarios(Integer pagina, Integer elementosPagina);
 	
 }

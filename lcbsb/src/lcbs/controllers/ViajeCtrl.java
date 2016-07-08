@@ -55,8 +55,8 @@ public class ViajeCtrl implements IViaje{
 	}
 	
 	@Override
-	public List<DataPasaje> obtenerHistorialPasajes(String idUsuario) {
-		return srvPasaje.obtenerPasajesPorPersona(idUsuario);
+	public List<DataPasaje> obtenerHistorialPasajes(String idUsuario, Integer pagina, Integer elementosPagina) {
+		return srvPasaje.obtenerPasajesPorPersona(idUsuario, pagina, elementosPagina);
 	}
 	
 	@Override

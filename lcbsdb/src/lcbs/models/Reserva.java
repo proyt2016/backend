@@ -64,8 +64,10 @@ public class Reserva implements Serializable{
     
     public Reserva(DataReserva dt){
     	this.setId(dt.getId());
-    	this.setViaje(new Viaje(dt.getViaje()));
-    	this.setPrecio(new Precio(dt.getPrecio()));
+    	if(dt.getViaje() != null)
+    		this.setViaje(new Viaje(dt.getViaje()));
+    	if(dt.getPrecio() != null)
+    		this.setPrecio(new Precio(dt.getPrecio()));
     	if(dt.getOrigen() != null){
 	    	if(dt.getOrigen() instanceof DataTerminal){
 	    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));

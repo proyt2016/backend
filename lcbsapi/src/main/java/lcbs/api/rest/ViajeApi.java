@@ -177,9 +177,9 @@ public class ViajeApi {
 	}
 	
 	@GET
-	@Path("/listarhistorialpasajes/{idUsuario}")
-	public List<DataPasaje> obtenerHistorialPasajes(@PathParam("idUsuario") final String idUsuario){
-		return repo.obtenerHistorialPasajes(idUsuario);
+	@Path("/listarhistorialpasajes/{idUsuario}/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataPasaje> obtenerHistorialPasajes(@PathParam("idUsuario") final String idUsuario, @PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar") final Integer elementosPagina){
+		return repo.obtenerHistorialPasajes(idUsuario, pagina, elementosPagina);
 	}
 	
 	@POST

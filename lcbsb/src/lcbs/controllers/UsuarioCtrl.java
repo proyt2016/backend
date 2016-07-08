@@ -143,6 +143,11 @@ public class UsuarioCtrl implements IUsuario{
 	public List<DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
 		return srvPerfil.obtenerPerfils(pagina, elementosPagina);
 	}
+
+	@Override
+	public List<DataUsuario> listarUsuarios(Integer pagina, Integer elementosPagina) {
+		return srvUsuario.obtenerUsuarios(pagina, elementosPagina);
+	}
 	
 	
 }

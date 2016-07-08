@@ -18,7 +18,7 @@
           </tr>
           <tr ng-repeat="compra in compras">
             <td>{{ compra.fecha || 'dd/MM/yy' }}</td>
-            <td>{{ compra.recorrido.nombre }}</td>
+            <td>{{ compra.viaje.recorrido.nombre }}</td>
             <td>{{ compra.origen.nombre }}</td>
             <td>{{ compra.destino.nombre }}</td>
             <td>{{ compra.cantidad }}</td>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Linea</strong></p>
-                  <p>{{ info.recorrido.nombre }} </p>
+                  <p>{{ info.viaje.recorrido.nombre }} </p>
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Horario</strong></p>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Linea</strong></p>
-                  <p>{{ info.recorrido.nombre }} </p>
+                  <p>{{ info.viaje.recorrido.nombre }} </p>
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Horario</strong></p>
@@ -132,8 +132,9 @@
                 <div class="col-xs-12">
                   <div class="form-group">
                     <label>Transferir pasaje a</label>
-                    <select class="form-control select2">
-                      <option ng-repeat="usuario in usuarios" value="{{ usuario.id }}">{{ usuario.nombre }}</option>
+                    <select class="form-control select2" style="width: 100%;">
+                    	<option></option>
+                      	<option ng-repeat="usuario in usuarios" value="{{ usuario.id }}" ng-if="usuarioLogueado.id != usuario.id">{{ usuario.nombre }}</option>
                     </select>
                   </div>
                 </div>

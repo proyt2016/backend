@@ -10,8 +10,6 @@
     function configFunction($routeProvider, toastrConfig) {
         angular.extend(toastrConfig, {
             positionClass: 'toast-top-center',
-            preventDuplicates: true,
-            preventOpenDuplicates: true,
             timeOut: 2500
         });
 

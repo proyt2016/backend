@@ -3,7 +3,21 @@
     angular.module('lacbus').service('usuarioService', ['$http', '$q', usuarioService]);
 
     function usuarioService($http, $q) {
+    	
+    	var getAll = function(id){
+            var defer = $q.defer();
 
+            $http.get('/lcbsapi/rest/usuarios/listarusuarios/1/1000')
+            .success(function (datos) {
+                defer.resolve(datos);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
+
+            return defer.promise;
+        };
+        
         var add = function(usuario){
             var defer = $q.defer();
 
@@ -62,6 +76,7 @@
 
         return {
             getId   : getId,
+            getAll  : getAll,
             add     : add,
             edit    : edit,
             login   : login

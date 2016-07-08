@@ -14,12 +14,12 @@
                   <tbody>
                     <tr>
                       <th style="width:30%"><p class="text-success">Monto actual:</p></th>
-                      <td><p class="text-success"><strong>$250,5</strong></p></td>
+                      <td><p class="text-success"><strong>${{ usuarioLogueado.cuponera.saldo }}</strong></p></td>
                     </tr>
                     <tr>
                       <th>Recargar:</th>
                       <td>
-                        <div class="input-group" ng-class="{ 'has-error' : submitted && cuponeraForm.recarga.$invalid }">
+                        <div class="input-group">
                           <span class="input-group-addon" style="padding:6px 12px 4px 12px; border:0;"><i class="fa fa-dollar"></i></span>
                           <input type="number" name="recarga" align="right" ng-model="recarga" required />
                         </div>

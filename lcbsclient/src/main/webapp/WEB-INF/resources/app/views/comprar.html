@@ -6,14 +6,14 @@
       </div>
       <div class="box-body">
         <p><strong><i class="fa fa-map margin-r-5"></i> Origien y Destino</strong></p>
-        <p>{{ pasaje.origen.nombre }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ pasaje.destino.nombre }}</p>
+        <p>{{ viaje.origen.nombre }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ viaje.destino.nombre }}</p>
         <hr>
-        <p><i class="fa fa-map-marker margin-r-5"></i> {{ pasaje.recorrido.nombre }}</p>
+        <p><i class="fa fa-map-marker margin-r-5"></i> {{ viaje.recorrido.nombre }}</p>
         <hr>
-        <p><i class="fa fa-calendar margin-r-5"></i> {{ pasaje.salida }} a {{ pasaje.llegada }}</p>
+        <p><i class="fa fa-calendar margin-r-5"></i> {{ viaje.salida }} a {{ viaje.llegada }}</p>
         <hr>
         <strong><i class="fa fa-file-text-o margin-r-5"></i> Descripci&oacute;n</strong>
-        <p>{{ pasaje.descripcion }}</p>
+        <p>{{ viaje.descripcion }}</p>
       </div>
     </div>
   </div>
@@ -56,7 +56,7 @@
                 <div class="radio">
                   <label>
                     <input type="radio" name="pagos" value="cuponera">
-                    <strong>Cuponera $30.000</strong>
+                    <strong>Cuponera ${{ usuarioLogueado.cuponera.saldo }}</strong>
                   </label>
                 </div>
               </div>  

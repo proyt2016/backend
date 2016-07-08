@@ -1,23 +1,30 @@
     (function () {
     'use strict';
-    angular.module('lacbus').controller('comprarCtrl', ['$scope', '$routeParams', 'pasajeService', comprarCtrl]);
+    angular.module('lacbus').controller('comprarCtrl', ['$scope', '$routeParams', '$localStorage', 'viajeService', 'pasajeService', comprarCtrl]);
 
-    function comprarCtrl($scope, $routeParams, pasajeService) {
+    function comprarCtrl($scope, $routeParams, $localStorage, viajeService, pasajeService) {
         var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null
-    	
+        $scope.usuarioLogueado = $localStorage.usuarioLogueado;
+        
     	$scope.pagos 	= 'paypal';
-    	$scope.pasaje 	= null;
+    	$scope.viaje 	= null;
         $scope.cantidad = 1;
     	
-    	pasajeService.getId(id).then(function (datos) {
-            $scope.pasaje = datos;
+        viajeService.getId(id).then(function (datos) {
+            $scope.viaje = datos;
         });
 
         $scope.comprar = function () {
-	    	var pasaje = $scope.pasaje;
-
-	    	console.log(this.pagos, this.cantidad, pasaje);
-
+	    	var viaje = $scope.viaje;
+	    	
+	    	var pasaje = {
+	    			comprador : {
+	    				id : $scope.usuarioLogueado.id
+	    			},
+	    			viaje : viaje,
+	    			fechaCompra : moment().format('YYYY-MM-DD') 
+	    	}
+	    	
 	        pasajeService.comprar(pasaje).then(function (datos) {
 	            console.log('COMPRAR reserva PRONTO')
 	        });

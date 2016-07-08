@@ -1,13 +1,14 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('historialCompraCtrl', ['$scope', 'pasajeService', historialCompraCtrl]);
+    angular.module('lacbus').controller('historialCompraCtrl', ['$scope', '$localStorage', 'pasajeService', 'usuarioService', historialCompraCtrl]);
 
-    function historialCompraCtrl($scope, pasajeService) {
+    function historialCompraCtrl($scope, $localStorage, pasajeService, usuarioService) {
+    	$scope.usuarioLogueado = $localStorage.usuarioLogueado;
     	$scope.compras = [];
 
         var transferirA = null;
     	
-    	pasajeService.getAll().then(function (datos) {
+    	pasajeService.getAll($scope.usuarioLogueado.id).then(function (datos) {
             $scope.compras = datos;
         });
 
@@ -54,6 +55,10 @@
         $scope.mostrarPasajes = function (info) {
         	$scope.info = info;
             $('#modal-transferir-pasaje').modal('show');
+            
+            usuarioService.getAll().then(function (datos) {
+                $scope.usuarios = datos;
+            });
         }
 
         $('#modal-transferir-pasaje').on('hidden.bs.modal', function (e) {

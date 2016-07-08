@@ -7,7 +7,9 @@
         	var usuario = this.usuario;
             
         	var dataUsuario = {
-                email 		: usuario.email,
+                email 		: {
+                	email : usuario.email
+                },
                 clave 		: usuario.clave,
                 nombrePila 	: usuario.nombre,
                 apellido 	: usuario.apellido

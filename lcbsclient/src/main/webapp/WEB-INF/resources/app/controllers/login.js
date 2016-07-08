@@ -10,7 +10,6 @@
             		$rootScope.$broadcast('localStorage:changed');
             		$location.url('/');
         		}else{
-        			console.log('error')
         			toastr.error('El usuario no existe o las credenciales no son las correctas', 'Error');
         		}
             });

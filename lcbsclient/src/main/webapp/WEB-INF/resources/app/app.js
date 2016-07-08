@@ -1,10 +1,10 @@
 ﻿(function () {
 
-    angular.module('lacbus', ['ngRoute', 'ngAnimate', 'toastr', 'ngStorage']);
+    angular.module('lacbus', ['ngRoute', 'ngAnimate', 'toastr', 'ngStorage', 'pusher-angular']);
 
     angular.module('lacbus').config(['$routeProvider', 'toastrConfig', configFunction]);
     
-    angular.module('lacbus').controller('appCtrl', ['$scope', '$location', '$localStorage', appCtrl]);
+    angular.module('lacbus').controller('appCtrl', ['$scope', '$location', '$localStorage', '$pusher', 'toastr', appCtrl]);
 
     /*@ngInject*/
     function configFunction($routeProvider, toastrConfig) {
@@ -72,7 +72,7 @@
         });
     }
     
-    function appCtrl($scope, $location, $localStorage) {
+    function appCtrl($scope, $location, $localStorage, $pusher, toastr) {
         $scope.usuarioLogueado = $localStorage.usuarioLogueado;
         
         $scope.logout = function(){
@@ -84,6 +84,15 @@
         $scope.$on('localStorage:changed', function(event, data){
         	$scope.usuarioLogueado = $localStorage.usuarioLogueado;
         });
+        
+        var client = new Pusher('e782ddf887a873098d22');
+        var pusher = $pusher(client);
+        pusher.subscribe('notificaciones');
+        pusher.bind('nueva-notificacion',
+          function(data) {
+        	toastr.success(data.mensaje, 'Nueva notificacion.')
+          }
+        );
     }
 
 })();

@@ -1,8 +1,8 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('historialCompraCtrl', ['$scope', '$localStorage', 'pasajeService', 'usuarioService', historialCompraCtrl]);
+    angular.module('lacbus').controller('historialCompraCtrl', ['$scope', '$localStorage', 'toastr', 'pasajeService', 'usuarioService', historialCompraCtrl]);
 
-    function historialCompraCtrl($scope, $localStorage, pasajeService, usuarioService) {
+    function historialCompraCtrl($scope, $localStorage, toastr, pasajeService, usuarioService) {
     	$scope.usuarioLogueado = $localStorage.usuarioLogueado;
     	$scope.compras = [];
 
@@ -26,16 +26,19 @@
             }
         }
 
-        $scope.transferirPasaje = function (pasajeId) {
+        $scope.transferirPasaje = function (pasaje) {
+        	var index = $scope.compras.indexOf(pasaje);
             var r = confirm("Seguro que quiere transferir el pasaje?");
             if (r == true) {
                 var pasaje = {
-                    idPasaje    : pasajeId,
+                    idPasaje    : pasaje.id,
                     idUsuario   : transferirA
                 }
 
                 pasajeService.transferir(pasaje).then(function (datos) {
-                    console.log('TRANSFERENCIA PRONTA');
+                	toastr.success('La transferencia se realizo con exito.', 'Trasnferencia exitosa.');
+                	$scope.compras.splice(index, 1);
+                	$('#modal-transferir-pasaje').modal('hide');
                 });
 
                 transferirA = null;

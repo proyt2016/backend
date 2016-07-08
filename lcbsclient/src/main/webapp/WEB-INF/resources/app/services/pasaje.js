@@ -7,7 +7,7 @@
         var getAll = function(usuarioId){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/listarhistorialpasajes/' + usuarioId)
+            $http.get('/lcbsapi/rest/viajes/listarhistorialpasajes/' + usuarioId + '/1/1000')
             .success(function (datos) {
                 defer.resolve(datos);
             })

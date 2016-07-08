@@ -134,14 +134,14 @@
                     <label>Transferir pasaje a</label>
                     <select class="form-control select2" style="width: 100%;">
                     	<option></option>
-                      	<option ng-repeat="usuario in usuarios" value="{{ usuario.id }}" ng-if="usuarioLogueado.id != usuario.id">{{ usuario.nombre }}</option>
+                      	<option ng-repeat="usuario in usuarios" value="{{ usuario.id }}" ng-if="usuarioLogueado.id != usuario.id">{{ usuario.nombrePila + ' ' + usuario.apellido }}</option>
                     </select>
                   </div>
                 </div>
               </div>
             </div>
             <div class="box-footer">
-              <a class="btn btn-success pull-right" ng-click="transferirPasaje(info.id)">Transferir</a>
+              <a class="btn btn-success pull-right" ng-click="transferirPasaje(info)">Transferir</a>
             </div>
           </form>
         </div>

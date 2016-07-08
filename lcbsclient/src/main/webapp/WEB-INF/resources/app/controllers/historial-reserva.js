@@ -1,11 +1,12 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('historialReservaCtrl', ['$scope', 'reservaService', historialReservaCtrl]);
+    angular.module('lacbus').controller('historialReservaCtrl', ['$scope', '$localStorage', 'reservaService', historialReservaCtrl]);
 
-    function historialReservaCtrl($scope, reservaService) {
+    function historialReservaCtrl($scope, $localStorage, reservaService) {
+    	$scope.usuarioLogueado = $localStorage.usuarioLogueado;
         $scope.reservas = [];
     	
-    	reservaService.getAll().then(function (datos) {
+    	reservaService.getAll($scope.usuarioLogueado.id).then(function (datos) {
             $scope.reservas = datos;
         });
 

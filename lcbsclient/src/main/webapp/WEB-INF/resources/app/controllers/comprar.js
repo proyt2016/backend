@@ -1,8 +1,8 @@
     (function () {
     'use strict';
-    angular.module('lacbus').controller('comprarCtrl', ['$scope', '$routeParams', '$localStorage', 'viajeService', 'pasajeService', comprarCtrl]);
+    angular.module('lacbus').controller('comprarCtrl', ['$scope', '$routeParams', '$localStorage', '$location', 'toastr', 'viajeService', 'pasajeService', comprarCtrl]);
 
-    function comprarCtrl($scope, $routeParams, $localStorage, viajeService, pasajeService) {
+    function comprarCtrl($scope, $routeParams, $localStorage, $location, toastr, viajeService, pasajeService) {
         var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null
         $scope.usuarioLogueado = $localStorage.usuarioLogueado;
         
@@ -18,15 +18,18 @@
 	    	var viaje = $scope.viaje;
 	    	
 	    	var pasaje = {
-	    			comprador : {
-	    				id : $scope.usuarioLogueado.id
-	    			},
-	    			viaje : viaje,
-	    			fechaCompra : moment().format('YYYY-MM-DD') 
+	    		comprador : {
+	    			id : $scope.usuarioLogueado.id
+	    		},
+	    		viaje : viaje,
+	    		fechaCompra : moment().format('YYYY-MM-DD') 
 	    	}
 	    	
 	        pasajeService.comprar(pasaje).then(function (datos) {
-	            console.log('COMPRAR reserva PRONTO')
+	            toastr.success('Su compra se realizo con exito, que disfrute su viaje.', 'Compra exitosa.');
+	            setTimeout(function(){ 
+	            	$location.url('/');
+	            }, 3000);
 	        });
         }
     }

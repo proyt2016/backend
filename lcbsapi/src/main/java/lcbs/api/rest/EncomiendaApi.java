@@ -101,10 +101,10 @@ public class EncomiendaApi {
 		repo.editarEncomienda(encomienda);
 	}
 	
-	@POST
-	@Path("/borrarencomienda/")
-	public void borrarEncomienda(String idEncomienda){
-		 repo.bajaEncomienda(idEncomienda);
+	@DELETE
+	@Path("/borrarencomienda/{idEncomienda}")
+	public void borrarEncomienda(@PathParam("idEncomienda") final String idEncomienda){
+		repo.borrarEstadoEncomienda(idEncomienda);
 	}
 	
 	@GET

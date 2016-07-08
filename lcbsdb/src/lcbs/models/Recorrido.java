@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -28,7 +29,7 @@ public class Recorrido implements Serializable{
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String nombre;
-    @OneToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.EAGER)
     @IndexColumn(name="LIST_INDEX")
     private List<PuntoRecorrido> puntosDeRecorrido;
     @OneToMany(fetch=FetchType.EAGER)

@@ -134,7 +134,7 @@
           var flightPlanCoordinates = [];
 
           for(var i in $scope.puntosDelRecorrido){
-            var lats = $scope.puntosrecorridoLst[i].ubicacionMapa.split(",");
+            var lats = $scope.puntosDelRecorrido[i].ubicacionMapa.split(",");
             flightPlanCoordinates.push(new google.maps.LatLng(lats[0],lats[1]));
           }
 
@@ -146,7 +146,6 @@
                 strokeWeight: 2
               });
 
-              console.log("entra pero no hace nada");
               flightPath.setMap(map);
         }
 
@@ -175,30 +174,6 @@
             });
           })
 
-        }
-
-        function initMap() {
-          var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 3,
-            center: {lat: 0, lng: -180},
-            mapTypeId: google.maps.MapTypeId.TERRAIN
-          });
-
-          var flightPlanCoordinates = [
-            {lat: 37.772, lng: -122.214},
-            {lat: 21.291, lng: -157.821},
-            {lat: -18.142, lng: 178.431},
-            {lat: -27.467, lng: 153.027}
-          ];
-          var flightPath = new google.maps.Polyline({
-            path: flightPlanCoordinates,
-            geodesic: true,
-            strokeColor: '#FF0000',
-            strokeOpacity: 1.0,
-            strokeWeight: 2
-          });
-
-          flightPath.setMap(map);
         }
 
         initialize();

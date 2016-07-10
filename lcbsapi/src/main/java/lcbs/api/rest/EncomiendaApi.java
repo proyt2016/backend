@@ -107,6 +107,12 @@ public class EncomiendaApi {
 		return repo.buscarEncomienda(filtro, pagina, ElementosPagina);
 	}
 	
+	@GET
+	@Path("/getestados/{pagina:[0-9][0-9]*}/{elementosPagina:[0-9][0-9]*}")
+	public List<DataEstadosEncomienda> getEstados(@PathParam("pagina") final Integer pagina,@PathParam("elementosPagina") final Integer ElementosPagina){
+		return repo.getEstados(pagina, ElementosPagina); 
+	}
+	
 	
 	@GET
 	@Path("/getencomienda/{idEncomienda}")
@@ -139,7 +145,7 @@ public class EncomiendaApi {
 	}
 	
 	@GET
-	@Path("/getreglacobro/{idEncomienda}")
+	@Path("/getultimoestado/{idEncomienda}")
 	public DataEstadosEncomienda getUltimoEstado(@PathParam("idEncomienda")final String idEncomienda){
 		return repo.getUltimoEstado(idEncomienda);
 	}

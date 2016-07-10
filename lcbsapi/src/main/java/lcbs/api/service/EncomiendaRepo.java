@@ -45,6 +45,10 @@ public class EncomiendaRepo {
 		return ctrEncomienda.getReglasDeCobro(pagina, elementosPagina);
 	}
 	
+	public List<DataEstadosEncomienda> getEstados(Integer pagina, Integer elementosPagina){
+		return ctrEncomienda.getEstados(pagina, elementosPagina);
+	}
+	
 	
 	public void AltaReglaCobro(DataReglaCobroEncomienda drce){
 		ctrEncomienda.crearReglaDeCobro(drce);

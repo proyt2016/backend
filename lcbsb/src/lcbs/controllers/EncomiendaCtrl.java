@@ -43,6 +43,10 @@ public class EncomiendaCtrl implements IEncomienda{
 		return srvEncomienda.obtenerEncomiendas(pagina, elementosPagina);
 		
 	}
+	@Override
+	public List<DataEstadosEncomienda> getEstados(Integer pagina, Integer elementosPagina){
+		return srvEstadosEncomienda.obtenerEstadosEncomienda(pagina, elementosPagina);
+	}
 	
 	@Override
 	public List<DataReglaCobroEncomienda> getReglasDeCobro(Integer pagina, Integer elementosPagina) {

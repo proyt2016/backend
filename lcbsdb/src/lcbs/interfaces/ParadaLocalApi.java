@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.ejb.Local;
 
 import lcbs.shares.DataParada;
+import lcbs.shares.DataPuntoRecorrido;
 
 @Local
 public interface ParadaLocalApi {
@@ -14,4 +15,5 @@ public interface ParadaLocalApi {
 	public DataParada getParada(String id);
 	public DataParada crearParada(DataParada prd);
 	public void borrarParada(String idParada);
+	public DataPuntoRecorrido getParadaPorCoordenada(String coord);
 }

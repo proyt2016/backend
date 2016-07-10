@@ -1,15 +1,3 @@
-<script src="http://maps.google.com/maps/api/js?sensor=false&callback=iniciar">
-</script>
-<script>
-  function iniciar() {
-    var mapOptions = {
-      center: new google.maps.LatLng(25.80, -80.30),
-      zoom: 10,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById("map"),mapOptions);
-  }              
-</script>
 
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="page-title">
@@ -35,7 +23,18 @@
           <div class="col-md-6 col-sm-6 col-xs-12">
             <input type="text" id="nombre" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="recorrido.nombre"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
           </div>
-          <div id="map"></div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-6 col-sm-6 col-xs-12" class="col-md-7 col-xs-12 form-inline">
+            <div id="map" class="form-inline" style="height: 400px"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="punto in puntosDelRecorrido" style="margin-top:10px;">
+              <div class="form-group">
+                  <label>Descripcion</label>
+                  <input type="text" disabled="disabled" class="form-control" ng-model="punto.nombre">
+              </div>
+              <a class="btn btn-default" style="margin:0;" ng-click="removeRelation($index)"><i class="fa fa-remove"></i></a>
+            </div>
+          </div>
         </div>
         <div class="ln_solid"></div>
         <div class="form-group">

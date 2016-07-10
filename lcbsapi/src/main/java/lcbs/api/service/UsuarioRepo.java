@@ -85,7 +85,7 @@ public class UsuarioRepo {
 		ctrUsuario.AsignarPerfil(idEmpleado, perfil);
 	}
 	
-	public boolean loginUsuario(String usuario, String clave) {
+	public DataUsuario loginUsuario(String usuario, String clave) {
 		return ctrUsuario.loginUsuario(usuario, clave);
 	}
 
@@ -113,4 +113,7 @@ public class UsuarioRepo {
 		return ctrUsuario.listarPerfiles(pagina, elementosPagina);
 	}
 	
+	public List<DataUsuario> listarUsuarios(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
+		return ctrUsuario.listarUsuarios(pagina, elementosPagina);
+	}
 }

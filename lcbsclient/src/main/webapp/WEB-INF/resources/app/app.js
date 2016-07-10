@@ -1,15 +1,15 @@
 ﻿(function () {
 
-    angular.module('lacbus', ['ngRoute', 'ngAnimate', 'toastr']);
+    angular.module('lacbus', ['ngRoute', 'ngAnimate', 'toastr', 'ngStorage', 'pusher-angular']);
 
     angular.module('lacbus').config(['$routeProvider', 'toastrConfig', configFunction]);
+    
+    angular.module('lacbus').controller('appCtrl', ['$scope', '$location', '$localStorage', '$pusher', 'toastr', appCtrl]);
 
     /*@ngInject*/
     function configFunction($routeProvider, toastrConfig) {
         angular.extend(toastrConfig, {
             positionClass: 'toast-top-center',
-            preventDuplicates: true,
-            preventOpenDuplicates: true,
             timeOut: 2500
         });
 
@@ -70,6 +70,29 @@
             templateUrl: 'app/views/historial-notificacion.html',
             controller: 'historialNotificacionCtrl'
         });
+    }
+    
+    function appCtrl($scope, $location, $localStorage, $pusher, toastr) {
+        $scope.usuarioLogueado = $localStorage.usuarioLogueado;
+        
+        $scope.logout = function(){
+        	$localStorage.$reset();
+        	$scope.usuarioLogueado = null;
+        	$location.url('/');
+        }
+        
+        $scope.$on('localStorage:changed', function(event, data){
+        	$scope.usuarioLogueado = $localStorage.usuarioLogueado;
+        });
+        
+        var client = new Pusher('e782ddf887a873098d22');
+        var pusher = $pusher(client);
+        pusher.subscribe('notificaciones');
+        pusher.bind('nueva-notificacion',
+          function(data) {
+        	toastr.success(data.mensaje, 'Nueva notificacion.')
+          }
+        );
     }
 
 })();

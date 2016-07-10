@@ -4,26 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import lcbs.interfaces.TenantLocalApi;
 import lcbs.models.Tenant;
-import lcbs.models.Terminal;
 import lcbs.shares.DataTenant;
 
 /**
  * Session Bean implementation class CuponeraSrv
  */
 @Stateless
+
 public class TenantSrv implements TenantLocalApi {
 	@Inject
 	EntityManager em;
-
+	private static final Log log  =  LogFactory.getLog(TenantSrv.class);
 	public List<DataTenant> filter(DataTenant filtro) {
 		List<DataTenant> tenants = new ArrayList<DataTenant>();
 		Session session = (Session) em.getDelegate();
@@ -44,7 +50,7 @@ public class TenantSrv implements TenantLocalApi {
 			if (filtro.getId() != null && !filtro.getId().isEmpty() ) {
 				criteria.add(Restrictions.eq("id", filtro.getId()));
 			}
-		}
+		} 
 		List<Tenant> list = criteria.list();
 		list.stream().forEach((tenant) -> {
 			tenants.add(tenant.getDatatype());
@@ -77,6 +83,7 @@ public class TenantSrv implements TenantLocalApi {
 	@Override
 	public Boolean delete(DataTenant tenant) {
 		Tenant realObj = new Tenant(tenant);
+		realObj.setIsDelete(true);
         em.merge(realObj);
         return realObj.getIsDelete();
 	}

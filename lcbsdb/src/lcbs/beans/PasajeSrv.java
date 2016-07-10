@@ -77,14 +77,17 @@ public class PasajeSrv implements PasajeLocalApi {
         this.modificarPasaje(psj);
     }
 
-	@Override
-	public List<DataPasaje> obtenerPasajesPorPersona(String idUsuario) {
+	public List<DataPasaje> obtenerPasajesPorPersona(String idUsuario, Integer pagina, Integer elementosPagina) {
 		List<DataPasaje> Pasajes = new ArrayList();
         //obtengo todos los Pasajes de la bd
-        Query query = em.createQuery("SELECT p FROM Pasaje p", Pasaje.class);
-        //TODO: Listar por usuario
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Pasaje.class);
+    	criteria.add(Restrictions.eq("eliminado", false));
+    	criteria.add(Restrictions.eq("comprador.id", idUsuario));
+        criteria.setFirstResult((pagina - 1) * elementosPagina);
+    	criteria.setMaxResults(elementosPagina);
+        List<Pasaje> listPsj = criteria.list();
         
-        List<Pasaje> listPsj = query.getResultList();
         listPsj.stream().forEach((psj) -> {
         	Pasajes.add(psj.getDatatype());
         });

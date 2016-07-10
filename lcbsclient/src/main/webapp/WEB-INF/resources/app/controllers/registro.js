@@ -1,13 +1,24 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('registroCtrl', ['$scope', 'usuarioService', registroCtrl]);
+    angular.module('lacbus').controller('registroCtrl', ['$rootScope', '$scope','$location', '$localStorage', 'usuarioService', registroCtrl]);
 
-    function registroCtrl($scope, usuarioService) {
+    function registroCtrl($rootScope, $scope, $location, $localStorage, usuarioService) {
         $scope.registrarse = function(){
-        	console.log(this.usuario);
-
-        	usuarioService.add(this.usuario).then(function (datos) {
-                console.log(datos);
+        	var usuario = this.usuario;
+            
+        	var dataUsuario = {
+                email 		: {
+                	email : usuario.email
+                },
+                clave 		: usuario.clave,
+                nombrePila 	: usuario.nombre,
+                apellido 	: usuario.apellido
+            }
+        	
+        	usuarioService.add(dataUsuario).then(function (datos) {
+        		$localStorage.usuarioLogueado = datos;
+        		$rootScope.$broadcast('localStorage:changed');
+        		$location.url('/');
             });
         }
     }

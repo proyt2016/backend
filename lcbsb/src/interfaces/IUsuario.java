@@ -6,7 +6,7 @@ import java.util.Map;
 import lcbs.shares.*;
 public interface IUsuario {
 	
-	public boolean loginUsuario(String usuario, String clave);
+	public DataUsuario loginUsuario(String usuario, String clave);
 	public DataUsuario getUsuario(String idUsuario);
 	public DataUsuario AltaUsuario(DataUsuario usuario);
 	public void ModificarUsuario(DataUsuario usuario);
@@ -25,5 +25,6 @@ public interface IUsuario {
 	public void EliminarPerfil(String idPerfil);
 	public List<DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina);
 	public void AsignarPerfil(String idEmpleado, String perfil);
+	public List<DataUsuario> listarUsuarios(Integer pagina, Integer elementosPagina);
 	
 }

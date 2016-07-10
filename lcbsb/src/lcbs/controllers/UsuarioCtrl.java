@@ -109,7 +109,7 @@ public class UsuarioCtrl implements IUsuario{
 	}
 
 	@Override
-	public boolean loginUsuario(String usuario, String clave) {
+	public DataUsuario loginUsuario(String usuario, String clave) {
 		return srvUsuario.loginUsuario(usuario, clave);
 	}
 
@@ -142,6 +142,11 @@ public class UsuarioCtrl implements IUsuario{
 	@Override
 	public List<DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
 		return srvPerfil.obtenerPerfils(pagina, elementosPagina);
+	}
+
+	@Override
+	public List<DataUsuario> listarUsuarios(Integer pagina, Integer elementosPagina) {
+		return srvUsuario.obtenerUsuarios(pagina, elementosPagina);
 	}
 	
 	

@@ -11,6 +11,7 @@ import lcbs.shares.DataEstadosEncomienda;
 public interface EstadosEncomiendaLocalApi {
 	public List<DataEstadosEncomienda> obtenerEstadosEncomienda(Integer pagina, Integer elementosPagina);
 	public void modificarEstadosEncomienda(DataEstadosEncomienda estEnc);
+	public DataEstadosEncomienda getEstadosEncomienda(String id);
 	public DataEstadosEncomienda crearEstadosEncomienda(DataEstadosEncomienda est);
 	public void borrarEstadosEncomienda(String idEmpleado);
 }

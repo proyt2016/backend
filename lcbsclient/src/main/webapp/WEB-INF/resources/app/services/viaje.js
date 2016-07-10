@@ -21,7 +21,7 @@
         var getId = function(id){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/getterminal/' + id)
+            $http.get('/lcbsapi/rest/viajes/getviaje/' + id)
             .success(function (dato) {
                 defer.resolve(dato);
             })

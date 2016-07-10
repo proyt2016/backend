@@ -88,10 +88,9 @@ public class ViajeApi {
 	}
 	
 	@GET
-	@Path("/listarreservas/")
-	public List<DataReserva> ListarReservas(String data) {
-		JSONObject obj = new JSONObject(data);
-		return repo.ListarReservas(obj.getString("idUsuario"));
+	@Path("/listarreservas/{idUsuario}")
+	public List<DataReserva> ListarReservas(@PathParam("idUsuario") final String idUsuario) {
+		return repo.ListarReservas(idUsuario);
 	}
 	
 	@POST
@@ -131,7 +130,8 @@ public class ViajeApi {
 	//tested
 	@POST
 	@Path("/crearrecorrido/")
-	public DataRecorrido CrearRecorrido(DataRecorrido recorrido){
+	public DataRecorrido CrearRecorrido(DataRecorridoConvertor pseudoRecorrido){
+		DataRecorrido recorrido = pseudoRecorrido.getRecorrido();
 		return repo.CrearRecorrido(recorrido);
 	}
 	
@@ -177,9 +177,9 @@ public class ViajeApi {
 	}
 	
 	@GET
-	@Path("/listarhistorialpasajes/{idUsuario}")
-	public List<DataPasaje> obtenerHistorialPasajes(@PathParam("idUsuario") final String idUsuario){
-		return repo.obtenerHistorialPasajes(idUsuario);
+	@Path("/listarhistorialpasajes/{idUsuario}/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataPasaje> obtenerHistorialPasajes(@PathParam("idUsuario") final String idUsuario, @PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar") final Integer elementosPagina){
+		return repo.obtenerHistorialPasajes(idUsuario, pagina, elementosPagina);
 	}
 	
 	@POST
@@ -193,6 +193,24 @@ public class ViajeApi {
 	@Path("/getterminal/{idTerminal}")
 	public DataTerminal obtenerTerminal(@PathParam("idTerminal") final String IdTerminal){
 		return repo.obtenerTerminal(IdTerminal);
+	}
+	
+	@GET
+	@Path("/getpuntorecorrido/{idPunto}")
+	public DataPuntoRecorrido obtenerPuntoRecorrido(@PathParam("idPunto") final String idPunto){
+		return repo.obtenerPuntoRecorrido(idPunto);
+	}
+	
+	@GET
+	@Path("/getpuntoporcoordenada/{coord}")
+	public DataPuntoRecorrido getPuntoPorCoordenada(@PathParam("coord") final String coord){
+		return repo.obtenerPuntoPorCoordenada(coord);
+	}
+	
+	@GET
+	@Path("/getviaje/{idViaje}")
+	public DataViaje getViaje(@PathParam("idViaje") final String idViaje){
+		return repo.getViaje(idViaje);
 	}
 	
 	@POST

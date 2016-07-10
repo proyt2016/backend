@@ -7,6 +7,10 @@
         <input type="text" class="form-control" placeholder="Nombre" ng-model="usuario.nombre" name="nombre" required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
+      <div class="form-group has-feedback" ng-class="{ 'has-error' : submitted && registroForm.apellido.$invalid }">
+        <input type="text" class="form-control" placeholder="Apellido" ng-model="usuario.apellido" name="apellido" required>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
       <div class="form-group has-feedback" ng-class="{ 'has-error' : submitted && registroForm.email.$invalid }">
         <input type="email" class="form-control" placeholder="Email" ng-model="usuario.email" name="email" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

@@ -4,8 +4,8 @@ public class DataTenant {
 	private String name;
 	private String domain;
 	private String id;
-	private Boolean isActive;
-	private Boolean isDelete;
+	private Boolean isActive = true;
+	private Boolean isDelete = false;
 	public DataTenant(){}
 	public DataTenant(String id, String name, String domain, Boolean isActive) {
 		super();

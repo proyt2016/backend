@@ -45,15 +45,15 @@
             </button>
           </div>
 
-          <div class="collapse navbar-collapse" id="navbar-collapse">
+          <div class="collapse navbar-collapse" id="navbar-collapse" ng-controller="appCtrl">
             <ul class="nav navbar-nav">
               <li><a href="#/">Inicio</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#/login">Iniciar Sesi&oacute;n</a></li>
-              <li><a href="#/registro">Registrarse</a></li>
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">Andrulo <span class="caret"></span></a>
+              <li ng-if="!usuarioLogueado"><a href="#/login">Iniciar Sesi&oacute;n</a></li>
+              <li ng-if="!usuarioLogueado"><a href="#/registro">Registrarse</a></li>
+              <li class="dropdown" ng-if="usuarioLogueado">
+                <a class="dropdown-toggle" data-toggle="dropdown">{{ usuarioLogueado.nombrePila + ' ' +  usuarioLogueado.apellido }} <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#/historial-compra">Compras</a></li>
                   <li><a href="#/cuponera">Cuponera</a></li>
@@ -61,11 +61,12 @@
                   <li><a href="#/encomiendas">Encomiendas</a></li>
                   <li><a href="#/historial-notifacion">Notificaciones</a></li>
                   <li class="divider"></li>
-                  <li><a>Cerrar Sesion</a></li>
+                  <li><a ng-click="logout()">Cerrar Sesion</a></li>
                 </ul>
               </li>
             </ul>
           </div><!-- /.navbar-collapse -->
+          
         </div><!-- /.container-fluid -->
       </nav>
     </header>
@@ -101,6 +102,7 @@
   <script src="dist/js/angular-route.min.js"></script>
   <script src="dist/js/angular-animate.min.js"></script>
   <script src="dist/js/angular-toastr.tpls.min.js"></script>
+  <script src="dist/js/ngStorage.min.js"></script>
 
   <!-- jQuery 2.2.0 -->
   <script src="libs/jQuery/jQuery-2.2.0.min.js"></script>
@@ -114,6 +116,11 @@
   <script src="dist/js/app.min.js"></script>
   <script src="libs/moment.js"></script>
   
+  <!-- pusher-js -->
+  <script src="//js.pusher.com/3.0/pusher.min.js"></script>
+  <!-- pusher-angular -->
+  <script src="//cdn.jsdelivr.net/angular.pusher/latest/pusher-angular.min.js"></script>
+  
   <!-- app -->
   <script src="app/app.js"></script>
   
@@ -122,6 +129,11 @@
   <script src="app/services/terminal.js"></script>
   <script src="app/services/recorrido.js"></script>
   <script src="app/services/viaje.js"></script>
+  <script src="app/services/cuponera.js"></script>
+  <script src="app/services/encomienda.js"></script>
+  <script src="app/services/pasaje.js"></script>
+  <script src="app/services/notificacion.js"></script>
+  <script src="app/services/reserva.js"></script>
   
   <!-- controllers -->
   <script src="app/controllers/home.js"></script>

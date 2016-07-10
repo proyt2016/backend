@@ -61,7 +61,7 @@ public class Empleado extends Persona implements Serializable{
     	result.setNombrePila(this.getNombrePila());
     	result.setApellido(this.getApellido());
     	if(this.getEmail()!=null)
-    		result.setEmail(new DataEmail(this.getEmail().getEmail()));
+    		result.setEmail(this.getEmail().getDatatype());
     	if(this.getTelefonosContacto()!=null && conHijos){
 	    	List<DataTelefono> temp = new ArrayList<DataTelefono>();
 	    	this.getTelefonosContacto().stream().forEach((tel) -> {

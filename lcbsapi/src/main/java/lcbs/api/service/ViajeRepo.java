@@ -106,8 +106,8 @@ public class ViajeRepo {
 		return ctrViaje.obtenerParada(IdParada);
 	}
 	
-	public List<DataPasaje> obtenerHistorialPasajes(String idUsuario){
-		return ctrViaje.obtenerHistorialPasajes(idUsuario);
+	public List<DataPasaje> obtenerHistorialPasajes(String idUsuario, Integer pagina, Integer elementosPagina){
+		return ctrViaje.obtenerHistorialPasajes(idUsuario, pagina, elementosPagina);
 	}
 	
 	public DataPasaje verDetallePasaje(String idPasaje){
@@ -139,5 +139,17 @@ public class ViajeRepo {
 
 	public void BajaRecorrido(String idRecorrido) {
 		ctrViaje.BajaRecorrido(idRecorrido);		
+	}
+
+	public DataPuntoRecorrido obtenerPuntoRecorrido(String idPunto) {
+		return ctrViaje.obtenerPuntoRecorrido(idPunto);
+	}
+
+	public DataPuntoRecorrido obtenerPuntoPorCoordenada(String coord) {
+		return ctrViaje.obtenerPuntoPorCoordenada(coord);
+	}
+
+	public DataViaje getViaje(String idViaje) {
+		return ctrViaje.getViaje(idViaje);
 	}
 }

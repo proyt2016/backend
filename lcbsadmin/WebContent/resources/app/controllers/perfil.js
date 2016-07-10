@@ -54,7 +54,6 @@
         }
 
         $scope.borrar = function (index) {
-            console.log($scope.perfiles);
             $scope.saving = true;
             var perfil = this.perfil;
 

@@ -1,11 +1,13 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').controller('homeCtrl', ['$scope', 'terminalService', 'recorridoService', 'viajeService', homeCtrl]);
+    angular.module('lacbus').controller('homeCtrl', ['$scope', 'toastr', '$localStorage', 'terminalService', 'recorridoService', 'viajeService', 'pasajeService', homeCtrl]);
 
-    function homeCtrl($scope, terminalService, recorridoService, viajeService) {
-        $scope.terminales = null;
-        $scope.recorridos = null;
-        $scope.resultados = null;
+    function homeCtrl($scope, toastr, $localStorage, terminalService, recorridoService, viajeService, pasajeService) {
+        $scope.terminales 		= null;
+        $scope.recorridos 		= null;
+        $scope.resultados 		= null;
+        $scope.info 			= null;
+        $scope.usuarioLogueado 	= $localStorage.usuarioLogueado;
 
         $scope.filter = {
             origen : null,
@@ -27,53 +29,96 @@
         });
 
         $scope.buscar = function(){
-            console.log('filters', this.filter);
+            var filtrosIda = null;
+            var filtrosVuelta = null;
 
-            var filtros = {};
-
-            if(this.filter['origen']){
-                filtros.origen = {
-                    id : this.filter['origen']
-                }
+            if(!this.filter['origen']){
+            	toastr.warning('Debe seleccionar un origen', 'Ups');
+                return;
             }
-
-            if(this.filter['destino']){
-                filtros.destino = {
-                    id : this.filter['destino']
-                }
+            
+            if(!this.filter['destino']){
+            	toastr.warning('Debe seleccionar un destino', 'Ups');
+                return;
             }
-
-            if(this.filter['fechaIda']){
-                filtros.fechaIda = moment(this.filter['fechaIda'], 'DD/MM/YYYY').format('YYYY-MM-DD');
+            
+            if(!this.filter['fechaIda']){
+            	toastr.warning('Debe seleccionar una fecha de ida', 'Ups');
+                return;
             }
-
-            if(this.filter['fechaVuelta']){
-                filtros.fechaVuelta = moment(this.filter['fechaVuelta'], 'DD/MM/YYYY').format('YYYY-MM-DD');
+            
+            filtrosIda = {
+            		fechaSalida : moment(this.filter['fechaIda'], 'DD/MM/YYYY').format('YYYY-MM-DD'),
+            		recorrido : {
+            			idOrigen : this.filter['origen'],
+                        idDestino : this.filter['destino']
+            		}      
             }
-
+            
             if(this.filter['recorrido']){
-                filtros.recorrido = {
+            	filtrosIda.recorrido = {
                     id : this.filter['recorrido']
                 }
             }
 
-            viajeService.buscar(filtros).then(function (datos) {
-                $scope.resultados = datos;
+            if(this.filter['fechaVuelta']){
+            	filtrosVuelta = {
+                		fechaSalida : moment(this.filter['fechaVuelta'], 'DD/MM/YYYY').format('YYYY-MM-DD'),
+                		recorrido : {
+                			idDestino : this.filter['origen'],
+                            idOrigen : this.filter['destino']
+                		}      
+                }
+            	
+            	if(this.filter['recorrido']){
+                    filtrosVuelta.recorrido = {
+                        id : this.filter['recorrido']
+                    }
+                }
+            }
+
+            viajeService.buscar(filtrosIda).then(function (datos) {
+                $scope.resultadosIda = datos;
             });
+            
+			if(filtrosVuelta){
+				viajeService.buscar(filtrosVuelta).then(function (datos) {
+	                $scope.resultadosVuelta = datos;
+	            });
+			}
         };
 
-        $scope.reservar = function () {
+        $scope.mostrarReservar = function (resultado) {
+        	$scope.info = resultado;
             $('#modal-reservar').modal('show');
+        }
+        
+        $scope.reservar = function() {
+        	var pasaje = {
+    			viaje : {
+    				id : this.reservar.viaje
+    			},
+        		usuarioReserva : {
+        			id : $scope.usuarioLogueado.id
+        		},
+        		fechaReserva : moment().format('YYYY-MM-DD')
+        	}
+        	
+        	pasajeService.reservar(pasaje).then(function (datos) {
+                $scope.resultadosVuelta = datos;
+            });
+        	
         }
 
         $('#modal-reservar').on('hidden.bs.modal', function (e) {
-
+        	$scope.info = null;
         });
 
         $( document ).ready(function() {
             //Initialize Select2 Elements
             $('.select2').select2({
-                placeholder : 'Seleccione una terminal'
+                placeholder: 'Seleccione',
+                allowClear: true
             }).on('select2:select', function (evt) {
               $scope.filter[evt.currentTarget.name] = evt.currentTarget.value
             });
@@ -88,7 +133,5 @@
         });
         
     }
-
-    
 
 })();

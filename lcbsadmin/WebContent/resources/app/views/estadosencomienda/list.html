@@ -1,0 +1,44 @@
+﻿<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Estados de Encomiendas</h3>
+    </div>
+
+    <div class="title_right">
+      <div class="pull-right">
+        <a href="#/estadosencomienda/add" class="btn btn-info">Agregar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2>Listado de estados</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="est in estadosencomiendas">
+            <td>{{est.nombre}}</td>
+            <td>
+              <div class="btn-group">
+                <a href="#/estadosencomienda/edit/{{est.id}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
+                <a class="btn btn-danger btn-xs" ng-click="borrar($index)"><i class="fa fa-trash-o"></i> </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

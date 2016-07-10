@@ -24,7 +24,7 @@ public class TenantRepo {
 		}
 	}
 
-	public DataTenant create(DataTenant tenant) throws TenantException {
+	public DataTenant create(DataTenant tenant) throws TenantException, Exception {
 		try {
 			return ctrTenant.create(tenant);
 		} catch (TenantException e) {

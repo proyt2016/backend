@@ -11,17 +11,9 @@
             <th>Fecha</th>
             <th>Mensaje</th>
           </tr>
-          <tr>
-            <td>23/06/16</td>
-            <td>Llego la encomienda</td>
-          </tr>
-          <tr>
-            <td>23/06/16</td>
-            <td>Llego la encomienda</td>
-          </tr>
-          <tr>
-            <td>23/06/16</td>
-            <td>Llego la encomienda</td>
+          <tr ng-repeat="notifiacion in notificaciones">
+            <td>{{ notifiacion.fecha || 'dd/MM/yy' }}</td>
+            <td>{{ notifiacion.mensaje }}</td>
           </tr>
         </table>
       </div>

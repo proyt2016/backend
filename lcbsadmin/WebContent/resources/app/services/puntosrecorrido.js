@@ -4,10 +4,10 @@
 
     function puntosrecorridoService($http, $q) {
 
-        var getAll = function(){
+        var getTerminales = function(){
             var defer = $q.defer();
 
-             $http.get('/lcbsapi/rest/viajes/listarrecorridos/1/10000')
+             $http.get('/lcbsapi/rest/viajes/getterminales/1/10000')
              .success(function (puntosrecorrido) {
                  defer.resolve(puntosrecorrido);
              })
@@ -18,31 +18,39 @@
             return defer.promise;
         };
 
-        var add = function(puntosrecorrido, tipodepunto){
+        var getParadas = function(){
             var defer = $q.defer();
-            var apiAUsar;
-            if(tipodepunto == "Terminal"){
-                apiAUsar = '/lcbsapi/rest/viajes/altaterminal';
-            }else{
-                apiAUsar = '/lcbsapi/rest/viajes/altaparada';
-            }
-            $http.post(apiAUsar, puntosrecorrido)
-            .success(function (ptorec) {
-                defer.resolve(ptorec);
-            })
-            .error(function(){
-                defer.reject('server error')
-            });
+
+             $http.get('/lcbsapi/rest/viajes/getparadas/1/10000')
+             .success(function (puntosrecorrido) {
+                 defer.resolve(puntosrecorrido);
+             })
+             .error(function(){
+                 defer.reject('server error')
+             });
 
             return defer.promise;
         };
 
-        var edit = function(puntosrecorrido){
+        var addEdit = function(puntosrecorrido, tipodepunto){
             var defer = $q.defer();
-
-            $http.post('/lcbsapi/rest/viajes/editarrecorrido', puntosrecorrido)
-            .success(function (rec) {
-                defer.resolve(rec);
+            var apiAUsar;
+            if(tipodepunto == "Terminal"){
+                if(puntosrecorrido.id == null){
+                    apiAUsar = '/lcbsapi/rest/viajes/altaterminal';
+                }else{
+                    apiAUsar = '/lcbsapi/rest/viajes/editarterminal';
+                }
+            }else{
+                if(puntosrecorrido.id == null){
+                    apiAUsar = '/lcbsapi/rest/viajes/altaparada';
+                }else{
+                    apiAUsar = '/lcbsapi/rest/viajes/editarparada';
+                }
+            }
+            $http.post(apiAUsar, puntosrecorrido)
+            .success(function (ptorec) {
+                defer.resolve(ptorec);
             })
             .error(function(){
                 defer.reject('server error')
@@ -65,10 +73,10 @@
             return defer.promise;
         };
 
-        var getId = function(id){
+        var getPorCoord = function(coord){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/getrecorrido/'+id)
+            $http.get('/lcbsapi/rest/viajes/getpuntoporcoordenada/'+coord)
             .success(function (ptorec) {
                 defer.resolve(ptorec);
             })
@@ -80,11 +88,11 @@
         };
 
         return {
-            getAll  : getAll,
-            getId   : getId,
-            add     : add,
-            borrar  : borrar,
-            edit    : edit
+            getTerminales  : getTerminales,
+            getParadas  : getParadas,
+            getPorCoord   : getPorCoord,
+            addEdit     : addEdit,
+            borrar  : borrar
         }
 
     }

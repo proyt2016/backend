@@ -4,19 +4,20 @@
   <div class="login-box-body">
     <p class="login-box-msg">Iniciar Sesi&oacute;n</p>
 
-    <form action="#" method="post">
-      <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+    <form name="loginForm" ng-submit="loginForm.$valid && login()" novalidate>
+      <div class="form-group has-feedback" ng-class="{ 'has-error' : submitted && loginForm.usuario.$invalid }">
+        <input type="email" class="form-control" placeholder="Email" ng-model="usuario.usuario" name="usuario" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <p class="help-block" ng-show="submitted && loginForm.usuario.$error.email"">Ingrese un email valido.</p>
       </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Clave">
+      <div class="form-group has-feedback" ng-class="{ 'has-error' : submitted && loginForm.clave.$invalid }">
+        <input type="password" class="form-control" placeholder="Clave" ng-model="usuario.clave" name="clave" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat" ng-click="submitted=true">Entrar</button>
         </div>
         <!-- /.col -->
       </div>

@@ -118,5 +118,21 @@ public class EncomiendaRepo {
 	public DataEstadosEncomienda crearEstadoEncomienda(DataEstadosEncomienda estado){
 		return ctrEncomienda.crearEstadoEncomienda(estado);
 	}
+
+
+	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina) {
+		return ctrEncomienda.listarEncomiendasPorUsuario(idUsuario, pagina, elementosPagina);
+	}
+
+
+	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado) {
+		ctrEncomienda.EditarEstadoEncomienda(dataEstado);
+		
+	}
+
+
+	public DataEstadosEncomienda getEstadoEncomienda(String idEstadoEncomienda) {
+		return ctrEncomienda.getEstadoEncomienda(idEstadoEncomienda);
+	}
 	
 }

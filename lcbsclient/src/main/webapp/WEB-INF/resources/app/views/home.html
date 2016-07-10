@@ -7,15 +7,17 @@
       <form role="form">
   			<div class="box-body">
           <div class="row">
-						<div class="col-md-6 form-group">
-							<label>Origen</label>
-							<select class="form-control select2" style="width: 100%;" name="origen">
-								<option ng-repeat="terminal in terminales" value="{{ terminal.id }}">{{ terminal.nombre }}</option>
-							</select>
-						</div>
+			<div class="col-md-6 form-group">
+				<label>Origen</label>
+				<select class="form-control select2" style="width: 100%;" name="origen">
+					<option></option>
+					<option ng-repeat="terminal in terminales" value="{{ terminal.id }}">{{ terminal.nombre }}</option>
+				</select>
+			</div>
             <div class="col-md-6 form-group">
               <label>Destino</label>
               <select class="form-control select2" style="width: 100%;" name="destino">
+              	<option></option>
                 <option ng-repeat="terminal in terminales" value="{{ terminal.id }}">{{terminal.nombre}}</option>
               </select>
             </div>
@@ -53,7 +55,8 @@
                   <div class="col-md-6 form-group">
                     <label>Lineas</label>
                     <select class="form-control select2" style="width: 100%;" name="recorrido">
-                      <option ng-repeat="recorrido in recorridos" value="{{ recorrido.id }}">{{ recorrido.nombre }}</option>
+                    	<option></option>
+                      	<option ng-repeat="recorrido in recorridos" value="{{ recorrido.id }}">{{ recorrido.nombre }}</option>
                     </select>
                   </div>
                   <div class="col-md-6 form-group">
@@ -110,11 +113,11 @@
 	</div>
 </div>
 
-<div class="row" ng-if="resultados.length">
+<div class="row" ng-if="resultadosIda.length">
   <div class="col-md-12 col-xs-12">
     <div class="box box-success">
       <div class="box-header">
-        <h2 class="box-title">Resultado de busqueda</h2>
+        <h2 class="box-title">Resultado de busqueda - IDA</h2>
       </div>
       
       <div class="box-body table-responsive">
@@ -129,37 +132,51 @@
             <th>Destino</th>
             <th></th>
           </tr>
-          <tr>
-            <td>08:05</td>
-            <td>11:05</td>
-            <td>Montevideo</td>
-            <td>Paysandu</td>
+          <tr ng-repeat="resultado in resultadosIda">
+            <td>{{ resultado.salida }}</td>
+            <td>{{ resultado.llegada }}</td>
+            <td>{{ resultado.origen.nombre }}</td>
+            <td>{{ resultado.destino.nombre }}</td>
             <td>
-              <a href="#/detalle/1" class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
-              <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="reservar()"><i class="fa fa-bookmark"></i></a>
-              <a href="#/comprar/1" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
+              <a href="#/detalle/{{ resultado.id }}" class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
+              <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="mostrarReservar(resultado)"><i class="fa fa-bookmark"></i></a>
+              <a href="#/comprar/{{ resultado.id }}" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
             </td>
           </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" ng-if="resultadosVuelta.length">
+  <div class="col-md-12 col-xs-12">
+    <div class="box box-success">
+      <div class="box-header">
+        <h2 class="box-title">Resultado de busqueda< - Vuelta/h2>
+      </div>
+      
+      <div class="box-body table-responsive">
+        <blockquote>
+          <p>Linea 1</p>
+        </blockquote>
+        <table class="table table-hover">
           <tr>
-            <td>08:05</td>
-            <td>11:05</td>
-            <td>Montevideo</td>
-            <td>Paysandu</td>
-            <td>
-              <a href="#/detalle/2" class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
-              <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="reservar()"><i class="fa fa-bookmark"></i></a>
-              <a href="#/comprar/2" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
-            </td>
+            <th>Salida</th>
+            <th>Llegada</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th></th>
           </tr>
-          <tr>
-            <td>08:05</td>
-            <td>11:05</td>
-            <td>Montevideo</td>
-            <td>Paysandu</td>
+          <tr ng-repeat="resultado in resultadosVuelta">
+            <td>{{ resultado.salida }}</td>
+            <td>{{ resultado.llegada }}</td>
+            <td>{{ resultado.origen.nombre }}</td>
+            <td>{{ resultado.destino.nombre }}</td>
             <td>
-              <a href="#/detalle/3" class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
-              <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="reservar()"><i class="fa fa-bookmark"></i></a>
-              <a href="#/comprar/3" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
+              <a href="#/detalle/{{ resultado.id }}" class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
+              <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="mostrarReservar(resultado)"><i class="fa fa-bookmark"></i></a>
+              <a href="#/comprar/{{ resultado.id }}" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
             </td>
           </tr>
         </table>
@@ -171,7 +188,7 @@
 <div class="modal fade" id="modal-reservar">
     <div class="modal-dialog">
         <div class="modal-content">
-          <form class="">
+          <form name="reservarForm" ng-submit="reservarForm.$valid && reservar()" novalidate>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -182,29 +199,30 @@
               <div class="row">
                 <div class="col-xs-4">
                   <p><strong>Origien y Destino</strong></p>
-                  <p>Montevideo <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> Paysandu</p>
+                  <p>{{ info.origen }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ info.destino }}</p>
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Linea</strong></p>
-                  <p>Linea 150</p>
+                  <p>{{ info.recorrido.nombre }}</p>
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Horario</strong></p>
-                  <p>08:05 a 11:05</p>
+                  <p>{{ info.salida }} a {{ info.llegada }}</p>
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-xs-12">
-                  <div class="form-group">
+                  <div class="form-group" ng-class="{ 'has-error' : submitted && reservarForm.cantidad.$invalid }">
                     <label>Cantidad de pasajes</label>
-                    <input class="form-control" type="number" name="cantida" value="1" align="right" />
+                    <input type="hidden" value="{{ info.id }}" ng-model="reservar.viaje"/>
+                    <input class="form-control" type="number" name="cantida" value="1" align="right" ng-model="reservar.cantidad" required/>
                   </div>
                 </div>
               </div>
             </div>
             <div class="box-footer">
-              <a class="btn btn-success pull-right">Reservar</a>
+              <button type="submit" class="btn btn-success pull-right" ng-click="submitted=true">Reservar</button>
             </div>
           </form>
         </div>

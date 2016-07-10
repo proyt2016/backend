@@ -14,29 +14,11 @@
             <th>Ubicaci&oacute;n</th>
             <th></th>
           </tr>
-          <tr>
-            <td>23/06/16</td>
-            <td>En viaje</td>
-            <td>25/06/16</td>
-            <td>Colonia</td>
-            <td>
-              <a class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>23/06/16</td>
-            <td>En viaje</td>
-            <td>25/06/16</td>
-            <td>Colonia</td>
-            <td>
-              <a class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>23/06/16</td>
-            <td>En viaje</td>
-            <td>25/06/16</td>
-            <td>Colonia</td>
+          <tr ng-repeat="encomienda in encomiendas">
+            <td>{{ encomienda.fecha || 'dd/MM/yy' }}</td>
+            <td>{{ encomienda.estado }}</td>
+            <td>{{ encomienda.estadoFecha || 'dd/MM/yy' }}</td>
+            <td>{{ encomienda.ubicacion }}</td>
             <td>
               <a class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
             </td>

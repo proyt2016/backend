@@ -11,6 +11,7 @@ import lcbs.shares.DataViaje;
 public interface ViajeLocalApi {
 	public List<DataViaje> obtenerViajes(Integer pagina, Integer elementosPagina);
 	public void modificarViaje(DataViaje via);
+	
 	public DataViaje getViaje(String via);
 	public DataViaje crearViaje(DataViaje via);
 	public void borrarViaje(String idViaje);

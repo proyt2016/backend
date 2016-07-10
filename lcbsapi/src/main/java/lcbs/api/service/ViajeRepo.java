@@ -78,6 +78,10 @@ public class ViajeRepo {
 		ctrViaje.EditarParada(parada);
 	}
 	
+	public List<DataViaje> getViajes(int pagina,int elementos){
+		return ctrViaje.getViajes(pagina, elementos);
+	}
+	
 	public void EditarTerminal(DataTerminal terminal){
 		ctrViaje.EditarTerminal(terminal);
 	}

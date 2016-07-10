@@ -188,6 +188,7 @@ public class ViajeApi {
 		return repo.verDetallePasaje(idPasaje);
 	}
 	
+	
 	//tested
 	@GET
 	@Path("/getterminal/{idTerminal}")
@@ -229,6 +230,12 @@ public class ViajeApi {
 	@Path("/eliminarviaje/")
 	public void eliminarViaje(String idViaje){
 		repo.eliminarViaje(idViaje);
+	}
+	
+	@GET
+	@Path("/getviajes/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataViaje> getViajes(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar") final Integer elementosPagina){
+		return repo.getViajes(pagina, elementosPagina);
 	}
 	
 }

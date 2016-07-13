@@ -103,7 +103,7 @@ public class Viaje implements Serializable {
 		DataViaje result = new DataViaje();
 		result.setId(this.getId());
 		if(this.getRecorrido()!=null)
-			result.setRecorrido(this.getRecorrido().getDatatype(false));
+			result.setRecorrido(this.getRecorrido().getDatatype(true));
 		if(this.getHorario()!=null)
 			result.setHorario(this.getHorario().getDatatype());
 		result.setFechaSalida(this.getFechaSalida());

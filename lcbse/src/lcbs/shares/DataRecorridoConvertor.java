@@ -14,7 +14,7 @@ public class DataRecorridoConvertor{
     private String idDestino;
     private List<DataPrecio> precios;
     private Boolean eliminado;
-    
+    	
  
 
     public DataRecorridoConvertor() {}

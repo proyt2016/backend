@@ -43,6 +43,13 @@ public class ViajeApi {
 		return repo.getTerminales(pagina, elementosPagina);
 	}
 	
+	
+	@GET
+	@Path("/getviajesxterminal/{idterminal}/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataViaje> viajesPorTerminal(@PathParam ("idterminal")String idterminal,@PathParam("pagina") final Integer pagina,@PathParam("elementosAMostrar") final Integer ElementosPagina){
+		return	repo.viajesPorTerminal(idterminal,pagina,ElementosPagina);
+		}
+	
 	@GET
 	@Path("/getparadas/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
 	public List<DataParada> getParadas(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){

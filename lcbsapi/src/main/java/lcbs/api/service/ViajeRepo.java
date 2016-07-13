@@ -37,6 +37,10 @@ public class ViajeRepo {
 	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina){
 		return ctrViaje.BuscarViaje(filtro, pagina, ElementosPagina);
 	}
+
+	public List<DataViaje> viajesPorTerminal(String idterminal, Integer pagina, Integer ElementosPagina){
+		return	ctrViaje.viajesPorTerminal(idterminal,pagina,ElementosPagina);
+	}
 	
 	public DataPasaje ComprarPasaje(DataPasaje pasaje){
 		return ctrViaje.ComprarPasaje(pasaje);

@@ -21,7 +21,9 @@ public class DataPasaje{
 
     public DataPasaje() {}
     
-    public DataPasaje(String id, DataViaje via, DataPrecio prec, DataPuntoRecorrido orig, DataPuntoRecorrido des, Date fecVen, DataUsuario comp, String ciPer, DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
+    public DataPasaje(String id, DataViaje via, DataPrecio prec, DataPuntoRecorrido orig, 
+    		DataPuntoRecorrido des,	Date fecVen, DataUsuario comp, String ciPer, 
+    		DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.id = id;
         this.viaje = via;
         this.precio = prec;

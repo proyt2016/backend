@@ -3,10 +3,17 @@ package lcbs.shares;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+@XmlRootElement
 public class DataViaje{
     private String id;
     private DataRecorrido recorrido;
     private DataHorario horario;
+    @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaSalida;
     private List<DataEmpleado> empleados;
     private DataVehiculo coche;

@@ -2,6 +2,11 @@ package lcbs.shares;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+@XmlRootElement
 public class DataMantenimientoVehiculo{
     
 	private String id;
@@ -9,7 +14,11 @@ public class DataMantenimientoVehiculo{
     private String descripcionReducida;
     private String descripcionCompleta;
     private float costo;
+    @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaIngreso;
+    @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaCompleado;
     
     

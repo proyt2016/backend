@@ -3,6 +3,11 @@ package lcbs.shares;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+@XmlRootElement
 public class DataEncomienda {
 
 	
@@ -22,7 +27,11 @@ public class DataEncomienda {
     private DataViaje viajeAsignado;
     private List<DataHistorialEstadosEncomienda> estados;
     private DataEstadosEncomienda estadoActual;
+    @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaIngreso;
+    @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaEntrega;
     private boolean retiraEnSucursal;
     private boolean eliminada;

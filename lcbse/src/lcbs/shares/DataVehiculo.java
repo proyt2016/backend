@@ -3,6 +3,11 @@ package lcbs.shares;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+@XmlRootElement
 public class DataVehiculo{
     
 	private String id;
@@ -12,6 +17,8 @@ public class DataVehiculo{
     private String marca;
     private String modelo;
     private Integer anioFabricacion;
+    @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaAlta;
     private Integer cantidadAsientos;
     private Boolean conGuarda;

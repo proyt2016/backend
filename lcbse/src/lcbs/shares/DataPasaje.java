@@ -2,6 +2,11 @@ package lcbs.shares;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+@XmlRootElement
 public class DataPasaje{
     
 	private String id;
@@ -9,6 +14,8 @@ public class DataPasaje{
     private DataPrecio precio;
     private DataPuntoRecorrido origen;
     private DataPuntoRecorrido destino;
+    @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaCompra;
     private DataUsuario comprador;
     private String ciPersona;

@@ -88,7 +88,7 @@ public class Recorrido implements Serializable{
     	DataRecorrido result = new DataRecorrido();
     	result.setId(this.getId());
     	result.setNombre(this.getNombre());
-    	if(this.getPuntosDeRecorrido()!=null && conHijos){
+    	if(this.getPuntosDeRecorrido() != null && this.getPuntosDeRecorrido().size()>0 && conHijos){
 	    	List<DataPuntoRecorrido> auxPr = new ArrayList<DataPuntoRecorrido>();
 	    	this.getPuntosDeRecorrido().stream().forEach((pr) -> {
 	    		if(pr instanceof Terminal){

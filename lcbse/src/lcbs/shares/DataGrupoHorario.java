@@ -3,12 +3,19 @@ package lcbs.shares;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+@XmlRootElement
 public class DataGrupoHorario{
     
 	private String id;
     
     private String nombre;
     private List<DataDiasSemana> diasSemana; //Lista de dias de la semana en los que funciona el grupo
+    @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private List<Date> diasEspecificos; //Lista de dias especificos en los que funciona este grupo, por ejemplo, semana de turismo
     private List<DataHorario> horarios;
     

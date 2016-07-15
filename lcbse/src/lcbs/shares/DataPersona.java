@@ -3,12 +3,19 @@ package lcbs.shares;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+@XmlRootElement
 public abstract class DataPersona{
     private String id;
     private String nombrePila;
     private String apellido;
     private DataEmail email;
     private List<DataTelefono> telefonosContacto;
+    @XmlElement
+    @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaNacimiento;
     private boolean eliminado;
     

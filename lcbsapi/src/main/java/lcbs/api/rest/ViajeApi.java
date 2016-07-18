@@ -245,4 +245,10 @@ public class ViajeApi {
 		return repo.getViajes(pagina, elementosPagina);
 	}
 	
+	@GET
+	@Path("/getpasajes/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataPasaje> getPasajes(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar") final Integer ElementosPagina){
+		return repo.getPasajes(pagina, ElementosPagina);
+	}
+	
 }

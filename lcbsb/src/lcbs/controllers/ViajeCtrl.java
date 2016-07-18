@@ -109,6 +109,11 @@ public class ViajeCtrl implements IViaje{
 		pasajeAModificar.setUsado(true);
 		srvPasaje.modificarPasaje(pasajeAModificar);
 	}
+	
+	@Override
+	public List<DataPasaje> getPasajes(Integer pagina, Integer ElementosPagina){
+		return srvPasaje.obtenerPasajes(pagina, ElementosPagina);
+	}
 
 	@Override
 	public DataParada AltaParadas(DataParada parada) {

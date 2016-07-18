@@ -42,6 +42,10 @@ public class ViajeRepo {
 		return	ctrViaje.viajesPorTerminal(idterminal,pagina,ElementosPagina);
 	}
 	
+	public List<DataPasaje> getPasajes(Integer pagina, Integer ElementosPagina){
+		return ctrViaje.getPasajes(pagina, ElementosPagina);
+	}
+	
 	public DataPasaje ComprarPasaje(DataPasaje pasaje){
 		return ctrViaje.ComprarPasaje(pasaje);
 	}

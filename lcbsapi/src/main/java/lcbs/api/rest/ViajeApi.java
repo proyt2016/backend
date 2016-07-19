@@ -64,7 +64,8 @@ public class ViajeApi {
 	
 	@POST
 	@Path("/comprarpasaje/")
-	public DataPasaje ComprarPasaje(DataPasaje pasaje){
+	public DataPasaje ComprarPasaje(DataPasajeConvertor pseudoPasaje){
+		DataPasaje pasaje = pseudoPasaje.getDataPasaje();
 		return repo.ComprarPasaje(pasaje);
 	}
 	

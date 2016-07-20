@@ -14,6 +14,7 @@ import lcbs.interfaces.EmpleadoLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Cuponera;
 import lcbs.models.Empleado;
+import lcbs.models.Usuario;
 
 import java.util.Map;
 import java.util.ArrayList;
@@ -60,6 +61,19 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
     	Session session = (Session) em.getDelegate();
     	Empleado realObj = (Empleado) session.get(Empleado.class, id);
 		return realObj.getDatatype(true);
+    }
+    
+    public boolean loginUsuario(String mailEmpleado, String clave){
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Empleado.class);
+    	criteria.add(Restrictions.eq("email.email", mailEmpleado));
+        List<Empleado> listEmp = criteria.list();
+        if(listEmp.size() == 1){
+	    	DataEmpleado empleado = listEmp.get(0).getDatatype(true);
+	    	if(empleado.getClave().equals(clave))
+	        return true;
+        }
+        return false;
     }
     
     public DataEmpleado crearEmpleado(DataEmpleado emp){

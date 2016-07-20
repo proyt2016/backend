@@ -13,6 +13,7 @@ public abstract class DataPersona{
     private String nombrePila;
     private String apellido;
     private DataEmail email;
+    private String clave;
     private List<DataTelefono> telefonosContacto;
     @XmlElement
     @XmlJavaTypeAdapter(DateAdapter.class)
@@ -21,6 +22,14 @@ public abstract class DataPersona{
     
     public void setId(String val){
         this.id = val;
+    }
+    
+    public void setClave(String c){
+    	this.clave = c;
+    }
+    
+    public String getClave(){
+    	return this.clave;
     }
     
     public String getId(){

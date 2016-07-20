@@ -24,7 +24,7 @@ import java.util.List;
 public class Usuario extends Persona implements Serializable{
     private static final long serialVersionUID = 1L; 
     
-    private String clave;
+    
     private String redSocialUsada;
     private String idRedSocial;
     @OneToOne(cascade = CascadeType.ALL)
@@ -42,8 +42,7 @@ public class Usuario extends Persona implements Serializable{
     public Usuario() {}
     
     public Usuario(String id, String nm, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim, String clave, String redSoc, String idRedsoc, Cuponera cup, List<Encomienda> enc, List<Notificacion> not) {
-        super(id, nm, ape, mail, tels, fecNac, elim);
-        this.clave = clave;
+        super(id,clave, nm, ape, mail, tels, fecNac, elim);
         this.redSocialUsada = redSoc;
         this.idRedSocial = idRedsoc;
         this.cuponera = cup;
@@ -113,13 +112,7 @@ public class Usuario extends Persona implements Serializable{
     	return result;
     }
     
-    public void setClave(String val){
-        this.clave = val;
-    }
-    
-    public String getClave(){
-        return this.clave;
-    }
+   
 
     public void setRedSocialUsada(String val){
         this.redSocialUsada = val;

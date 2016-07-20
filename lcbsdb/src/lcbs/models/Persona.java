@@ -30,6 +30,7 @@ public abstract class Persona implements Serializable{
     private String id;
     private String nombrePila;
     private String apellido;
+    private String clave;
     @Embedded
     private Email email;
     @Embedded
@@ -43,8 +44,9 @@ public abstract class Persona implements Serializable{
 
     public Persona() {}
     
-    public Persona(String id, String nm, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim) {
+    public Persona(String id, String clave, String nm, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim) {
         this.id = id;
+        this.clave = clave;
         this.nombrePila = nm;
         this.apellido = ape;
         this.email = mail;
@@ -108,5 +110,12 @@ public abstract class Persona implements Serializable{
     
     public Boolean getEliminado(){
     	return this.eliminado;
+    }
+    public String getClave(){
+    	return this.clave;
+    }
+    
+    public void setClave(String c){
+    	this.clave = c;
     }
 }

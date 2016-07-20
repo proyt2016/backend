@@ -119,9 +119,9 @@ public class UsuarioCtrl implements IUsuario{
 	}
 
 	@Override
-	public boolean loginEmpleado(String usuario, String clave) {
+	public boolean loginEmpleado(String mail, String clave) {
 		// TODO Auto-generated method stub
-		return false;
+		return srvEmpleado.loginUsuario(mail, clave);
 	}
 
 	@Override

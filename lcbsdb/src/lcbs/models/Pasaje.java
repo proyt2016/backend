@@ -29,6 +29,7 @@ public class Pasaje implements Serializable{
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+    private int codigoPasaje;
     
     @ManyToOne(fetch=FetchType.EAGER)
     private Viaje viaje;
@@ -53,7 +54,7 @@ public class Pasaje implements Serializable{
 
     public Pasaje() {}
     
-    public Pasaje(String id, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, Date fecVen, Usuario comp, String ciPer, Empleado vend, Boolean usd, Boolean pg, Boolean elim) {
+    public Pasaje(String id,int codigoPasaje, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, Date fecVen, Usuario comp, String ciPer, Empleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.id = id;
         this.viaje = via;
         this.precio = prec;
@@ -66,6 +67,7 @@ public class Pasaje implements Serializable{
         this.usado = usd;
         this.pago = pg;
         this.eliminado = elim;
+        this.codigoPasaje = codigoPasaje;
     }
     
     public Pasaje(DataPasaje dt){
@@ -106,6 +108,7 @@ public class Pasaje implements Serializable{
     public DataPasaje getDatatype(){
     	DataPasaje result = new DataPasaje();
     	result.setId(this.getId());
+    	result.setCodigoPasaje(this.getCodigoPasaje());
     	if(this.getViaje()!=null)
     		result.setViaje(this.getViaje().getDatatype(false));
     	if(this.getPrecio()!=null)
@@ -134,6 +137,14 @@ public class Pasaje implements Serializable{
     	result.setPago(this.getPago());
     	result.setEliminado(this.getEliminado());
     	return result;
+    }
+    
+    public void setCodigoPasaje(int cod){
+    	this.codigoPasaje = cod;
+    }
+    
+    public int getCodigoPasaje(){
+    	return this.codigoPasaje;
     }
     
     public void setId(String val){

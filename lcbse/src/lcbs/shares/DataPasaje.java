@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class DataPasaje{
     
 	private String id;
+	
     private DataViaje viaje;
     private DataPrecio precio;
     private DataPuntoRecorrido origen;
@@ -17,6 +18,7 @@ public class DataPasaje{
     @XmlElement
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaCompra;
+    private int codigoPasaje;
     private DataUsuario comprador;
     private String ciPersona;
     private DataEmpleado vendedor;
@@ -28,10 +30,11 @@ public class DataPasaje{
 
     public DataPasaje() {}
     
-    public DataPasaje(String id, DataViaje via, DataPrecio prec, DataPuntoRecorrido orig, 
+    public DataPasaje(String id, int codigoPasaje, DataViaje via, DataPrecio prec, DataPuntoRecorrido orig, 
     		DataPuntoRecorrido des,	Date fecVen, DataUsuario comp, String ciPer, 
     		DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.id = id;
+        this.codigoPasaje = codigoPasaje;
         this.viaje = via;
         this.precio = prec;
         this.origen = orig;
@@ -43,6 +46,14 @@ public class DataPasaje{
         this.usado = usd;
         this.pago = pg;
         this.eliminado = elim;
+    }
+    
+    public void setCodigoPasaje(int cod){
+    	this.codigoPasaje = cod;
+    }
+    
+    public int getCodigoPasaje(){
+    	return this.codigoPasaje;
     }
     
     public void setId(String val){

@@ -14,11 +14,13 @@ import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.GrupoHorario;
 import lcbs.models.Parada;
 import lcbs.models.Pasaje;
+import lcbs.models.Viaje;
 import lcbs.shares.DataPasaje;
 
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -41,7 +43,8 @@ public class PasajeSrv implements PasajeLocalApi {
     	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<Pasaje> listPsj = criteria.list();
+    	
+    	List<Pasaje> listPsj = new ArrayList<Pasaje>(new LinkedHashSet( criteria.list() ));
         
         listPsj.stream().forEach((psj) -> {
         	Pasajes.add(psj.getDatatype());
@@ -86,7 +89,7 @@ public class PasajeSrv implements PasajeLocalApi {
     	criteria.add(Restrictions.eq("comprador.id", idUsuario));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<Pasaje> listPsj = criteria.list();
+    	List<Pasaje> listPsj = new ArrayList<Pasaje>(new LinkedHashSet( criteria.list() ));
         
         listPsj.stream().forEach((psj) -> {
         	Pasajes.add(psj.getDatatype());

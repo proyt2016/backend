@@ -29,6 +29,8 @@ public class Pasaje implements Serializable{
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigoPasaje;
     
     @ManyToOne(fetch=FetchType.EAGER)
@@ -72,6 +74,7 @@ public class Pasaje implements Serializable{
     
     public Pasaje(DataPasaje dt){
     	this.setId(dt.getId());
+    	this.setCodigoPasaje(dt.getCodigoPasaje());
     	if(dt.getViaje() != null){
     		this.setViaje(new Viaje(dt.getViaje()));
     	}

@@ -6,18 +6,18 @@
       </div>
       <div class="box-body">
         <p><strong><i class="fa fa-map margin-r-5"></i> Origien y Destino</strong></p>
-        <p>Montevideo <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> Paysandu</p>
+        <p>{{ viaje.recorrido.puntosDeRecorrido[0].nombre }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ viaje.recorrido.puntosDeRecorrido[viaje.recorrido.puntosDeRecorrido.length - 1].nombre }}</p>
         <hr>
-        <p><i class="fa fa-map-marker margin-r-5"></i> Linea 150</p>
+        <p><i class="fa fa-map-marker margin-r-5"></i> {{ viaje.recorrido.nombre }}</p>
         <hr>
-        <p><i class="fa fa-calendar margin-r-5"></i> 08:05 a 11:05</p>
+        <p><i class="fa fa-calendar margin-r-5"></i> {{ viaje.fechaSalida | date : 'dd/MM/yy' }} a {{ viaje.llegada }}</p>
         <hr>
         <strong><i class="fa fa-file-text-o margin-r-5"></i> Descripci&oacute;n</strong>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+        <p>{{ viaje.descripcion }}</p>
       </div>
       <div class="box-footer">
-        <a class="btn btn-info pull-left" ng-click="reservar()">Reservar</a>
-        <a href="#/comprar/1" class="btn btn-success pull-right">Comprar</a>
+        <a class="btn btn-info pull-left" ng-click="mostrarReservar()">Reservar</a>
+        <a href="#/comprar/{{ viaje.id }}" class="btn btn-success pull-right">Comprar</a>
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@
 <div class="modal fade" id="modal-reservar">
     <div class="modal-dialog">
         <div class="modal-content">
-          <form class="">
+          <form name="reservarForm" ng-submit="reservarForm.$valid && reservar()" novalidate>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -50,29 +50,30 @@
               <div class="row">
                 <div class="col-xs-4">
                   <p><strong>Origien y Destino</strong></p>
-                  <p>Montevideo <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> Paysandu</p>
+                  <p>{{ viaje.recorrido.puntosDeRecorrido[0].nombre }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ viaje.recorrido.puntosDeRecorrido[viaje.recorrido.puntosDeRecorrido.length - 1].nombre }}</p>
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Linea</strong></p>
-                  <p>Linea 150</p>
+                  <p>{{ viaje.recorrido.nombre }}</p>
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Horario</strong></p>
-                  <p>08:05 a 11:05</p>
+                  <p>{{ viaje.fechaSalida | date : 'dd/MM/yy' }} a {{ viaje.llegada }}</p>
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-xs-12">
-                  <div class="form-group">
+                  <div class="form-group" ng-class="{ 'has-error' : submitted && reservarForm.cantidad.$invalid }">
                     <label>Cantidad de pasajes</label>
-                    <input class="form-control" type="number" name="cantida" value="1" align="right" />
+                    <input type="hidden" value="{{ viaje.id }}" ng-model="reservar.viaje"/>
+                    <input class="form-control" type="number" name="cantida" value="1" align="right" ng-model="reservar.cantidad" required/>
                   </div>
                 </div>
               </div>
             </div>
             <div class="box-footer">
-              <a class="btn btn-success pull-right">Reservar</a>
+              <button type="submit" class="btn btn-success pull-right" ng-click="submitted=true">Reservar</button>
             </div>
           </form>
         </div>

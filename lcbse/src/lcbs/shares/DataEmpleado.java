@@ -7,7 +7,6 @@ public class DataEmpleado extends DataPersona{
     
     private String idEmpleadoLdap;
     private DataPerfil perfil;
-    private String clave;
 
  
 
@@ -15,7 +14,7 @@ public class DataEmpleado extends DataPersona{
         idEmpleadoLdap = "";
     }
     
-    public DataEmpleado(String id, String clave,String nm, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, String idEmpLdap, DataPerfil perf, Boolean elim) {
+    public DataEmpleado(String id, String nm, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, String idEmpLdap, DataPerfil perf, Boolean elim) {
         super.setId(id);
         super.setNombrePila(nm);
         super.setApellido(ape);
@@ -23,7 +22,6 @@ public class DataEmpleado extends DataPersona{
         super.setTelefonosContacto(tels);
         super.setFechaNacimiento(fecNac);
         super.setEliminado(elim);
-        this.clave = clave;
         this.idEmpleadoLdap = idEmpLdap;
         this.perfil = perf;
         
@@ -39,14 +37,6 @@ public class DataEmpleado extends DataPersona{
 
     public void setPerfil(DataPerfil val){
         this.perfil = val;
-    }
-    
-    public String getClave(){
-    	return this.clave;
-    }
-    
-    public void setClave(String c){
-    	this.clave = c;
     }
     
     public DataPerfil getPerfil(){

@@ -98,7 +98,14 @@ public class DataPasajeConvertor{
     }
     
     public DataViaje getViaje(){
-        return this.viaje;
+    	DataViaje sinPuntos = new DataViaje();
+    	sinPuntos = this.viaje;
+    	DataRecorrido recOverr = sinPuntos.getRecorrido();
+    	if(recOverr != null){
+	    	recOverr.setPuntosDeRecorrido(null);
+	    	sinPuntos.setRecorrido(recOverr);
+    	}
+        return sinPuntos;
     }
 
     public void setPrecio(DataPrecio val){

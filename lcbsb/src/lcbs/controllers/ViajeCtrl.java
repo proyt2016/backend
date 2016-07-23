@@ -111,7 +111,7 @@ public class ViajeCtrl implements IViaje{
 	}
 	
 	@Override
-	public List<DataPasaje> getPasajes(Integer pagina, Integer ElementosPagina){
+	public List<DataPasajeConvertor> getPasajes(Integer pagina, Integer ElementosPagina){
 		return srvPasaje.obtenerPasajes(pagina, ElementosPagina);
 	}
 

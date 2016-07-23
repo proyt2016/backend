@@ -16,6 +16,7 @@ import lcbs.models.Parada;
 import lcbs.models.Pasaje;
 import lcbs.models.Viaje;
 import lcbs.shares.DataPasaje;
+import lcbs.shares.DataPasajeConvertor;
 
 import java.util.Map;
 import java.util.ArrayList;
@@ -35,8 +36,8 @@ public class PasajeSrv implements PasajeLocalApi {
         
     }
     
-    public List<DataPasaje> obtenerPasajes(Integer pagina, Integer elementosPagina){
-    	List<DataPasaje> Pasajes = new ArrayList();
+    public List<DataPasajeConvertor> obtenerPasajes(Integer pagina, Integer elementosPagina){
+    	List<DataPasajeConvertor> Pasajes = new ArrayList();
         //obtengo todos los Pasajes de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Pasaje.class);
@@ -47,7 +48,7 @@ public class PasajeSrv implements PasajeLocalApi {
     	List<Pasaje> listPsj = new ArrayList<Pasaje>(new LinkedHashSet( criteria.list() ));
         
         listPsj.stream().forEach((psj) -> {
-        	Pasajes.add(psj.getDatatype());
+        	Pasajes.add(psj.getDatatype().genConvertor());
         });
         return Pasajes;
     }

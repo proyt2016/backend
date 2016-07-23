@@ -6,10 +6,11 @@ import java.util.Map;
 import javax.ejb.Local;
 
 import lcbs.shares.DataPasaje;
+import lcbs.shares.DataPasajeConvertor;
 
 @Local
 public interface PasajeLocalApi {
-	public List<DataPasaje> obtenerPasajes(Integer pagina, Integer elementosPagina);
+	public List<DataPasajeConvertor> obtenerPasajes(Integer pagina, Integer elementosPagina);
 	public void modificarPasaje(DataPasaje psj);
 	public DataPasaje getPasaje(String id);
 	public DataPasaje crearPasaje(DataPasaje psj);

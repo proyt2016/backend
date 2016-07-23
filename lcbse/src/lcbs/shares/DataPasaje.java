@@ -48,7 +48,7 @@ public class DataPasaje{
         this.eliminado = elim;
     }
     
-    public DataPasajeConvertor getConvertor(){
+    public DataPasajeConvertor genConvertor(){
     	DataPasajeConvertor result = new DataPasajeConvertor();
     	result.setId(this.getId());
     	result.setCodigoPasaje(this.getCodigoPasaje());

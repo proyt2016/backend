@@ -48,6 +48,36 @@ public class DataPasaje{
         this.eliminado = elim;
     }
     
+    public DataPasajeConvertor getConvertor(){
+    	DataPasajeConvertor result = new DataPasajeConvertor();
+    	result.setId(this.getId());
+    	result.setCodigoPasaje(this.getCodigoPasaje());
+    	result.setViaje(this.getViaje());
+    	result.setPrecio(this.getPrecio());
+    	if(this.getOrigen() != null){
+    		if(this.getOrigen() instanceof DataParada){
+    			result.setOrigen(((DataParada)this.getOrigen()).getConvertor());
+    		}else{
+    			result.setOrigen(((DataTerminal)this.getOrigen()).getConvertor());
+    		}
+    	}
+    	if(this.getDestino() != null){
+    		if(this.getDestino() instanceof DataParada){
+    			result.setDestino(((DataParada)this.getDestino()).getConvertor());
+    		}else{
+    			result.setDestino(((DataTerminal)this.getDestino()).getConvertor());
+    		}
+    	}
+    	result.setFechaCompra(this.getFechaCompra());
+    	result.setComprador(this.getComprador());
+    	result.setCiPersona(this.getCiPersona());
+    	result.setVendedor(this.getVendedor());
+    	result.setUsado(this.getUsado());
+    	result.setPago(this.getPago());
+    	result.setEliminado(this.getEliminado());
+    	return result;
+    }
+    
     public void setCodigoPasaje(int cod){
     	this.codigoPasaje = cod;
     }

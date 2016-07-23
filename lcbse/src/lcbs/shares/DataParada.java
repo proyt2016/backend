@@ -11,6 +11,15 @@ public class DataParada extends DataPuntoRecorrido{
 	    setEliminado(elim);
 	}
 	
+	public DataPuntoRecorridoConverter getConvertor(){
+		DataPuntoRecorridoConverter result = new DataPuntoRecorridoConverter();
+		result.setId(this.getId());
+		result.setNombre(this.getNombre());
+		result.setUbicacionMapa(this.getUbicacionMapa());
+		result.setEliminado(this.getEliminado());
+		return result;
+	}
+	
 	public String getTipo(){
 	    return "Parada";
 	}

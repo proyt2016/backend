@@ -22,6 +22,18 @@ public class DataTerminal extends DataPuntoRecorrido{
         this.aceptaEncomiendas = acEnc;
     }
     
+    public DataPuntoRecorridoConverter getConvertor(){
+		DataPuntoRecorridoConverter result = new DataPuntoRecorridoConverter();
+		result.setId(this.getId());
+		result.setNombre(this.getNombre());
+		result.setUbicacionMapa(this.getUbicacionMapa());
+		result.setEliminado(this.getEliminado());
+		result.setAceptaEncomiendas(this.getAceptaEncomiendas());
+		result.setMailsDeContacto(this.getMailsDeContacto());
+		result.setTelefonosContacto(this.getTelefonosContacto());
+		return result;
+	}
+    
     
     public void setTelefonosContacto(List<DataTelefono> val){
         this.telefonosContacto = val;

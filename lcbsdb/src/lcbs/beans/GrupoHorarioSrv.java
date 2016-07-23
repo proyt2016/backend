@@ -13,11 +13,13 @@ import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Empleado;
 import lcbs.models.EstadosEncomienda;
 import lcbs.models.GrupoHorario;
+import lcbs.models.Parada;
 import lcbs.shares.DataGrupoHorario;
 
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -40,7 +42,7 @@ public class GrupoHorarioSrv implements GrupoHorarioLocalApi {
         
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<GrupoHorario> listGrupHor = criteria.list();
+        List<GrupoHorario> listGrupHor = new ArrayList<GrupoHorario>(new LinkedHashSet( criteria.list() ));
         
         listGrupHor.stream().forEach((grp) -> {
         	grupos.add(grp.getDatatype(true));

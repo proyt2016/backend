@@ -13,12 +13,14 @@ import lcbs.interfaces.ReservaLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.ReglaCobroEncomienda;
 import lcbs.models.Reserva;
+import lcbs.models.Terminal;
 import lcbs.models.Viaje;
 import lcbs.shares.DataReserva;
 
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -41,7 +43,7 @@ public class ReservaSrv implements ReservaLocalApi {
     	criteria.add(Restrictions.eq("eliminada", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<Reserva> listRes = criteria.list();
+        List<Reserva> listRes = new ArrayList<Reserva>(new LinkedHashSet( criteria.list() ));
         
         listRes.stream().forEach((rec) -> {
         	reservas.add(rec.getDatatype());
@@ -55,8 +57,8 @@ public class ReservaSrv implements ReservaLocalApi {
     	Session session = (Session) em.getDelegate();
         
         Criteria c = session.createCriteria(Reserva.class);
-        c.add(Restrictions.eq("usuario.id", idUsuario)); //TODO: Fixear filtro
-        List<Reserva> listRes = c.list();
+        c.add(Restrictions.eq("usuarioReserva.id", idUsuario)); //TODO: Fixear filtro
+        List<Reserva> listRes = new ArrayList<Reserva>(new LinkedHashSet( c.list() ));
         
         listRes.stream().forEach((rec) -> {
         	reservas.add(rec.getDatatype());

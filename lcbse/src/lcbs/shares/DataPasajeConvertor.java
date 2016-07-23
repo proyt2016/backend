@@ -47,7 +47,7 @@ public class DataPasajeConvertor{
         this.eliminado = elim;
     }
     
-    public DataPasaje getDataPasaje(){
+    public DataPasaje genDataPasaje(){
     	DataPasaje result = new DataPasaje();
     	result.setId(this.getId());
     	result.setCodigoPasaje(this.getCodigoPasaje());
@@ -55,16 +55,16 @@ public class DataPasajeConvertor{
     	result.setPrecio(this.getPrecio());
     	if(this.getOrigen() != null){
     		if(this.getOrigen().getTipo().equals("Parada")){
-    			result.setOrigen(this.getOrigen().getDataParada());
+    			result.setOrigen(this.getOrigen().genDataParada());
     		}else{
-    			result.setOrigen(this.getOrigen().getDataTerminal());
+    			result.setOrigen(this.getOrigen().genDataTerminal());
     		}
     	}
     	if(this.getDestino() != null){
     		if(this.getDestino().getTipo().equals("Parada")){
-    			result.setDestino(this.getDestino().getDataParada());
+    			result.setDestino(this.getDestino().genDataParada());
     		}else{
-    			result.setDestino(this.getDestino().getDataTerminal());
+    			result.setDestino(this.getDestino().genDataTerminal());
     		}
     	}
     	result.setFechaCompra(this.getFechaCompra());

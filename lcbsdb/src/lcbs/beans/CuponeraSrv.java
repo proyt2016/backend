@@ -11,12 +11,14 @@ import org.hibernate.Session;
 import lcbs.interfaces.CuponeraLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Cuponera;
+import lcbs.models.Empleado;
 import lcbs.models.Perfil;
 import lcbs.shares.*;
 
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -39,7 +41,7 @@ public class CuponeraSrv implements CuponeraLocalApi {
         
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<Cuponera> listCup = criteria.list();
+        List<Cuponera> listCup = new ArrayList<Cuponera>(new LinkedHashSet( criteria.list() ));
         
         listCup.stream().forEach((cup) -> {
         	cuponeras.add(cup.getDatatype());

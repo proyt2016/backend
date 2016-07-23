@@ -28,7 +28,7 @@ public class DataRecorridoConvertor{
         this.eliminado = elim;
     }
     
-    public DataRecorrido getRecorrido(){
+    public DataRecorrido genRecorrido(){
     	DataRecorrido result = new DataRecorrido();
     	result.setEliminado(this.getEliminado());
     	result.setHorarios(this.getHorarios());
@@ -39,9 +39,9 @@ public class DataRecorridoConvertor{
     	if(this.getPuntosDeRecorrido() != null){
     		this.getPuntosDeRecorrido().stream().forEach((pr) -> {
         		if(pr.getTipo().equals("Parada")){
-        			puntos.add(pr.getDataParada());
+        			puntos.add(pr.genDataParada());
         		}else{
-        			puntos.add(pr.getDataTerminal());
+        			puntos.add(pr.genDataTerminal());
         		}
             });
     	}

@@ -31,6 +31,7 @@ public class DataTerminal extends DataPuntoRecorrido{
 		result.setAceptaEncomiendas(this.getAceptaEncomiendas());
 		result.setMailsDeContacto(this.getMailsDeContacto());
 		result.setTelefonosContacto(this.getTelefonosContacto());
+		result.setTipo("Terminal");
 		return result;
 	}
     

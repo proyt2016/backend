@@ -65,7 +65,7 @@ public class ViajeApi {
 	@POST
 	@Path("/comprarpasaje/")
 	public DataPasajeConvertor ComprarPasaje(DataPasajeConvertor pseudoPasaje){
-		DataPasaje pasaje = pseudoPasaje.getDataPasaje();
+		DataPasaje pasaje = pseudoPasaje.genDataPasaje();
 		return repo.ComprarPasaje(pasaje).genConvertor();
 	}
 	
@@ -139,7 +139,7 @@ public class ViajeApi {
 	@POST
 	@Path("/crearrecorrido/")
 	public DataRecorrido CrearRecorrido(DataRecorridoConvertor pseudoRecorrido){
-		DataRecorrido recorrido = pseudoRecorrido.getRecorrido();
+		DataRecorrido recorrido = pseudoRecorrido.genRecorrido();
 		return repo.CrearRecorrido(recorrido);
 	}
 	
@@ -147,7 +147,7 @@ public class ViajeApi {
 	@POST
 	@Path("/editarrecorrido/")
 	public void EditarRecorrido(DataRecorridoConvertor pseudoRecorrido){
-		DataRecorrido recorrido = pseudoRecorrido.getRecorrido();
+		DataRecorrido recorrido = pseudoRecorrido.genRecorrido();
 		repo.EditarRecorrido(recorrido);
 	}
 	

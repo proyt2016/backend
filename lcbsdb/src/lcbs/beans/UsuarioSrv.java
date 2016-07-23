@@ -14,12 +14,14 @@ import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Reserva;
 import lcbs.models.Terminal;
 import lcbs.models.Usuario;
+import lcbs.models.Vehiculo;
 import lcbs.shares.DataEmpleado;
 import lcbs.shares.DataUsuario;
 
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -42,7 +44,7 @@ public class UsuarioSrv implements UsuarioLocalApi {
     	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<Usuario> listUsu = criteria.list();
+        List<Usuario> listUsu = new ArrayList<Usuario>(new LinkedHashSet( criteria.list() ));
         
         listUsu.stream().forEach((usu) -> {
         	usuarios.add(usu.getDatatype(true));

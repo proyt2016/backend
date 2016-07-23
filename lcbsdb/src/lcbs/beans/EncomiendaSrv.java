@@ -15,11 +15,13 @@ import org.hibernate.mapping.Column;
 import lcbs.interfaces.EncomiendaLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Encomienda;
+import lcbs.models.EstadosEncomienda;
 import lcbs.models.Viaje;
 
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -42,7 +44,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     	criteria.add(Restrictions.eq("eliminada", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<Encomienda> listEnc = criteria.list();
+        List<Encomienda> listEnc = new ArrayList<Encomienda>(new LinkedHashSet( criteria.list() ));
         
         listEnc.stream().forEach((enc) -> {
         	encomiendas.add(enc.getDatatype(true));
@@ -110,7 +112,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     	criteria.setFirstResult((pagina - 1) * ElementosPagina);
     	criteria.setMaxResults(ElementosPagina);
     	
-        List<Encomienda> listEnc = criteria.list();
+        List<Encomienda> listEnc = new ArrayList<Encomienda>(new LinkedHashSet( criteria.list() ));
         
         listEnc.stream().forEach((enc) -> {
         	encomiendas.add(enc.getDatatype(true));
@@ -128,7 +130,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     	criteria.add(Restrictions.or(Restrictions.eq("emisor.id", idUsuario),Restrictions.eq("receptor.id", idUsuario)));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<Encomienda> listEnc = criteria.list();
+        List<Encomienda> listEnc = new ArrayList<Encomienda>(new LinkedHashSet( criteria.list() ));
         
         listEnc.stream().forEach((enc) -> {
         	encomiendas.add(enc.getDatatype(true));

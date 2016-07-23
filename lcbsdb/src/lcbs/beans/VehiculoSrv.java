@@ -14,11 +14,13 @@ import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Terminal;
 import lcbs.models.Usuario;
 import lcbs.models.Vehiculo;
+import lcbs.models.Viaje;
 import lcbs.shares.DataVehiculo;
 
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -41,7 +43,7 @@ public class VehiculoSrv implements VehiculoLocalApi {
     	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<Vehiculo> listVeh = criteria.list();
+        List<Vehiculo> listVeh = new ArrayList<Vehiculo>(new LinkedHashSet( criteria.list() ));
         
         listVeh.stream().forEach((veh) -> {
         	vehiculos.add(veh.getDatatype(true));

@@ -14,10 +14,12 @@ import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Cuponera;
 import lcbs.models.Empleado;
 import lcbs.models.EstadosEncomienda;
+import lcbs.models.GrupoHorario;
 
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -40,7 +42,7 @@ public class EstadosEncomiendaSrv implements EstadosEncomiendaLocalApi {
         
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<EstadosEncomienda> listEstEnc = criteria.list();
+        List<EstadosEncomienda> listEstEnc = new ArrayList<EstadosEncomienda>(new LinkedHashSet( criteria.list() ));
         
         listEstEnc.stream().forEach((est) -> {
         	estados.add(est.getDatatype());

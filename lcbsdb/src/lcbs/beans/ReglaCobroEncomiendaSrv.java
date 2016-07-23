@@ -12,11 +12,13 @@ import lcbs.interfaces.ReglaCobroEncomiendaLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Recorrido;
 import lcbs.models.ReglaCobroEncomienda;
+import lcbs.models.Reserva;
 import lcbs.shares.DataReglaCobroEncomienda;
 
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -39,7 +41,7 @@ public class ReglaCobroEncomiendaSrv implements ReglaCobroEncomiendaLocalApi {
         
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<ReglaCobroEncomienda> listRce = criteria.list();
+    	List<ReglaCobroEncomienda> listRce = new ArrayList<ReglaCobroEncomienda>(new LinkedHashSet( criteria.list() ));
         
         listRce.stream().forEach((rce) -> {
         	reglas.add(rce.getDatatype());

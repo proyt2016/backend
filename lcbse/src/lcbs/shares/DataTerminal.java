@@ -22,7 +22,7 @@ public class DataTerminal extends DataPuntoRecorrido{
         this.aceptaEncomiendas = acEnc;
     }
     
-    public DataPuntoRecorridoConverter getConvertor(){
+    public DataPuntoRecorridoConverter genConvertor(){
 		DataPuntoRecorridoConverter result = new DataPuntoRecorridoConverter();
 		result.setId(this.getId());
 		result.setNombre(this.getNombre());

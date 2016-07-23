@@ -56,16 +56,16 @@ public class DataPasaje{
     	result.setPrecio(this.getPrecio());
     	if(this.getOrigen() != null){
     		if(this.getOrigen() instanceof DataParada){
-    			result.setOrigen(((DataParada)this.getOrigen()).getConvertor());
+    			result.setOrigen(((DataParada)this.getOrigen()).genConvertor());
     		}else{
-    			result.setOrigen(((DataTerminal)this.getOrigen()).getConvertor());
+    			result.setOrigen(((DataTerminal)this.getOrigen()).genConvertor());
     		}
     	}
     	if(this.getDestino() != null){
     		if(this.getDestino() instanceof DataParada){
-    			result.setDestino(((DataParada)this.getDestino()).getConvertor());
+    			result.setDestino(((DataParada)this.getDestino()).genConvertor());
     		}else{
-    			result.setDestino(((DataTerminal)this.getDestino()).getConvertor());
+    			result.setDestino(((DataTerminal)this.getDestino()).genConvertor());
     		}
     	}
     	result.setFechaCompra(this.getFechaCompra());

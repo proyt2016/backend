@@ -17,8 +17,6 @@
 
             $scope.comprar['origen']    = '0';
             $scope.comprar['destino']   = datos.recorrido.puntosDeRecorrido.length - 1 + '';
-
-            console.log($scope.comprar);
         });
 
         $scope.procesarCompra = function () {

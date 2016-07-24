@@ -252,4 +252,11 @@ public class ViajeApi {
 		return repo.getPasajes(pagina, ElementosPagina);
 	}
 	
+	@GET
+	@Path("/getpasajeporcodigo/{codigoPasaje}")
+	public DataPasaje getPasajeXcodigo(@PathParam("codigoPasaje") final Integer codigo){
+		return repo.getPasajeXcodigo(codigo);
+	}
+	
+	
 }

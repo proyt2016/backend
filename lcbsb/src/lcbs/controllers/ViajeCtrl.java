@@ -254,6 +254,10 @@ public class ViajeCtrl implements IViaje{
 		return srvViaje.getViaje(idViaje);
 	}
 	
+	public DataPasaje getPasajeXCodigo(int codigoPasaje){
+		return srvPasaje.getpasajeXcodigo(codigoPasaje);
+	}
+	
 	@Override
 	public List<DataViaje> getViajes(int pagina, int elementos){
 		return srvViaje.obtenerViajes(pagina, elementos);

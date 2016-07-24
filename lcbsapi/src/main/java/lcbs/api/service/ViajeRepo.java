@@ -50,6 +50,10 @@ public class ViajeRepo {
 		return ctrViaje.ComprarPasaje(pasaje);
 	}
 	
+	public DataPasaje getPasajeXcodigo(int codigoPasaje){
+		return ctrViaje.getPasajeXCodigo(codigoPasaje);
+	}
+	
 	public void CambiarHorarioPasaje(String idPasaje, String viaje){
 		ctrViaje.CambiarHorarioPasaje(idPasaje, viaje);
 	}

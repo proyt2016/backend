@@ -67,6 +67,20 @@ public class PasajeSrv implements PasajeLocalApi {
 		return realObj.getDatatype();
     }
     
+    public DataPasaje getpasajeXcodigo(int codigoPasaje) {
+    	List<DataPasaje> Pasajes = new ArrayList();
+        //obtengo todos los Pasajes de la bd
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Pasaje.class);
+    	criteria.add(Restrictions.eq("eliminado", false));
+    	criteria.add(Restrictions.eq("codigoPasaje", codigoPasaje));
+    	List<Pasaje> listPsj = new ArrayList<Pasaje>(new LinkedHashSet( criteria.list() ));
+        listPsj.stream().forEach((psj) -> {
+        	Pasajes.add(psj.getDatatype());
+        });
+        return Pasajes.get(0);
+	}
+    
     public DataPasaje crearPasaje(DataPasaje psj){
     	Pasaje realObj = new Pasaje(psj);
     	realObj.setEliminado(false);

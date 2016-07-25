@@ -6,7 +6,15 @@
       </div>
       <div class="box-body">
         <p><strong><i class="fa fa-map margin-r-5"></i> Origien y Destino</strong></p>
-        <p>{{ viaje.origen.nombre }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ viaje.destino.nombre }}</p>
+        <p class="text-center">
+          <select class="form-control select2" style="width: 100%;" ng-model="comprar.origen" required>
+            <option ng-repeat="recorrido in viaje.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
+          </select> 
+          <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> 
+          <select class="form-control select2" style="width: 100%;" ng-model="comprar.destino" required>
+            <option ng-repeat="recorrido in viaje.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
+          </select>
+        </p>
         <hr>
         <p><i class="fa fa-map-marker margin-r-5"></i> {{ viaje.recorrido.nombre }}</p>
         <hr>
@@ -19,75 +27,73 @@
   </div>
 
   <div class="col-md-8">
-    <form name="comprarForm" ng-submit="comprarForm.$valid && comprar()" novalidate>
-      <div class="box box-info">
-        <div class="box-header with-border">
-          <h3 class="box-title">Procesar pago</h3>
-        </div>
-        <div class="box-body">
-          <div class="row">
-            <div class="col-xs-4">
-              <p class="lead">Metodos de pago:</p>
-              <div class="form-group">
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="pagos" value="paypal" ng-model="pagos">
-                    <img src="dist/img/credit/paypal2.png" alt="Paypal">
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="pagos" value="visa" ng-model="pagos">
-                    <img src="dist/img/credit/visa.png" alt="Visa">
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="pagos" value="master" ng-model="pagos">
-                    <img src="dist/img/credit/mastercard.png" alt="Mastercard">
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="pagos" value="amex" ng-model="pagos">
-                    <img src="dist/img/credit/american-express.png" alt="American Express">
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="pagos" value="cuponera">
-                    <strong>Cuponera ${{ usuarioLogueado.cuponera.saldo }}</strong>
-                  </label>
-                </div>
-              </div>  
-            </div>
-            <div class="col-xs-8">
-            <p class="lead">Monto a pagar</p>
-            <div class="table-responsive">
-              <table class="table">
-                <tbody>
-                  <tr>
-                    <th style="width:50%">Precio por pasaje:</th>
-                    <td>$250,5</td>
-                  </tr>
-                  <tr>
-                    <th>Cantidad de pasajes</th>
-                    <td><input type="number" name="cantidad" value="1" align="right" ng-model="cantidad" required/></td>
-                  </tr>
-                  <tr>
-                    <th>Total:</th>
-                    <td>$250,5</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Procesar pago</h3>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <div class="col-xs-4">
+            <p class="lead">Metodos de pago:</p>
+            <div class="form-group">
+              <div class="radio">
+                <label>
+                  <input type="radio" name="pagos" value="paypal" ng-model="comprar.pagos">
+                  <img src="dist/img/credit/paypal2.png" alt="Paypal">
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="pagos" value="visa" ng-model="comprar.pagos">
+                  <img src="dist/img/credit/visa.png" alt="Visa">
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="pagos" value="master" ng-model="comprar.pagos">
+                  <img src="dist/img/credit/mastercard.png" alt="Mastercard">
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="pagos" value="amex" ng-model="comprar.pagos">
+                  <img src="dist/img/credit/american-express.png" alt="American Express">
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="pagos" value="comprar.cuponera">
+                  <strong>Cuponera ${{ usuarioLogueado.cuponera.saldo }}</strong>
+                </label>
+              </div>
+            </div>  
           </div>
+          <div class="col-xs-8">
+          <p class="lead">Monto a pagar</p>
+          <div class="table-responsive">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th style="width:50%">Precio por pasaje:</th>
+                  <td>$250,5</td>
+                </tr>
+                <tr>
+                  <th>Cantidad de pasajes</th>
+                  <td><input type="number" name="cantidad" align="right" ng-model="comprar.cantidad" required/></td>
+                </tr>
+                <tr>
+                  <th>Total:</th>
+                  <td>$250,5</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-        <div class="box-footer">
-          <button type="submit" class="btn btn-success pull-right" ng-click="submitted=true">Confirmar Pago</a>
         </div>
-      </form>
+      </div>
+      <div class="box-footer">
+        <a class="btn btn-success pull-right" ng-click="procesarCompra()">Confirmar Pago</a>
+      </div>
     </div>
   </div>
 </div>

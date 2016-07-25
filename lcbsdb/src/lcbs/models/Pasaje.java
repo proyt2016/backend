@@ -88,7 +88,7 @@ public class Pasaje implements Serializable{
 	    	}
     	}
     	if(dt.getDestino() != null){
-	    	if(this.getDestino() instanceof Terminal){
+	    	if(dt.getDestino() instanceof DataTerminal){
 	    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
 	    	}else{
 	    		this.setDestino(new Parada((DataParada)dt.getDestino()));

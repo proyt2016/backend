@@ -14,11 +14,13 @@ import lcbs.interfaces.EmpleadoLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Cuponera;
 import lcbs.models.Empleado;
+import lcbs.models.Encomienda;
 import lcbs.models.Usuario;
 
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -41,7 +43,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
     	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<Empleado> listEmp = criteria.list();
+        List<Empleado> listEmp = new ArrayList<Empleado>(new LinkedHashSet( criteria.list() ));
         
         listEmp.stream().forEach((emp) -> {
         	empleados.add(emp.getDatatype(true));
@@ -67,7 +69,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Empleado.class);
     	criteria.add(Restrictions.eq("email.email", mailEmpleado));
-        List<Empleado> listEmp = criteria.list();
+        List<Empleado> listEmp = new ArrayList<Empleado>(new LinkedHashSet( criteria.list() ));
         if(listEmp.size() == 1){
 	    	DataEmpleado empleado = listEmp.get(0).getDatatype(true);
 	    	if(empleado.getClave().equals(clave))

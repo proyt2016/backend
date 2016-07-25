@@ -13,12 +13,14 @@ import lcbs.interfaces.ParadaLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.GrupoHorario;
 import lcbs.models.Parada;
+import lcbs.models.Perfil;
 import lcbs.shares.DataParada;
 import lcbs.shares.DataPuntoRecorrido;
 
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -41,7 +43,7 @@ public class ParadaSrv implements ParadaLocalApi {
     	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<Parada> listPds = criteria.list();
+        List<Parada> listPds = new ArrayList<Parada>(new LinkedHashSet( criteria.list() ));
         
         listPds.stream().forEach((prd) -> {
         	paradas.add(prd.getDatatype());
@@ -84,7 +86,7 @@ public class ParadaSrv implements ParadaLocalApi {
     	Criteria criteria = session.createCriteria(Parada.class);
     	criteria.add(Restrictions.eq("eliminado", false));
     	criteria.add(Restrictions.eq("ubicacionMapa", coord));
-        List<Parada> listPds = criteria.list();
+        List<Parada> listPds = new ArrayList<Parada>(new LinkedHashSet( criteria.list() ));
         
         listPds.stream().forEach((prd) -> {
         	paradas.add(prd.getDatatype());

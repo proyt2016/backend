@@ -12,11 +12,13 @@ import lcbs.interfaces.PerfilLocalApi;
 import lcbs.models.Encomienda;
 import lcbs.models.Pasaje;
 import lcbs.models.Perfil;
+import lcbs.models.ReglaCobroEncomienda;
 import lcbs.shares.DataPerfil;
 
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -39,7 +41,7 @@ public class PerfilSrv implements PerfilLocalApi {
         
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-    	List<Perfil> listPds = criteria.list();
+    	List<Perfil> listPds = new ArrayList<Perfil>(new LinkedHashSet( criteria.list() ));
         listPds.stream().forEach((prf) -> {
         	Perfils.add(prf.getDatatype(true));
         });

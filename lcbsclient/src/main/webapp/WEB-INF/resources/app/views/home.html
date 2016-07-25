@@ -1,19 +1,19 @@
 <div class="row">
-	<div class="col-md-12 col-xs-12">
-		<div class="box box-info">
-			<div class="box-header with-border">
-			  <h2 class="box-title">¿A dónde querés ir?</h2>
-			</div>
+  <div class="col-md-12 col-xs-12">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h2 class="box-title">¿A dónde querés ir?</h2>
+      </div>
       <form role="form">
-  			<div class="box-body">
+        <div class="box-body">
           <div class="row">
-			<div class="col-md-6 form-group">
-				<label>Origen</label>
-				<select class="form-control select2" style="width: 100%;" name="origen">
-					<option></option>
-					<option ng-repeat="terminal in terminales" value="{{ terminal.id }}">{{ terminal.nombre }}</option>
-				</select>
-			</div>
+      			<div class="col-md-6 form-group">
+      				<label>Origen</label>
+      				<select class="form-control select2" style="width: 100%;" name="origen">
+      					<option></option>
+      					<option ng-repeat="terminal in terminales" value="{{ terminal.id }}">{{ terminal.nombre }}</option>
+      				</select>
+      			</div>
             <div class="col-md-6 form-group">
               <label>Destino</label>
               <select class="form-control select2" style="width: 100%;" name="destino">
@@ -30,18 +30,8 @@
                 <input type="text" class="form-control pull-right datepicker" name="fechaIda">
               </div>
             </div>
-		        <div class="col-md-6 form-group" ng-show="filter.idaVuelta == 'vuelta'">
-		          <label>Fecha de Vuelta:</label>
-		          <div class="input-group date">
-		            <div class="input-group-addon">
-		              <i class="fa fa-calendar"></i>
-		            </div>
-		            <input type="text" class="form-control pull-right datepicker" name="fechaVuelta">
-		          </div>
-		        </div>
 			    </div>
           <div class="box-group" id="accordion">
-            <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
             <div class="panel box box-primary">
               <a data-toggle="collapse" data-parent="#accordion" data-target="#collapse" style="cursor:pointer">
                 <div class="box-header">
@@ -50,7 +40,7 @@
                   </h4>
                 </div>
               </a>
-              <div id="collapse" class="panel-collapse collapse">
+              <div id="collapse" class="row panel-collapse collapse">
                 <div class="box-body">
                   <div class="col-md-6 form-group">
                     <label>Lineas</label>
@@ -93,7 +83,7 @@
           </div>
         </div>
         <div class="box-footer">
-          <div class="pull-left">
+          <!-- <div class="pull-left">
             <div class="radio">
               <label>
                 <input type="radio" name="idaVuelta" value="vuelta" ng-model="filter.idaVuelta">
@@ -105,61 +95,25 @@
                 Solo  Ida
               </label>
             </div>
-          </div>
+          </div> -->
           <button type="button" class="btn btn-info pull-right" ng-click="buscar()">Buscar</button>
         </div>
       </form>
-		</div>
-	</div>
-</div>
-
-<div class="row" ng-if="resultadosIda.length">
-  <div class="col-md-12 col-xs-12">
-    <div class="box box-success">
-      <div class="box-header">
-        <h2 class="box-title">Resultado de busqueda - IDA</h2>
-      </div>
-      
-      <div class="box-body table-responsive">
-        <blockquote>
-          <p>Linea 1</p>
-        </blockquote>
-        <table class="table table-hover">
-          <tr>
-            <th>Salida</th>
-            <th>Llegada</th>
-            <th>Origen</th>
-            <th>Destino</th>
-            <th></th>
-          </tr>
-          <tr ng-repeat="resultado in resultadosIda">
-            <td>{{ resultado.salida }}</td>
-            <td>{{ resultado.llegada }}</td>
-            <td>{{ resultado.origen.nombre }}</td>
-            <td>{{ resultado.destino.nombre }}</td>
-            <td>
-              <a href="#/detalle/{{ resultado.id }}" class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
-              <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="mostrarReservar(resultado)"><i class="fa fa-bookmark"></i></a>
-              <a href="#/comprar/{{ resultado.id }}" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
-            </td>
-          </tr>
-        </table>
-      </div>
     </div>
   </div>
 </div>
 
-<div class="row" ng-if="resultadosVuelta.length">
+<div class="row" ng-if="resultados.length">
   <div class="col-md-12 col-xs-12">
     <div class="box box-success">
       <div class="box-header">
-        <h2 class="box-title">Resultado de busqueda< - Vuelta/h2>
+        <h2 class="box-title">Resultado de busqueda</h2>
       </div>
       
       <div class="box-body table-responsive">
-        <blockquote>
+        <!-- <blockquote>
           <p>Linea 1</p>
-        </blockquote>
+        </blockquote> -->
         <table class="table table-hover">
           <tr>
             <th>Salida</th>
@@ -168,11 +122,11 @@
             <th>Destino</th>
             <th></th>
           </tr>
-          <tr ng-repeat="resultado in resultadosVuelta">
-            <td>{{ resultado.salida }}</td>
+          <tr ng-repeat="resultado in resultados">
+            <td>{{ resultado.fechaSalida | date : 'dd/MM/yy' }}</td>
             <td>{{ resultado.llegada }}</td>
-            <td>{{ resultado.origen.nombre }}</td>
-            <td>{{ resultado.destino.nombre }}</td>
+            <td>{{ resultado.recorrido.puntosDeRecorrido[0].nombre }}</td>
+            <td>{{ resultado.recorrido.puntosDeRecorrido[resultado.recorrido.puntosDeRecorrido.length - 1].nombre }}</td>
             <td>
               <a href="#/detalle/{{ resultado.id }}" class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
               <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="mostrarReservar(resultado)"><i class="fa fa-bookmark"></i></a>
@@ -199,7 +153,7 @@
               <div class="row">
                 <div class="col-xs-4">
                   <p><strong>Origien y Destino</strong></p>
-                  <p>{{ info.origen }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ info.destino }}</p>
+                  <p>{{ info.recorrido.puntosDeRecorrido[0].nombre }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ info.recorrido.puntosDeRecorrido[info.recorrido.puntosDeRecorrido.length - 1].nombre }}</p>
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Linea</strong></p>
@@ -207,19 +161,18 @@
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Horario</strong></p>
-                  <p>{{ info.salida }} a {{ info.llegada }}</p>
+                  <p>{{ info.fechaSalida | date : 'dd/MM/yy' }} a {{ info.llegada }}</p>
                 </div>
               </div>
               <hr>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group" ng-class="{ 'has-error' : submitted && reservarForm.cantidad.$invalid }">
                     <label>Cantidad de pasajes</label>
-                    <input type="hidden" value="{{ info.id }}" ng-model="reservar.viaje"/>
-                    <input class="form-control" type="number" name="cantida" value="1" align="right" ng-model="reservar.cantidad" required/>
+                    <input class="form-control" type="number" name="cantida" value="1" align="right" ng-model="reservarData.cantidad" required/>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="box-footer">
               <button type="submit" class="btn btn-success pull-right" ng-click="submitted=true">Reservar</button>

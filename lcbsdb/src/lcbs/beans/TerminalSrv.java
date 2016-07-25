@@ -1,6 +1,7 @@
 package lcbs.beans;
 
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.hibernate.criterion.Restrictions;
 
 import lcbs.interfaces.TerminalLocalApi;
 import lcbs.models.Terminal;
+import lcbs.models.Usuario;
 import lcbs.shares.DataPuntoRecorrido;
 import lcbs.shares.DataTerminal;
 
@@ -42,7 +44,7 @@ public class TerminalSrv implements TerminalLocalApi {
     	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
-        List<Terminal> listTer = criteria.list();
+        List<Terminal> listTer = new ArrayList<Terminal>(new LinkedHashSet( criteria.list() ));
         listTer.stream().forEach((ter) -> {
         	terminales.add(ter.getDatatype());
         });
@@ -83,7 +85,7 @@ public class TerminalSrv implements TerminalLocalApi {
     	Criteria criteria = session.createCriteria(Terminal.class);
     	criteria.add(Restrictions.eq("eliminado", false));
     	criteria.add(Restrictions.eq("ubicacionMapa", coord));
-        List<Terminal> listTer = criteria.list();
+        List<Terminal> listTer = new ArrayList<Terminal>(new LinkedHashSet( criteria.list() ));
         
         listTer.stream().forEach((ter) -> {
         	terminales.add(ter.getDatatype());

@@ -25,11 +25,11 @@ public class DataPuntoRecorridoConverter {
         setTipo(tip);
     }
     
-    public DataParada getDataParada(){
+    public DataParada genDataParada(){
     	return new DataParada(getId(), getNombre(), getUbicacionMapa(), getEliminado());
     }
     
-    public DataTerminal getDataTerminal(){
+    public DataTerminal genDataTerminal(){
     	return new DataTerminal(getId(), getNombre(), getUbicacionMapa(),getTelefonosContacto(),getMailsDeContacto(),getAceptaEncomiendas(), getEliminado());
     }
     

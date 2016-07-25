@@ -17,7 +17,7 @@
             <th></th>
           </tr>
           <tr ng-repeat="compra in compras">
-            <td>{{ compra.fecha || 'dd/MM/yy' }}</td>
+            <td>{{ compra.fechaCompra | date : 'dd/MM/yy' }}</td>
             <td>{{ compra.viaje.recorrido.nombre }}</td>
             <td>{{ compra.origen.nombre }}</td>
             <td>{{ compra.destino.nombre }}</td>
@@ -48,7 +48,7 @@
                 <p><strong><i class="fa fa-dollar margin-r-5"></i> Medio de pago</strong></p>
                 <p>{{ info.medioPago }}</p>
                 <hr>
-                <p><i class="fa fa-calendar margin-r-5"></i> {{ info.salida }} a {{ info.llegada }}</p>
+                <p><i class="fa fa-calendar margin-r-5"></i> {{ info.viaje.fechaSalida | date : 'dd/MM/yy' }} a {{ info.llegada }}</p>
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@
               <div class="row">
                 <div class="col-xs-4">
                   <p><strong>Origien y Destino</strong></p>
-                  <p>{{ info.origen.nombre }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ info.destino.nombre }} </p>
+                  <p>{{ info.viaje.recorrido.puntosDeRecorrido[0].nombre }}<i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ info.viaje.recorrido.puntosDeRecorrido[info.viaje.recorrido.puntosDeRecorrido.length - 1].nombre }} </p>
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Linea</strong></p>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Horario</strong></p>
-                  <p>{{ info.salida }} a {{ info.llegada }}</p>
+                  <p>{{ info.viaje.fechaSalida | date : 'dd/MM/yy' }} a {{ info.llegada }}</p>
                 </div>
               </div>
             </div>
@@ -116,7 +116,7 @@
               <div class="row">
                 <div class="col-xs-4">
                   <p><strong>Origien y Destino</strong></p>
-                  <p>{{ info.origen.nombre }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ info.destino.nombre }} </p>
+                  <p>{{ info.viaje.recorrido.puntosDeRecorrido[0].nombre }}<i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ info.viaje.recorrido.puntosDeRecorrido[info.viaje.recorrido.puntosDeRecorrido.length - 1].nombre }} </p>
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Linea</strong></p>
@@ -124,7 +124,7 @@
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Horario</strong></p>
-                  <p>{{ info.salida }} a {{ info.llegada }}</p>
+                  <p>{{ info.viaje.fechaSalida | date : 'dd/MM/yy' }} a {{ info.llegada }}</p>
                 </div>
               </div>
               <hr>

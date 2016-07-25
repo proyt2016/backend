@@ -102,8 +102,8 @@ public class ViajeApi {
 	}
 	
 	@POST
-	@Path("/procesarpasaje/")
-	public void ProcesarPasajes(String idPasaje){
+	@Path("/procesarpasaje/{idPasaje}")
+	public void ProcesarPasajes(@PathParam("idPasaje") final String idPasaje){
 		repo.ProcesarPasajes(idPasaje);
 	}
 	

@@ -107,6 +107,7 @@ public class ViajeCtrl implements IViaje{
 	public void ProcesarPasajes(String idPasaje) {
 		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje);
 		pasajeAModificar.setUsado(true);
+		pasajeAModificar.setPago(true);
 		srvPasaje.modificarPasaje(pasajeAModificar);
 	}
 	

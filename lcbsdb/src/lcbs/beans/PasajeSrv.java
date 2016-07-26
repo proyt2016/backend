@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -31,6 +33,7 @@ import java.util.List;
 public class PasajeSrv implements PasajeLocalApi {
 	@Inject
     EntityManager em;
+	private static final Log log = LogFactory.getLog(EntityManagerProducer.class);
 	
     private PasajeSrv(){
         
@@ -55,21 +58,27 @@ public class PasajeSrv implements PasajeLocalApi {
     
     public void modificarPasaje(DataPasaje psj){
         Pasaje realObj = new Pasaje(psj);
-    	if(em.find(Pasaje.class, realObj.getId()) == null){
+    	if(getPasaje(realObj.getId()) == null){
            throw new IllegalArgumentException("El Pasaje no existe");
        }
        em.merge(realObj);
     }
     
     public DataPasaje getPasaje(String id){
+    	List<DataPasaje> Pasajes = new ArrayList();
     	Session session = (Session) em.getDelegate();
-    	Pasaje realObj = (Pasaje) session.get(Pasaje.class, id);
-		return realObj.getDatatype();
+    	Criteria criteria = session.createCriteria(Pasaje.class);
+    	criteria.add(Restrictions.eq("eliminado", false));
+    	criteria.add(Restrictions.eq("id", id));
+    	List<Pasaje> listPsj = new ArrayList<Pasaje>(new LinkedHashSet( criteria.list() ));
+        listPsj.stream().forEach((psj) -> {
+        	Pasajes.add(psj.getDatatype());
+        });
+        return Pasajes.get(0);
     }
     
     public DataPasaje getpasajeXcodigo(int codigoPasaje) {
     	List<DataPasaje> Pasajes = new ArrayList();
-        //obtengo todos los Pasajes de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Pasaje.class);
     	criteria.add(Restrictions.eq("eliminado", false));

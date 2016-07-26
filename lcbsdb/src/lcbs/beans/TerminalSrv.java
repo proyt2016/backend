@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import lcbs.interfaces.TerminalLocalApi;
@@ -44,6 +45,7 @@ public class TerminalSrv implements TerminalLocalApi {
     	criteria.add(Restrictions.eq("eliminado", false));
         criteria.setFirstResult((pagina - 1) * elementosPagina);
     	criteria.setMaxResults(elementosPagina);
+    	criteria.addOrder(Order.asc("nombre"));
         List<Terminal> listTer = new ArrayList<Terminal>(new LinkedHashSet( criteria.list() ));
         listTer.stream().forEach((ter) -> {
         	terminales.add(ter.getDatatype());

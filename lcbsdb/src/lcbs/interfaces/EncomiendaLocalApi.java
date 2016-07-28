@@ -9,7 +9,7 @@ import lcbs.shares.*;
 
 @Local
 public interface EncomiendaLocalApi {
-	public List<DataEncomienda> obtenerEncomiendas(Integer pagina, Integer elementosPagina);
+	public List<DataEncomiendaConvertor> obtenerEncomiendas(Integer pagina, Integer elementosPagina);
 	public void modificarEncomienda(DataEncomienda enc);
 	public DataEncomienda getEncomienda(String id);
 	public DataEncomienda crearEncomienda(DataEncomienda enc);

@@ -1,19 +1,17 @@
 package lcbs.shares;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-@XmlRootElement
-public class DataEncomienda {
-
+public class DataEncomiendaConvertor {
 	
 	private String id;
-    private DataPuntoRecorrido origen;
-    private DataPuntoRecorrido destino;
+    private DataPuntoRecorridoConverter origen;
+    private DataPuntoRecorridoConverter destino;
     private DataUsuario emisor;
     private String ciEmisor;
     private DataTelefono telEmisor;
@@ -38,9 +36,9 @@ public class DataEncomienda {
 
  
 
-    public DataEncomienda() {}
+    public DataEncomiendaConvertor() {}
     
-    public DataEncomienda(String id, DataPuntoRecorrido orig, DataPuntoRecorrido dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, float mont, boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim) {
+    public DataEncomiendaConvertor(String id, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, float mont, boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -63,26 +61,31 @@ public class DataEncomienda {
         this.eliminada = elim;
     }
     
-    public DataEncomiendaConvertor getConvertor(){
-    	DataEncomiendaConvertor result = new DataEncomiendaConvertor();
+    public DataEncomienda getDataEncomienda(){
+    	DataEncomienda result = new DataEncomienda();
     	result.setId(this.getId());
     	if(this.getOrigen()!=null){
-    		if(this.getOrigen() instanceof DataParada){
-    			result.setOrigen(((DataParada)this.getOrigen()).genConvertor());
-    		}else{
-    			result.setOrigen(((DataTerminal)this.getOrigen()).genConvertor());
-    		}
+    		if(this.getOrigen().getTipo().equals("Terminal")){
+    			result.setOrigen(new DataTerminal(this.getOrigen().getId(),this.getOrigen().getNombre(),this.getOrigen().getUbicacionMapa(),
+    					this.getOrigen().getTelefonosContacto(),this.getOrigen().getMailsDeContacto(),this.getOrigen().getAceptaEncomiendas(),
+    					this.getOrigen().getEliminado()));
+    		}if(this.getOrigen().getTipo().equals("Parada")){
+    			result.setOrigen(new DataParada(this.getOrigen().getId(),this.getOrigen().getNombre(),this.getOrigen().getUbicacionMapa(),
+    					this.getOrigen().getEliminado()));
+    	     }
     	}
     	if(this.getDestino()!=null){
-    		if(this.getDestino() instanceof DataParada){
-    			result.setDestino(((DataParada)this.getDestino()).genConvertor());
-    		}else{
-    			result.setDestino(((DataTerminal)this.getDestino()).genConvertor());
-    		}
+    		if(this.getOrigen().getTipo().equals("Terminal")){
+    			result.setOrigen(new DataTerminal(this.getOrigen().getId(),this.getOrigen().getNombre(),this.getOrigen().getUbicacionMapa(),
+    					this.getOrigen().getTelefonosContacto(),this.getOrigen().getMailsDeContacto(),this.getOrigen().getAceptaEncomiendas(),
+    					this.getOrigen().getEliminado()));
+    		}if(this.getOrigen().getTipo().equals("Parada")){
+    			result.setOrigen(new DataParada(this.getOrigen().getId(),this.getOrigen().getNombre(),this.getOrigen().getUbicacionMapa(),
+    					this.getOrigen().getEliminado()));
+    	     }
     	}
     	if(this.getEmisor()!=null){
-    		result.setEmisor(this.getEmisor());
-    	}
+    		result.setEmisor(this.getEmisor());}
     	if(this.getCiEmisor()!=null){
     		result.setCiEmisor(this.getCiEmisor());}
     	if(this.getTelEmisor()!=null){
@@ -122,8 +125,7 @@ public class DataEncomienda {
     	}
     	result.setRetiraEnSucursal(this.getRetiraEnSucursal());
     	result.setEliminada(this.getEliminada());
-      	
-    	return result;
+       	return result;
     }
     
     public void setId(String val){
@@ -134,19 +136,19 @@ public class DataEncomienda {
         return this.id;
     }
 
-    public void setOrigen(DataPuntoRecorrido val){
+    public void setOrigen(DataPuntoRecorridoConverter val){
         this.origen = val;
     }
     
-    public DataPuntoRecorrido getOrigen(){
+    public DataPuntoRecorridoConverter getOrigen(){
         return this.origen;
     }
 
-    public void setDestino(DataPuntoRecorrido val){
+    public void setDestino(DataPuntoRecorridoConverter val){
         this.destino = val;
     }
     
-    public DataPuntoRecorrido getDestino(){
+    public DataPuntoRecorridoConverter getDestino(){
         return this.destino;
     }
 
@@ -285,4 +287,5 @@ public class DataEncomienda {
     public boolean getEliminada(){
         return this.eliminada;
     }
+
 }

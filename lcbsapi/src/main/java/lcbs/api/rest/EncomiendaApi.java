@@ -140,7 +140,7 @@ public class EncomiendaApi {
 	
 	@GET
 	@Path("/getencomiendas/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
-	public List<DataEncomienda> getEncomiendas(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
+	public List<DataEncomiendaConvertor> getEncomiendas(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
 		return repo.ListarEncomiendas(pagina, elementosPagina);
 	}
 	

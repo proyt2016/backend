@@ -36,8 +36,8 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         
     }
     
-    public List<DataEncomienda> obtenerEncomiendas(Integer pagina, Integer elementosPagina){
-    	List<DataEncomienda> encomiendas = new ArrayList();
+    public List<DataEncomiendaConvertor> obtenerEncomiendas(Integer pagina, Integer elementosPagina){
+    	List<DataEncomiendaConvertor> encomiendas = new ArrayList();
         //obtengo todas las encomiendas de la bd
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Encomienda.class);
@@ -47,7 +47,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         List<Encomienda> listEnc = new ArrayList<Encomienda>(new LinkedHashSet( criteria.list() ));
         
         listEnc.stream().forEach((enc) -> {
-        	encomiendas.add(enc.getDatatype(true));
+        	encomiendas.add(enc.getDatatype(true).getConvertor());
         });
         return encomiendas;
     }

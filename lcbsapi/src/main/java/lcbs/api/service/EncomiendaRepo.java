@@ -36,7 +36,7 @@ public class EncomiendaRepo {
 	@EJB(lookup =  "java:app/lcbsb/EncomiendaCtrl!interfaces.IEncomienda")
 	IEncomienda ctrEncomienda;
 	
-	public List<DataEncomienda> ListarEncomiendas(Integer pagina, Integer elementosPagina){
+	public List<DataEncomiendaConvertor> ListarEncomiendas(Integer pagina, Integer elementosPagina){
 		return ctrEncomienda.ListarEncomiendas(pagina, elementosPagina);
 	}
 	

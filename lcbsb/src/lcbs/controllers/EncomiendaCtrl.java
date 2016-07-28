@@ -39,7 +39,7 @@ public class EncomiendaCtrl implements IEncomienda{
 	
 
 	@Override
-	public List<DataEncomienda> ListarEncomiendas(Integer pagina, Integer elementosPagina) {
+	public List<DataEncomiendaConvertor> ListarEncomiendas(Integer pagina, Integer elementosPagina) {
 		return srvEncomienda.obtenerEncomiendas(pagina, elementosPagina);
 		
 	}

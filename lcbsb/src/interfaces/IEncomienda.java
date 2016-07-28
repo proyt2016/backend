@@ -6,6 +6,7 @@ import javax.ejb.Local;
 
 import java.util.Map;
 import lcbs.shares.DataEncomienda;
+import lcbs.shares.DataEncomiendaConvertor;
 import lcbs.shares.DataEstadosEncomienda;
 import lcbs.shares.DataHistorialEstadosEncomienda;
 import lcbs.shares.DataPuntoRecorrido;
@@ -17,7 +18,7 @@ import lcbs.shares.DataVehiculo;
 @Local
 public interface IEncomienda {
 	
-	public List<DataEncomienda> ListarEncomiendas(Integer pagina, Integer elementosPagina);
+	public List<DataEncomiendaConvertor> ListarEncomiendas(Integer pagina, Integer elementosPagina);
 	public List<DataReglaCobroEncomienda> getReglasDeCobro(Integer pagina, Integer elementosPagina);
 	public List<DataEstadosEncomienda> getEstados(Integer pagina, Integer elementosPagina);
 	public DataReglaCobroEncomienda getReglaDeCobro(String idEncomieda);

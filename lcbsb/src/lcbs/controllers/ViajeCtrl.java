@@ -183,7 +183,8 @@ public class ViajeCtrl implements IViaje{
 	}
 
 	@Override
-	public DataPasaje ComprarPasajeReservado(DataReserva reserva) {
+	public DataPasaje ComprarPasajeReservado(DataReserva filtro) {
+		DataReserva reserva = srvReserva.getReserva(filtro.getId());
 		DataPasaje pasajeACrear = new DataPasaje();
 		pasajeACrear.setCiPersona(reserva.getCiPersona());
 		pasajeACrear.setComprador(reserva.getUsuarioReserva());
@@ -195,6 +196,8 @@ public class ViajeCtrl implements IViaje{
 		pasajeACrear.setUsado(false);
 		pasajeACrear.setVendedor(reserva.getEmpleado());
 		pasajeACrear.setViaje(reserva.getViaje());
+		reserva.setUtilizada(true);
+		srvReserva.modificarReserva(reserva);
 		return srvPasaje.crearPasaje(pasajeACrear);
 	}
 

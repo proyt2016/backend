@@ -107,6 +107,12 @@ public class ViajeApi {
 		return repo.ListarReservas(idUsuario);
 	}
 	
+	@GET
+	@Path("/getreserva/{idReserva}")
+	public DataReserva obtenerReserva(@PathParam("idReserva") final String idReserva){
+		return repo.obtenerReserva(idReserva);
+	}
+	
 	@POST
 	@Path("/procesarpasaje/{idPasaje}")
 	public void ProcesarPasajes(@PathParam("idPasaje") final String idPasaje){

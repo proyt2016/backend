@@ -172,4 +172,8 @@ public class ViajeRepo {
 	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina) {
 		return ctrViaje.BuscarRecorrido(filtro, pagina, elementosPagina);
 	}
+
+	public DataReserva obtenerReserva(String idReserva) {
+		return ctrViaje.obtenerReserva(idReserva);
+	}
 }

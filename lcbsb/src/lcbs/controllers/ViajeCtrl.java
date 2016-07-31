@@ -269,4 +269,9 @@ public class ViajeCtrl implements IViaje{
 		return srvRecorrido.BuscarRecorrido(filtro, pagina, elementosPagina);
 	}
 
+	@Override
+	public DataReserva obtenerReserva(String idReserva) {
+		return srvReserva.getReserva(idReserva);
+	}
+
 }

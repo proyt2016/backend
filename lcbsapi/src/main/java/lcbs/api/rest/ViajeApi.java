@@ -185,7 +185,8 @@ public class ViajeApi {
 	
 	@POST
 	@Path("/comprarpasajereservado/")
-	public DataPasaje ComprarPasajeReservado(DataReserva reserva){
+	public DataPasaje ComprarPasajeReservado(DataReservaConvertor pseudoReserva){
+		DataReserva reserva = pseudoReserva.genDataReserva();
 		return repo.ComprarPasajeReservado(reserva);
 	}
 	

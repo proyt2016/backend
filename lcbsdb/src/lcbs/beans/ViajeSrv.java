@@ -170,10 +170,8 @@ public class ViajeSrv implements ViajeLocalApi {
         	viajes.add(via.getDatatype(true));
         });
 		}catch(Exception e){
-			log.info("################################newEM#################################### "+e.getMessage());
-			e.printStackTrace();
+			log.info("#################################################################### "+e.getMessage());
 		}
-		log.info("################################newEM#################################### "+new SimpleDateFormat("dd-MM-yyyy").format(filtro.getFechaSalida()));
         return viajes;
 	}
     

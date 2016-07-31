@@ -14,4 +14,5 @@ public interface RecorridoLocalApi {
 	public DataRecorrido getRecorrido(String rec);
 	public DataRecorrido crearRecorrido(DataRecorrido rec);
 	public void darBajaRecorrido(String idRecorrido);
+	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina);
 }

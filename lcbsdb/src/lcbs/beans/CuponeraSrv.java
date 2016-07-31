@@ -3,21 +3,14 @@ package lcbs.beans;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import lcbs.interfaces.CuponeraLocalApi;
-import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Cuponera;
-import lcbs.models.Empleado;
-import lcbs.models.Perfil;
 import lcbs.shares.*;
-
-import java.util.Map;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 

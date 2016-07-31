@@ -33,20 +33,20 @@ public class Pasaje implements Serializable{
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigoPasaje;
     
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     private Viaje viaje;
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     private Precio precio;
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     private PuntoRecorrido origen;
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     private PuntoRecorrido destino;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCompra;
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     private Usuario comprador;
     private String ciPersona;
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     private Empleado vendedor;
     private Boolean usado;
     private Boolean pago;

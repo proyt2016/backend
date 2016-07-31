@@ -52,16 +52,16 @@ public class Encomienda implements Serializable{
     private String ciReceptor;
    
     private String direccionReceptor;
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     private ReglaCobroEncomienda reglaCobro;
     private float monto;
     private boolean pagaReceptor;
     @ManyToOne
     private Viaje viajeAsignado;
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.LAZY)
     @IndexColumn(name="LIST_INDEX")
     private List<HistorialEstadosEncomienda> estados;
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     private EstadosEncomienda estadoActual;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaIngreso;

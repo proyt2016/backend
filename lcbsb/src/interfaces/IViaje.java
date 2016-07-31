@@ -42,5 +42,6 @@ public interface IViaje {
 	public DataPuntoRecorrido obtenerPuntoPorCoordenada(String coord);
 	public DataViaje getViaje(String idViaje);
 	public List<DataViaje> getViajes(int pagina, int elementos);
+	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina);
 	
 }

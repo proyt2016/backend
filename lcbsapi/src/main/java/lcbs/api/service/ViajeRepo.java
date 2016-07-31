@@ -168,4 +168,8 @@ public class ViajeRepo {
 	public DataViaje getViaje(String idViaje) {
 		return ctrViaje.getViaje(idViaje);
 	}
+
+	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina) {
+		return ctrViaje.BuscarRecorrido(filtro, pagina, elementosPagina);
+	}
 }

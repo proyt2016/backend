@@ -264,4 +264,9 @@ public class ViajeCtrl implements IViaje{
 		return srvViaje.obtenerViajes(pagina, elementos);
 	}
 
+	@Override
+	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina) {
+		return srvRecorrido.BuscarRecorrido(filtro, pagina, elementosPagina);
+	}
+
 }

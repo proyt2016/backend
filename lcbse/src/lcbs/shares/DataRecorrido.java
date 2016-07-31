@@ -11,6 +11,7 @@ public class DataRecorrido{
     private List<DataGrupoHorario> horarios;
     private String idOrigen;
     private String idDestino;
+    private String tipoHorario;
     private List<DataPrecio> precios;
     private Boolean eliminado;
     
@@ -18,13 +19,14 @@ public class DataRecorrido{
 
     public DataRecorrido() {}
     
-    public DataRecorrido(String id, String nom, List<DataPuntoRecorrido> punRec, List<DataGrupoHorario> hor, List<DataPrecio> prec, Boolean elim) {
+    public DataRecorrido(String id, String nom, List<DataPuntoRecorrido> punRec, List<DataGrupoHorario> hor, List<DataPrecio> prec, Boolean elim, String tipoH) {
         this.id = id;
         this.nombre = nom;
         this.puntosDeRecorrido = punRec;
         this.horarios = hor;
         this.precios = prec;
         this.eliminado = elim;
+        this.tipoHorario = tipoH;
     }
     
     public void setId(String val){
@@ -75,25 +77,27 @@ public class DataRecorrido{
         return this.eliminado;
     }
     
-    public String getIdOrigen(){
-    	String result = null;
-    	if(puntosDeRecorrido != null && puntosDeRecorrido.size() > 0)
-    		result = puntosDeRecorrido.get(0).getId();
-    	return result;
+    public String genIdOrigen(){
+    	return this.idOrigen;
     }
     
     public void setIdOrigen(String val){
     	this.idOrigen = val;
     }
     
-    public String getIdDestino(){
-    	String result = null;
-    	if(puntosDeRecorrido != null && puntosDeRecorrido.size() > 0)
-    		result = puntosDeRecorrido.get(puntosDeRecorrido.size()-1).getId();
-    	return result;
+    public String genIdDestino(){
+    	return this.idDestino;
     }
     
     public void setIdDestino(String val){
     	this.idDestino = val;
+    }
+    
+    public void setTipoHorario(String val){
+        this.tipoHorario = val;
+    }
+    
+    public String genTipoHorario(){
+        return this.tipoHorario;
     }
 }

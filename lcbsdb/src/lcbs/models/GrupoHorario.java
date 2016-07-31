@@ -39,6 +39,7 @@ public class GrupoHorario implements Serializable{
     private String id;
     
     private String nombre;
+    private String tipo;
     @ElementCollection(targetClass = DiasSemana.class)
     @CollectionTable(name = "dias", joinColumns = @JoinColumn(name = "GrupoHorarioId"))
     @Column(name = "diasSemana")
@@ -51,7 +52,7 @@ public class GrupoHorario implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     @IndexColumn(name="LIST_INDEX")
     private List<Date> diasEspecificos; //Lista de dias especificos en los que funciona este grupo, por ejemplo, semana de turismo
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.LAZY)
     @IndexColumn(name="LIST_INDEX")
     private List<Horario> horarios;
     
@@ -59,17 +60,19 @@ public class GrupoHorario implements Serializable{
 
     public GrupoHorario() {}
     
-    public GrupoHorario(String id, String nom, List<DiasSemana> diasSemana, List<Date> diasEspec, List<Horario> hora) {
+    public GrupoHorario(String id, String nom, List<DiasSemana> diasSemana, List<Date> diasEspec, List<Horario> hora, String tipo) {
         this.id = id;
         this.nombre = nom;
         this.diasSemana = diasSemana;
         this.diasEspecificos = diasEspec;
         this.horarios = hora;
+        this.tipo = tipo;
     }
     
     public GrupoHorario(DataGrupoHorario dt){
     	this.setId(dt.getId());
     	this.setNombre(dt.getNombre());
+    	this.setTipo(dt.getTipo());
     	/*List<DiasSemana> aux = new ArrayList<DiasSemana>();
     	dt.getDiasSemana().stream().forEach((ds) -> {
     		aux.add((DiasSemana)ds);
@@ -89,6 +92,7 @@ public class GrupoHorario implements Serializable{
     	DataGrupoHorario result = new DataGrupoHorario();
     	result.setId(this.getId());
     	result.setNombre(this.getNombre());
+    	result.setTipo(this.getTipo());
     	/*List<DataDiasSemana> aux = new ArrayList<DataDiasSemana>();
     	this.getDiasSemana().stream().forEach((ds) -> {
     		aux.add((DataDiasSemana)ds);
@@ -143,5 +147,13 @@ public class GrupoHorario implements Serializable{
     
     public List<Horario> getHorarios(){
         return this.horarios;
+    }
+    
+    public void setTipo(String val){
+        this.tipo = val;
+    }
+    
+    public String getTipo(){
+        return this.tipo;
     }
 }

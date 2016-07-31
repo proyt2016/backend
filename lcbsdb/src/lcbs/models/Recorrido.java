@@ -29,13 +29,13 @@ public class Recorrido implements Serializable{
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String nombre;
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.LAZY)
     @IndexColumn(name="LIST_INDEX")
     private List<PuntoRecorrido> puntosDeRecorrido;
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.LAZY)
     @IndexColumn(name="LIST_INDEX")
     private List<GrupoHorario> horarios;
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(fetch=FetchType.LAZY)
     @IndexColumn(name="LIST_INDEX")
     private List<Precio> precios;
     private Boolean eliminado;

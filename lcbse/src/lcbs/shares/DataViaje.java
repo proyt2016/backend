@@ -19,12 +19,15 @@ public class DataViaje{
     private DataVehiculo coche;
     private List<DataEncomienda> encomiendas;
     private List<DataReserva> reservas;
+    private String idOrigen;
+    private String idDestino;
+    private String tipoHorario;
     
   
 
     public DataViaje() {}
     
-    public DataViaje(String id, DataRecorrido rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, DataVehiculo coche, List<DataEncomienda> enc, List<DataReserva> res) {
+    public DataViaje(String id, DataRecorrido rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, DataVehiculo coche, List<DataEncomienda> enc, List<DataReserva> res, String idOr, String idDest, String tipoHor) {
         this.id = id;
     	this.recorrido = rec;
         this.horario = hor;
@@ -33,6 +36,9 @@ public class DataViaje{
         this.coche = coche;
         this.encomiendas = enc;
         this.reservas = res;
+        this.idOrigen = idOr;
+        this.idDestino = idDest;
+        this.tipoHorario = tipoHor;
     }
     
     public void setId(String val){
@@ -97,5 +103,29 @@ public class DataViaje{
     
     public List<DataReserva> getReservas(){
         return this.reservas;
+    }
+    
+    public String genIdOrigen(){
+    	return this.idOrigen;
+    }
+    
+    public void setIdOrigen(String val){
+    	this.idOrigen = val;
+    }
+    
+    public String genIdDestino(){
+    	return this.idDestino;
+    }
+    
+    public void setIdDestino(String val){
+    	this.idDestino = val;
+    }
+    
+    public void setTipoHorario(String val){
+        this.tipoHorario = val;
+    }
+    
+    public String genTipoHorario(){
+        return this.tipoHorario;
     }
 }

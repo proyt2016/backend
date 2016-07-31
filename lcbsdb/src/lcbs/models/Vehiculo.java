@@ -42,7 +42,7 @@ public class Vehiculo implements Serializable{
     private Date fechaAlta;
     private Integer cantidadAsientos;
     private Boolean conGuarda;
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     @IndexColumn(name="LIST_INDEX")
     private List<MantenimientoVehiculo> mantenimientos;
     private Boolean eliminado;

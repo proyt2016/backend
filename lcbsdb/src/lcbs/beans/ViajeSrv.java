@@ -2,10 +2,16 @@ package lcbs.beans;
 
 import javax.ejb.Stateless;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Conjunction;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Subqueries;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -21,10 +27,15 @@ import lcbs.shares.DataEncomienda;
 import lcbs.shares.DataViaje;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Session Bean implementation class ViajeSrv
@@ -33,7 +44,7 @@ import java.util.List;
 public class ViajeSrv implements ViajeLocalApi {
 	@Inject
     EntityManager em;
-	
+	private static final Log log = LogFactory.getLog(ViajeSrv.class);
     private ViajeSrv(){
         
     }
@@ -99,28 +110,57 @@ public class ViajeSrv implements ViajeLocalApi {
         return viajes;
     }
 
-	public List<DataViaje> buscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina) {
+	public List<DataViaje> buscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina){
 		List<DataViaje> viajes = new ArrayList();
+		
+		try{
+		
         Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Viaje.class);
+    	if(filtro.getCoche() != null)
+    		criteria.add(Restrictions.eq("coche", filtro.getCoche().getId()));
     	if(filtro.getRecorrido() != null)
     		criteria.add(Restrictions.eq("recorrido.id", filtro.getRecorrido().getId()));
     	if(filtro.getHorario() != null)
     		criteria.add(Restrictions.eq("horario.id", filtro.getHorario().getId()));
-    	if(filtro.getFechaSalida() != null)
-    		criteria.add(Restrictions.eq("fechaSalida", filtro.getFechaSalida()));
+    	if(filtro.getFechaSalida() != null){
+    		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    		String myDate = new SimpleDateFormat("yyyy-MM-dd").format(filtro.getFechaSalida());
+    		Date fromDate = df.parse(myDate+" 00:00:00");
+    		Date toDate = df.parse(myDate+" 23:59:59");
+
+    		criteria.add(Restrictions.between("fechaSalida", fromDate, toDate));
+    	}
     	//if(filtro.getEmpleados() != null)
     	//	criteria.createCriteria("empleados").add(Restrictions.eq("id", filtro.getEmpleados().getId()));
-    	if(filtro.getCoche() != null)
-    		criteria.add(Restrictions.eq("coche", filtro.getCoche().getId()));
+    	
     	//if(filtro.getEncomiendas() != null)
     	//	criteria.createCriteria("encomiendas").add(Restrictions.eq("id", filtro.getEncomiendas().getId()));
     	
-    	//Asi se obtiene el numero de resultados
-    	/*Criteria criteriaCount = criteria;
-    	criteriaCount.setProjection(Projections.rowCount());
-    	Long count = (Long) criteriaCount.uniqueResult();*/
     	
+    	DetachedCriteria subquery = DetachedCriteria.forClass(Viaje.class);
+    	if(filtro.getCoche() != null)
+    		subquery.add(Restrictions.eq("coche", filtro.getCoche().getId()));
+    	if(filtro.getRecorrido() != null)
+    		subquery.add(Restrictions.eq("recorrido.id", filtro.getRecorrido().getId()));
+    	if(filtro.getHorario() != null)
+    		subquery.add(Restrictions.eq("horario.id", filtro.getHorario().getId()));
+    	if(filtro.getFechaSalida() != null){
+    		
+    		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    		String myDate = new SimpleDateFormat("yyyy-MM-dd").format(filtro.getFechaSalida());
+    		Date fromDate = df.parse(myDate+" 00:00:00");
+    		Date toDate = df.parse(myDate+" 23:59:59");
+
+    		subquery.add(Restrictions.between("fechaSalida", fromDate, toDate));
+    	}
+    	if(filtro.genIdOrigen() != null)
+    		subquery.createCriteria("recorrido").createCriteria("puntosDeRecorrido").add(Restrictions.eq("id", filtro.genIdOrigen()));
+    	subquery.setProjection(Projections.property("id"));
+    	if(filtro.genIdDestino() != null)
+    		criteria.createCriteria("recorrido").createCriteria("puntosDeRecorrido").add(Restrictions.eq("id", filtro.genIdDestino()));
+    	
+    	criteria.add(Subqueries.propertyIn("id", subquery));
     	criteria.setFirstResult((pagina - 1) * ElementosPagina);
     	criteria.setMaxResults(ElementosPagina);
     	
@@ -129,6 +169,11 @@ public class ViajeSrv implements ViajeLocalApi {
         listViaje.stream().forEach((via) -> {
         	viajes.add(via.getDatatype(true));
         });
+		}catch(Exception e){
+			log.info("################################newEM#################################### "+e.getMessage());
+			e.printStackTrace();
+		}
+		log.info("################################newEM#################################### "+new SimpleDateFormat("dd-MM-yyyy").format(filtro.getFechaSalida()));
         return viajes;
 	}
     

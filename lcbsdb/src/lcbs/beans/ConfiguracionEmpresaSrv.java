@@ -6,13 +6,11 @@ import javax.ejb.Stateless;
 import lcbs.shares.*;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import org.hibernate.Session;
 
 import lcbs.interfaces.ConfiguracionEmpresaLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
-import lcbs.models.Encomienda;
 
 
 /**

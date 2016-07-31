@@ -13,6 +13,7 @@ public class DataGrupoHorario{
 	private String id;
     
     private String nombre;
+    private String tipo;
     private List<DataDiasSemana> diasSemana; //Lista de dias de la semana en los que funciona el grupo
     @XmlElement
     @XmlJavaTypeAdapter(DateAdapter.class)
@@ -23,12 +24,13 @@ public class DataGrupoHorario{
 
     public DataGrupoHorario() {}
     
-    public DataGrupoHorario(String id, String nom, List<DataDiasSemana> diasSemana, List<Date> diasEspec, List<DataHorario> hora) {
+    public DataGrupoHorario(String id, String nom, List<DataDiasSemana> diasSemana, List<Date> diasEspec, List<DataHorario> hora, String tipo) {
         this.id = id;
         this.nombre = nom;
         this.diasSemana = diasSemana;
         this.diasEspecificos = diasEspec;
         this.horarios = hora;
+        this.tipo = tipo;
     }
     
     public void setId(String val){
@@ -69,5 +71,13 @@ public class DataGrupoHorario{
     
     public List<DataHorario> getHorarios(){
         return this.horarios;
+    }
+    
+    public void setTipo(String val){
+        this.tipo = val;
+    }
+    
+    public String getTipo(){
+        return this.tipo;
     }
 }

@@ -33,13 +33,13 @@ public class Viaje implements Serializable {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Recorrido recorrido;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Horario horario;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaSalida;
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.LAZY)
 	@IndexColumn(name="LIST_INDEX")
 	private List<Empleado> empleados;
 	private Vehiculo coche;

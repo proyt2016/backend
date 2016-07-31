@@ -63,6 +63,12 @@ public class ViajeApi {
 	}
 	
 	@POST
+	@Path("/buscarrecorrido/{pagina}/{elementosPagina}")
+	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, @PathParam("pagina") final Integer pagina, @PathParam("elementosPagina") final Integer ElementosPagina){
+		return repo.BuscarRecorrido(filtro, pagina, ElementosPagina);
+	}
+	
+	@POST
 	@Path("/comprarpasaje/")
 	public DataPasajeConvertor ComprarPasaje(DataPasajeConvertor pseudoPasaje){
 		DataPasaje pasaje = pseudoPasaje.genDataPasaje();

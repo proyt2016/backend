@@ -35,7 +35,7 @@
                     idUsuario   : transferirA
                 }
 
-                pasajeService.transferir(pasaje).then(function (datos) {
+                pasajeService.transferir(pasaje).then(function () {
                 	toastr.success('La transferencia se realizo con exito.', 'Trasnferencia exitosa.');
                 	$scope.compras.splice(index, 1);
                 	$('#modal-transferir-pasaje').modal('hide');

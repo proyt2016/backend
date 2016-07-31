@@ -1,13 +1,19 @@
 ﻿(function () {
 
-    angular.module('lacbus', ['ngRoute', 'ngAnimate', 'toastr', 'ngStorage', 'pusher-angular']);
+    angular.module('lacbus', ['ngRoute', 'ngAnimate', 'toastr', 'ngStorage', 'pusher-angular', 'uiGmapgoogle-maps']);
 
-    angular.module('lacbus').config(['$routeProvider', 'toastrConfig', configFunction]);
+    angular.module('lacbus').config(['$routeProvider', 'toastrConfig', 'uiGmapGoogleMapApiProvider', configFunction]);
     
     angular.module('lacbus').controller('appCtrl', ['$scope', '$location', '$localStorage', '$pusher', 'toastr', appCtrl]);
 
     /*@ngInject*/
-    function configFunction($routeProvider, toastrConfig) {
+    function configFunction($routeProvider, toastrConfig, uiGmapGoogleMapApiProvider) {
+        uiGmapGoogleMapApiProvider.configure({
+            key: 'AIzaSyBVL227yFvpTa6b0oolhl3PW_BPGLFMnwI',
+            v: '3.20', //defaults to latest 3.X anyhow
+            libraries: 'weather,geometry,visualization'
+        });
+
         angular.extend(toastrConfig, {
             positionClass: 'toast-top-center',
             timeOut: 2500

@@ -3,7 +3,7 @@
     angular.module('lacbus').controller('comprarCtrl', ['$scope', '$routeParams', '$localStorage', '$location', 'toastr', 'viajeService', 'pasajeService', comprarCtrl]);
 
     function comprarCtrl($scope, $routeParams, $localStorage, $location, toastr, viajeService, pasajeService) {
-        var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null
+        var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null;
         $scope.usuarioLogueado = $localStorage.usuarioLogueado;
         
     	$scope.viaje 	= null;

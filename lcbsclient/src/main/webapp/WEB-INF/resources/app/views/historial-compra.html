@@ -29,6 +29,9 @@
               <a class="btn btn-success btn-flat btn-sm" title="transferir pasaje" ng-click="mostrarPasajes(compra)"><i class="fa fa-exchange"></i></a>
             </td>
           </tr>
+          <tr ng-if="!compras.length">
+          	<td colspan="7" class="text-center"><h4>No ha realizado ninguna compra.</h4></td>
+          </tr>
         </table>
       </div>
     </div>

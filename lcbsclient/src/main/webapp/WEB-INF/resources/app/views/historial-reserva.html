@@ -13,18 +13,23 @@
             <th>Origen</th>
             <th>Destino</th>
             <th>Asientos</th>
+            <th>Estado</th>
             <th></th>
           </tr>
-          <tr ng-repeat="reserva in reservas">
-            <td>{{ reserva.fecha || 'dd/MM/yy' }}</td>
-            <td>{{ reserva.recorrido.nombre }}</td>
+          <tr ng-repeat="reserva in reservas | orderBy : '-fechaReserva'">
+            <td>{{ reserva.fechaReserva | date : 'dd/MM/yy' }}</td>
+            <td>{{ reserva.viaje.recorrido.nombre }}</td>
             <td>{{ reserva.origen.nombre }}</td>
             <td>{{ reserva.destino.nombre }}</td>
             <td>{{ reserva.cantidad }}</td>
+            <td>{{ reserva.eliminada ? 'Eliminada' : reserva.utilizada ? 'Utilizada' : 'Activa' }}</td>
             <td>
-              <a class="btn btn-danger btn-flat btn-sm" title="cancelar reserva" ng-click="cancelar(reserva)"><i class="fa fa-remove"></i></a>
-              <a href="#/comprar-reserva/{{ reserva.id }}" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
+              <a ng-if="!reserva.eliminada && !reserva.utilizada" class="btn btn-danger btn-flat btn-sm" title="cancelar reserva" ng-click="cancelar(reserva)"><i class="fa fa-remove"></i></a>
+              <a ng-if="!reserva.eliminada && !reserva.utilizada" href="#/comprar-reserva/{{ reserva.id }}" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
             </td>
+          </tr>
+          <tr ng-if="!reservas.length">
+          	<td colspan="6" class="text-center"><h4>No ha realizado ninguna reserva.</h4></td>
           </tr>
         </table>
       </div>

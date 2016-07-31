@@ -15,6 +15,9 @@
             <td>{{ notifiacion.fecha || 'dd/MM/yy' }}</td>
             <td>{{ notifiacion.mensaje }}</td>
           </tr>
+          <tr ng-if="!notifiaciones.length">
+          	<td colspan="2" class="text-center"><h4>No hay ninguna notificaci&oacute;n asociada a usted.</h4></td>
+          </tr>
         </table>
       </div>
     </div>

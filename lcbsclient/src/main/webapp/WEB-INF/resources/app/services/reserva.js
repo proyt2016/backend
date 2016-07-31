@@ -35,7 +35,7 @@
         var cancelar = function(id){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/viajes/cancelarreserva/' + id)
+            $http.delete('/lcbsapi/rest/viajes/cancelarreserva/' + id)
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -61,8 +61,10 @@
         };
 
         return {
-            getAll  : getAll,
-            getId   : getId,
+            getAll  	: getAll,
+            getId   	: getId,
+            cancelar 	: cancelar,
+            comprar		: comprar
         }
 
     }

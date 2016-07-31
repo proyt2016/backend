@@ -129,7 +129,7 @@
             <td>{{ resultado.recorrido.puntosDeRecorrido[resultado.recorrido.puntosDeRecorrido.length - 1].nombre }}</td>
             <td>
               <a href="#/detalle/{{ resultado.id }}" class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
-              <a class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="mostrarReservar(resultado)"><i class="fa fa-bookmark"></i></a>
+              <a ng-if="usuarioLogueado" class="btn btn-info btn-flat btn-sm" title="reservar" ng-click="mostrarReservar(resultado)"><i class="fa fa-bookmark"></i></a>
               <a href="#/comprar/{{ resultado.id }}" class="btn btn-success btn-flat btn-sm" title="comprar"><i class="fa fa-dollar"></i></a>
             </td>
           </tr>

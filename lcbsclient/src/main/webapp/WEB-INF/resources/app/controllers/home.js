@@ -29,8 +29,7 @@
         });
 
         $scope.buscar = function(){
-            var filtrosIda = null;
-            var filtrosVuelta = null;
+            var filtrosIda = {};
 
             // if(!this.filter['origen']){
             // 	toastr.warning('Debe seleccionar un origen', 'Ups');
@@ -46,38 +45,24 @@
             // 	toastr.warning('Debe seleccionar una fecha de ida', 'Ups');
             //     return;
             // }
-            
-            // filtrosIda = {
-            //     fechaSalida : moment(this.filter['fechaIda'], 'DD/MM/YYYY').format('YYYY-MM-DD'),
-            //     recorrido : {
-            //         idOrigen : this.filter['origen'],
-            //         idDestino : this.filter['destino']
-            //     }      
-            // }
-            
-            filtrosIda = {};
+
+            if(this.filter['fechaIda']){
+                filtrosIda.fechaSalida = moment(this.filter['fechaIda'], 'DD/MM/YYYY').format('YYYY-MM-DD');
+            }
+
+            if(this.filter['origen']){
+                filtrosIda.idOrigen = this.filter['origen'];
+            }
+
+            if(this.filter['destino']){
+                filtrosIda.idDestino = this.filter['destino'];
+            }
 
             if(this.filter['recorrido']){
             	filtrosIda.recorrido = {
                     id : this.filter['recorrido']
                 }
             }
-
-            // if(this.filter['fechaVuelta']){
-            // 	filtrosVuelta = {
-            //     		fechaSalida : moment(this.filter['fechaVuelta'], 'DD/MM/YYYY').format('YYYY-MM-DD'),
-            //     		recorrido : {
-            //     			idDestino : this.filter['origen'],
-            //                 idOrigen : this.filter['destino']
-            //     		}      
-            //     }
-            	
-            // 	if(this.filter['recorrido']){
-            //         filtrosVuelta.recorrido = {
-            //             id : this.filter['recorrido']
-            //         }
-            //     }
-            // }
 
             viajeService.buscar(filtrosIda).then(function (datos) {
                 $scope.resultados = datos;
@@ -86,16 +71,6 @@
                     toastr.info('No se encontraron viajes con los filtros seleccionados.', 'No hay viajes');
                 }
             });
-            
-			// if(filtrosVuelta){
-			// 	viajeService.buscar(filtrosVuelta).then(function (datos) {
-	  //               $scope.resultadosVuelta = datos;
-
-   //                  if(!datos.length){
-   //                      toastr.info('No se encontraron viajes con los filtros seleccionados.', 'No hay viajes');
-   //                  }
-	  //           });
-			// }
         };
 
         $scope.mostrarReservar = function (resultado) {
@@ -116,6 +91,7 @@
         	
         	pasajeService.reservar(pasaje).then(function (datos) {
                 toastr.success('El pasaje fue reservado con exito.', 'Reserva de pasaje');
+                $('#modal-reservar').modal('hide');
             });
         }
 

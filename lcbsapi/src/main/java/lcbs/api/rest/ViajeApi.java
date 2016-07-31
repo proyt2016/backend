@@ -95,9 +95,9 @@ public class ViajeApi {
 		repo.TransferirPasajeComprado(obj.getString("idPasaje"), obj.getString("idUsuario"));
 	}
 	
-	@POST
-	@Path("/cancelarreserva/")
-	public void CancelarReserva(String idReserva){
+	@DELETE
+	@Path("/cancelarreserva/{idReserva}")
+	public void CancelarReserva(@PathParam("idReserva") final String idReserva){
 		repo.CancelarReserva(idReserva);
 	}
 	

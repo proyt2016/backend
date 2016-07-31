@@ -16,8 +16,8 @@
         <p>{{ viaje.descripcion }}</p>
       </div>
       <div class="box-footer">
-        <a class="btn btn-info pull-left" ng-click="mostrarReservar()">Reservar</a>
-        <a href="#/comprar/{{ viaje.id }}" class="btn btn-success pull-right">Comprar</a>
+        <a ng-if="usuarioLogueado" class="btn btn-info pull-left" ng-click="mostrarReservar()">Reservar</a>
+        <a ng-if="usuarioLogueado" href="#/comprar/{{ viaje.id }}" class="btn btn-success pull-right">Comprar</a>
       </div>
     </div>
   </div>
@@ -28,9 +28,9 @@
         <h3 class="box-title">Recorrido</h3>
       </div>
       <div class="box-body">
-        <p class="text-center">
-          <img src="http://placehold.it/500x400/39CCCC/ffffff&amp;text=MAPA"/>
-        </p>
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+        	<ui-gmap-polyline path="recorrido.path" visible='recorrido.visible' stroke="recorrido.stroke" geodesic='recorrido.geodesic' fit="false" icons='recorrido.icons'></ui-gmap-polyline>
+        </ui-gmap-google-map>
       </div>
     </div>
   </div>

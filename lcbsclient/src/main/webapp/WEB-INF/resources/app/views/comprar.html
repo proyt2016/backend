@@ -92,7 +92,7 @@
         </div>
       </div>
       <div class="box-footer">
-        <a class="btn btn-success pull-right" ng-click="procesarCompra()">Confirmar Pago</a>
+        <a ng-if="usuarioLogueado" class="btn btn-success pull-right" ng-click="procesarCompra()">Confirmar Pago</a>
       </div>
     </div>
   </div>

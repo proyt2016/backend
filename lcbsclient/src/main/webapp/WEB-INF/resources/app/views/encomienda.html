@@ -15,13 +15,16 @@
             <th></th>
           </tr>
           <tr ng-repeat="encomienda in encomiendas">
-            <td>{{ encomienda.fecha || 'dd/MM/yy' }}</td>
+            <td>{{ encomienda.fecha | date : 'dd/MM/yy' }}</td>
             <td>{{ encomienda.estado }}</td>
-            <td>{{ encomienda.estadoFecha || 'dd/MM/yy' }}</td>
+            <td>{{ encomienda.estadoFecha | date : 'dd/MM/yy' }}</td>
             <td>{{ encomienda.ubicacion }}</td>
             <td>
               <a class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
             </td>
+          </tr>
+          <tr ng-if="!encomiendas.length">
+          	<td colspan="5" class="text-center"><h4>No hay encomiendas asociadas a usted.</h4></td>
           </tr>
         </table>
       </div>

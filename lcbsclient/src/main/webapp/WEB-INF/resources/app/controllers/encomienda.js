@@ -1,11 +1,12 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('encomiendaCtrl', ['$scope', 'toastr', 'encomiendaService',  encomiendaCtrl]);
+    angular.module('lacbus').controller('encomiendaCtrl', ['$scope', 'toastr', '$localStorage', 'encomiendaService',  encomiendaCtrl]);
 
-    function encomiendaCtrl($scope, toastr, encomiendaService) {
+    function encomiendaCtrl($scope, toastr, $localStorage, encomiendaService) {
+    	$scope.usuarioLogueado = $localStorage.usuarioLogueado;
     	$scope.encomiendas = [];
     	
-    	encomiendaService.getAll(1).then(function (datos) {
+    	encomiendaService.getAll($scope.usuarioLogueado.id).then(function (datos) {
             $scope.encomiendas = datos;
         });
     }

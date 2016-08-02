@@ -14,18 +14,20 @@ public class DataRecorridoConvertor{
     private String idDestino;
     private List<DataPrecio> precios;
     private Boolean eliminado;
+    private String tipoHorario;
     	
  
 
     public DataRecorridoConvertor() {}
     
-    public DataRecorridoConvertor(String id, String nom, List<DataPuntoRecorridoConverter> punRec, List<DataGrupoHorario> hor, List<DataPrecio> prec, Boolean elim) {
+    public DataRecorridoConvertor(String id, String nom, List<DataPuntoRecorridoConverter> punRec, List<DataGrupoHorario> hor, List<DataPrecio> prec, Boolean elim, String tip) {
         this.id = id;
         this.nombre = nom;
         this.puntosDeRecorrido = punRec;
         this.horarios = hor;
         this.precios = prec;
         this.eliminado = elim;
+        this.tipoHorario = tip;
     }
     
     public DataRecorrido genRecorrido(){
@@ -35,7 +37,7 @@ public class DataRecorridoConvertor{
     	result.setId(this.getId());
     	result.setNombre(this.getNombre());
     	result.setPrecios(this.getPrecios());
-    	final List<DataPuntoRecorrido> puntos = new ArrayList<DataPuntoRecorrido>();
+    	List<DataPuntoRecorrido> puntos = new ArrayList<DataPuntoRecorrido>();
     	if(this.getPuntosDeRecorrido() != null){
     		this.getPuntosDeRecorrido().stream().forEach((pr) -> {
         		if(pr.getTipo().equals("Parada")){
@@ -111,5 +113,13 @@ public class DataRecorridoConvertor{
     
     public void setIdDestino(String val){
     	this.idDestino = val;
+    }
+    
+    public void setTipoHorario(String val){
+        this.tipoHorario = val;
+    }
+    
+    public String genTipoHorario(){
+        return this.tipoHorario;
     }
 }

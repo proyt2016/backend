@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class DataPasajeConvertor{
     
 	private String id;
-    private DataViaje viaje;
+    private DataViajeConvertor viaje;
     private DataPrecio precio;
     private DataPuntoRecorridoConverter origen;
     private DataPuntoRecorridoConverter destino;
@@ -29,7 +29,7 @@ public class DataPasajeConvertor{
 
     public DataPasajeConvertor() {}
     
-    public DataPasajeConvertor(String id, int codigoPasaje, DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig, 
+    public DataPasajeConvertor(String id, int codigoPasaje, DataViajeConvertor via, DataPrecio prec, DataPuntoRecorridoConverter orig, 
     		DataPuntoRecorridoConverter des,	Date fecVen, DataUsuario comp, String ciPer, 
     		DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.id = id;
@@ -51,7 +51,7 @@ public class DataPasajeConvertor{
     	DataPasaje result = new DataPasaje();
     	result.setId(this.getId());
     	result.setCodigoPasaje(this.getCodigoPasaje());
-    	result.setViaje(this.getViaje());
+    	result.setViaje(this.getViaje().genDataViaje());
     	result.setPrecio(this.getPrecio());
     	if(this.getOrigen() != null){
     		if(this.getOrigen().getTipo().equals("Parada")){
@@ -93,14 +93,14 @@ public class DataPasajeConvertor{
         return this.id;
     }
 
-    public void setViaje(DataViaje val){
+    public void setViaje(DataViajeConvertor val){
         this.viaje = val;
     }
     
-    public DataViaje getViaje(){
-    	DataViaje sinPuntos = new DataViaje();
+    public DataViajeConvertor getViaje(){
+    	DataViajeConvertor sinPuntos = new DataViajeConvertor();
     	sinPuntos = this.viaje;
-    	DataRecorrido recOverr = sinPuntos.getRecorrido();
+    	DataRecorridoConvertor recOverr = sinPuntos.getRecorrido();
     	if(recOverr != null){
 	    	recOverr.setPuntosDeRecorrido(null);
 	    	sinPuntos.setRecorrido(recOverr);

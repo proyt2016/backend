@@ -9,26 +9,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement
-public class DataViaje{
+public class DataViajeConvertor{
     private String id;
-    private DataRecorrido recorrido;
+    private DataRecorridoConvertor recorrido;
     private DataHorario horario;
     @XmlElement
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaSalida;
     private List<DataEmpleado> empleados;
     private DataVehiculo coche;
-    private List<DataEncomienda> encomiendas;
-    private List<DataReserva> reservas;
+    private List<DataEncomiendaConvertor> encomiendas;
+    private List<DataReservaConvertor> reservas;
     private String idOrigen;
     private String idDestino;
     private String tipoHorario;
     
   
 
-    public DataViaje() {}
+    public DataViajeConvertor() {}
     
-    public DataViaje(String id, DataRecorrido rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, DataVehiculo coche, List<DataEncomienda> enc, List<DataReserva> res, String idOr, String idDest, String tipoHor) {
+    public DataViajeConvertor(String id, DataRecorridoConvertor rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, DataVehiculo coche, List<DataEncomiendaConvertor> enc, List<DataReservaConvertor> res, String idOr, String idDest, String tipoHor) {
         this.id = id;
     	this.recorrido = rec;
         this.horario = hor;
@@ -42,28 +42,29 @@ public class DataViaje{
         this.tipoHorario = tipoHor;
     }
     
-    public DataViajeConvertor genConvertor(){
-    	DataViajeConvertor result = new DataViajeConvertor();
+    public DataViaje genDataViaje(){
+    	DataViaje result = new DataViaje();
     	result.setId(this.getId());
-    	result.setRecorrido(this.getRecorrido().genConvertor());
+    	result.setRecorrido(this.getRecorrido().genRecorrido());
     	result.setHorario(this.getHorario());
     	result.setFechaSalida(this.getFechaSalida());
     	result.setEmpleados(this.getEmpleados());
     	result.setCoche(this.getCoche());
     	if(this.getEncomiendas() != null){
-    		List<DataEncomiendaConvertor> encToAdd = new ArrayList<DataEncomiendaConvertor>();
+    		List<DataEncomienda> encToAdd = new ArrayList<DataEncomienda>();
     		this.getEncomiendas().stream().forEach((enc) -> {
-    			encToAdd.add(enc.getConvertor());
+    			encToAdd.add(enc.getDataEncomienda());
     		});
     		result.setEncomiendas(encToAdd);
     	}
     	if(this.getReservas() != null){
-    		List<DataReservaConvertor> resToAdd = new ArrayList<DataReservaConvertor>();
+    		List<DataReserva> resToAdd = new ArrayList<DataReserva>();
     		this.getReservas().stream().forEach((res) -> {
-    			resToAdd.add(res.genConvertor());
+    			resToAdd.add(res.genDataReserva());
     		});
     		result.setReservas(resToAdd);
     	}
+    	
     	result.setIdOrigen(this.genIdOrigen());
     	result.setIdDestino(this.genIdDestino());
     	result.setTipoHorario(this.genTipoHorario());
@@ -78,11 +79,11 @@ public class DataViaje{
         return this.id;
     }
     
-    public void setRecorrido(DataRecorrido val){
+    public void setRecorrido(DataRecorridoConvertor val){
         this.recorrido = val;
     }
     
-    public DataRecorrido getRecorrido(){
+    public DataRecorridoConvertor getRecorrido(){
         return this.recorrido;
     }
 
@@ -118,19 +119,19 @@ public class DataViaje{
         return this.coche;
     }
     
-    public void setEncomiendas(List<DataEncomienda> val){
+    public void setEncomiendas(List<DataEncomiendaConvertor> val){
         this.encomiendas = val;
     }
     
-    public List<DataEncomienda> getEncomiendas(){
+    public List<DataEncomiendaConvertor> getEncomiendas(){
         return this.encomiendas;
     }
     
-    public void setReservas(List<DataReserva> val){
+    public void setReservas(List<DataReservaConvertor> val){
         this.reservas = val;
     }
     
-    public List<DataReserva> getReservas(){
+    public List<DataReservaConvertor> getReservas(){
         return this.reservas;
     }
     

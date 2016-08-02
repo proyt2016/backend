@@ -38,6 +38,21 @@ public class DataReserva{
         this.utilizada = usa;
         this.eliminada = elim;
     }
+    
+    public DataReservaConvertor genConvertor(){
+    	DataReservaConvertor result = new DataReservaConvertor();
+    	result.setId(this.getId());
+    	result.setViaje(this.getViaje().genConvertor());
+    	result.setPrecio(this.getPrecio());
+    	result.setOrigen(this.getOrigen().getConverter());
+    	result.setDestino(this.getDestino().getConverter());
+    	result.setFechaReserva(this.getFechaReserva());
+    	result.setUsuarioReserva(this.getUsuarioReserva());
+    	result.setCiPersona(this.getCiPersona());
+    	result.setEmpleado(this.getEmpleado());
+    	result.setEliminada(this.getEliminada());
+    	return result;
+    }
 
 	public String getId() {
 		return id;

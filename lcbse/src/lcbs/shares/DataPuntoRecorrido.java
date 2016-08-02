@@ -6,6 +6,15 @@ public abstract class DataPuntoRecorrido{
 	    private String ubicacionMapa;
 	    private Boolean eliminado; 
 	    
+	    public DataPuntoRecorridoConverter getConverter(){
+	    	DataPuntoRecorridoConverter result = new DataPuntoRecorridoConverter();
+	    	result.setId(this.getId());
+	    	result.setNombre(this.getNombre());
+	    	result.setUbicacionMapa(this.getUbicacionMapa());
+	    	result.setEliminado(this.getEliminado());
+	    	return result;
+	    }
+	    
 	    public void setId(String val){
 	        this.id = val;
 	    }

@@ -1,5 +1,6 @@
 package lcbs.shares;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataRecorrido{
@@ -27,6 +28,35 @@ public class DataRecorrido{
         this.precios = prec;
         this.eliminado = elim;
         this.tipoHorario = tipoH;
+    }
+    
+    public DataRecorridoConvertor genConvertor(){
+    	DataRecorridoConvertor result = new DataRecorridoConvertor();
+    	result.setId(this.getId());
+    	result.setNombre(this.getNombre());
+    	if(this.getPuntosDeRecorrido() != null){
+    		List<DataPuntoRecorridoConverter> puntos = new ArrayList<DataPuntoRecorridoConverter>();
+    		this.getPuntosDeRecorrido().stream().forEach((pr) -> {
+        		if(pr instanceof DataParada){
+        			DataPuntoRecorridoConverter toAdd = pr.getConverter();
+        			toAdd.setTipo("Parada");
+        			puntos.add(toAdd);
+        		}else{
+        			DataPuntoRecorridoConverter toAdd = pr.getConverter();
+        			toAdd.setAceptaEncomiendas(((DataTerminal)pr).getAceptaEncomiendas());
+        			toAdd.setMailsDeContacto(((DataTerminal)pr).getMailsDeContacto());
+        			toAdd.setTelefonosContacto(((DataTerminal)pr).getTelefonosContacto());
+        			toAdd.setTipo("Terminal");
+        			puntos.add(toAdd);
+        		}
+            });
+        	result.setPuntosDeRecorrido(puntos);
+    	}
+    	result.setHorarios(this.getHorarios());
+    	result.setPrecios(this.getPrecios());
+    	result.setEliminado(this.getEliminado());
+    	result.setTipoHorario(this.genTipoHorario());
+    	return result;
     }
     
     public void setId(String val){

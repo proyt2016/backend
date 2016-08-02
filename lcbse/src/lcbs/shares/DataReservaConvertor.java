@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class DataReservaConvertor{
     
 	private String id;
-    private DataViaje viaje;
+    private DataViajeConvertor viaje;
     private DataPrecio precio;
     private DataPuntoRecorridoConverter origen;
     private DataPuntoRecorridoConverter destino;
@@ -27,7 +27,7 @@ public class DataReservaConvertor{
      
     public DataReservaConvertor() {}
     
-    public DataReservaConvertor(String id, DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter des, Date fecRes, DataUsuario usRes, String ciPer, DataEmpleado emp, boolean usa, boolean elim) {
+    public DataReservaConvertor(String id, DataViajeConvertor via, DataPrecio prec, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter des, Date fecRes, DataUsuario usRes, String ciPer, DataEmpleado emp, boolean usa, boolean elim) {
         this.id = id;
         this.viaje = via;
         this.precio = prec;
@@ -44,7 +44,7 @@ public class DataReservaConvertor{
     public DataReserva genDataReserva(){
     	DataReserva result = new DataReserva();
     	result.setId(this.getId());
-    	result.setViaje(this.getViaje());
+    	result.setViaje(this.getViaje().genDataViaje());
     	result.setPrecio(this.getPrecio());
     	if(this.getOrigen() != null){
 			if(this.getOrigen().getTipo().equals("Parada")){
@@ -77,11 +77,11 @@ public class DataReservaConvertor{
 		this.id = id;
 	}
 
-	public DataViaje getViaje() {
+	public DataViajeConvertor getViaje() {
 		return viaje;
 	}
 
-	public void setViaje(DataViaje viaje) {
+	public void setViaje(DataViajeConvertor viaje) {
 		this.viaje = viaje;
 	}
 

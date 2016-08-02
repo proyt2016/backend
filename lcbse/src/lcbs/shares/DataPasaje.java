@@ -52,7 +52,7 @@ public class DataPasaje{
     	DataPasajeConvertor result = new DataPasajeConvertor();
     	result.setId(this.getId());
     	result.setCodigoPasaje(this.getCodigoPasaje());
-    	result.setViaje(this.getViaje());
+    	result.setViaje(this.getViaje().genConvertor());
     	result.setPrecio(this.getPrecio());
     	if(this.getOrigen() != null){
     		if(this.getOrigen() instanceof DataParada){

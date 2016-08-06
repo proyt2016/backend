@@ -45,8 +45,6 @@
     	                longitude: coords[1]
     	            });
                 }
-                
-                console.log($scope.recorrido);
             });
         });
 
@@ -57,7 +55,7 @@
         $scope.reservar = function() {
             var pasaje = {
                 viaje : {
-                    id : this.reservar.viaje
+                    id : $scope.viaje.id
                 },
                 usuarioReserva : {
                     id : $scope.usuarioLogueado.id
@@ -67,6 +65,7 @@
             
             pasajeService.reservar(pasaje).then(function (datos) {
                 toastr.success('El pasaje fue reservado con exito.', 'Reserva de pasaje');
+                $('#modal-reservar').modal('hide');
             });
         }
     }

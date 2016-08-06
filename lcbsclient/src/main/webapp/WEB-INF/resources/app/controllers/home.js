@@ -106,6 +106,8 @@
                 allowClear: true
             }).on('select2:select', function (evt) {
               $scope.filter[evt.currentTarget.name] = evt.currentTarget.value
+            }).on("select2:unselect", function (evt) { 
+              $scope.filter[evt.currentTarget.name] = null;
             });
 
             //Date picker

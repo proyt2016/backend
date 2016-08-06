@@ -45,7 +45,8 @@ public class DataViaje{
     public DataViajeConvertor genConvertor(){
     	DataViajeConvertor result = new DataViajeConvertor();
     	result.setId(this.getId());
-    	result.setRecorrido(this.getRecorrido().genConvertor());
+    	if(this.getRecorrido() != null)
+    		result.setRecorrido(this.getRecorrido().genConvertor());
     	result.setHorario(this.getHorario());
     	result.setFechaSalida(this.getFechaSalida());
     	result.setEmpleados(this.getEmpleados());

@@ -44,8 +44,8 @@ public class DataReserva{
     	result.setId(this.getId());
     	result.setViaje(this.getViaje().genConvertor());
     	result.setPrecio(this.getPrecio());
-    	result.setOrigen(this.getOrigen().getConverter());
-    	result.setDestino(this.getDestino().getConverter());
+    	result.setOrigen(this.getOrigen().genConverter());
+    	result.setDestino(this.getDestino().genConverter());
     	result.setFechaReserva(this.getFechaReserva());
     	result.setUsuarioReserva(this.getUsuarioReserva());
     	result.setCiPersona(this.getCiPersona());

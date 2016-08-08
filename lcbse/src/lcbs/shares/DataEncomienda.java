@@ -63,7 +63,7 @@ public class DataEncomienda {
         this.eliminada = elim;
     }
     
-    public DataEncomiendaConvertor getConvertor(){
+    public DataEncomiendaConvertor genConvertor(){
     	DataEncomiendaConvertor result = new DataEncomiendaConvertor();
     	result.setId(this.getId());
     	if(this.getOrigen()!=null){

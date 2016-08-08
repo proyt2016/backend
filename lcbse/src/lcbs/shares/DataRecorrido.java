@@ -38,11 +38,11 @@ public class DataRecorrido{
     		List<DataPuntoRecorridoConverter> puntos = new ArrayList<DataPuntoRecorridoConverter>();
     		this.getPuntosDeRecorrido().stream().forEach((pr) -> {
         		if(pr instanceof DataParada){
-        			DataPuntoRecorridoConverter toAdd = pr.getConverter();
+        			DataPuntoRecorridoConverter toAdd = pr.genConverter();
         			toAdd.setTipo("Parada");
         			puntos.add(toAdd);
         		}else{
-        			DataPuntoRecorridoConverter toAdd = pr.getConverter();
+        			DataPuntoRecorridoConverter toAdd = pr.genConverter();
         			toAdd.setAceptaEncomiendas(((DataTerminal)pr).getAceptaEncomiendas());
         			toAdd.setMailsDeContacto(((DataTerminal)pr).getMailsDeContacto());
         			toAdd.setTelefonosContacto(((DataTerminal)pr).getTelefonosContacto());

@@ -6,7 +6,7 @@ public abstract class DataPuntoRecorrido{
 	    private String ubicacionMapa;
 	    private Boolean eliminado; 
 	    
-	    public DataPuntoRecorridoConverter getConverter(){
+	    public DataPuntoRecorridoConverter genConverter(){
 	    	DataPuntoRecorridoConverter result = new DataPuntoRecorridoConverter();
 	    	result.setId(this.getId());
 	    	result.setNombre(this.getNombre());

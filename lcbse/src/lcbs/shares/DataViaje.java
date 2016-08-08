@@ -54,7 +54,7 @@ public class DataViaje{
     	if(this.getEncomiendas() != null){
     		List<DataEncomiendaConvertor> encToAdd = new ArrayList<DataEncomiendaConvertor>();
     		this.getEncomiendas().stream().forEach((enc) -> {
-    			encToAdd.add(enc.getConvertor());
+    			encToAdd.add(enc.genConvertor());
     		});
     		result.setEncomiendas(encToAdd);
     	}

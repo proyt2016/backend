@@ -116,19 +116,21 @@ public class Pasaje implements Serializable{
     		result.setViaje(this.getViaje().getDatatype(false));
     	if(this.getPrecio()!=null)
     		result.setPrecio(this.getPrecio().getDatatype());
-    	if(this.getOrigen() instanceof Terminal){
-    		if(this.getOrigen()!=null)
-    			result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
-    	}else{
-    		if(this.getOrigen()!=null)
-    			result.setOrigen(((Parada)this.getOrigen()).getDatatype());
+    	if(this.getOrigen() != null){
+    		PuntoRecorrido origen = HibernateUtils.initializeAndUnproxy(this.getOrigen());
+	    	if(origen instanceof Terminal){
+	    		result.setOrigen(((Terminal)origen).getDatatype());
+	    	}else{
+	    		result.setOrigen(((Parada)origen).getDatatype());
+	    	}
     	}
-    	if(this.getDestino() instanceof Terminal){
-    		if(this.getDestino()!=null)
-    			result.setDestino(((Terminal)this.getDestino()).getDatatype());
-    	}else{
-    		if(this.getDestino()!=null)
-    			result.setDestino(((Parada)this.getDestino()).getDatatype());
+    	if(this.getDestino() != null){
+    		PuntoRecorrido destino = HibernateUtils.initializeAndUnproxy(this.getDestino());
+	    	if(destino instanceof Terminal){
+	    		result.setOrigen(((Terminal)destino).getDatatype());
+	    	}else{
+	    		result.setOrigen(((Parada)destino).getDatatype());
+	    	}
     	}
     	result.setFechaCompra(this.getFechaCompra());
     	if(this.getComprador()!=null)

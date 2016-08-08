@@ -47,7 +47,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         List<Encomienda> listEnc = new ArrayList<Encomienda>(new LinkedHashSet( criteria.list() ));
         
         listEnc.stream().forEach((enc) -> {
-        	encomiendas.add(enc.getDatatype(true).getConvertor());
+        	encomiendas.add(enc.getDatatype(true).genConvertor());
         });
         return encomiendas;
     }

@@ -127,9 +127,9 @@ public class Pasaje implements Serializable{
     	if(this.getDestino() != null){
     		PuntoRecorrido destino = HibernateUtils.initializeAndUnproxy(this.getDestino());
 	    	if(destino instanceof Terminal){
-	    		result.setOrigen(((Terminal)destino).getDatatype());
+	    		result.setDestino(((Terminal)destino).getDatatype());
 	    	}else{
-	    		result.setOrigen(((Parada)destino).getDatatype());
+	    		result.setDestino(((Parada)destino).getDatatype());
 	    	}
     	}
     	result.setFechaCompra(this.getFechaCompra());

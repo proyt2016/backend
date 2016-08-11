@@ -44,7 +44,8 @@ public class DataReservaConvertor{
     public DataReserva genDataReserva(){
     	DataReserva result = new DataReserva();
     	result.setId(this.getId());
-    	result.setViaje(this.getViaje().genDataViaje());
+    	if(this.getViaje() != null)
+    		result.setViaje(this.getViaje().genDataViaje());
     	result.setPrecio(this.getPrecio());
     	if(this.getOrigen() != null){
 			if(this.getOrigen().getTipo().equals("Parada")){

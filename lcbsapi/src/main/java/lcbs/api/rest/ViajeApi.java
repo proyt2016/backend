@@ -173,8 +173,8 @@ public class ViajeApi {
 	//tested
 	@GET
 	@Path("/getrecorrido/{idRecorrido}")
-	public DataRecorrido obtenerRecorrido(@PathParam("idRecorrido") final String idRecorrido){
-		return repo.obtenerRecorrido(idRecorrido);
+	public DataRecorridoConvertor obtenerRecorrido(@PathParam("idRecorrido") final String idRecorrido){
+		return repo.obtenerRecorrido(idRecorrido).genConvertor();
 	}
 	
 	@GET

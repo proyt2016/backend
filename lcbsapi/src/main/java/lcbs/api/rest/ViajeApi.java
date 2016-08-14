@@ -58,8 +58,12 @@ public class ViajeApi {
 	
 	@POST
 	@Path("/buscarviaje/{pagina}/{elementosPagina}")
-	public List<DataViaje> BuscarViaje(DataViaje filtro, @PathParam("pagina") final Integer pagina, @PathParam("elementosPagina") final Integer ElementosPagina){
-		return repo.BuscarViaje(filtro, pagina, ElementosPagina);
+	public List<DataViajeConvertor> BuscarViaje(DataViaje filtro, @PathParam("pagina") final Integer pagina, @PathParam("elementosPagina") final Integer ElementosPagina){
+		List<DataViajeConvertor> result = new ArrayList<DataViajeConvertor>();
+		repo.BuscarViaje(filtro, pagina, ElementosPagina).forEach((viaje)->{
+			result.add(viaje.genConvertor());
+		});
+		return result;
 	}
 	
 	@POST

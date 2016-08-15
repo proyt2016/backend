@@ -46,8 +46,12 @@ public class ViajeApi {
 	
 	@GET
 	@Path("/getviajesxterminal/{idterminal}/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
-	public List<DataViaje> viajesPorTerminal(@PathParam ("idterminal")String idterminal,@PathParam("pagina") final Integer pagina,@PathParam("elementosAMostrar") final Integer ElementosPagina){
-		return	repo.viajesPorTerminal(idterminal,pagina,ElementosPagina);
+	public List<DataViajeConvertor> viajesPorTerminal(@PathParam ("idterminal")String idterminal,@PathParam("pagina") final Integer pagina,@PathParam("elementosAMostrar") final Integer ElementosPagina){
+		List<DataViajeConvertor> result = new ArrayList<DataViajeConvertor>();
+		repo.viajesPorTerminal(idterminal,pagina,ElementosPagina).forEach((viaje)->{
+			result.add(viaje.genConvertor());
+		});
+		return result;
 		}
 	
 	@GET

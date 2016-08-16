@@ -9,6 +9,11 @@ public class DataTelefono{
 
     public DataTelefono() {}
     
+    public DataTelefono(String tel){
+    	this.descripcion = "Contacto";
+    	this.telefono = tel;
+    }
+    
     public DataTelefono(String desc, String tel) {
     	this.descripcion = desc;
     	this.telefono = tel;

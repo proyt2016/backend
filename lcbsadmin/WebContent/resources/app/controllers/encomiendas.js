@@ -5,7 +5,14 @@
     function encomiendasCtrl($scope, $routeParams, encomiendasService) {
         $scope.encomiendas     = [];
         $scope.encomienda     = null;
+        $scope.filtro     = null;
         $scope.showAlert    = false;
+        $scope.terminales = [];
+        $scope.reglasCobro = [];
+        $scope.emisorStrg = null;
+        $scope.receptorStrg = null;
+        $scope.emisor = null;
+        $scope.receptor = null;
 
         var initialize = function(){
             var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null
@@ -14,17 +21,56 @@
                     $scope.encomienda = data;
                 });
             }else{
-                console.info("no tengo id"+id);
-                encomiendasService.getAll().then(function (data) {
-                    $scope.encomiendas = data;
-                });
+                
             }
+            encomiendasService.getTerminales().then(function (data){
+                $scope.terminales = data;
+            });
+            encomiendasService.getReglasCobro().then(function (data){
+                $scope.reglasCobro = data;
+            });
         }
+
+        $scope.buscarEmisor = function(){
+            encomiendasService.buscarUsuario($scope.emisorStrg).then(function (data) {
+                $scope.emisor = data;
+                if($scope.emisor == null || $scope.emisor == '')
+                    alert('Usuario incorrecto');
+            });
+        }
+
+        $scope.buscarReceptor = function(){
+            encomiendasService.buscarUsuario($scope.receptorStrg).then(function (data) {
+                $scope.receptor = data;
+                if($scope.receptor == null || $scope.receptor == '')
+                    alert('Usuario incorrecto');
+            });
+        }
+
+        $scope.buscarReceptor = function(){
+            encomiendasService.buscarUsuario($scope.receptorStrg).then(function (data) {
+                $scope.receptor = data;
+                if($scope.receptor == null || $scope.receptor == '')
+                    alert('Usuario incorrecto');
+            });
+        }
+
+        $scope.buscar = function(){
+            encomiendasService.buscar($scope.filtro).then(function (data) {
+                $scope.encomiendas = data;
+            });
+        } 
 
         $scope.add = function(){
             $scope.saving   = true;
             var encomienda     = this.encomienda;
-            console.info(encomienda);
+            encomienda["origen"] = $scope.terminales[encomienda["origen"]];
+            encomienda["destino"] = $scope.terminales[encomienda["destino"]];
+            encomienda["reglaCobro"] = $scope.reglasCobro[encomienda["reglaCobro"]];
+            if($scope.emisor != null && $scope.emisor != '')
+                encomienda["emisor"] = $scope.emisor;
+            if($scope.receptor != null && $scope.receptor != '')
+                encomienda["receptor"] = $scope.receptor;
             encomiendasService.add(encomienda).then(
                 function (data) {
                     $scope.saving = false;
@@ -57,7 +103,6 @@
         }
 
         $scope.borrar = function (index) {
-            console.log($scope.encomiendas);
             $scope.saving = true;
             var encomienda = this.encomienda;
 

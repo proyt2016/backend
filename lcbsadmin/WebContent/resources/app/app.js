@@ -33,6 +33,9 @@
 		}).when("/encomiendas/add", {
 		    templateUrl : "app/views/encomiendas/add.html",
 		    controller  : 'encomiendasCtrl'
+		}).when("/encomiendas/search", {
+		    templateUrl : "app/views/encomiendas/search.html",
+		    controller  : 'encomiendasCtrl'
 		}).when("/encomiendas/edit/:id", {
 		    templateUrl : "app/views/encomiendas/edit.html",
 		    controller  : 'encomiendasCtrl'

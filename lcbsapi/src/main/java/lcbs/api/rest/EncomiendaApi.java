@@ -3,6 +3,7 @@
  */
 package lcbs.api.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -38,8 +39,9 @@ public class EncomiendaApi {
 	
 	@POST
 	@Path("/altaencomienda/")
-	public DataEncomienda AltaEncomienda(DataEncomienda enc){
-		return repo.AltaEncomienda(enc);
+	public DataEncomiendaConvertor AltaEncomienda(DataEncomiendaConvertor enc){
+		DataEncomienda encomienda = enc.getDataEncomienda();
+		return repo.AltaEncomienda(encomienda).genConvertor();
 	}
 	
 	@DELETE
@@ -104,10 +106,14 @@ public class EncomiendaApi {
 		return repo.getEncomiendasPorVehiculo(idViaje);
 	}
 	
-	@GET
+	@POST
 	@Path("/buscarencomienda/{pagina:[0-9][0-9]*}/{elementosPagina:[0-9][0-9]*}")
-	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, @PathParam("pagina") final Integer pagina,@PathParam("elementosPagina") final Integer ElementosPagina){
-		return repo.buscarEncomienda(filtro, pagina, ElementosPagina);
+	public List<DataEncomiendaConvertor> buscarEncomienda(DataEncomienda filtro, @PathParam("pagina") final Integer pagina,@PathParam("elementosPagina") final Integer ElementosPagina){
+		List<DataEncomiendaConvertor> result = new ArrayList<DataEncomiendaConvertor>();
+		repo.buscarEncomienda(filtro, pagina, ElementosPagina).forEach((encomienda)->{
+			result.add(encomienda.genConvertor());
+		});
+		return result;
 	}
 	
 	@GET

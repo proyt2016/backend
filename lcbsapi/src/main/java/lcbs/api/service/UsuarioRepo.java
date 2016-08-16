@@ -116,4 +116,8 @@ public class UsuarioRepo {
 	public List<DataUsuario> listarUsuarios(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
 		return ctrUsuario.listarUsuarios(pagina, elementosPagina);
 	}
+
+	public DataUsuario buscarUsuarioPorMail(String mailUsuario) {
+		return ctrUsuario.buscarUsuarioPorMail(mailUsuario);
+	}
 }

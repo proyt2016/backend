@@ -34,9 +34,9 @@ public class Encomienda implements Serializable{
     @GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne
     private PuntoRecorrido origen;
-    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne
     private PuntoRecorrido destino;
     @ManyToOne
     private Usuario emisor;
@@ -106,7 +106,7 @@ public class Encomienda implements Serializable{
 	    	}
     	}
     	if(dt.getDestino() != null){
-	    	if(this.getDestino() instanceof Terminal){
+	    	if(dt.getDestino() instanceof DataTerminal){
 	    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
 	    	}else{
 	    		this.setDestino(new Parada((DataParada)dt.getDestino()));

@@ -97,7 +97,7 @@
         var initMap = function () {
 
             //usamos la API para geolocalizar el usuario
-            navigator.geolocation.getCurrentPosition(
+            /*navigator.geolocation.getCurrentPosition(
               function (position){
                 var coords =  {
                   lng: position.coords.longitude,
@@ -106,7 +106,8 @@
                 setMapa(coords);  //pasamos las coordenadas al metodo para crear el mapa
                 
                
-              },function(error){console.log(error);});
+              },function(error){console.log(error);});*/
+        	  setMapa(new google.maps.LatLng(parseFloat("-34.8940096615171"),parseFloat("-56.16642236709595")));
             
         }
 
@@ -116,7 +117,7 @@
           var map = new google.maps.Map(document.getElementById('map'),
           {
             zoom: 13,
-            center:new google.maps.LatLng(coords.lat,coords.lng),
+            center:coords,
 
           });
 
@@ -132,21 +133,27 @@
           }
 
           var flightPlanCoordinates = [];
-
+          var inicioRecorrido = null;
           for(var i in $scope.puntosDelRecorrido){
             var lats = $scope.puntosDelRecorrido[i].ubicacionMapa.split(",");
-            flightPlanCoordinates.push(new google.maps.LatLng(lats[0],lats[1]));
+            var ltgLngReco = new google.maps.LatLng(lats[0],lats[1]);
+            if(inicioRecorrido == null)
+            	inicioRecorrido = ltgLngReco;
+            flightPlanCoordinates.push(ltgLngReco);
           }
+          if(inicioRecorrido == null)
+          	inicioRecorrido = coords;
 
-              var flightPath = new google.maps.Polyline({
-                path: flightPlanCoordinates,
-                geodesic: true,
-                strokeColor: '#FF0000',
-                strokeOpacity: 1.0,
-                strokeWeight: 2
-              });
+          var flightPath = new google.maps.Polyline({
+            path: flightPlanCoordinates,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+          });
 
-              flightPath.setMap(map);
+          flightPath.setMap(map);
+          map.panTo(inicioRecorrido);
         }
 
         var placeMarkerAndPanTo = function (latLng, map, title, icon) {

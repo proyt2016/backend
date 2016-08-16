@@ -1,0 +1,104 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Busqueda de Encomiendas</h3>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+  <!------------------------------------->
+
+      <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" ng-submit="buscar()">
+
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="origen">Origen <span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <select class="form-control select2" style="width: 100%;" ng-model="filtro.origen" required>
+              <option ng-repeat="iter in terminales" value="{{ $index }}">{{iter.nombre}}</option>
+            </select>
+          <ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="destino">Destino <span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <select class="form-control select2" style="width: 100%;" ng-model="filtro.destino" required>
+              <option ng-repeat="iter in terminales" value="{{ $index }}">{{iter.nombre}}</option>
+            </select>
+          <ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Emisor <span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" id="nombre" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="emisorStrg" ng-blur="buscarEmisor()"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ciEmisor">Cedula de emisor <span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" id="ciEmisor" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="filtro.ciEmisor"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="receptor">Receptor <span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" id="receptor" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="receptorStrg" ng-blur="buscarReceptor()"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ciReceptor">Cedula de receptor <span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" id="apellido" name="ciReceptor" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="0978" ng-model="filtro.ciReceptor"><ul class="parsley-errors-list" id="parsley-id-0978"></ul>
+          </div>
+        </div>
+        <div class="ln_solid"></div>
+        <div class="form-group">
+          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <button class="btn btn-success" ng-disabled="buscando">Buscar</button>
+          </div>
+        </div>
+      </form>
+
+  <!------------------------------------->
+    <div class="x_title">
+      <h2>Resultado de busqueda</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>C&eacute;dula de emisor</th>
+            <th>C&eacute;dula de receptor</th>
+            <th>Direcci&oacute;n de receptor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="encomienda in encomiendas">
+            <td>{{encomienda.ciReceptor}}</td>
+            <td>{{encomienda.ciEmisor}}</td>
+            <td>{{encomienda.direccionReceptor}}</td>
+            <td>
+              <div class="btn-group">
+                <a href="#/encomiendas/edit/{{encomienda.id}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
+                <a class="btn btn-danger btn-xs" ng-click="borrar($index)"><i class="fa fa-trash-o"></i> </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

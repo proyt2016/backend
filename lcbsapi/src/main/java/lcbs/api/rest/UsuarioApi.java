@@ -165,4 +165,10 @@ public class UsuarioApi {
 	public List<DataPerfil> listarPerfiles(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
 		return repo.listarPerfiles(pagina, elementosPagina);
 	}
+	
+	@POST
+	@Path("/buscarusuariopormail/")
+	public DataUsuario buscarUsuarioPorMail(String mailUsuario){
+		return repo.buscarUsuarioPorMail(mailUsuario);
+	}
 }

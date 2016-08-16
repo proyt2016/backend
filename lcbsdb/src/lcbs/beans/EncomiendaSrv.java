@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+import java.util.Date;
+
 /**
  * Session Bean implementation class CuponeraSrv
  */
@@ -69,6 +71,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     public DataEncomienda crearEncomienda(DataEncomienda enc){
     	Encomienda realObj = new Encomienda(enc);
     	realObj.setEliminada(false);
+    	realObj.setFechaIngreso(new Date());
         //guardo la encomienda en bd
         em.persist(realObj);
         return realObj.getDatatype(true);

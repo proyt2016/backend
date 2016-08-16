@@ -15,4 +15,5 @@ public interface UsuarioLocalApi {
 	public DataUsuario getUsuario(String usu);
 	public DataUsuario crearUsuario(DataUsuario usu);
 	public void darBajaUsuario(String idUsuario);
+	public DataUsuario buscarUsuarioPorMail(String mailUsuario);
 }

@@ -87,7 +87,7 @@
         var initMap = function () {
 
             //usamos la API para geolocalizar el usuario
-            navigator.geolocation.getCurrentPosition(
+            /*navigator.geolocation.getCurrentPosition(
               function (position){
                 var coords =  {
                   lng: position.coords.longitude,
@@ -96,7 +96,8 @@
                 setMapa(coords);  //pasamos las coordenadas al metodo para crear el mapa
                 
                
-              },function(error){console.log(error);});
+              },function(error){console.log(error);});*/
+            setMapa(new google.maps.LatLng(parseFloat("-34.8940096615171"),parseFloat("-56.16642236709595")));
             
         }
 
@@ -106,7 +107,7 @@
           var map = new google.maps.Map(document.getElementById('map'),
           {
             zoom: 13,
-            center:new google.maps.LatLng(coords.lat,coords.lng),
+            center:coords,
 
           });
 
@@ -126,6 +127,7 @@
           map.addListener('click', function(e) {
             placeMarkerAndPanTo(e.latLng, map, 'Nuevo punto');
           });
+          map.panTo(coords);
         }
 
         var placeMarkerAndPanTo = function (latLng, map, title, icon) {

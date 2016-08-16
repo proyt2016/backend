@@ -92,5 +92,17 @@ public class UsuarioSrv implements UsuarioLocalApi {
         usu.setEliminado(true);
         this.modificarUsuario(usu);
     }
+
+	public DataUsuario buscarUsuarioPorMail(String mailUsuario) {
+		Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Usuario.class);
+    	criteria.add(Restrictions.eq("email.email", mailUsuario));
+        List<Usuario> listUsu = criteria.list();
+        if(listUsu.size() > 0){
+	    	DataUsuario usuario = listUsu.get(0).getDatatype(true);
+	    	return usuario;
+        }
+        return null;
+	}
    
 }

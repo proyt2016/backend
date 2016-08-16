@@ -120,7 +120,6 @@ public class UsuarioCtrl implements IUsuario{
 
 	@Override
 	public boolean loginEmpleado(String mail, String clave) {
-		// TODO Auto-generated method stub
 		return srvEmpleado.loginUsuario(mail, clave);
 	}
 
@@ -147,6 +146,11 @@ public class UsuarioCtrl implements IUsuario{
 	@Override
 	public List<DataUsuario> listarUsuarios(Integer pagina, Integer elementosPagina) {
 		return srvUsuario.obtenerUsuarios(pagina, elementosPagina);
+	}
+
+	@Override
+	public DataUsuario buscarUsuarioPorMail(String mailUsuario) {
+		return srvUsuario.buscarUsuarioPorMail(mailUsuario);
 	}
 	
 	

@@ -75,13 +75,13 @@ public class DataEncomiendaConvertor {
     	     }
     	}
     	if(this.getDestino()!=null){
-    		if(this.getOrigen().getTipo().equals("Terminal")){
-    			result.setOrigen(new DataTerminal(this.getOrigen().getId(),this.getOrigen().getNombre(),this.getOrigen().getUbicacionMapa(),
-    					this.getOrigen().getTelefonosContacto(),this.getOrigen().getMailsDeContacto(),this.getOrigen().getAceptaEncomiendas(),
-    					this.getOrigen().getEliminado()));
-    		}if(this.getOrigen().getTipo().equals("Parada")){
-    			result.setOrigen(new DataParada(this.getOrigen().getId(),this.getOrigen().getNombre(),this.getOrigen().getUbicacionMapa(),
-    					this.getOrigen().getEliminado()));
+    		if(this.getDestino().getTipo().equals("Terminal")){
+    			result.setDestino(new DataTerminal(this.getDestino().getId(),this.getDestino().getNombre(),this.getDestino().getUbicacionMapa(),
+    					this.getDestino().getTelefonosContacto(),this.getDestino().getMailsDeContacto(),this.getDestino().getAceptaEncomiendas(),
+    					this.getDestino().getEliminado()));
+    		}if(this.getDestino().getTipo().equals("Parada")){
+    			result.setDestino(new DataParada(this.getDestino().getId(),this.getDestino().getNombre(),this.getDestino().getUbicacionMapa(),
+    					this.getDestino().getEliminado()));
     	     }
     	}
     	if(this.getEmisor()!=null){

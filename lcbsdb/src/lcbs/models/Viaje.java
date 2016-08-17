@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -42,7 +43,9 @@ public class Viaje implements Serializable {
 	@OneToMany(fetch=FetchType.LAZY)
 	@IndexColumn(name="LIST_INDEX")
 	private List<Empleado> empleados;
-	private Vehiculo coche;
+	@ManyToMany(fetch=FetchType.LAZY)
+    @IndexColumn(name="LIST_INDEX")
+	private List<Vehiculo> coches;
 	@OneToMany
 	@IndexColumn(name="LIST_INDEX")
 	private List<Encomienda> encomiendas;
@@ -53,13 +56,13 @@ public class Viaje implements Serializable {
 	public Viaje() {
 	}
 
-	public Viaje(String id, Recorrido rec, Horario hor, Date fecSalida, List<Empleado> emp, Vehiculo coche, List<Encomienda> enc, List<Reserva> res) {
+	public Viaje(String id, Recorrido rec, Horario hor, Date fecSalida, List<Empleado> emp, List<Vehiculo> coches, List<Encomienda> enc, List<Reserva> res) {
 		this.id = id;
 		this.recorrido = rec;
 		this.horario = hor;
 		this.fechaSalida = fecSalida;
 		this.empleados = emp;
-		this.coche = coche;
+		this.coches = coches;
 		this.encomiendas = enc;
 		this.reservas = res;
 	}
@@ -80,8 +83,12 @@ public class Viaje implements Serializable {
 	        });
 	    	this.setEmpleados(aux);
 		}
-		if(dt.getCoche() != null){
-			this.setCoche(new Vehiculo(dt.getCoche()));
+		if(dt.getCoches() != null){
+			List<Vehiculo> aux = new ArrayList<Vehiculo>();
+	    	dt.getCoches().stream().forEach((co) -> {
+	    		aux.add(new Vehiculo(co));
+	        });
+	    	this.setCoches(aux);
 		}
 		if(dt.getEncomiendas() != null){
 			List<Encomienda> auxEnc = new ArrayList<Encomienda>();
@@ -114,8 +121,13 @@ public class Viaje implements Serializable {
 	        });
 	    	result.setEmpleados(aux);
     	}
-		if(this.getCoche()!=null)
-			result.setCoche(this.getCoche().getDatatype(false));
+		if(this.getCoches()!=null && conHijos){
+			List<DataVehiculo> auxEnc = new ArrayList<DataVehiculo>();
+			this.getCoches().stream().forEach((co) -> {
+	    		auxEnc.add(co.getDatatype(false));
+	        });
+	    	result.setCoches(auxEnc);
+    	}
 		if(this.getEncomiendas()!=null && conHijos){
 			List<DataEncomienda> auxEnc = new ArrayList<DataEncomienda>();
 			this.getEncomiendas().stream().forEach((enc) -> {
@@ -173,12 +185,12 @@ public class Viaje implements Serializable {
 		return this.empleados;
 	}
 
-	public void setCoche(Vehiculo val) {
-		this.coche = val;
+	public void setCoches(List<Vehiculo> val) {
+		this.coches = val;
 	}
 
-	public Vehiculo getCoche() {
-		return this.coche;
+	public List<Vehiculo> getCoches() {
+		return this.coches;
 	}
 
 	public void setEncomiendas(List<Encomienda> val) {

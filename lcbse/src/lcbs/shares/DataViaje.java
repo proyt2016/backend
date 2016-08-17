@@ -17,7 +17,7 @@ public class DataViaje{
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaSalida;
     private List<DataEmpleado> empleados;
-    private DataVehiculo coche;
+    private List<DataVehiculo> coches;
     private List<DataEncomienda> encomiendas;
     private List<DataReserva> reservas;
     private String idOrigen;
@@ -28,13 +28,13 @@ public class DataViaje{
 
     public DataViaje() {}
     
-    public DataViaje(String id, DataRecorrido rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, DataVehiculo coche, List<DataEncomienda> enc, List<DataReserva> res, String idOr, String idDest, String tipoHor) {
+    public DataViaje(String id, DataRecorrido rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, List<DataVehiculo> coches, List<DataEncomienda> enc, List<DataReserva> res, String idOr, String idDest, String tipoHor) {
         this.id = id;
     	this.recorrido = rec;
         this.horario = hor;
         this.fechaSalida = fecSalida;
         this.empleados = emp;
-        this.coche = coche;
+        this.coches = coches;
         this.encomiendas = enc;
         this.reservas = res;
         this.idOrigen = idOr;
@@ -50,7 +50,13 @@ public class DataViaje{
     	result.setHorario(this.getHorario());
     	result.setFechaSalida(this.getFechaSalida());
     	result.setEmpleados(this.getEmpleados());
-    	result.setCoche(this.getCoche());
+    	if(this.getCoches() != null){
+    		List<DataVehiculo> cocheToAdd = new ArrayList<DataVehiculo>();
+    		this.getCoches().stream().forEach((co) -> {
+    			cocheToAdd.add(co);
+    		});
+    		result.setCoches(cocheToAdd);
+    	}
     	if(this.getEncomiendas() != null){
     		List<DataEncomiendaConvertor> encToAdd = new ArrayList<DataEncomiendaConvertor>();
     		this.getEncomiendas().stream().forEach((enc) -> {
@@ -111,12 +117,12 @@ public class DataViaje{
         return this.empleados;
     }
 
-    public void setCoche(DataVehiculo val){
-        this.coche = val;
+    public void setCoches(List<DataVehiculo> val){
+        this.coches = val;
     }
     
-    public DataVehiculo getCoche(){
-        return this.coche;
+    public List<DataVehiculo> getCoches(){
+        return this.coches;
     }
     
     public void setEncomiendas(List<DataEncomienda> val){

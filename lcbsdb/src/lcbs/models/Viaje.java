@@ -122,11 +122,11 @@ public class Viaje implements Serializable {
 	    	result.setEmpleados(aux);
     	}
 		if(this.getCoches()!=null && conHijos){
-			List<DataVehiculo> auxEnc = new ArrayList<DataVehiculo>();
+			List<DataVehiculo> auxC = new ArrayList<DataVehiculo>();
 			this.getCoches().stream().forEach((co) -> {
-	    		auxEnc.add(co.getDatatype(false));
+	    		auxC.add(co.getDatatype(false));
 	        });
-	    	result.setCoches(auxEnc);
+	    	result.setCoches(auxC);
     	}
 		if(this.getEncomiendas()!=null && conHijos){
 			List<DataEncomienda> auxEnc = new ArrayList<DataEncomienda>();

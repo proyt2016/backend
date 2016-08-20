@@ -270,9 +270,9 @@ INSERT INTO viaje (id, fechasalida, recorrido_id) VALUES ('106e6105-0248-478e-a5
 INSERT INTO viaje (id, fechasalida, recorrido_id) VALUES ('c090a88c-8fa6-4004-adc2-3b72c7c7e848', '2016-10-09 21:00:00', '4d0609ce-eb2e-437c-be86-fb6ab22e5570');
 
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('8d957d43-1997-4617-9375-381e73b04024', '65378fa8-8931-44c9-8a89-895af6a37c33',  0);
-INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('d0260ba1-51ea-4cd2-97a1-665110581835', '352f3329-90d4-4cfa-b0bd-4202d152dcb0',  1);
-INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('526feac2-20d5-4c2d-8d6c-93df920461fb', 'c20854d0-4229-4ee9-9101-4f95681eaa21',  2);
-INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('b1a84a3d-b280-42c6-b288-4bbd6bbadb62', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  3);
-INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('627e9822-1b5b-4736-9846-2fff81adb052', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  4);
-INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('83cac1e7-4e7f-40fc-b29f-a2f08574480e', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  5);
-INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('cc9b5ea9-fb86-4f6a-a949-302ab8fdc024', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  6);
+INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('d0260ba1-51ea-4cd2-97a1-665110581835', '352f3329-90d4-4cfa-b0bd-4202d152dcb0',  0);
+INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('526feac2-20d5-4c2d-8d6c-93df920461fb', 'c20854d0-4229-4ee9-9101-4f95681eaa21',  0);
+INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('b1a84a3d-b280-42c6-b288-4bbd6bbadb62', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
+INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('627e9822-1b5b-4736-9846-2fff81adb052', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
+INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('83cac1e7-4e7f-40fc-b29f-a2f08574480e', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
+INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('cc9b5ea9-fb86-4f6a-a949-302ab8fdc024', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);

@@ -83,6 +83,7 @@
     create table GrupoHorario (
         id varchar(255) not null,
         nombre varchar(255),
+        tipo varchar(255),
         primary key (id)
     );
 
@@ -323,7 +324,6 @@
 
     create table Viaje (
         id varchar(255) not null,
-        coche bytea,
         fechaSalida timestamp,
         horario_id varchar(255),
         recorrido_id varchar(255),
@@ -347,6 +347,13 @@
     create table Viaje_Reserva (
         Viaje_id varchar(255) not null,
         reservas_id varchar(255) not null,
+        LIST_INDEX int4 not null,
+        primary key (Viaje_id, LIST_INDEX)
+    );
+
+    create table Viaje_Vehiculo (
+        Viaje_id varchar(255) not null,
+        coches_id varchar(255) not null,
         LIST_INDEX int4 not null,
         primary key (Viaje_id, LIST_INDEX)
     );
@@ -660,6 +667,16 @@
 
     alter table Viaje_Reserva 
         add constraint FK_hfinyo80vii4dt8h6nvdmp80l 
+        foreign key (Viaje_id) 
+        references Viaje;
+
+    alter table Viaje_Vehiculo 
+        add constraint FK_gfjj2ndw3v3b1aimy7bomb2bh 
+        foreign key (coches_id) 
+        references Vehiculo;
+
+    alter table Viaje_Vehiculo 
+        add constraint FK_kygwggiv599v0v7h8ljainla3 
         foreign key (Viaje_id) 
         references Viaje;
 

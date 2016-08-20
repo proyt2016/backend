@@ -33,7 +33,7 @@ public class Encomienda implements Serializable{
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-
+    
     @ManyToOne
     private PuntoRecorrido origen;
     @ManyToOne
@@ -41,6 +41,8 @@ public class Encomienda implements Serializable{
     @ManyToOne
     private Usuario emisor;
     private String ciEmisor;
+    @ManyToOne
+    private String coche_codigo;
     /*@Embedded
     private Telefono telEmisor;
         */
@@ -74,7 +76,7 @@ public class Encomienda implements Serializable{
 
     public Encomienda() {}
     
-    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim) {
+    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, String cod_coche) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -94,6 +96,7 @@ public class Encomienda implements Serializable{
         this.fechaEntrega = fecEn;
         this.retiraEnSucursal = retiraSuc;
         this.eliminada = elim;
+        this.coche_codigo = cod_coche;
     }
     
     public Encomienda(DataEncomienda dt){
@@ -112,6 +115,8 @@ public class Encomienda implements Serializable{
 	    		this.setDestino(new Parada((DataParada)dt.getDestino()));
 	    	}
     	}
+    	if(dt.getCodigoCocheEncomienda()!=null)
+    		this.setCocheEncomienda(this.getCodigoCocheEncomienda());
     	if(dt.getEmisor() != null)
     		this.setEmisor(new Usuario(dt.getEmisor()));
     	this.setCiEmisor(dt.getCiEmisor());
@@ -157,6 +162,8 @@ public class Encomienda implements Serializable{
     			result.setDestino(((Parada)this.getDestino()).getDatatype());
     		}
     	}
+    	if(this.getCodigoCocheEncomienda()!=null)
+    		result.setCocheEncomienda(this.getCodigoCocheEncomienda());
     	if(this.getEmisor()!=null)
     		result.setEmisor(this.getEmisor().getDatatype(false));
     	result.setCiEmisor(this.getCiEmisor());
@@ -185,6 +192,14 @@ public class Encomienda implements Serializable{
     	result.setFechaEntrega(this.getFechaEntrega());
     	result.setRetiraEnSucursal(this.getRetiraEnSucursal());
     	return result;
+    }
+    
+    public void setCocheEncomienda(String codCoche){
+    	this.coche_codigo = codCoche;
+    }
+    
+    public String getCodigoCocheEncomienda(){
+    	return this.coche_codigo;
     }
     
     public void setId(String val){

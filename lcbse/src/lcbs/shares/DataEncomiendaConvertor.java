@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -25,6 +26,8 @@ public class DataEncomiendaConvertor {
     private DataViaje viajeAsignado;
     private List<DataHistorialEstadosEncomienda> estados;
     private DataEstadosEncomienda estadoActual;
+    @ManyToOne
+    private String coche_codigo;
     @XmlElement
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaIngreso;
@@ -38,7 +41,7 @@ public class DataEncomiendaConvertor {
 
     public DataEncomiendaConvertor() {}
     
-    public DataEncomiendaConvertor(String id, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, float mont, boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim) {
+    public DataEncomiendaConvertor(String id, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, float mont, boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, String codCoche) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -59,6 +62,7 @@ public class DataEncomiendaConvertor {
         this.fechaEntrega = fecEn;
         this.retiraEnSucursal = retiraSuc;
         this.eliminada = elim;
+        this.coche_codigo = codCoche;
     }
     
     public DataEncomienda getDataEncomienda(){
@@ -83,6 +87,10 @@ public class DataEncomiendaConvertor {
     			result.setDestino(new DataParada(this.getDestino().getId(),this.getDestino().getNombre(),this.getDestino().getUbicacionMapa(),
     					this.getDestino().getEliminado()));
     	     }
+    	}
+    	
+    	if(this.getCodigoCocheEncomienda()!=null){
+    		result.setCocheEncomienda(this.getCodigoCocheEncomienda());
     	}
     	if(this.getEmisor()!=null){
     		result.setEmisor(this.getEmisor());}
@@ -126,6 +134,14 @@ public class DataEncomiendaConvertor {
     	result.setRetiraEnSucursal(this.getRetiraEnSucursal());
     	result.setEliminada(this.getEliminada());
        	return result;
+    }
+    
+    public void setCocheEncomienda(String codCoche){
+    	this.coche_codigo = codCoche;
+    }
+    
+    public String getCodigoCocheEncomienda(){
+    	return this.coche_codigo;
     }
     
     public void setId(String val){

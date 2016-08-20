@@ -96,7 +96,8 @@ public class ViajeSrv implements ViajeLocalApi {
     	List<DataViaje> viajes = new ArrayList();
         Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Viaje.class, "viaje");
-    	criteria.createCriteria("recorrido").createCriteria("puntosDeRecorrido").add(Restrictions.eq("id", idterminal));
+    	criteria.createAlias("viaje.recorrido", "puntos");
+    	criteria.createCriteria("puntos.puntosDeRecorrido").add(Restrictions.eq("id", idterminal));
     	//criteria.add(Restrictions.eq("puntos.id", idterminal));
     	
     	criteria.setFirstResult((pagina - 1) * ElementosPagina);

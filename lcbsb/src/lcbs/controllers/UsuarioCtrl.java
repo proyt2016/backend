@@ -119,7 +119,7 @@ public class UsuarioCtrl implements IUsuario{
 	}
 
 	@Override
-	public boolean loginEmpleado(String mail, String clave) {
+	public DataEmpleado loginEmpleado(String mail, String clave) {
 		return srvEmpleado.loginUsuario(mail, clave);
 	}
 

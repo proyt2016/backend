@@ -276,3 +276,25 @@ INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('b1a84a3d-b
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('627e9822-1b5b-4736-9846-2fff81adb052', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  4);
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('83cac1e7-4e7f-40fc-b29f-a2f08574480e', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  5);
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('cc9b5ea9-fb86-4f6a-a949-302ab8fdc024', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  6);
+
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04045', '500.00', '82bc4ed2-043b-44e5-833d-20f07b740392', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04065', '600.00', 'f4f165d3-0881-4e8b-8208-ab8adc29a6c7', '14926e20-1da5-4bf2-9135-abf198535bc5');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04125', '450.50', 'c6253122-990a-4891-9456-6d5c68f0c2a9', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04001', '366.50', 'f4f165d3-0881-4e8b-8208-ab8adc29a6c7', '63b84f4b-9b50-40d3-8eed-4e8c0203244d');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b07849', '280.50', 'b61d2464-77e3-47f7-bc18-aa75871de5c6', 'c6253122-990a-4891-9456-6d5c68f0c2a9');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04122', '950.50', 'c6253122-990a-4891-9456-6d5c68f0c2a9', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b01111', '520.50', 'b61d2464-77e3-47f7-bc18-aa75871de5c6', '82bc4ed2-043b-44e5-833d-20f07b740392');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04222', '460.50', 'f4f165d3-0881-4e8b-8208-ab8adc29a6c7', '63b84f4b-9b50-40d3-8eed-4e8c0203244d');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04231', '1050.50', 'f4f165d3-0881-4e8b-8208-ab8adc29a6c7', '4ea4ba73-a2c1-4821-9c9e-09369aacbabf');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b03321', '1450.50', 'f4f165d3-0881-4e8b-8208-ab8adc29a6c7', '2db79cf9-3811-4f3e-b1b4-23b86b3a8283'	);
+
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('11f80976-5b98-4672-84e9-7a249c23b7ad', '8d957d43-1997-4617-9375-381e73b04045', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('4d0609ce-eb2e-437c-be86-fb6ab22e5570', '8d957d43-1997-4617-9375-381e73b04065', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('5f30627f-8f24-476b-8b48-f9ede4ea91dd', '8d957d43-1997-4617-9375-381e73b04125', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('8fa8bab2-6e31-4459-a08e-5347de6eae06', '8d957d43-1997-4617-9375-381e73b04001', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('96e77f63-25bf-4b8d-b116-fdbd1983f1e2', '8d957d43-1997-4617-9375-381e73b07849', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('a0b6eda1-867e-4bf6-9b4d-711820bfdcc0', '8d957d43-1997-4617-9375-381e73b04122', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('a483a3ee-ba85-4e6e-aa8c-d4ba987b5f65', '8d957d43-1997-4617-9375-381e73b01111', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('b5acbe97-d2a3-4742-8e62-f421d3cba89b', '8d957d43-1997-4617-9375-381e73b04222', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('bb8186db-2af4-4081-8c21-302ab8fdc024', '8d957d43-1997-4617-9375-381e73b04231', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('c2b01749-0cba-44e1-9165-bf6bd629528e', '8d957d43-1997-4617-9375-381e73b03321', 0);

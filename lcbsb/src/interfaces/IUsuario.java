@@ -11,7 +11,7 @@ public interface IUsuario {
 	public DataUsuario AltaUsuario(DataUsuario usuario);
 	public void ModificarUsuario(DataUsuario usuario);
 	public void BajaUsuario(String idUsuario);
-	public boolean loginEmpleado(String usuario, String clave);
+	public DataEmpleado loginEmpleado(String usuario, String clave);
 	public DataEmpleado getEmpleado(String idEmpleado);
 	public DataEmpleado AltaEmpleado(DataEmpleado empleado);
 	public List<DataEmpleado> listarEmpleados(Integer pagina, Integer elementosPagina);

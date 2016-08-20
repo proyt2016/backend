@@ -42,7 +42,7 @@ public class Encomienda implements Serializable{
     private Usuario emisor;
     private String ciEmisor;
     @ManyToOne
-    private String coche_codigo;
+    private Vehiculo coche_codigo;
     /*@Embedded
     private Telefono telEmisor;
         */
@@ -76,7 +76,7 @@ public class Encomienda implements Serializable{
 
     public Encomienda() {}
     
-    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, String cod_coche) {
+    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, Vehiculo cod_coche) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -116,7 +116,8 @@ public class Encomienda implements Serializable{
 	    	}
     	}
     	if(dt.getCodigoCocheEncomienda()!=null)
-    		this.setCocheEncomienda(this.getCodigoCocheEncomienda());
+    		this.setCocheEncomienda(new Vehiculo(dt.getCodigoCocheEncomienda()));
+    
     	if(dt.getEmisor() != null)
     		this.setEmisor(new Usuario(dt.getEmisor()));
     	this.setCiEmisor(dt.getCiEmisor());
@@ -162,8 +163,9 @@ public class Encomienda implements Serializable{
     			result.setDestino(((Parada)this.getDestino()).getDatatype());
     		}
     	}
+    	
     	if(this.getCodigoCocheEncomienda()!=null)
-    		result.setCocheEncomienda(this.getCodigoCocheEncomienda());
+    		result.setCocheEncomienda(this.getCodigoCocheEncomienda().getDatatype(false));    		    	
     	if(this.getEmisor()!=null)
     		result.setEmisor(this.getEmisor().getDatatype(false));
     	result.setCiEmisor(this.getCiEmisor());
@@ -194,11 +196,11 @@ public class Encomienda implements Serializable{
     	return result;
     }
     
-    public void setCocheEncomienda(String codCoche){
+    public void setCocheEncomienda(Vehiculo codCoche){
     	this.coche_codigo = codCoche;
     }
     
-    public String getCodigoCocheEncomienda(){
+    public Vehiculo getCodigoCocheEncomienda(){
     	return this.coche_codigo;
     }
     

@@ -2,6 +2,8 @@
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -50,10 +52,8 @@ public class SchemaHandler implements ISchemaHandler{
 		}
 		log.info("Changing current Schema to: "+ name);
 		try {  
-			
-			File file =  new File("META-INF/schema.ddl");
-			log.info("====="); 
-			Scanner scanner = new Scanner(file).useDelimiter(delimiter);
+			InputStream schemadll = SchemaHandler.class.getResourceAsStream("schema.ddl");
+			Scanner scanner = new Scanner(schemadll).useDelimiter(delimiter);
 		    while(scanner.hasNext()) {
 		    	String sql = scanner.next();
 		    	if(!sql.isEmpty())

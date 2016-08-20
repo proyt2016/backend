@@ -1,6 +1,6 @@
 package lcbs.models;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import lcbs.shares.*;
 
 import javax.persistence.Entity;

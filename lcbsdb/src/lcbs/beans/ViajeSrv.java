@@ -117,8 +117,6 @@ public class ViajeSrv implements ViajeLocalApi {
 		
         Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Viaje.class);
-    	if(filtro.getCoche() != null)
-    		criteria.add(Restrictions.eq("coche", filtro.getCoche().getId()));
     	if(filtro.getRecorrido() != null)
     		criteria.add(Restrictions.eq("recorrido.id", filtro.getRecorrido().getId()));
     	if(filtro.getHorario() != null)
@@ -139,8 +137,6 @@ public class ViajeSrv implements ViajeLocalApi {
     	
     	
     	DetachedCriteria subquery = DetachedCriteria.forClass(Viaje.class);
-    	if(filtro.getCoche() != null)
-    		subquery.add(Restrictions.eq("coche", filtro.getCoche().getId()));
     	if(filtro.getRecorrido() != null)
     		subquery.add(Restrictions.eq("recorrido.id", filtro.getRecorrido().getId()));
     	if(filtro.getHorario() != null)

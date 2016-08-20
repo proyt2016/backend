@@ -60,7 +60,7 @@ public class EncomiendaApi {
 	@Path("/asignarencomiendavehiculo/")
 	public void AsignarEncomiendaVehiculo(String data) {
 		JSONObject obj = new JSONObject(data);
-		repo.AsignarEncomiendasVehiculo(obj.getString("IdEncomienda"), obj.getString("idViaje"));
+		repo.AsignarEncomiendasVehiculo(obj.getString("IdEncomienda"), obj.getString("idViaje"), obj.getString("idCoche"));
 	}
 	
 		

@@ -88,8 +88,8 @@ public class EncomiendaRepo {
 	}
 	
 	
-	public void AsignarEncomiendasVehiculo(String IdEncomienda, String idViaje){
-		ctrEncomienda.AsignarEncomiendasVehiculo(IdEncomienda, idViaje);
+	public void AsignarEncomiendasVehiculo(String IdEncomienda, String idViaje, String idCoche){
+		ctrEncomienda.AsignarEncomiendasVehiculo(IdEncomienda, idViaje, idCoche);
 	}
 	
 	

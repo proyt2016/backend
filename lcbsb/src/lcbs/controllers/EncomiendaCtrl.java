@@ -120,13 +120,17 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 
 	@Override
-	public void AsignarEncomiendasVehiculo(String IdEncomienda,String idViaje) {
+	public void AsignarEncomiendasVehiculo(String IdEncomienda,String idViaje, String idCoche) {
 		DataViaje viaje = srvViaje.getViaje(idViaje);
 		DataEncomienda encomienda = srvEncomienda.getEncomienda(IdEncomienda);
+		DataVehiculo coche = srvVehiculo.getVehiculo(idCoche);
 		List<DataEncomienda> encomiendas = viaje.getEncomiendas();
 		encomiendas.add(encomienda);
 		viaje.setEncomiendas(encomiendas);
-		srvViaje.modificarViaje(viaje);;
+		encomienda.setViajeAsignado(viaje);
+		encomienda.setCocheEncomienda(coche);
+		srvEncomienda.modificarEncomienda(encomienda);
+		srvViaje.modificarViaje(viaje);
 	}
 
 	@Override

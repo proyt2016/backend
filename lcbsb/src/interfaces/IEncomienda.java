@@ -28,7 +28,7 @@ public interface IEncomienda {
 	public DataEncomienda getEncomienda(String idEncomienda);
 	public void setEstadoEncomienda(String idEncomienda, DataEstadosEncomienda dataEstado);
 	public List<DataEncomienda> getEncomiendasPorVehiculo(String idViaje);
-	public void AsignarEncomiendasVehiculo(String IdEncomienda, String idViaje);
+	public void AsignarEncomiendasVehiculo(String IdEncomienda, String idViaje, String idCoche);
 	public List<DataHistorialEstadosEncomienda> VerEstadosEncomienda(String idEncomienda);
 	public void crearReglaDeCobro(DataReglaCobroEncomienda rdc);
 	public void editarEncomienda(DataEncomienda encomienda);

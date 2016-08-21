@@ -101,8 +101,8 @@ public class EncomiendaApi {
 	}
 	
 	@GET
-	@Path("/getencomiendasporvehiculo/")
-	public List<DataEncomienda> getEncomiendasPorVehiculo(String idViaje){
+	@Path("/getencomiendasporvehiculo/{idViaje}")
+	public List<DataEncomienda> getEncomiendasPorVehiculo(@PathParam("idViaje") final String idViaje){
 		return repo.getEncomiendasPorVehiculo(idViaje);
 	}
 	

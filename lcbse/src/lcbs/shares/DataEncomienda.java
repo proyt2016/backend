@@ -3,6 +3,8 @@ package lcbs.shares;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -28,6 +30,8 @@ public class DataEncomienda {
     private DataViaje viajeAsignado;
     private List<DataHistorialEstadosEncomienda> estados;
     private DataEstadosEncomienda estadoActual;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private int codigoEncomienda;
     @ManyToOne
     private DataVehiculo coche_codigo;
     @XmlElement
@@ -43,7 +47,7 @@ public class DataEncomienda {
 
     public DataEncomienda() {}
     
-    public DataEncomienda(String id, DataPuntoRecorrido orig, DataPuntoRecorrido dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, float mont, boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, DataVehiculo codCoche) {
+    public DataEncomienda(String id, DataPuntoRecorrido orig, DataPuntoRecorrido dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, float mont, boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, DataVehiculo codCoche, int codEnco) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -65,6 +69,7 @@ public class DataEncomienda {
         this.retiraEnSucursal = retiraSuc;
         this.eliminada = elim;
         this.coche_codigo = codCoche;
+        this.codigoEncomienda = codEnco;
     }
     
     public DataEncomiendaConvertor genConvertor(){
@@ -132,6 +137,14 @@ public class DataEncomienda {
     	result.setEliminada(this.getEliminada());
       	
     	return result;
+    }
+    
+    public void setCodigoEncomienda(int codEnco){
+    	this.codigoEncomienda = codEnco;
+    }
+    
+    public int getCodigoEncomienda(){
+    	return this.codigoEncomienda;
     }
     
     public void setCocheEncomienda(DataVehiculo codCoche){

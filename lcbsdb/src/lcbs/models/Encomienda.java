@@ -33,6 +33,8 @@ public class Encomienda implements Serializable{
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private int codigoEncomienda;
     
     @ManyToOne
     private PuntoRecorrido origen;
@@ -76,7 +78,7 @@ public class Encomienda implements Serializable{
 
     public Encomienda() {}
     
-    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, Vehiculo cod_coche) {
+    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, Vehiculo cod_coche, int codEnco) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -97,6 +99,7 @@ public class Encomienda implements Serializable{
         this.retiraEnSucursal = retiraSuc;
         this.eliminada = elim;
         this.coche_codigo = cod_coche;
+        this.codigoEncomienda = codEnco;
     }
     
     public Encomienda(DataEncomienda dt){
@@ -194,6 +197,14 @@ public class Encomienda implements Serializable{
     	result.setFechaEntrega(this.getFechaEntrega());
     	result.setRetiraEnSucursal(this.getRetiraEnSucursal());
     	return result;
+    }
+    
+    public void setCodigoEncomienda(int codigoEnco){
+    	this.codigoEncomienda = codigoEnco;
+    }
+    
+    public int getCodigoEncomienda(){
+    	return this.codigoEncomienda;
     }
     
     public void setCocheEncomienda(Vehiculo codCoche){

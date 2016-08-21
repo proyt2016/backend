@@ -44,7 +44,7 @@ public class Encomienda implements Serializable{
     private Usuario emisor;
     private String ciEmisor;
     @ManyToOne
-    private Vehiculo coche_codigo;
+    private Vehiculo cocheAsignado;
     /*@Embedded
     private Telefono telEmisor;
         */
@@ -98,8 +98,8 @@ public class Encomienda implements Serializable{
         this.fechaEntrega = fecEn;
         this.retiraEnSucursal = retiraSuc;
         this.eliminada = elim;
-        this.coche_codigo = cod_coche;
         this.codigoEncomienda = codEnco;
+        this.cocheAsignado = cod_coche;
     }
     
     public Encomienda(DataEncomienda dt){
@@ -118,8 +118,8 @@ public class Encomienda implements Serializable{
 	    		this.setDestino(new Parada((DataParada)dt.getDestino()));
 	    	}
     	}
-    	if(dt.getCodigoCocheEncomienda()!=null)
-    		this.setCocheEncomienda(new Vehiculo(dt.getCodigoCocheEncomienda()));
+    	if(dt.getCocheAsignado()!=null)
+    		this.setCocheAsignado(new Vehiculo(dt.getCocheAsignado()));
     
     	if(dt.getEmisor() != null)
     		this.setEmisor(new Usuario(dt.getEmisor()));
@@ -167,8 +167,8 @@ public class Encomienda implements Serializable{
     		}
     	}
     	
-    	if(this.getCodigoCocheEncomienda()!=null)
-    		result.setCocheEncomienda(this.getCodigoCocheEncomienda().getDatatype(false));    		    	
+    	if(this.getCocheAsignado()!=null)
+    		result.setCocheAsignado(this.getCocheAsignado().getDatatype(false));    		    	
     	if(this.getEmisor()!=null)
     		result.setEmisor(this.getEmisor().getDatatype(false));
     	result.setCiEmisor(this.getCiEmisor());
@@ -207,12 +207,12 @@ public class Encomienda implements Serializable{
     	return this.codigoEncomienda;
     }
     
-    public void setCocheEncomienda(Vehiculo codCoche){
-    	this.coche_codigo = codCoche;
+    public void setCocheAsignado(Vehiculo val){
+    	this.cocheAsignado = val;
     }
     
-    public Vehiculo getCodigoCocheEncomienda(){
-    	return this.coche_codigo;
+    public Vehiculo getCocheAsignado(){
+    	return this.cocheAsignado;
     }
     
     public void setId(String val){

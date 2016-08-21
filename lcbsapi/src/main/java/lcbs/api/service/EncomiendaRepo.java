@@ -135,4 +135,8 @@ public class EncomiendaRepo {
 		return ctrEncomienda.getEstadoEncomienda(idEstadoEncomienda);
 	}
 	
+	public DataEncomienda getEncomiendaXcodigo(int codigoEncomienda){
+		return ctrEncomienda.getEncomiendaXcodigo(codigoEncomienda);
+	}
+	
 }

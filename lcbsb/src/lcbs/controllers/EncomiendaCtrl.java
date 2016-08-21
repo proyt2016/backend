@@ -128,7 +128,7 @@ public class EncomiendaCtrl implements IEncomienda{
 		encomiendas.add(encomienda);
 		viaje.setEncomiendas(encomiendas);
 		encomienda.setViajeAsignado(viaje);
-		encomienda.setCocheEncomienda(coche);
+		encomienda.setCocheAsignado(coche);
 		srvEncomienda.modificarEncomienda(encomienda);
 		srvViaje.modificarViaje(viaje);
 	}
@@ -167,5 +167,10 @@ public class EncomiendaCtrl implements IEncomienda{
 	@Override
 	public DataEstadosEncomienda getEstadoEncomienda(String idEstadoEncomienda) {
 		return srvEstadosEncomienda.getEstadosEncomienda(idEstadoEncomienda);
+	}
+	
+	@Override
+	public DataEncomienda getEncomiendaXcodigo(int codigoEncomienda){
+		return srvEncomienda.getEncomiendaXcodigo(codigoEncomienda);
 	}
 }

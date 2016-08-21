@@ -170,11 +170,10 @@ public class EncomiendaApi {
 		return repo.listarEncomiendasPorUsuario(idUsuario, pagina, elementosPagina);
 	}
 	
-	
-	
-	
-	
-	
-	
+	@GET
+	@Path("/getultimoestado/{codigoEnc}")
+	public DataEncomienda getEncomiendaXcodigo(@PathParam("codigoEnc") final int codigoEncomienda){
+		return repo.getEncomiendaXcodigo(codigoEncomienda);
+	}
 
 }

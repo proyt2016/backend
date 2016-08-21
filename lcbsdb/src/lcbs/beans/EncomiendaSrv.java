@@ -16,6 +16,7 @@ import lcbs.interfaces.EncomiendaLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
 import lcbs.models.Encomienda;
 import lcbs.models.EstadosEncomienda;
+import lcbs.models.Pasaje;
 import lcbs.models.Viaje;
 
 import java.util.Map;
@@ -64,10 +65,30 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     }
     
     public DataEncomienda getEncomienda(String id){
-		Session session = (Session) em.getDelegate();
-		Encomienda realObj = (Encomienda) session.get(Encomienda.class, id);
-		return realObj.getDatatype(true);
+		List<DataEncomienda> encomiendas = new ArrayList();
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Encomienda.class);
+    	criteria.add(Restrictions.eq("eliminada", false));
+    	criteria.add(Restrictions.eq("id", id));
+    	List<Encomienda> listEnc = new ArrayList<Encomienda>(new LinkedHashSet( criteria.list() ));
+    	listEnc.stream().forEach((enc) -> {
+    		encomiendas.add(enc.getDatatype(true));
+        });
+        return encomiendas.get(0);
     }
+    
+    public DataEncomienda getEncomiendaXcodigo(int codigoEncomienda) {
+    	List<DataEncomienda> encomiendas = new ArrayList();
+    	Session session = (Session) em.getDelegate();
+    	Criteria criteria = session.createCriteria(Encomienda.class);
+    	criteria.add(Restrictions.eq("eliminada", false));
+    	criteria.add(Restrictions.eq("codigoEncomienda", codigoEncomienda));
+    	List<Encomienda> listEnc = new ArrayList<Encomienda>(new LinkedHashSet( criteria.list() ));
+        listEnc.stream().forEach((enc) -> {
+        	encomiendas.add(enc.getDatatype(true));
+        });
+        return encomiendas.get(0);
+	}
     
     public DataEncomienda crearEncomienda(DataEncomienda enc){
     	Encomienda realObj = new Encomienda(enc);

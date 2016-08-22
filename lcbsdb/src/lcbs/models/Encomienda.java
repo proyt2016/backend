@@ -62,7 +62,7 @@ public class Encomienda implements Serializable{
     private boolean pagaReceptor;
     @ManyToOne
     private Viaje viajeAsignado;
-    @OneToMany(fetch=FetchType.LAZY)
+    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     @IndexColumn(name="LIST_INDEX")
     private List<HistorialEstadosEncomienda> estados;
     @ManyToOne(fetch=FetchType.LAZY)

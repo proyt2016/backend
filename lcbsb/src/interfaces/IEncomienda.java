@@ -40,4 +40,5 @@ public interface IEncomienda {
 	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina);
 	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado);
 	public DataEstadosEncomienda getEstadoEncomienda(String idEstadoEncomienda);
+	public DataEncomienda getEncomiendaXcodigo(int codigoEncomienda);
 }

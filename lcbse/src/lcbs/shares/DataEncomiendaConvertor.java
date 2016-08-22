@@ -31,7 +31,7 @@ public class DataEncomiendaConvertor {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigoEncomienda;
     @ManyToOne
-    private DataVehiculo coche_codigo;
+    private DataVehiculo cocheAsignado;
     @XmlElement
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaIngreso;
@@ -66,8 +66,8 @@ public class DataEncomiendaConvertor {
         this.fechaEntrega = fecEn;
         this.retiraEnSucursal = retiraSuc;
         this.eliminada = elim;
-        this.coche_codigo = codCoche;
         this.codigoEncomienda = codEnco;
+        this.cocheAsignado = codCoche;
     }
     
     public DataEncomienda getDataEncomienda(){
@@ -94,8 +94,8 @@ public class DataEncomiendaConvertor {
     	     }
     	}
     	
-    	if(this.getCodigoCocheEncomienda()!=null){
-    		result.setCocheEncomienda(this.getCodigoCocheEncomienda());
+    	if(this.getCocheAsignado()!=null){
+    		result.setCocheAsignado(this.getCocheAsignado());
     	}
     	if(this.getEmisor()!=null){
     		result.setEmisor(this.getEmisor());}
@@ -148,13 +148,12 @@ public class DataEncomiendaConvertor {
     public int getCodigoEncomienda(){
     	return this.codigoEncomienda;
     }
-    
-    public void setCocheEncomienda(DataVehiculo codCoche){
-    	this.coche_codigo = codCoche;
+    public void setCocheAsignado(DataVehiculo val){
+    	this.cocheAsignado = val;
     }
     
-    public DataVehiculo getCodigoCocheEncomienda(){
-    	return this.coche_codigo;
+    public DataVehiculo getCocheAsignado(){
+    	return this.cocheAsignado;
     }
     
     public void setId(String val){

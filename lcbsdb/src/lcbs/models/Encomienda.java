@@ -33,6 +33,7 @@ public class Encomienda implements Serializable{
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
+    @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigoEncomienda;
     
@@ -98,12 +99,13 @@ public class Encomienda implements Serializable{
         this.fechaEntrega = fecEn;
         this.retiraEnSucursal = retiraSuc;
         this.eliminada = elim;
-        this.codigoEncomienda = codEnco;
         this.cocheAsignado = cod_coche;
+        this.codigoEncomienda = codEnco;
     }
     
     public Encomienda(DataEncomienda dt){
     	this.setId(dt.getId());
+    	this.setCodigoEncomienda(dt.getCodigoEncomienda());
     	if(dt.getOrigen() != null){
 	    	if(dt.getOrigen() instanceof DataTerminal){
 	    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
@@ -118,6 +120,7 @@ public class Encomienda implements Serializable{
 	    		this.setDestino(new Parada((DataParada)dt.getDestino()));
 	    	}
     	}
+    	
     	if(dt.getCocheAsignado()!=null)
     		this.setCocheAsignado(new Vehiculo(dt.getCocheAsignado()));
     
@@ -153,6 +156,7 @@ public class Encomienda implements Serializable{
     public DataEncomienda getDatatype(Boolean conHijos){
     	DataEncomienda result = new DataEncomienda();
     	result.setId(this.getId());
+    	result.setCodigoEncomienda(this.getCodigoEncomienda());
     	if(this.getOrigen()!=null)
     		if(this.getOrigen() instanceof Terminal){
     			result.setOrigen(((Terminal)this.getOrigen()).getDatatype());

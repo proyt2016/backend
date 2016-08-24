@@ -58,7 +58,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     
     public void modificarEncomienda(DataEncomienda enc){
     	Encomienda realObj = new Encomienda(enc);
-        if(em.find(Encomienda.class, realObj.getId()) == null){
+    	if(em.find(Encomienda.class, realObj.getId()) == null){
            throw new IllegalArgumentException("La encomienda no existe");
        }
        em.merge(realObj);

@@ -28,7 +28,6 @@ public class DataEncomiendaConvertor {
     private DataViaje viajeAsignado;
     private List<DataHistorialEstadosEncomienda> estados;
     private DataEstadosEncomienda estadoActual;
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigoEncomienda;
     @ManyToOne
     private DataVehiculo cocheAsignado;
@@ -73,6 +72,7 @@ public class DataEncomiendaConvertor {
     public DataEncomienda getDataEncomienda(){
     	DataEncomienda result = new DataEncomienda();
     	result.setId(this.getId());
+    	result.setCodigoEncomienda(this.getCodigoEncomienda());
     	if(this.getOrigen()!=null){
     		if(this.getOrigen().getTipo().equals("Terminal")){
     			result.setOrigen(new DataTerminal(this.getOrigen().getId(),this.getOrigen().getNombre(),this.getOrigen().getUbicacionMapa(),
@@ -119,6 +119,7 @@ public class DataEncomiendaConvertor {
     	if(this.getReglaCobro()!=null){
     		result.setReglaCobro(this.getReglaCobro());
     	}
+    	
     	result.setMonto(this.getMonto());
     	result.setPagaReceptor(this.getPagaReceptor());
     	if(this.getViajeAsignado()!=null){

@@ -304,7 +304,7 @@ INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('83cac1e7-4
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('cc9b5ea9-fb86-4f6a-a949-302ab8fdc024', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('8d957d43-1997-4617-9375-381e73b04024', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
 
-INSERT INTO encomienda (id, codigoencomienda, eliminada, monto, pagareceptor, retiraensucursal, destino_id, estadoactual_id, origen_id, viajeasignado_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235b', '1',false, '120.00', false, true, 'c6253122-990a-4891-9456-6d5c68f0c2a9', 'cc9bf2f4-e09a-4067-82ab-4bd4e800c7a3', 'b61d2464-77e3-47f7-bc18-aa75871de5c6', '8d957d43-1997-4617-9375-381e73b04024');
+INSERT INTO encomienda (id, eliminada, destino_id, estadoactual_id, origen_id, viajeasignado_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235b',false, 'c6253122-990a-4891-9456-6d5c68f0c2a9', 'cc9bf2f4-e09a-4067-82ab-4bd4e800c7a3', 'b61d2464-77e3-47f7-bc18-aa75871de5c6', '8d957d43-1997-4617-9375-381e73b04024');
 
-INSERT INTO viaje_encomienda(viaje_id, encomiendas_id, list_index) VALUES('8d957d43-1997-4617-9375-381e73b04024', 'f7036bc6-a43e-4d14-ac9c-cb35f182235b', 0);
+/*INSERT INTO viaje_encomienda(viaje_id, encomiendas_id, list_index) VALUES('8d957d43-1997-4617-9375-381e73b04024', 'f7036bc6-a43e-4d14-ac9c-cb35f182235b', 0);*/
 

@@ -76,7 +76,7 @@ public class Pasaje implements Serializable{
     	this.setId(dt.getId());
     	this.setCodigoPasaje(dt.getCodigoPasaje());
     	if(dt.getViaje() != null){
-    		this.setViaje(new Viaje(dt.getViaje()));
+    		this.setViaje(new Viaje(dt.getViaje(), false));
     	}
     	if(dt.getPrecio() != null)
     		this.setPrecio(new Precio(dt.getPrecio()));

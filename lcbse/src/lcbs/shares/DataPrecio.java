@@ -5,13 +5,13 @@ public class DataPrecio{
 	private String id;
     private DataPuntoRecorrido origen;
     private DataPuntoRecorrido destino;
-    private float monto;
+    private Float monto;
      
     public DataPrecio() {
       
     }
     
-    public DataPrecio(DataPuntoRecorrido orig, DataPuntoRecorrido dest, float monto) {
+    public DataPrecio(DataPuntoRecorrido orig, DataPuntoRecorrido dest, Float monto) {
         this.origen = orig;
         this.destino = dest;
         this.monto = monto;
@@ -41,11 +41,11 @@ public class DataPrecio{
         return this.destino;
     }
 
-    public void setMonto(float val){
+    public void setMonto(Float val){
         this.monto = val;
     }
     
-    public float getMonto(){
+    public Float getMonto(){
         return this.monto;
     }
 

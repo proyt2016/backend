@@ -22,12 +22,12 @@ public class DataReservaConvertor{
     private DataUsuario usuarioReserva;
     private String ciPersona;
     private DataEmpleado empleado;
-    private boolean utilizada;
-    private boolean eliminada;
+    private Boolean utilizada;
+    private Boolean eliminada;
      
     public DataReservaConvertor() {}
     
-    public DataReservaConvertor(String id, DataViajeConvertor via, DataPrecio prec, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter des, Date fecRes, DataUsuario usRes, String ciPer, DataEmpleado emp, boolean usa, boolean elim) {
+    public DataReservaConvertor(String id, DataViajeConvertor via, DataPrecio prec, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter des, Date fecRes, DataUsuario usRes, String ciPer, DataEmpleado emp, Boolean usa, Boolean elim) {
         this.id = id;
         this.viaje = via;
         this.precio = prec;
@@ -142,19 +142,19 @@ public class DataReservaConvertor{
 		this.empleado = empleado;
 	}
 
-	public boolean getUtilizada() {
+	public Boolean getUtilizada() {
 		return utilizada;
 	}
 
-	public void setUtilizada(boolean utilizada) {
+	public void setUtilizada(Boolean utilizada) {
 		this.utilizada = utilizada;
 	}
     
-	public boolean getEliminada() {
+	public Boolean getEliminada() {
 		return eliminada;
 	}
 
-	public void setEliminada(boolean eliminada) {
+	public void setEliminada(Boolean eliminada) {
 		this.eliminada = eliminada;
 	}
 }

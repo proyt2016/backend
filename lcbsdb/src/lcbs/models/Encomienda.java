@@ -78,7 +78,7 @@ public class Encomienda implements Serializable{
 
     public Encomienda() {}
     
-    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, Float mont, Float prec, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, Vehiculo cod_coche, int codEnco) {
+    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, Vehiculo cod_coche, int codEnco) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -139,7 +139,7 @@ public class Encomienda implements Serializable{
     	this.setPrecio(dt.getPrecio());
     	this.setPagaReceptor(dt.getPagaReceptor());
     	if(dt.getViajeAsignado() != null)
-    		this.setViajeAsignado(new Viaje(dt.getViajeAsignado()));
+    		this.setViajeAsignado(new Viaje(dt.getViajeAsignado(),false));
     	if(dt.getEstados()!=null){
 	    	List<HistorialEstadosEncomienda> temp = new ArrayList<HistorialEstadosEncomienda>();
 	    	dt.getEstados().stream().forEach((est) -> {
@@ -317,11 +317,11 @@ public class Encomienda implements Serializable{
         return this.precio;
     }
 
-    public void setPagaReceptor(boolean val){
+    public void setPagaReceptor(Boolean val){
         this.pagaReceptor = val;
     }
     
-    public boolean getPagaReceptor(){
+    public Boolean getPagaReceptor(){
         return this.pagaReceptor;
     }
 
@@ -365,19 +365,19 @@ public class Encomienda implements Serializable{
         return this.fechaEntrega;
     }
 
-    public void setRetiraEnSucursal(boolean val){
+    public void setRetiraEnSucursal(Boolean val){
         this.retiraEnSucursal = val;
     }
     
-    public boolean getRetiraEnSucursal(){
+    public Boolean getRetiraEnSucursal(){
         return this.retiraEnSucursal;
     }
     
-    public void setEliminada(boolean val){
+    public void setEliminada(Boolean val){
         this.eliminada = val;
     }
     
-    public boolean getEliminada(){
+    public Boolean getEliminada(){
         return this.eliminada;
     }
 }

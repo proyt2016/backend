@@ -22,7 +22,7 @@ public class MedioDePago implements Serializable{
     private String id;
     
     private String nombre;
-    private boolean activo;
+    private Boolean activo;
     private String cuenta;
     private String usuario;
     private String clave;
@@ -31,7 +31,7 @@ public class MedioDePago implements Serializable{
 
     public MedioDePago() { }
     
-    public MedioDePago(String id, String nom, boolean act, String cue, String usu, String clav) {
+    public MedioDePago(String id, String nom, Boolean act, String cue, String usu, String clav) {
         this.id = id;
         this.nombre = nom;
         this.activo = act;
@@ -76,11 +76,11 @@ public class MedioDePago implements Serializable{
         return this.nombre;
     }
 
-    public void setActivo(boolean val){
+    public void setActivo(Boolean val){
         this.activo = val;
     }
     
-    public boolean getActivo(){
+    public Boolean getActivo(){
         return this.activo;
     }
 

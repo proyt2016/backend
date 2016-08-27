@@ -67,7 +67,7 @@ public class ViajeSrv implements ViajeLocalApi {
     }
     
     public void modificarViaje(DataViaje via){
-    	Viaje realObj = new Viaje(via);
+    	Viaje realObj = new Viaje(via,true);
         if(em.find(Viaje.class, realObj.getId()) == null){
            throw new IllegalArgumentException("El viaje no existe");
        }
@@ -81,14 +81,14 @@ public class ViajeSrv implements ViajeLocalApi {
     }
     
     public DataViaje crearViaje(DataViaje via){
-    	Viaje realObj = new Viaje(via);
+    	Viaje realObj = new Viaje(via,false);
         //guardo el viaje en bd
         em.persist(realObj);
         return realObj.getDatatype(true);
     }
     
     public void borrarViaje(String idViaje){
-    	Viaje realObj = new Viaje(this.getViaje(idViaje));
+    	Viaje realObj = new Viaje(this.getViaje(idViaje),false);
         em.remove(realObj);
     }
     

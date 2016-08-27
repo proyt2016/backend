@@ -27,7 +27,7 @@ public class DataEncomienda {
     private DataReglaCobroEncomienda reglaCobro;
     private Float monto;
     private Float precio;
-    private boolean pagaReceptor;
+    private Boolean pagaReceptor;
     private DataViaje viajeAsignado;
     private List<DataHistorialEstadosEncomienda> estados;
     private DataEstadosEncomienda estadoActual;
@@ -40,14 +40,14 @@ public class DataEncomienda {
     @XmlElement
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaEntrega;
-    private boolean retiraEnSucursal;
-    private boolean eliminada;
+    private Boolean retiraEnSucursal;
+    private Boolean eliminada;
 
  
 
     public DataEncomienda() {}
     
-    public DataEncomienda(String id, DataPuntoRecorrido orig, DataPuntoRecorrido dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, Float mont, Float prec, boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, DataVehiculo codCoche, int codEnco) {
+    public DataEncomienda(String id, DataPuntoRecorrido orig, DataPuntoRecorrido dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, DataVehiculo codCoche, int codEnco) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -260,11 +260,11 @@ public class DataEncomienda {
         return this.precio;
     }
 
-    public void setPagaReceptor(boolean val){
+    public void setPagaReceptor(Boolean val){
         this.pagaReceptor = val;
     }
     
-    public boolean getPagaReceptor(){
+    public Boolean getPagaReceptor(){
         return this.pagaReceptor;
     }
 
@@ -308,19 +308,19 @@ public class DataEncomienda {
         return this.fechaEntrega;
     }
 
-    public void setRetiraEnSucursal(boolean val){
+    public void setRetiraEnSucursal(Boolean val){
         this.retiraEnSucursal = val;
     }
     
-    public boolean getRetiraEnSucursal(){
+    public Boolean getRetiraEnSucursal(){
         return this.retiraEnSucursal;
     }
     
-    public void setEliminada(boolean val){
+    public void setEliminada(Boolean val){
         this.eliminada = val;
     }
     
-    public boolean getEliminada(){
+    public Boolean getEliminada(){
         return this.eliminada;
     }
 }

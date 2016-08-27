@@ -67,7 +67,7 @@ public class Viaje implements Serializable {
 		this.reservas = res;
 	}
 	
-	public Viaje(DataViaje dt){
+	public Viaje(DataViaje dt, Boolean conHijos){
 		this.setId(dt.getId());
 		if(dt.getRecorrido() != null){
 			this.setRecorrido(new Recorrido(dt.getRecorrido()));
@@ -90,7 +90,7 @@ public class Viaje implements Serializable {
 	        });
 	    	this.setCoches(aux);
 		}
-		if(dt.getEncomiendas() != null){
+		if(dt.getEncomiendas() != null && conHijos){
 			List<Encomienda> auxEnc = new ArrayList<Encomienda>();
 	    	dt.getEncomiendas().stream().forEach((enc) -> {
 	    		auxEnc.add(new Encomienda(enc));

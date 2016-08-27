@@ -67,12 +67,9 @@
 
 		// ruta de configuracion
 		$routeProvider.when("/configuracion", {
-		    templateUrl : "app/views/configuracion/list.html",
+		    templateUrl : "app/views/configuracion/details.html",
 		    controller  : 'configuracionCtrl'
-		}).when("/configuracion/add", {
-		    templateUrl : "app/views/configuracion/add.html",
-		    controller  : 'configuracionCtrl'
-		}).when("/configuracion/edit/:id", {
+		}).when("/configuracion/edit", {
 		    templateUrl : "app/views/configuracion/edit.html",
 		    controller  : 'configuracionCtrl'
 		});
@@ -123,6 +120,18 @@
 		}).when("/estadosencomienda/edit/:id", {
 		    templateUrl : "app/views/estadosencomienda/edit.html",
 		    controller  : 'estadosencomiendaCtrl'
+		});
+
+		// ruta de reglacobroencomienda
+		$routeProvider.when("/reglacobroencomienda", {
+		    templateUrl : "app/views/reglacobroencomienda/list.html",
+		    controller  : 'reglacobroencomiendaCtrl'
+		}).when("/reglacobroencomienda/add", {
+		    templateUrl : "app/views/reglacobroencomienda/add.html",
+		    controller  : 'reglacobroencomiendaCtrl'
+		}).when("/reglacobroencomienda/edit/:id", {
+		    templateUrl : "app/views/reglacobroencomienda/edit.html",
+		    controller  : 'reglacobroencomiendaCtrl'
 		});
 
 		// ruta de puntosrecorrido

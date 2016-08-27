@@ -4,24 +4,37 @@
 
     function configuracionService($http, $q) {
 
-        var getAll = function(){
+        var getConfiguracion = function(){
             var defer = $q.defer();
 
-            defer.resolve();
+            $http.get('/lcbsapi/rest/empresa/getconfirguacionempresa/')
+            .success(function (configuracion) {
+                defer.resolve(configuracion);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
 
-            // $http.get('api/employee')
-	    	// .success(function (employees) {
-	    	//     defer.resolve(employees);
-	    	// })
-	    	// .error(function(){
-	    	//     defer.reject('server error')
-	    	// });
+            return defer.promise;
+        };
+
+        var updateConfig = function(configuracion){
+            var defer = $q.defer();
+
+            $http.post('/lcbsapi/rest/empresa/editarconfiguracion', configuracion)
+            .success(function (conf) {
+                defer.resolve(conf);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
 
             return defer.promise;
         };
 
         return {
-            getAll : getAll
+            getConfiguracion : getConfiguracion,
+            updateConfig     : updateConfig
         }
 
     }

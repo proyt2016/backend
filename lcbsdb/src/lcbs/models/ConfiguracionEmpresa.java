@@ -113,17 +113,18 @@ public class ConfiguracionEmpresa implements Serializable{
 	    	result.setTelefonos(aux);
     	}
     	if(this.emails != null){    	
-    	List<DataEmail> auxEm = new ArrayList<DataEmail>();
-    	this.emails.stream().forEach((em) -> {
-    		auxEm.add(em.getDatatype());
-        });
-    	result.setEmails(auxEm);
+	    	List<DataEmail> auxEm = new ArrayList<DataEmail>();
+	    	this.emails.stream().forEach((em) -> {
+	    		auxEm.add(em.getDatatype());
+	        });
+	    	result.setEmails(auxEm);
     	}
     	result.setUrlLdap(this.getUrlLdap());
     	result.setUsuarioLdap(this.getUsuarioLdap());
     	result.setClaveLdap(this.getClaveLdap());
     	result.setActivo(this.getActivo());
     	result.setPagoOnlineCoche(this.getPagoOnlineCoche());
+    	result.setReservaPasajes(this.getReservaPasajes());
     	result.setValidesReservasHoras(this.getValidesReservasHoras());
     	result.setTrasferirPasajes(this.getTrasferirPasajes());
     	return result;

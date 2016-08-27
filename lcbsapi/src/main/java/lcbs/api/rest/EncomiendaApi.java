@@ -50,6 +50,12 @@ public class EncomiendaApi {
 		repo.borrarEstadoEncomienda(idEstadoEncomienda);
 	}
 	
+	@DELETE
+	@Path("/borrarreglacobroencomienda/{idReglaCobro}")
+	public void borrarReglaCobroEncomienda(@PathParam("idReglaCobro") final String idReglaCobro){
+		repo.borrarReglaCobroEncomienda(idReglaCobro);
+	}
+	
 	@POST
 	@Path("/setestadoencomienda/{idEncomienda}/")
 	public void setEstadoEncomienda(@PathParam("idEncomienda")final String idEncomienda,final DataEstadosEncomienda dataEstado){
@@ -74,6 +80,12 @@ public class EncomiendaApi {
 	@Path("/editarestadoencomienda/")
 	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado){
 		repo.EditarEstadoEncomienda(dataEstado);
+	}
+	
+	@POST
+	@Path("/editarreglacobroencomienda/")
+	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla){
+		return repo.editarReglaCobroEncomienda(dataRegla);
 	}
 	
 	@GET
@@ -130,8 +142,8 @@ public class EncomiendaApi {
 	}
 	
 	@GET
-	@Path("/getreglacobro/{idEncomienda}")
-	public DataReglaCobroEncomienda getReglaCobro(@PathParam("idEncomienda") final String idEncomieda){
+	@Path("/getreglacobro/{idRegla}")
+	public DataReglaCobroEncomienda getReglaCobro(@PathParam("idRegla") final String idEncomieda){
 		return repo.getReglaDeCobro(idEncomieda);
 	}
 	

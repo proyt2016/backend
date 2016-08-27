@@ -31,10 +31,6 @@ public class EmpresaRepo {
 	@EJB(lookup =  "java:app/lcbsb/EmpresaCtrl!interfaces.IEmpresa")
 	IEmpresa ctrEmpresa;
 	
-	public void altaConfiguracionEmpresa(DataConfiguracionEmpresa empresa) {
-		ctrEmpresa.altaConfiguracionEmpresa(empresa);
-	}
-	
 	public DataConfiguracionEmpresa obtenerConfiguracionEmpresa(){
 		return ctrEmpresa.obtenerConfiguracionEmpresa();
 	}

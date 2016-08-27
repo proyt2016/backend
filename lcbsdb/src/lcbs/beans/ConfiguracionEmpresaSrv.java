@@ -29,8 +29,15 @@ public class ConfiguracionEmpresaSrv implements ConfiguracionEmpresaLocalApi {
         //obtengo la configuracion de empresa de la bd
         Session session = (Session) em.getDelegate();
         List<ConfiguracionEmpresa> listEnc = session.createCriteria(ConfiguracionEmpresa.class).list();
-        
-        ConfiguracionEmpresa conf = listEnc.get(0);
+        ConfiguracionEmpresa conf;
+        if(listEnc.size() > 0){
+        	conf = listEnc.get(0);
+        }else{
+        	DataConfiguracionEmpresa newConf = new DataConfiguracionEmpresa();
+        	newConf.setNombre("Nueva empresa");
+        	newConf = crearConfiguracionEmpresa(newConf);
+        	conf = new ConfiguracionEmpresa(newConf);
+        }
         
         return conf.getDatatype();
     }

@@ -49,12 +49,13 @@ public class ReglaCobroEncomiendaSrv implements ReglaCobroEncomiendaLocalApi {
         return reglas;
     }
     
-    public void modificarReglaCobroEncomienda(DataReglaCobroEncomienda rce){
+    public DataReglaCobroEncomienda modificarReglaCobroEncomienda(DataReglaCobroEncomienda rce){
     	ReglaCobroEncomienda realObj = new ReglaCobroEncomienda(rce);
         if(em.find(ReglaCobroEncomienda.class, realObj.getId()) == null){
            throw new IllegalArgumentException("La regla de cobro de encomiendas no existe");
        }
        em.merge(realObj);
+       return realObj.getDatatype();
     }
     
     public DataReglaCobroEncomienda getReglaCobroEncomienda(String id){
@@ -71,7 +72,8 @@ public class ReglaCobroEncomiendaSrv implements ReglaCobroEncomiendaLocalApi {
     }
     
     public void borrarReglaCobroEncomienda(String idRce){
-    	ReglaCobroEncomienda realObj = new ReglaCobroEncomienda(getReglaCobroEncomienda(idRce));
+    	Session session = (Session) em.getDelegate();
+    	ReglaCobroEncomienda realObj = (ReglaCobroEncomienda) session.get(ReglaCobroEncomienda.class, idRce);
         em.remove(realObj);
     }
 }

@@ -28,12 +28,6 @@ public class EmpresaApi {
 	@EJB
 	EmpresaRepo repo;
 	
-	@POST
-	@Path("/altaconfiguracion/")
-	public void AltaConfiguracionEmpresa(DataConfiguracionEmpresa empresa){
-		repo.altaConfiguracionEmpresa(empresa);
-	
-	}
 	
 	@POST
 	@Path("/editarconfiguracion/")

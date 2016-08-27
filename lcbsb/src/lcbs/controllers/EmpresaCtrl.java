@@ -25,11 +25,6 @@ public class EmpresaCtrl implements IEmpresa{
 	ConfiguracionEmpresaLocalApi srvEmpresa;
 	
 	@Override
-	public void altaConfiguracionEmpresa(DataConfiguracionEmpresa empresa) {
-		srvEmpresa.crearConfiguracionEmpresa(empresa);
-	}
-	
-	@Override
 	public DataConfiguracionEmpresa obtenerConfiguracionEmpresa(){
 		return srvEmpresa.getConfiguracionEmpresa();
 	}

@@ -1,20 +1,26 @@
 package lcbs.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import lcbs.shares.*;
 
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.mapping.List;
+import org.hibernate.annotations.IndexColumn;
 
 @Entity
 @XmlRootElement
@@ -27,37 +33,43 @@ public class ReglaCobroEncomienda implements Serializable{
     private String id;
     
     private String nombre;
-    private String operador;
-    private Integer valor;
-    private float precio;
+    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
+    @IndexColumn(name="LIST_INDEX")
+    private List<ReglaCobroEncomiendaCriteria> criterias;
     
  
 
     public ReglaCobroEncomienda() {}
     
-    public ReglaCobroEncomienda(String id, String nom, String oper, Integer val, float prec) {
+    public ReglaCobroEncomienda(String id, String nom, List<ReglaCobroEncomiendaCriteria> crit) {
         this.id = id;
         this.nombre = nom;
-        this.operador = oper;
-        this.valor = val;
-        this.precio = prec;
+        this.criterias = crit;
     }
     
     public ReglaCobroEncomienda(DataReglaCobroEncomienda dt){
     	this.setId(dt.getId());
     	this.setNombre(dt.getNombre());
-    	this.setOperador(dt.getOperador());
-    	this.setValor(dt.getValor());
-    	this.setPrecio(dt.getPrecio());
+    	if(dt.getCriterias() != null){
+	        List<ReglaCobroEncomiendaCriteria> auxEm = new ArrayList<ReglaCobroEncomiendaCriteria>();
+	        dt.getCriterias().stream().forEach((crit) -> {
+	        	auxEm.add(new ReglaCobroEncomiendaCriteria(crit));
+	        });
+	        this.setCriterias(auxEm);
+        }
     }
     
     public DataReglaCobroEncomienda getDatatype(){
     	DataReglaCobroEncomienda result = new DataReglaCobroEncomienda();
     	result.setId(this.getId());
     	result.setNombre(this.getNombre());
-    	result.setOperador(this.getOperador());
-    	result.setValor(this.getValor());
-    	result.setPrecio(this.getPrecio());
+    	if(this.getCriterias() != null){
+	    	List<DataReglaCobroEncomiendaCriteria> aux = new ArrayList<DataReglaCobroEncomiendaCriteria>();
+	    	this.getCriterias().stream().forEach((crit) -> {
+	    		aux.add(crit.getDatatype());
+	        });
+	    	result.setCriterias(aux);
+    	}
     	return result;
     }
     
@@ -76,30 +88,13 @@ public class ReglaCobroEncomienda implements Serializable{
     public String getNombre(){
         return this.nombre;
     }
-
-    public void setOperador(String val){
-        this.operador = val;
+    
+    public void setCriterias(List<ReglaCobroEncomiendaCriteria> val){
+        this.criterias = val;
     }
     
-    public String getOperador(){
-        return this.operador;
+    public List<ReglaCobroEncomiendaCriteria> getCriterias(){
+        return this.criterias;
     }
-
-    public void setValor(Integer val){
-        this.valor = val;
-    }
-    
-    public Integer getValor(){
-        return this.valor;
-    }
-
-    public void setPrecio(float val){
-        this.precio = val;
-    }
-    
-    public float getPrecio(){
-        return this.precio;
-    }
-
-    
+   
 }

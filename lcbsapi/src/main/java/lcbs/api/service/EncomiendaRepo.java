@@ -138,5 +138,17 @@ public class EncomiendaRepo {
 	public DataEncomienda getEncomiendaXcodigo(int codigoEncomienda){
 		return ctrEncomienda.getEncomiendaXcodigo(codigoEncomienda);
 	}
+
+
+	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla) {
+		return ctrEncomienda.editarReglaCobroEncomienda(dataRegla);
+		
+	}
+
+
+	public void borrarReglaCobroEncomienda(String idReglaCobro) {
+		ctrEncomienda.borrarReglaCobroEncomienda(idReglaCobro);
+		
+	}
 	
 }

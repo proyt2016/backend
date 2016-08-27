@@ -173,4 +173,12 @@ public class EncomiendaCtrl implements IEncomienda{
 	public DataEncomienda getEncomiendaXcodigo(int codigoEncomienda){
 		return srvEncomienda.getEncomiendaXcodigo(codigoEncomienda);
 	}
+	@Override
+	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla) {
+		return srvReglaCobro.modificarReglaCobroEncomienda(dataRegla);
+	}
+	@Override
+	public void borrarReglaCobroEncomienda(String idReglaCobro) {
+		srvReglaCobro.borrarReglaCobroEncomienda(idReglaCobro);
+	}
 }

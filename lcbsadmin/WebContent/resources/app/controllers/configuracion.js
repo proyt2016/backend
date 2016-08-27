@@ -3,21 +3,50 @@
     angular.module('lacbus').controller('configuracionCtrl', ['$scope', '$routeParams', 'configuracionService', configuracionCtrl]);
 
     function configuracionCtrl($scope, $routeParams, configuracionService) {
-        $scope.configuracion     = [];
+        $scope.configuracion     = null;
         $scope.showAlert    = false;
+        $scope.emailsEmpresa = [];
+        $scope.telsEmpresa = [];
 
         console.log($routeParams);
 
-        configuracionService.getAll().then(function (data) {
+        configuracionService.getConfiguracion().then(function (data) {
             $scope.configuracion = data;
+            $scope.emailsEmpresa = $scope.configuracion.emails;
+            $scope.telsEmpresa = $scope.configuracion.telefonos;
         });
 
-        $scope.add = function(){
-        	console.log('aaaddd')
+        $scope.edit = function(){
+            var configuracion     = this.configuracion;
+            configuracion.emails = $scope.emailsEmpresa;
+            configuracion.telefonos = $scope.telsEmpresa;
+            configuracionService.updateConfig(configuracion).then(
+                function (data) {
+                    window.history.back();
+                }, function() {
+                    //$scope.saving = false;
+                }
+            );
         }
 
-        $scope.edit = function(){
-        	console.log('aaaddd')
+        $scope.addRelation = function (type) {
+            if(type == 'email'){
+                var nuevoEmail = {'descripcion':'','email':''};
+                $scope.emailsEmpresa.push(nuevoEmail);
+            }
+            if(type == 'tels'){
+                var nuevoTel = {'descripcion':'','telefono':''};
+                $scope.telsEmpresa.push(nuevoTel);
+            }
+        }
+
+        $scope.removeRelation = function (type, index) {
+            if(type == 'email'){
+                $scope.emailsEmpresa.splice(index, 1);
+            }
+            if(type == 'tels'){
+                $scope.telsEmpresa.splice(index, 1);
+            }
         }
 
     }

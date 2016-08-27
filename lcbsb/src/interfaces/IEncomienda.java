@@ -41,4 +41,6 @@ public interface IEncomienda {
 	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado);
 	public DataEstadosEncomienda getEstadoEncomienda(String idEstadoEncomienda);
 	public DataEncomienda getEncomiendaXcodigo(int codigoEncomienda);
+	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla);
+	public void borrarReglaCobroEncomienda(String idReglaCobro);
 }

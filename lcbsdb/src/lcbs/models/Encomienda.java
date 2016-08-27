@@ -59,8 +59,8 @@ public class Encomienda implements Serializable{
     private String direccionReceptor;
     @ManyToOne(fetch=FetchType.LAZY)
     private ReglaCobroEncomienda reglaCobro;
-    private float monto;
-    private boolean pagaReceptor;
+    private Float monto;
+    private Boolean pagaReceptor;
     @ManyToOne
     private Viaje viajeAsignado;
     @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
@@ -72,8 +72,8 @@ public class Encomienda implements Serializable{
     private Date fechaIngreso;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEntrega;
-    private boolean retiraEnSucursal;
-    private boolean eliminada;
+    private Boolean retiraEnSucursal;
+    private Boolean eliminada;
 
  
 

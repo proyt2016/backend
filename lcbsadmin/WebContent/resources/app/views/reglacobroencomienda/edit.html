@@ -30,11 +30,11 @@
         <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="crit in criterias" style="margin-top:10px;">
             <div class="form-group">
                 <label>Operador</label>
-                <input type="text" class="form-control" ng-model="crit.operador">
+                <input type="text" class="form-control" ng-model="crit.operador" disabled="disabled">
             </div>
             <div class="form-group">
                 <label>Valor</label>
-                <input type="text" class="form-control" ng-model="crit.valor">
+                <input type="text" class="form-control" ng-model="crit.valor" ng-disabled="criterias.length == $index + 1" ng-blur="updateNext($index)">
             </div>
             <div class="form-group">
                 <label>Precio</label>

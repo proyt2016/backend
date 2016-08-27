@@ -22,11 +22,11 @@ public class ReglaCobroEncomiendaCriteria  implements Serializable{
     private String id;
     private String operador;
     private Integer valor;
-    private float precio;
+    private Float precio;
     
     public ReglaCobroEncomiendaCriteria() {}
     
-    public ReglaCobroEncomiendaCriteria(String id, String oper, Integer val, float prec) {
+    public ReglaCobroEncomiendaCriteria(String id, String oper, Integer val, Float prec) {
         this.id = id;
         this.operador = oper;
         this.valor = val;
@@ -73,11 +73,11 @@ public class ReglaCobroEncomiendaCriteria  implements Serializable{
         return this.valor;
     }
 
-    public void setPrecio(float val){
+    public void setPrecio(Float val){
         this.precio = val;
     }
     
-    public float getPrecio(){
+    public Float getPrecio(){
         return this.precio;
     }
 

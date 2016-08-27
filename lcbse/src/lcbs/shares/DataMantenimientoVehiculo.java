@@ -13,7 +13,7 @@ public class DataMantenimientoVehiculo{
     
     private String descripcionReducida;
     private String descripcionCompleta;
-    private float costo;
+    private Float costo;
     @XmlElement
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaIngreso;
@@ -25,7 +25,7 @@ public class DataMantenimientoVehiculo{
 
     public DataMantenimientoVehiculo() {}
     
-    public DataMantenimientoVehiculo(String id, String decRes, String descComp, float costo, Date fecIng, Date fecComp) {
+    public DataMantenimientoVehiculo(String id, String decRes, String descComp, Float costo, Date fecIng, Date fecComp) {
         this.id = id;
         this.descripcionReducida = decRes;
         this.descripcionCompleta = descComp;
@@ -58,11 +58,11 @@ public class DataMantenimientoVehiculo{
         return this.descripcionCompleta;
     }
 
-    public void setCosto(float val){
+    public void setCosto(Float val){
         this.costo = val;
     }
     
-    public float getCosto(){
+    public Float getCosto(){
         return this.costo;
     }
 

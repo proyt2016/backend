@@ -32,13 +32,13 @@ public class Precio implements Serializable{
     private PuntoRecorrido origen;
     @ManyToOne(fetch=FetchType.LAZY)
     private PuntoRecorrido destino;
-    private float monto;
+    private Float monto;
      
     public Precio() {
       
     }
     
-    public Precio(PuntoRecorrido orig, PuntoRecorrido dest, float monto) {
+    public Precio(PuntoRecorrido orig, PuntoRecorrido dest, Float monto) {
         this.origen = orig;
         this.destino = dest;
         this.monto = monto;
@@ -108,11 +108,11 @@ public class Precio implements Serializable{
         return this.destino;
     }
 
-    public void setMonto(float val){
+    public void setMonto(Float val){
         this.monto = val;
     }
     
-    public float getMonto(){
+    public Float getMonto(){
         return this.monto;
     }
 

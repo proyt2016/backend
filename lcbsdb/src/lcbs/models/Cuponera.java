@@ -19,12 +19,12 @@ public class Cuponera implements Serializable{
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    private float saldo;
+    private Float saldo;
  
 
     public Cuponera() {}
     
-    public Cuponera(String id, float saldo) {
+    public Cuponera(String id, Float saldo) {
         this.id = id;
         this.saldo = saldo;
     }
@@ -49,11 +49,11 @@ public class Cuponera implements Serializable{
         return this.id;
     }
     
-    public void setSaldo(float val){
+    public void setSaldo(Float val){
         this.saldo = val;
     }
     
-    public float getSaldo(){
+    public Float getSaldo(){
         return this.saldo;
     }
 }

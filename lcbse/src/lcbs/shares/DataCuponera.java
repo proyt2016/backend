@@ -3,12 +3,12 @@ package lcbs.shares;
 public class DataCuponera{
     
     private String id;
-    private float saldo;
+    private Float saldo;
  
 
     public DataCuponera() {}
     
-    public DataCuponera(String id, float saldo) {
+    public DataCuponera(String id, Float saldo) {
         this.id = id;
         this.saldo = saldo;
     }
@@ -21,11 +21,11 @@ public class DataCuponera{
         return this.id;
     }
     
-    public void setSaldo(float val){
+    public void setSaldo(Float val){
         this.saldo = val;
     }
     
-    public float getSaldo(){
+    public Float getSaldo(){
         return this.saldo;
     }
 }

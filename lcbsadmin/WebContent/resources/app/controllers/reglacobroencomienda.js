@@ -78,25 +78,24 @@
             if($scope.criterias.length == 0){
                 var nuevaCrit = {'operador':'<=','valor':'0','precio':''};
                 $scope.criterias.push(nuevaCrit);
-                nuevaCrit = {'operador':'>','valor':'1','precio':''};
+                nuevaCrit = {'operador':'>','valor':'0','precio':''};
                 $scope.criterias.push(nuevaCrit);
             }else{
                 $scope.criterias[$scope.criterias.length - 1].operador = "<=";
-                var nuevaCrit = {'operador':'>','valor':(parseFloat($scope.criterias[$scope.criterias.length - 1].valor) + 1),'precio':''};
+                var nuevaCrit = {'operador':'>','valor':(parseFloat($scope.criterias[$scope.criterias.length - 1].valor)),'precio':''};
                 $scope.criterias.push(nuevaCrit);
             }
         }
 
         $scope.updateNext = function (index) {
-            console.log("entro");
-            if($scope.criterias.length-2 == index){
-                console.log("entro aca tambien");
+            if($scope.criterias.length-2 == index || index == -1){
                 $scope.criterias[$scope.criterias.length - 1].valor = (parseFloat($scope.criterias[$scope.criterias.length - 2].valor));
             }
         }
 
         $scope.removeRelation = function (index) {
             $scope.criterias.splice(index, 1);
+            $scope.updateNext(-1);
         }
 
         initialize();

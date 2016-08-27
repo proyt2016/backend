@@ -23,7 +23,8 @@ public class DataEncomiendaConvertor {
     private DataTelefono telReceptor;
     private String direccionReceptor;
     private DataReglaCobroEncomienda reglaCobro;
-    private float monto;
+    private Float monto;
+    private Float precio;
     private boolean pagaReceptor;
     private DataViaje viajeAsignado;
     private List<DataHistorialEstadosEncomienda> estados;
@@ -44,7 +45,7 @@ public class DataEncomiendaConvertor {
 
     public DataEncomiendaConvertor() {}
     
-    public DataEncomiendaConvertor(String id, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, float mont, boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, DataVehiculo codCoche, int codEnco) {
+    public DataEncomiendaConvertor(String id, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, Float mont, Float prec, boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, DataVehiculo codCoche, int codEnco) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -57,6 +58,7 @@ public class DataEncomiendaConvertor {
         this.direccionReceptor = dirRec;
         this.reglaCobro = regCob;
         this.monto = mont;
+        this.precio = prec;
         this.pagaReceptor = pagaRec;
         this.viajeAsignado = viajeAs;
         this.estados = estds;
@@ -121,6 +123,7 @@ public class DataEncomiendaConvertor {
     	}
     	
     	result.setMonto(this.getMonto());
+    	result.setPrecio(this.getPrecio());
     	result.setPagaReceptor(this.getPagaReceptor());
     	if(this.getViajeAsignado()!=null){
     		result.setViajeAsignado(this.getViajeAsignado());
@@ -245,12 +248,20 @@ public class DataEncomiendaConvertor {
         return this.reglaCobro;
     }
 
-    public void setMonto(float val){
+    public void setMonto(Float val){
         this.monto = val;
     }
     
-    public float getMonto(){
+    public Float getMonto(){
         return this.monto;
+    }
+    
+    public void setPrecio(Float val){
+        this.precio = val;
+    }
+    
+    public Float getPrecio(){
+        return this.precio;
     }
 
     public void setPagaReceptor(boolean val){

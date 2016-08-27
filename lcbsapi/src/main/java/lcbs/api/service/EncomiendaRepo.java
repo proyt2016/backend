@@ -150,5 +150,9 @@ public class EncomiendaRepo {
 		ctrEncomienda.borrarReglaCobroEncomienda(idReglaCobro);
 		
 	}
+
+	public Float getPrecioDeEncomienda(String codigoReglaCobro, Float monto) {
+		return ctrEncomienda.getPrecioDeEncomienda(codigoReglaCobro, monto);
+	}
 	
 }

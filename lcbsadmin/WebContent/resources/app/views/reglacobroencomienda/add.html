@@ -23,6 +23,15 @@
             <input type="text" id="nombre" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="reglacobroencomienda.nombre"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
           </div>
         </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="aceptaCuponera">Precio exacto(checked) o calculo(unchecked) <span class="required">*</span>
+          </label>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" id="aceptaCuponera" data-parsley-id="0978" ng-model="reglacobroencomienda.precioExactoOCalculo" class="flat">             
+            </label>
+          </div>
+        </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
             <h4> Criterios </h4>
             <a class="btn btn-default" style="margin:0;" ng-click="addRelation()"><i class="fa fa-plus"></i></a>

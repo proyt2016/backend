@@ -43,4 +43,5 @@ public interface IEncomienda {
 	public DataEncomienda getEncomiendaXcodigo(int codigoEncomienda);
 	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla);
 	public void borrarReglaCobroEncomienda(String idReglaCobro);
+	public Float getPrecioDeEncomienda(String codigoReglaCobro, Float monto);
 }

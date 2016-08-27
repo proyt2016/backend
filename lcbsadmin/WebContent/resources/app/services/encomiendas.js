@@ -43,6 +43,21 @@
 
             return defer.promise;
         };
+
+        var calcularPrecio = function(regla,monto){
+            var defer = $q.defer();
+
+            $http.get('/lcbsapi/rest/encomiendas/getpreciodeencomienda/'+regla.id+'/'+monto)
+            .success(function (prec) {
+                defer.resolve(prec);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
+
+            return defer.promise;
+        };
+
         var buscar = function(filtro){
             var defer = $q.defer();
 
@@ -129,6 +144,7 @@
             getTerminales : getTerminales,
             getReglasCobro: getReglasCobro,
             buscarUsuario : buscarUsuario,
+            calcularPrecio: calcularPrecio,
             buscar        : buscar,
             getAll        : getAll,
             getId         : getId,

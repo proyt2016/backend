@@ -128,6 +128,19 @@
             }
         }
 
+        $scope.calcularPrecio = function () {
+            var encomienda = this.encomienda;
+
+            encomiendasService.calcularPrecio($scope.reglasCobro[encomienda["reglaCobro"]],encomienda.monto).then(
+                function (data) {
+                    $scope.encomienda.precio = data;
+
+                }, function () {
+
+                }
+            );
+        }
+
         initialize();
 
     }

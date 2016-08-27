@@ -187,5 +187,11 @@ public class EncomiendaApi {
 	public DataEncomienda getEncomiendaXcodigo(@PathParam("codigoEnc") final int codigoEncomienda){
 		return repo.getEncomiendaXcodigo(codigoEncomienda);
 	}
+	
+	@GET
+	@Path("/getpreciodeencomienda/{codigoReglaCobro}/{monto}")
+	public Float getPrecioDeEncomienda(@PathParam("codigoReglaCobro") final String codigoReglaCobro, @PathParam("monto") final Float monto){
+		return repo.getPrecioDeEncomienda(codigoReglaCobro, monto);
+	}
 
 }

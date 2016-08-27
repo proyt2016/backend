@@ -33,6 +33,7 @@ public class ReglaCobroEncomienda implements Serializable{
     private String id;
     
     private String nombre;
+    private Boolean precioExactoOCalculo;
     @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     @IndexColumn(name="LIST_INDEX")
     private List<ReglaCobroEncomiendaCriteria> criterias;
@@ -41,15 +42,17 @@ public class ReglaCobroEncomienda implements Serializable{
 
     public ReglaCobroEncomienda() {}
     
-    public ReglaCobroEncomienda(String id, String nom, List<ReglaCobroEncomiendaCriteria> crit) {
+    public ReglaCobroEncomienda(String id, String nom, List<ReglaCobroEncomiendaCriteria> crit, Boolean proc) {
         this.id = id;
         this.nombre = nom;
+        this.precioExactoOCalculo = proc;
         this.criterias = crit;
     }
     
     public ReglaCobroEncomienda(DataReglaCobroEncomienda dt){
     	this.setId(dt.getId());
     	this.setNombre(dt.getNombre());
+    	this.setPrecioExactoOCalculo(dt.getPrecioExactoOCalculo());
     	if(dt.getCriterias() != null){
 	        List<ReglaCobroEncomiendaCriteria> auxEm = new ArrayList<ReglaCobroEncomiendaCriteria>();
 	        dt.getCriterias().stream().forEach((crit) -> {
@@ -63,6 +66,7 @@ public class ReglaCobroEncomienda implements Serializable{
     	DataReglaCobroEncomienda result = new DataReglaCobroEncomienda();
     	result.setId(this.getId());
     	result.setNombre(this.getNombre());
+    	result.setPrecioExactoOCalculo(this.getPrecioExactoOCalculo());
     	if(this.getCriterias() != null){
 	    	List<DataReglaCobroEncomiendaCriteria> aux = new ArrayList<DataReglaCobroEncomiendaCriteria>();
 	    	this.getCriterias().stream().forEach((crit) -> {
@@ -96,5 +100,13 @@ public class ReglaCobroEncomienda implements Serializable{
     public List<ReglaCobroEncomiendaCriteria> getCriterias(){
         return this.criterias;
     }
-   
+    
+
+    public void setPrecioExactoOCalculo(Boolean val){
+        this.precioExactoOCalculo = val;
+    }
+    
+    public Boolean getPrecioExactoOCalculo(){
+        return this.precioExactoOCalculo;
+    }   
 }

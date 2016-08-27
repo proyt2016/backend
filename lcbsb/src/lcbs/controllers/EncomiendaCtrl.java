@@ -181,4 +181,8 @@ public class EncomiendaCtrl implements IEncomienda{
 	public void borrarReglaCobroEncomienda(String idReglaCobro) {
 		srvReglaCobro.borrarReglaCobroEncomienda(idReglaCobro);
 	}
+	@Override
+	public Float getPrecioDeEncomienda(String codigoReglaCobro, Float monto) {
+		return srvReglaCobro.getPrecioDeEncomienda(codigoReglaCobro, monto);
+	}
 }

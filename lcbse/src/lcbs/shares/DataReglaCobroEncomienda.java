@@ -7,16 +7,18 @@ public class DataReglaCobroEncomienda{
 	private String id;
     
     private String nombre;
+    private Boolean precioExactoOCalculo;
     private List<DataReglaCobroEncomiendaCriteria> criterias;
     
  
 
     public DataReglaCobroEncomienda() {}
     
-    public DataReglaCobroEncomienda(String id, String nom, List<DataReglaCobroEncomiendaCriteria> crit) {
+    public DataReglaCobroEncomienda(String id, String nom, List<DataReglaCobroEncomiendaCriteria> crit, Boolean proc) {
         this.id = id;
         this.nombre = nom;
         this.criterias = crit;
+        this.precioExactoOCalculo = proc;
     }
     
     public void setId(String val){
@@ -42,5 +44,13 @@ public class DataReglaCobroEncomienda{
     public List<DataReglaCobroEncomiendaCriteria> getCriterias(){
         return this.criterias;
     }
+    
+    public void setPrecioExactoOCalculo(Boolean val){
+        this.precioExactoOCalculo = val;
+    }
+    
+    public Boolean getPrecioExactoOCalculo(){
+        return this.precioExactoOCalculo;
+    } 
     
 }

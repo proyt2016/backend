@@ -51,15 +51,14 @@ public class Encomienda implements Serializable{
         */
     @Embedded
     private Telefono telReceptor;
-
     @ManyToOne
     private Usuario receptor;
     private String ciReceptor;
-   
     private String direccionReceptor;
     @ManyToOne(fetch=FetchType.LAZY)
     private ReglaCobroEncomienda reglaCobro;
     private Float monto;
+    private Float precio;
     private Boolean pagaReceptor;
     @ManyToOne
     private Viaje viajeAsignado;
@@ -79,7 +78,7 @@ public class Encomienda implements Serializable{
 
     public Encomienda() {}
     
-    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, Vehiculo cod_coche, int codEnco) {
+    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, Float mont, Float prec, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim, Vehiculo cod_coche, int codEnco) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -91,6 +90,7 @@ public class Encomienda implements Serializable{
         this.direccionReceptor = dirRec;
         this.reglaCobro = regCob;
         this.monto = mont;
+        this.precio = prec;
         this.pagaReceptor = pagaRec;
         this.viajeAsignado = viajeAs;
         this.estados = estds;
@@ -136,6 +136,7 @@ public class Encomienda implements Serializable{
     	if(dt.getReglaCobro() != null)
     		this.setReglaCobro(new ReglaCobroEncomienda(dt.getReglaCobro()));
     	this.setMonto(dt.getMonto());
+    	this.setPrecio(dt.getPrecio());
     	this.setPagaReceptor(dt.getPagaReceptor());
     	if(dt.getViajeAsignado() != null)
     		this.setViajeAsignado(new Viaje(dt.getViajeAsignado()));
@@ -185,6 +186,7 @@ public class Encomienda implements Serializable{
     	if(this.getReglaCobro()!=null)
     		result.setReglaCobro(this.getReglaCobro().getDatatype());
     	result.setMonto(this.getMonto());
+    	result.setPrecio(this.getPrecio());
     	result.setPagaReceptor(this.getPagaReceptor());
     	if(this.getViajeAsignado()!=null)
     		result.setViajeAsignado(this.getViajeAsignado().getDatatype(false));
@@ -299,12 +301,20 @@ public class Encomienda implements Serializable{
         return this.reglaCobro;
     }
 
-    public void setMonto(float val){
+    public void setMonto(Float val){
         this.monto = val;
     }
     
-    public float getMonto(){
+    public Float getMonto(){
         return this.monto;
+    }
+ 
+    public void setPrecio(Float val){
+        this.precio = val;
+    }
+    
+    public Float getPrecio(){
+        return this.precio;
     }
 
     public void setPagaReceptor(boolean val){

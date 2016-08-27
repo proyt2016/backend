@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 
@@ -14,6 +16,7 @@ import lcbs.models.Recorrido;
 import lcbs.models.ReglaCobroEncomienda;
 import lcbs.models.Reserva;
 import lcbs.shares.DataReglaCobroEncomienda;
+import lcbs.shares.DataReglaCobroEncomiendaCriteria;
 
 import java.util.Map;
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ import java.util.List;
 public class ReglaCobroEncomiendaSrv implements ReglaCobroEncomiendaLocalApi {
 	@Inject
     EntityManager em;
-	
+
     private ReglaCobroEncomiendaSrv(){
         
     }
@@ -76,4 +79,31 @@ public class ReglaCobroEncomiendaSrv implements ReglaCobroEncomiendaLocalApi {
     	ReglaCobroEncomienda realObj = (ReglaCobroEncomienda) session.get(ReglaCobroEncomienda.class, idRce);
         em.remove(realObj);
     }
+
+	public Float getPrecioDeEncomienda(String codigoReglaCobro, Float monto) {
+		Float result = null;
+		DataReglaCobroEncomienda regla = getReglaCobroEncomienda(codigoReglaCobro);
+		if(regla != null && regla.getCriterias().size() > 0){
+			for(DataReglaCobroEncomiendaCriteria crit : regla.getCriterias()){
+				if(crit.getOperador().equals("<=")){
+					if(Float.valueOf(monto) <= Float.valueOf(crit.getValor())){
+						if(regla.getPrecioExactoOCalculo()){
+							return crit.getPrecio();
+						}else{
+							return crit.getPrecio() * monto;
+						}
+					}
+				}else{
+					if(Float.valueOf(monto) > Float.valueOf(crit.getValor())){
+						if(regla.getPrecioExactoOCalculo()){
+							return crit.getPrecio();
+						}else{
+							return crit.getPrecio() * monto;
+						}
+					}
+				}
+			}
+		}
+		return result;
+	}
 }

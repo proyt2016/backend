@@ -83,8 +83,8 @@ public class EncomiendaRepo {
 	}
 	
 	
-	public List<DataEncomienda> getEncomiendasPorVehiculo(String idViaje){
-		return ctrEncomienda.getEncomiendasPorVehiculo(idViaje);
+	public List<DataEncomienda> getEncomiendasPorVehiculo(String idVehiculo){
+		return ctrEncomienda.getEncomiendasPorVehiculo(idVehiculo);
 	}
 	
 	

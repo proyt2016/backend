@@ -48,22 +48,18 @@ public class Viaje implements Serializable {
 	private List<Vehiculo> coches;
 	@OneToMany
 	@IndexColumn(name="LIST_INDEX")
-	private List<Encomienda> encomiendas;
-	@OneToMany
-	@IndexColumn(name="LIST_INDEX")
 	private List<Reserva> reservas;
 
 	public Viaje() {
 	}
 
-	public Viaje(String id, Recorrido rec, Horario hor, Date fecSalida, List<Empleado> emp, List<Vehiculo> coches, List<Encomienda> enc, List<Reserva> res) {
+	public Viaje(String id, Recorrido rec, Horario hor, Date fecSalida, List<Empleado> emp, List<Vehiculo> coches, List<Reserva> res) {
 		this.id = id;
 		this.recorrido = rec;
 		this.horario = hor;
 		this.fechaSalida = fecSalida;
 		this.empleados = emp;
 		this.coches = coches;
-		this.encomiendas = enc;
 		this.reservas = res;
 	}
 	
@@ -89,13 +85,6 @@ public class Viaje implements Serializable {
 	    		aux.add(new Vehiculo(co));
 	        });
 	    	this.setCoches(aux);
-		}
-		if(dt.getEncomiendas() != null && conHijos){
-			List<Encomienda> auxEnc = new ArrayList<Encomienda>();
-	    	dt.getEncomiendas().stream().forEach((enc) -> {
-	    		auxEnc.add(new Encomienda(enc));
-	        });
-	    	this.setEncomiendas(auxEnc);
 		}
 		if(dt.getReservas() != null){
 			List<Reserva> auxRes = new ArrayList<Reserva>();
@@ -127,13 +116,6 @@ public class Viaje implements Serializable {
 	    		auxC.add(co.getDatatype(false));
 	        });
 	    	result.setCoches(auxC);
-    	}
-		if(this.getEncomiendas()!=null && conHijos){
-			List<DataEncomienda> auxEnc = new ArrayList<DataEncomienda>();
-			this.getEncomiendas().stream().forEach((enc) -> {
-	    		auxEnc.add(enc.getDatatype(false));
-	        });
-	    	result.setEncomiendas(auxEnc);
     	}
 		if(this.getReservas()!=null && conHijos){
 			List<DataReserva> auxRes = new ArrayList<DataReserva>();
@@ -191,14 +173,6 @@ public class Viaje implements Serializable {
 
 	public List<Vehiculo> getCoches() {
 		return this.coches;
-	}
-
-	public void setEncomiendas(List<Encomienda> val) {
-		this.encomiendas = val;
-	}
-
-	public List<Encomienda> getEncomiendas() {
-		return this.encomiendas;
 	}
 	
 	public void setReservas(List<Reserva> val) {

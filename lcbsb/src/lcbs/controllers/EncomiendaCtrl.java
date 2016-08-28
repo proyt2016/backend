@@ -114,9 +114,9 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 
 	@Override
-	public List<DataEncomienda> getEncomiendasPorVehiculo(String idViaje) {
-		DataViaje viaje = srvViaje.getViaje(idViaje);
-		return viaje.getEncomiendas();
+	public List<DataEncomienda> getEncomiendasPorVehiculo(String idCoche) {
+		DataVehiculo coche = srvVehiculo.getVehiculo(idCoche);
+		return coche.getEncomiendas();
 	}
 
 	@Override
@@ -124,13 +124,13 @@ public class EncomiendaCtrl implements IEncomienda{
 		DataViaje viaje = srvViaje.getViaje(idViaje);
 		DataEncomienda encomienda = srvEncomienda.getEncomienda(IdEncomienda);
 		DataVehiculo coche = srvVehiculo.getVehiculo(idCoche);
-		List<DataEncomienda> encomiendas = viaje.getEncomiendas();
+		List<DataEncomienda> encomiendas = coche.getEncomiendas();
 		encomiendas.add(encomienda);
-		viaje.setEncomiendas(encomiendas);
+		coche.setEncomiendas(encomiendas);
 		encomienda.setViajeAsignado(viaje);
 		encomienda.setCocheAsignado(coche);
 		srvEncomienda.modificarEncomienda(encomienda);
-		srvViaje.modificarViaje(viaje);
+		srvVehiculo.modificarVehiculo(coche);
 	}
 
 	@Override

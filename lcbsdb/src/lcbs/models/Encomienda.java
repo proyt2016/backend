@@ -103,7 +103,7 @@ public class Encomienda implements Serializable{
         this.codigoEncomienda = codEnco;
     }
     
-    public Encomienda(DataEncomienda dt){
+    public Encomienda(DataEncomienda dt, Boolean conHijos){
     	this.setId(dt.getId());
     	this.setCodigoEncomienda(dt.getCodigoEncomienda());
     	if(dt.getOrigen() != null){
@@ -121,7 +121,7 @@ public class Encomienda implements Serializable{
 	    	}
     	}
     	
-    	if(dt.getCocheAsignado()!=null)
+    	if(dt.getCocheAsignado()!=null && conHijos)
     		this.setCocheAsignado(new Vehiculo(dt.getCocheAsignado()));
     
     	if(dt.getEmisor() != null)
@@ -152,6 +152,7 @@ public class Encomienda implements Serializable{
     	this.setFechaIngreso(dt.getFechaIngreso());
     	this.setFechaEntrega(dt.getFechaEntrega());
     	this.setRetiraEnSucursal(dt.getRetiraEnSucursal());	
+    	this.setEliminada(dt.getEliminada());
     }
     
     public DataEncomienda getDatatype(Boolean conHijos){
@@ -202,6 +203,7 @@ public class Encomienda implements Serializable{
     	result.setFechaIngreso(this.getFechaIngreso());
     	result.setFechaEntrega(this.getFechaEntrega());
     	result.setRetiraEnSucursal(this.getRetiraEnSucursal());
+    	result.setEliminada(this.getEliminada());
     	return result;
     }
     

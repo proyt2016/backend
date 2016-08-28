@@ -75,7 +75,7 @@ public class Usuario extends Persona implements Serializable{
     	if(dt.getEncomiendas() != null){
 	    	List<Encomienda> auxEnc = new ArrayList<Encomienda>();
 	    	dt.getEncomiendas().stream().forEach((enc) -> {
-	    		auxEnc.add(new Encomienda(enc));
+	    		auxEnc.add(new Encomienda(enc, true));
 	        });
 	    	this.setEncomiendas(auxEnc);
     	}

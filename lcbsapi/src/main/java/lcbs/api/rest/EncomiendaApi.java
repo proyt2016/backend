@@ -113,9 +113,9 @@ public class EncomiendaApi {
 	}
 	
 	@GET
-	@Path("/getencomiendasporvehiculo/{idViaje}")
-	public List<DataEncomienda> getEncomiendasPorVehiculo(@PathParam("idViaje") final String idViaje){
-		return repo.getEncomiendasPorVehiculo(idViaje);
+	@Path("/getencomiendasporvehiculo/{idVehiculo}")
+	public List<DataEncomienda> getEncomiendasPorVehiculo(@PathParam("idVehiculo") final String idVehiculo){
+		return repo.getEncomiendasPorVehiculo(idVehiculo);
 	}
 	
 	@POST

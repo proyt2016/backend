@@ -59,7 +59,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     }
     
     public void modificarEncomienda(DataEncomienda enc){
-    	Encomienda realObj = new Encomienda(enc);
+    	Encomienda realObj = new Encomienda(enc, true);
         em.merge(realObj);
     }
     
@@ -70,6 +70,8 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
     	criteria.add(Restrictions.eq("eliminada", false));
     	criteria.add(Restrictions.eq("id", id));
     	List<Encomienda> listEnc = new ArrayList<Encomienda>(new LinkedHashSet( criteria.list() ));
+    	log.info("#################################################################### "+id);
+    	log.info("#################################################################### "+listEnc);
     	listEnc.stream().forEach((enc) -> {
     		encomiendas.add(enc.getDatatype(true));
         });
@@ -90,7 +92,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
 	}
     
     public DataEncomienda crearEncomienda(DataEncomienda enc){
-    	Encomienda realObj = new Encomienda(enc);
+    	Encomienda realObj = new Encomienda(enc, true);
     	realObj.setEliminada(false);
     	realObj.setFechaIngreso(new Date());
         //guardo la encomienda en bd

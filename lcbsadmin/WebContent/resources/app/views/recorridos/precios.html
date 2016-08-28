@@ -15,7 +15,9 @@
     <div class="x_content">
       <br>
       <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" ng-submit="editHorarios()">
-
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <a class="btn btn-default" style="margin:0;" ng-click="addRelation('precios')"><i class="fa fa-plus"></i></a>
+        </div>
         <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="prec in precios" style="margin-top:10px;">
           <div class="form-group">
               <label>Origen</label>

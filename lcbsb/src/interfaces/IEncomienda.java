@@ -40,7 +40,7 @@ public interface IEncomienda {
 	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina);
 	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado);
 	public DataEstadosEncomienda getEstadoEncomienda(String idEstadoEncomienda);
-	public DataEncomienda getEncomiendaXcodigo(int codigoEncomienda);
+	public DataEncomienda getEncomiendaXcodigo(Integer codigoEncomienda);
 	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla);
 	public void borrarReglaCobroEncomienda(String idReglaCobro);
 	public Float getPrecioDeEncomienda(String codigoReglaCobro, Float monto);

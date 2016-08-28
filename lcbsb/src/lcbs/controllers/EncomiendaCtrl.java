@@ -170,7 +170,7 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 	
 	@Override
-	public DataEncomienda getEncomiendaXcodigo(int codigoEncomienda){
+	public DataEncomienda getEncomiendaXcodigo(Integer codigoEncomienda){
 		return srvEncomienda.getEncomiendaXcodigo(codigoEncomienda);
 	}
 	@Override

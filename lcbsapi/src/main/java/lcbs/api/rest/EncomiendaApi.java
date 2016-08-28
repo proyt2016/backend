@@ -184,7 +184,7 @@ public class EncomiendaApi {
 	
 	@GET
 	@Path("/getencomiendaxcodigo/{codigoEnc}")
-	public DataEncomienda getEncomiendaXcodigo(@PathParam("codigoEnc") final int codigoEncomienda){
+	public DataEncomienda getEncomiendaXcodigo(@PathParam("codigoEnc") final Integer codigoEncomienda){
 		return repo.getEncomiendaXcodigo(codigoEncomienda);
 	}
 	

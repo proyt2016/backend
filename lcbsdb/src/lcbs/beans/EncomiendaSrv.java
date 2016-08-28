@@ -6,6 +6,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -35,7 +37,7 @@ import java.util.Date;
 public class EncomiendaSrv implements EncomiendaLocalApi {
 	@Inject
     EntityManager em;
-	
+	private static final Log log = LogFactory.getLog(EncomiendaSrv.class);
     private EncomiendaSrv(){
         
     }
@@ -74,7 +76,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
         return encomiendas.get(0);
     }
     
-    public DataEncomienda getEncomiendaXcodigo(int codigoEncomienda) {
+    public DataEncomienda getEncomiendaXcodigo(Integer codigoEncomienda) {
     	List<DataEncomienda> encomiendas = new ArrayList();
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Encomienda.class);

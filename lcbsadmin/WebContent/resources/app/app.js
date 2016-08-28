@@ -108,6 +108,12 @@
 		}).when("/recorridos/edit/:id", {
 		    templateUrl : "app/views/recorridos/edit.html",
 		    controller  : 'recorridosCtrl'
+		}).when("/recorridos/precios/:id", {
+		    templateUrl : "app/views/recorridos/precios.html",
+		    controller  : 'recorridosCtrl'
+		}).when("/recorridos/oraios/:id", {
+		    templateUrl : "app/views/recorridos/horarios.html",
+		    controller  : 'recorridosCtrl'
 		});
 
 		// ruta de estadosencomienda

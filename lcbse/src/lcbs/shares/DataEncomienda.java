@@ -31,7 +31,7 @@ public class DataEncomienda {
     private DataViaje viajeAsignado;
     private List<DataHistorialEstadosEncomienda> estados;
     private DataEstadosEncomienda estadoActual;
-    private int codigoEncomienda;
+    private Integer codigoEncomienda;
     @ManyToOne
     private DataVehiculo cocheAsignado;
     @XmlElement
@@ -47,7 +47,7 @@ public class DataEncomienda {
 
     public DataEncomienda() {}
     
-    public DataEncomienda(String id, DataPuntoRecorrido orig, DataPuntoRecorrido dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, DataVehiculo codCoche, int codEnco) {
+    public DataEncomienda(String id, DataPuntoRecorrido orig, DataPuntoRecorrido dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, DataVehiculo codCoche, Integer codEnco) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -141,11 +141,11 @@ public class DataEncomienda {
     	return result;
     }
     
-    public void setCodigoEncomienda(int codEnco){
+    public void setCodigoEncomienda(Integer codEnco){
     	this.codigoEncomienda = codEnco;
     }
     
-    public int getCodigoEncomienda(){
+    public Integer getCodigoEncomienda(){
     	return this.codigoEncomienda;
     }
     public void setCocheAsignado(DataVehiculo val){

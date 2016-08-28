@@ -152,7 +152,7 @@ public class ViajeCtrl implements IViaje{
 	}
 	
 	@Override
-	public List<DataTerminal> getTerminales(int pagina, int elementos) {
+	public List<DataTerminal> getTerminales(Integer pagina, Integer elementos) {
 		return srvTerminal.obtenerTerminals(pagina, elementos);
 		
 	}
@@ -258,12 +258,12 @@ public class ViajeCtrl implements IViaje{
 		return srvViaje.getViaje(idViaje);
 	}
 	
-	public DataPasaje getPasajeXCodigo(int codigoPasaje){
+	public DataPasaje getPasajeXCodigo(Integer codigoPasaje){
 		return srvPasaje.getpasajeXcodigo(codigoPasaje);
 	}
 	
 	@Override
-	public List<DataViaje> getViajes(int pagina, int elementos){
+	public List<DataViaje> getViajes(Integer pagina, Integer elementos){
 		return srvViaje.obtenerViajes(pagina, elementos);
 	}
 

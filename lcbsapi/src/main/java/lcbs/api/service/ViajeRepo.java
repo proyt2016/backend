@@ -50,7 +50,7 @@ public class ViajeRepo {
 		return ctrViaje.ComprarPasaje(pasaje);
 	}
 	
-	public DataPasaje getPasajeXcodigo(int codigoPasaje){
+	public DataPasaje getPasajeXcodigo(Integer codigoPasaje){
 		return ctrViaje.getPasajeXCodigo(codigoPasaje);
 	}
 	
@@ -90,7 +90,7 @@ public class ViajeRepo {
 		ctrViaje.EditarParada(parada);
 	}
 	
-	public List<DataViaje> getViajes(int pagina,int elementos){
+	public List<DataViaje> getViajes(Integer pagina,Integer elementos){
 		return ctrViaje.getViajes(pagina, elementos);
 	}
 	
@@ -145,7 +145,7 @@ public class ViajeRepo {
 	public void eliminarViaje(String idViaje){
 		ctrViaje.eliminarViaje(idViaje);
 	}
-	public List<DataTerminal> getTerminales(int pagina, int elementos){
+	public List<DataTerminal> getTerminales(Integer pagina, Integer elementos){
 		return ctrViaje.getTerminales(pagina, elementos);
 	}
 	

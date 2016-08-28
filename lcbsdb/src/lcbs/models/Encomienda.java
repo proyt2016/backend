@@ -35,7 +35,7 @@ public class Encomienda implements Serializable{
 	private String id;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int codigoEncomienda;
+    private Integer codigoEncomienda;
     
     @ManyToOne
     private PuntoRecorrido origen;
@@ -78,7 +78,7 @@ public class Encomienda implements Serializable{
 
     public Encomienda() {}
     
-    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, Vehiculo cod_coche, int codEnco) {
+    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, Vehiculo cod_coche, Integer codEnco) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -205,11 +205,11 @@ public class Encomienda implements Serializable{
     	return result;
     }
     
-    public void setCodigoEncomienda(int codigoEnco){
+    public void setCodigoEncomienda(Integer codigoEnco){
     	this.codigoEncomienda = codigoEnco;
     }
     
-    public int getCodigoEncomienda(){
+    public Integer getCodigoEncomienda(){
     	return this.codigoEncomienda;
     }
     

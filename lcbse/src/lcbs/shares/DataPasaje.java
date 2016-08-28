@@ -18,7 +18,7 @@ public class DataPasaje{
     @XmlElement
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaCompra;
-    private int codigoPasaje;
+    private Integer codigoPasaje;
     private DataUsuario comprador;
     private String ciPersona;
     private DataEmpleado vendedor;
@@ -30,7 +30,7 @@ public class DataPasaje{
 
     public DataPasaje() {}
     
-    public DataPasaje(String id, int codigoPasaje, DataViaje via, DataPrecio prec, DataPuntoRecorrido orig, 
+    public DataPasaje(String id, Integer codigoPasaje, DataViaje via, DataPrecio prec, DataPuntoRecorrido orig, 
     		DataPuntoRecorrido des,	Date fecVen, DataUsuario comp, String ciPer, 
     		DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.id = id;
@@ -78,11 +78,11 @@ public class DataPasaje{
     	return result;
     }
     
-    public void setCodigoPasaje(int cod){
+    public void setCodigoPasaje(Integer cod){
     	this.codigoPasaje = cod;
     }
     
-    public int getCodigoPasaje(){
+    public Integer getCodigoPasaje(){
     	return this.codigoPasaje;
     }
     

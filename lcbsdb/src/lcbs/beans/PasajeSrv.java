@@ -77,7 +77,7 @@ public class PasajeSrv implements PasajeLocalApi {
         return Pasajes.get(0);
     }
     
-    public DataPasaje getpasajeXcodigo(int codigoPasaje) {
+    public DataPasaje getpasajeXcodigo(Integer codigoPasaje) {
     	List<DataPasaje> Pasajes = new ArrayList();
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Pasaje.class);

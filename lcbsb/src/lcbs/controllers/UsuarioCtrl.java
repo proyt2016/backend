@@ -36,7 +36,7 @@ public class UsuarioCtrl implements IUsuario{
 	@Override
 	public DataUsuario AltaUsuario(DataUsuario usuario) {
 		DataCuponera cuponera = new DataCuponera();
-		cuponera.setSaldo(0);
+		cuponera.setSaldo(0.0f);
 		usuario.setCuponera(cuponera);
 		return srvUsuario.crearUsuario(usuario);
 	}

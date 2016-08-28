@@ -22,25 +22,47 @@ import lcbs.api.service.EmpresaRepo;
 @Path("/empresa")
 @Produces({ "application/json" })
 @Consumes({ "application/json" })
-public class EmpresaApi {
+public class EmpresaApi extends BaseApi{
 
 	
 	@EJB
 	EmpresaRepo repo;
+
+	@POST
+	@Path("/altaconfiguracion/")
+	public void AltaConfiguracionEmpresa(DataConfiguracionEmpresa empresa){
+		DataTenant tenant = checkTenant();
+		if(tenant != null){
+
+			repo.altaConfiguracionEmpresa(empresa, tenant);
+		}else{
+			return ;
+		}
 	
-	
+	} 
 	@POST
 	@Path("/editarconfiguracion/")
 	public void editarConfiguracionEmpresa(DataConfiguracionEmpresa empresa){
-		repo.editarConfiguracionEmpresa(empresa);
+		DataTenant tenant = checkTenant();
+		if(tenant != null){
+
+			repo.editarConfiguracionEmpresa(empresa, tenant);
+		}else{
+			return;
+		}
 	
 	}
 	
 	@GET
 	@Path("/getconfirguacionempresa/")
 	public DataConfiguracionEmpresa obtenerConfiguracion(){
-		return repo.obtenerConfiguracionEmpresa();
-	
+		
+		DataTenant tenant = checkTenant();
+		if(tenant != null){
+			return repo.obtenerConfiguracionEmpresa(tenant);
+		}else{
+			return null;
+		}
 	}
 	
 	

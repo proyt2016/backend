@@ -1,16 +1,18 @@
 package lcbs.beans;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.ejb.LocalBean;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import lcbs.schema.SchemaHandler;
 
 /**
  * Session Bean implementation class EntityManagerProducer
@@ -26,7 +28,8 @@ public class EntityManagerProducer {
     @Produces
     @RequestScoped
     public EntityManager getEntityManager() {
-    	log.info("################################newEM####################################33333");
-        return em;
+        em.createNativeQuery("SET SCHEMA 'public'").executeUpdate();
+		em.createNativeQuery("SET search_path TO public").executeUpdate();
+		return em;
     }
 }

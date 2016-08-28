@@ -25,18 +25,18 @@ public class EmpresaCtrl implements IEmpresa{
 	ConfiguracionEmpresaLocalApi srvEmpresa;
 	
 	@Override
-	public void altaConfiguracionEmpresa(DataConfiguracionEmpresa empresa) {
-		srvEmpresa.crearConfiguracionEmpresa(empresa);
+	public void altaConfiguracionEmpresa(DataConfiguracionEmpresa empresa, DataTenant tenant) {
+		srvEmpresa.crearConfiguracionEmpresa(empresa, tenant);
 	}
 	
 	@Override
-	public DataConfiguracionEmpresa obtenerConfiguracionEmpresa(){
-		return srvEmpresa.getConfiguracionEmpresa();
+	public DataConfiguracionEmpresa obtenerConfiguracionEmpresa(DataTenant tenant){
+		return srvEmpresa.getConfiguracionEmpresa(tenant);
 	}
 	
 	@Override
-	public void editarConfiguracionEmpresa(DataConfiguracionEmpresa empresa){
-		srvEmpresa.modificarCuponera(empresa);
+	public void editarConfiguracionEmpresa(DataConfiguracionEmpresa empresa, DataTenant tenant){
+		srvEmpresa.modificarCuponera(empresa, tenant);
 	}
 
 	// TODO: agregar la parte de congiguracion de UI

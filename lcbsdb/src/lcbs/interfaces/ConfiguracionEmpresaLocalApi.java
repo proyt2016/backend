@@ -5,7 +5,7 @@ import lcbs.shares.*;
 
 @Local
 public interface ConfiguracionEmpresaLocalApi {
-	public DataConfiguracionEmpresa getConfiguracionEmpresa();
-	public void modificarCuponera(DataConfiguracionEmpresa conf);
-	public DataConfiguracionEmpresa crearConfiguracionEmpresa(DataConfiguracionEmpresa conf);
+	public DataConfiguracionEmpresa getConfiguracionEmpresa(DataTenant tenant);
+	public void modificarCuponera(DataConfiguracionEmpresa conf, DataTenant tenant);
+	public DataConfiguracionEmpresa crearConfiguracionEmpresa(DataConfiguracionEmpresa conf, DataTenant tenant);
 }

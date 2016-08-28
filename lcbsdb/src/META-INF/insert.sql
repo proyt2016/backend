@@ -6,6 +6,8 @@ INSERT INTO estadosencomienda (id, nombre) VALUES ('f75ebf4c-43a5-4331-91e6-bb16
 INSERT INTO estadosencomienda (id, nombre) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235b', 'Entregada');
 
 
+
+
 INSERT INTO perfil (id, modulo1, modulo2, modulo3, modulo4, modulo5, modulo6, modulo7, modulo8, nombreperfil) VALUES ('ecefa62b-185a-4e48-a019-f67521e2b9cd', true, true, true, true, true, true, true, true, 'Admin');
 INSERT INTO perfil (id, modulo1, modulo2, modulo3, modulo4, modulo5, modulo6, modulo7, modulo8, nombreperfil) VALUES ('40b64aed-ae63-4908-914d-b011188c171a', true, true, true, true, false, false, true, true, 'Vendedor');
 INSERT INTO perfil (id, modulo1, modulo2, modulo3, modulo4, modulo5, modulo6, modulo7, modulo8, nombreperfil) VALUES ('49b26bf8-1be4-4405-a0d7-0356f644440d', false, false, true, false, true, true, false, false, 'Encargado Deposito');
@@ -16,6 +18,8 @@ INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechana
 INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', '52897d2a-49af-40cc-939c-e6a300f720e7', 'Sosa', false, NULL, 'julio.sosa@lacbus.tenant.com', NULL, 'Julio', NULL, NULL, NULL, '', NULL, NULL);
 INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', '2f769c0c-6ea4-4d67-a50b-b3167344bfce', 'Pacheco', false, NULL, 'antonio.pacheco@lacbus.tenant.com', NULL, 'Antonio', NULL, NULL, NULL, '', NULL, NULL);
 INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', 'c726c21c-f2e4-4094-a9b6-bb5811cf2e0e', 'Paez', false, NULL, 'ruben.paez@lacbus.tenant.com', NULL, 'Ruben', NULL, NULL, NULL, '', NULL, NULL);
+
+
 
 INSERT INTO vehiculo (id, aniofabricacion, cantidadasientos, conguarda, eliminado, fechaalta, marca, matricula, modelo, numerovehiculo) VALUES ('65378fa8-8931-44c9-8a89-895af6a37c33', 1990, 45, NULL, false, NULL, 'VW', 'SAS123', 'W', '1234');
 INSERT INTO vehiculo (id, aniofabricacion, cantidadasientos, conguarda, eliminado, fechaalta, marca, matricula, modelo, numerovehiculo) VALUES ('352f3329-90d4-4cfa-b0bd-4202d152dcb0', 1890, 43, NULL, false, NULL, 'vw', 'SaS234', 'sa', '2345');
@@ -82,7 +86,7 @@ INSERT INTO puntorecorrido (dtype, id, eliminado, nombre, ubicacionmapa, aceptae
 INSERT INTO puntorecorrido (dtype, id, eliminado, nombre, ubicacionmapa, aceptaencomiendas) VALUES ('Parada', '3e0666c5-45f1-43d2-8a85-c2514a227448', false, 'Las Flores', '-34.7894177824241,-55.322513580322266', NULL);
 INSERT INTO puntorecorrido (dtype, id, eliminado, nombre, ubicacionmapa, aceptaencomiendas) VALUES ('Parada', 'b5b88fca-be10-4155-8b1a-fa0de43043d4', false, 'Pta de ls Sierra', '-34.78688014485674,-55.27719497680664', NULL);
 INSERT INTO puntorecorrido (dtype, id, eliminado, nombre, ubicacionmapa, aceptaencomiendas) VALUES ('Terminal', '016ec03e-d5a2-493e-ada1-06007aeb5b5e', false, 'Pan de Azucar', '-34.7801127296316,-55.2311897277832', true);
-INSERT INTO puntorecorrido (dtype, id, eliminado, nombre, ubicacionmapa, aceptaencomiendas) VALUES ('Parada', '63b84f4b-9b50-40d3-8eed-4e8c0203244d', false, 'La PAz', '-34.7568455057737,-56.25823974609375', NULL);
+INSERT INTO puntorecorrido (dtype, id, eliminado, nombre, ubicacionmapa, aceptaencomiendas) VALUES ('Parada', '63b84f4b-9b50-40d3-8eed-4e8c0203244d', false, 'La Paz', '-34.7568455057737,-56.25823974609375', NULL);
 INSERT INTO puntorecorrido (dtype, id, eliminado, nombre, ubicacionmapa, aceptaencomiendas) VALUES ('Parada', '14926e20-1da5-4bf2-9135-abf198535bc5', false, 'Santiago Vazquez', '-34.78673916270251,-56.355743408203125', NULL);
 INSERT INTO puntorecorrido (dtype, id, eliminado, nombre, ubicacionmapa, aceptaencomiendas) VALUES ('Terminal', '82bc4ed2-043b-44e5-833d-20f07b740392', false, 'Colonia del Sacramento', '-34.452218472826544,-57.82928466796875', true);
 INSERT INTO puntorecorrido (dtype, id, eliminado, nombre, ubicacionmapa, aceptaencomiendas) VALUES ('Terminal', 'b61d2464-77e3-47f7-bc18-aa75871de5c6', false, 'Paysandu', '-32.32195460020057,-58.08746337890625', NULL);
@@ -269,10 +273,35 @@ INSERT INTO viaje (id, fechasalida, recorrido_id) VALUES ('2eceb553-26f3-4e3d-a2
 INSERT INTO viaje (id, fechasalida, recorrido_id) VALUES ('106e6105-0248-478e-a5fb-674dd056d08d', '2016-10-09 21:00:00', 'ff0034e6-dc22-4233-b429-a168f0301ce5');
 INSERT INTO viaje (id, fechasalida, recorrido_id) VALUES ('c090a88c-8fa6-4004-adc2-3b72c7c7e848', '2016-10-09 21:00:00', '4d0609ce-eb2e-437c-be86-fb6ab22e5570');
 
-INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('8d957d43-1997-4617-9375-381e73b04024', '65378fa8-8931-44c9-8a89-895af6a37c33',  0);
+
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04045', '500.00', '82bc4ed2-043b-44e5-833d-20f07b740392', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04065', '600.00', 'f4f165d3-0881-4e8b-8208-ab8adc29a6c7', '14926e20-1da5-4bf2-9135-abf198535bc5');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04125', '450.50', 'c6253122-990a-4891-9456-6d5c68f0c2a9', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04001', '366.50', 'f4f165d3-0881-4e8b-8208-ab8adc29a6c7', '63b84f4b-9b50-40d3-8eed-4e8c0203244d');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b07849', '280.50', 'b61d2464-77e3-47f7-bc18-aa75871de5c6', 'c6253122-990a-4891-9456-6d5c68f0c2a9');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04122', '950.50', 'c6253122-990a-4891-9456-6d5c68f0c2a9', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b01111', '520.50', 'b61d2464-77e3-47f7-bc18-aa75871de5c6', '82bc4ed2-043b-44e5-833d-20f07b740392');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04222', '460.50', 'f4f165d3-0881-4e8b-8208-ab8adc29a6c7', '63b84f4b-9b50-40d3-8eed-4e8c0203244d');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b04231', '1050.50', 'f4f165d3-0881-4e8b-8208-ab8adc29a6c7', '4ea4ba73-a2c1-4821-9c9e-09369aacbabf');
+INSERT INTO precio (id, monto, destino_id, origen_id) VALUES ('8d957d43-1997-4617-9375-381e73b03321', '1450.50', 'f4f165d3-0881-4e8b-8208-ab8adc29a6c7', '2db79cf9-3811-4f3e-b1b4-23b86b3a8283'	);
+
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('11f80976-5b98-4672-84e9-7a249c23b7ad', '8d957d43-1997-4617-9375-381e73b04045', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('4d0609ce-eb2e-437c-be86-fb6ab22e5570', '8d957d43-1997-4617-9375-381e73b04065', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('5f30627f-8f24-476b-8b48-f9ede4ea91dd', '8d957d43-1997-4617-9375-381e73b04125', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('8fa8bab2-6e31-4459-a08e-5347de6eae06', '8d957d43-1997-4617-9375-381e73b04001', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('96e77f63-25bf-4b8d-b116-fdbd1983f1e2', '8d957d43-1997-4617-9375-381e73b07849', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('a0b6eda1-867e-4bf6-9b4d-711820bfdcc0', '8d957d43-1997-4617-9375-381e73b04122', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('a483a3ee-ba85-4e6e-aa8c-d4ba987b5f65', '8d957d43-1997-4617-9375-381e73b01111', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('b5acbe97-d2a3-4742-8e62-f421d3cba89b', '8d957d43-1997-4617-9375-381e73b04222', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('bb8186db-2af4-4081-8c21-302ab8fdc024', '8d957d43-1997-4617-9375-381e73b04231', 0);
+INSERT INTO recorrido_precio (recorrido_id, precios_id, list_index) VALUES ('c2b01749-0cba-44e1-9165-bf6bd629528e', '8d957d43-1997-4617-9375-381e73b03321', 0);
+
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('d0260ba1-51ea-4cd2-97a1-665110581835', '352f3329-90d4-4cfa-b0bd-4202d152dcb0',  0);
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('526feac2-20d5-4c2d-8d6c-93df920461fb', 'c20854d0-4229-4ee9-9101-4f95681eaa21',  0);
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('b1a84a3d-b280-42c6-b288-4bbd6bbadb62', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('627e9822-1b5b-4736-9846-2fff81adb052', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('83cac1e7-4e7f-40fc-b29f-a2f08574480e', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('cc9b5ea9-fb86-4f6a-a949-302ab8fdc024', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
+INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('8d957d43-1997-4617-9375-381e73b04024', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
+
+INSERT INTO encomienda (id, codigoencomienda, eliminada, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235b',1,false, 'c6253122-990a-4891-9456-6d5c68f0c2a9', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');

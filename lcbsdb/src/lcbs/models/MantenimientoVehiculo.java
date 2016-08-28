@@ -27,7 +27,7 @@ public class MantenimientoVehiculo implements Serializable{
     
     private String descripcionReducida;
     private String descripcionCompleta;
-    private float costo;
+    private Float costo;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaIngreso;
     @Temporal(TemporalType.TIMESTAMP)
@@ -37,7 +37,7 @@ public class MantenimientoVehiculo implements Serializable{
 
     public MantenimientoVehiculo() {}
     
-    public MantenimientoVehiculo(String id, String decRes, String descComp, float costo, Date fecIng, Date fecComp) {
+    public MantenimientoVehiculo(String id, String decRes, String descComp, Float costo, Date fecIng, Date fecComp) {
         this.id = id;
         this.descripcionReducida = decRes;
         this.descripcionCompleta = descComp;
@@ -90,11 +90,11 @@ public class MantenimientoVehiculo implements Serializable{
         return this.descripcionCompleta;
     }
 
-    public void setCosto(float val){
+    public void setCosto(Float val){
         this.costo = val;
     }
     
-    public float getCosto(){
+    public Float getCosto(){
         return this.costo;
     }
 

@@ -39,7 +39,7 @@ public abstract class Persona implements Serializable{
     private List<Telefono> telefonosContacto;
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
-    private boolean eliminado;
+    private Boolean eliminado;
      
 
     public Persona() {}

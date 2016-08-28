@@ -58,7 +58,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
 		return realObj.getDatatype(true);
     }
     
-    public boolean loginUsuario(String mailEmpleado, String clave){
+    public DataEmpleado loginUsuario(String mailEmpleado, String clave){
     	Session session = (Session) em.getDelegate();
     	Criteria criteria = session.createCriteria(Empleado.class);
     	criteria.add(Restrictions.eq("email.email", mailEmpleado));
@@ -66,9 +66,9 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
         if(listEmp.size() == 1){
 	    	DataEmpleado empleado = listEmp.get(0).getDatatype(true);
 	    	if(empleado.getClave().equals(clave))
-	        return true;
+	        return empleado;
         }
-        return false;
+        return null;
     }
     
     public DataEmpleado crearEmpleado(DataEmpleado emp){

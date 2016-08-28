@@ -46,11 +46,14 @@ public class Vehiculo implements Serializable{
     @IndexColumn(name="LIST_INDEX")
     private List<MantenimientoVehiculo> mantenimientos;
     private Boolean eliminado;
+    @OneToMany
+	@IndexColumn(name="LIST_INDEX")
+	private List<Encomienda> encomiendas;
    
 
     public Vehiculo() {}
     
-    public Vehiculo(String id, String numV, String mat, String mar, String mod, Integer anioFab, Date fecAlta, Integer cantAs, Boolean conG, List<MantenimientoVehiculo> mant, Boolean elim) {
+    public Vehiculo(String id, String numV, String mat, String mar, String mod, Integer anioFab, Date fecAlta, Integer cantAs, Boolean conG, List<MantenimientoVehiculo> mant, Boolean elim, List<Encomienda> enc) {
         this.id = id;
         this.numeroVehiculo = numV;
         this.matricula = mat;
@@ -62,6 +65,7 @@ public class Vehiculo implements Serializable{
         this.conGuarda = conG;
         this.mantenimientos = mant;
         this.eliminado = elim;
+        this.encomiendas = enc;
     }
     
     public Vehiculo(DataVehiculo dt){
@@ -80,6 +84,13 @@ public class Vehiculo implements Serializable{
 	    		aux.add(new MantenimientoVehiculo(mnt));
 	        });
 	    	this.setMantenimientos(aux);
+    	}
+    	if(dt.getEncomiendas() != null){
+	    	List<Encomienda> aux = new ArrayList<Encomienda>();
+	    	dt.getEncomiendas().stream().forEach((enc) -> {
+	    		aux.add(new Encomienda(enc, false));
+	        });
+	    	this.setEncomiendas(aux);
     	}
     	this.setEliminado(dt.getEliminado());
     }
@@ -101,6 +112,13 @@ public class Vehiculo implements Serializable{
 	    		aux.add(mnt.getDatatype());
 	        });
 	    	result.setMantenimientos(aux);
+    	}
+    	if(this.getEncomiendas()!=null && conHijos){
+	    	List<DataEncomienda> aux = new ArrayList<DataEncomienda>();
+	    	this.getEncomiendas().stream().forEach((enc) -> {
+	    		aux.add(enc.getDatatype(true));
+	        });
+	    	result.setEncomiendas(aux);
     	}
     	result.setEliminado(this.getEliminado());
     	return result;
@@ -193,4 +211,12 @@ public class Vehiculo implements Serializable{
     public Boolean getEliminado(){
         return this.eliminado;
     }
+    
+    public void setEncomiendas(List<Encomienda> val) {
+		this.encomiendas = val;
+	}
+
+	public List<Encomienda> getEncomiendas() {
+		return this.encomiendas;
+	}
 }

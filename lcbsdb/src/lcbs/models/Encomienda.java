@@ -33,7 +33,10 @@ public class Encomienda implements Serializable{
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer codigoEncomienda;
+    
     @ManyToOne
     private PuntoRecorrido origen;
     @ManyToOne
@@ -41,24 +44,25 @@ public class Encomienda implements Serializable{
     @ManyToOne
     private Usuario emisor;
     private String ciEmisor;
+    @ManyToOne
+    private Vehiculo cocheAsignado;
     /*@Embedded
     private Telefono telEmisor;
         */
     @Embedded
     private Telefono telReceptor;
-
     @ManyToOne
     private Usuario receptor;
     private String ciReceptor;
-   
     private String direccionReceptor;
     @ManyToOne(fetch=FetchType.LAZY)
     private ReglaCobroEncomienda reglaCobro;
-    private float monto;
-    private boolean pagaReceptor;
+    private Float monto;
+    private Float precio;
+    private Boolean pagaReceptor;
     @ManyToOne
     private Viaje viajeAsignado;
-    @OneToMany(fetch=FetchType.LAZY)
+    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     @IndexColumn(name="LIST_INDEX")
     private List<HistorialEstadosEncomienda> estados;
     @ManyToOne(fetch=FetchType.LAZY)
@@ -67,14 +71,14 @@ public class Encomienda implements Serializable{
     private Date fechaIngreso;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEntrega;
-    private boolean retiraEnSucursal;
-    private boolean eliminada;
+    private Boolean retiraEnSucursal;
+    private Boolean eliminada;
 
  
 
     public Encomienda() {}
     
-    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, float mont, boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim) {
+    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, Vehiculo cod_coche, Integer codEnco) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -86,6 +90,7 @@ public class Encomienda implements Serializable{
         this.direccionReceptor = dirRec;
         this.reglaCobro = regCob;
         this.monto = mont;
+        this.precio = prec;
         this.pagaReceptor = pagaRec;
         this.viajeAsignado = viajeAs;
         this.estados = estds;
@@ -94,10 +99,13 @@ public class Encomienda implements Serializable{
         this.fechaEntrega = fecEn;
         this.retiraEnSucursal = retiraSuc;
         this.eliminada = elim;
+        this.cocheAsignado = cod_coche;
+        this.codigoEncomienda = codEnco;
     }
     
-    public Encomienda(DataEncomienda dt){
+    public Encomienda(DataEncomienda dt, Boolean conHijos){
     	this.setId(dt.getId());
+    	this.setCodigoEncomienda(dt.getCodigoEncomienda());
     	if(dt.getOrigen() != null){
 	    	if(dt.getOrigen() instanceof DataTerminal){
 	    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
@@ -112,6 +120,10 @@ public class Encomienda implements Serializable{
 	    		this.setDestino(new Parada((DataParada)dt.getDestino()));
 	    	}
     	}
+    	
+    	if(dt.getCocheAsignado()!=null && conHijos)
+    		this.setCocheAsignado(new Vehiculo(dt.getCocheAsignado()));
+    
     	if(dt.getEmisor() != null)
     		this.setEmisor(new Usuario(dt.getEmisor()));
     	this.setCiEmisor(dt.getCiEmisor());
@@ -124,9 +136,10 @@ public class Encomienda implements Serializable{
     	if(dt.getReglaCobro() != null)
     		this.setReglaCobro(new ReglaCobroEncomienda(dt.getReglaCobro()));
     	this.setMonto(dt.getMonto());
+    	this.setPrecio(dt.getPrecio());
     	this.setPagaReceptor(dt.getPagaReceptor());
     	if(dt.getViajeAsignado() != null)
-    		this.setViajeAsignado(new Viaje(dt.getViajeAsignado()));
+    		this.setViajeAsignado(new Viaje(dt.getViajeAsignado(),false));
     	if(dt.getEstados()!=null){
 	    	List<HistorialEstadosEncomienda> temp = new ArrayList<HistorialEstadosEncomienda>();
 	    	dt.getEstados().stream().forEach((est) -> {
@@ -139,11 +152,13 @@ public class Encomienda implements Serializable{
     	this.setFechaIngreso(dt.getFechaIngreso());
     	this.setFechaEntrega(dt.getFechaEntrega());
     	this.setRetiraEnSucursal(dt.getRetiraEnSucursal());	
+    	this.setEliminada(dt.getEliminada());
     }
     
     public DataEncomienda getDatatype(Boolean conHijos){
     	DataEncomienda result = new DataEncomienda();
     	result.setId(this.getId());
+    	result.setCodigoEncomienda(this.getCodigoEncomienda());
     	if(this.getOrigen()!=null)
     		if(this.getOrigen() instanceof Terminal){
     			result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
@@ -157,6 +172,9 @@ public class Encomienda implements Serializable{
     			result.setDestino(((Parada)this.getDestino()).getDatatype());
     		}
     	}
+    	
+    	if(this.getCocheAsignado()!=null)
+    		result.setCocheAsignado(this.getCocheAsignado().getDatatype(false));    		    	
     	if(this.getEmisor()!=null)
     		result.setEmisor(this.getEmisor().getDatatype(false));
     	result.setCiEmisor(this.getCiEmisor());
@@ -169,6 +187,7 @@ public class Encomienda implements Serializable{
     	if(this.getReglaCobro()!=null)
     		result.setReglaCobro(this.getReglaCobro().getDatatype());
     	result.setMonto(this.getMonto());
+    	result.setPrecio(this.getPrecio());
     	result.setPagaReceptor(this.getPagaReceptor());
     	if(this.getViajeAsignado()!=null)
     		result.setViajeAsignado(this.getViajeAsignado().getDatatype(false));
@@ -184,7 +203,24 @@ public class Encomienda implements Serializable{
     	result.setFechaIngreso(this.getFechaIngreso());
     	result.setFechaEntrega(this.getFechaEntrega());
     	result.setRetiraEnSucursal(this.getRetiraEnSucursal());
+    	result.setEliminada(this.getEliminada());
     	return result;
+    }
+    
+    public void setCodigoEncomienda(Integer codigoEnco){
+    	this.codigoEncomienda = codigoEnco;
+    }
+    
+    public Integer getCodigoEncomienda(){
+    	return this.codigoEncomienda;
+    }
+    
+    public void setCocheAsignado(Vehiculo val){
+    	this.cocheAsignado = val;
+    }
+    
+    public Vehiculo getCocheAsignado(){
+    	return this.cocheAsignado;
     }
     
     public void setId(String val){
@@ -267,19 +303,27 @@ public class Encomienda implements Serializable{
         return this.reglaCobro;
     }
 
-    public void setMonto(float val){
+    public void setMonto(Float val){
         this.monto = val;
     }
     
-    public float getMonto(){
+    public Float getMonto(){
         return this.monto;
     }
+ 
+    public void setPrecio(Float val){
+        this.precio = val;
+    }
+    
+    public Float getPrecio(){
+        return this.precio;
+    }
 
-    public void setPagaReceptor(boolean val){
+    public void setPagaReceptor(Boolean val){
         this.pagaReceptor = val;
     }
     
-    public boolean getPagaReceptor(){
+    public Boolean getPagaReceptor(){
         return this.pagaReceptor;
     }
 
@@ -323,19 +367,19 @@ public class Encomienda implements Serializable{
         return this.fechaEntrega;
     }
 
-    public void setRetiraEnSucursal(boolean val){
+    public void setRetiraEnSucursal(Boolean val){
         this.retiraEnSucursal = val;
     }
     
-    public boolean getRetiraEnSucursal(){
+    public Boolean getRetiraEnSucursal(){
         return this.retiraEnSucursal;
     }
     
-    public void setEliminada(boolean val){
+    public void setEliminada(Boolean val){
         this.eliminada = val;
     }
     
-    public boolean getEliminada(){
+    public Boolean getEliminada(){
         return this.eliminada;
     }
 }

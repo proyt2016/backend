@@ -27,7 +27,7 @@ public class EmpresaApi extends BaseApi{
 	
 	@EJB
 	EmpresaRepo repo;
-	
+
 	@POST
 	@Path("/altaconfiguracion/")
 	public void AltaConfiguracionEmpresa(DataConfiguracionEmpresa empresa){
@@ -39,8 +39,7 @@ public class EmpresaApi extends BaseApi{
 			return ;
 		}
 	
-	}
-	
+	} 
 	@POST
 	@Path("/editarconfiguracion/")
 	public void editarConfiguracionEmpresa(DataConfiguracionEmpresa empresa){

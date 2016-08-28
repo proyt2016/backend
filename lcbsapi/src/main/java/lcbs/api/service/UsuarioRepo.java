@@ -93,7 +93,7 @@ public class UsuarioRepo {
 		return ctrUsuario.getUsuario(idUsuario);
 	}
 
-	public boolean loginEmpleado(String usuario, String clave) {
+	public DataEmpleado loginEmpleado(String usuario, String clave) {
 		return ctrUsuario.loginEmpleado(usuario, clave);
 	}
 

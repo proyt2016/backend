@@ -18,7 +18,7 @@ public abstract class DataPersona{
     @XmlElement
     @XmlJavaTypeAdapter(DateAdapter.class)
     private Date fechaNacimiento;
-    private boolean eliminado;
+    private Boolean eliminado;
     
     public void setId(String val){
         this.id = val;

@@ -27,8 +27,8 @@ public interface IEncomienda {
 	public DataEstadosEncomienda getUltimoEstado(String idEncomienda);
 	public DataEncomienda getEncomienda(String idEncomienda);
 	public void setEstadoEncomienda(String idEncomienda, DataEstadosEncomienda dataEstado);
-	public List<DataEncomienda> getEncomiendasPorVehiculo(String idViaje);
-	public void AsignarEncomiendasVehiculo(String IdEncomienda, String idViaje);
+	public List<DataEncomienda> getEncomiendasPorVehiculo(String idVehiculo);
+	public void AsignarEncomiendasVehiculo(String IdEncomienda, String idViaje, String idCoche);
 	public List<DataHistorialEstadosEncomienda> VerEstadosEncomienda(String idEncomienda);
 	public void crearReglaDeCobro(DataReglaCobroEncomienda rdc);
 	public void editarEncomienda(DataEncomienda encomienda);
@@ -40,4 +40,8 @@ public interface IEncomienda {
 	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina);
 	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado);
 	public DataEstadosEncomienda getEstadoEncomienda(String idEstadoEncomienda);
+	public DataEncomienda getEncomiendaXcodigo(Integer codigoEncomienda);
+	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla);
+	public void borrarReglaCobroEncomienda(String idReglaCobro);
+	public Float getPrecioDeEncomienda(String codigoReglaCobro, Float monto);
 }

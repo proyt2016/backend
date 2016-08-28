@@ -24,11 +24,12 @@ public class DataVehiculo{
     private Boolean conGuarda;
     private List<DataMantenimientoVehiculo> mantenimientos;
     private Boolean eliminado;
+    private List<DataEncomienda> encomiendas;
    
 
     public DataVehiculo() {}
     
-    public DataVehiculo(String id, String numV, String mat, String mar, String mod, Integer anioFab, Date fecAlta, Integer cantAs, Boolean conG, List<DataMantenimientoVehiculo> mant, Boolean elim) {
+    public DataVehiculo(String id, String numV, String mat, String mar, String mod, Integer anioFab, Date fecAlta, Integer cantAs, Boolean conG, List<DataMantenimientoVehiculo> mant, Boolean elim, List<DataEncomienda> enc) {
         this.id = id;
         this.numeroVehiculo = numV;
         this.matricula = mat;
@@ -40,6 +41,7 @@ public class DataVehiculo{
         this.conGuarda = conG;
         this.mantenimientos = mant;
         this.eliminado = elim;
+        this.encomiendas = enc;
     }
 
     public void setId(String val){
@@ -128,5 +130,13 @@ public class DataVehiculo{
     
     public Boolean getEliminado(){
         return this.eliminado;
+    }
+    
+    public void setEncomiendas(List<DataEncomienda> val){
+        this.encomiendas = val;
+    }
+    
+    public List<DataEncomienda> getEncomiendas(){
+        return this.encomiendas;
     }
 }

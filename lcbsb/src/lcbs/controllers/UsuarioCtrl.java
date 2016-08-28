@@ -36,7 +36,7 @@ public class UsuarioCtrl implements IUsuario{
 	@Override
 	public DataUsuario AltaUsuario(DataUsuario usuario) {
 		DataCuponera cuponera = new DataCuponera();
-		cuponera.setSaldo(0);
+		cuponera.setSaldo(0.0f);
 		usuario.setCuponera(cuponera);
 		return srvUsuario.crearUsuario(usuario);
 	}
@@ -119,7 +119,7 @@ public class UsuarioCtrl implements IUsuario{
 	}
 
 	@Override
-	public boolean loginEmpleado(String mail, String clave) {
+	public DataEmpleado loginEmpleado(String mail, String clave) {
 		return srvEmpleado.loginUsuario(mail, clave);
 	}
 

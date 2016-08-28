@@ -114,19 +114,23 @@ public class EncomiendaCtrl implements IEncomienda{
 	}
 
 	@Override
-	public List<DataEncomienda> getEncomiendasPorVehiculo(String idViaje) {
-		DataViaje viaje = srvViaje.getViaje(idViaje);
-		return viaje.getEncomiendas();
+	public List<DataEncomienda> getEncomiendasPorVehiculo(String idCoche) {
+		DataVehiculo coche = srvVehiculo.getVehiculo(idCoche);
+		return coche.getEncomiendas();
 	}
 
 	@Override
-	public void AsignarEncomiendasVehiculo(String IdEncomienda,String idViaje) {
+	public void AsignarEncomiendasVehiculo(String IdEncomienda,String idViaje, String idCoche) {
 		DataViaje viaje = srvViaje.getViaje(idViaje);
 		DataEncomienda encomienda = srvEncomienda.getEncomienda(IdEncomienda);
-		List<DataEncomienda> encomiendas = viaje.getEncomiendas();
+		DataVehiculo coche = srvVehiculo.getVehiculo(idCoche);
+		List<DataEncomienda> encomiendas = coche.getEncomiendas();
 		encomiendas.add(encomienda);
-		viaje.setEncomiendas(encomiendas);
-		srvViaje.modificarViaje(viaje);;
+		coche.setEncomiendas(encomiendas);
+		encomienda.setViajeAsignado(viaje);
+		encomienda.setCocheAsignado(coche);
+		srvEncomienda.modificarEncomienda(encomienda);
+		srvVehiculo.modificarVehiculo(coche);
 	}
 
 	@Override
@@ -163,5 +167,22 @@ public class EncomiendaCtrl implements IEncomienda{
 	@Override
 	public DataEstadosEncomienda getEstadoEncomienda(String idEstadoEncomienda) {
 		return srvEstadosEncomienda.getEstadosEncomienda(idEstadoEncomienda);
+	}
+	
+	@Override
+	public DataEncomienda getEncomiendaXcodigo(Integer codigoEncomienda){
+		return srvEncomienda.getEncomiendaXcodigo(codigoEncomienda);
+	}
+	@Override
+	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla) {
+		return srvReglaCobro.modificarReglaCobroEncomienda(dataRegla);
+	}
+	@Override
+	public void borrarReglaCobroEncomienda(String idReglaCobro) {
+		srvReglaCobro.borrarReglaCobroEncomienda(idReglaCobro);
+	}
+	@Override
+	public Float getPrecioDeEncomienda(String codigoReglaCobro, Float monto) {
+		return srvReglaCobro.getPrecioDeEncomienda(codigoReglaCobro, monto);
 	}
 }

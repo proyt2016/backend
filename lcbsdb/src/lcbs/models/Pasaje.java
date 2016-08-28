@@ -31,7 +31,7 @@ public class Pasaje implements Serializable{
     private String id;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int codigoPasaje;
+    private Integer codigoPasaje;
     
     @ManyToOne(fetch=FetchType.LAZY)
     private Viaje viaje;
@@ -56,7 +56,7 @@ public class Pasaje implements Serializable{
 
     public Pasaje() {}
     
-    public Pasaje(String id,int codigoPasaje, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, Date fecVen, Usuario comp, String ciPer, Empleado vend, Boolean usd, Boolean pg, Boolean elim) {
+    public Pasaje(String id,Integer codigoPasaje, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, Date fecVen, Usuario comp, String ciPer, Empleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.id = id;
         this.viaje = via;
         this.precio = prec;
@@ -76,7 +76,7 @@ public class Pasaje implements Serializable{
     	this.setId(dt.getId());
     	this.setCodigoPasaje(dt.getCodigoPasaje());
     	if(dt.getViaje() != null){
-    		this.setViaje(new Viaje(dt.getViaje()));
+    		this.setViaje(new Viaje(dt.getViaje(), false));
     	}
     	if(dt.getPrecio() != null)
     		this.setPrecio(new Precio(dt.getPrecio()));
@@ -144,11 +144,11 @@ public class Pasaje implements Serializable{
     	return result;
     }
     
-    public void setCodigoPasaje(int cod){
+    public void setCodigoPasaje(Integer cod){
     	this.codigoPasaje = cod;
     }
     
-    public int getCodigoPasaje(){
+    public Integer getCodigoPasaje(){
     	return this.codigoPasaje;
     }
     

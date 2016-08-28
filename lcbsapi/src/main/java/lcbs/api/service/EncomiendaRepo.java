@@ -83,13 +83,13 @@ public class EncomiendaRepo {
 	}
 	
 	
-	public List<DataEncomienda> getEncomiendasPorVehiculo(String idViaje){
-		return ctrEncomienda.getEncomiendasPorVehiculo(idViaje);
+	public List<DataEncomienda> getEncomiendasPorVehiculo(String idVehiculo){
+		return ctrEncomienda.getEncomiendasPorVehiculo(idVehiculo);
 	}
 	
 	
-	public void AsignarEncomiendasVehiculo(String IdEncomienda, String idViaje){
-		ctrEncomienda.AsignarEncomiendasVehiculo(IdEncomienda, idViaje);
+	public void AsignarEncomiendasVehiculo(String IdEncomienda, String idViaje, String idCoche){
+		ctrEncomienda.AsignarEncomiendasVehiculo(IdEncomienda, idViaje, idCoche);
 	}
 	
 	
@@ -133,6 +133,26 @@ public class EncomiendaRepo {
 
 	public DataEstadosEncomienda getEstadoEncomienda(String idEstadoEncomienda) {
 		return ctrEncomienda.getEstadoEncomienda(idEstadoEncomienda);
+	}
+	
+	public DataEncomienda getEncomiendaXcodigo(Integer codigoEncomienda){
+		return ctrEncomienda.getEncomiendaXcodigo(codigoEncomienda);
+	}
+
+
+	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla) {
+		return ctrEncomienda.editarReglaCobroEncomienda(dataRegla);
+		
+	}
+
+
+	public void borrarReglaCobroEncomienda(String idReglaCobro) {
+		ctrEncomienda.borrarReglaCobroEncomienda(idReglaCobro);
+		
+	}
+
+	public Float getPrecioDeEncomienda(String codigoReglaCobro, Float monto) {
+		return ctrEncomienda.getPrecioDeEncomienda(codigoReglaCobro, monto);
 	}
 	
 }

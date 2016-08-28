@@ -6,24 +6,24 @@ public class DataConfiguracionEmpresa{
 
     private String id;
     private String nombre;
-    private boolean aceptaCuponera;
+    private Boolean aceptaCuponera;
     private String urlAcceso;
     private List<DataTelefono> telefonos;
     private List<DataEmail> emails;
     private String urlLdap;
     private String usuarioLdap;
     private String claveLdap;
-    private boolean activo;
-    private boolean pagoOnlineCoche;
-    private boolean reservaPasajes;
+    private Boolean activo;
+    private Boolean pagoOnlineCoche;
+    private Boolean reservaPasajes;
     private Integer validesReservasHoras;
-    private boolean trasferirPasajes;
+    private Boolean trasferirPasajes;
 
     public DataConfiguracionEmpresa() {
        
     }
     
-    public DataConfiguracionEmpresa(String id, String nom, boolean acCup, String urlAcc, List<DataTelefono> tels, List<DataEmail> mails, String urlLdap, String usrLdap, String clLdap, boolean act, boolean pagOnCoche, boolean resePas, Integer valResHrs, boolean trasfPsjs) {
+    public DataConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<DataTelefono> tels, List<DataEmail> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs) {
         this.id = id;
         this.nombre = nom;
         this.aceptaCuponera = acCup;
@@ -56,11 +56,11 @@ public class DataConfiguracionEmpresa{
         return this.nombre;
     }
 
-    public void setAceptaCuponera(boolean val){
+    public void setAceptaCuponera(Boolean val){
         this.aceptaCuponera = val;
     }
     
-    public boolean getAceptaCuponera(){
+    public Boolean getAceptaCuponera(){
         return this.aceptaCuponera;
     }
 
@@ -112,27 +112,27 @@ public class DataConfiguracionEmpresa{
         return this.claveLdap;
     }
 
-    public void setActivo(boolean val){
+    public void setActivo(Boolean val){
         this.activo = val;
     }
     
-    public boolean getActivo(){
+    public Boolean getActivo(){
         return this.activo;
     }
 
-    public void setPagoOnlineCoche(boolean val){
+    public void setPagoOnlineCoche(Boolean val){
         this.pagoOnlineCoche = val;
     }
     
-    public boolean getPagoOnlineCoche(){
+    public Boolean getPagoOnlineCoche(){
         return this.pagoOnlineCoche;
     }
 
-    public void setReservaPasajes(boolean val){
+    public void setReservaPasajes(Boolean val){
         this.reservaPasajes = val;
     }
     
-    public boolean getReservaPasajes(){
+    public Boolean getReservaPasajes(){
         return this.reservaPasajes;
     }
 
@@ -144,11 +144,11 @@ public class DataConfiguracionEmpresa{
         return this.validesReservasHoras;
     }
 
-    public void setTrasferirPasajes(boolean val){
+    public void setTrasferirPasajes(Boolean val){
         this.trasferirPasajes = val;
     }
     
-    public boolean getTrasferirPasajes(){
+    public Boolean getTrasferirPasajes(){
         return this.trasferirPasajes;
     }
 }

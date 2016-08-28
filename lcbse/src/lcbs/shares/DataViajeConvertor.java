@@ -18,7 +18,6 @@ public class DataViajeConvertor{
     private Date fechaSalida;
     private List<DataEmpleado> empleados;
     private List<DataVehiculo> coches;
-    private List<DataEncomiendaConvertor> encomiendas;
     private List<DataReservaConvertor> reservas;
     private String idOrigen;
     private String idDestino;
@@ -28,14 +27,13 @@ public class DataViajeConvertor{
 
     public DataViajeConvertor() {}
     
-    public DataViajeConvertor(String id, DataRecorridoConvertor rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, List<DataVehiculo> coches, List<DataEncomiendaConvertor> enc, List<DataReservaConvertor> res, String idOr, String idDest, String tipoHor) {
+    public DataViajeConvertor(String id, DataRecorridoConvertor rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, List<DataVehiculo> coches, List<DataReservaConvertor> res, String idOr, String idDest, String tipoHor) {
         this.id = id;
     	this.recorrido = rec;
         this.horario = hor;
         this.fechaSalida = fecSalida;
         this.empleados = emp;
         this.coches = coches;
-        this.encomiendas = enc;
         this.reservas = res;
         this.idOrigen = idOr;
         this.idDestino = idDest;
@@ -51,13 +49,6 @@ public class DataViajeConvertor{
     	result.setFechaSalida(this.getFechaSalida());
     	result.setEmpleados(this.getEmpleados());
     	result.setCoches(this.getCoches());
-    	if(this.getEncomiendas() != null){
-    		List<DataEncomienda> encToAdd = new ArrayList<DataEncomienda>();
-    		this.getEncomiendas().stream().forEach((enc) -> {
-    			encToAdd.add(enc.getDataEncomienda());
-    		});
-    		result.setEncomiendas(encToAdd);
-    	}
     	if(this.getReservas() != null){
     		List<DataReserva> resToAdd = new ArrayList<DataReserva>();
     		this.getReservas().stream().forEach((res) -> {
@@ -118,14 +109,6 @@ public class DataViajeConvertor{
     
     public List<DataVehiculo> getCoches(){
         return this.coches;
-    }
-    
-    public void setEncomiendas(List<DataEncomiendaConvertor> val){
-        this.encomiendas = val;
-    }
-    
-    public List<DataEncomiendaConvertor> getEncomiendas(){
-        return this.encomiendas;
     }
     
     public void setReservas(List<DataReservaConvertor> val){

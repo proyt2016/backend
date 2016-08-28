@@ -37,6 +37,7 @@ public class EmpresaRepo {
 	
 	public DataConfiguracionEmpresa obtenerConfiguracionEmpresa(DataTenant tenant){
 		return ctrEmpresa.obtenerConfiguracionEmpresa(tenant);
+
 	}
 	
 	public void editarConfiguracionEmpresa(DataConfiguracionEmpresa empresa, DataTenant tenant){

@@ -18,7 +18,6 @@ public class DataViaje{
     private Date fechaSalida;
     private List<DataEmpleado> empleados;
     private List<DataVehiculo> coches;
-    private List<DataEncomienda> encomiendas;
     private List<DataReserva> reservas;
     private String idOrigen;
     private String idDestino;
@@ -28,14 +27,13 @@ public class DataViaje{
 
     public DataViaje() {}
     
-    public DataViaje(String id, DataRecorrido rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, List<DataVehiculo> coches, List<DataEncomienda> enc, List<DataReserva> res, String idOr, String idDest, String tipoHor) {
+    public DataViaje(String id, DataRecorrido rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, List<DataVehiculo> coches, List<DataReserva> res, String idOr, String idDest, String tipoHor) {
         this.id = id;
     	this.recorrido = rec;
         this.horario = hor;
         this.fechaSalida = fecSalida;
         this.empleados = emp;
         this.coches = coches;
-        this.encomiendas = enc;
         this.reservas = res;
         this.idOrigen = idOr;
         this.idDestino = idDest;
@@ -56,13 +54,6 @@ public class DataViaje{
     			cocheToAdd.add(co);
     		});
     		result.setCoches(cocheToAdd);
-    	}
-    	if(this.getEncomiendas() != null){
-    		List<DataEncomiendaConvertor> encToAdd = new ArrayList<DataEncomiendaConvertor>();
-    		this.getEncomiendas().stream().forEach((enc) -> {
-    			encToAdd.add(enc.genConvertor());
-    		});
-    		result.setEncomiendas(encToAdd);
     	}
     	if(this.getReservas() != null){
     		List<DataReservaConvertor> resToAdd = new ArrayList<DataReservaConvertor>();
@@ -123,14 +114,6 @@ public class DataViaje{
     
     public List<DataVehiculo> getCoches(){
         return this.coches;
-    }
-    
-    public void setEncomiendas(List<DataEncomienda> val){
-        this.encomiendas = val;
-    }
-    
-    public List<DataEncomienda> getEncomiendas(){
-        return this.encomiendas;
     }
     
     public void setReservas(List<DataReserva> val){

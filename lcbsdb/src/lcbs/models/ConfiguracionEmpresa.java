@@ -28,7 +28,7 @@ public class ConfiguracionEmpresa implements Serializable{
     private String id;
     
     private String nombre;
-    private boolean aceptaCuponera;
+    private Boolean aceptaCuponera;
     private String urlAcceso;
     @Embedded
     @ElementCollection
@@ -42,17 +42,17 @@ public class ConfiguracionEmpresa implements Serializable{
     private String urlLdap;
     private String usuarioLdap;
     private String claveLdap;
-    private boolean activo;
-    private boolean pagoOnlineCoche;
-    private boolean reservaPasajes;
+    private Boolean activo;
+    private Boolean pagoOnlineCoche;
+    private Boolean reservaPasajes;
     private Integer validesReservasHoras;
-    private boolean trasferirPasajes;
+    private Boolean trasferirPasajes;
 
     public ConfiguracionEmpresa() {
        
     }
     
-    public ConfiguracionEmpresa(String id, String nom, boolean acCup, String urlAcc, List<Telefono> tels, List<Email> mails, String urlLdap, String usrLdap, String clLdap, boolean act, boolean pagOnCoche, boolean resePas, Integer valResHrs, boolean trasfPsjs) {
+    public ConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<Telefono> tels, List<Email> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs) {
         this.id = id;
         this.nombre = nom;
         this.aceptaCuponera = acCup;
@@ -113,17 +113,18 @@ public class ConfiguracionEmpresa implements Serializable{
 	    	result.setTelefonos(aux);
     	}
     	if(this.emails != null){    	
-    	List<DataEmail> auxEm = new ArrayList<DataEmail>();
-    	this.emails.stream().forEach((em) -> {
-    		auxEm.add(em.getDatatype());
-        });
-    	result.setEmails(auxEm);
+	    	List<DataEmail> auxEm = new ArrayList<DataEmail>();
+	    	this.emails.stream().forEach((em) -> {
+	    		auxEm.add(em.getDatatype());
+	        });
+	    	result.setEmails(auxEm);
     	}
     	result.setUrlLdap(this.getUrlLdap());
     	result.setUsuarioLdap(this.getUsuarioLdap());
     	result.setClaveLdap(this.getClaveLdap());
     	result.setActivo(this.getActivo());
     	result.setPagoOnlineCoche(this.getPagoOnlineCoche());
+    	result.setReservaPasajes(this.getReservaPasajes());
     	result.setValidesReservasHoras(this.getValidesReservasHoras());
     	result.setTrasferirPasajes(this.getTrasferirPasajes());
     	return result;
@@ -145,11 +146,11 @@ public class ConfiguracionEmpresa implements Serializable{
         return this.nombre;
     }
 
-    public void setAceptaCuponera(boolean val){
+    public void setAceptaCuponera(Boolean val){
         this.aceptaCuponera = val;
     }
     
-    public boolean getAceptaCuponera(){
+    public Boolean getAceptaCuponera(){
         return this.aceptaCuponera;
     }
 
@@ -201,27 +202,27 @@ public class ConfiguracionEmpresa implements Serializable{
         return this.claveLdap;
     }
 
-    public void setActivo(boolean val){
+    public void setActivo(Boolean val){
         this.activo = val;
     }
     
-    public boolean getActivo(){
+    public Boolean getActivo(){
         return this.activo;
     }
 
-    public void setPagoOnlineCoche(boolean val){
+    public void setPagoOnlineCoche(Boolean val){
         this.pagoOnlineCoche = val;
     }
     
-    public boolean getPagoOnlineCoche(){
+    public Boolean getPagoOnlineCoche(){
         return this.pagoOnlineCoche;
     }
 
-    public void setReservaPasajes(boolean val){
+    public void setReservaPasajes(Boolean val){
         this.reservaPasajes = val;
     }
     
-    public boolean getReservaPasajes(){
+    public Boolean getReservaPasajes(){
         return this.reservaPasajes;
     }
 
@@ -233,11 +234,11 @@ public class ConfiguracionEmpresa implements Serializable{
         return this.validesReservasHoras;
     }
 
-    public void setTrasferirPasajes(boolean val){
+    public void setTrasferirPasajes(Boolean val){
         this.trasferirPasajes = val;
     }
     
-    public boolean getTrasferirPasajes(){
+    public Boolean getTrasferirPasajes(){
         return this.trasferirPasajes;
     }
 }

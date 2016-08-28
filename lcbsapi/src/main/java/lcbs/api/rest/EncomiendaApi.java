@@ -50,6 +50,12 @@ public class EncomiendaApi {
 		repo.borrarEstadoEncomienda(idEstadoEncomienda);
 	}
 	
+	@DELETE
+	@Path("/borrarreglacobroencomienda/{idReglaCobro}")
+	public void borrarReglaCobroEncomienda(@PathParam("idReglaCobro") final String idReglaCobro){
+		repo.borrarReglaCobroEncomienda(idReglaCobro);
+	}
+	
 	@POST
 	@Path("/setestadoencomienda/{idEncomienda}/")
 	public void setEstadoEncomienda(@PathParam("idEncomienda")final String idEncomienda,final DataEstadosEncomienda dataEstado){
@@ -60,7 +66,7 @@ public class EncomiendaApi {
 	@Path("/asignarencomiendavehiculo/")
 	public void AsignarEncomiendaVehiculo(String data) {
 		JSONObject obj = new JSONObject(data);
-		repo.AsignarEncomiendasVehiculo(obj.getString("IdEncomienda"), obj.getString("idViaje"));
+		repo.AsignarEncomiendasVehiculo(obj.getString("IdEncomienda"), obj.getString("idViaje"), obj.getString("idCoche"));
 	}
 	
 		
@@ -74,6 +80,12 @@ public class EncomiendaApi {
 	@Path("/editarestadoencomienda/")
 	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado){
 		repo.EditarEstadoEncomienda(dataEstado);
+	}
+	
+	@POST
+	@Path("/editarreglacobroencomienda/")
+	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla){
+		return repo.editarReglaCobroEncomienda(dataRegla);
 	}
 	
 	@GET
@@ -101,9 +113,9 @@ public class EncomiendaApi {
 	}
 	
 	@GET
-	@Path("/getencomiendasporvehiculo/")
-	public List<DataEncomienda> getEncomiendasPorVehiculo(String idViaje){
-		return repo.getEncomiendasPorVehiculo(idViaje);
+	@Path("/getencomiendasporvehiculo/{idVehiculo}")
+	public List<DataEncomienda> getEncomiendasPorVehiculo(@PathParam("idVehiculo") final String idVehiculo){
+		return repo.getEncomiendasPorVehiculo(idVehiculo);
 	}
 	
 	@POST
@@ -130,8 +142,8 @@ public class EncomiendaApi {
 	}
 	
 	@GET
-	@Path("/getreglacobro/{idEncomienda}")
-	public DataReglaCobroEncomienda getReglaCobro(@PathParam("idEncomienda") final String idEncomieda){
+	@Path("/getreglacobro/{idRegla}")
+	public DataReglaCobroEncomienda getReglaCobro(@PathParam("idRegla") final String idEncomieda){
 		return repo.getReglaDeCobro(idEncomieda);
 	}
 	
@@ -170,11 +182,16 @@ public class EncomiendaApi {
 		return repo.listarEncomiendasPorUsuario(idUsuario, pagina, elementosPagina);
 	}
 	
+	@GET
+	@Path("/getencomiendaxcodigo/{codigoEnc}")
+	public DataEncomienda getEncomiendaXcodigo(@PathParam("codigoEnc") final Integer codigoEncomienda){
+		return repo.getEncomiendaXcodigo(codigoEncomienda);
+	}
 	
-	
-	
-	
-	
-	
+	@GET
+	@Path("/getpreciodeencomienda/{codigoReglaCobro}/{monto}")
+	public Float getPrecioDeEncomienda(@PathParam("codigoReglaCobro") final String codigoReglaCobro, @PathParam("monto") final Float monto){
+		return repo.getPrecioDeEncomienda(codigoReglaCobro, monto);
+	}
 
 }

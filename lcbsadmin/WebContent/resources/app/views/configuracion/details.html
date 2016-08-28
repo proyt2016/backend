@@ -1,0 +1,131 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Configuraci&oacute;n b&aacute;lsica de empresa</h3>
+    </div>
+
+    <div class="title_right">
+      <div class="pull-right">
+        <a href="#/configuracion/edit" class="btn btn-info">Editar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2>Configuraci&oacute;n b&aacute;lsica actual</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombreEmpresa">Nombre de empresa
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          {{configuracion.nombre}}
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <h4> Emails </h4>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="mail in emailsEmpresa" style="margin-top:10px;">
+          <div class="form-group">
+              <label>Descripcion</label>
+              {{mail.descripcion}}
+          </div>
+          <div class="form-group">
+              <label>Email</label>
+              {{mail.email}}
+          </div></a>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <h4> Tel&eacute;fonos </h4>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="tels in telsEmpresa" style="margin-top:10px;">
+          <div class="form-group">
+              <label>Descripcion</label>
+              {{tels.descripcion}}
+          </div>
+          <div class="form-group">
+              <label>Tel&eacute;fono</label>
+              {{tels.telefono}}
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="urlAcceso">URL de acceso web
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          {{configuracion.urlAcceso}}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="aceptaCuponera">Acepta cuponera
+        </label>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="aceptaCuponera" data-parsley-id="0978" ng-model="configuracion.aceptaCuponera" class="flat" ng-checked="configuracion.aceptaCuponera">             
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="urlLDAP">URL de servidor LDAP
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          {{configuracion.urlLdap}}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuarioLdap">Usuario de acceso de servidor LDAP
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          {{configuracion.usuarioLdap}}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="activarAcceso">Activar/desactivar acceso
+        </label>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="activarAcceso" data-parsley-id="0978" ng-model="configuracion.activo" class="flat" ng-checked="configuracion.activo">
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pagoOnlineCoche">Aceptar pago online en coche
+        </label>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="pagoOnlineCoche" data-parsley-id="0978" ng-model="configuracion.pagoOnlineCoche" class="flat" ng-checked="configuracion.pagoOnlineCoche">
+            </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="reservaPasajes">Habilitar reserva de pasajes
+        </label>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="reservaPasajes" data-parsley-id="0978" ng-model="configuracion.reservaPasajes" class="flat" ng-checked="configuracion.reservaPasajes">
+            </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="validesReservasHoras">Valides de reservas en horas
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          {{configuracion.validesReservasHoras}}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="trasferirPasajes">Habilitar transferencia de pasajes
+        </label>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="trasferirPasajes" data-parsley-id="0978" ng-model="configuracion.trasferirPasajes" class="flat" ng-checked="configuracion.trasferirPasajes" >
+            </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

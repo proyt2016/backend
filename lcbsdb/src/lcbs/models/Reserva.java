@@ -43,12 +43,12 @@ public class Reserva implements Serializable{
     private String ciPersona;
     @ManyToOne(fetch=FetchType.LAZY)
     private Empleado empleado;
-    private boolean utilizada;
-    private boolean eliminada;
+    private Boolean utilizada;
+    private Boolean eliminada;
      
     public Reserva() {}
     
-    public Reserva(String id, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, Date fecRes, Usuario usRes, String ciPer, Empleado emp, boolean usa, boolean elim) {
+    public Reserva(String id, Viaje via, Precio prec, PuntoRecorrido orig, PuntoRecorrido des, Date fecRes, Usuario usRes, String ciPer, Empleado emp, Boolean usa, Boolean elim) {
         this.id = id;
         this.viaje = via;
         this.precio = prec;
@@ -65,7 +65,7 @@ public class Reserva implements Serializable{
     public Reserva(DataReserva dt){
     	this.setId(dt.getId());
     	if(dt.getViaje() != null)
-    		this.setViaje(new Viaje(dt.getViaje()));
+    		this.setViaje(new Viaje(dt.getViaje(),false));
     	if(dt.getPrecio() != null)
     		this.setPrecio(new Precio(dt.getPrecio()));
     	if(dt.getOrigen() != null){
@@ -201,19 +201,19 @@ public class Reserva implements Serializable{
 		this.empleado = empleado;
 	}
 
-	public boolean getUtilizada() {
+	public Boolean getUtilizada() {
 		return utilizada;
 	}
 
-	public void setUtilizada(boolean utilizada) {
+	public void setUtilizada(Boolean utilizada) {
 		this.utilizada = utilizada;
 	}
     
-	public boolean getEliminada() {
+	public Boolean getEliminada() {
 		return eliminada;
 	}
 
-	public void setEliminada(boolean eliminada) {
+	public void setEliminada(Boolean eliminada) {
 		this.eliminada = eliminada;
 	}
 }

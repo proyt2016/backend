@@ -14,5 +14,5 @@ public interface EmpleadoLocalApi {
 	public DataEmpleado getEmpleado(String id);
 	public DataEmpleado crearEmpleado(DataEmpleado emp);
 	public void darBajaEmpleado(String idEmpleado);
-	 public boolean loginUsuario(String mailEmpleado, String clave);
+	 public DataEmpleado loginUsuario(String mailEmpleado, String clave);
 }

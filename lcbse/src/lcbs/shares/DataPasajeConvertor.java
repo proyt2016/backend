@@ -20,7 +20,7 @@ public class DataPasajeConvertor{
     private DataUsuario comprador;
     private String ciPersona;
     private DataEmpleado vendedor;
-    private int codigoPasaje;
+    private Integer codigoPasaje;
     private Boolean usado;
     private Boolean pago;
     private Boolean eliminado;
@@ -29,7 +29,7 @@ public class DataPasajeConvertor{
 
     public DataPasajeConvertor() {}
     
-    public DataPasajeConvertor(String id, int codigoPasaje, DataViajeConvertor via, DataPrecio prec, DataPuntoRecorridoConverter orig, 
+    public DataPasajeConvertor(String id, Integer codigoPasaje, DataViajeConvertor via, DataPrecio prec, DataPuntoRecorridoConverter orig, 
     		DataPuntoRecorridoConverter des,	Date fecVen, DataUsuario comp, String ciPer, 
     		DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.id = id;
@@ -77,11 +77,11 @@ public class DataPasajeConvertor{
     	return result;
     }
     
-    public void setCodigoPasaje(int cod){
+    public void setCodigoPasaje(Integer cod){
     	this.codigoPasaje = cod;
     }
     
-    public int getCodigoPasaje(){
+    public Integer getCodigoPasaje(){
     	return this.codigoPasaje;
     }
     

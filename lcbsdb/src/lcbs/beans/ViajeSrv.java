@@ -1,27 +1,42 @@
 package lcbs.beans;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.List;
-
 import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Conjunction;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.Subqueries;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import lcbs.interfaces.ViajeLocalApi;
+import lcbs.models.ConfiguracionEmpresa;
+import lcbs.models.Encomienda;
+import lcbs.models.Recorrido;
+import lcbs.models.Vehiculo;
 import lcbs.models.Viaje;
+import lcbs.shares.DataEncomienda;
 import lcbs.shares.DataViaje;
+
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Session Bean implementation class ViajeSrv
@@ -52,7 +67,7 @@ public class ViajeSrv implements ViajeLocalApi {
     }
     
     public void modificarViaje(DataViaje via){
-    	Viaje realObj = new Viaje(via);
+    	Viaje realObj = new Viaje(via,true);
         if(em.find(Viaje.class, realObj.getId()) == null){
            throw new IllegalArgumentException("El viaje no existe");
        }
@@ -66,14 +81,14 @@ public class ViajeSrv implements ViajeLocalApi {
     }
     
     public DataViaje crearViaje(DataViaje via){
-    	Viaje realObj = new Viaje(via);
+    	Viaje realObj = new Viaje(via,false);
         //guardo el viaje en bd
         em.persist(realObj);
         return realObj.getDatatype(true);
     }
     
     public void borrarViaje(String idViaje){
-    	Viaje realObj = new Viaje(this.getViaje(idViaje));
+    	Viaje realObj = new Viaje(this.getViaje(idViaje),false);
         em.remove(realObj);
     }
     

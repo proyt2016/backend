@@ -56,9 +56,16 @@
         }
 
         $scope.buscar = function(){
-            encomiendasService.buscar($scope.filtro).then(function (data) {
+            var filtro = $scope.filtro;
+            var fecha = filtro['fechaIngreso'];
+            if(filtro['fechaIngreso']){
+                filtro.fechaIngreso = moment(filtro['fechaIngreso'], 'DD/MM/YYYY').format('YYYY-MM-DD');
+            }
+            encomiendasService.buscar(filtro).then(function (data) {
                 $scope.encomiendas = data;
+                filtro.fechaIngreso = fecha;
             });
+
         } 
 
         $scope.add = function(){
@@ -119,6 +126,19 @@
                  }
              );
             }
+        }
+
+        $scope.calcularPrecio = function () {
+            var encomienda = this.encomienda;
+
+            encomiendasService.calcularPrecio($scope.reglasCobro[encomienda["reglaCobro"]],encomienda.monto).then(
+                function (data) {
+                    $scope.encomienda.precio = data;
+
+                }, function () {
+
+                }
+            );
         }
 
         initialize();

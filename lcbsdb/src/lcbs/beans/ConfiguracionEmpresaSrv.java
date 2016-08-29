@@ -12,6 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 
+import lcbs.interceptors.TenantIntercept;
 import lcbs.interfaces.ConfiguracionEmpresaLocalApi;
 import lcbs.models.ConfiguracionEmpresa;
 import lcbs.schema.SchemaHandler;

@@ -9,12 +9,12 @@ import lcbs.shares.*;
 
 @Local
 public interface EncomiendaLocalApi {
-	public List<DataEncomiendaConvertor> obtenerEncomiendas(Integer pagina, Integer elementosPagina);
-	public void modificarEncomienda(DataEncomienda enc);
-	public DataEncomienda getEncomienda(String id);
-	public DataEncomienda crearEncomienda(DataEncomienda enc);
-	public void darBajaEncomienda(String idEncomienda);
-	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina);
-	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina);
-	public DataEncomienda getEncomiendaXcodigo(Integer codigoEncomienda);
+	public List<DataEncomiendaConvertor> obtenerEncomiendas(Integer pagina, Integer elementosPagina, DataTenant tenant);
+	public void modificarEncomienda(DataEncomienda enc, DataTenant tenant);
+	public DataEncomienda getEncomienda(String id, DataTenant tenant);
+	public DataEncomienda crearEncomienda(DataEncomienda enc, DataTenant tenant);
+	public void darBajaEncomienda(String idEncomienda, DataTenant tenant);
+	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina, DataTenant tenant);
+	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina, DataTenant tenant);
+	public DataEncomienda getEncomiendaXcodigo(Integer codigoEncomienda, DataTenant tenant);
 }

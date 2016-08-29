@@ -33,27 +33,27 @@ public class VehiculoRepo {
 	@EJB(lookup =  "java:app/lcbsb/VehiculoCtrl!interfaces.IVehiculo")
 	IVehiculo ctrVehiculo;
 	
-	public DataVehiculo altaVehiculo(DataVehiculo vehiculo){
-		return ctrVehiculo.altaVehiculo(vehiculo);
+	public DataVehiculo altaVehiculo(DataVehiculo vehiculo, DataTenant tenant){
+		return ctrVehiculo.altaVehiculo(vehiculo, tenant );
 	}
 	
-	public void editarVehiculo(DataVehiculo vehiculo){
-		ctrVehiculo.editarVehiculo(vehiculo);
+	public void editarVehiculo(DataVehiculo vehiculo, DataTenant tenant){
+		ctrVehiculo.editarVehiculo(vehiculo, tenant );
 	}
 	
-	public void bajaVehiculo(String idVehiculo){
-		ctrVehiculo.bajaVehiculo(idVehiculo);
+	public void bajaVehiculo(String idVehiculo, DataTenant tenant){
+		ctrVehiculo.bajaVehiculo(idVehiculo, tenant );
 	}
 	
-	public List<DataMantenimientoVehiculo> mantenimientosPorVehiculo(String idVehiculo){
-		return ctrVehiculo.mantenimientosPorVehiculo(idVehiculo);
+	public List<DataMantenimientoVehiculo> mantenimientosPorVehiculo(String idVehiculo, DataTenant tenant){
+		return ctrVehiculo.mantenimientosPorVehiculo(idVehiculo, tenant );
 	}
 	
-	public DataVehiculo obtenerVehiculo(String idVehiculo){
-		return ctrVehiculo.obtenerVehiculo(idVehiculo);
+	public DataVehiculo obtenerVehiculo(String idVehiculo, DataTenant tenant){
+		return ctrVehiculo.obtenerVehiculo(idVehiculo, tenant );
 	}
 
-	public List<DataVehiculo> listarVehiculos(Integer pagina, Integer elementosPagina) {
-		return ctrVehiculo.listarVehiculos(pagina, elementosPagina);
+	public List<DataVehiculo> listarVehiculos(Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return ctrVehiculo.listarVehiculos(pagina, elementosPagina, tenant ); 
 	}
 }

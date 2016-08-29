@@ -1,19 +1,20 @@
 
-    create table ConfiguracionEmpresa (
-        id varchar(255) not null,
-        aceptaCuponera boolean not null,
-        activo boolean not null,
-        claveLdap varchar(255),
-        nombre varchar(255),
-        pagoOnlineCoche boolean not null,
-        reservaPasajes boolean not null,
-        trasferirPasajes boolean not null,
-        urlAcceso varchar(255),
-        urlLdap varchar(255),
-        usuarioLdap varchar(255),
-        validesReservasHoras int4,
-        primary key (id)
-    );
+    CREATE TABLE configuracionempresa
+(
+  id character varying(255) NOT NULL,
+  aceptacuponera boolean,
+  activo boolean,
+  claveldap character varying(255),
+  nombre character varying(255),
+  pagoonlinecoche boolean,
+  reservapasajes boolean,
+  trasferirpasajes boolean,
+  urlacceso character varying(255),
+  urlldap character varying(255),
+  usuarioldap character varying(255),
+  validesreservashoras integer,
+  CONSTRAINT configuracionempresa_pkey PRIMARY KEY (id)
+);
 
     create table ConfiguracionEmpresa_emails (
         ConfiguracionEmpresa_id varchar(255) not null,
@@ -197,16 +198,7 @@
         LIST_INDEX int4 not null,
         primary key (Persona_id, LIST_INDEX)
     );
-
-    create table Precio (
-        id varchar(255) not null,
-        monto float4 not null,
-        destino_id varchar(255),
-        origen_id varchar(255),
-        primary key (id)
-    );
-
-    create table PuntoRecorrido (
+create table PuntoRecorrido (
         DTYPE varchar(31) not null,
         id varchar(255) not null,
         eliminado boolean,
@@ -215,13 +207,30 @@
         aceptaEncomiendas boolean,
         primary key (id)
     );
+    CREATE TABLE precio
+(
+  id character varying(255) NOT NULL,
+  monto real,
+  destino_id character varying(255),
+  origen_id character varying(255),
+  CONSTRAINT precio_pkey PRIMARY KEY (id),
+  CONSTRAINT fkg2n1ulm6xoybntytanqohqc5m FOREIGN KEY (origen_id)
+      REFERENCES puntorecorrido (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fkiysfc29ourld6rox6ee9hsjyk FOREIGN KEY (destino_id)
+      REFERENCES puntorecorrido (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
 
-    create table Recorrido (
-        id varchar(255) not null,
-        eliminado boolean,
-        nombre varchar(255),
-        primary key (id)
-    );
+    
+
+    CREATE TABLE recorrido
+(
+  id character varying(255) NOT NULL,
+  eliminado boolean,
+  nombre character varying(255),
+  CONSTRAINT recorrido_pkey PRIMARY KEY (id)
+);
 
     create table Recorrido_GrupoHorario (
         Recorrido_id varchar(255) not null,

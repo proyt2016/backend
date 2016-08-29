@@ -30,129 +30,116 @@ import lcbs.shares.*;
 @Stateless
 @Remote
 public class EncomiendaRepo {
-//  
-	 
-	
-	@EJB(lookup =  "java:app/lcbsb/EncomiendaCtrl!interfaces.IEncomienda")
+	//
+
+	@EJB(lookup = "java:app/lcbsb/EncomiendaCtrl!interfaces.IEncomienda")
 	IEncomienda ctrEncomienda;
-	
-	public List<DataEncomiendaConvertor> ListarEncomiendas(Integer pagina, Integer elementosPagina){
-		return ctrEncomienda.ListarEncomiendas(pagina, elementosPagina);
-	}
-	
-	
-	public List<DataReglaCobroEncomienda> getReglasDeCobro(Integer pagina, Integer elementosPagina){
-		return ctrEncomienda.getReglasDeCobro(pagina, elementosPagina);
-	}
-	
-	public List<DataEstadosEncomienda> getEstados(Integer pagina, Integer elementosPagina){
-		return ctrEncomienda.getEstados(pagina, elementosPagina);
-	}
-	
-	
-	public void AltaReglaCobro(DataReglaCobroEncomienda drce){
-		ctrEncomienda.crearReglaDeCobro(drce);
-	}
-	
-	
-	public DataReglaCobroEncomienda getReglaDeCobro(String idEncomieda){
-		return ctrEncomienda.getReglaDeCobro(idEncomieda);
-	}
-	
-	
-	public DataEncomienda AltaEncomienda(DataEncomienda encomienda){
-		return ctrEncomienda.AltaEncomienda(encomienda);
-	}	
-	
-	public List<DataHistorialEstadosEncomienda> getHistorialEstado(String idEncomienda){
-		return ctrEncomienda.getHistorialEstado(idEncomienda);
-	}
-	
-	
-	public DataEstadosEncomienda getUltimoEstado(String idEncomienda){
-		return ctrEncomienda.getUltimoEstado(idEncomienda);
-	}
-	
-	
-	public DataEncomienda getEncomienda(String idEncomienda){
-		return ctrEncomienda.getEncomienda(idEncomienda);
-	}
-	
-	public void setEstadoEncomienda(String idEncomienda, DataEstadosEncomienda dataEstado){
-		ctrEncomienda.setEstadoEncomienda(idEncomienda, dataEstado);
-	}
-	
-	
-	public List<DataEncomienda> getEncomiendasPorVehiculo(String idVehiculo){
-		return ctrEncomienda.getEncomiendasPorVehiculo(idVehiculo);
-	}
-	
-	
-	public void AsignarEncomiendasVehiculo(String IdEncomienda, String idViaje, String idCoche){
-		ctrEncomienda.AsignarEncomiendasVehiculo(IdEncomienda, idViaje, idCoche);
-	}
-	
-	
-	public List<DataHistorialEstadosEncomienda> VerEstadosEncomienda(String idEncomienda){
-		return ctrEncomienda.VerEstadosEncomienda(idEncomienda);
-	}
-	
-	public void editarEncomienda(DataEncomienda encomienda) {
-		ctrEncomienda.editarEncomienda(encomienda);
-	}
-	
-	public void bajaEncomienda(String idEncomienda) {
-		ctrEncomienda.bajaEncomienda(idEncomienda);
+
+	public List<DataEncomiendaConvertor> ListarEncomiendas(Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return ctrEncomienda.ListarEncomiendas(pagina, elementosPagina, tenant);
 	}
 
-	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina) {
-		return ctrEncomienda.buscarEncomienda(filtro, pagina, ElementosPagina);
-	}
-	
-	public void borrarEstadoEncomienda(String idEstadoEncomienda){
-		ctrEncomienda.borrarEstadoEncomienda(idEstadoEncomienda);
-	}
-	public List<DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina){
-		return ctrEncomienda.listarEstadoEncomienda(pagina, elementosPagina);
-	}
-	public DataEstadosEncomienda crearEstadoEncomienda(DataEstadosEncomienda estado){
-		return ctrEncomienda.crearEstadoEncomienda(estado);
+	public List<DataReglaCobroEncomienda> getReglasDeCobro(Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return ctrEncomienda.getReglasDeCobro(pagina, elementosPagina, tenant);
 	}
 
-
-	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina) {
-		return ctrEncomienda.listarEncomiendasPorUsuario(idUsuario, pagina, elementosPagina);
+	public List<DataEstadosEncomienda> getEstados(Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return ctrEncomienda.getEstados(pagina, elementosPagina, tenant);
 	}
 
-
-	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado) {
-		ctrEncomienda.EditarEstadoEncomienda(dataEstado);
-		
+	public void AltaReglaCobro(DataReglaCobroEncomienda drce, DataTenant tenant) {
+		ctrEncomienda.crearReglaDeCobro(drce, tenant);
 	}
 
-
-	public DataEstadosEncomienda getEstadoEncomienda(String idEstadoEncomienda) {
-		return ctrEncomienda.getEstadoEncomienda(idEstadoEncomienda);
-	}
-	
-	public DataEncomienda getEncomiendaXcodigo(Integer codigoEncomienda){
-		return ctrEncomienda.getEncomiendaXcodigo(codigoEncomienda);
+	public DataReglaCobroEncomienda getReglaDeCobro(String idEncomieda, DataTenant tenant) {
+		return ctrEncomienda.getReglaDeCobro(idEncomieda, tenant);
 	}
 
-
-	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla) {
-		return ctrEncomienda.editarReglaCobroEncomienda(dataRegla);
-		
+	public DataEncomienda AltaEncomienda(DataEncomienda encomienda, DataTenant tenant) {
+		return ctrEncomienda.AltaEncomienda(encomienda, tenant);
 	}
 
-
-	public void borrarReglaCobroEncomienda(String idReglaCobro) {
-		ctrEncomienda.borrarReglaCobroEncomienda(idReglaCobro);
-		
+	public List<DataHistorialEstadosEncomienda> getHistorialEstado(String idEncomienda, DataTenant tenant) {
+		return ctrEncomienda.getHistorialEstado(idEncomienda, tenant);
 	}
 
-	public Float getPrecioDeEncomienda(String codigoReglaCobro, Float monto) {
-		return ctrEncomienda.getPrecioDeEncomienda(codigoReglaCobro, monto);
+	public DataEstadosEncomienda getUltimoEstado(String idEncomienda, DataTenant tenant) {
+		return ctrEncomienda.getUltimoEstado(idEncomienda, tenant);
 	}
-	
+
+	public DataEncomienda getEncomienda(String idEncomienda, DataTenant tenant) {
+		return ctrEncomienda.getEncomienda(idEncomienda, tenant);
+	}
+
+	public void setEstadoEncomienda(String idEncomienda, DataEstadosEncomienda dataEstado, DataTenant tenant) {
+		ctrEncomienda.setEstadoEncomienda(idEncomienda, dataEstado, tenant);
+	}
+
+	public List<DataEncomienda> getEncomiendasPorVehiculo(String idVehiculo, DataTenant tenant) {
+		return ctrEncomienda.getEncomiendasPorVehiculo(idVehiculo, tenant);
+	}
+
+	public void AsignarEncomiendasVehiculo(String IdEncomienda, String idViaje, String idCoche, DataTenant tenant) {
+		ctrEncomienda.AsignarEncomiendasVehiculo(IdEncomienda, idViaje, idCoche, tenant);
+	}
+
+	public List<DataHistorialEstadosEncomienda> VerEstadosEncomienda(String idEncomienda, DataTenant tenant) {
+		return ctrEncomienda.VerEstadosEncomienda(idEncomienda, tenant);
+	}
+
+	public void editarEncomienda(DataEncomienda encomienda, DataTenant tenant) {
+		ctrEncomienda.editarEncomienda(encomienda, tenant);
+	}
+
+	public void bajaEncomienda(String idEncomienda, DataTenant tenant) {
+		ctrEncomienda.bajaEncomienda(idEncomienda, tenant);
+	}
+
+	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina, DataTenant tenant) {
+		return ctrEncomienda.buscarEncomienda(filtro, pagina, ElementosPagina, tenant);
+	}
+
+	public void borrarEstadoEncomienda(String idEstadoEncomienda, DataTenant tenant) {
+		ctrEncomienda.borrarEstadoEncomienda(idEstadoEncomienda, tenant);
+	}
+
+	public List<DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return ctrEncomienda.listarEstadoEncomienda(pagina, elementosPagina, tenant);
+	}
+
+	public DataEstadosEncomienda crearEstadoEncomienda(DataEstadosEncomienda estado, DataTenant tenant) {
+		return ctrEncomienda.crearEstadoEncomienda(estado, tenant);
+	}
+
+	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return ctrEncomienda.listarEncomiendasPorUsuario(idUsuario, pagina, elementosPagina, tenant);
+	}
+
+	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado, DataTenant tenant) {
+		ctrEncomienda.EditarEstadoEncomienda(dataEstado, tenant);
+
+	}
+
+	public DataEstadosEncomienda getEstadoEncomienda(String idEstadoEncomienda, DataTenant tenant) {
+		return ctrEncomienda.getEstadoEncomienda(idEstadoEncomienda, tenant);
+	}
+
+	public DataEncomienda getEncomiendaXcodigo(Integer codigoEncomienda, DataTenant tenant) {
+		return ctrEncomienda.getEncomiendaXcodigo(codigoEncomienda, tenant);
+	}
+
+	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla, DataTenant tenant) {
+		return ctrEncomienda.editarReglaCobroEncomienda(dataRegla, tenant);
+
+	}
+
+	public void borrarReglaCobroEncomienda(String idReglaCobro, DataTenant tenant) {
+		ctrEncomienda.borrarReglaCobroEncomienda(idReglaCobro, tenant);
+
+	}
+
+	public Float getPrecioDeEncomienda(String codigoReglaCobro, Float monto, DataTenant tenant) {
+		return ctrEncomienda.getPrecioDeEncomienda(codigoReglaCobro, monto, tenant);
+	}
+
 }

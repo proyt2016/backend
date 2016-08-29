@@ -12,179 +12,175 @@ import lcbs.shares.*;
 
 import javax.ejb.Stateless;
 
-
-
-
 /**
  * Session Bean implementation class ViajeSrv
  */
 @Stateless
-public class ViajeCtrl implements IViaje{
+public class ViajeCtrl implements IViaje {
 
-	@EJB(lookup="java:app/lcbsdb/ViajeSrv!lcbs.interfaces.ViajeLocalApi")
+	@EJB(lookup = "java:app/lcbsdb/ViajeSrv!lcbs.interfaces.ViajeLocalApi")
 	ViajeLocalApi srvViaje;
-	
-	@EJB(lookup="java:app/lcbsdb/PasajeSrv!lcbs.interfaces.PasajeLocalApi")
+
+	@EJB(lookup = "java:app/lcbsdb/PasajeSrv!lcbs.interfaces.PasajeLocalApi")
 	PasajeLocalApi srvPasaje;
-	
-	@EJB(lookup="java:app/lcbsdb/ReservaSrv!lcbs.interfaces.ReservaLocalApi")
+
+	@EJB(lookup = "java:app/lcbsdb/ReservaSrv!lcbs.interfaces.ReservaLocalApi")
 	ReservaLocalApi srvReserva;
-	
-	@EJB(lookup="java:app/lcbsdb/UsuarioSrv!lcbs.interfaces.UsuarioLocalApi")
+
+	@EJB(lookup = "java:app/lcbsdb/UsuarioSrv!lcbs.interfaces.UsuarioLocalApi")
 	UsuarioLocalApi srvUsuario;
-	
-	@EJB(lookup="java:app/lcbsdb/ParadaSrv!lcbs.interfaces.ParadaLocalApi")
+
+	@EJB(lookup = "java:app/lcbsdb/ParadaSrv!lcbs.interfaces.ParadaLocalApi")
 	ParadaLocalApi srvParada;
-	
-	@EJB(lookup="java:app/lcbsdb/TerminalSrv!lcbs.interfaces.TerminalLocalApi")
+
+	@EJB(lookup = "java:app/lcbsdb/TerminalSrv!lcbs.interfaces.TerminalLocalApi")
 	TerminalLocalApi srvTerminal;
-	
-	@EJB(lookup="java:app/lcbsdb/RecorridoSrv!lcbs.interfaces.RecorridoLocalApi")
+
+	@EJB(lookup = "java:app/lcbsdb/RecorridoSrv!lcbs.interfaces.RecorridoLocalApi")
 	RecorridoLocalApi srvRecorrido;
-	
+
 	@Override
-	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina) {
-		return srvViaje.buscarViaje(filtro, pagina, ElementosPagina);
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina, DataTenant tenant) {
+		return srvViaje.buscarViaje(filtro, pagina, ElementosPagina, tenant);
 	}
 
 	@Override
-	public DataPasaje ComprarPasaje(DataPasaje pasaje) {
-		DataPasaje nuevoPasaje = srvPasaje.crearPasaje(pasaje);
+	public DataPasaje ComprarPasaje(DataPasaje pasaje, DataTenant tenant) {
+		DataPasaje nuevoPasaje = srvPasaje.crearPasaje(pasaje, tenant);
 		return nuevoPasaje;
-		
-	}
-	
-	@Override
-	public List<DataViaje> viajesPorTerminal(String idterminal, Integer pagina, Integer ElementosPagina){
-		return	srvViaje.viajesPorTerminal(idterminal,pagina,ElementosPagina);
-		}
-	
-	@Override
-	public List<DataPasajeConvertor> obtenerHistorialPasajes(String idUsuario, Integer pagina, Integer elementosPagina) {
-		return srvPasaje.obtenerPasajesPorPersona(idUsuario, pagina, elementosPagina);
-	}
-	
-	@Override
-	public DataPasaje verDetallePasaje(String idPasaje){
-		return srvPasaje.getPasaje(idPasaje);
+
 	}
 
 	@Override
-	public void CambiarHorarioPasaje(String idPasaje, String viaje) {
-		DataViaje viajeAAsignar = srvViaje.getViaje(viaje);
-		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje);
+	public List<DataViaje> viajesPorTerminal(String idterminal, Integer pagina, Integer ElementosPagina, DataTenant tenant) {
+		return srvViaje.viajesPorTerminal(idterminal, pagina, ElementosPagina, tenant);
+	}
+
+	@Override
+	public List<DataPasajeConvertor> obtenerHistorialPasajes(String idUsuario, Integer pagina,
+			Integer elementosPagina, DataTenant tenant) {
+		return srvPasaje.obtenerPasajesPorPersona(idUsuario, pagina, elementosPagina, tenant);
+	}
+
+	@Override
+	public DataPasaje verDetallePasaje(String idPasaje, DataTenant tenant) {
+		return srvPasaje.getPasaje(idPasaje, tenant);
+	}
+
+	@Override
+	public void CambiarHorarioPasaje(String idPasaje, String viaje, DataTenant tenant) {
+		DataViaje viajeAAsignar = srvViaje.getViaje(viaje, tenant);
+		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje, tenant);
 		pasajeAModificar.setViaje(viajeAAsignar);
-		srvPasaje.modificarPasaje(pasajeAModificar);
-		
+		srvPasaje.modificarPasaje(pasajeAModificar, tenant);
+
 	}
 
 	@Override
-	public DataReserva ReservarPasaje(DataReserva reserva) {
-		DataReserva nuevaReserva = srvReserva.crearReserva(reserva);
+	public DataReserva ReservarPasaje(DataReserva reserva, DataTenant tenant) {
+		DataReserva nuevaReserva = srvReserva.crearReserva(reserva, tenant);
 		return nuevaReserva;
-		
+
 	}
 
 	@Override
-	public void TransferirPasajeComprado(String idPasaje, String idUsuario) {
-		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje);
-		DataUsuario usuarioAAsignar = srvUsuario.getUsuario(idUsuario);
+	public void TransferirPasajeComprado(String idPasaje, String idUsuario, DataTenant tenant) {
+		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje, tenant);
+		DataUsuario usuarioAAsignar = srvUsuario.getUsuario(idUsuario, tenant);
 		pasajeAModificar.setComprador(usuarioAAsignar);
-		srvPasaje.modificarPasaje(pasajeAModificar);
+		srvPasaje.modificarPasaje(pasajeAModificar, tenant);
 	}
 
 	@Override
-	public void CancelarReserva(String idReserva) {
-		srvReserva.darBajaReserva(idReserva);
+	public void CancelarReserva(String idReserva, DataTenant tenant) {
+		srvReserva.darBajaReserva(idReserva, tenant);
 	}
 
 	@Override
-	public List< DataReserva> ListarReservas(String idUsuario) {
-		return srvReserva.listarReservasPorUsuario(idUsuario);
+	public List<DataReserva> ListarReservas(String idUsuario, DataTenant tenant) {
+		return srvReserva.listarReservasPorUsuario(idUsuario, tenant);
 	}
 
 	@Override
-	public void ProcesarPasajes(String idPasaje) {
-		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje);
+	public void ProcesarPasajes(String idPasaje, DataTenant tenant) {
+		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje, tenant);
 		pasajeAModificar.setUsado(true);
 		pasajeAModificar.setPago(true);
-		srvPasaje.modificarPasaje(pasajeAModificar);
-	}
-	
-	@Override
-	public List<DataPasajeConvertor> getPasajes(Integer pagina, Integer ElementosPagina){
-		return srvPasaje.obtenerPasajes(pagina, ElementosPagina);
+		srvPasaje.modificarPasaje(pasajeAModificar, tenant);
 	}
 
 	@Override
-	public DataParada AltaParadas(DataParada parada) {
-		return srvParada.crearParada(parada);
-	}
-	
-	@Override
-	public void EditarParada(DataParada parada) {
-		srvParada.modificarParada(parada);
-		
-	}
-	
-	@Override
-	public DataParada obtenerParada(String IdParada) {
-		return srvParada.getParada(IdParada);
-		
+	public List<DataPasajeConvertor> getPasajes(Integer pagina, Integer ElementosPagina, DataTenant tenant) {
+		return srvPasaje.obtenerPasajes(pagina, ElementosPagina, tenant);
 	}
 
 	@Override
-	public DataTerminal AltaTerminal(DataTerminal terminal) {
-		return srvTerminal.crearTerminal(terminal);
-		
+	public DataParada AltaParadas(DataParada parada, DataTenant tenant) {
+		return srvParada.crearParada(parada, tenant);
 	}
 
 	@Override
-	public void EditarTerminal(DataTerminal terminal) {
-		srvTerminal.modificarTerminal(terminal);
-		
-	}
-	
-	@Override
-	public DataTerminal obtenerTerminal(String IdTerminal) {
-		return srvTerminal.getTerminal(IdTerminal);
-		
-	}
-	
-	@Override
-	public List<DataTerminal> getTerminales(Integer pagina, Integer elementos) {
-		return srvTerminal.obtenerTerminals(pagina, elementos);
-		
-	}
-	
-	
+	public void EditarParada(DataParada parada, DataTenant tenant) {
+		srvParada.modificarParada(parada, tenant);
 
-	@Override
-	public DataRecorrido CrearRecorrido(DataRecorrido recorrido) {
-		return srvRecorrido.crearRecorrido(recorrido);
-		
 	}
 
 	@Override
-	public void EditarRecorrido(DataRecorrido recorrido) {
-		srvRecorrido.modificarRecorrido(recorrido);
-		
-	}
-	
-	@Override
-	public DataRecorrido obtenerRecorrido(String idRecorrido) {
-		return srvRecorrido.getRecorrido(idRecorrido);
-		
-	}
-	
-	@Override
-	public List<DataRecorrido> listarRecorridos(Integer pagina, Integer elementosPagina) {
-		return srvRecorrido.obtenerRecorridos(pagina, elementosPagina);
+	public DataParada obtenerParada(String IdParada, DataTenant tenant) {
+		return srvParada.getParada(IdParada, tenant);
+
 	}
 
 	@Override
-	public DataPasaje ComprarPasajeReservado(DataReserva filtro) {
-		DataReserva reserva = srvReserva.getReserva(filtro.getId());
+	public DataTerminal AltaTerminal(DataTerminal terminal, DataTenant tenant) {
+		return srvTerminal.crearTerminal(terminal, tenant);
+
+	}
+
+	@Override
+	public void EditarTerminal(DataTerminal terminal, DataTenant tenant) {
+		srvTerminal.modificarTerminal(terminal, tenant);
+
+	}
+
+	@Override
+	public DataTerminal obtenerTerminal(String IdTerminal, DataTenant tenant) {
+		return srvTerminal.getTerminal(IdTerminal, tenant);
+
+	}
+
+	@Override
+	public List<DataTerminal> getTerminales(Integer pagina, Integer elementos, DataTenant tenant) {
+		return srvTerminal.obtenerTerminals(pagina, elementos, tenant);
+
+	}
+
+	@Override
+	public DataRecorrido CrearRecorrido(DataRecorrido recorrido, DataTenant tenant) {
+		return srvRecorrido.crearRecorrido(recorrido, tenant);
+
+	}
+
+	@Override
+	public void EditarRecorrido(DataRecorrido recorrido, DataTenant tenant) {
+		srvRecorrido.modificarRecorrido(recorrido, tenant);
+
+	}
+
+	@Override
+	public DataRecorrido obtenerRecorrido(String idRecorrido, DataTenant tenant) {
+		return srvRecorrido.getRecorrido(idRecorrido, tenant);
+
+	}
+
+	@Override
+	public List<DataRecorrido> listarRecorridos(Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return srvRecorrido.obtenerRecorridos(pagina, elementosPagina, tenant);
+	}
+
+	@Override
+	public DataPasaje ComprarPasajeReservado(DataReserva filtro, DataTenant tenant) {
+		DataReserva reserva = srvReserva.getReserva(filtro.getId(), tenant);
 		DataPasaje pasajeACrear = new DataPasaje();
 		pasajeACrear.setCiPersona(reserva.getCiPersona());
 		pasajeACrear.setComprador(reserva.getUsuarioReserva());
@@ -197,84 +193,84 @@ public class ViajeCtrl implements IViaje{
 		pasajeACrear.setVendedor(reserva.getEmpleado());
 		pasajeACrear.setViaje(reserva.getViaje());
 		reserva.setUtilizada(true);
-		srvReserva.modificarReserva(reserva);
-		return srvPasaje.crearPasaje(pasajeACrear);
+		srvReserva.modificarReserva(reserva, tenant);
+		return srvPasaje.crearPasaje(pasajeACrear, tenant);
 	}
 
 	@Override
-	public DataViaje crearViaje(DataViaje viaje) {
-		return srvViaje.crearViaje(viaje);
+	public DataViaje crearViaje(DataViaje viaje, DataTenant tenant) {
+		return srvViaje.crearViaje(viaje, tenant);
 	}
 
 	@Override
-	public void editarViaje(DataViaje viaje) {
-		srvViaje.modificarViaje(viaje);
+	public void editarViaje(DataViaje viaje, DataTenant tenant) {
+		srvViaje.modificarViaje(viaje, tenant);
 	}
 
 	@Override
-	public void eliminarViaje(String idViaje) {
-		srvViaje.borrarViaje(idViaje);
+	public void eliminarViaje(String idViaje, DataTenant tenant) {
+		srvViaje.borrarViaje(idViaje, tenant);
 	}
 
 	@Override
-	public void BajaRecorrido(String idRecorrido) {
-		srvRecorrido.darBajaRecorrido(idRecorrido);
-		
+	public void BajaRecorrido(String idRecorrido, DataTenant tenant) {
+		srvRecorrido.darBajaRecorrido(idRecorrido, tenant);
+
 	}
 
 	@Override
-	public List<DataParada> getParadas(Integer pagina, Integer elementosPagina) {
-		return srvParada.obtenerParadas(pagina, elementosPagina);
+	public List<DataParada> getParadas(Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return srvParada.obtenerParadas(pagina, elementosPagina, tenant);
 	}
 
 	@Override
-	public DataPuntoRecorrido obtenerPuntoRecorrido(String idPunto) {
-		DataPuntoRecorrido terminal = obtenerTerminal(idPunto);
-		if(terminal != null){
+	public DataPuntoRecorrido obtenerPuntoRecorrido(String idPunto, DataTenant tenant) {
+		DataPuntoRecorrido terminal = obtenerTerminal(idPunto, tenant);
+		if (terminal != null) {
 			return terminal;
 		}
-		DataPuntoRecorrido parada = obtenerParada(idPunto);
-		if(parada != null){
+		DataPuntoRecorrido parada = obtenerParada(idPunto, tenant);
+		if (parada != null) {
 			return parada;
 		}
 		return null;
 	}
 
 	@Override
-	public DataPuntoRecorrido obtenerPuntoPorCoordenada(String coord) {
-		DataPuntoRecorrido terminal = srvTerminal.getTerminalPorCoordenada(coord);
-		if(terminal != null){
+	public DataPuntoRecorrido obtenerPuntoPorCoordenada(String coord, DataTenant tenant) {
+		DataPuntoRecorrido terminal = srvTerminal.getTerminalPorCoordenada(coord, tenant);
+		if (terminal != null) {
 			return terminal;
 		}
-		DataPuntoRecorrido parada = srvParada.getParadaPorCoordenada(coord);
-		if(parada != null){
+		DataPuntoRecorrido parada = srvParada.getParadaPorCoordenada(coord, tenant);
+		if (parada != null) {
 			return parada;
 		}
 		return null;
 	}
 
 	@Override
-	public DataViaje getViaje(String idViaje) {
-		return srvViaje.getViaje(idViaje);
+	public DataViaje getViaje(String idViaje, DataTenant tenant) {
+		return srvViaje.getViaje(idViaje, tenant);
 	}
-	
-	public DataPasaje getPasajeXCodigo(Integer codigoPasaje){
-		return srvPasaje.getpasajeXcodigo(codigoPasaje);
-	}
-	
-	@Override
-	public List<DataViaje> getViajes(Integer pagina, Integer elementos){
-		return srvViaje.obtenerViajes(pagina, elementos);
+
+	public DataPasaje getPasajeXCodigo(Integer codigoPasaje, DataTenant tenant) {
+		return srvPasaje.getpasajeXcodigo(codigoPasaje, tenant);
 	}
 
 	@Override
-	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina) {
-		return srvRecorrido.BuscarRecorrido(filtro, pagina, elementosPagina);
+	public List<DataViaje> getViajes(Integer pagina, Integer elementos, DataTenant tenant) {
+		return srvViaje.obtenerViajes(pagina, elementos, tenant);
 	}
 
 	@Override
-	public DataReserva obtenerReserva(String idReserva) {
-		return srvReserva.getReserva(idReserva);
+	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return srvRecorrido.BuscarRecorrido(filtro, pagina, elementosPagina, tenant);
+	}
+
+	@Override
+	public DataReserva obtenerReserva(String idReserva, DataTenant tenant) {
+		return srvReserva.getReserva(idReserva, tenant);
 	}
 
 }

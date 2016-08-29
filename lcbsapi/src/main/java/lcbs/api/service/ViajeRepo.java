@@ -34,146 +34,146 @@ public class ViajeRepo {
 	@EJB(lookup =  "java:app/lcbsb/ViajeCtrl!interfaces.IViaje")
 	IViaje ctrViaje;
 	
-	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina){
-		return ctrViaje.BuscarViaje(filtro, pagina, ElementosPagina);
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina, DataTenant tenant){
+		return ctrViaje.BuscarViaje(filtro, pagina, ElementosPagina, tenant );
 	}
 
-	public List<DataViaje> viajesPorTerminal(String idterminal, Integer pagina, Integer ElementosPagina){
-		return	ctrViaje.viajesPorTerminal(idterminal,pagina,ElementosPagina);
+	public List<DataViaje> viajesPorTerminal(String idterminal, Integer pagina, Integer ElementosPagina, DataTenant tenant){
+		return	ctrViaje.viajesPorTerminal(idterminal,pagina,ElementosPagina, tenant );
 	}
 	
-	public List<DataPasajeConvertor> getPasajes(Integer pagina, Integer ElementosPagina){
-		return ctrViaje.getPasajes(pagina, ElementosPagina);
+	public List<DataPasajeConvertor> getPasajes(Integer pagina, Integer ElementosPagina, DataTenant tenant){
+		return ctrViaje.getPasajes(pagina, ElementosPagina, tenant );
 	}
 	
-	public DataPasaje ComprarPasaje(DataPasaje pasaje){
-		return ctrViaje.ComprarPasaje(pasaje);
+	public DataPasaje ComprarPasaje(DataPasaje pasaje, DataTenant tenant){
+		return ctrViaje.ComprarPasaje(pasaje, tenant );
 	}
 	
-	public DataPasaje getPasajeXcodigo(Integer codigoPasaje){
-		return ctrViaje.getPasajeXCodigo(codigoPasaje);
+	public DataPasaje getPasajeXcodigo(Integer codigoPasaje, DataTenant tenant){
+		return ctrViaje.getPasajeXCodigo(codigoPasaje, tenant );
 	}
 	
-	public void CambiarHorarioPasaje(String idPasaje, String viaje){
-		ctrViaje.CambiarHorarioPasaje(idPasaje, viaje);
+	public void CambiarHorarioPasaje(String idPasaje, String viaje, DataTenant tenant){
+		ctrViaje.CambiarHorarioPasaje(idPasaje, viaje, tenant );
 	}
 	
-	public DataReserva ReservarPasaje(DataReserva reserva){
-		return ctrViaje.ReservarPasaje(reserva);
+	public DataReserva ReservarPasaje(DataReserva reserva, DataTenant tenant){
+		return ctrViaje.ReservarPasaje(reserva, tenant );
 	}
 	
-	public void TransferirPasajeComprado(String idPasaje, String idUsuario){
-		ctrViaje.TransferirPasajeComprado(idPasaje, idUsuario);
+	public void TransferirPasajeComprado(String idPasaje, String idUsuario, DataTenant tenant){
+		ctrViaje.TransferirPasajeComprado(idPasaje, idUsuario, tenant );
 	}
 	
-	public void CancelarReserva(String idReserva){
-		ctrViaje.CancelarReserva(idReserva);
+	public void CancelarReserva(String idReserva, DataTenant tenant){
+		ctrViaje.CancelarReserva(idReserva, tenant );
 	}
 	
-	public List<DataReserva> ListarReservas(String idUsuario){
-		return ctrViaje.ListarReservas(idUsuario);
+	public List<DataReserva> ListarReservas(String idUsuario, DataTenant tenant){
+		return ctrViaje.ListarReservas(idUsuario, tenant ); 
 	}
 	
-	public void ProcesarPasajes(String idPasaje){
-		ctrViaje.ProcesarPasajes(idPasaje);
+	public void ProcesarPasajes(String idPasaje, DataTenant tenant){
+		ctrViaje.ProcesarPasajes(idPasaje, tenant );
 	}
 	
-	public DataParada AltaParadas(DataParada parada){
-		return ctrViaje.AltaParadas(parada);
+	public DataParada AltaParadas(DataParada parada, DataTenant tenant){
+		return ctrViaje.AltaParadas(parada, tenant );
 	}
 	
-	public DataTerminal AltaTerminal(DataTerminal terminal){
-		return ctrViaje.AltaTerminal(terminal);
+	public DataTerminal AltaTerminal(DataTerminal terminal, DataTenant tenant){
+		return ctrViaje.AltaTerminal(terminal, tenant );
 	}
 	
-	public void EditarParada(DataParada parada){
-		ctrViaje.EditarParada(parada);
+	public void EditarParada(DataParada parada, DataTenant tenant){
+		ctrViaje.EditarParada(parada, tenant );
 	}
 	
-	public List<DataViaje> getViajes(Integer pagina,Integer elementos){
-		return ctrViaje.getViajes(pagina, elementos);
+	public List<DataViaje> getViajes(Integer pagina,Integer elementos, DataTenant tenant){
+		return ctrViaje.getViajes(pagina, elementos, tenant );
 	}
 	
-	public void EditarTerminal(DataTerminal terminal){
-		ctrViaje.EditarTerminal(terminal);
+	public void EditarTerminal(DataTerminal terminal, DataTenant tenant){
+		ctrViaje.EditarTerminal(terminal, tenant );
 	}
 	
-	public DataRecorrido CrearRecorrido(DataRecorrido recorrido){
-		return ctrViaje.CrearRecorrido(recorrido);
+	public DataRecorrido CrearRecorrido(DataRecorrido recorrido, DataTenant tenant){
+		return ctrViaje.CrearRecorrido(recorrido, tenant );
 	}
 	
-	public void EditarRecorrido(DataRecorrido recorrido){
-		ctrViaje.EditarRecorrido(recorrido);
+	public void EditarRecorrido(DataRecorrido recorrido, DataTenant tenant){
+		ctrViaje.EditarRecorrido(recorrido, tenant );
 	}
 	
-	public DataRecorrido obtenerRecorrido(String idRecorrido){
-		return ctrViaje.obtenerRecorrido(idRecorrido);
+	public DataRecorrido obtenerRecorrido(String idRecorrido, DataTenant tenant){
+		return ctrViaje.obtenerRecorrido(idRecorrido, tenant );
 	}
 	
-	public List<DataRecorrido> listarRecorridos(Integer pagina, Integer elementosPagina) {
-		return ctrViaje.listarRecorridos(pagina, elementosPagina);
+	public List<DataRecorrido> listarRecorridos(Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return ctrViaje.listarRecorridos(pagina, elementosPagina, tenant );
 	}
 	
-	public DataPasaje ComprarPasajeReservado(DataReserva reserva){
-		return ctrViaje.ComprarPasajeReservado(reserva);
+	public DataPasaje ComprarPasajeReservado(DataReserva reserva, DataTenant tenant){
+		return ctrViaje.ComprarPasajeReservado(reserva, tenant );
 	}
 	
-	public DataParada obtenerParada(String IdParada){
-		return ctrViaje.obtenerParada(IdParada);
+	public DataParada obtenerParada(String IdParada, DataTenant tenant){
+		return ctrViaje.obtenerParada(IdParada, tenant );
 	}
 	
-	public List<DataPasajeConvertor> obtenerHistorialPasajes(String idUsuario, Integer pagina, Integer elementosPagina){
-		return ctrViaje.obtenerHistorialPasajes(idUsuario, pagina, elementosPagina);
+	public List<DataPasajeConvertor> obtenerHistorialPasajes(String idUsuario, Integer pagina, Integer elementosPagina, DataTenant tenant){
+		return ctrViaje.obtenerHistorialPasajes(idUsuario, pagina, elementosPagina, tenant );
 	}
 	
-	public DataPasaje verDetallePasaje(String idPasaje){
-		return ctrViaje.verDetallePasaje(idPasaje);
+	public DataPasaje verDetallePasaje(String idPasaje, DataTenant tenant){
+		return ctrViaje.verDetallePasaje(idPasaje, tenant );
 	}
 	
-	public DataTerminal obtenerTerminal(String IdTerminal){
-		return ctrViaje.obtenerTerminal(IdTerminal);
+	public DataTerminal obtenerTerminal(String IdTerminal, DataTenant tenant){
+		return ctrViaje.obtenerTerminal(IdTerminal, tenant );
 	}
 	
-	public void crearViaje(DataViaje viaje){
-		ctrViaje.crearViaje(viaje);
+	public void crearViaje(DataViaje viaje, DataTenant tenant){
+		ctrViaje.crearViaje(viaje, tenant );
 	}
 	
-	public void editarViaje(DataViaje viaje){
-		ctrViaje.editarViaje(viaje);
+	public void editarViaje(DataViaje viaje, DataTenant tenant){
+		ctrViaje.editarViaje(viaje, tenant );
 	}
 	
-	public void eliminarViaje(String idViaje){
-		ctrViaje.eliminarViaje(idViaje);
+	public void eliminarViaje(String idViaje, DataTenant tenant){
+		ctrViaje.eliminarViaje(idViaje, tenant );
 	}
-	public List<DataTerminal> getTerminales(Integer pagina, Integer elementos){
-		return ctrViaje.getTerminales(pagina, elementos);
+	public List<DataTerminal> getTerminales(Integer pagina, Integer elementos, DataTenant tenant){
+		return ctrViaje.getTerminales(pagina, elementos, tenant );
 	}
 	
-	public List<DataParada> getParadas(Integer pagina, Integer elementosPagina) {
-		return ctrViaje.getParadas(pagina, elementosPagina);
+	public List<DataParada> getParadas(Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return ctrViaje.getParadas(pagina, elementosPagina, tenant );
 	}
 
-	public void BajaRecorrido(String idRecorrido) {
-		ctrViaje.BajaRecorrido(idRecorrido);		
+	public void BajaRecorrido(String idRecorrido, DataTenant tenant) {
+		ctrViaje.BajaRecorrido(idRecorrido, tenant );		
 	}
 
-	public DataPuntoRecorrido obtenerPuntoRecorrido(String idPunto) {
-		return ctrViaje.obtenerPuntoRecorrido(idPunto);
+	public DataPuntoRecorrido obtenerPuntoRecorrido(String idPunto, DataTenant tenant) {
+		return ctrViaje.obtenerPuntoRecorrido(idPunto, tenant );
 	}
 
-	public DataPuntoRecorrido obtenerPuntoPorCoordenada(String coord) {
-		return ctrViaje.obtenerPuntoPorCoordenada(coord);
+	public DataPuntoRecorrido obtenerPuntoPorCoordenada(String coord, DataTenant tenant) {
+		return ctrViaje.obtenerPuntoPorCoordenada(coord, tenant );
 	}
 
-	public DataViaje getViaje(String idViaje) {
-		return ctrViaje.getViaje(idViaje);
+	public DataViaje getViaje(String idViaje, DataTenant tenant) {
+		return ctrViaje.getViaje(idViaje, tenant );
 	}
 
-	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina) {
-		return ctrViaje.BuscarRecorrido(filtro, pagina, elementosPagina);
+	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return ctrViaje.BuscarRecorrido(filtro, pagina, elementosPagina, tenant );
 	}
 
-	public DataReserva obtenerReserva(String idReserva) {
-		return ctrViaje.obtenerReserva(idReserva);
+	public DataReserva obtenerReserva(String idReserva, DataTenant tenant) {
+		return ctrViaje.obtenerReserva(idReserva, tenant );
 	}
 }

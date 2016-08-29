@@ -1,25 +1,17 @@
 package lcbs.api.rest;
 
 import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
 
+import lcbs.api.interceptor.TenantChecked;
 import lcbs.api.service.TenantRepo;
-import lcbs.shares.DataTenant;
-
-public class BaseApi {
-	@Context 
-	HttpHeaders headers;
-	
+@TenantChecked
+public class BaseApi {	
+	@Context
+	HttpServletRequest request;
 	@EJB
 	TenantRepo repo;
-	
-	public DataTenant checkTenant(){
-		 String host = headers.getHeaderString("host");
-		 DataTenant filter = new DataTenant();
-		 filter.setDomain(host); 
-		 return repo.get(filter);
-	}
 	 
 	
 }

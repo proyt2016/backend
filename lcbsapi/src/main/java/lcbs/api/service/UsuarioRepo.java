@@ -17,7 +17,6 @@
 package lcbs.api.service;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -28,96 +27,98 @@ import interfaces.IUsuario;
 import lcbs.shares.DataEmpleado;
 import lcbs.shares.DataNotificacion;
 import lcbs.shares.DataPerfil;
+import lcbs.shares.DataTenant;
 import lcbs.shares.DataUsuario;
 
 // The @Stateless annotation eliminates the need for manual transaction demarcation
 @Stateless
 @Remote
 public class UsuarioRepo {
-	@EJB(lookup =  "java:app/lcbsb/UsuarioCtrl!interfaces.IUsuario")
+	@EJB(lookup = "java:app/lcbsb/UsuarioCtrl!interfaces.IUsuario")
 	IUsuario ctrUsuario;
-	
-	public DataUsuario AltaUsuario(DataUsuario usuario){
-		return ctrUsuario.AltaUsuario(usuario);
-	}
-	
-	public void ModificarUsuario(DataUsuario usuario){
-		ctrUsuario.ModificarUsuario(usuario);
-	}
-	
-	public void BajaUsuario(String idUsuario){
-		ctrUsuario.BajaUsuario(idUsuario);
-	}
-	
-	public DataEmpleado AltaEmpleado(DataEmpleado empleado){
-		return ctrUsuario.AltaEmpleado(empleado);
-	}
-	
-	public void ModificarEmpleado(DataEmpleado empleado){
-		ctrUsuario.ModificarEmpleado(empleado);
-	}
-	
-	public void BajaEmpleado(String idEmpleado){
-		ctrUsuario.BajaEmpleado(idEmpleado);
-	}
-	
-	public void CargarSaldoCuponera(String idUsuario, Float saldo){
-		ctrUsuario.CargarSaldoCuponera(idUsuario, saldo);
-	}
-	
-	public List<DataNotificacion> listarNotificaciones(String idUsuario){
-		return ctrUsuario.listarNotificaciones(idUsuario);
-	}
-	
-	public DataPerfil AltaPerfil(DataPerfil perfil){
-		return ctrUsuario.AltaPerfil(perfil);
-	}
-	
-	public void EditarPerfil(DataPerfil perfil){
-		ctrUsuario.EditarPerfil(perfil);
-	}
-	
-	public void EliminarPerfil(String idPerfil){
-		ctrUsuario.EliminarPerfil(idPerfil);
-	}
-	
-	public void AsignarPerfil(String idEmpleado, String perfil){
-		ctrUsuario.AsignarPerfil(idEmpleado, perfil);
-	}
-	
-	public DataUsuario loginUsuario(String usuario, String clave) {
-		return ctrUsuario.loginUsuario(usuario, clave);
+
+	public DataUsuario AltaUsuario(DataUsuario usuario, DataTenant tenant) {
+		return ctrUsuario.AltaUsuario(usuario, tenant);
 	}
 
-	public DataUsuario getUsuario(String idUsuario) {
-		return ctrUsuario.getUsuario(idUsuario);
+	public void ModificarUsuario(DataUsuario usuario, DataTenant tenant) {
+		ctrUsuario.ModificarUsuario(usuario, tenant);
 	}
 
-	public DataEmpleado loginEmpleado(String usuario, String clave) {
-		return ctrUsuario.loginEmpleado(usuario, clave);
+	public void BajaUsuario(String idUsuario, DataTenant tenant) {
+		ctrUsuario.BajaUsuario(idUsuario, tenant);
 	}
 
-	public DataEmpleado getEmpleado(String idEmpleado) {
-		return ctrUsuario.getEmpleado(idEmpleado);
-	}
-	
-	public List<DataEmpleado> listarEmpleados(Integer pagina, Integer elementosPagina) {
-		return ctrUsuario.listarEmpleados(pagina, elementosPagina);
+	public DataEmpleado AltaEmpleado(DataEmpleado empleado, DataTenant tenant) {
+		return ctrUsuario.AltaEmpleado(empleado, tenant);
 	}
 
-	public DataPerfil getPerfil(String idPerfil) {
-		return ctrUsuario.getPerfil(idPerfil);
+	public void ModificarEmpleado(DataEmpleado empleado, DataTenant tenant) {
+		ctrUsuario.ModificarEmpleado(empleado, tenant);
 	}
 
-	public List<DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina) {
-		return ctrUsuario.listarPerfiles(pagina, elementosPagina);
-	}
-	
-	public List<DataUsuario> listarUsuarios(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
-		return ctrUsuario.listarUsuarios(pagina, elementosPagina);
+	public void BajaEmpleado(String idEmpleado, DataTenant tenant) {
+		ctrUsuario.BajaEmpleado(idEmpleado, tenant);
 	}
 
-	public DataUsuario buscarUsuarioPorMail(String mailUsuario) {
-		return ctrUsuario.buscarUsuarioPorMail(mailUsuario);
+	public void CargarSaldoCuponera(String idUsuario, Float saldo, DataTenant tenant) {
+		ctrUsuario.CargarSaldoCuponera(idUsuario, saldo, tenant);
+	}
+
+	public List<DataNotificacion> listarNotificaciones(String idUsuario, DataTenant tenant) {
+		return ctrUsuario.listarNotificaciones(idUsuario, tenant);
+	}
+
+	public DataPerfil AltaPerfil(DataPerfil perfil, DataTenant tenant) {
+		return ctrUsuario.AltaPerfil(perfil, tenant);
+	}
+
+	public void EditarPerfil(DataPerfil perfil, DataTenant tenant) {
+		ctrUsuario.EditarPerfil(perfil, tenant);
+	}
+
+	public void EliminarPerfil(String idPerfil, DataTenant tenant) {
+		ctrUsuario.EliminarPerfil(idPerfil, tenant);
+	}
+
+	public void AsignarPerfil(String idEmpleado, String perfil, DataTenant tenant) {
+		ctrUsuario.AsignarPerfil(idEmpleado, perfil, tenant);
+	}
+
+	public DataUsuario loginUsuario(String usuario, String clave, DataTenant tenant) {
+		return ctrUsuario.loginUsuario(usuario, clave, tenant);
+	}
+
+	public DataUsuario getUsuario(String idUsuario, DataTenant tenant) {
+		return ctrUsuario.getUsuario(idUsuario, tenant);
+	}
+
+	public DataEmpleado loginEmpleado(String usuario, String clave, DataTenant tenant) {
+		return ctrUsuario.loginEmpleado(usuario, clave, tenant);
+	}
+
+	public DataEmpleado getEmpleado(String idEmpleado, DataTenant tenant) {
+		return ctrUsuario.getEmpleado(idEmpleado, tenant);
+	}
+
+	public List<DataEmpleado> listarEmpleados(Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return ctrUsuario.listarEmpleados(pagina, elementosPagina, tenant);
+	}
+
+	public DataPerfil getPerfil(String idPerfil, DataTenant tenant) {
+		return ctrUsuario.getPerfil(idPerfil, tenant);
+	}
+
+	public List<DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return ctrUsuario.listarPerfiles(pagina, elementosPagina, tenant);
+	}
+
+	public List<DataUsuario> listarUsuarios(@PathParam("pagina") final Integer pagina,
+			@PathParam("elementosAMostrar") final Integer elementosPagina, DataTenant tenant) {
+		return ctrUsuario.listarUsuarios(pagina, elementosPagina, tenant);
+	}
+
+	public DataUsuario buscarUsuarioPorMail(String mailUsuario, DataTenant tenant) {
+		return ctrUsuario.buscarUsuarioPorMail(mailUsuario, tenant);
 	}
 }

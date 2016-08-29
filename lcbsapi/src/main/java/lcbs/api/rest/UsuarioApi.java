@@ -34,7 +34,7 @@ import lcbs.api.service.UsuarioRepo;
 @Path("/usuarios/")
 @Produces({ "application/json" })
 @Consumes({ "application/json" })
-public class UsuarioApi {																														
+public class UsuarioApi extends BaseApi{																														
 	
 	@EJB
 	UsuarioRepo repo;
@@ -42,70 +42,81 @@ public class UsuarioApi {
 	@POST
 	@Path("/altausuario/")
 	public DataUsuario AltaUsuario(DataUsuario usuario){
-		return repo.AltaUsuario(usuario);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.AltaUsuario(usuario, tenant);
 	}
 	
 	@POST
 	@Path("/editarusuario/")
 	public void ModificarUsuario(DataUsuario usuario){
-		repo.ModificarUsuario(usuario);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.ModificarUsuario(usuario, tenant);
 	}
 	
 	@POST
 	@Path("/bajausuario/")
 	public void BajaUsuario(String idUsuario){
-		repo.BajaUsuario(idUsuario);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.BajaUsuario(idUsuario, tenant);
 	}
 	
 	@POST
 	@Path("/altaempleado/")
 	public DataEmpleado AltaEmpleado(DataEmpleado empleado){
-		return repo.AltaEmpleado(empleado);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.AltaEmpleado(empleado, tenant);
 	}
 	
 	@POST
 	@Path("/editarempleado/")
 	public void ModificarEmpleado(DataEmpleado empleado){
-		repo.ModificarEmpleado(empleado);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.ModificarEmpleado(empleado, tenant);
 	}
 	
 	@POST
 	@Path("/bajaempleado/")
 	public void BajaEmpleado(String data){
 		JSONObject obj = new JSONObject(data);
-		repo.BajaEmpleado(obj.getString("idEmpleado"));
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.BajaEmpleado(obj.getString("idEmpleado"), tenant);
 	}
 	
 	@POST
 	@Path("/cargarcuponera/")
 	public void CargarSaldoCuponera(String data) {
 		JSONObject obj = new JSONObject(data);
-		repo.CargarSaldoCuponera(obj.getString("idUsuario"), Float.parseFloat(obj.getString("saldo")));
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.CargarSaldoCuponera(obj.getString("idUsuario"), Float.parseFloat(obj.getString("saldo")), tenant);
 	}
 	
 	@GET
 	@Path("/listanotificaciones/{idUsuario}")
 	public List<DataNotificacion> listarNotificaciones(@PathParam("idUsuario") final String idUsuario){
-		return repo.listarNotificaciones(idUsuario);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.listarNotificaciones(idUsuario, tenant);
 	}
 	
 	//tested
 	@POST
 	@Path("/altaperfil/")
 	public DataPerfil AltaPerfil(final DataPerfil perfil) {
-		return repo.AltaPerfil(perfil);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.AltaPerfil(perfil, tenant);
 	}
 	
 	@POST
 	@Path("/editarperfil/")
 	public void EditarPerfil(final DataPerfil perfil){
-		repo.EditarPerfil(perfil);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.EditarPerfil(perfil, tenant);
 	}
 	
 	@DELETE
 	@Path("/eliminarperfil/{idPerfil}")
 	public void EliminarPerfil(@PathParam("idPerfil") String idPerfil){
-		repo.EliminarPerfil(idPerfil);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.EliminarPerfil(idPerfil, tenant);
 	}
 	
 	//tested
@@ -113,62 +124,72 @@ public class UsuarioApi {
 	@Path("/asignarperfil/")
 	public void AsignarPerfil(String data) {
 		JSONObject obj = new JSONObject(data);
-		repo.AsignarPerfil(obj.getString("idEmpleado"), obj.getString("perfil"));
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.AsignarPerfil(obj.getString("idEmpleado"), obj.getString("perfil"), tenant);
 	}
 	
 	@POST
 	@Path("/loginusuario/")
 	public DataUsuario loginUsuario(String data) {
 		JSONObject obj = new JSONObject(data);
-		return repo.loginUsuario(obj.getString("usuario"), obj.getString("clave"));
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.loginUsuario(obj.getString("usuario"), obj.getString("clave"), tenant);
 	}
 
 	@GET
 	@Path("/getusuario/{idUsuario}")
 	public DataUsuario getUsuario(@PathParam("idUsuario") final String idUsuario){
-		return repo.getUsuario(idUsuario);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getUsuario(idUsuario, tenant);
 	}
 	
 	@POST
 	@Path("/loginempleado/")
 	public DataEmpleado loginEmpleado(String data) {
 		JSONObject obj = new JSONObject(data);
-		return repo.loginEmpleado(obj.getString("usuario"), obj.getString("clave"));
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.loginEmpleado(obj.getString("usuario"), obj.getString("clave"), tenant);
 	}
 	
 	@GET
 	@Path("/getempleado/{idEmpleado}")
 	public DataEmpleado getEmpleado(@PathParam("idEmpleado") final String idEmpleado) {
-		return repo.getEmpleado(idEmpleado);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getEmpleado(idEmpleado, tenant);
 	}
 	
 	@GET
 	@Path("/listarempleados/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
 	public List<DataEmpleado> listarEmpleados(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
-		return repo.listarEmpleados(pagina, elementosPagina);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.listarEmpleados(pagina, elementosPagina, tenant);
 	}
 	
 	@GET
 	@Path("/listarusuarios/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
 	public List<DataUsuario> listarUsuarios(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
-		return repo.listarUsuarios(pagina, elementosPagina);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.listarUsuarios(pagina, elementosPagina, tenant);
 	}
 
 	@GET
 	@Path("/getperfil/{idPerfil}")
 	public DataPerfil getPerfil(@PathParam("idPerfil") final String idPerfil) {
-		return repo.getPerfil(idPerfil);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getPerfil(idPerfil, tenant);
 	}
 
 	@GET
 	@Path("/listarperfiles/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
 	public List<DataPerfil> listarPerfiles(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina) {
-		return repo.listarPerfiles(pagina, elementosPagina);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.listarPerfiles(pagina, elementosPagina, tenant);
 	}
 	
 	@POST
 	@Path("/buscarusuariopormail/")
 	public DataUsuario buscarUsuarioPorMail(String mailUsuario){
-		return repo.buscarUsuarioPorMail(mailUsuario);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.buscarUsuarioPorMail(mailUsuario, tenant);
 	}
 }

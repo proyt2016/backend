@@ -38,7 +38,7 @@ import lcbs.controllers.VehiculoCtrl;
 @Path("/vehiculos")
 @Produces({ "application/json" })
 @Consumes({ "application/json" })
-public class VehiculoApi {
+public class VehiculoApi extends BaseApi{
 
 	
 	@EJB
@@ -48,14 +48,16 @@ public class VehiculoApi {
 	@POST
 	@Path("/altavehiculo/")
 	public DataVehiculo AltaVehiculo(DataVehiculo dataVehiculo){
-		return repo.altaVehiculo(dataVehiculo);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.altaVehiculo(dataVehiculo, tenant );
 	}
 	
 	//tested
 	@POST
 	@Path("/editarvehiculo/")
 	public void editarVehiculo(DataVehiculo vehiculo){
-		 repo.editarVehiculo(vehiculo);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		 repo.editarVehiculo(vehiculo, tenant );
 	}
 	
 	//tested
@@ -63,26 +65,30 @@ public class VehiculoApi {
 	@Path("/bajavehiculo/")
 	public void bajaVehiculo(String data){
 		 JSONObject obj = new JSONObject(data);
-		 repo.bajaVehiculo(obj.getString("idVehiculo"));
+		 DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		 repo.bajaVehiculo(obj.getString("idVehiculo"), tenant );
 	}
 	
 	@GET
 	@Path("/listarvehiculos/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
 	public List<DataVehiculo> listarVehiculos(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar") final Integer elementosPagina) {
-		return repo.listarVehiculos(pagina, elementosPagina);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.listarVehiculos(pagina, elementosPagina, tenant );
 	}
 	
 	@GET
 	@Path("/listarmantenimientosporvehiculo/{idVehiculo}")
 	public List<DataMantenimientoVehiculo> ListarMantenimientosPorVehiculo(@PathParam("idVehiculo")final String idVehiculo){
-		return repo.mantenimientosPorVehiculo(idVehiculo);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.mantenimientosPorVehiculo(idVehiculo, tenant );
 	}
 	
 	
 	@GET
 	@Path("/getvehiculo/{idVehiculo}")
 	public DataVehiculo getVechiulo(@PathParam("idVehiculo")final String idVehiculo){
-		return repo.obtenerVehiculo(idVehiculo);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.obtenerVehiculo(idVehiculo, tenant);
 	}
 	
 

@@ -30,7 +30,7 @@ import lcbs.api.service.EncomiendaRepo;
 @Path("/encomiendas")
 @Produces({ "application/json" })
 @Consumes({ "application/json" })
-public class EncomiendaApi {
+public class EncomiendaApi extends BaseApi{
 
 	
 	@EJB
@@ -41,88 +41,102 @@ public class EncomiendaApi {
 	@Path("/altaencomienda/")
 	public DataEncomiendaConvertor AltaEncomienda(DataEncomiendaConvertor enc){
 		DataEncomienda encomienda = enc.getDataEncomienda();
-		return repo.AltaEncomienda(encomienda).genConvertor();
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.AltaEncomienda(encomienda, tenant).genConvertor();
 	}
 	
 	@DELETE
 	@Path("/borrarestadoencomienda/{idEstadoEncomienda}")
 	public void borrarEstadoEncomienda(@PathParam("idEstadoEncomienda") final String idEstadoEncomienda){
-		repo.borrarEstadoEncomienda(idEstadoEncomienda);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.borrarEstadoEncomienda(idEstadoEncomienda, tenant);
 	}
 	
 	@DELETE
 	@Path("/borrarreglacobroencomienda/{idReglaCobro}")
 	public void borrarReglaCobroEncomienda(@PathParam("idReglaCobro") final String idReglaCobro){
-		repo.borrarReglaCobroEncomienda(idReglaCobro);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.borrarReglaCobroEncomienda(idReglaCobro, tenant);
 	}
 	
 	@POST
 	@Path("/setestadoencomienda/{idEncomienda}/")
 	public void setEstadoEncomienda(@PathParam("idEncomienda")final String idEncomienda,final DataEstadosEncomienda dataEstado){
-		repo.setEstadoEncomienda(idEncomienda, dataEstado);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.setEstadoEncomienda(idEncomienda, dataEstado, tenant);
 	}
 	
 	@POST
 	@Path("/asignarencomiendavehiculo/")
 	public void AsignarEncomiendaVehiculo(String data) {
 		JSONObject obj = new JSONObject(data);
-		repo.AsignarEncomiendasVehiculo(obj.getString("IdEncomienda"), obj.getString("idViaje"), obj.getString("idCoche"));
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.AsignarEncomiendasVehiculo(obj.getString("IdEncomienda"), obj.getString("idViaje"), obj.getString("idCoche"), tenant);
 	}
 	
 		
 	@POST
 	@Path("/altaestadoencomienda/")
 	public void AltaEstadoEncomienda(DataEstadosEncomienda dataEstado){
-		repo.crearEstadoEncomienda(dataEstado);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.crearEstadoEncomienda(dataEstado, tenant);
 	}
 	
 	@POST
 	@Path("/editarestadoencomienda/")
 	public void EditarEstadoEncomienda(DataEstadosEncomienda dataEstado){
-		repo.EditarEstadoEncomienda(dataEstado);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.EditarEstadoEncomienda(dataEstado, tenant);
 	}
 	
 	@POST
 	@Path("/editarreglacobroencomienda/")
 	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla){
-		return repo.editarReglaCobroEncomienda(dataRegla);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.editarReglaCobroEncomienda(dataRegla, tenant);
 	}
 	
 	@GET
 	@Path("/getestadoencomienda/{idEstadoEncomienda}")
 	public DataEstadosEncomienda getEstadoEncomienda(@PathParam("idEstadoEncomienda") final String idEstadoEncomienda){
-		return repo.getEstadoEncomienda(idEstadoEncomienda);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getEstadoEncomienda(idEstadoEncomienda, tenant);
 	}
 	
 	@POST
 	@Path("/altareglacobro/")
 	public void AltaReglaCobro(DataReglaCobroEncomienda dataRegla){
-		repo.AltaReglaCobro(dataRegla);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.AltaReglaCobro(dataRegla, tenant);
 	}
 	
 	@POST
 	@Path("/editarencomienda/")
 	public void editarEncomienda(DataEncomienda encomienda){
-		repo.editarEncomienda(encomienda);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.editarEncomienda(encomienda, tenant);
 	}
 	
 	@DELETE
 	@Path("/borrarencomienda/{idEncomienda}")
 	public void borrarEncomienda(@PathParam("idEncomienda") final String idEncomienda){
-		repo.borrarEstadoEncomienda(idEncomienda);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.borrarEstadoEncomienda(idEncomienda, tenant);
 	}
 	
 	@GET
 	@Path("/getencomiendasporvehiculo/{idVehiculo}")
 	public List<DataEncomienda> getEncomiendasPorVehiculo(@PathParam("idVehiculo") final String idVehiculo){
-		return repo.getEncomiendasPorVehiculo(idVehiculo);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getEncomiendasPorVehiculo(idVehiculo, tenant);
 	}
 	
 	@POST
 	@Path("/buscarencomienda/{pagina:[0-9][0-9]*}/{elementosPagina:[0-9][0-9]*}")
 	public List<DataEncomiendaConvertor> buscarEncomienda(DataEncomienda filtro, @PathParam("pagina") final Integer pagina,@PathParam("elementosPagina") final Integer ElementosPagina){
 		List<DataEncomiendaConvertor> result = new ArrayList<DataEncomiendaConvertor>();
-		repo.buscarEncomienda(filtro, pagina, ElementosPagina).forEach((encomienda)->{
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.buscarEncomienda(filtro, pagina, ElementosPagina, tenant).forEach((encomienda)->{
 			result.add(encomienda.genConvertor());
 		});
 		return result;
@@ -131,67 +145,78 @@ public class EncomiendaApi {
 	@GET
 	@Path("/getestados/{pagina:[0-9][0-9]*}/{elementosPagina:[0-9][0-9]*}")
 	public List<DataEstadosEncomienda> getEstados(@PathParam("pagina") final Integer pagina,@PathParam("elementosPagina") final Integer ElementosPagina){
-		return repo.getEstados(pagina, ElementosPagina); 
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getEstados(pagina, ElementosPagina, tenant); 
 	}
 	
 	
 	@GET
 	@Path("/getencomienda/{idEncomienda}")
 	public DataEncomienda getEncomienda(@PathParam("idEncomienda") final String idEncomienda){
-		return repo.getEncomienda(idEncomienda);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getEncomienda(idEncomienda, tenant);
 	}
 	
 	@GET
 	@Path("/getreglacobro/{idRegla}")
 	public DataReglaCobroEncomienda getReglaCobro(@PathParam("idRegla") final String idEncomieda){
-		return repo.getReglaDeCobro(idEncomieda);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getReglaDeCobro(idEncomieda, tenant);
 	}
 	
 	@GET
 	@Path("/getencomiendas/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
 	public List<DataEncomiendaConvertor> getEncomiendas(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
-		return repo.ListarEncomiendas(pagina, elementosPagina);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.ListarEncomiendas(pagina, elementosPagina, tenant);
 	}
 	
 	@GET
 	@Path("/getreglascobro/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
 	public List<DataReglaCobroEncomienda> getReglasCobro(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
-		return repo.getReglasDeCobro(pagina, elementosPagina);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getReglasDeCobro(pagina, elementosPagina, tenant);
 	}
 	
 	@GET
 	@Path("/gethistorialestados/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}/{idEncomienda}")
 	public List<DataHistorialEstadosEncomienda> getHistorialEstadosEncomienda(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina, @PathParam("idEncomienda") final String idEncomienda){
-		return repo.getHistorialEstado(idEncomienda);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getHistorialEstado(idEncomienda, tenant);
 	}
 	
 	@GET
 	@Path("/getultimoestado/{idEncomienda}")
 	public DataEstadosEncomienda getUltimoEstado(@PathParam("idEncomienda")final String idEncomienda){
-		return repo.getUltimoEstado(idEncomienda);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getUltimoEstado(idEncomienda, tenant);
 	}
 	
 	@GET
 	@Path("/listarestadosencomienda/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
 	public List<DataEstadosEncomienda> listarEstadoEncomienda(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
-		return repo.listarEstadoEncomienda(pagina, elementosPagina);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.listarEstadoEncomienda(pagina, elementosPagina, tenant);
 	}
 	@GET
 	@Path("/listarencomiendasusuario/{idUsuario}/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
 	public List<DataEncomienda> listarEncomiendasPorUsuario(@PathParam("idUsuario") final String idUsuario, @PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
-		return repo.listarEncomiendasPorUsuario(idUsuario, pagina, elementosPagina);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.listarEncomiendasPorUsuario(idUsuario, pagina, elementosPagina, tenant);
 	}
 	
 	@GET
 	@Path("/getencomiendaxcodigo/{codigoEnc}")
 	public DataEncomienda getEncomiendaXcodigo(@PathParam("codigoEnc") final Integer codigoEncomienda){
-		return repo.getEncomiendaXcodigo(codigoEncomienda);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getEncomiendaXcodigo(codigoEncomienda, tenant);
 	}
 	
 	@GET
 	@Path("/getpreciodeencomienda/{codigoReglaCobro}/{monto}")
 	public Float getPrecioDeEncomienda(@PathParam("codigoReglaCobro") final String codigoReglaCobro, @PathParam("monto") final Float monto){
-		return repo.getPrecioDeEncomienda(codigoReglaCobro, monto);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getPrecioDeEncomienda(codigoReglaCobro, monto, tenant);
 	}
 
 }

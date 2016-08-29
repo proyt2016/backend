@@ -12,46 +12,43 @@ import lcbs.shares.*;
 
 import javax.ejb.Stateless;
 
-
-
-
 /**
  * Session Bean implementation class VehiculoCtrl
  */
 @Stateless
-public class VehiculoCtrl implements IVehiculo{
-	@EJB(lookup="java:app/lcbsdb/VehiculoSrv!lcbs.interfaces.VehiculoLocalApi")
+public class VehiculoCtrl implements IVehiculo {
+	@EJB(lookup = "java:app/lcbsdb/VehiculoSrv!lcbs.interfaces.VehiculoLocalApi")
 	VehiculoLocalApi srvVehiculo;
 
 	@Override
-	public DataVehiculo altaVehiculo(DataVehiculo vehiculo) {
-		return srvVehiculo.crearVehiculo(vehiculo);
+	public DataVehiculo altaVehiculo(DataVehiculo vehiculo, DataTenant tenant) {
+		return srvVehiculo.crearVehiculo(vehiculo, tenant);
 	}
 
 	@Override
-	public void editarVehiculo(DataVehiculo vehiculo) {
-		srvVehiculo.modificarVehiculo(vehiculo);
+	public void editarVehiculo(DataVehiculo vehiculo, DataTenant tenant) {
+		srvVehiculo.modificarVehiculo(vehiculo, tenant);
 	}
 
 	@Override
-	public void bajaVehiculo(String idVehiculo) {
-		srvVehiculo.darBajaVehiculo(idVehiculo);
+	public void bajaVehiculo(String idVehiculo, DataTenant tenant) {
+		srvVehiculo.darBajaVehiculo(idVehiculo, tenant);
 	}
 
 	@Override
-	public List<DataMantenimientoVehiculo> mantenimientosPorVehiculo(String idVehiculo) {
-		DataVehiculo vehiculo = srvVehiculo.getVehiculo(idVehiculo);
+	public List<DataMantenimientoVehiculo> mantenimientosPorVehiculo(String idVehiculo, DataTenant tenant) {
+		DataVehiculo vehiculo = srvVehiculo.getVehiculo(idVehiculo, tenant);
 		return vehiculo.getMantenimientos();
 	}
-	
+
 	@Override
-	public DataVehiculo obtenerVehiculo(String idVehiculo){
-		return srvVehiculo.getVehiculo(idVehiculo);
+	public DataVehiculo obtenerVehiculo(String idVehiculo, DataTenant tenant) {
+		return srvVehiculo.getVehiculo(idVehiculo, tenant);
 	}
 
 	@Override
-	public List<DataVehiculo> listarVehiculos(Integer pagina, Integer elementosPagina) {
-		return srvVehiculo.obtenerVehiculos(pagina, elementosPagina);
+	public List<DataVehiculo> listarVehiculos(Integer pagina, Integer elementosPagina, DataTenant tenant) {
+		return srvVehiculo.obtenerVehiculos(pagina, elementosPagina, tenant);
 	}
-	
+
 }

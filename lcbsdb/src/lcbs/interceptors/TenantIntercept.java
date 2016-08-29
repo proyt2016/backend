@@ -1,4 +1,4 @@
-package lcbs.beans;
+package lcbs.interceptors;
 
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;

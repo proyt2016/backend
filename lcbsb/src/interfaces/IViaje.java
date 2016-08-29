@@ -6,43 +6,43 @@ import java.util.Map;
 import lcbs.shares.*;
 public interface IViaje {
 	
-	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina);
-	public DataPasaje ComprarPasaje(DataPasaje pasaje);
-	public void CambiarHorarioPasaje(String idPasaje, String viaje);
-	public DataReserva ReservarPasaje(DataReserva reserva);
-	public List<DataTerminal> getTerminales(Integer pagina, Integer elementos);
-	public List<DataViaje> viajesPorTerminal(String idterminal, Integer pagina, Integer ElementosPagina);
-	public List<DataPasajeConvertor> getPasajes(Integer pagina, Integer ElementosPagina);
-	public DataPasaje getPasajeXCodigo(Integer codigoPasaje);
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina, DataTenant tenant);
+	public DataPasaje ComprarPasaje(DataPasaje pasaje, DataTenant tenant);
+	public void CambiarHorarioPasaje(String idPasaje, String viaje, DataTenant tenant);
+	public DataReserva ReservarPasaje(DataReserva reserva, DataTenant tenant);
+	public List<DataTerminal> getTerminales(Integer pagina, Integer elementos, DataTenant tenant);
+	public List<DataViaje> viajesPorTerminal(String idterminal, Integer pagina, Integer ElementosPagina, DataTenant tenant);
+	public List<DataPasajeConvertor> getPasajes(Integer pagina, Integer ElementosPagina, DataTenant tenant);
+	public DataPasaje getPasajeXCodigo(Integer codigoPasaje, DataTenant tenant);
 	
-	public void TransferirPasajeComprado(String idPasaje, String idUsuario);//idUsuario a Transferir
-	public void CancelarReserva(String idReserva);
-	public List<DataReserva> ListarReservas(String idUsuario);
-	public void ProcesarPasajes(String idPasaje);
-	public DataParada AltaParadas(DataParada parada);
-	public DataTerminal AltaTerminal(DataTerminal terminal);
-	public void EditarParada(DataParada parada);
-	public void EditarTerminal(DataTerminal terminal);
-	public DataRecorrido CrearRecorrido(DataRecorrido recorrido);
-	public void EditarRecorrido(DataRecorrido recorrido);
-	public List<DataRecorrido> listarRecorridos(Integer pagina, Integer elementosPagina);
-	public DataPasaje ComprarPasajeReservado(DataReserva reserva);
-	public DataParada obtenerParada(String IdParada);
-	public List<DataPasajeConvertor> obtenerHistorialPasajes(String idUsuario, Integer pagina, Integer elementosPagina);
-	public DataPasaje verDetallePasaje(String idPasaje);
-	public DataTerminal obtenerTerminal(String IdTerminal);
+	public void TransferirPasajeComprado(String idPasaje, String idUsuario, DataTenant tenant);//idUsuario a Transferir
+	public void CancelarReserva(String idReserva, DataTenant tenant);
+	public List<DataReserva> ListarReservas(String idUsuario, DataTenant tenant);
+	public void ProcesarPasajes(String idPasaje, DataTenant tenant);
+	public DataParada AltaParadas(DataParada parada, DataTenant tenant);
+	public DataTerminal AltaTerminal(DataTerminal terminal, DataTenant tenant);
+	public void EditarParada(DataParada parada, DataTenant tenant);
+	public void EditarTerminal(DataTerminal terminal, DataTenant tenant);
+	public DataRecorrido CrearRecorrido(DataRecorrido recorrido, DataTenant tenant);
+	public void EditarRecorrido(DataRecorrido recorrido, DataTenant tenant);
+	public List<DataRecorrido> listarRecorridos(Integer pagina, Integer elementosPagina, DataTenant tenant);
+	public DataPasaje ComprarPasajeReservado(DataReserva reserva, DataTenant tenant);
+	public DataParada obtenerParada(String IdParada, DataTenant tenant);
+	public List<DataPasajeConvertor> obtenerHistorialPasajes(String idUsuario, Integer pagina, Integer elementosPagina, DataTenant tenant);
+	public DataPasaje verDetallePasaje(String idPasaje, DataTenant tenant);
+	public DataTerminal obtenerTerminal(String IdTerminal, DataTenant tenant);
 
-	public DataViaje crearViaje(DataViaje viaje);
-	public void editarViaje(DataViaje viaje);
-	public void eliminarViaje(String idViaje);
-	public DataRecorrido obtenerRecorrido(String idRecorrido);
-	public void BajaRecorrido(String idRecorrido);
-	public List<DataParada> getParadas(Integer pagina, Integer elementosPagina);
-	public DataPuntoRecorrido obtenerPuntoRecorrido(String idPunto);
-	public DataPuntoRecorrido obtenerPuntoPorCoordenada(String coord);
-	public DataViaje getViaje(String idViaje);
-	public List<DataViaje> getViajes(Integer pagina, Integer elementos);
-	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina);
-	public DataReserva obtenerReserva(String idReserva);
+	public DataViaje crearViaje(DataViaje viaje, DataTenant tenant);
+	public void editarViaje(DataViaje viaje, DataTenant tenant);
+	public void eliminarViaje(String idViaje, DataTenant tenant);
+	public DataRecorrido obtenerRecorrido(String idRecorrido, DataTenant tenant);
+	public void BajaRecorrido(String idRecorrido, DataTenant tenant);
+	public List<DataParada> getParadas(Integer pagina, Integer elementosPagina, DataTenant tenant);
+	public DataPuntoRecorrido obtenerPuntoRecorrido(String idPunto, DataTenant tenant);
+	public DataPuntoRecorrido obtenerPuntoPorCoordenada(String coord, DataTenant tenant);
+	public DataViaje getViaje(String idViaje, DataTenant tenant);
+	public List<DataViaje> getViajes(Integer pagina, Integer elementos, DataTenant tenant);
+	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina, DataTenant tenant);
+	public DataReserva obtenerReserva(String idReserva, DataTenant tenant);
 	
 }

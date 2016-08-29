@@ -121,7 +121,7 @@ public class ViajeApi {
 		return repo.obtenerReserva(idReserva);
 	}
 	
-	@POST
+	@POST	
 	@Path("/procesarpasaje/{idPasaje}")
 	public void ProcesarPasajes(@PathParam("idPasaje") final String idPasaje){
 		repo.ProcesarPasajes(idPasaje);

@@ -12,6 +12,7 @@
 
         var initialize = function(){
             var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null
+            var idRec = $routeParams && $routeParams['idRec'] ? $routeParams['idRec'] : null
             if(id){
                 recorridosService.getId(id).then(function (data) {
                     $scope.recorrido = data;

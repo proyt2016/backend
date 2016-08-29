@@ -14,28 +14,28 @@
     </div>
     <div class="x_content">
       <br>
-      <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" ng-submit="editHorarios()">
+      <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" ng-submit="edit()">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <a class="btn btn-default" style="margin:0;" ng-click="addRelation('precios')"><i class="fa fa-plus"></i></a>
+            <a class="btn btn-default" style="margin:0;" ng-click="addRelation()"><i class="fa fa-plus"></i></a>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="prec in precios" style="margin-top:10px;">
           <div class="form-group">
               <label>Origen</label>
               <select class="form-control select2" style="width: 100%;" ng-model="prec.origen" required>
-                <option ng-repeat="iter in terminales" value="{{ $index }}">{{iter.nombre}}</option>
+                <option ng-repeat="iter in terminales" value="{{ $index }}" ng-selected="prec.origen == $index">{{iter.nombre}}</option>
               </select>
           </div>
           <div class="form-group">
               <label>Destino</label>
               <select class="form-control select2" style="width: 100%;" ng-model="prec.destino" required>
-                <option ng-repeat="iter in terminales" value="{{ $index }}">{{iter.nombre}}</option>
+                <option ng-repeat="iter in terminales" value="{{ $index }}" ng-selected="prec.destino == $index">{{iter.nombre}}</option>
               </select>
           </div>
           <div class="form-group">
               <label>Precio</label>
               <input type="text" step="0,01" class="form-control" ng-model="prec.monto">
           </div>
-          <a class="btn btn-default" style="margin:0;" ng-click="removeRelation('precios', $index)"><i class="fa fa-remove"></i></a>
+          <a class="btn btn-default" style="margin:0;" ng-click="removeRelation($index)"><i class="fa fa-remove"></i></a>
         </div>
         
         <div class="ln_solid"></div>

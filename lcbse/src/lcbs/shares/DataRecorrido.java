@@ -53,7 +53,13 @@ public class DataRecorrido{
         	result.setPuntosDeRecorrido(puntos);
     	}
     	result.setHorarios(this.getHorarios());
-    	result.setPrecios(this.getPrecios());
+    	if(this.getPrecios() != null){
+    		List<DataPrecioConvertor> aux = new ArrayList<DataPrecioConvertor>();
+    		this.getPrecios().stream().forEach((pr) -> {
+        		aux.add(pr.genConvertor());
+            });
+    		result.setPrecios(aux);
+    	}
     	result.setEliminado(this.getEliminado());
     	result.setTipoHorario(this.genTipoHorario());
     	return result;

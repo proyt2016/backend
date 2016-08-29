@@ -12,7 +12,7 @@ public class DataRecorridoConvertor{
     private List<DataGrupoHorario> horarios;
     private String idOrigen;
     private String idDestino;
-    private List<DataPrecio> precios;
+    private List<DataPrecioConvertor> precios;
     private Boolean eliminado;
     private String tipoHorario;
     	
@@ -20,7 +20,7 @@ public class DataRecorridoConvertor{
 
     public DataRecorridoConvertor() {}
     
-    public DataRecorridoConvertor(String id, String nom, List<DataPuntoRecorridoConverter> punRec, List<DataGrupoHorario> hor, List<DataPrecio> prec, Boolean elim, String tip) {
+    public DataRecorridoConvertor(String id, String nom, List<DataPuntoRecorridoConverter> punRec, List<DataGrupoHorario> hor, List<DataPrecioConvertor> prec, Boolean elim, String tip) {
         this.id = id;
         this.nombre = nom;
         this.puntosDeRecorrido = punRec;
@@ -36,7 +36,13 @@ public class DataRecorridoConvertor{
     	result.setHorarios(this.getHorarios());
     	result.setId(this.getId());
     	result.setNombre(this.getNombre());
-    	result.setPrecios(this.getPrecios());
+    	if(this.getPrecios() != null){
+    		List<DataPrecio> aux = new ArrayList<DataPrecio>();
+    		this.getPrecios().stream().forEach((pr) -> {
+        		aux.add(pr.genPrecio());
+            });
+    		result.setPrecios(aux);
+    	}
     	List<DataPuntoRecorrido> puntos = new ArrayList<DataPuntoRecorrido>();
     	if(this.getPuntosDeRecorrido() != null){
     		this.getPuntosDeRecorrido().stream().forEach((pr) -> {
@@ -83,11 +89,11 @@ public class DataRecorridoConvertor{
         return this.horarios;
     }
 
-    public void setPrecios(List<DataPrecio> val){
+    public void setPrecios(List<DataPrecioConvertor> val){
         this.precios = val;
     }
     
-    public List<DataPrecio> getPrecios(){
+    public List<DataPrecioConvertor> getPrecios(){
         return this.precios;
     }
 

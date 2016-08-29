@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
 
     angular.module('lacbus', ['ngRoute']);
 
@@ -110,8 +110,8 @@
 		    controller  : 'recorridosCtrl'
 		}).when("/recorridos/precios/:id", {
 		    templateUrl : "app/views/recorridos/precios.html",
-		    controller  : 'recorridosCtrl'
-		}).when("/recorridos/oraios/:id", {
+		    controller  : 'preciorecorridoCtrl'
+		}).when("/recorridos/horaios/:id", {
 		    templateUrl : "app/views/recorridos/horarios.html",
 		    controller  : 'recorridosCtrl'
 		});

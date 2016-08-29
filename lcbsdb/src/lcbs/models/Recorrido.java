@@ -41,7 +41,7 @@ public class Recorrido implements Serializable{
     @OneToMany(fetch=FetchType.LAZY)
     @IndexColumn(name="LIST_INDEX")
     private List<GrupoHorario> horarios;
-    @OneToMany(fetch=FetchType.LAZY)
+    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     @IndexColumn(name="LIST_INDEX")
     private List<Precio> precios;
     private Boolean eliminado;

@@ -74,11 +74,11 @@
         };
 
         return {
-            getAll  : getAll,
-            getId   : getId,
-            add     : add,
-            borrar  : borrar,
-            edit    : edit
+            getAll        : getAll,
+            getId         : getId,
+            add           : add,
+            borrar        : borrar,
+            edit          : edit
         }
 
     }

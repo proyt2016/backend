@@ -1,5 +1,8 @@
 package lcbs.shares;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DataPrecio{
     
 	private String id;
@@ -15,6 +18,17 @@ public class DataPrecio{
         this.origen = orig;
         this.destino = dest;
         this.monto = monto;
+    }
+    
+    public DataPrecioConvertor genConvertor(){
+    	DataPrecioConvertor result = new DataPrecioConvertor();
+    	result.setId(this.getId());
+    	if(this.getOrigen() != null)
+    		result.setOrigen(this.getOrigen().genConverter());
+    	if(this.getDestino() != null)
+    		result.setDestino(this.getDestino().genConverter());
+    	result.setMonto(this.getMonto());
+    	return result;
     }
     
     public void setId(String val){

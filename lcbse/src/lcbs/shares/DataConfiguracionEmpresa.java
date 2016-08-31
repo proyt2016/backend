@@ -18,12 +18,13 @@ public class DataConfiguracionEmpresa{
     private Boolean reservaPasajes;
     private Integer validesReservasHoras;
     private Boolean trasferirPasajes;
+    private String css;
 
     public DataConfiguracionEmpresa() {
        
     }
     
-    public DataConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<DataTelefono> tels, List<DataEmail> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs) {
+    public DataConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<DataTelefono> tels, List<DataEmail> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css) {
         this.id = id;
         this.nombre = nom;
         this.aceptaCuponera = acCup;
@@ -38,6 +39,7 @@ public class DataConfiguracionEmpresa{
         this.reservaPasajes = resePas;
         this.validesReservasHoras = valResHrs;
         this.trasferirPasajes = trasfPsjs;
+        this.css = css;
     }
     
     public void setId(String val){
@@ -150,5 +152,13 @@ public class DataConfiguracionEmpresa{
     
     public Boolean getTrasferirPasajes(){
         return this.trasferirPasajes;
+    }
+    
+    public void setCss(String val){
+        this.css = val;
+    }
+    
+    public String getCss(){
+        return this.css;
     }
 }

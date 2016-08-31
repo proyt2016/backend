@@ -67,9 +67,6 @@
 
 		// ruta de configuracion
 		$routeProvider.when("/configuracion", {
-		    templateUrl : "app/views/configuracion/details.html",
-		    controller  : 'configuracionCtrl'
-		}).when("/configuracion/edit", {
 		    templateUrl : "app/views/configuracion/edit.html",
 		    controller  : 'configuracionCtrl'
 		});

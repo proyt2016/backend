@@ -4,11 +4,9 @@
 
     function configuracionCtrl($scope, $routeParams, configuracionService) {
         $scope.configuracion     = null;
-        $scope.showAlert    = false;
+        $scope.saving    = false;
         $scope.emailsEmpresa = [];
         $scope.telsEmpresa = [];
-
-        console.log($routeParams);
 
         configuracionService.getConfiguracion().then(function (data) {
             $scope.configuracion = data;
@@ -22,20 +20,20 @@
             configuracion.telefonos = $scope.telsEmpresa;
             configuracionService.updateConfig(configuracion).then(
                 function (data) {
-                    window.history.back();
+                	$scope.saving = false;
                 }, function() {
-                    //$scope.saving = false;
+                    $scope.saving = false;
                 }
             );
         }
 
         $scope.addRelation = function (type) {
             if(type == 'email'){
-                var nuevoEmail = {'descripcion':'','email':''};
+                var nuevoEmail = { 'descripcion' : '', 'email' : '' };
                 $scope.emailsEmpresa.push(nuevoEmail);
             }
             if(type == 'tels'){
-                var nuevoTel = {'descripcion':'','telefono':''};
+                var nuevoTel = { 'descripcion' : '', 'telefono' : '' };
                 $scope.telsEmpresa.push(nuevoTel);
             }
         }

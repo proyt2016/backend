@@ -47,12 +47,13 @@ public class ConfiguracionEmpresa implements Serializable{
     private Boolean reservaPasajes;
     private Integer validesReservasHoras;
     private Boolean trasferirPasajes;
+    private String css;
 
     public ConfiguracionEmpresa() {
        
     }
     
-    public ConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<Telefono> tels, List<Email> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs) {
+    public ConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<Telefono> tels, List<Email> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css) {
         this.id = id;
         this.nombre = nom;
         this.aceptaCuponera = acCup;
@@ -67,6 +68,7 @@ public class ConfiguracionEmpresa implements Serializable{
         this.reservaPasajes = resePas;
         this.validesReservasHoras = valResHrs;
         this.trasferirPasajes = trasfPsjs;
+        this.css = css;
     }
     
     public ConfiguracionEmpresa(DataConfiguracionEmpresa dt){
@@ -96,7 +98,8 @@ public class ConfiguracionEmpresa implements Serializable{
         this.setPagoOnlineCoche(dt.getPagoOnlineCoche());
         this.setReservaPasajes(dt.getReservaPasajes());
         this.setValidesReservasHoras(dt.getValidesReservasHoras());
-        this.setTrasferirPasajes(dt.getTrasferirPasajes());    	
+        this.setTrasferirPasajes(dt.getTrasferirPasajes());
+        this.setCss(dt.getCss());
     }
     
     public DataConfiguracionEmpresa getDatatype(){
@@ -127,6 +130,7 @@ public class ConfiguracionEmpresa implements Serializable{
     	result.setReservaPasajes(this.getReservaPasajes());
     	result.setValidesReservasHoras(this.getValidesReservasHoras());
     	result.setTrasferirPasajes(this.getTrasferirPasajes());
+    	result.setCss(this.getCss());
     	return result;
     }
     
@@ -240,5 +244,13 @@ public class ConfiguracionEmpresa implements Serializable{
     
     public Boolean getTrasferirPasajes(){
         return this.trasferirPasajes;
+    }
+    
+    public void setCss(String val){
+        this.css = val;
+    }
+    
+    public String getCss(){
+        return this.css;
     }
 }

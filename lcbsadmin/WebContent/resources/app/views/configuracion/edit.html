@@ -18,44 +18,6 @@
             <input type="text" id="nombreEmpresa" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="configuracion.nombre"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
           </div>
         </div>
-        <div class="col-md-12 col-sm-12 col-xs-12">
-        	<div class="ln_solid"></div>
-            <div class="form-group">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <h4> Email <a class="btn btn-default btn-xs" ng-click="addRelation('email')"><i class="fa fa-plus"></i></a></h4>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="mail in emailsEmpresa"  style="margin-top:10px;">
-                    <div class="form-group">
-                        <label>Descripcion</label>
-                        <input type="text" class="form-control" ng-model="mail.descripcion">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" class="form-control" ng-model="mail.email">
-                    </div>
-                    <a class="btn btn-default" style="margin:0;" ng-click="removeRelation('email', $index)"><i class="fa fa-remove"></i></a>
-                </div>
-            </div>
-            <div class="ln_solid"></div>
-            <div class="form-group">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <h4> Tel&eacute;fonos <a class="btn btn-default btn-xs" ng-click="addRelation('tels')"><i class="fa fa-plus"></i></a></h4>
-                </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="tels in telsEmpresa" style="margin-top:10px;">
-                    <div class="form-group">
-                        <label>Descripcion</label>
-                        <input type="text" class="form-control" ng-model="tels.descripcion">
-                    </div>
-                    <div class="form-group">
-                        <label>Tel&eacute;fono</label>
-                        <input type="text" class="form-control" ng-model="tels.telefono">
-                    </div>
-                    <a class="btn btn-default" style="margin:0;" ng-click="removeRelation('tels', $index)"><i class="fa fa-remove"></i></a>
-                </div>
-            </div>
-            <div class="ln_solid"></div>
-        </div>
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="urlAcceso">URL de acceso web</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
@@ -63,9 +25,12 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="aceptaCuponera">Acepta cuponera</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="checkbox" id="aceptaCuponera" class="flat" ng-model="configuracion.aceptaCuponera" ng-checked="configuracion.aceptaCuponera">             
+          <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="configuracion.aceptaCuponera"> Acepta cuponera
+              </label>
+            </div>
           </div>
         </div>
         <div class="form-group">
@@ -88,21 +53,30 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="activarAcceso">Activar/desactivar acceso</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="checkbox" id="activarAcceso" ng-model="configuracion.activo" class="flat" ng-checked="configuracion.activo">
+          <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="configuracion.activo"> Activar/desactivar acceso
+              </label>
+            </div>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pagoOnlineCoche">Aceptar pago online en coche</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="checkbox" id="pagoOnlineCoche" ng-model="configuracion.pagoOnlineCoche" class="flat" ng-checked="configuracion.pagoOnlineCoche">
+          <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="configuracion.pagoOnlineCoche"> Aceptar pago online en coche
+              </label>
+            </div>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="reservaPasajes">Habilitar reserva de pasajes</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="checkbox" id="reservaPasajes" ng-model="configuracion.reservaPasajes" class="flat" ng-checked="configuracion.reservaPasajes">
+          <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="configuracion.reservaPasajes"> Habilitar reserva de pasajes
+              </label>
+            </div>
           </div>
         </div>
         <div class="form-group">
@@ -112,11 +86,96 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="trasferirPasajes">Habilitar transferencia de pasajes</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="checkbox" id="trasferirPasajes" ng-model="configuracion.trasferirPasajes" class="flat" ng-checked="configuracion.trasferirPasajes">
+          <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="configuracion.trasferirPasajes"> Habilitar transferencia de pasajes
+              </label>
+            </div>
           </div>
         </div>
+    	<div class="ln_solid"></div>
+    	<div class="x_title">
+	         <h4> Email <a class="btn btn-default btn-xs" ng-click="addRelation('email')"><i class="fa fa-plus"></i></a></h4>
+	         <div class="clearfix"></div>
+     	</div>
+        <div class="form-group">
+            <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="mail in emailsEmpresa"  style="margin-top:10px;">
+                <div class="form-group">
+                    <label>Descripcion</label>
+                    <input type="text" class="form-control" ng-model="mail.descripcion">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" ng-model="mail.email">
+                </div>
+                <a class="btn btn-default" style="margin:0;" ng-click="removeRelation('email', $index)"><i class="fa fa-remove"></i></a>
+            </div>
+        </div>
+        <div class="ln_solid"></div>
+        <div class="x_title">
+	         <h4> Tel&eacute;fonos <a class="btn btn-default btn-xs" ng-click="addRelation('tels')"><i class="fa fa-plus"></i></a></h4>
+	         <div class="clearfix"></div>
+     	</div>
+        <div class="form-group">
+            <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="tels in telsEmpresa" style="margin-top:10px;">
+                <div class="form-group">
+                    <label>Descripcion</label>
+                    <input type="text" class="form-control" ng-model="tels.descripcion">
+                </div>
+                <div class="form-group">
+                    <label>Tel&eacute;fono</label>
+                    <input type="text" class="form-control" ng-model="tels.telefono">
+                </div>
+                <a class="btn btn-default" style="margin:0;" ng-click="removeRelation('tels', $index)"><i class="fa fa-remove"></i></a>
+            </div>
+        </div>
+        <div class="ln_solid"></div>
+        <div class="x_title">
+            <h2>Editar UI</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <ul class="list-unstyled clearfix">
+                <li style="float:left; width: 20%; padding: 5px;">
+                    <a href="javascript:void(0);" data-skin="skin-blue" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover" ng-click="selectTemplate($event)">
+                        <div><span class="bg-light-blue" style="display:block; width: 100%; float: left; height: 10px;"></span></div><div><span style="display:block; width: 100%; float: left; height: 30px; background: #f4f5f7;"></span></div>
+                    </a>
+                    <p class="text-center no-margin">Blue</p>
+                </li>
+                <li style="float:left; width: 20%; padding: 5px;">
+                    <a href="javascript:void(0);" data-skin="skin-purple" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover" ng-click="selectTemplate($event)">
+                        <div><span class="bg-purple" style="display:block; width: 100%; float: left; height: 10px;"></span></div><div><span style="display:block; width: 100%; float: left; height: 30px; background: #f4f5f7;"></span></div>
+                    </a>
+                    <p class="text-center no-margin">Purple</p>
+                </li>
+                <li style="float:left; width: 20%; padding: 5px;">
+                    <a href="javascript:void(0);" data-skin="skin-green" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover" ng-click="selectTemplate($event)">
+                        <div><span class="bg-green" style="display:block; width: 100%; float: left; height: 10px;"></span></div><div><span style="display:block; width: 100%; float: left; height: 30px; background: #f4f5f7;"></span></div>
+                    </a>
+                    <p class="text-center no-margin">Green</p>
+                </li>
+                <li style="float:left; width: 20%; padding: 5px;">
+                    <a href="javascript:void(0);" data-skin="skin-red" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover" ng-click="selectTemplate($event)">
+                        <div><span class="bg-red" style="display:block; width: 100%; float: left; height: 10px;"></span></div><div><span style="display:block; width: 100%; float: left; height: 30px; background: #f4f5f7;"></span></div>
+                    </a>
+                    <p class="text-center no-margin">Red</p>
+                </li>
+                <li style="float:left; width: 20%; padding: 5px;">
+                    <a href="javascript:void(0);" data-skin="skin-yellow" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover" ng-click="selectTemplate($event)">
+                        <div><span class="bg-yellow" style="display:block; width: 100%; float: left; height: 10px;"></span></div><div><span style="display:block; width: 100%; float: left; height: 30px; background: #f4f5f7;"></span></div>
+                    </a>
+                    <p class="text-center no-margin">Yellow</p>
+                </li>
+            </ul>
+        </div>
+        <div class="form-group">
+            <label> Estilos </label>
+            <textarea rows="20" class="form-control col-md-7 col-xs-12" ng-model="configuracion.css">
+                {{configuracion.css}}
+            </textarea>
+        </div>
+        <div class="ln_solid"></div>
         <div class="ln_solid"></div>
         <div class="form-group">
           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

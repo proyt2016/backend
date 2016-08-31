@@ -96,30 +96,17 @@
         }
 
         var initMap = function () {
-
-            //usamos la API para geolocalizar el usuario
-            /*navigator.geolocation.getCurrentPosition(
-              function (position){
-                var coords =  {
-                  lng: position.coords.longitude,
-                  lat: position.coords.latitude
-                };
-                setMapa(coords);  //pasamos las coordenadas al metodo para crear el mapa
-                
-               
-              },function(error){console.log(error);});*/
-        	  setMapa(new google.maps.LatLng(parseFloat("-34.8940096615171"),parseFloat("-56.16642236709595")));
-            
+        	if(document.getElementById('map')){
+        		setMapa(new google.maps.LatLng(parseFloat("-34.8940096615171"),parseFloat("-56.16642236709595")));
+        	}
         }
-
 
         var setMapa = function (coords) {
           //Se crea una nueva instancia del objeto mapa
           var map = new google.maps.Map(document.getElementById('map'),
           {
             zoom: 13,
-            center:coords,
-
+            center:coords
           });
 
           for(var i in $scope.puntosrecorridoLst){
@@ -181,11 +168,9 @@
                 $scope.puntosDelRecorrido.push(data);
             });
           })
-
         }
 
         initialize();
-
     }
 
 })();

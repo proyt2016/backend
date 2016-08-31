@@ -1,15 +1,7 @@
 <style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
   #map {
-    width: 800px;
     height: 400px;
   }
-  #coords{width: 500px;}
-  #coordsOrig{width: 500px;}
 </style>
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="page-title">
@@ -25,7 +17,7 @@
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
-      <div id="map"></div>
+      <div id="map" class="col-md-12"></div>
       <br>
       <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" ng-submit="addEdit()">
         <div ng-show="false" class="form-group">
@@ -58,18 +50,18 @@
           </div>
         </div>
         <div ng-show="tipodepunto == 'Terminal'" class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="encomiendas">Acepta encomiendas <span class="required">*</span>
-          </label>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" id="encomiendas" data-parsley-id="0978" ng-model="puntosrecorrido.aceptaEncomiendas" class="flat" checked="checked">
-            </label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="encomiendas">Acepta encomiendas</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="checkbox" id="encomiendas" ng-model="puntosrecorrido.aceptaEncomiendas" class="flat" checked="checked">
           </div>
         </div>
+        
+        
+        
+        
         <div ng-show="tipodepunto == 'Terminal'" class="form-group">
           <div class="col-md-12 col-sm-12 col-xs-12">
-              <h4> Emails </h4>
-              <a class="btn btn-default" style="margin:0;" ng-click="addRelation('email')"><i class="fa fa-plus"></i></a>
+              <h4> Emails <a class="btn btn-default btn-xs" ng-click="addRelation('email')"><i class="fa fa-plus"></i></a></h4>
           </div>
           <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="mail in emailsTerminal" style="margin-top:10px;">
               <div class="form-group">
@@ -85,8 +77,7 @@
       </div>
       <div ng-show="tipodepunto == 'Terminal'" class="form-group">
           <div class="col-md-12 col-sm-12 col-xs-12">
-              <h4> Tel&eacute;fonos </h4>
-              <a class="btn btn-default" style="margin:0;" ng-click="addRelation('tels')"><i class="fa fa-plus"></i></a>
+              <h4> Tel&eacute;fonos <a class="btn btn-default btn-xs" ng-click="addRelation('tels')"><i class="fa fa-plus"></i></a></h4>
           </div>
           <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="tels in telsTerminal" style="margin-top:10px;">
               <div class="form-group">
@@ -103,7 +94,6 @@
         <div class="ln_solid"></div>
         <div class="form-group">
           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-            <a href="#/puntosrecorrido" class="btn btn-primary">Cancelar</a>
             <button class="btn btn-success" ng-disabled="saving">Guardar</button>
           </div>
         </div>

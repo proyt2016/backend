@@ -4,7 +4,7 @@
         aceptaCuponera boolean,
         activo boolean,
         claveLdap varchar(255),
-        css varchar(255),
+        css Text,
         nombre varchar(255),
         pagoOnlineCoche boolean,
         reservaPasajes boolean,

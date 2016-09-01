@@ -6,6 +6,7 @@ import lcbs.shares.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -47,6 +48,7 @@ public class ConfiguracionEmpresa implements Serializable{
     private Boolean reservaPasajes;
     private Integer validesReservasHoras;
     private Boolean trasferirPasajes;
+    @Column(length = 65535,columnDefinition="Text")
     private String css;
 
     public ConfiguracionEmpresa() {

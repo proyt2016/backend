@@ -1,11 +1,11 @@
 ﻿(function () {
 
-    angular.module('lacbus', ['ngRoute', 'ngAnimate', 'toastr', 'ngStorage', 'pusher-angular', 'uiGmapgoogle-maps']);
+    var app = angular.module('lacbus', ['ngRoute', 'ngAnimate', 'toastr', 'ngStorage', 'pusher-angular', 'uiGmapgoogle-maps']);
 
-    angular.module('lacbus').config(['$routeProvider', 'toastrConfig', 'uiGmapGoogleMapApiProvider', configFunction]);
+    app.config(['$routeProvider', 'toastrConfig', 'uiGmapGoogleMapApiProvider', configFunction]);
     
-    angular.module('lacbus').controller('appCtrl', ['$scope', '$location', '$localStorage', '$pusher', 'toastr', appCtrl]);
-
+    app.controller('appCtrl', ['$scope', '$location', '$localStorage', '$pusher', 'toastr', appCtrl]);
+    
     /*@ngInject*/
     function configFunction($routeProvider, toastrConfig, uiGmapGoogleMapApiProvider) {
         uiGmapGoogleMapApiProvider.configure({
@@ -13,7 +13,7 @@
             v: '3.20', //defaults to latest 3.X anyhow
             libraries: 'weather,geometry,visualization'
         });
-
+        
         angular.extend(toastrConfig, {
             positionClass: 'toast-top-center',
             timeOut: 2500
@@ -100,5 +100,18 @@
           }
         );
     }
+    
+    $.ajax({
+    	url			: '/lcbsapi/rest/empresa/getconfirguacionempresa/',
+    	method		: 'GET',
+    	dataType 	: 'json'
+	}).done(function( configuracion ) {
+		$('head').append('<style>' + configuracion.css + '</style>');
+		
+		angular.element(document).ready(function() {
+	    	app.constant('CONFIGURACION', configuracion);
+	        angular.bootstrap(document, ['lacbus']);
+	    });
+	});
 
 })();

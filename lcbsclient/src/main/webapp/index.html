@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-controller="appCtrl">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,7 @@
   <!-- Toast style -->
   <link rel="stylesheet" href="dist/css/angular-toastr.css">
   <style>
-  	.angular-google-map-container { height: 400px; }
+  	.angular-google-map-container { height: 400px; };
   </style>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -33,7 +33,7 @@
   <title>LacBus</title>
 </head>
 
-<body class="hold-transition skin layout-top-nav" ng-app="lacbus">
+<body class="hold-transition skin layout-top-nav">
   <!-- Site wrapper -->
   <div class="wrapper">
 
@@ -47,7 +47,7 @@
             </button>
           </div>
 
-          <div class="collapse navbar-collapse" id="navbar-collapse" ng-controller="appCtrl">
+          <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
               <li><a href="#/">Inicio</a></li>
             </ul>
@@ -139,6 +139,7 @@
   <script src="app/services/pasaje.js"></script>
   <script src="app/services/notificacion.js"></script>
   <script src="app/services/reserva.js"></script>
+  <script src="app/services/configuracion.js"></script>
   
   <!-- controllers -->
   <script src="app/controllers/home.js"></script>

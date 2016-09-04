@@ -52,7 +52,7 @@ public class GrupoHorario implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     @IndexColumn(name="LIST_INDEX")
     private List<Date> diasEspecificos; //Lista de dias especificos en los que funciona este grupo, por ejemplo, semana de turismo
-    @OneToMany(fetch=FetchType.LAZY)
+    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     @IndexColumn(name="LIST_INDEX")
     private List<Horario> horarios;
     
@@ -98,7 +98,7 @@ public class GrupoHorario implements Serializable{
     		aux.add((DataDiasSemana)ds);
         });
     	result.setDiasSemana(aux);*/
-    	result.setDiasEspecificos(this.getDiasEspecificos());
+    	result.setDiasEspecificos(HibernateUtils.initializeAndUnproxy(this.getDiasEspecificos()));
     	if(this.getHorarios()!=null && conHijos){
 	    	List<DataHorario> auxHr = new ArrayList<DataHorario>();
 	    	this.getHorarios().stream().forEach((hr) -> {

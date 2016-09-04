@@ -19,12 +19,21 @@ public class DataConfiguracionEmpresa{
     private Integer validesReservasHoras;
     private Boolean trasferirPasajes;
     private String css;
+    
+    //UI de aplicaciones Android
+    private String iconoEmpresa;
+    private String colorFondosDePantalla;
+    private String colorTitulo;
+    private String colorTextoLista;
+    private String colorFondoLista;
+    private String colorBoton;
+    private String colorListadoDesplegable;
 
     public DataConfiguracionEmpresa() {
        
     }
     
-    public DataConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<DataTelefono> tels, List<DataEmail> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css) {
+    public DataConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<DataTelefono> tels, List<DataEmail> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css, String icEmp, String colFondPant, String colTit, String colTextLst, String colFondLst, String colBtn, String colLstDesp) {
         this.id = id;
         this.nombre = nom;
         this.aceptaCuponera = acCup;
@@ -40,6 +49,13 @@ public class DataConfiguracionEmpresa{
         this.validesReservasHoras = valResHrs;
         this.trasferirPasajes = trasfPsjs;
         this.css = css;
+        this.iconoEmpresa = icEmp;
+        this.colorFondosDePantalla = colFondPant;
+        this.colorTitulo = colTit;
+        this.colorTextoLista = colTextLst;
+        this.colorFondoLista = colFondLst;
+        this.colorBoton = colBtn;
+        this.colorListadoDesplegable = colLstDesp;
     }
     
     public void setId(String val){
@@ -49,7 +65,6 @@ public class DataConfiguracionEmpresa{
     public String getId(){
         return this.id;
     }
-
     public void setNombre(String val){
         this.nombre = val;
     }
@@ -161,4 +176,60 @@ public class DataConfiguracionEmpresa{
     public String getCss(){
         return this.css;
     }
+    
+    public void setIconoEmpresa(String val){
+        this.iconoEmpresa = val;
+    }
+    
+    public String getIconoEmpresa(){
+        return this.iconoEmpresa;
+    }
+    
+    public void setColorFondosDePantalla(String val){
+        this.colorFondosDePantalla = val;
+    }
+    
+    public String getColorFondosDePantalla(){
+        return this.colorFondosDePantalla;
+    }
+    
+    public void setColorTitulo(String val){
+        this.colorTitulo = val;
+    }
+    
+    public String getColorTitulo(){
+        return this.colorTitulo;
+    }
+    
+    public void setColorTextoLista(String val){
+        this.colorTextoLista = val;
+    }
+    
+    public String getColorTextoLista(){
+        return this.colorTextoLista;
+    }
+    
+    public void setColorFondoLista(String val){
+        this.colorFondoLista = val;
+    }
+    
+    public String getColorFondoLista(){
+        return this.colorFondoLista;
+    }
+        
+    public void setColorBoton(String val){
+        this.colorBoton = val;
+    }
+    
+    public String getColorBoton(){
+        return this.colorBoton;
+    }
+    
+	public void setColorListadoDesplegable(String val){
+	    this.colorListadoDesplegable = val;
+	}
+	
+	public String getColorListadoDesplegable(){
+	    return this.colorListadoDesplegable;
+	}
 }

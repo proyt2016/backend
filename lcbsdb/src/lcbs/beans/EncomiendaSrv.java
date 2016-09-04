@@ -75,8 +75,6 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
 		criteria.add(Restrictions.eq("eliminada", false));
 		criteria.add(Restrictions.eq("id", id));
 		List<Encomienda> listEnc = new ArrayList<Encomienda>(new LinkedHashSet(criteria.list()));
-		log.info("#################################################################### " + id);
-		log.info("#################################################################### " + listEnc);
 		listEnc.stream().forEach((enc) -> {
 			encomiendas.add(enc.getDatatype(true));
 		});

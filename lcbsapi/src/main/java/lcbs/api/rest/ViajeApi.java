@@ -315,5 +315,25 @@ public class ViajeApi extends BaseApi{
 		return repo.getPasajeXcodigo(codigo, tenant);
 	}
 	
-	
+	@POST
+	@Path("/crearhorarioenrecorrido/{idRecorrido}")
+	public void crearHorarioRecorrido(DataGrupoHorario horario, @PathParam("idRecorrido") final String idRecorrido){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.crearHorarioRecorrido(horario, idRecorrido, tenant);
+	}
+
+	@POST
+	@Path("/editarhorarioenrecorrido/{idRecorrido}")
+	public void editarHorarioRecorrido(DataGrupoHorario horario, @PathParam("idRecorrido") final String idRecorrido){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.editarHorarioRecorrido(horario, idRecorrido, tenant);
+	}
+
+	@POST
+	@Path("/borrarhorarioenrecorrido/{idRecorrido}")
+	public void borrarHorarioRecorrido(String data, @PathParam("idRecorrido") final String idRecorrido){
+		JSONObject obj = new JSONObject(data);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.borrarHorarioRecorrido(idRecorrido, obj.getString("idHorarioRecorrido"), tenant);
+	}
 }

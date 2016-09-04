@@ -38,7 +38,7 @@ public class Recorrido implements Serializable{
     @ManyToMany(fetch=FetchType.LAZY)
     @IndexColumn(name="LIST_INDEX")
     private List<PuntoRecorrido> puntosDeRecorrido;
-    @OneToMany(fetch=FetchType.LAZY)
+    @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     @IndexColumn(name="LIST_INDEX")
     private List<GrupoHorario> horarios;
     @OneToMany(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
@@ -110,7 +110,7 @@ public class Recorrido implements Serializable{
     	if(this.getHorarios()!=null && conHijos){
 	    	List<DataGrupoHorario> auxHr = new ArrayList<DataGrupoHorario>();
 	    	this.getHorarios().stream().forEach((hr) -> {
-	    		auxHr.add(hr.getDatatype(false));
+	    		auxHr.add(hr.getDatatype(true));
 	        });
 	    	result.setHorarios(auxHr);
     	}

@@ -108,9 +108,15 @@
 		}).when("/recorridos/precios/:id", {
 		    templateUrl : "app/views/recorridos/precios.html",
 		    controller  : 'preciorecorridoCtrl'
-		}).when("/recorridos/horaios/:id", {
-		    templateUrl : "app/views/recorridos/horarios.html",
-		    controller  : 'recorridosCtrl'
+		}).when("/recorridos/horarioslist/:id", {
+		    templateUrl : "app/views/recorridos/horarioslist.html",
+		    controller  : 'horariorecorridoCtrl'
+		}).when("/recorridos/horariosadd/:id", {
+		    templateUrl : "app/views/recorridos/horariosadd.html",
+		    controller  : 'horariorecorridoCtrl'
+		}).when("/recorridos/horariosedit/:id/:idHorario", {
+		    templateUrl : "app/views/recorridos/horariosedit.html",
+		    controller  : 'horariorecorridoCtrl'
 		});
 
 		// ruta de estadosencomienda

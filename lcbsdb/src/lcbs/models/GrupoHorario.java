@@ -73,11 +73,24 @@ public class GrupoHorario implements Serializable{
     	this.setId(dt.getId());
     	this.setNombre(dt.getNombre());
     	this.setTipo(dt.getTipo());
-    	/*List<DiasSemana> aux = new ArrayList<DiasSemana>();
+    	List<DiasSemana> aux = new ArrayList<DiasSemana>();
     	dt.getDiasSemana().stream().forEach((ds) -> {
-    		aux.add((DiasSemana)ds);
+    		if(ds.toString() == "Lunes")
+    			aux.add(DiasSemana.Lunes);
+    		if(ds.toString() == "Martes")
+    			aux.add(DiasSemana.Martes);
+    		if(ds.toString() == "Miercoles")
+    			aux.add(DiasSemana.Miercoles);
+    		if(ds.toString() == "Jueves")
+    			aux.add(DiasSemana.Jueves);
+    		if(ds.toString() == "Viernes")
+    			aux.add(DiasSemana.Viernes);
+    		if(ds.toString() == "Sabado")
+    			aux.add(DiasSemana.Sabado);
+    		if(ds.toString() == "Lunes")
+    			aux.add(DiasSemana.Domingo);
         });
-    	this.setDiasSemana(aux)*/;
+    	this.setDiasSemana(aux);
     	this.setDiasEspecificos(dt.getDiasEspecificos());
     	if(dt.getHorarios() != null){
 	    	List<Horario> auxHr = new ArrayList<Horario>();
@@ -93,11 +106,24 @@ public class GrupoHorario implements Serializable{
     	result.setId(this.getId());
     	result.setNombre(this.getNombre());
     	result.setTipo(this.getTipo());
-    	/*List<DataDiasSemana> aux = new ArrayList<DataDiasSemana>();
+    	List<DataDiasSemana> aux = new ArrayList<DataDiasSemana>();
     	this.getDiasSemana().stream().forEach((ds) -> {
-    		aux.add((DataDiasSemana)ds);
+    		if(ds.toString() == "Lunes")
+    			aux.add(DataDiasSemana.Lunes);
+    		if(ds.toString() == "Martes")
+    			aux.add(DataDiasSemana.Martes);
+    		if(ds.toString() == "Miercoles")
+    			aux.add(DataDiasSemana.Miercoles);
+    		if(ds.toString() == "Jueves")
+    			aux.add(DataDiasSemana.Jueves);
+    		if(ds.toString() == "Viernes")
+    			aux.add(DataDiasSemana.Viernes);
+    		if(ds.toString() == "Sabado")
+    			aux.add(DataDiasSemana.Sabado);
+    		if(ds.toString() == "Lunes")
+    			aux.add(DataDiasSemana.Domingo);
         });
-    	result.setDiasSemana(aux);*/
+    	result.setDiasSemana(aux);
     	result.setDiasEspecificos(HibernateUtils.initializeAndUnproxy(this.getDiasEspecificos()));
     	if(this.getHorarios()!=null && conHijos){
 	    	List<DataHorario> auxHr = new ArrayList<DataHorario>();

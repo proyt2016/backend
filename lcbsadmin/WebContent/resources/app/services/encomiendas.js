@@ -47,7 +47,7 @@
         var calcularPrecio = function(regla,monto){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/encomiendas/getpreciodeencomienda/'+regla.id+'/'+monto)
+            $http.get('/lcbsapi/rest/encomiendas/getpreciodeencomienda/' + regla + '/' + monto)
             .success(function (prec) {
                 defer.resolve(prec);
             })

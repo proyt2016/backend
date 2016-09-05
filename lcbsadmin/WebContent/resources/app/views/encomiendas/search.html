@@ -5,66 +5,62 @@
     </div>
   </div>
 </div>
-
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
-  <!------------------------------------->
-
       <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" ng-submit="buscar()">
 
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="origen">Origen <span class="required">*</span>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="origen">Origen
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <select class="form-control select2" style="width: 100%;" ng-model="filtro.origen" required>
-              <option ng-repeat="iter in terminales" value="{{ $index }}">{{iter.nombre}}</option>
+            <select class="form-control select2-filtro" style="width: 100%;" name="origen">
+              <option></option>
+              <option ng-repeat="iter in terminales" value="{{ iter.id }}">{{ iter.nombre }}</option>
             </select>
-          <ul class="parsley-errors-list" id="parsley-id-5536"></ul>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="destino">Destino <span class="required">*</span>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="destino">Destino
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <select class="form-control select2" style="width: 100%;" ng-model="filtro.destino" required>
-              <option ng-repeat="iter in terminales" value="{{ $index }}">{{iter.nombre}}</option>
+            <select class="form-control select2-filtro" style="width: 100%;" name="destino">
+              <option></option>
+              <option ng-repeat="iter in terminales" value="{{ iter.id }}">{{ iter.nombre }}</option>
             </select>
-          <ul class="parsley-errors-list" id="parsley-id-5536"></ul>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Emisor <span class="required">*</span>
-          </label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Emisor </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="nombre" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="emisorStrg" ng-blur="buscarEmisor()"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+            <input type="text" id="nombre" required="required" class="form-control col-md-7 col-xs-12" ng-model="emisorStrg" ng-blur="buscarUsuario('emisorStrg', 'emisor')">
+            <p class="help-block">Si el emisor esta registrado ingrese el email para buscar sus datos</p>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ciEmisor">Cedula de emisor <span class="required">*</span>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ciEmisor">Cedula de emisor
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="ciEmisor" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="filtro.ciEmisor"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+            <input type="text" id="ciEmisor" class="form-control col-md-7 col-xs-12" ng-model="filtro.ciEmisor">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="receptor">Receptor <span class="required">*</span>
-          </label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="receptor">Receptor</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="receptor" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="receptorStrg" ng-blur="buscarReceptor()"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+            <input type="text" id="receptor" class="form-control col-md-7 col-xs-12" ng-model="receptorStrg" ng-blur="buscarUsuario('receptorStrg', 'receptor')">
+            <p class="help-block">Si el receptor esta registrado ingrese el email para buscar sus datos</p>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ciReceptor">Cedula de receptor <span class="required">*</span>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ciReceptor">Cedula de receptor
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="ciReceptor" name="ciReceptor" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="0978" ng-model="filtro.ciReceptor"><ul class="parsley-errors-list" id="parsley-id-0978"></ul>
+            <input type="text" id="ciReceptor" name="ciReceptor" class="form-control col-md-7 col-xs-12" ng-model="filtro.ciReceptor">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fechaAlta">Fecha de alta <span class="required">*</span>
-          </label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fechaAlta">Fecha de alta</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="fechaAlta" name="fechaAlta" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="0978" ng-model="filtro.fechaIngreso"><ul class="parsley-errors-list" id="parsley-id-0978"></ul>
+            <input type="text" id="fechaAlta" name="fechaAlta" class="form-control col-md-7 col-xs-12" ng-model="filtro.fechaIngreso">
           </div>
         </div>
         <div class="ln_solid"></div>
@@ -75,7 +71,6 @@
         </div>
       </form>
 
-  <!------------------------------------->
     <div class="x_title">
       <h2>Resultado de busqueda</h2>
       <div class="clearfix"></div>

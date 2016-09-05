@@ -25,15 +25,6 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-offset-3 col-sm-9">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="configuracion.aceptaCuponera"> Acepta cuponera
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="urlLDAP">URL de servidor LDAP</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <input type="text" id="urlLDAP" class="form-control col-md-7 col-xs-12" ng-model="configuracion.urlLdap">
@@ -56,7 +47,16 @@
           <div class="col-sm-offset-3 col-sm-9">
             <div class="checkbox">
               <label>
-                <input type="checkbox" ng-model="configuracion.activo"> Activar/desactivar acceso
+                <input type="checkbox" ng-model="configuracion.aceptaCuponera"> Acepta cuponera
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="configuracion.activo"> Activar acceso
               </label>
             </div>
           </div>
@@ -81,8 +81,8 @@
         </div>
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="validesReservasHoras">Valides de reservas en horas</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="validesReservasHoras" class="form-control col-md-7 col-xs-12" ng-model="configuracion.validesReservasHoras">
+          <div class="col-md-1 col-sm-1 col-xs-12">
+            <input type="text" id="validesReservasHoras" class="form-control" ng-model="configuracion.validesReservasHoras">
           </div>
         </div>
         <div class="form-group">

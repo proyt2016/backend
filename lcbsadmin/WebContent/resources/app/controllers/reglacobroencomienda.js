@@ -3,10 +3,12 @@
     angular.module('lacbus').controller('reglacobroencomiendaCtrl', ['$scope', '$routeParams', 'reglacobroencomiendaService', reglacobroencomiendaCtrl]);
 
     function reglacobroencomiendaCtrl($scope, $routeParams, reglacobroencomiendaService) {
-        $scope.reglacobroencomiendas     = [];
-        $scope.reglacobroencomienda     = null;
+        $scope.reglacobroencomiendas = [];
+        $scope.reglacobroencomienda = {
+        	precioExactoOCalculo : false
+        };
         $scope.criterias = [];
-        $scope.showAlert    = false;
+        $scope.showAlert = false;
 
         var initialize = function(){
             var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null
@@ -24,9 +26,7 @@
 
         $scope.add = function(){
             $scope.saving   = true;
-            var reglacobroencomienda     = this.reglacobroencomienda;
-            console.log('casaaaa');
-            console.log(reglacobroencomienda);
+            var reglacobroencomienda = this.reglacobroencomienda;
             reglacobroencomienda.criterias = $scope.criterias;
             reglacobroencomiendaService.add(reglacobroencomienda).then(
                 function (data) {
@@ -35,14 +35,13 @@
                     window.history.back();
                 }, function() {
                     $scope.saving = false;
-
                 }
             );
         }
 
         $scope.edit = function(){
             $scope.saving   = true;
-            var reglacobroencomienda     = this.reglacobroencomienda;
+            var reglacobroencomienda = this.reglacobroencomienda;
             reglacobroencomiendaService.edit(reglacobroencomienda).then(
                 function (data) {
                     $scope.saving = false;
@@ -50,7 +49,6 @@
                     window.history.back();
                 }, function() {
                     $scope.saving = false;
-
                 }
             );
         }
@@ -58,31 +56,28 @@
         $scope.borrar = function (index) {
             $scope.saving = true;
             var reglacobroencomienda = this.reglacobroencomienda;
-            console.info(reglacobroencomienda);
             var r = confirm("Seguro que quiere borrar?");
             if (r == true) {
                 reglacobroencomiendaService.borrar(reglacobroencomienda.id).then(
-                 function () {
-                     $scope.reglacobroencomiendas.splice(index, 1);
-                     $scope.saving = false;
-
-                 }, function () {
-                     $scope.saving = false;
-
-                 }
-             );
+					function () {
+					    $scope.reglacobroencomiendas.splice(index, 1);
+					    $scope.saving = false;
+					}, function () {
+					    $scope.saving = false;
+					}
+                );
             }
         }
 
         $scope.addRelation = function () {
             if($scope.criterias.length == 0){
-                var nuevaCrit = {'operador':'<=','valor':'0','precio':''};
+                var nuevaCrit = {'operador':'<=', 'valor':'0', 'precio':''};
                 $scope.criterias.push(nuevaCrit);
-                nuevaCrit = {'operador':'>','valor':'0','precio':''};
+                nuevaCrit = {'operador':'>', 'valor':'0', 'precio':''};
                 $scope.criterias.push(nuevaCrit);
             }else{
                 $scope.criterias[$scope.criterias.length - 1].operador = "<=";
-                var nuevaCrit = {'operador':'>','valor':(parseFloat($scope.criterias[$scope.criterias.length - 1].valor)),'precio':''};
+                var nuevaCrit = {'operador':'>', 'valor':(parseFloat($scope.criterias[$scope.criterias.length - 1].valor)), 'precio':''};
                 $scope.criterias.push(nuevaCrit);
             }
         }

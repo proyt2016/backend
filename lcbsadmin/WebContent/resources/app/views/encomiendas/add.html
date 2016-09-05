@@ -13,105 +13,124 @@
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
-      <br>
-      <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" ng-submit="add()">
-
+      <form id="demo-form2" class="form-horizontal form-label-left" novalidate="" ng-submit="add()">
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="origen">Origen <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <select class="form-control select2" style="width: 100%;" ng-model="encomienda.origen" required>
-              <option ng-repeat="iter in terminales" value="{{ $index }}">{{iter.nombre}}</option>
+            <select class="form-control select2" style="width: 100%;" required name="origen">
+            	<option></option>
+              	<option ng-repeat="iter in terminales" value="{{ iter.id }}">{{iter.nombre}}</option>
             </select>
-          <ul class="parsley-errors-list" id="parsley-id-5536"></ul>
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="destino">Destino <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <select class="form-control select2" style="width: 100%;" ng-model="encomienda.destino" required>
-              <option ng-repeat="iter in terminales" value="{{ $index }}">{{iter.nombre}}</option>
+            <select class="form-control select2" style="width: 100%;" required name="destino">
+            	<option></option>
+              	<option ng-repeat="iter in terminales" value="{{ iter.id }}">{{iter.nombre}}</option>
             </select>
-          <ul class="parsley-errors-list" id="parsley-id-5536"></ul>
           </div>
         </div>
+        <div class="x_title">
+	         <h4> Datos del emisor </h4>
+	         <div class="clearfix"></div>
+     	</div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Emisor <span class="required">*</span>
-          </label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Emisor <span class="required">*</span></label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="nombre" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="emisorStrg" ng-blur="buscarEmisor()"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+            <input type="text" id="nombre" required="required" class="form-control col-md-7 col-xs-12" ng-model="emisorStrg" ng-blur="buscarUsuario('emisorStrg', 'emisor')">
+          	<p class="help-block">Si el emisor esta registrado ingrese el email para buscar sus datos</p>
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ciEmisor">Cedula de emisor <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="ciEmisor" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="encomienda.ciEmisor"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+            <input type="text" id="ciEmisor" required="required" class="form-control col-md-7 col-xs-12" ng-model="encomienda.ciEmisor">
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telEmisor">Tel&eacute;fono de emisor <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="telEmisor" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="encomienda.telEmisor"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+            <input type="text" id="telEmisor" required="required" class="form-control col-md-7 col-xs-12" ng-model="encomienda.telEmisor">
           </div>
         </div>
+        <div class="x_title">
+	         <h4> Datos del receptor </h4>
+	         <div class="clearfix"></div>
+     	</div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="receptor">Receptor <span class="required">*</span>
-          </label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="receptor">Receptor <span class="required">*</span></label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="receptor" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="receptorStrg" ng-blur="buscarReceptor()"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+            <input type="text" id="receptor" required="required" class="form-control col-md-7 col-xs-12" ng-model="receptorStrg" ng-blur="buscarUsuario('receptorStrg', 'receptor')">
+          	<p class="help-block">Si el receptor esta registrado ingrese el email para buscar sus datos</p>
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ciReceptor">Cedula de receptor <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="apellido" name="ciReceptor" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="0978" ng-model="encomienda.ciReceptor"><ul class="parsley-errors-list" id="parsley-id-0978"></ul>
+            <input type="text" id="apellido" name="ciReceptor" required="required" class="form-control col-md-7 col-xs-12" ng-model="encomienda.ciReceptor">
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telReceptor">Tel&eacute;fono de receptor <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="trec" name="telReceptor" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="0978" ng-model="encomienda.telReceptor"><ul class="parsley-errors-list" id="parsley-id-0978"></ul>
+            <input type="text" id="trec" name="telReceptor" required="required" class="form-control col-md-7 col-xs-12" ng-model="encomienda.telReceptor">
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dirReceptor">Direccion de receptor <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="wmadrecil" name="dirReceptor" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="0978" ng-model="encomienda.direccionReceptor"><ul class="parsley-errors-list" id="parsley-id-0978"></ul>
+            <input type="text" id="wmadrecil" name="dirReceptor" required="required" class="form-control col-md-7 col-xs-12" ng-model="encomienda.direccionReceptor">
           </div>
         </div>
+        <div class="ln_solid"></div>
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="reglaCobro">Regla de cobro <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <select class="form-control select2" style="width: 100%;" ng-model="encomienda.reglaCobro" required>
-              <option ng-repeat="iter in reglasCobro" value="{{ $index }}">{{iter.nombre}}</option>
+            <select class="form-control select2" style="width: 100%;" required name="reglaCobro">
+            	<option></option>
+              	<option ng-repeat="iter in reglasCobro" value="{{ iter.id }}">{{iter.nombre}}</option>
             </select>
-            <input type="text" id="monto" data-parsley-id="0978" ng-model="encomienda.monto" class="flat" ng-blur="calcularPrecio()">
-            <input type="text" id="precio" data-parsley-id="0978" ng-model="encomienda.precio" class="flat" disabled="disabled">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pagaReceptor">Paga receptor <span class="required">*</span>
-          </label>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" id="pagaReceptor" data-parsley-id="0978" ng-model="encomienda.pagaReceptor" class="flat" checked="checked">
-            </label>
+        	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="reglaCobro">Ingrese un valor</label>
+          	<div class="col-md-6 col-sm-6 col-xs-12">
+	          	<div class="row">
+	          		<div class="col-md-6 col-sm-6 col-xs-12">
+		            	<input class="form-control" type="text" id="monto" ng-model="encomienda.monto" ng-blur="calcularPrecio()">
+		          	</div>
+		          	<div class="col-md-6 col-sm-6 col-xs-12">
+		            	<input class="form-control" type="text" id="precio" ng-model="encomienda.precio" disabled="disabled">
+		          	</div>
+	          	</div>
+          	</div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="encomienda.pagaReceptor"> Paga receptor
+              </label>
+            </div>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="retiraSucursal">Retira en sucursal <span class="required">*</span>
-          </label>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" id="retiraSucursal" data-parsley-id="0978" ng-model="encomienda.retiraEnSucursal" class="flat" checked="checked">
-            </label>
+          <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="encomienda.retiraEnSucursal"> Retira en sucursal
+              </label>
+            </div>
           </div>
         </div>
         <div class="ln_solid"></div>

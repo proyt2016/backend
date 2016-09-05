@@ -22,13 +22,13 @@
           <div class="form-group">
               <label>Origen</label>
               <select class="form-control select2" style="width: 100%;" ng-model="prec.origen" required>
-                <option ng-repeat="iter in terminales" value="{{ $index }}" ng-selected="prec.origen == $index">{{iter.nombre}}</option>
+                <option ng-repeat="iter in terminales" value="{{ $index }}">{{iter.nombre}}</option>
               </select>
           </div>
           <div class="form-group">
               <label>Destino</label>
               <select class="form-control select2" style="width: 100%;" ng-model="prec.destino" required>
-                <option ng-repeat="iter in terminales" value="{{ $index }}" ng-selected="prec.destino == $index">{{iter.nombre}}</option>
+                <option ng-repeat="iter in terminales" value="{{ $index }}">{{iter.nombre}}</option>
               </select>
           </div>
           <div class="form-group">

@@ -7,10 +7,14 @@ import java.util.Map;
 
 import javax.ejb.EJB;
 import interfaces.IViaje;
+import lcbs.beans.EncomiendaSrv;
 import lcbs.interfaces.*;
 import lcbs.shares.*;
 
 import javax.ejb.Stateless;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Session Bean implementation class ViajeSrv
@@ -271,6 +275,44 @@ public class ViajeCtrl implements IViaje {
 	@Override
 	public DataReserva obtenerReserva(String idReserva, DataTenant tenant) {
 		return srvReserva.getReserva(idReserva, tenant);
+	}
+	
+	@Override
+	public void crearHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant){
+		DataRecorrido rec = srvRecorrido.getRecorrido(idRecorrido, tenant);
+		List<DataGrupoHorario> horarioList = rec.getHorarios();
+		horarioList.add(horario);
+		rec.setHorarios(horarioList);
+		srvRecorrido.modificarRecorrido(rec, tenant);
+	}
+
+	@Override
+	public void editarHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant){
+		DataRecorrido rec = srvRecorrido.getRecorrido(idRecorrido, tenant);
+		List<DataGrupoHorario> horarioList = rec.getHorarios();
+		Integer aux = 0;
+		for(Integer i = 0; i < horarioList.size(); i++){
+			if(horario.getId() == horarioList.get(i).getId()){
+				aux = i;
+			}
+		}
+		horarioList.set(aux, horario);
+		rec.setHorarios(horarioList);
+		srvRecorrido.modificarRecorrido(rec, tenant);
+	}
+
+	@Override
+	public void borrarHorarioRecorrido(String idRecorrido, String idHorario, DataTenant tenant){
+		DataRecorrido rec = srvRecorrido.getRecorrido(idRecorrido, tenant);
+		List<DataGrupoHorario> horarioList = rec.getHorarios();
+		List<DataGrupoHorario> result = new ArrayList<DataGrupoHorario>();
+		for(Integer i = 0; i < horarioList.size(); i++){
+			if(!idHorario.equals(horarioList.get(i).getId())){
+				result.add(horarioList.get(i));
+			}
+		}
+		rec.setHorarios(result);
+		srvRecorrido.modificarRecorrido(rec, tenant);
 	}
 
 }

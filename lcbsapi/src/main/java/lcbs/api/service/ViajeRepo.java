@@ -22,6 +22,8 @@ import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 import interfaces.*;
@@ -175,5 +177,17 @@ public class ViajeRepo {
 
 	public DataReserva obtenerReserva(String idReserva, DataTenant tenant) {
 		return ctrViaje.obtenerReserva(idReserva, tenant );
+	}
+	
+	public void crearHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant){
+		ctrViaje.crearHorarioRecorrido(horario, idRecorrido, tenant);
+	}
+
+	public void editarHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant){
+		ctrViaje.editarHorarioRecorrido(horario, idRecorrido, tenant);
+	}
+
+	public void borrarHorarioRecorrido(String idRecorrido, String idHorario, DataTenant tenant){
+		ctrViaje.borrarHorarioRecorrido(idRecorrido, idHorario, tenant);
 	}
 }

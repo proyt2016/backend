@@ -44,5 +44,8 @@ public interface IViaje {
 	public List<DataViaje> getViajes(Integer pagina, Integer elementos, DataTenant tenant);
 	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina, DataTenant tenant);
 	public DataReserva obtenerReserva(String idReserva, DataTenant tenant);
+	public void crearHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant);
+	public void editarHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant);
+	public void borrarHorarioRecorrido(String idRecorrido, String idHorario, DataTenant tenant);
 	
 }

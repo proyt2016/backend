@@ -111,13 +111,19 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
 
 	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina, DataTenant tenant) {
 		List<DataEncomienda> encomiendas = new ArrayList();
+		log.info("#################################################################### ");
 		try {
 			Session session = (Session) em.getDelegate();
 			Criteria criteria = session.createCriteria(Encomienda.class);
-			if (filtro.getOrigen() != null)
+			log.info("#################################################################### "+filtro.getOrigen());
+			if (filtro.getOrigen() != null){
 				criteria.createCriteria("origen").add(Restrictions.eq("id", filtro.getOrigen().getId()));
-			if (filtro.getDestino() != null)
+				log.info("#################################################################### "+filtro.getOrigen().getId());
+			}
+			if (filtro.getDestino() != null){
 				criteria.createCriteria("destino").add(Restrictions.eq("id", filtro.getDestino().getId()));
+				log.info("#################################################################### "+filtro.getDestino().getId());
+			}
 			if (filtro.getEmisor() != null)
 				criteria.createCriteria("emisor").add(Restrictions.eq("id", filtro.getEmisor().getId()));
 			if (filtro.getReceptor() != null)
@@ -162,8 +168,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
 				encomiendas.add(enc.getDatatype(true));
 			});
 		} catch (Exception e) {
-			// log.info("####################################################################
-			// "+e.getMessage());
+			 log.info("#################################################################### "+e.getMessage());
 		}
 		return encomiendas;
 	}

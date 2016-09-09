@@ -133,10 +133,12 @@ public class EncomiendaApi extends BaseApi{
 	
 	@POST
 	@Path("/buscarencomienda/{pagina:[0-9][0-9]*}/{elementosPagina:[0-9][0-9]*}")
-	public List<DataEncomiendaConvertor> buscarEncomienda(DataEncomienda filtro, @PathParam("pagina") final Integer pagina,@PathParam("elementosPagina") final Integer ElementosPagina){
+	public List<DataEncomiendaConvertor> buscarEncomienda(DataEncomiendaConvertor filtro, @PathParam("pagina") final Integer pagina,@PathParam("elementosPagina") final Integer ElementosPagina){
 		List<DataEncomiendaConvertor> result = new ArrayList<DataEncomiendaConvertor>();
+		DataEncomienda enc = filtro.getDataEncomienda();
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
-		repo.buscarEncomienda(filtro, pagina, ElementosPagina, tenant).forEach((encomienda)->{
+		
+		repo.buscarEncomienda(enc, pagina, ElementosPagina, tenant).forEach((encomienda)->{
 			result.add(encomienda.genConvertor());
 		});
 		return result;

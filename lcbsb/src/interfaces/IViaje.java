@@ -47,5 +47,6 @@ public interface IViaje {
 	public void crearHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant);
 	public void editarHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant);
 	public void borrarHorarioRecorrido(String idRecorrido, String idHorario, DataTenant tenant);
+	public Float getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant);
 	
 }

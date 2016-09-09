@@ -190,4 +190,8 @@ public class ViajeRepo {
 	public void borrarHorarioRecorrido(String idRecorrido, String idHorario, DataTenant tenant){
 		ctrViaje.borrarHorarioRecorrido(idRecorrido, idHorario, tenant);
 	}
+
+	public Float getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant) {
+		return ctrViaje.getPrecioDePasaje(codigoOrigen, codigoDestino, codigoRecorrido, tenant);
+	}
 }

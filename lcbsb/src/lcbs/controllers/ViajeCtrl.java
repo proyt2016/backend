@@ -2,6 +2,7 @@ package lcbs.controllers;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,8 @@ import org.apache.commons.logging.LogFactory;
  */
 @Stateless
 public class ViajeCtrl implements IViaje {
+	
+	private static final Log log = LogFactory.getLog(ViajeCtrl.class);
 
 	@EJB(lookup = "java:app/lcbsdb/ViajeSrv!lcbs.interfaces.ViajeLocalApi")
 	ViajeLocalApi srvViaje;
@@ -313,6 +316,29 @@ public class ViajeCtrl implements IViaje {
 		}
 		rec.setHorarios(result);
 		srvRecorrido.modificarRecorrido(rec, tenant);
+	}
+
+	@Override
+	public Float getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant) {
+		DataRecorrido rec = srvRecorrido.getRecorrido(codigoRecorrido, tenant);
+		List<DataPrecio> precios = rec.getPrecios();
+		Map<String, Integer> puntosMap = new HashMap<String, Integer>();
+		for(Integer i = 0; i < rec.getPuntosDeRecorrido().size();i++){
+			puntosMap.put(rec.getPuntosDeRecorrido().get(i).getId(), i);
+		}
+		List<DataPrecio> aux = new ArrayList<DataPrecio>();
+		DataPrecio elegido = new DataPrecio();
+		precios.stream().forEach((prc) -> {
+			if(puntosMap.get(prc.getOrigen().getId()) >= puntosMap.get(codigoOrigen) && puntosMap.get(prc.getDestino().getId()) <= puntosMap.get(codigoDestino)){
+				aux.add(prc);
+			}
+		});
+		for(Integer i = 0; i < aux.size();i++){
+			if(elegido.getMonto() == null || elegido.getMonto()>aux.get(i).getMonto()){
+				elegido = aux.get(i);
+			}
+		}
+		return elegido.getMonto();
 	}
 
 }

@@ -9,6 +9,7 @@
         $scope.horariosRows       = [];
         $scope.horas = [];
         $scope.minutos = [];
+        $scope.diaEspecifico     = null;
 
         var initialize = function(){
             var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null
@@ -26,6 +27,9 @@
                   }
 
                   if($scope.horario != null){
+                    if($scope.horario.diasEspecificos.length > 0){
+                      $scope.diaEspecifico = moment($scope.horario.diasEspecificos[0], 'YYYY-MM-DD').format('DD/MM/YYYY');
+                    }
                     for(var i = 0; i < $scope.horario.horarios.length; i++){
                       var nuevohorario = {'nombre':$scope.horario.horarios[i].nombre};
                       $scope.horariosRows.push(nuevohorario);
@@ -43,7 +47,16 @@
             var recorrido     = this.recorrido;
             var horario     = this.horario;
             horario.horarios = this.horariosRows;
-            horario.diasSemana = limpiarListaDias(horario.diasSemana);
+            
+            if(horario.tipo == 'diasEspecificos'){
+              horario.diasSemana = [];
+              var dEsp = [];
+              dEsp.push(moment($scope.diaEspecifico, 'DD/MM/YYYY').format('YYYY-MM-DD'));
+              horario.diasEspecificos = dEsp;
+            }else{
+              horario.diasSemana = limpiarListaDias(horario.diasSemana);
+              horario.diasEspecificos = [];
+            }
             horariorecorridoService.add(horario,recorrido.id).then(
                 function (data) {
                     $scope.saving = false;

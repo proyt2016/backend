@@ -336,4 +336,11 @@ public class ViajeApi extends BaseApi{
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		repo.borrarHorarioRecorrido(idRecorrido, obj.getString("idHorarioRecorrido"), tenant);
 	}
+	
+	@GET
+	@Path("/getpreciodepasaje/{codigoOrigen}/{codigoDestino}/{codigoRecorrido}")
+	public Float getPrecioDePasaje(@PathParam("codigoOrigen") final String codigoOrigen, @PathParam("codigoDestino") final String codigoDestino, @PathParam("codigoRecorrido") final String codigoRecorrido){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getPrecioDePasaje(codigoOrigen, codigoDestino, codigoRecorrido,  tenant);
+	}
 }

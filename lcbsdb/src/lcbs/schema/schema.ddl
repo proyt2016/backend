@@ -7,7 +7,7 @@
         colorBoton varchar(255),
         colorFondoLista varchar(255),
         colorFondosDePantalla varchar(255),
-        colorListadoDesplegable varchar(255),
+        colorLetras varchar(255),
         colorTextoLista varchar(255),
         colorTitulo varchar(255),
         css Text,

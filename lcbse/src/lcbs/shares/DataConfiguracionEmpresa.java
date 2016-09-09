@@ -27,13 +27,13 @@ public class DataConfiguracionEmpresa{
     private String colorTextoLista;
     private String colorFondoLista;
     private String colorBoton;
-    private String colorListadoDesplegable;
+    private String colorLetras;
 
     public DataConfiguracionEmpresa() {
        
     }
     
-    public DataConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<DataTelefono> tels, List<DataEmail> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css, String icEmp, String colFondPant, String colTit, String colTextLst, String colFondLst, String colBtn, String colLstDesp) {
+    public DataConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<DataTelefono> tels, List<DataEmail> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css, String icEmp, String colFondPant, String colTit, String colTextLst, String colFondLst, String colBtn, String colLetra) {
         this.id = id;
         this.nombre = nom;
         this.aceptaCuponera = acCup;
@@ -55,7 +55,7 @@ public class DataConfiguracionEmpresa{
         this.colorTextoLista = colTextLst;
         this.colorFondoLista = colFondLst;
         this.colorBoton = colBtn;
-        this.colorListadoDesplegable = colLstDesp;
+        this.colorLetras = colLetra;
     }
     
     public void setId(String val){
@@ -225,11 +225,11 @@ public class DataConfiguracionEmpresa{
         return this.colorBoton;
     }
     
-	public void setColorListadoDesplegable(String val){
-	    this.colorListadoDesplegable = val;
+	public void setColorLetras(String val){
+	    this.colorLetras= val;
 	}
 	
-	public String getColorListadoDesplegable(){
-	    return this.colorListadoDesplegable;
+	public String getColorLetras(){
+	    return this.colorLetras;
 	}
 }

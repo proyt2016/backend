@@ -58,13 +58,13 @@ public class ConfiguracionEmpresa implements Serializable{
     private String colorTextoLista;
     private String colorFondoLista;
     private String colorBoton;
-    private String colorListadoDesplegable;
+    private String colorLetras;
 
     public ConfiguracionEmpresa() {
        
     }
     
-    public ConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<Telefono> tels, List<Email> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css, String icEmp, String colFondPant, String colTit, String colTextLst, String colFondLst, String colBtn, String colLstDesp) {
+    public ConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<Telefono> tels, List<Email> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css, String icEmp, String colFondPant, String colTit, String colTextLst, String colFondLst, String colBtn, String colorLetras) {
         this.id = id;
         this.nombre = nom;
         this.aceptaCuponera = acCup;
@@ -86,7 +86,7 @@ public class ConfiguracionEmpresa implements Serializable{
         this.colorTextoLista = colTextLst;
         this.colorFondoLista = colFondLst;
         this.colorBoton = colBtn;
-        this.colorListadoDesplegable = colLstDesp;
+        this.colorLetras = colorLetras;
     }
     
     public ConfiguracionEmpresa(DataConfiguracionEmpresa dt){
@@ -124,7 +124,7 @@ public class ConfiguracionEmpresa implements Serializable{
         this.setColorTextoLista(dt.getColorTextoLista());
         this.setColorFondoLista(dt.getColorFondoLista());
         this.setColorBoton(dt.getColorBoton());
-        this.setColorListadoDesplegable(dt.getColorListadoDesplegable());
+        this.setColorLetras(dt.getColorLetras());
     }
     
     public DataConfiguracionEmpresa getDatatype(){
@@ -162,7 +162,7 @@ public class ConfiguracionEmpresa implements Serializable{
     	result.setColorTextoLista(this.getColorTextoLista());
     	result.setColorFondoLista(this.getColorFondoLista());
     	result.setColorBoton(this.getColorBoton());
-    	result.setColorListadoDesplegable(this.getColorListadoDesplegable());
+    	result.setColorLetras(this.getColorLetras());
     	return result;
     }
     
@@ -334,11 +334,11 @@ public class ConfiguracionEmpresa implements Serializable{
         return this.colorBoton;
     }
     
-	public void setColorListadoDesplegable(String val){
-	    this.colorListadoDesplegable = val;
+	public void setColorLetras(String val){
+	    this.colorLetras = val;
 	}
 	
-	public String getColorListadoDesplegable(){
-	    return this.colorListadoDesplegable;
+	public String getColorLetras(){
+	    return this.colorLetras;
 	}
 }

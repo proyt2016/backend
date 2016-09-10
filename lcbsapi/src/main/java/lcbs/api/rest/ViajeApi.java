@@ -68,7 +68,7 @@ public class ViajeApi extends BaseApi{
 	public List<DataViajeConvertor> BuscarViaje(DataViaje filtro, @PathParam("pagina") final Integer pagina, @PathParam("elementosPagina") final Integer ElementosPagina){
 		List<DataViajeConvertor> result = new ArrayList<DataViajeConvertor>();
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
-		repo.BuscarViaje(filtro, pagina, ElementosPagina, tenant).forEach((viaje)->{
+		repo.BuscarViaje(filtro, null, pagina, ElementosPagina, tenant).forEach((viaje)->{
 			result.add(viaje.genConvertor());
 		});
 		return result;
@@ -343,4 +343,20 @@ public class ViajeApi extends BaseApi{
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		return repo.getPrecioDePasaje(codigoOrigen, codigoDestino, codigoRecorrido,  tenant);
 	}
+	
+	@GET
+	@Path("/crearViajesNuevoRecorrido/{recorridoId}")
+	public void crearViajesNuevoRecorrido(@PathParam("recorridoId") final String recorridoId){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.crearViajesNuevoRecorrido(recorridoId, tenant);
+	}
+	
+	@GET
+	@Path("/crearViajesNuevoRecorrido/")
+	public void crearViajesParaRecorridos(){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		repo.crearViajesParaRecorridos(tenant);
+	}
+	
+	
 }

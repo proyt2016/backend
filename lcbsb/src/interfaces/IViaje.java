@@ -6,7 +6,7 @@ import java.util.Map;
 import lcbs.shares.*;
 public interface IViaje {
 	
-	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina, DataTenant tenant);
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant);
 	public DataPasaje ComprarPasaje(DataPasaje pasaje, DataTenant tenant);
 	public void CambiarHorarioPasaje(String idPasaje, String viaje, DataTenant tenant);
 	public DataReserva ReservarPasaje(DataReserva reserva, DataTenant tenant);
@@ -48,5 +48,6 @@ public interface IViaje {
 	public void editarHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant);
 	public void borrarHorarioRecorrido(String idRecorrido, String idHorario, DataTenant tenant);
 	public Float getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant);
-	
+	public void crearViajesNuevoRecorrido(String recorridoId, DataTenant tenant);
+	public void crearViajesParaRecorridos(DataTenant tenant);
 }

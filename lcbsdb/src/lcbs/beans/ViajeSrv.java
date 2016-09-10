@@ -2,6 +2,7 @@ package lcbs.beans;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
+import org.hibernate.Transaction;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -101,7 +103,7 @@ public class ViajeSrv implements ViajeLocalApi {
 		return viajes;
 	}
 
-	public List<DataViaje> buscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina, DataTenant tenant) {
+	public List<DataViaje> buscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant) {
 		List<DataViaje> viajes = new ArrayList();
 
 		try {
@@ -117,7 +119,12 @@ public class ViajeSrv implements ViajeLocalApi {
 				String myDate = new SimpleDateFormat("yyyy-MM-dd").format(filtro.getFechaSalida());
 				Date fromDate = df.parse(myDate + " 00:00:00");
 				Date toDate = df.parse(myDate + " 23:59:59");
-
+				if(cantidadDias != null){
+					Calendar c = Calendar.getInstance(); 
+					c.setTime(filtro.getFechaSalida()); 
+					c.add(Calendar.DATE, cantidadDias);
+					toDate = df.parse(new SimpleDateFormat("yyyy-MM-dd").format(c.getTime()) + " 23:59:59");
+				}
 				criteria.add(Restrictions.between("fechaSalida", fromDate, toDate));
 			}
 			// if(filtro.getEmpleados() != null)
@@ -139,7 +146,12 @@ public class ViajeSrv implements ViajeLocalApi {
 				String myDate = new SimpleDateFormat("yyyy-MM-dd").format(filtro.getFechaSalida());
 				Date fromDate = df.parse(myDate + " 00:00:00");
 				Date toDate = df.parse(myDate + " 23:59:59");
-
+				if(cantidadDias != null){
+					Calendar c = Calendar.getInstance(); 
+					c.setTime(filtro.getFechaSalida()); 
+					c.add(Calendar.DATE, cantidadDias);
+					toDate = df.parse(new SimpleDateFormat("yyyy-MM-dd").format(c.getTime()) + " 23:59:59");
+				}
 				subquery.add(Restrictions.between("fechaSalida", fromDate, toDate));
 			}
 			if (filtro.genIdOrigen() != null)
@@ -163,6 +175,17 @@ public class ViajeSrv implements ViajeLocalApi {
 			log.info("#################################################################### " + e.getMessage());
 		}
 		return viajes;
+	}
+	
+	public void crearViajes(List<DataViaje> viajes, DataTenant tenant){
+		for ( int i=0; i<viajes.size(); i++ ) {
+		    em.persist(new Viaje(viajes.get(i),true));
+		    if ( i % 20 == 0 ) { //20, same as the JDBC batch size
+		        //flush a batch of inserts and release memory:
+		        em.flush();
+		        em.clear();
+		    }
+		}
 	}
 
 }

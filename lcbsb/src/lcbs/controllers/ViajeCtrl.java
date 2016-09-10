@@ -1,7 +1,11 @@
 package lcbs.controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +14,7 @@ import javax.ejb.EJB;
 import interfaces.IViaje;
 import lcbs.beans.EncomiendaSrv;
 import lcbs.interfaces.*;
+import lcbs.models.DiasSemana;
 import lcbs.shares.*;
 
 import javax.ejb.Stateless;
@@ -47,8 +52,8 @@ public class ViajeCtrl implements IViaje {
 	RecorridoLocalApi srvRecorrido;
 
 	@Override
-	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina, DataTenant tenant) {
-		return srvViaje.buscarViaje(filtro, pagina, ElementosPagina, tenant);
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant) {
+		return srvViaje.buscarViaje(filtro, cantidadDias, pagina, ElementosPagina, tenant);
 	}
 
 	@Override
@@ -339,6 +344,102 @@ public class ViajeCtrl implements IViaje {
 			}
 		}
 		return elegido.getMonto();
+	}
+	
+	@Override
+	public void crearViajesParaRecorridos(DataTenant tenant){
+		List<DataRecorrido> recs = srvRecorrido.obtenerRecorridos(1, 99999, tenant);
+		recs.stream().forEach((rec) -> {
+			crearViajesNuevoRecorrido(rec.getId(),tenant);
+		});
+	}
+	
+	@Override
+	public void crearViajesNuevoRecorrido(String recorridoId, DataTenant tenant){
+		List<DataViaje> aInsertar = new ArrayList<DataViaje>();
+		DataRecorrido rec = srvRecorrido.getRecorrido(recorridoId, tenant);
+		Date fechaDesde = new Date();
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(fechaDesde); 
+		c.add(Calendar.DATE, 15);
+		Date fechaHasta = c.getTime();
+		List<Date> listaDias = getDaysBetweenDates(fechaDesde, fechaHasta);
+		List<Date> yaAgregados = new ArrayList<Date>();
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		DataViaje filtro = new DataViaje();
+		filtro.setRecorrido(rec);
+		filtro.setFechaSalida(fechaDesde);
+		List<DataViaje> viajesExistentes = srvViaje.buscarViaje(filtro, 15, 1, 99999, tenant);
+		viajesExistentes.stream().forEach((day) -> {
+			try {
+				if(!yaAgregados.contains(formatter.parse(formatter.format(day.getFechaSalida())))){
+					yaAgregados.add(formatter.parse(formatter.format(day.getFechaSalida())));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		
+		rec.getHorarios().stream().forEach((hor) -> {
+			listaDias.stream().forEach((day) -> {
+				if(hor.getDiasEspecificos().size() > 0){
+					hor.getDiasEspecificos().stream().forEach((dEsp) -> {
+						try {
+							if(formatter.parse(formatter.format(day)).equals(formatter.parse(formatter.format(dEsp))) && !yaAgregados.contains(formatter.parse(formatter.format(day)))){
+								aInsertar.addAll(generarViajes(rec, formatter.parse(formatter.format(day)), hor.getHorarios()));
+								yaAgregados.add(formatter.parse(formatter.format(day)));
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					});
+				}
+			});
+			listaDias.stream().forEach((day) -> {
+				try {
+					if(hor.getDiasSemana().size() > 0 && !yaAgregados.contains(formatter.parse(formatter.format(day)))){
+						if((hor.getDiasSemana().contains(DataDiasSemana.Lunes) && getDayOfTheWeek(day) == 2)||(hor.getDiasSemana().contains(DataDiasSemana.Martes) && getDayOfTheWeek(day) == 3)||(hor.getDiasSemana().contains(DataDiasSemana.Miercoles) && getDayOfTheWeek(day) == 4)||(hor.getDiasSemana().contains(DataDiasSemana.Jueves) && getDayOfTheWeek(day) == 5)||(hor.getDiasSemana().contains(DataDiasSemana.Viernes) && getDayOfTheWeek(day) == 6)||(hor.getDiasSemana().contains(DataDiasSemana.Sabado) && getDayOfTheWeek(day) == 7)||(hor.getDiasSemana().contains(DataDiasSemana.Domingo) && getDayOfTheWeek(day) == 1)){
+							aInsertar.addAll(generarViajes(rec, formatter.parse(formatter.format(day)), hor.getHorarios()));
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+		});
+		srvViaje.crearViajes(aInsertar, tenant);
+	}
+	public static List<DataViaje> generarViajes(DataRecorrido rec, Date fecha, List<DataHorario> hor){
+		List<DataViaje> result = new ArrayList<DataViaje>();
+		hor.stream().forEach((horario) -> {
+			DataViaje nuevoViaje = new DataViaje();
+			nuevoViaje.setFechaSalida(fecha);
+			nuevoViaje.setHorario(horario);
+			nuevoViaje.setRecorrido(rec);
+			result.add(nuevoViaje);
+		});
+		return result;
+	}
+	
+	public static Integer getDayOfTheWeek(Date fecha){
+		Calendar c = Calendar.getInstance();
+		c.setTime(fecha);
+		return c.get(Calendar.DAY_OF_WEEK);
+	}
+	
+	public static List<Date> getDaysBetweenDates(Date startdate, Date enddate)
+	{
+	    List<Date> dates = new ArrayList<Date>();
+	    Calendar calendar = new GregorianCalendar();
+	    calendar.setTime(startdate);
+
+	    while (calendar.getTime().before(enddate))
+	    {
+	        Date result = calendar.getTime();
+	        dates.add(result);
+	        calendar.add(Calendar.DATE, 1);
+	    }
+	    return dates;
 	}
 
 }

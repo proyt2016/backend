@@ -36,8 +36,8 @@ public class ViajeRepo {
 	@EJB(lookup =  "java:app/lcbsb/ViajeCtrl!interfaces.IViaje")
 	IViaje ctrViaje;
 	
-	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina, DataTenant tenant){
-		return ctrViaje.BuscarViaje(filtro, pagina, ElementosPagina, tenant );
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant){
+		return ctrViaje.BuscarViaje(filtro, cantidadDias, pagina, ElementosPagina, tenant );
 	}
 
 	public List<DataViaje> viajesPorTerminal(String idterminal, Integer pagina, Integer ElementosPagina, DataTenant tenant){
@@ -193,5 +193,13 @@ public class ViajeRepo {
 
 	public Float getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant) {
 		return ctrViaje.getPrecioDePasaje(codigoOrigen, codigoDestino, codigoRecorrido, tenant);
+	}
+	
+	public void crearViajesNuevoRecorrido(String recorridoId, DataTenant tenant){
+		ctrViaje.crearViajesNuevoRecorrido(recorridoId, tenant);
+	}
+	
+	public void crearViajesParaRecorridos(DataTenant tenant){
+		ctrViaje.crearViajesParaRecorridos(tenant);
 	}
 }

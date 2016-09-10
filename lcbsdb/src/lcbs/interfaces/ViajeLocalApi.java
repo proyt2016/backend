@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.ejb.Local;
 
+import lcbs.models.Viaje;
 import lcbs.shares.DataTenant;
 import lcbs.shares.DataViaje;
 
@@ -17,5 +18,6 @@ public interface ViajeLocalApi {
 	public DataViaje getViaje(String via, DataTenant tenant);
 	public DataViaje crearViaje(DataViaje via, DataTenant tenant);
 	public void borrarViaje(String idViaje, DataTenant tenant);
-	public List<DataViaje> buscarViaje(DataViaje filtro, Integer pagina, Integer ElementosPagina, DataTenant tenant);
+	public List<DataViaje> buscarViaje(DataViaje filtro, Integer cantidadDias,Integer pagina, Integer ElementosPagina, DataTenant tenant);
+	public void crearViajes(List<DataViaje> viajes, DataTenant tenant);
 }

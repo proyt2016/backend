@@ -98,7 +98,6 @@
             </div>
           </div>
         </div>
-    	<div class="ln_solid"></div>
     	<div class="x_title">
 	         <h4> Email <a class="btn btn-default btn-xs" ng-click="addRelation('email')"><i class="fa fa-plus"></i></a></h4>
 	         <div class="clearfix"></div>
@@ -116,7 +115,6 @@
                 <a class="btn btn-default" style="margin:0;" ng-click="removeRelation('email', $index)"><i class="fa fa-remove"></i></a>
             </div>
         </div>
-        <div class="ln_solid"></div>
         <div class="x_title">
 	         <h4> Tel&eacute;fonos <a class="btn btn-default btn-xs" ng-click="addRelation('tels')"><i class="fa fa-plus"></i></a></h4>
 	         <div class="clearfix"></div>
@@ -134,9 +132,55 @@
                 <a class="btn btn-default" style="margin:0;" ng-click="removeRelation('tels', $index)"><i class="fa fa-remove"></i></a>
             </div>
         </div>
+        <div class="x_title">
+            <h2>Editar UI de las Aplicaciones de Android (Guarda y Encomiendas)</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="iconoEmpresa">iconoEmpresa</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" class="form-control col-md-7 col-xs-12" ng-model="configuracion.iconoEmpresa">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="colorFondosDePantalla">colorFondosDePantalla</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" class="form-control col-md-7 col-xs-12" ng-model="configuracion.colorFondosDePantalla">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="colorTitulo">colorTitulo</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" class="form-control col-md-7 col-xs-12" ng-model="configuracion.colorTitulo">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="colorTextoLista">colorTextoLista</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" class="form-control col-md-7 col-xs-12" ng-model="configuracion.colorTextoLista">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="colorFondoLista">colorFondoLista</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" class="form-control col-md-7 col-xs-12" ng-model="configuracion.colorFondoLista">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="colorBoton">colorBoton</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" class="form-control col-md-7 col-xs-12" ng-model="configuracion.colorBoton">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="colorLetras">colorLetras</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" class="form-control col-md-7 col-xs-12" ng-model="configuracion.colorLetras">
+          </div>
+        </div>
         <div class="ln_solid"></div>
         <div class="x_title">
-            <h2>Editar UI</h2>
+            <h2>Editar UI del Cliente</h2>
             <div class="clearfix"></div>
         </div>
         <div class="form-group">

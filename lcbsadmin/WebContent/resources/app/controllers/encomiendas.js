@@ -158,7 +158,7 @@
             	} else {
             		$scope.encomienda[evt.currentTarget.name] = {
             			id : evt.currentTarget.value,
-            			tipo : 'terminal'
+            			tipo : 'Terminal'
                     }
             	}
             }).on("select2:unselect", function (evt) { 
@@ -171,7 +171,7 @@
             }).on('select2:select', function (evt) {
                 $scope.filtro[evt.currentTarget.name] = {
                     id : evt.currentTarget.value,
-                    tipo : 'terminal'
+                    tipo : 'Terminal'
                 }
             }).on("select2:unselect", function (evt) { 
               $scope.filtro[evt.currentTarget.name] = null;

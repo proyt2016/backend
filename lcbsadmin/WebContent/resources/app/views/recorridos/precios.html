@@ -1,47 +1,50 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="page-title">
-    <div class="title_left">
-      <h3>Precios de recorrido</h3>
+    <div>
+      <h3>Precios para el recorrido {{recorrido.nombre}}</h3>
     </div>
   </div>
 </div>
 
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
-    <div class="x_title">
-      <h2>Precios para recorrido XXXX</h2>
-      <div class="clearfix"></div>
-    </div>
     <div class="x_content">
       <br>
-      <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" ng-submit="edit()">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <a class="btn btn-default" style="margin:0;" ng-click="addRelation()"><i class="fa fa-plus"></i></a>
-        </div>
-        <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="prec in precios" style="margin-top:10px;">
-          <div class="form-group">
-              <label>Origen</label>
-              <select class="form-control select2" style="width: 100%;" ng-model="prec.origen" required>
-                <option ng-repeat="iter in terminales" value="{{ $index }}">{{iter.nombre}}</option>
-              </select>
-          </div>
-          <div class="form-group">
-              <label>Destino</label>
-              <select class="form-control select2" style="width: 100%;" ng-model="prec.destino" required>
-                <option ng-repeat="iter in terminales" value="{{ $index }}">{{iter.nombre}}</option>
-              </select>
-          </div>
-          <div class="form-group">
-              <label>Precio</label>
-              <input type="text" step="0,01" class="form-control" ng-model="prec.monto">
-          </div>
-          <a class="btn btn-default" style="margin:0;" ng-click="removeRelation($index)"><i class="fa fa-remove"></i></a>
+      <form class="form-horizontal form-label-left" novalidate="" ng-submit="edit()">
+      	
+      	<div class="x_title">
+	         <h4>Agregar precios <a class="btn btn-default btn-xs" style="margin:0;" ng-click="addRelation()"><i class="fa fa-plus"></i></a>
+	         <div class="clearfix"></div>
+     	</div>
+        <div class="form-group">
+            <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="prec in precios" style="margin-top:10px;">
+                <div class="form-group">
+                    <label>Origen</label>
+                    <select class="form-control select2" style="width: 100%;" ng-model="prec.origen">
+		                <option ng-repeat="iter in terminales" value="{{ iter.id }}">{{iter.nombre}}</option>
+		            </select>
+                </div>
+                <div class="form-group">
+                    <label>Destino</label>
+		            <select class="form-control select2" style="width: 100%;" ng-model="prec.destino">
+		                <option ng-repeat="iter in terminales" value="{{ iter.id }}">{{iter.nombre}}</option>
+		            </select>
+                </div>
+                <div class="form-group">
+                	<label>Precio</label>
+              		<input type="text" step="0,01" style="width: 100%;" class="form-control" ng-model="prec.monto">
+                </div>
+                <div class="form-group">
+                	<label>&nbsp;</label>
+              		<a class="btn btn-default" style="width: 100%; margin:0;" ng-click="removeRelation($index)"><i class="fa fa-remove"></i></a>
+                </div>
+            </div>
         </div>
         
         <div class="ln_solid"></div>
         <div class="form-group">
           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-            <a href="#/perfil" class="btn btn-primary">Cancelar</a>
+            <a href="#/recorridos/edit/{{recorrido.id}}" class="btn btn-primary">Cancelar</a>
             <button class="btn btn-success" ng-disabled="saving">Guardar</button>
           </div>
         </div>

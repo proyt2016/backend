@@ -52,6 +52,14 @@
                 filtro.fechaIngreso = moment(filtro['fechaIngreso'], 'DD/MM/YYYY').format('YYYY-MM-DD');
             }
 
+            if(filtro['destino'] == null){
+                delete filtro['destino'];
+            }
+
+            if(filtro['origen'] == null){
+                delete filtro['origen'];
+            }
+
             encomiendasService.buscar(filtro).then(function (data) {
                 $scope.encomiendas = data;
             });

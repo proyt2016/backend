@@ -19,11 +19,11 @@
     <div class="x_content">
       <div id="map" class="col-md-12"></div>
       <br>
-      <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" ng-submit="addEdit()">
+      <form class="form-horizontal form-label-left" novalidate="" ng-submit="addEdit()">
         <div ng-show="false" class="form-group">
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="ubicacionMapa" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="puntosrecorrido.ubicacionMapa">
-            <input type="text" id="ubicacionMapaOriginal" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="ubicacionInicial">
+            <input type="text" id="ubicacionMapa" class="form-control col-md-7 col-xs-12" ng-model="puntosrecorrido.ubicacionMapa">
+            <input type="text" id="ubicacionMapaOriginal" class="form-control col-md-7 col-xs-12" ng-model="ubicacionInicial">
           </div>
         </div>
         <div class="form-group">
@@ -55,9 +55,6 @@
               <input type="checkbox" id="encomiendas" ng-model="puntosrecorrido.aceptaEncomiendas" class="flat" checked="checked">
           </div>
         </div>
-        
-        
-        
         
         <div ng-show="tipodepunto == 'Terminal'" class="form-group">
           <div class="col-md-12 col-sm-12 col-xs-12">

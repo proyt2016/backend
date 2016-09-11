@@ -1,13 +1,12 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="page-title">
-    <div class="title_left">
-      <h3>Horarios de Recorrido {{recorrido.nombre}}</h3>
-    </div>
-
-    <div class="title_right">
+    <div>
+      <h3>Horarios de Recorrido {{recorrido.nombre}}
       <div class="pull-right">
+      	<a href="#/recorridos/edit/{{recorrido.id}}" class="btn btn-primary">Vovler al recorrido</a>
         <a href="#/recorridos/horariosadd/{{recorrido.id}}" class="btn btn-info">Agregar</a>
       </div>
+      </h3>
     </div>
   </div>
 </div>

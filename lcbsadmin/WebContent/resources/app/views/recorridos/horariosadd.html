@@ -1,7 +1,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="page-title">
-    <div class="title_left">
-      <h3>Agregar horarios de recorrido {{recorrido.horario}}</h3>
+    <div>
+      <h3>Agregar horarios de recorrido {{recorrido.nombre}}</h3>
     </div>
   </div>
 </div>
@@ -14,18 +14,16 @@
     </div>
     <div class="x_content">
       <br>
-      <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" ng-submit="add()">
-
+      <form class="form-horizontal form-label-left" novalidate="" ng-submit="add()">
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="nombre" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="horario.nombre"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+            <input type="text" class="form-control col-md-7 col-xs-12"  ng-model="horario.nombre">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de horario <span class="required">*</span>
-          </label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de horario</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="radio">
               <label>
@@ -93,26 +91,24 @@
           </div>
         </div>
         <div class="form-group" ng-show="horario.tipo == 'diasEspecificos'">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="feca">Fecha <span class="required">*</span>
-          </label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="feca">Fecha</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="fecha" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="diaEspecifico">
+            <input type="text" id="fecha" class="form-control col-md-7 col-xs-12" ng-model="diaEspecifico">
           </div>
         </div>
+        
+        <div class="x_title">
+	         <h4>Agregar horas <a class="btn btn-default btn-xs" style="margin:0;" ng-click="addRelation()"><i class="fa fa-plus"></i></a></h4>
+	         <div class="clearfix"></div>
+     	</div>
         <div class="form-group">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-              <a class="btn btn-default" style="margin:0;" ng-click="addRelation()"><i class="fa fa-plus"></i></a>
-          </div>
-          <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="hor in horariosRows" style="margin-top:10px;">
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Hora <span class="required">*</span>
-              </label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="hora" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="hor.nombre"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
-              </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="hor in horariosRows" style="margin-top:10px;">
+                <div class="form-group">
+                    <label>Hora</label>
+                    <input type="text" class="form-control" ng-model="hor.nombre">
+                </div>
+                <a class="btn btn-default" style="margin:0;" ng-click="removeRelation($index)"><i class="fa fa-remove"></i></a>
             </div>
-            <a class="btn btn-default" style="margin:0;" ng-click="removeRelation($index)"><i class="fa fa-remove"></i></a>
-          </div>
         </div>
         <div class="ln_solid"></div>
         <div class="form-group">

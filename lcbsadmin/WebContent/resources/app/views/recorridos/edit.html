@@ -6,12 +6,8 @@
     </div>
     <div class="title_right">
       <div class="pull-right">
+      <a href="#/recorridos/precios/{{recorrido.id}}" class="btn btn-info">Precios</a>
         <a href="#/recorridos/horarioslist/{{recorrido.id}}" class="btn btn-info">Horarios</a>
-      </div>
-    </div>
-    <div class="title_right">
-      <div class="pull-right">
-        <a href="#/recorridos/precios/{{recorrido.id}}" class="btn btn-info">Precios</a>
       </div>
     </div>
   </div>
@@ -25,13 +21,11 @@
     </div>
     <div class="x_content">
       <br>
-      <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" ng-submit="edit()">
-
+      <form class="form-horizontal form-label-left" novalidate="" ng-submit="edit()">
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span>
-          </label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">*</span></label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="nombre" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="5536" ng-model="recorrido.nombre"><ul class="parsley-errors-list" id="parsley-id-5536"></ul>
+            <input type="text" id="nombre" class="form-control col-md-7 col-xs-12" ng-model="recorrido.nombre">
           </div>
         </div>
         <div class="form-group">

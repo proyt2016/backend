@@ -3,11 +3,11 @@
     angular.module('lacbus').controller('recorridosCtrl', ['$scope', '$routeParams', 'recorridosService', 'puntosrecorridoService', recorridosCtrl]);
 
     function recorridosCtrl($scope, $routeParams, recorridosService, puntosrecorridoService) {
-        $scope.recorridos     = [];
-        $scope.recorrido     = null;
-        $scope.showAlert    = false;
-        $scope.puntosrecorridoLst     = [];
-        $scope.puntosDelRecorrido     = [];
+        $scope.recorridos = [];
+        $scope.recorrido = null;
+        $scope.showAlert = false;
+        $scope.puntosrecorridoLst = [];
+        $scope.puntosDelRecorrido = [];
         $scope.tipodepunto = "Parada";
 
         var initialize = function(){
@@ -92,7 +92,6 @@
 
         $scope.removeRelation = function (index) {
             $scope.puntosDelRecorrido.splice(index, 1);
-            
         }
 
         var initMap = function () {

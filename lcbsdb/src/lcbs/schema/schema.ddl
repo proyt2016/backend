@@ -11,11 +11,13 @@
         colorTextoLista varchar(255),
         colorTitulo varchar(255),
         css Text,
+        diasCreacionViaje int4,
         iconoEmpresa varchar(255),
         nombre varchar(255),
         pagoOnlineCoche boolean,
         reservaPasajes boolean,
         trasferirPasajes boolean,
+        ultimaCreacionDeViajes timestamp,
         urlAcceso varchar(255),
         urlLdap varchar(255),
         usuarioLdap varchar(255),
@@ -1037,6 +1039,50 @@ INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('cc9b5ea9-f
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('8d957d43-1997-4617-9375-381e73b04024', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
 
 INSERT INTO encomienda (id, codigoencomienda, eliminada, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235b',1,false, 'c6253122-990a-4891-9456-6d5c68f0c2a9', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+
+INSERT INTO grupohorario (id, nombre, tipo) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', 'Diario', 'diasSemana');
+INSERT INTO grupohorario (id, nombre, tipo) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'Diario', 'diasSemana');
+INSERT INTO recorrido_grupohorario (recorrido_id, horarios_id, list_index) VALUES ('11f80976-5b98-4672-84e9-7a249c23b7ad', '3f205ba5-126c-4715-b264-4ac838641149', 0);
+INSERT INTO recorrido_grupohorario (recorrido_id, horarios_id, list_index) VALUES ('cf552147-c495-4572-ae1c-22796aeec1e2', '28393733-6222-433d-850a-92dd7cdd8703', 0);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', 'Lunes', 0);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', 'Domingo', 1);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', 'Martes', 2);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', 'Miercoles', 3);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', 'Jueves', 4);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', 'Viernes', 5);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', 'Sabado', 6);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'Lunes', 0);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'Domingo', 1);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'Martes', 2);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'Miercoles', 3);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'Jueves', 4);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'Viernes', 5);
+INSERT INTO dias (grupohorarioid, diassemana, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'Sabado', 6);
+INSERT INTO horario (id, nombre) VALUES ('03a54d05-c336-4ecf-9ac7-4fd3332f1bb1', '08:00');
+INSERT INTO horario (id, nombre) VALUES ('b95f3290-7040-4461-88c1-464c0a916622', '10:00');
+INSERT INTO horario (id, nombre) VALUES ('feeca242-91c7-4c72-bb75-0f94bfb767ef', '12:00');
+INSERT INTO horario (id, nombre) VALUES ('95279f7e-be46-47f7-9a2a-25935ce098d3', '14:00');
+INSERT INTO horario (id, nombre) VALUES ('7ae662ba-7f35-4078-b030-b49e4b97df3f', '16:00');
+INSERT INTO horario (id, nombre) VALUES ('e3a60fad-f8db-4260-ad69-c17c2b4a6913', '06:00');
+INSERT INTO horario (id, nombre) VALUES ('fbaceae8-412c-48c0-ac2f-e99a4505632d', '09:00');
+INSERT INTO horario (id, nombre) VALUES ('b3413122-baed-48b5-b577-647d0d3aba8f', '12:00');
+INSERT INTO horario (id, nombre) VALUES ('b7b5467b-470d-43fc-98f2-45b64385f569', '15:00');
+INSERT INTO horario (id, nombre) VALUES ('f0f4e1a8-0ba0-4376-8f87-ebe8ae1d3bb9', '18:00');
+INSERT INTO horario (id, nombre) VALUES ('2642a5ab-23fb-4a97-88b8-d12e00a7f932', '21:00');
+INSERT INTO horario (id, nombre) VALUES ('7c110f0d-b980-4811-912c-79bcb40a0936', '00:00');
+INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', '03a54d05-c336-4ecf-9ac7-4fd3332f1bb1', 0);
+INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', 'b95f3290-7040-4461-88c1-464c0a916622', 1);
+INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', 'feeca242-91c7-4c72-bb75-0f94bfb767ef', 2);
+INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', '95279f7e-be46-47f7-9a2a-25935ce098d3', 3);
+INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', '7ae662ba-7f35-4078-b030-b49e4b97df3f', 4);
+INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'e3a60fad-f8db-4260-ad69-c17c2b4a6913', 0);
+INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'fbaceae8-412c-48c0-ac2f-e99a4505632d', 1);
+INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'b3413122-baed-48b5-b577-647d0d3aba8f', 2);
+INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'b7b5467b-470d-43fc-98f2-45b64385f569', 3);
+INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'f0f4e1a8-0ba0-4376-8f87-ebe8ae1d3bb9', 4);
+INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', '2642a5ab-23fb-4a97-88b8-d12e00a7f932', 5);
+INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', '7c110f0d-b980-4811-912c-79bcb40a0936', 6);
+
 
 
     create sequence hibernate_sequence;

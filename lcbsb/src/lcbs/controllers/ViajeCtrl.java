@@ -1,6 +1,7 @@
 package lcbs.controllers;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,9 +51,13 @@ public class ViajeCtrl implements IViaje {
 
 	@EJB(lookup = "java:app/lcbsdb/RecorridoSrv!lcbs.interfaces.RecorridoLocalApi")
 	RecorridoLocalApi srvRecorrido;
+	
+	@EJB(lookup = "java:app/lcbsdb/ConfiguracionEmpresaSrv!lcbs.interfaces.ConfiguracionEmpresaLocalApi")
+	ConfiguracionEmpresaLocalApi srvConfiguracion;
 
 	@Override
-	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant) {
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant) throws ParseException {
+		crearViajesParaRecorridos(tenant);
 		return srvViaje.buscarViaje(filtro, cantidadDias, pagina, ElementosPagina, tenant);
 	}
 
@@ -347,21 +352,33 @@ public class ViajeCtrl implements IViaje {
 	}
 	
 	@Override
-	public void crearViajesParaRecorridos(DataTenant tenant){
+	public void crearViajesParaRecorridos(DataTenant tenant) throws ParseException{
 		List<DataRecorrido> recs = srvRecorrido.obtenerRecorridos(1, 99999, tenant);
+		DataConfiguracionEmpresa conf = srvConfiguracion.getConfiguracionEmpresa(tenant);
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		if(conf.getUltimaCreacionDeViajes() != null && formatter.parse(formatter.format(conf.getUltimaCreacionDeViajes())).equals(formatter.parse(formatter.format(new Date()))))
+			return;
 		recs.stream().forEach((rec) -> {
-			crearViajesNuevoRecorrido(rec.getId(),tenant);
+			try {
+				crearViajesNuevoRecorrido(rec.getId(),tenant);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		});
+		conf.setUltimaCreacionDeViajes(formatter.parse(formatter.format(new Date())));
+		srvConfiguracion.modificarCuponera(conf, tenant);
 	}
 	
 	@Override
 	public void crearViajesNuevoRecorrido(String recorridoId, DataTenant tenant){
 		List<DataViaje> aInsertar = new ArrayList<DataViaje>();
 		DataRecorrido rec = srvRecorrido.getRecorrido(recorridoId, tenant);
+		DataConfiguracionEmpresa conf = srvConfiguracion.getConfiguracionEmpresa(tenant);
+		Integer diasACrear = conf.getDiasCreacionViaje();
 		Date fechaDesde = new Date();
 		Calendar c = Calendar.getInstance(); 
 		c.setTime(fechaDesde); 
-		c.add(Calendar.DATE, 15);
+		c.add(Calendar.DATE, diasACrear);
 		Date fechaHasta = c.getTime();
 		List<Date> listaDias = getDaysBetweenDates(fechaDesde, fechaHasta);
 		List<Date> yaAgregados = new ArrayList<Date>();
@@ -369,7 +386,7 @@ public class ViajeCtrl implements IViaje {
 		DataViaje filtro = new DataViaje();
 		filtro.setRecorrido(rec);
 		filtro.setFechaSalida(fechaDesde);
-		List<DataViaje> viajesExistentes = srvViaje.buscarViaje(filtro, 15, 1, 99999, tenant);
+		List<DataViaje> viajesExistentes = srvViaje.buscarViaje(filtro, diasACrear, 1, 99999, tenant);
 		viajesExistentes.stream().forEach((day) -> {
 			try {
 				if(!yaAgregados.contains(formatter.parse(formatter.format(day.getFechaSalida())))){

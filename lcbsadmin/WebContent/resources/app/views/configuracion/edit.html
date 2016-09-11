@@ -78,7 +78,13 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="validesReservasHoras">Valides de reservas en horas</label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="diasCreacionViaje">Valides de reservas en horas</label>
+          <div class="col-md-1 col-sm-1 col-xs-12">
+            <input type="number" id="diasCreacionViaje" class="form-control" ng-model="configuracion.diasCreacionViaje">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="validesReservasHoras">Cantiadad de dias para autogenerar viajes</label>
           <div class="col-md-1 col-sm-1 col-xs-12">
             <input type="text" id="validesReservasHoras" class="form-control" ng-model="configuracion.validesReservasHoras">
           </div>

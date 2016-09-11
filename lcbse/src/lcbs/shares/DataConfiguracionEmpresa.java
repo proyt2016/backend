@@ -1,5 +1,6 @@
 package lcbs.shares;
 
+import java.util.Date;
 import java.util.List;
 
 public class DataConfiguracionEmpresa{
@@ -28,12 +29,14 @@ public class DataConfiguracionEmpresa{
     private String colorFondoLista;
     private String colorBoton;
     private String colorLetras;
+    private Integer diasCreacionViaje;
+    private Date ultimaCreacionDeViajes;
 
     public DataConfiguracionEmpresa() {
        
     }
     
-    public DataConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<DataTelefono> tels, List<DataEmail> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css, String icEmp, String colFondPant, String colTit, String colTextLst, String colFondLst, String colBtn, String colLetra) {
+    public DataConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<DataTelefono> tels, List<DataEmail> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css, String icEmp, String colFondPant, String colTit, String colTextLst, String colFondLst, String colBtn, String colLetra, Integer diasC, Date ultCreaViaje) {
         this.id = id;
         this.nombre = nom;
         this.aceptaCuponera = acCup;
@@ -56,6 +59,8 @@ public class DataConfiguracionEmpresa{
         this.colorFondoLista = colFondLst;
         this.colorBoton = colBtn;
         this.colorLetras = colLetra;
+        this.diasCreacionViaje = diasC;
+        this.ultimaCreacionDeViajes = ultCreaViaje;
     }
     
     public void setId(String val){
@@ -231,5 +236,21 @@ public class DataConfiguracionEmpresa{
 	
 	public String getColorLetras(){
 	    return this.colorLetras;
+	}
+	
+	public void setDiasCreacionViaje(Integer val){
+	    this.diasCreacionViaje = val;
+	}
+	
+	public Integer getDiasCreacionViaje(){
+	    return this.diasCreacionViaje;
+	}
+	
+	public void setUltimaCreacionDeViajes(Date val){
+	    this.ultimaCreacionDeViajes = val;
+	}
+	
+	public Date getUltimaCreacionDeViajes(){
+	    return this.ultimaCreacionDeViajes;
 	}
 }

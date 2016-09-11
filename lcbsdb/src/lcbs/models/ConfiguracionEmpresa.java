@@ -4,6 +4,7 @@ import java.io.Serializable;
 import lcbs.shares.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -59,12 +60,14 @@ public class ConfiguracionEmpresa implements Serializable{
     private String colorFondoLista;
     private String colorBoton;
     private String colorLetras;
+    private Integer diasCreacionViaje;
+    private Date ultimaCreacionDeViajes;
 
     public ConfiguracionEmpresa() {
        
     }
     
-    public ConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<Telefono> tels, List<Email> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css, String icEmp, String colFondPant, String colTit, String colTextLst, String colFondLst, String colBtn, String colorLetras) {
+    public ConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<Telefono> tels, List<Email> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css, String icEmp, String colFondPant, String colTit, String colTextLst, String colFondLst, String colBtn, String colorLetras, Integer diasC, Date ultCreaViaje) {
         this.id = id;
         this.nombre = nom;
         this.aceptaCuponera = acCup;
@@ -87,6 +90,8 @@ public class ConfiguracionEmpresa implements Serializable{
         this.colorFondoLista = colFondLst;
         this.colorBoton = colBtn;
         this.colorLetras = colorLetras;
+        this.diasCreacionViaje = diasC;
+        this.ultimaCreacionDeViajes = ultCreaViaje;
     }
     
     public ConfiguracionEmpresa(DataConfiguracionEmpresa dt){
@@ -125,6 +130,8 @@ public class ConfiguracionEmpresa implements Serializable{
         this.setColorFondoLista(dt.getColorFondoLista());
         this.setColorBoton(dt.getColorBoton());
         this.setColorLetras(dt.getColorLetras());
+        this.setDiasCreacionViaje(dt.getDiasCreacionViaje());
+        this.setUltimaCreacionDeViajes(dt.getUltimaCreacionDeViajes());
     }
     
     public DataConfiguracionEmpresa getDatatype(){
@@ -163,6 +170,8 @@ public class ConfiguracionEmpresa implements Serializable{
     	result.setColorFondoLista(this.getColorFondoLista());
     	result.setColorBoton(this.getColorBoton());
     	result.setColorLetras(this.getColorLetras());
+    	result.setDiasCreacionViaje(this.getDiasCreacionViaje());
+    	result.setUltimaCreacionDeViajes(this.getUltimaCreacionDeViajes());
     	return result;
     }
     
@@ -340,5 +349,21 @@ public class ConfiguracionEmpresa implements Serializable{
 	
 	public String getColorLetras(){
 	    return this.colorLetras;
+	}
+	
+	public void setDiasCreacionViaje(Integer val){
+	    this.diasCreacionViaje = val;
+	}
+	
+	public Integer getDiasCreacionViaje(){
+	    return this.diasCreacionViaje;
+	}
+	
+	public void setUltimaCreacionDeViajes(Date val){
+	    this.ultimaCreacionDeViajes = val;
+	}
+	
+	public Date getUltimaCreacionDeViajes(){
+	    return this.ultimaCreacionDeViajes;
 	}
 }

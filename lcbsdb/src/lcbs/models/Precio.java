@@ -38,13 +38,15 @@ public class Precio implements Serializable{
       
     }
     
-    public Precio(PuntoRecorrido orig, PuntoRecorrido dest, Float monto) {
-        this.origen = orig;
+    public Precio(String id,PuntoRecorrido orig, PuntoRecorrido dest, Float monto) {
+    	this.id = id;
+    	this.origen = orig;
         this.destino = dest;
         this.monto = monto;
     }
     
     public Precio(DataPrecio dt){
+    	this.setId(dt.getId());
     	if(dt.getOrigen() != null){
 	    	if(dt.getOrigen() instanceof DataTerminal){
 	    		this.setOrigen(new Terminal((DataTerminal)dt.getOrigen()));
@@ -64,6 +66,7 @@ public class Precio implements Serializable{
     
     public DataPrecio getDatatype(){
     	DataPrecio result = new DataPrecio();
+    	result.setId(this.getId());
     	if(this.getOrigen() != null){
     		PuntoRecorrido origen = HibernateUtils.initializeAndUnproxy(this.getOrigen());
 	    	if(origen instanceof Terminal){

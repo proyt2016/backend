@@ -1,5 +1,6 @@
 package lcbs.api.rest;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +66,7 @@ public class ViajeApi extends BaseApi{
 	
 	@POST
 	@Path("/buscarviaje/{pagina}/{elementosPagina}")
-	public List<DataViajeConvertor> BuscarViaje(DataViaje filtro, @PathParam("pagina") final Integer pagina, @PathParam("elementosPagina") final Integer ElementosPagina){
+	public List<DataViajeConvertor> BuscarViaje(DataViaje filtro, @PathParam("pagina") final Integer pagina, @PathParam("elementosPagina") final Integer ElementosPagina) throws ParseException{
 		List<DataViajeConvertor> result = new ArrayList<DataViajeConvertor>();
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		repo.BuscarViaje(filtro, null, pagina, ElementosPagina, tenant).forEach((viaje)->{
@@ -352,8 +353,8 @@ public class ViajeApi extends BaseApi{
 	}
 	
 	@GET
-	@Path("/crearViajesNuevoRecorrido/")
-	public void crearViajesParaRecorridos(){
+	@Path("/crearviajespararecorridos/")
+	public void crearViajesParaRecorridos() throws ParseException{
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		repo.crearViajesParaRecorridos(tenant);
 	}

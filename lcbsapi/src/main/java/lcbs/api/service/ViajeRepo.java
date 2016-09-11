@@ -16,6 +16,7 @@
  */
 package lcbs.api.service;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +37,7 @@ public class ViajeRepo {
 	@EJB(lookup =  "java:app/lcbsb/ViajeCtrl!interfaces.IViaje")
 	IViaje ctrViaje;
 	
-	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant){
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant) throws ParseException{
 		return ctrViaje.BuscarViaje(filtro, cantidadDias, pagina, ElementosPagina, tenant );
 	}
 
@@ -199,7 +200,7 @@ public class ViajeRepo {
 		ctrViaje.crearViajesNuevoRecorrido(recorridoId, tenant);
 	}
 	
-	public void crearViajesParaRecorridos(DataTenant tenant){
+	public void crearViajesParaRecorridos(DataTenant tenant) throws ParseException{
 		ctrViaje.crearViajesParaRecorridos(tenant);
 	}
 }

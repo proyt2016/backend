@@ -40,6 +40,7 @@ public class ConfiguracionEmpresaSrv implements ConfiguracionEmpresaLocalApi {
         }else{
         	DataConfiguracionEmpresa newConf = new DataConfiguracionEmpresa();
         	newConf.setNombre("Nueva empresa");
+        	newConf.setDiasCreacionViaje(30);
         	newConf = crearConfiguracionEmpresa(newConf, tenant);
         	conf = new ConfiguracionEmpresa(newConf);
         }

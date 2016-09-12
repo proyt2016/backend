@@ -7,7 +7,7 @@
 </div>
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
-      <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" ng-submit="buscar()">
+      <form class="form-horizontal form-label-left" novalidate="" ng-submit="buscar()">
 
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="origen">Origen
@@ -81,16 +81,14 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>C&eacute;dula de emisor</th>
-            <th>C&eacute;dula de receptor</th>
-            <th>Direcci&oacute;n de receptor</th>
+            <th>Emisor</th>
+            <th>Receptor</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="encomienda in encomiendas">
-            <td>{{encomienda.ciReceptor}}</td>
-            <td>{{encomienda.ciEmisor}}</td>
-            <td>{{encomienda.direccionReceptor}}</td>
+          	<td>{{ getEmisor(encomienda) }}</td>
+            <td>{{ getReceptor(encomienda) }}</td>
             <td>
               <div class="btn-group">
                 <a href="#/encomiendas/edit/{{encomienda.id}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>

@@ -18,9 +18,9 @@
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="origen">Origen <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <select class="form-control select2" style="width: 100%;" required name="origen">
+            <select class="form-control" style="width: 100%;" required name="origen">
             	<option></option>
-              	<option ng-repeat="iter in terminales" value="{{ iter.id }}">{{iter.nombre}}</option>
+              	<option ng-repeat="iter in terminales" value="{{ iter.id }}" ng-selected="iter.id == encomienda.origen.id">{{iter.nombre}}</option>
             </select>
           </div>
         </div>
@@ -28,9 +28,9 @@
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="destino">Destino <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <select class="form-control select2" style="width: 100%;" required name="destino">
+            <select class="form-control" style="width: 100%;" required name="destino">
             	<option></option>
-              	<option ng-repeat="iter in terminales" value="{{ iter.id }}">{{iter.nombre}}</option>
+              	<option ng-repeat="iter in terminales" value="{{ iter.id }}" ng-selected="iter.id == encomienda.destino.id">{{iter.nombre}}</option>
             </select>
           </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Emisor <span class="required">*</span></label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="nombre" required="required" class="form-control col-md-7 col-xs-12" ng-model="emisorStrg" ng-blur="buscarUsuario('emisorStrg', 'emisor')">
+            <input type="text" id="nombre" class="form-control col-md-7 col-xs-12" ng-model="emisorStrg" ng-blur="buscarUsuario('emisorStrg', 'emisor')">
           	<p class="help-block">Si el emisor esta registrado ingrese el email para buscar sus datos</p>
           </div>
         </div>
@@ -96,7 +96,7 @@
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="reglaCobro">Regla de cobro <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <select class="form-control select2" style="width: 100%;" required name="reglaCobro">
+            <select class="form-control" style="width: 100%;" required name="reglaCobro">
             	<option></option>
               	<option ng-repeat="iter in reglasCobro" value="{{ iter.id }}">{{iter.nombre}}</option>
             </select>

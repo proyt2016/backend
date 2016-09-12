@@ -27,6 +27,14 @@
             if(id){
                 encomiendasService.getId(id).then(function (data) {
                     $scope.encomienda = data;
+                    
+                    if(data.emisor){
+                    	$scope.emisorStrg = data.emisor.email.email;
+                    }
+                    
+                    if(data.emisor){
+                    	$scope.receptorStrg = data.receptor.email.email;
+                    }
                 });
             }
             
@@ -141,6 +149,30 @@
                     }
                 );
             }
+        }
+        
+        $scope.getEmisor = function(encomienda) {
+        	if(encomienda.ciEmisor){
+        		return encomienda.ciEmisor;
+        	}
+        	
+        	if(encomienda.emisor){
+        		return encomienda.emisor.nombrePila + ' ' + encomienda.emisor.apellido;
+        	}
+        	
+        	return 'No usuario';
+        }
+        
+        $scope.getReceptor = function(encomienda) {
+        	if(encomienda.ciReceptor){
+        		return encomienda.ciReceptor;
+        	}
+        	
+        	if(encomienda.receptor){
+        		return encomienda.receptor.nombrePila + ' ' + encomienda.receptor.apellido;
+        	}
+        	
+        	return 'No usuario';
         }
 
         initialize();

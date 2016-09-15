@@ -32,7 +32,7 @@
                     	$scope.emisorStrg = data.emisor.email.email;
                     }
                     
-                    if(data.emisor){
+                    if(data.receptor){
                     	$scope.receptorStrg = data.receptor.email.email;
                     }
                 });
@@ -121,7 +121,6 @@
         }
 
         $scope.borrar = function (index) {
-            $scope.saving = true;
             var encomienda = this.encomienda;
 
             var r = confirm("Seguro que quiere borrar?");
@@ -129,11 +128,6 @@
                 encomiendasService.borrar(encomienda.id).then(
                  function () {
                      $scope.encomiendas.splice(index, 1);
-                     $scope.saving = false;
-
-                 }, function () {
-                     $scope.saving = false;
-
                  }
              );
             }

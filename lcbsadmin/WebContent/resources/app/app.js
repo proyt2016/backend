@@ -16,21 +16,15 @@
 
 		// ruta de viajes
 		$routeProvider.when("/viajes", {
-		    templateUrl : "app/views/viajes/list.html",
+		    templateUrl : "app/views/viajes/search.html",
 		    controller  : 'viajesCtrl'
-		}).when("/viajes/add", {
-		    templateUrl : "app/views/viajes/add.html",
-		    controller  : 'viajesCtrl'
-		}).when("/viajes/edit/:id", {
-		    templateUrl : "app/views/viajes/edit.html",
+		}).when("/viajes/detalle/:id", {
+		    templateUrl : "app/views/viajes/details.html",
 		    controller  : 'viajesCtrl'
 		});
 
 		// ruta de encomiendas
-		$routeProvider.when("/encomiendas", {
-		    templateUrl : "app/views/encomiendas/list.html",
-		    controller  : 'encomiendasCtrl'
-		}).when("/encomiendas/add", {
+		$routeProvider.when("/encomiendas/add", {
 		    templateUrl : "app/views/encomiendas/add.html",
 		    controller  : 'encomiendasCtrl'
 		}).when("/encomiendas/search", {

@@ -46,8 +46,8 @@
             //     return;
             // }
 
-            if(this.filter['fechaIda']){
-                filtrosIda.fechaSalida = moment(this.filter['fechaIda'], 'DD/MM/YYYY').format('YYYY-MM-DD');
+            if(this.filter['fechaSalida']){
+                filtrosIda.fechaSalida = moment(this.filter['fechaSalida'], 'DD/MM/YYYY').format('YYYY-MM-DD');
             }
 
             if(this.filter['origen']){

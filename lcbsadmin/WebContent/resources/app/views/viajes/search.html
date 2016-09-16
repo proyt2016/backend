@@ -60,7 +60,7 @@
 	        </tr>
 	        <tr ng-repeat="resultado in resultados">
 	          <td>{{ resultado.fechaSalida | date : 'dd/MM/yy' }}</td>
-	          <td>{{ resultado.horario }}</td>
+	          <td>{{ resultado.horario.nombre }}</td>
 	          <td>{{ resultado.recorrido.puntosDeRecorrido[0].nombre }}</td>
 	          <td>{{ resultado.recorrido.puntosDeRecorrido[resultado.recorrido.puntosDeRecorrido.length - 1].nombre }}</td>
 	          <td>

@@ -28,6 +28,16 @@
                         $scope.comprar['origen']    = '0';
                         $scope.comprar['destino']   = datos.recorrido.puntosDeRecorrido.length - 1 + '';
                         
+                        var origen = datos.recorrido.puntosDeRecorrido[$scope.comprar.origen];
+                        var destino = datos.recorrido.puntosDeRecorrido[$scope.comprar.destino];
+                        for(var i in datos.recorrido.precios){
+                            var precio = datos.recorrido.precios[i];
+                            
+                            if(precio['origen'].id == origen.id && precio['destino'].id == destino.id){
+                            	$scope.comprar['precio'] = precio['monto'];
+                            }
+                        }
+                        
                         $scope.recorrido = {
                             visible: true,
                             geodesic: true,
@@ -66,6 +76,20 @@
             viajeService.getTerminales().then(function (data){
                 $scope.terminales = data;
             });
+        }
+        
+        $scope.calcularPrecio = function(){
+        	var viaje = this.viaje;
+        	var puntosDeRecorrido = viaje.recorrido.puntosDeRecorrido;
+        	var origen = puntosDeRecorrido[$scope.comprar.origen];
+            var destino = puntosDeRecorrido[$scope.comprar.destino];
+            for(var i in viaje.recorrido.precios){
+                var precio = viaje.recorrido.precios[i];
+                
+                if(precio['origen'].id == origen.id && precio['destino'].id == destino.id){
+                	$scope.comprar['precio'] = precio['monto'];
+                }
+            }
         }
 
         $scope.buscarUsuario = function(){

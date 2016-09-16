@@ -18,10 +18,7 @@
         <hr>
         <p><i class="fa fa-map-marker margin-r-5"></i> {{ viaje.recorrido.nombre }}</p>
         <hr>
-        <p><i class="fa fa-calendar margin-r-5"></i> {{ viaje.salida }} a {{ viaje.llegada }}</p>
-        <hr>
-        <strong><i class="fa fa-file-text-o margin-r-5"></i> Descripci&oacute;n</strong>
-        <p>{{ viaje.descripcion }}</p>
+        <p><i class="fa fa-calendar margin-r-5"></i> {{ viaje.fechaSalida | date : 'dd/MM/yy' }} - {{ viaje.horario.nombre }}</p>
       </div>
     </div>
   </div>
@@ -75,7 +72,7 @@
               <tbody>
                 <tr>
                   <th style="width:50%">Precio por pasaje:</th>
-                  <td>$250,5</td>
+                  <td>${{precio}}</td>
                 </tr>
                 <tr>
                   <th>Cantidad de pasajes</th>
@@ -83,7 +80,7 @@
                 </tr>
                 <tr>
                   <th>Total:</th>
-                  <td>$250,5</td>
+                  <td>${{precio}}</td>
                 </tr>
               </tbody>
             </table>

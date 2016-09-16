@@ -1,11 +1,17 @@
 (function () {
 
-    angular.module('lacbus', ['ngRoute']);
+    angular.module('lacbus', ['ngRoute', 'uiGmapgoogle-maps']);
 
-    angular.module('lacbus').config(['$routeProvider', configFunction]);
+    angular.module('lacbus').config(['$routeProvider', 'uiGmapGoogleMapApiProvider', configFunction]);
 
     /*@ngInject*/
-    function configFunction($routeProvider) {
+    function configFunction($routeProvider, uiGmapGoogleMapApiProvider) {
+    	uiGmapGoogleMapApiProvider.configure({
+            key: 'AIzaSyBVL227yFvpTa6b0oolhl3PW_BPGLFMnwI',
+            v: '3.20', //defaults to latest 3.X anyhow
+            libraries: 'weather,geometry,visualization'
+        });
+    	
         // Routes
         $routeProvider.when("/", {
 		    templateUrl : "app/views/home.html",
@@ -142,8 +148,6 @@
 		    templateUrl : "app/views/puntosrecorrido/map.html",
 		    controller  : 'puntosrecorridoCtrl'
 		})
-
-		
     }
 
 })();

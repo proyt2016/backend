@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').controller('viajesCtrl', ['$scope', '$routeParams', 'viajeService', '$location', viajesCtrl]);
+    angular.module('lacbus').controller('viajesCtrl', ['$scope', '$routeParams', 'viajeService', '$location', 'uiGmapGoogleMapApi', viajesCtrl]);
 
-    function viajesCtrl($scope, $routeParams, viajeService, $location) {
+    function viajesCtrl($scope, $routeParams, viajeService, $location, uiGmapGoogleMapApi) {
         $scope.filtro = {
             idOrigen : null,
             idDestino : null
@@ -19,11 +19,47 @@
         var initialize = function(){
             var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null
             if(id){
-                viajeService.getId(id).then(function (datos) {
-                    $scope.viaje = datos;
+                $scope.map = { center: { latitude: -32.5383022, longitude: -58.0605055 }, zoom: 9 };
+        
+                uiGmapGoogleMapApi.then(function(){
+                    viajeService.getId(id).then(function (datos) {
+                        $scope.viaje = datos;
 
-                    $scope.comprar['origen']    = '0';
-                    $scope.comprar['destino']   = datos.recorrido.puntosDeRecorrido.length - 1 + '';
+                        $scope.comprar['origen']    = '0';
+                        $scope.comprar['destino']   = datos.recorrido.puntosDeRecorrido.length - 1 + '';
+                        
+                        $scope.recorrido = {
+                            visible: true,
+                            geodesic: true,
+                            stroke: {
+                                color: '#6060FB',
+                                weight: 3
+                            },
+                            icons: [{
+                                icon: {
+                                    path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW
+                                },
+                                offset: '25px',
+                                repeat: '80px'
+                            }],
+                            path : []
+                        };
+                        
+                        var puntosRecorrido = datos.recorrido.puntosDeRecorrido;
+                        
+                        for(var i in puntosRecorrido){
+                            var coords = puntosRecorrido[i].ubicacionMapa.split(",");
+                            
+                            if(i == 0){
+                                $scope.map.center = { latitude: coords[0], longitude: coords[1] };
+                            }
+                            
+                            $scope.recorrido.path.unshift({
+                                latitude: coords[0],
+                                longitude: coords[1]
+                            });
+                        }
+                    });
                 });
             }
             
@@ -77,18 +113,10 @@
                 return;
             }
 
-            if(!this.comprar['cantidad']){
-                mostrarNotificacion('error', 'Debe seleccionar la cantidad de pasajes');
-                return;
-            }
-
             var origen = viaje.recorrido.puntosDeRecorrido[this.comprar.origen];
             var destino = viaje.recorrido.puntosDeRecorrido[this.comprar.destino];
 
             var pasaje = {
-                comprador : {
-                    id : $scope.comprador.id
-                },
                 viaje : {
                     id : viaje.id 
                 },
@@ -101,13 +129,47 @@
                     tipo : destino.tipo
                 },
                 fechaCompra : moment().format('YYYY-MM-DD') 
-            }
+            };
+            
+            if($scope.comprador){
+            	pasaje['comprador'] = {
+            		id : $scope.comprador.id
+                };
+            };
+            
+            if($scope.ciUsuario){
+            	pasaje['ciPersona'] = $scope.ciUsuario;
+            };
             
             viajeService.comprar(pasaje).then(function (datos) {
-                mostrarNotificacion('success', 'Su compra se realizo con exito, que disfrute su viaje.', 'Compra exitosa.');
-                setTimeout(function(){ 
-                    $location.url('/viajes');
-                }, 3000);
+                mostrarNotificacion('success', 'Su compra se realizo con exito.', 'Compra exitosa.');
+                $location.url('/viajes');
+            });
+        }
+        
+        $scope.procesarReservar = function() {
+            var pasaje = {
+                viaje : {
+                    id : $scope.viaje.id
+                },
+                fechaReserva : moment().format('YYYY-MM-DD')
+            };
+            
+            if($scope.comprador){
+            	pasaje['usuarioReserva'] = {
+            		id : $scope.comprador.id
+                };
+            };
+            
+            if($scope.ciUsuario){
+            	pasaje['ciPersona'] = $scope.ciUsuario;
+            };
+            
+            console.log('aaaa');
+            
+            viajeService.reservar(pasaje).then(function (datos) {
+            	mostrarNotificacion('success', 'El pasaje fue reservado con exito.');
+            	$location.url('/viajes');
             });
         }
 

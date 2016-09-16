@@ -21,37 +21,50 @@
            <h3 class="prod_title">{{ viaje.recorrido.nombre }}</h3>
 
            <p>{{ viaje.fechaSalida | date : 'dd/MM/yy' }} a {{ viaje.horario }}</p>
+           
            <br />
-
-           <div>
-             <ul class="list-inline">
-               <li style="width: 100%;">
-               		<p>Origen</p>
-                  	<select class="form-control select2" style="width: 100%;" ng-model="comprar.origen" required>
-                    	<option ng-repeat="recorrido in viaje.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
-                  	</select> 
-               </li>
-               <li style="width: 100%;">
-               		<p>Destino</p>
-                  	<select class="form-control select2" style="width: 100%;" ng-model="comprar.destino" required>
-                    	<option ng-repeat="recorrido in viaje.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
-                  	</select>
-               </li>
-             </ul>
-           </div>
-
+			
+           <ul class="list-inline">
+             <li style="width: 100%;">
+             		<label>Origen</label>
+                	<select class="form-control select2" style="width: 100%;" ng-model="comprar.origen" required>
+                  	<option ng-repeat="recorrido in viaje.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
+                	</select> 
+             </li>
+             <li style="width: 100%;">
+             		<label>Destino</label>
+                	<select class="form-control select2" style="width: 100%;" ng-model="comprar.destino" required>
+                  	<option ng-repeat="recorrido in viaje.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
+                	</select>
+             </li>
+           </ul>
+             
            <br />
 
            <div class="">
              <div class="product_price">
                <h1 class="price">$250,5</h1>
-               <br>
              </div>
            </div>
+           
+           <br />
+           
+           <ul class="list-inline">
+             <li style="width: 100%;">
+             		<label>Usuario</label>
+                	<input type="text" class="form-control col-md-7 col-xs-12" ng-model="usuario" ng-blur="buscarUsuario()">
+             </li>
+             <li style="width: 100%;">
+	           		<label>Cedula del usuario</label>
+	               	<input type="text" class="form-control col-md-7 col-xs-12" ng-model="ciUsuario">
+             </li>
+           </ul>
+
+           <br />
 
            <div class="">
-             <button type="button" class="btn btn-primary btn-lg">Reservar</button>
-             <button type="button" class="btn btn-success btn-lg">Comprar</button>
+             <button type="button" class="btn btn-primary btn-lg" ng-click="procesarReservar()">Reservar</button>
+             <button type="button" class="btn btn-success btn-lg pull-right" ng-click="procesarCompra()">Comprar</button>
            </div>
 
          </div>

@@ -25,6 +25,7 @@
   <!-- Select2 -->
   <link href="css/select/select2.min.css" rel="stylesheet">
     
+  <script type="text/javascript" src="js/lodash.js"></script>
   <script type="text/javascript" src="js/moment/moment.min.js"></script>
   <script src="js/jquery.min.js"></script>
   <script src="js/nprogress.js"></script>
@@ -40,7 +41,18 @@
   <![endif]-->
 
   <script src="js/angular.min.js"></script>
+  <script src="js/angular-simple-logger.min.js"></script>
   <script src="js/angular-route.min.js"></script>
+
+  <style>
+	  #map {
+	    height: 400px;
+	  }
+	  
+	  .angular-google-map-container { 
+	  	height: 600px; 
+	  };
+  </style>
 
 </head>
 
@@ -205,6 +217,12 @@
   <script src="js/custom.js"></script>
 
   <script src="app/app.js"></script>
+  
+  <!-- Select2 -->
+  <script type="text/javascript" src="js/select/select2.full.js"></script>
+  
+  
+  <script type="text/javascript" src="js/angular-google-maps.min.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVL227yFvpTa6b0oolhl3PW_BPGLFMnwI&signed_in=false"></script>
   
    <!-- services -->
@@ -220,7 +238,6 @@
   <script src="app/services/estadosencomienda.js"></script>
   <script src="app/services/reglacobroencomienda.js"></script>
   <script src="app/services/horariorecorrido.js"></script>
-  
   
   <!-- controllers -->
   <script src="app/controllers/home.js"></script>
@@ -241,9 +258,6 @@
   <script type="text/javascript" src="js/notify/pnotify.core.js"></script>
   <script type="text/javascript" src="js/notify/pnotify.buttons.js"></script>
   <script type="text/javascript" src="js/notify/pnotify.nonblock.js"></script>
-  <!-- Select2 -->
-  <script type="text/javascript" src="js/select/select2.full.js"></script>
-
 </body>
 
 </html>

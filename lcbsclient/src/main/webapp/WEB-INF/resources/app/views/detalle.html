@@ -10,10 +10,7 @@
         <hr>
         <p><i class="fa fa-map-marker margin-r-5"></i> {{ viaje.recorrido.nombre }}</p>
         <hr>
-        <p><i class="fa fa-calendar margin-r-5"></i> {{ viaje.fechaSalida | date : 'dd/MM/yy' }} a {{ viaje.llegada }}</p>
-        <hr>
-        <strong><i class="fa fa-file-text-o margin-r-5"></i> Descripci&oacute;n</strong>
-        <p>{{ viaje.descripcion }}</p>
+        <p><i class="fa fa-calendar margin-r-5"></i> {{ viaje.fechaSalida | date : 'dd/MM/yy' }} - {{ viaje.horario.nombre }}</p>
       </div>
       <div class="box-footer">
         <a ng-if="usuarioLogueado" class="btn btn-info pull-left" ng-click="mostrarReservar()">Reservar</a>
@@ -58,7 +55,7 @@
                 </div>
                 <div class="col-xs-4">
                   <p><strong>Horario</strong></p>
-                  <p>{{ viaje.fechaSalida | date : 'dd/MM/yy' }} a {{ viaje.llegada }}</p>
+                  <p>{{ viaje.fechaSalida | date : 'dd/MM/yy' }} - {{ viaje.horario.nombre }}</p>
                 </div>
               </div>
             </div>

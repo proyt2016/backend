@@ -11,12 +11,17 @@
             pagos : 'paypal',
             cantidad : 1
         };
+        $scope.precio = null;
     	
         viajeService.getId(id).then(function (datos) {
             $scope.viaje = datos;
 
             $scope.comprar['origen']    = '0';
             $scope.comprar['destino']   = datos.recorrido.puntosDeRecorrido.length - 1 + '';
+            console.info($scope.viaje);
+            viajeService.getPrecio($scope.viaje.recorrido.puntosDeRecorrido[0].id,$scope.viaje.recorrido.puntosDeRecorrido[$scope.viaje.recorrido.puntosDeRecorrido.length - 1].id, $scope.viaje.recorrido.id).then(function (prc){
+            	$scope.precio = prc;
+            });
         });
 
         $scope.procesarCompra = function () {

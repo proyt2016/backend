@@ -1,8 +1,12 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').controller('empleadosCtrl', ['$scope', '$routeParams', 'empleadosService', empleadosCtrl]);
+    angular.module('lacbus').controller('empleadosCtrl', ['$scope', '$routeParams', 'empleadosService', '$localStorage', '$location', empleadosCtrl]);
 
-    function empleadosCtrl($scope, $routeParams, empleadosService) {
+    function empleadosCtrl($scope, $routeParams, empleadosService, $localStorage, $location) {
+    	if(!$localStorage.empleadoLogueado){
+			$location.url('/login');
+		}
+    	
         $scope.empleados     = [];
         $scope.empleado     = null;
         $scope.showAlert    = false;

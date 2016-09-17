@@ -1,8 +1,12 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('horariorecorridoCtrl', ['$scope', '$routeParams', 'recorridosService', 'horariorecorridoService', horariorecorridoCtrl]);
+    angular.module('lacbus').controller('horariorecorridoCtrl', ['$scope', '$routeParams', 'recorridosService', 'horariorecorridoService', '$localStorage', '$location', horariorecorridoCtrl]);
 
-    function horariorecorridoCtrl($scope, $routeParams, recorridosService, horariorecorridoService) {
+    function horariorecorridoCtrl($scope, $routeParams, recorridosService, horariorecorridoService, $localStorage, $location) {
+    	if(!$localStorage.empleadoLogueado){
+			$location.url('/login');
+		}
+    	
         $scope.recorrido     = null;
         $scope.horario     = {'tipo':'diasSemana'};
         $scope.horarios       = [];

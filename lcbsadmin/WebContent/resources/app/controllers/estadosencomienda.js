@@ -3,6 +3,10 @@
     angular.module('lacbus').controller('estadosencomiendaCtrl', ['$scope', '$routeParams', 'estadosencomiendaService', estadosencomiendaCtrl]);
 
     function estadosencomiendaCtrl($scope, $routeParams, estadosencomiendaService) {
+    	if(!$localStorage.empleadoLogueado){
+			$location.url('/login');
+		}
+    	
         $scope.estadosencomiendas     = [];
         $scope.estadosencomienda     = null;
         $scope.showAlert    = false;

@@ -1,8 +1,12 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('puntosrecorridoCtrl', ['$scope', '$routeParams', 'puntosrecorridoService', puntosrecorridoCtrl]);
+    angular.module('lacbus').controller('puntosrecorridoCtrl', ['$scope', '$routeParams', 'puntosrecorridoService', '$localStorage', '$location', puntosrecorridoCtrl]);
 
-    function puntosrecorridoCtrl($scope, $routeParams, puntosrecorridoService) {
+    function puntosrecorridoCtrl($scope, $routeParams, puntosrecorridoService, $localStorage, $location) {
+    	if(!$localStorage.empleadoLogueado){
+			$location.url('/login');
+		}
+    	
         $scope.puntosrecorridoLst     = [];
         $scope.puntosrecorrido     = null;
         $scope.tipodepunto = "Parada";

@@ -71,6 +71,7 @@ $(function () {
         setContentHeight();
     });
 
+    setContentHeight();
 });
 
 // Panel toolbox

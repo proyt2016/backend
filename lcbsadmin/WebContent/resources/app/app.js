@@ -1,8 +1,10 @@
 (function () {
 
-    angular.module('lacbus', ['ngRoute', 'uiGmapgoogle-maps']);
+    angular.module('lacbus', ['ngRoute', 'uiGmapgoogle-maps', 'ngStorage']);
 
-    angular.module('lacbus').config(['$routeProvider', 'uiGmapGoogleMapApiProvider', configFunction]);
+    angular.module('lacbus').config(['$routeProvider', 'uiGmapGoogleMapApiProvider',  configFunction]);
+    
+    angular.module('lacbus').controller('appCtrl', ['$scope', '$location', '$localStorage', appCtrl]);
 
     /*@ngInject*/
     function configFunction($routeProvider, uiGmapGoogleMapApiProvider) {
@@ -19,6 +21,12 @@
 		}).otherwise({
             redirectTo 	: '/'
         });
+        
+        // ruta de login
+		$routeProvider.when("/login", {
+		    templateUrl : "app/views/login.html",
+		    controller  : 'loginCtrl'
+		});
 
 		// ruta de viajes
 		$routeProvider.when("/viajes", {
@@ -149,5 +157,23 @@
 		    controller  : 'puntosrecorridoCtrl'
 		})
     }
+    
+    function appCtrl($scope, $location, $localStorage) {
+        $scope.empleadoLogueado = $localStorage.empleadoLogueado;
+                
+        $scope.logout = function(){
+        	$localStorage.$reset();
+        	$scope.empleadoLogueado = null;
+        	$location.url('/login');
+        }
+        
+        $scope.$on('localStorage:changed', function(event, data){
+        	$scope.empleadoLogueado = $localStorage.empleadoLogueado;
+        });
+    }
+    
+    angular.element(document).ready(function() {
+        angular.bootstrap(document, ['lacbus']);
+    });
 
 })();

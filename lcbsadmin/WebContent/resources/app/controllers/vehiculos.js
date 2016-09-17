@@ -1,8 +1,12 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').controller('vehiculosCtrl', ['$scope', '$routeParams', 'vehiculosService', vehiculosCtrl]);
+    angular.module('lacbus').controller('vehiculosCtrl', ['$scope', '$routeParams', 'vehiculosService', '$localStorage', '$location', vehiculosCtrl]);
 
-    function vehiculosCtrl($scope, $routeParams, vehiculosService) {
+    function vehiculosCtrl($scope, $routeParams, vehiculosService, $localStorage, $location) {
+    	if(!$localStorage.empleadoLogueado){
+			$location.url('/login');
+		}
+    	
         $scope.vehiculos     = [];
         $scope.vehiculo     = null;
         $scope.showAlert    = false;

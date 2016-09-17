@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html ng-controller="appCtrl">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- Meta, title, CSS, favicons, etc. -->
@@ -57,7 +56,7 @@
 </head>
 
 
-<body class="nav-md" ng-app="lacbus">
+<body class="nav-md">
 
   <div class="container body">
 
@@ -74,13 +73,10 @@
           <div class="clearfix"></div>
 
           <!-- menu prile quick info -->
-          <div class="profile clearfix">
-            <div class="profile_pic">
-              <img src="images/img.jpg" alt="..." class="img-circle profile_img">
-            </div>
+          <div class="profile clearfix" ng-show="empleadoLogueado">
             <div class="profile_info">
               <span>Bienvenido,</span>
-              <h2>Andrulo</h2>
+              <h2>{{ empleadoLogueado.nombrePila + ' ' +  empleadoLogueado.apellido }}</h2>
             </div>
           </div>
           <!-- /menu prile quick info -->
@@ -90,7 +86,7 @@
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <ul class="nav side-menu">
+              <ul class="nav side-menu" ng-show="empleadoLogueado">
                 <li>
                   <a href="#/"><i class="fa fa-home"></i> Inicio </a>
                 </li>
@@ -165,18 +161,15 @@
         <div class="nav_menu">
           <nav class="" role="navigation">
 
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" ng-show="empleadoLogueado">
               <li class="">
                 <a class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt="">Andrulo
+                  {{ empleadoLogueado.nombrePila + ' ' +  empleadoLogueado.apellido }}
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
                   <li>
-                    <a> Profile</a>
-                  </li>
-                  <li>
-                    <a><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                    <a ng-click="logout()"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </li>
                 </ul>
               </li>
@@ -223,6 +216,7 @@
   
   
   <script type="text/javascript" src="js/angular-google-maps.min.js"></script>
+  <script type="text/javascript" src="js/ngStorage.min.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVL227yFvpTa6b0oolhl3PW_BPGLFMnwI&signed_in=false"></script>
   
    <!-- services -->
@@ -238,6 +232,7 @@
   <script src="app/services/estadosencomienda.js"></script>
   <script src="app/services/reglacobroencomienda.js"></script>
   <script src="app/services/horariorecorrido.js"></script>
+  <script src="app/services/usuario.js"></script>
   
   <!-- controllers -->
   <script src="app/controllers/home.js"></script>
@@ -254,6 +249,7 @@
   <script src="app/controllers/reglacobroencomienda.js"></script>
   <script src="app/controllers/preciorecorrido.js"></script>
   <script src="app/controllers/horariorecorrido.js"></script>
+  <script src="app/controllers/login.js"></script>
   
   <script type="text/javascript" src="js/notify/pnotify.core.js"></script>
   <script type="text/javascript" src="js/notify/pnotify.buttons.js"></script>

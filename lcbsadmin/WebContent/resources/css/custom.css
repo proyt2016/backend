@@ -5542,3 +5542,11 @@ ul.notifications {
   opacity: 0.65;
   filter: alpha(opacity=65);
 }
+
+.login_wrapper {
+    right: 0px;
+    margin: 0px auto;
+    margin-top: 5%;
+    max-width: 350px;
+    position: relative;
+}

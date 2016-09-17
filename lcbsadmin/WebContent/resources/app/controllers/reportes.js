@@ -1,8 +1,12 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').controller('reportesCtrl', ['$scope', '$routeParams', 'reportesService', reportesCtrl]);
+    angular.module('lacbus').controller('reportesCtrl', ['$scope', '$routeParams', 'reportesService', '$localStorage', '$location', reportesCtrl]);
 
-    function reportesCtrl($scope, $routeParams, reportesService) {
+    function reportesCtrl($scope, $routeParams, reportesService, $localStorage, $location) {
+    	if(!$localStorage.empleadoLogueado){
+			$location.url('/login');
+		}
+    	
         $scope.reportes     = [];
         $scope.showAlert    = false;
 

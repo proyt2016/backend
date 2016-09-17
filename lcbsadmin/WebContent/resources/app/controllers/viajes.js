@@ -1,8 +1,12 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').controller('viajesCtrl', ['$scope', '$routeParams', 'viajeService', '$location', 'uiGmapGoogleMapApi', viajesCtrl]);
+    angular.module('lacbus').controller('viajesCtrl', ['$scope', '$routeParams', 'viajeService', '$location', 'uiGmapGoogleMapApi', '$localStorage', viajesCtrl]);
 
-    function viajesCtrl($scope, $routeParams, viajeService, $location, uiGmapGoogleMapApi) {
+    function viajesCtrl($scope, $routeParams, viajeService, $location, uiGmapGoogleMapApi, $localStorage) {
+    	if(!$localStorage.empleadoLogueado){
+			$location.url('/login');
+		}
+    	
         $scope.filtro = {
             idOrigen : null,
             idDestino : null

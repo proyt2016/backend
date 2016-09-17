@@ -1,8 +1,12 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('reglacobroencomiendaCtrl', ['$scope', '$routeParams', 'reglacobroencomiendaService', reglacobroencomiendaCtrl]);
+    angular.module('lacbus').controller('reglacobroencomiendaCtrl', ['$scope', '$routeParams', 'reglacobroencomiendaService', '$localStorage', '$location', reglacobroencomiendaCtrl]);
 
-    function reglacobroencomiendaCtrl($scope, $routeParams, reglacobroencomiendaService) {
+    function reglacobroencomiendaCtrl($scope, $routeParams, reglacobroencomiendaService, $localStorage, $location) {
+    	if(!$localStorage.empleadoLogueado){
+			$location.url('/login');
+		}
+    	
         $scope.reglacobroencomiendas = [];
         $scope.reglacobroencomienda = {
         	precioExactoOCalculo : false

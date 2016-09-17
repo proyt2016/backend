@@ -1,8 +1,12 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').controller('configuracionCtrl', ['$scope', '$routeParams', 'configuracionService', configuracionCtrl]);
+    angular.module('lacbus').controller('configuracionCtrl', ['$scope', '$routeParams', 'configuracionService', '$localStorage', '$location', configuracionCtrl]);
 
-    function configuracionCtrl($scope, $routeParams, configuracionService) {
+    function configuracionCtrl($scope, $routeParams, configuracionService, $localStorage, $location) {
+    	if(!$localStorage.empleadoLogueado){
+			$location.url('/login');
+		}
+    	
         $scope.configuracion = null;
         $scope.saving = false;
         $scope.emailsEmpresa = [];

@@ -1,8 +1,12 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('preciorecorridoCtrl', ['$scope', '$routeParams', 'recorridosService', preciorecorridoCtrl]);
+    angular.module('lacbus').controller('preciorecorridoCtrl', ['$scope', '$routeParams', 'recorridosService', '$localStorage', '$location', preciorecorridoCtrl]);
 
-    function preciorecorridoCtrl($scope, $routeParams, recorridosService) {
+    function preciorecorridoCtrl($scope, $routeParams, recorridosService, $localStorage, $location) {
+    	if(!$localStorage.empleadoLogueado){
+			$location.url('/login');
+		}
+    	
         $scope.recorrido = null;
         $scope.precios = [];
         $scope.terminales = null;

@@ -1,8 +1,12 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('perfilCtrl', ['$scope', '$routeParams', 'perfilService', perfilCtrl]);
+    angular.module('lacbus').controller('perfilCtrl', ['$scope', '$routeParams', 'perfilService', '$localStorage', '$location', perfilCtrl]);
 
-    function perfilCtrl($scope, $routeParams, perfilService) {
+    function perfilCtrl($scope, $routeParams, perfilService, $localStorage, $location) {
+    	if(!$localStorage.empleadoLogueado){
+			$location.url('/login');
+		}
+    	
         $scope.perfiles     = [];
         $scope.perfil     = null;
         $scope.showAlert    = false;

@@ -1,8 +1,12 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('recorridosCtrl', ['$scope', '$routeParams', 'recorridosService', 'puntosrecorridoService', recorridosCtrl]);
+    angular.module('lacbus').controller('recorridosCtrl', ['$scope', '$routeParams', 'recorridosService', 'puntosrecorridoService', '$localStorage', '$location', recorridosCtrl]);
 
-    function recorridosCtrl($scope, $routeParams, recorridosService, puntosrecorridoService) {
+    function recorridosCtrl($scope, $routeParams, recorridosService, puntosrecorridoService, $localStorage, $location) {
+    	if(!$localStorage.empleadoLogueado){
+			$location.url('/login');
+		}
+    	
         $scope.recorridos = [];
         $scope.recorrido = null;
         $scope.showAlert = false;

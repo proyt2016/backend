@@ -25,14 +25,6 @@
             templateUrl: 'app/views/tenant/create.html',
             controller: 'tenantCtrl'
         });
-        $routeProvider.when('/admin/create', {
-            templateUrl: 'app/views/admin/create.html',
-            controller: 'adminCtrl'
-        });
-        $routeProvider.when('/admin/list', {
-            templateUrl: 'app/views/admin/list.html',
-            controller: 'adminCtrl'
-        });
     }
 
 })();

@@ -1,6 +1,7 @@
 package interfaces;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -51,4 +52,6 @@ public interface IViaje {
 	public Float getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant);
 	public void crearViajesNuevoRecorrido(String recorridoId, DataTenant tenant);
 	public void crearViajesParaRecorridos(DataTenant tenant) throws ParseException;
+	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina, DataTenant tenant);
+
 }

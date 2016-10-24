@@ -18,6 +18,20 @@
             return defer.promise;
         };
 
+        var getVehiculoMantenimiento = function(){
+            var defer = $q.defer();
+
+             $http.get('/lcbsapi/rest/vehiculos/vehiculosenmantenimiento/1/10000')
+             .success(function (vehiculos) {
+                 defer.resolve(vehiculos);
+             })
+             .error(function(){
+                 defer.reject('server error')
+             });
+
+            return defer.promise;
+        };
+
         var add = function(vehiculo){
             var defer = $q.defer();
             $http.post('/lcbsapi/rest/vehiculos/altavehiculo', vehiculo)
@@ -73,12 +87,28 @@
             return defer.promise;
         };
 
+         var guardarMantenimiento = function(id, mantenimiento){
+            var defer = $q.defer();
+            $http.post('/lcbsapi/rest/vehiculos/altamantenimiento/'+id,mantenimiento)
+            .success(function (vlo) {
+                defer.resolve(vlo);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
+
+            return defer.promise;
+        };
+
+
         return {
             getAll  : getAll,
             getId   : getId,
             add     : add,
             borrar  : borrar,
-            edit    : edit
+            edit    : edit,
+            guardarMantenimiento : guardarMantenimiento,
+            getVehiculoMantenimiento : getVehiculoMantenimiento
         }
 
     }

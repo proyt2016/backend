@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import lcbs.shares.DataMantenimientoVehiculo;
 import lcbs.shares.DataTenant;
 import lcbs.shares.DataVehiculo;
 
@@ -14,4 +15,5 @@ public interface VehiculoLocalApi {
 	public DataVehiculo getVehiculo(String veh, DataTenant tenant);
 	public DataVehiculo crearVehiculo(DataVehiculo veh, DataTenant tenant);
 	public void darBajaVehiculo(String idVeiculo, DataTenant tenant);
+	public List<DataVehiculo> obtenerVehiculosEnMantenimiento(Integer pagina, Integer elementosPagina, DataTenant tenant);
 }

@@ -17,6 +17,7 @@
 package lcbs.api.service;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,10 @@ import lcbs.shares.*;
 public class ViajeRepo {
 	@EJB(lookup =  "java:app/lcbsb/ViajeCtrl!interfaces.IViaje")
 	IViaje ctrViaje;
+	
+	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina, DataTenant tenant){
+		return ctrViaje.obtenerTotalPasajesVendidos(fecha, pagina, elementosPagina, tenant);
+	}
 	
 	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant) throws ParseException{
 		return ctrViaje.BuscarViaje(filtro, cantidadDias, pagina, ElementosPagina, tenant );

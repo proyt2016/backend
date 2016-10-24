@@ -56,4 +56,11 @@ public class VehiculoRepo {
 	public List<DataVehiculo> listarVehiculos(Integer pagina, Integer elementosPagina, DataTenant tenant) {
 		return ctrVehiculo.listarVehiculos(pagina, elementosPagina, tenant ); 
 	}
+	
+	public void altaMantenimiento(DataMantenimientoVehiculo mante,String id, DataTenant tenant){
+		 ctrVehiculo.altaMantenimiento(mante,id, tenant);
+	}
+	public List<DataVehiculo> obtenerVehiculosEnMantenimiento(Integer pagina, Integer elementosPagina, DataTenant tenant){
+		return ctrVehiculo.obtenerVehiculosEnMantenimiento(pagina, elementosPagina, tenant);
+	}
 }

@@ -46,6 +46,7 @@ public class Vehiculo implements Serializable{
     @IndexColumn(name="LIST_INDEX")
     private List<MantenimientoVehiculo> mantenimientos;
     private Boolean eliminado;
+    private Boolean enMantenimiento;
     @OneToMany
 	@IndexColumn(name="LIST_INDEX")
 	private List<Encomienda> encomiendas;
@@ -53,7 +54,7 @@ public class Vehiculo implements Serializable{
 
     public Vehiculo() {}
     
-    public Vehiculo(String id, String numV, String mat, String mar, String mod, Integer anioFab, Date fecAlta, Integer cantAs, Boolean conG, List<MantenimientoVehiculo> mant, Boolean elim, List<Encomienda> enc) {
+    public Vehiculo(String id,Boolean enMantenimiento, String numV, String mat, String mar, String mod, Integer anioFab, Date fecAlta, Integer cantAs, Boolean conG, List<MantenimientoVehiculo> mant, Boolean elim, List<Encomienda> enc) {
         this.id = id;
         this.numeroVehiculo = numV;
         this.matricula = mat;
@@ -66,6 +67,7 @@ public class Vehiculo implements Serializable{
         this.mantenimientos = mant;
         this.eliminado = elim;
         this.encomiendas = enc;
+        this.enMantenimiento = enMantenimiento;
     }
     
     public Vehiculo(DataVehiculo dt){
@@ -77,6 +79,7 @@ public class Vehiculo implements Serializable{
     	this.setAnioFabricacion(dt.getAnioFabricacion());
     	this.setFechaAlta(dt.getFechaAlta());
     	this.setCantidadAsientos(dt.getCantidadAsientos());
+    	this.setEnMantenimiento(dt.getEnMantenimiento());
     	this.setConGuarda(dt.getConGuarda());
     	if(dt.getMantenimientos() != null){
 	    	List<MantenimientoVehiculo> aux = new ArrayList<MantenimientoVehiculo>();
@@ -121,6 +124,7 @@ public class Vehiculo implements Serializable{
 	    	result.setEncomiendas(aux);
     	}
     	result.setEliminado(this.getEliminado());
+    	result.setEnMantenimiento(this.getEnMantenimiento());
     	return result;
     }
 
@@ -210,6 +214,14 @@ public class Vehiculo implements Serializable{
     
     public Boolean getEliminado(){
         return this.eliminado;
+    }
+    
+    public void setEnMantenimiento(Boolean enMante){
+    	this.enMantenimiento = enMante;
+    }
+    
+    public Boolean getEnMantenimiento(){
+    	return this.enMantenimiento;
     }
     
     public void setEncomiendas(List<Encomienda> val) {

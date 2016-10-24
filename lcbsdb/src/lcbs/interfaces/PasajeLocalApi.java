@@ -1,5 +1,6 @@
 package lcbs.interfaces;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -17,4 +18,6 @@ public interface PasajeLocalApi {
 	public void darBajaPasaje(String idPasaje, DataTenant tenant);
 	public DataPasaje getpasajeXcodigo(Integer codigoPasaje, DataTenant tenant);
 	public List<DataPasajeConvertor> obtenerPasajesPorPersona(String idUsuario, Integer pagina, Integer elementosPagina, DataTenant tenant);
+	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina, DataTenant tenant);
+
 }

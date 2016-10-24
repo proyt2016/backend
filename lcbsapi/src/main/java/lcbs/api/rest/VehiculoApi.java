@@ -68,6 +68,12 @@ public class VehiculoApi extends BaseApi{
 		 DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		 repo.bajaVehiculo(obj.getString("idVehiculo"), tenant );
 	}
+	@POST
+	@Path("/altamantenimiento/{idVehiculo}")
+	public void altaMantenimiento(DataMantenimientoVehiculo mant,@PathParam("idVehiculo")final String id){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+	    repo.altaMantenimiento(mant,id, tenant);
+	}
 	
 	@GET
 	@Path("/listarvehiculos/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
@@ -83,12 +89,18 @@ public class VehiculoApi extends BaseApi{
 		return repo.mantenimientosPorVehiculo(idVehiculo, tenant );
 	}
 	
-	
 	@GET
 	@Path("/getvehiculo/{idVehiculo}")
 	public DataVehiculo getVechiulo(@PathParam("idVehiculo")final String idVehiculo){
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		return repo.obtenerVehiculo(idVehiculo, tenant);
+	}
+	
+	@GET
+	@Path("/vehiculosenmantenimiento/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataVehiculo> obtenerVehiculosEnMantenimiento(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar") final Integer elementosPagina){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.obtenerVehiculosEnMantenimiento(pagina, elementosPagina, tenant);
 	}
 	
 

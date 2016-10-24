@@ -1,7 +1,7 @@
 ﻿<div class="col-md-12 col-sm-12 col-xs-12">
   <div class="page-title">
     <div class="title_left">
-      <h3>Recursos</h3>
+      <h3>Reportes</h3>
     </div>
 
     <div class="title_right">
@@ -15,64 +15,40 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
     <div class="x_title">
-      <h2>Listado de recursos</h2>
+      <h2>Reportes Diarios</h2>
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
 
-      <table class="table table-hover table-striped">
+        <table class="table table-hover table-striped">
         <thead>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-            <th>Acciones</th>
+          <tr>  
+            <th>Numero Pasaje</th>
+            <th>Ci Cliente</th>
+            <th>Fecha compra</th>
+            <th>Precio</th>
+            <th>Destino</th>
+            <th>Origen</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+          <tr ng-repeat="pasaje in pasajes">
+            <td>{{pasaje.codigopasaje}}</td>
+            <td>{{pasaje.cipersona}}</td>
+            <td>{{pasaje.fechacompra}}</td>
+            <td>{{pasaje.precio}}</td>
+            <td>{{pasaje.destino_id}}</td>
+            <td>{{pasaje.origen_id}}</td>
             <td>
               <div class="btn-group">
-                <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> </a>
-                <a href="#/recurso/edit/1" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
-                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> </a>
+                <a href="#/vehiculos/edit/{{vehiculo.id}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
+                <a href="#/vehiculos/mantenimiento/{{vehiculo.id}}" ng-if="!vehiculo.enMantenimiento" class="btn btn-info btn-xs"><i class="fa fa-wrench"></i> </a>
+                 <a class="btn btn-danger btn-xs" ng-click="borrar($index)"><i class="fa fa-trash-o"></i> </a>
+                
               </div>
             </td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>
-              <div class="btn-group">
-                <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> </a>
-                <a href="#/recurso/edit/1" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
-                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> </a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>
-              <div class="btn-group">
-                <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> </a>
-                <a href="#/recurso/edit/1" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
-                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> </a>
-              </div>
-            </td>
-          </tr>
-        </tbody>
       </table>
-
     </div>
   </div>
 </div>

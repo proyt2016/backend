@@ -48,20 +48,30 @@ public class MantenimientoVehiculo implements Serializable{
     
     public MantenimientoVehiculo(DataMantenimientoVehiculo dt){
     	this.setId(dt.getId());
+    	if(dt.getDescripcionReducida()!=null)
     	this.setDescripcionReducida(dt.getDescripcionReducida());
+    	if(dt.getDescripcionCompleta()!=null)
     	this.setDescripcionCompleta(dt.getDescripcionCompleta());
+    	if(this.getCosto()!=null)
     	this.setCosto(dt.getCosto());
+    	if(this.getFechaIngreso()!=null)
     	this.setFechaIngreso(dt.getFechaIngreso());
+    	if(this.getFechaCompleado()!=null)
     	this.setFechaCompleado(dt.getFechaCompleado());
     }
     
     public DataMantenimientoVehiculo getDatatype(){
     	DataMantenimientoVehiculo result = new DataMantenimientoVehiculo();
     	result.setId(this.getId());
+    	if(this.getDescripcionReducida()!=null)
     	result.setDescripcionReducida(this.getDescripcionReducida());
+    	if(this.getDescripcionCompleta()!=null)
     	result.setDescripcionCompleta(this.getDescripcionCompleta());
+    	if(this.getCosto()!=null)
     	result.setCosto(this.getCosto());
+    	if(this.getFechaIngreso()!=null)
     	result.setFechaIngreso(this.getFechaIngreso());
+    	if(this.getFechaCompleado()!=null)
     	result.setFechaCompleado(this.getFechaCompleado());
     	return result;
     }

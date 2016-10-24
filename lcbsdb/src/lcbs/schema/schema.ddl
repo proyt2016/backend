@@ -340,6 +340,7 @@
         matricula varchar(255),
         modelo varchar(255),
         numeroVehiculo varchar(255),
+        enMantenimiento boolean,
         primary key (id)
     );
 
@@ -755,10 +756,10 @@ INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechana
 
 
 
-INSERT INTO vehiculo (id, aniofabricacion, cantidadasientos, conguarda, eliminado, fechaalta, marca, matricula, modelo, numerovehiculo) VALUES ('65378fa8-8931-44c9-8a89-895af6a37c33', 1990, 45, NULL, false, NULL, 'VW', 'SAS123', 'W', '1234');
-INSERT INTO vehiculo (id, aniofabricacion, cantidadasientos, conguarda, eliminado, fechaalta, marca, matricula, modelo, numerovehiculo) VALUES ('352f3329-90d4-4cfa-b0bd-4202d152dcb0', 1890, 43, NULL, false, NULL, 'vw', 'SaS234', 'sa', '2345');
-INSERT INTO vehiculo (id, aniofabricacion, cantidadasientos, conguarda, eliminado, fechaalta, marca, matricula, modelo, numerovehiculo) VALUES ('c20854d0-4229-4ee9-9101-4f95681eaa21', 1999, 34, NULL, false, NULL, 'vw', 'sas345', 'gol', '3456');
-INSERT INTO vehiculo (id, aniofabricacion, cantidadasientos, conguarda, eliminado, fechaalta, marca, matricula, modelo, numerovehiculo) VALUES ('7e7024fb-4cef-4133-95be-22ec7eb4448c', 1989, 60, NULL, false, NULL, 'vw', 'sas4567', 'gol', '45678');
+INSERT INTO vehiculo (id, aniofabricacion, cantidadasientos, conguarda, eliminado, fechaalta, marca, matricula, modelo, numerovehiculo, enmantenimiento) VALUES ('65378fa8-8931-44c9-8a89-895af6a37c33', 1990, 45, NULL, false, NULL, 'VW', 'SAS123', 'W', '1234', false);
+INSERT INTO vehiculo (id, aniofabricacion, cantidadasientos, conguarda, eliminado, fechaalta, marca, matricula, modelo, numerovehiculo, enmantenimiento) VALUES ('352f3329-90d4-4cfa-b0bd-4202d152dcb0', 1890, 43, NULL, false, NULL, 'vw', 'SaS234', 'sa', '2345', false);
+INSERT INTO vehiculo (id, aniofabricacion, cantidadasientos, conguarda, eliminado, fechaalta, marca, matricula, modelo, numerovehiculo, enmantenimiento) VALUES ('c20854d0-4229-4ee9-9101-4f95681eaa21', 1999, 34, NULL, false, NULL, 'vw', 'sas345', 'gol', '3456', false);
+INSERT INTO vehiculo (id, aniofabricacion, cantidadasientos, conguarda, eliminado, fechaalta, marca, matricula, modelo, numerovehiculo, enmantenimiento) VALUES ('7e7024fb-4cef-4133-95be-22ec7eb4448c', 1989, 60, NULL, false, NULL, 'vw', 'sas4567', 'gol', '45678', false);
 
  
 INSERT INTO puntorecorrido (dtype, id, eliminado, nombre, ubicacionmapa, aceptaencomiendas) VALUES ('Terminal', 'f4f165d3-0881-4e8b-8208-ab8adc29a6c7', false, 'tres cruces', '-34.8940096615171,-56.16642236709595', true);

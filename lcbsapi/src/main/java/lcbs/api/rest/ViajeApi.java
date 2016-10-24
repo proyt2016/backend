@@ -2,6 +2,7 @@ package lcbs.api.rest;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,15 @@ public class ViajeApi extends BaseApi{
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		return repo.getTerminales(pagina, elementosPagina, tenant);
 	}
+	
+	@POST
+	@Path("/gettotalpasajesvendidos/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
+	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String data, @PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
+		JSONObject obj = new JSONObject(data);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.obtenerTotalPasajesVendidos(obj.getString("fecha"), pagina, elementosPagina, tenant);
+	}
+
 	
 	
 	@GET

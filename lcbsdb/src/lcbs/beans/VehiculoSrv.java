@@ -15,7 +15,9 @@ import org.hibernate.criterion.Restrictions;
 
 import lcbs.interceptors.TenantIntercept;
 import lcbs.interfaces.VehiculoLocalApi;
+import lcbs.models.MantenimientoVehiculo;
 import lcbs.models.Vehiculo;
+import lcbs.shares.DataMantenimientoVehiculo;
 import lcbs.shares.DataTenant;
 import lcbs.shares.DataVehiculo;
 
@@ -47,6 +49,22 @@ public class VehiculoSrv implements VehiculoLocalApi {
 		});
 		return vehiculos;
 	}
+	
+	public List<DataVehiculo> obtenerVehiculosEnMantenimiento(Integer pagina, Integer elementosPagina, DataTenant tenant){
+		List<DataVehiculo> vehiculosEnMante = new ArrayList();
+		Session session = (Session) em.getDelegate();
+		Criteria criteria = session.createCriteria(Vehiculo.class);
+		criteria.add(Restrictions.eq("eliminado", false));
+		criteria.add(Restrictions.eq("enMantenimiento", true));
+		criteria.setFirstResult((pagina - 1) * elementosPagina);
+		criteria.setMaxResults(elementosPagina);
+		List<Vehiculo> listVeh = new ArrayList<Vehiculo>(new LinkedHashSet(criteria.list()));
+
+		listVeh.stream().forEach((veh) -> {
+			vehiculosEnMante.add(veh.getDatatype(true));
+		});
+		return vehiculosEnMante;
+	}
 
 	public void modificarVehiculo(DataVehiculo veh, DataTenant tenant) {
 		Vehiculo realObj = new Vehiculo(veh);
@@ -65,6 +83,7 @@ public class VehiculoSrv implements VehiculoLocalApi {
 	public DataVehiculo crearVehiculo(DataVehiculo veh, DataTenant tenant) {
 		Vehiculo realObj = new Vehiculo(veh);
 		realObj.setEliminado(false);
+		realObj.setEnMantenimiento(false);
 		// guardo el vehiculo en bd
 		em.persist(realObj);
 		return realObj.getDatatype(true);

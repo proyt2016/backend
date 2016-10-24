@@ -14,4 +14,8 @@ public interface IVehiculo {
 	public List<DataVehiculo> listarVehiculos(Integer pagina, Integer elementosPagina, DataTenant tenant);
 	public List<DataMantenimientoVehiculo> mantenimientosPorVehiculo(String idVehiculo, DataTenant tenant);
 	public DataVehiculo obtenerVehiculo(String idVehiculo, DataTenant tenant);
+	public void altaMantenimiento(DataMantenimientoVehiculo mante,String id, DataTenant tenant);
+	public List<DataVehiculo> obtenerVehiculosEnMantenimiento(Integer pagina, Integer elementosPagina, DataTenant tenant);
+
+
 }

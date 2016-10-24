@@ -50,5 +50,22 @@ public class VehiculoCtrl implements IVehiculo {
 	public List<DataVehiculo> listarVehiculos(Integer pagina, Integer elementosPagina, DataTenant tenant) {
 		return srvVehiculo.obtenerVehiculos(pagina, elementosPagina, tenant);
 	}
+	
+	@Override
+	public void altaMantenimiento(DataMantenimientoVehiculo mante,String id, DataTenant tenant){
+		DataVehiculo ve = srvVehiculo.getVehiculo(id, tenant);
+		List <DataMantenimientoVehiculo> lista = ve.getMantenimientos();
+		lista.add(mante);
+		ve.setMantenimientos(lista);
+		ve.setEnMantenimiento(true);
+		srvVehiculo.modificarVehiculo(ve, tenant);
+	  
+	}
+	
+	@Override
+	public List<DataVehiculo> obtenerVehiculosEnMantenimiento(Integer pagina, Integer elementosPagina, DataTenant tenant){
+		return srvVehiculo.obtenerVehiculosEnMantenimiento(pagina, elementosPagina, tenant);
+	}
+
 
 }

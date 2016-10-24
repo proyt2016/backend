@@ -4,19 +4,18 @@
 
     function reportesService($http, $q) {
 
-        var getAll = function(){
+        var getAllPasajes = function(){
             var defer = $q.defer();
 
             defer.resolve();
 
-            // $http.get('api/employee')
-	    	// .success(function (employees) {
-	    	//     defer.resolve(employees);
-	    	// })
-	    	// .error(function(){
-	    	//     defer.reject('server error')
-	    	// });
-
+             $http.get('/lcbsapi/rest/viajes/gettotalpasajesvendidos/1/10000')
+	    	 .success(function (pasajes) {
+	    	     defer.resolve(pasajes);
+	    	 })
+	    	 .error(function(){
+	    	     defer.reject('server error')
+	     });
             return defer.promise;
         };
 

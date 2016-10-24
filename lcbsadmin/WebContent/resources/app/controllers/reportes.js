@@ -7,17 +7,19 @@
 			$location.url('/login');
 		}
     	
-        $scope.reportes     = [];
+        $scope.pasajes     = [];
+        $pasaje             = null;
         $scope.showAlert    = false;
+        $scope.Date = new Date();
 
         console.log($routeParams);
 
-        reportesService.getAll().then(function (data) {
-            $scope.reportes = data;
-        });
-
-        $scope.add = function(){
-        	console.log('aaaddd')
+        $scope.getPasajesVendidos = function(){
+            
+        	reportesService.getAllPasajes(Date).then(function (data) {
+                    $scope.pasajes = data;
+                });
+            
         }
 
         $scope.edit = function(){

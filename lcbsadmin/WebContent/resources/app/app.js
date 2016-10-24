@@ -71,6 +71,18 @@
 		}).when("/vehiculos/edit/:id", {
 		    templateUrl : "app/views/vehiculos/edit.html",
 		    controller  : 'vehiculosCtrl'
+		}).when("/vehiculos/mantenimiento/:id",{
+			templateUrl : "app/views/vehiculos/mantenimiento.html",
+			controller	: 'vehiculosCtrl' 
+		});
+
+		//msntenimiento
+		$routeProvider.when("/mantenimiento",{
+			templateUrl : "app/views/vehiculos/bajaMantenimiento.html",
+			controller	: 'mantenimientoVehiculoCtrl' 
+		}).when("/mantenimiento/finalizar/:id",{
+			templateUrl : "app/views/vehiculos/finMantenimiento.html",
+			controller	: 'mantenimientoVehiculoCtrl' 
 		});
 
 		// ruta de configuracion
@@ -80,7 +92,7 @@
 		});
 
 		// ruta de reportes
-		$routeProvider.when("/reportes", {
+		$routeProvider.when("/reportes/:fecha", {
 		    templateUrl : "app/views/reportes/list.html",
 		    controller  : 'reportesCtrl'
 		}).when("/reportes/add", {

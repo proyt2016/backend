@@ -1,11 +1,13 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('estadosencomiendaCtrl', ['$scope', '$routeParams', 'estadosencomiendaService', estadosencomiendaCtrl]);
+    angular.module('lacbus').controller('estadosencomiendaCtrl', ['$scope', '$routeParams', 'estadosencomiendaService', '$localStorage', '$location', estadosencomiendaCtrl]);
 
-    function estadosencomiendaCtrl($scope, $routeParams, estadosencomiendaService) {
+    function estadosencomiendaCtrl($scope, $routeParams, estadosencomiendaService, $localStorage, $location) {
     	if(!$localStorage.empleadoLogueado){
 			$location.url('/login');
 		}
+
+    
     	
         $scope.estadosencomiendas     = [];
         $scope.estadosencomienda     = null;

@@ -4,12 +4,11 @@
 
     function reportesService($http, $q) {
 
-        var getAllPasajes = function(){
+        var getPasajesVendidos = function(dateNow){
             var defer = $q.defer();
-
-            defer.resolve();
-
-             $http.get('/lcbsapi/rest/viajes/gettotalpasajesvendidos/1/10000')
+           
+            //defer.resolve();
+             $http.get('/lcbsapi/rest/viajes/gettotalpasajesvendidos/1/9998889/'+dateNow)
 	    	 .success(function (pasajes) {
 	    	     defer.resolve(pasajes);
 	    	 })
@@ -19,8 +18,22 @@
             return defer.promise;
         };
 
+        var getEncomiendasPagas = function(dateNow){
+            var defer = $q.defer();
+
+            $http.get('/lcbsapi/rest/encomiendas/getencomiendaspagas/1/999998/'+dateNow)
+            .success(function (encomiendas){
+            defer.resolve(encomiendas);
+        })
+            .error(function(){
+                defer.reject('server error')
+            });
+            return defer.promise;
+        }
+
         return {
-            getAll : getAll
+            getPasajesVendidos : getPasajesVendidos,
+            getEncomiendasPagas : getEncomiendasPagas
         }
 
     }

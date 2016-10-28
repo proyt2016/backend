@@ -46,12 +46,12 @@ public class ViajeApi extends BaseApi{
 		return repo.getTerminales(pagina, elementosPagina, tenant);
 	}
 	
-	@POST
-	@Path("/gettotalpasajesvendidos/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
-	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String data, @PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
-		JSONObject obj = new JSONObject(data);
+	@GET
+	@Path("/gettotalpasajesvendidos/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}/{fecha}")
+	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(@PathParam("fecha") final String fecha, @PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar")final Integer elementosPagina){
+		//JSONObject obj = new JSONObject(data);
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
-		return repo.obtenerTotalPasajesVendidos(obj.getString("fecha"), pagina, elementosPagina, tenant);
+		return repo.obtenerTotalPasajesVendidos(fecha, pagina, elementosPagina, tenant);
 	}
 
 	

@@ -67,6 +67,7 @@
         pagaReceptor boolean,
         precio float4,
         retiraEnSucursal boolean,
+        paga boolean,
         descripcion varchar(255),
         telefono varchar(255),
         cocheAsignado_id varchar(255),
@@ -1039,7 +1040,7 @@ INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('83cac1e7-4
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('cc9b5ea9-fb86-4f6a-a949-302ab8fdc024', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('8d957d43-1997-4617-9375-381e73b04024', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
 
-INSERT INTO encomienda (id, codigoencomienda, eliminada, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235b',1,false, 'c6253122-990a-4891-9456-6d5c68f0c2a9', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO encomienda (id, codigoencomienda, eliminada,paga, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235b',1,false,true, 'c6253122-990a-4891-9456-6d5c68f0c2a9', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
 
 INSERT INTO grupohorario (id, nombre, tipo) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', 'Diario', 'diasSemana');
 INSERT INTO grupohorario (id, nombre, tipo) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'Diario', 'diasSemana');

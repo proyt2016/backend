@@ -7,25 +7,29 @@
 			$location.url('/login');
 		}
     	
-        $scope.pasajes     = [];
-        $pasaje             = null;
+        $scope.pasajes    = [];
+        $scope.encomiendas = [];
         $scope.showAlert    = false;
-        $scope.Date = new Date();
 
         console.log($routeParams);
 
-        $scope.getPasajesVendidos = function(){
-            
-        	reportesService.getAllPasajes(Date).then(function (data) {
+       var initialize  = function(){
+           var now = moment();
+           var dateNow =  moment(now, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        	reportesService.getPasajesVendidos(dateNow).then(function (data) {
                     $scope.pasajes = data;
-                });
-            
+                });          
         }
 
-        $scope.edit = function(){
-        	console.log('aaaddd')
+       var initializeEnco  = function(){
+           var now = moment();
+           var dateNow =  moment(now, 'DD/MM/YYYY').format('YYYY-MM-DD');
+           reportesService.getEncomiendasPagas(dateNow).then(function (data){
+                    $scope.encomiendas = data;
+            }); 
         }
-
+        initialize();
+        initializeEnco();
     }
 
 })();

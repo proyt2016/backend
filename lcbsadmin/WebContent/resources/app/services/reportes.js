@@ -21,9 +21,10 @@
         var getEncomiendasPagas = function(dateNow){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/encomiendas/getencomiendaspagas/1/999998/'+dateNow)
+            $http.get('/lcbsapi/rest/encomiendas/getencomiendaspagas/1/99999899/'+dateNow)
             .success(function (encomiendas){
             defer.resolve(encomiendas);
+            
         })
             .error(function(){
                 defer.reject('server error')

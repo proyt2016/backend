@@ -82,13 +82,14 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		criteria.add(Restrictions.between("fechaIngreso", fromDate, toDate));
+		criteria.add(Restrictions.between("fechaEntrega", fromDate, toDate));
 		criteria.setFirstResult((pagina - 1) * elementosPagina);
 		criteria.setMaxResults(elementosPagina);
 		List<Encomienda> listEnc = new ArrayList<Encomienda>(new LinkedHashSet(criteria.list()));
 
 		listEnc.stream().forEach((enc) -> {
 			encomiendas.add(enc.getDatatype(true).genConvertor());
+			log.info("-------------------------------------->"+enc.getCodigoEncomienda());
 		});
 		return encomiendas;
 	}

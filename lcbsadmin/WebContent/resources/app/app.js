@@ -92,14 +92,14 @@
 		});
 
 		// ruta de reportes
-		$routeProvider.when("/reportes", {
-		    templateUrl : "app/views/reportes/list.html",
-		    controller  : 'reportesCtrl'
-		}).when("/reportes/add", {
+		$routeProvider.when("/reportes/add", {
 		    templateUrl : "app/views/reportes/add.html",
 		    controller  : 'reportesCtrl'
 		}).when("/reportes/edit/:id", {
 		    templateUrl : "app/views/reportes/edit.html",
+		    controller  : 'reportesCtrl'
+		}).when("/reportes/reportes", {
+		    templateUrl : "app/views/reportes/reportes.html",
 		    controller  : 'reportesCtrl'
 		});
 

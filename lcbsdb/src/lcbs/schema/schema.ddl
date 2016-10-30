@@ -1041,6 +1041,11 @@ INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('cc9b5ea9-f
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('8d957d43-1997-4617-9375-381e73b04024', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
 
 INSERT INTO encomienda (id, codigoencomienda, eliminada,paga, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235b',1,false,true, 'c6253122-990a-4891-9456-6d5c68f0c2a9', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO encomienda (id, codigoencomienda, eliminada,paga, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235c',2,false,true, '016ec03e-d5a2-493e-ada1-06007aeb5b5e', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO encomienda (id, codigoencomienda, eliminada,paga, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235e',3,false,true, 'c6253122-990a-4891-9456-6d5c68f0c2a9', '82bc4ed2-043b-44e5-833d-20f07b740392');
+INSERT INTO encomienda (id, codigoencomienda, eliminada,paga, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235h',4,false,true, '63b84f4b-9b50-40d3-8eed-4e8c0203244d', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO encomienda (id, codigoencomienda, eliminada,paga, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235j',5,false,true, 'b61d2464-77e3-47f7-bc18-aa75871de5c6', '82bc4ed2-043b-44e5-833d-20f07b740392');
+
 
 INSERT INTO grupohorario (id, nombre, tipo) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', 'Diario', 'diasSemana');
 INSERT INTO grupohorario (id, nombre, tipo) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'Diario', 'diasSemana');

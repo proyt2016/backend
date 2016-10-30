@@ -1,11 +1,28 @@
-﻿<div class="col-md-12 col-sm-12 col-xs-12">
+<div class="col-md-12 col-sm-12 col-xs-12">
   <div class="page-title">
     <div class="title_left">
       <h3>Reportes</h3>
     </div>
   </div>
 </div>
-
+<div class="col-md-4 col-sm-12 col-xs-12 form-group">
+  <fieldset>
+    <div class="control-group">
+      <div class="controls">
+        <div class="col-md-11 xdisplay_inputx form-group has-feedback">
+          <input type="text" class="form-control has-feedback-left active" id="single_cal5" placeholder="Seleccionar reporte por fecha" aria-describedby="inputSuccess2Status4">
+          <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+          <span id="inputSuccess2Status4" class="sr-only">(success)</span>
+        </div>
+      </div>
+    </div>
+  </fieldset>     
+</div>
+<div class="col-md-8 col-sm-12 col-xs-12 form-group">
+ <div class="pull-right">
+          <a href="#/vehiculos/add" class="btn btn-info">Listar</a>
+</div> 
+</div>
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
    <div class="x_title">
@@ -85,3 +102,16 @@
        <div class="clearfix"></div>
   </div>
 </div> 
+
+<div class="x_panel">
+  <div class="x_title">
+      <h2>Bar graph <small>Sessions</small></h2>
+      <div class="clearfix"></div>
+  </div>
+    <div class="x_content">
+      <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;">
+      </iframe>
+      <canvas id="mybarChart" width="362" height="181" style="width: 362px; height: 181px;"></canvas>
+  </div>
+</div>
+

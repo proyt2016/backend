@@ -39,6 +39,6 @@ public interface IEncomienda {
 	public DataReglaCobroEncomienda editarReglaCobroEncomienda(DataReglaCobroEncomienda dataRegla, DataTenant tenant);
 	public void borrarReglaCobroEncomienda(String idReglaCobro, DataTenant tenant);
 	public Float getPrecioDeEncomienda(String codigoReglaCobro, Float monto, DataTenant tenant);
-	public List<DataEncomiendaConvertor> getEncomiendasPagas(Integer pagina, Integer elemPagina, String fecha,DataTenant tenant);
+	public List<DataEncomiendaConvertor> getEncomiendasPagas(String fecha, Integer pagina, Integer elemPagina,DataTenant tenant);
 
 }

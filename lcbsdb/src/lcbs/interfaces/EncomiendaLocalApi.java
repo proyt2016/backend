@@ -17,6 +17,6 @@ public interface EncomiendaLocalApi {
 	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina, DataTenant tenant);
 	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina, DataTenant tenant);
 	public DataEncomienda getEncomiendaXcodigo(Integer codigoEncomienda, DataTenant tenant);
-	public List<DataEncomiendaConvertor> getEncomiendasPagas(Integer pagina, Integer elemPagina,String fecha,DataTenant tenant);
+	public List<DataEncomiendaConvertor> getEncomiendasPagas(String fecha, Integer pagina, Integer elemPagina,DataTenant tenant);
 
 }

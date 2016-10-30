@@ -142,7 +142,7 @@ public class EncomiendaRepo {
 		return ctrEncomienda.getPrecioDeEncomienda(codigoReglaCobro, monto, tenant);
 	}
 	
-	public List<DataEncomiendaConvertor> getEncomiendasPagas(Integer pagina, Integer elemPagina, String fecha, DataTenant tenant){
-		return ctrEncomienda.getEncomiendasPagas(pagina, elemPagina, fecha, tenant);
+	public List<DataEncomiendaConvertor> getEncomiendasPagas(String fecha, Integer pagina, Integer elemPagina, DataTenant tenant){
+		return ctrEncomienda.getEncomiendasPagas(fecha, pagina, elemPagina, tenant);
 	}
 }

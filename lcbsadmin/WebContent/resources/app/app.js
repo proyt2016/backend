@@ -98,8 +98,11 @@
 		}).when("/reportes/edit/:id", {
 		    templateUrl : "app/views/reportes/edit.html",
 		    controller  : 'reportesCtrl'
-		}).when("/reportes/reportes", {
-		    templateUrl : "app/views/reportes/reportes.html",
+		}).when("/reportes/reportesPasajes", {
+		    templateUrl : "app/views/reportes/reportesPasajes.html",
+		    controller  : 'reportesCtrl'
+		}).when("/reportes/reportesEncomiendas", {
+		    templateUrl : "app/views/reportes/reportesEncomiendas.html",
 		    controller  : 'reportesCtrl'
 		});
 

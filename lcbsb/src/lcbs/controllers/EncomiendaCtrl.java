@@ -188,7 +188,7 @@ public class EncomiendaCtrl implements IEncomienda {
 	}
 	
 	@Override
-	public List<DataEncomiendaConvertor> getEncomiendasPagas(Integer pagina, Integer elemPagina, String fecha, DataTenant tenant){
-		return srvEncomienda.getEncomiendasPagas(pagina, elemPagina, fecha, tenant);
+	public List<DataEncomiendaConvertor> getEncomiendasPagas(String fecha, Integer pagina, Integer elemPagina, DataTenant tenant){
+		return srvEncomienda.getEncomiendasPagas(fecha, pagina, elemPagina, tenant);
 	}
 }

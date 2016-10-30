@@ -64,7 +64,7 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
 		return encomiendas;
 	}
 	
-	public List<DataEncomiendaConvertor> getEncomiendasPagas(Integer pagina, Integer elementosPagina,String fecha ,DataTenant tenant) {
+	public List<DataEncomiendaConvertor> getEncomiendasPagas(String fecha, Integer pagina, Integer elementosPagina ,DataTenant tenant) {
 		List<DataEncomiendaConvertor> encomiendas = new ArrayList();
 		// obtengo todas las encomiendas de la bd
 		Session session = (Session) em.getDelegate();

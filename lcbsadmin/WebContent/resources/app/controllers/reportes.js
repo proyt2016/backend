@@ -7,158 +7,178 @@
 			$location.url('/login');
 		}
     	
-        $scope.pasajes    = [];
-        $scope.encomiendas = [];
-        $scope.totalPasaje = 0;
-        $scope.totalEnco = 0;
-        $scope.cantPasajes = [];
-        $scope.cantEncomiendas = [];
-        $scope.showAlert    = false;
-        $scope.dia = null;
-        $scope.grafPasaje = [];
-        $scope.grafEncomiendas = [];
-        var fechaHoy = moment();
-        $scope.dia = moment(fechaHoy,'DD/MM/YYYY').format('YYYY-MM-DD');
+        var dataPorNuevo = [];
+        $scope.dataNuevoFilter = [];
+        var dataPorSesion = [];
+        $scope.dataSesionFilter = [];
 
-        console.log($routeParams);
+        var startDateNuevos = moment().subtract(29, 'days');
+        var endDateNuevos = moment();
+        var startDateSesion = moment().subtract(29, 'days');
+        var endDateSesion = moment();
 
-        var initialize  = function(){
-           var now = moment();
-           var total = 0;
-           var dateNow =  moment(now, 'DD/MM/YYYY').format('YYYY-MM-DD');
-        	reportesService.getPasajesVendidos(dateNow).then(function (data) {
-                    $scope.pasajes = data;
-                        for(var i = 0; i < $scope.pasajes.length; i++){
-                            total  = total + $scope.pasajes[i].precio.monto;
-                            $scope.totalPasaje = total;
-                            //console.log(grafPasaje);
-                        }
+        var chartPorNuevos = null;
+        var chartPorSesion = null;      
+       // var fechaHoy = moment();
+       // $scope.dia = moment(fechaHoy,'DD/MM/YYYY').format('YYYY-MM-DD');
+            
+         
+        var dateOption = {
+            startDate: moment().subtract(29, 'days'),
+            endDate: moment(),
+            showDropdowns: true,
+            timePicker: false,
+            ranges: {
+                'Ultimos 7 dias': [moment().subtract(6, 'days'), moment()],
+                'Ultimos 30 dias': [moment().subtract(29, 'days'), moment()],
+                'Este Mes': [moment().startOf('month'), moment().endOf('month')],
+                'Mes anterior': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            opens: 'left',
+            buttonClasses: ['btn btn-default'],
+            applyClass: 'btn-small btn-primary',
+            cancelClass: 'btn-small',
+            format: 'DD/MM/YY',
+            separator: ' a ',
+            locale: {
+                applyLabel: 'Enviar',
+                cancelLabel: 'Borrar',
+                fromLabel: 'Desde',
+                toLabel: 'a',
+                customRangeLabel: 'Rango',
+                daysOfWeek: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+                monthNames: ['Enero', 'Febero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            }
+        };
 
-            });       
 
-        }
-
-        var initializeEnco  = function(){
-           var totalEn = 0;
-           var now = moment();
-           var dateNow =  moment(now, 'DD/MM/YYYY').format('YYYY-MM-DD');
-           reportesService.getEncomiendasPagas(dateNow).then(function (data){
-                    $scope.encomiendas = data;
-                    console.log($scope.encomiendas);
-                    for(var i = 0; i < $scope.encomiendas.length; i++){
-                            totalEn  = totalEn + $scope.encomiendas[i].monto;
-                            $scope.totalEnco = totalEn;
-                        }   
-            }); 
-        }
+if($location.path() == '/reportes/reportesPasajes'){
+        reportesService.getPasajesVendidos().then(function (data) {
+                    dataPorNuevo = data;
+                       dibujarGraficaNuevos();
 
 
-     
-
-        initialize();
-        initializeEnco();
-        
-    
-   $(document).ready(function() {
-            $('#single_cal5').daterangepicker({
-                singleDatePicker: true,
-                calender_style: "picker_4"
-            }, function(start, end, label) {
-                console.log(start.toISOString(), end.toISOString(), label);
             });
-        });
 
-   $(document).ready(function(){
-      var ctx = document.getElementById("mybarChart");
-      var now = moment();
-      var dateNow =  moment(now, 'DD/MM/YYYY').format('YYYY-MM-DD');
-      var pasajeMonto = 0;
-      reportesService.getPasajesVendidos(dateNow).then(function (data) {
-                    $scope.pasajes = data;
-                        for(var i = 0; i < $scope.pasajes.length; i++){
-                            pasajeMonto = $scope.pasajes[i].precio.monto;
-                            $scope.grafPasaje.push(pasajeMonto);
-                            console.log($scope.grafPasaje);
-                                $scope.cantPasajes.push(i)
-                            //console.log(grafPasaje);
-                        }
+        var dataByRangoNuevos = function () {
 
-        var mybarChart = new Chart(ctx, {
-            type: 'bar',
-                data: {
-                    labels: $scope.cantPasajes,
-                datasets: [{
-                    label: 'Pasaje',
-                    backgroundColor: "#26B99A",
-                    data :  $scope.grafPasaje
-                }]
-                },
-
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        }
-                    }
-      });
-    });           
-});
-
-$(document).ready(function(){
-      var ctx = document.getElementById("mybarChart2");
-      var now = moment();
-      var encomiendaMonto = 0;
-      var dateNow =  moment(now, 'DD/MM/YYYY').format('YYYY-MM-DD');
-           reportesService.getEncomiendasPagas(dateNow).then(function (data){
-                    $scope.encomiendas = data;
-                    for(var i = 0; i < $scope.encomiendas.length; i++){
-                           encomiendaMonto = $scope.encomiendas[i].monto;
-                           $scope.grafEncomiendas.push(encomiendaMonto);
-                           if($scope.encomiendas.length == 1){
-                            $scope.cantEncomiendas.push(1)}else{
-                                $scope.cantEncomiendas.push(i)
-                            }
+            var dataArray = [];
+                    for (var d in dataPorNuevo) {
+                        var item = dataPorNuevo[d];
+                        var date = moment(item['fechaCompra'], 'YYYY-MM-DD');
+                        if (date.isBetween(startDateNuevos, endDateNuevos) || date.isSame(startDateNuevos) || date.isSame(endDateNuevos)) {
+                            dataArray.push({ 'monto': item.precio.monto, 'fechaCompra': moment(item.fechaCompra).format('DD/MM/YY') });
+                            console.log(item.fechaCompra);
                         }   
-           
-
-        var mybarChart = new Chart(ctx, {
-            type: 'bar',
-                data: {
-                    labels: $scope.cantEncomiendas,
-                datasets: [{
-                    label: 'Encomienda',
-                    backgroundColor: "#26B99A",
-                    data :  $scope.grafEncomiendas
-                }]
-                },
-
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        }
                     }
-      });
-    }); 
- });           
+                    console.log(item);
+                    if (dataArray.length == 0) {
+                        dataArray.push({ 'monto' : 0, 'fechaCompra' : 'No data' });
+                    }
+                    $scope.dataNuevoFilter = dataArray;
+                    return dataArray;
+        };
 
-       
+        var dibujarGraficaNuevos = function () {
+            var data = dataByRangoNuevos();
+            console.log(data);
+            chartPorNuevos = Morris.Bar({
+                element: 'porNuevos',
+                data: data,
+                xkey: 'fechaCompra',
+                hideHover: 'auto',
+                barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+                ykeys: ['monto'],
+                labels: ['Monto'],
+                xLabelAngle: 60,
+                resize: true
+            });
 
+            $('#dateRangeNuevos').daterangepicker(dateOption);
+            $('#dateRangeNuevos span').html(startDateNuevos.format('DD/MM/YY') + ' - ' + endDateNuevos.format('DD/MM/YY'));
+            $('#dateRangeNuevos').on('apply.daterangepicker', function (ev, picker) {
+                startDateNuevos = picker.startDate;
+                endDateNuevos = picker.endDate;
+
+                cambiarRangoNuevos();
+            });
+        };
+
+        var cambiarRangoNuevos = function () {
+            $('#dateRangeNuevos span').html(startDateNuevos.format('DD/MM/YY') + ' - ' + endDateNuevos.format('DD/MM/YY'));
+          
+            var data = dataByRangoNuevos();
+
+            chartPorNuevos.setData(data);
+
+            $scope.$apply();
+        }
+}
+if($location.path() == '/reportes/reportesEncomiendas'){
+    reportesService.getEncomiendasPagas().then(function (data) {
+                    dataPorNuevo = data;
+                       dibujarGraficaNuevos();
+
+
+            });
+
+        var dataByRangoNuevos = function () {
+
+            var dataArray = [];
+                    for (var d in dataPorNuevo) {
+                        var item = dataPorNuevo[d];
+                        var date = moment(item['fechaEntrega'], 'YYYY-MM-DD');
+                        if (date.isBetween(startDateNuevos, endDateNuevos) || date.isSame(startDateNuevos) || date.isSame(endDateNuevos)) {
+                            dataArray.push({ 'monto': item.monto, 'fechaEntrega': moment(item.fechaEntrega).format('DD/MM/YY') });
+                            console.log(item.fechaEntrega);
+                        }   
+                    }
+                    console.log(item);
+                    if (dataArray.length == 0) {
+                        dataArray.push({ 'monto' : 0, 'fechaEntrega' : 'No data' });
+                    }
+                    $scope.dataNuevoFilter = dataArray;
+                    return dataArray;
+        };
+
+        var dibujarGraficaNuevos = function () {
+            var data = dataByRangoNuevos();
+            console.log(data);
+            chartPorNuevos = Morris.Bar({
+                element: 'porNuevos',
+                data: data,
+                xkey: 'fechaEntrega',
+                hideHover: 'auto',
+                barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+                ykeys: ['monto'],
+                labels: ['Monto'],
+                xLabelAngle: 60,
+                resize: true
+            });
+
+            $('#dateRangeNuevos').daterangepicker(dateOption);
+            $('#dateRangeNuevos span').html(startDateNuevos.format('DD/MM/YY') + ' - ' + endDateNuevos.format('DD/MM/YY'));
+            $('#dateRangeNuevos').on('apply.daterangepicker', function (ev, picker) {
+                startDateNuevos = picker.startDate;
+                endDateNuevos = picker.endDate;
+
+                cambiarRangoNuevos();
+            });
+        };
+
+        var cambiarRangoNuevos = function () {
+            $('#dateRangeNuevos span').html(startDateNuevos.format('DD/MM/YY') + ' - ' + endDateNuevos.format('DD/MM/YY'));
+          
+            var data = dataByRangoNuevos();
+
+            chartPorNuevos.setData(data);
+
+            $scope.$apply();
+        }
 }
 
 
-
-      
-    
-
-
-    
+    }   
 
 })();
 

@@ -33,7 +33,16 @@ public class TenantCtrl implements ITenant{
 		try{
 			if(dt == null){
 				srvSchemaHandler.createSchema(tenant.getName());
-				return srvTenant.create(tenant);
+				DataTenant result = srvTenant.create(tenant); 
+				//TODO: Execute command here.
+				//result.getId();
+				//result.getFbId();
+				//resutl.getName();
+				//result.getFbSecret();
+				//result.getTipoVertical();
+				//Runtime rt = Runtime.getRuntime();
+				//Process pr = rt.exec(" COMANDO");
+				return result;
 			}else{
 				throw new TenantException("Tenant Already Exist");
 			}

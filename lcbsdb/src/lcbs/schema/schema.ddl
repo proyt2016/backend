@@ -161,14 +161,11 @@
 
     create table Perfil (
         id varchar(255) not null,
-        modulo1 boolean,
-        modulo2 boolean,
-        modulo3 boolean,
-        modulo4 boolean,
-        modulo5 boolean,
-        modulo6 boolean,
-        modulo7 boolean,
-        modulo8 boolean,
+        gestionEncomiendas boolean,
+        gestionPasajes boolean,
+        ConfiguracionEmpresa boolean,
+        gestionReportes boolean,
+        mantenimientoFlota boolean,
         nombrePerfil varchar(255),
         primary key (id)
     );
@@ -744,11 +741,11 @@ INSERT INTO estadosencomienda (id, nombre) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35
 
 
 
-INSERT INTO perfil (id, modulo1, modulo2, modulo3, modulo4, modulo5, modulo6, modulo7, modulo8, nombreperfil) VALUES ('ecefa62b-185a-4e48-a019-f67521e2b9cd', true, true, true, true, true, true, true, true, 'Admin');
-INSERT INTO perfil (id, modulo1, modulo2, modulo3, modulo4, modulo5, modulo6, modulo7, modulo8, nombreperfil) VALUES ('40b64aed-ae63-4908-914d-b011188c171a', true, true, true, true, false, false, true, true, 'Vendedor');
-INSERT INTO perfil (id, modulo1, modulo2, modulo3, modulo4, modulo5, modulo6, modulo7, modulo8, nombreperfil) VALUES ('49b26bf8-1be4-4405-a0d7-0356f644440d', false, false, true, false, true, true, false, false, 'Encargado Deposito');
-INSERT INTO perfil (id, modulo1, modulo2, modulo3, modulo4, modulo5, modulo6, modulo7, modulo8, nombreperfil) VALUES ('fb192132-7a5c-427a-9c55-bc4b339e1ffd', false, false, false, false, true, true, false, true, 'Guarda');
-INSERT INTO perfil (id, modulo1, modulo2, modulo3, modulo4, modulo5, modulo6, modulo7, modulo8, nombreperfil) VALUES ('d4d86bd5-60e5-4b45-abd4-58ea63af3b84', false, false, false, true, true, true, false, false, 'Encargado Taller');
+INSERT INTO perfil (id, gestionEncomiendas, gestionPasajes, ConfiguracionEmpresa, gestionReportes, mantenimientoFlota, nombreperfil) VALUES ('ecefa62b-185a-4e48-a019-f67521e2b9cd', true, true, true, true, true, 'Admin');
+INSERT INTO perfil (id, gestionEncomiendas, gestionPasajes, ConfiguracionEmpresa, gestionReportes, mantenimientoFlota, nombreperfil) VALUES ('40b64aed-ae63-4908-914d-b011188c171a', true, true, false, false, false, 'Vendedor');
+INSERT INTO perfil (id, gestionEncomiendas, gestionPasajes, ConfiguracionEmpresa, gestionReportes, mantenimientoFlota, nombreperfil) VALUES ('49b26bf8-1be4-4405-a0d7-0356f644440d', true, false, false, false, false, 'Encargado Deposito');
+INSERT INTO perfil (id, gestionEncomiendas, gestionPasajes, ConfiguracionEmpresa, gestionReportes, mantenimientoFlota, nombreperfil) VALUES ('fb192132-7a5c-427a-9c55-bc4b339e1ffd', false, true, false, false, false, 'Guarda');
+INSERT INTO perfil (id, gestionEncomiendas, gestionPasajes, ConfiguracionEmpresa, gestionReportes, mantenimientoFlota, nombreperfil) VALUES ('d4d86bd5-60e5-4b45-abd4-58ea63af3b84', false, false, false, true, true, 'Encargado Taller');
 
 INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', 'd1826b85-4527-4bd9-98d1-9dbad268ce5e', 'Perez', false, NULL, 'juan.perez@lacbus.tenant.com', NULL, 'Juan', NULL, NULL, NULL, '', NULL, NULL);
 INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', '52897d2a-49af-40cc-939c-e6a300f720e7', 'Sosa', false, NULL, 'julio.sosa@lacbus.tenant.com', NULL, 'Julio', NULL, NULL, NULL, '', NULL, NULL);

@@ -20,32 +20,27 @@
     </div>
     <div class="x_content">
 
-      <table class="table table-hover table-striped">
+      <table class="table table-striped responsive-utilities jambo_table bulk_action">
         <thead>
           <tr>
             <th>Nombre</th>
-            <th>Modulo 1</th>
-            <th>Modulo 2</th>
-            <th>Modulo 3</th>
-            <th>Modulo 4</th>
-            <th>Modulo 5</th>
-            <th>Modulo 6</th>
-            <th>Modulo 7</th>
-            <th>Modulo 8</th>
+            <th>Gestion Encomiendas</th>
+            <th>Gestion Pasajes</th>
+            <th>Configuracion Empresa</th>
+            <th>Gestion Reportes</th>
+            <th>Mantenimiento Flota</th>
             <th>Acciones</th>
+           
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="perfil in perfiles">
-            <td>{{perfil.nombre}}</td>
-            <td>{{perfil.modulo1}}</td>
-            <td>{{perfil.modulo2}}</td>
-            <td>{{perfil.modulo3}}</td>
-            <td>{{perfil.modulo4}}</td>
-            <td>{{perfil.modulo5}}</td>
-            <td>{{perfil.modulo6}}</td>
-            <td>{{perfil.modulo7}}</td>
-            <td>{{perfil.modulo8}}</td>
+            <td>{{perfil.nombrePerfil}}</td>
+            <td>{{perfil.gestionEncomiendas}}</td>
+            <td>{{perfil.gestionPasajes}}</td>
+            <td>{{perfil.configruacionEmpresa}}</td>
+            <td>{{perfil.gestionReportes}}</td>
+            <td>{{perfil.mantenimientoFlota}}</td>
             <td>
               <div class="btn-group">
                 <a href="#/perfil/edit/{{perfil.id}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>

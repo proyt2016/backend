@@ -174,6 +174,7 @@ public class ViajeSrv implements ViajeLocalApi {
 		} catch (Exception e) {
 			log.info("#################################################################### " + e.getMessage());
 		}
+		
 		return viajes;
 	}
 	

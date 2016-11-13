@@ -1,5 +1,4 @@
-
-    create table ConfiguracionEmpresa (
+create table ConfiguracionEmpresa (
         id varchar(255) not null,
         aceptaCuponera boolean,
         activo boolean,
@@ -64,10 +63,10 @@
         fechaEntrega timestamp,
         fechaIngreso timestamp,
         monto float4,
+        paga boolean,
         pagaReceptor boolean,
         precio float4,
         retiraEnSucursal boolean,
-        paga boolean,
         descripcion varchar(255),
         telefono varchar(255),
         cocheAsignado_id varchar(255),
@@ -161,9 +160,9 @@
 
     create table Perfil (
         id varchar(255) not null,
+        ConfiguracionEmpresa boolean,
         gestionEncomiendas boolean,
         gestionPasajes boolean,
-        ConfiguracionEmpresa boolean,
         gestionReportes boolean,
         mantenimientoFlota boolean,
         nombrePerfil varchar(255),
@@ -333,12 +332,12 @@
         cantidadAsientos int4,
         conGuarda boolean,
         eliminado boolean,
+        enMantenimiento boolean,
         fechaAlta date,
         marca varchar(255),
         matricula varchar(255),
         modelo varchar(255),
         numeroVehiculo varchar(255),
-        enMantenimiento boolean,
         primary key (id)
     );
 
@@ -730,6 +729,8 @@
         add constraint FK_hbh26sy6gwvgixbk380fa5im2 
         foreign key (GrupoHorarioId) 
         references GrupoHorario;
+
+    create sequence hibernate_sequence;
         
     INSERT INTO estadosencomienda (id, nombre) VALUES ('9a265943-ab81-4a19-a752-03b2db475fed', 'Recibida');
 INSERT INTO estadosencomienda (id, nombre) VALUES ('c1423557-e9fb-472a-92f6-023328107117', 'Enviada');

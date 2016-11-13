@@ -10,12 +10,18 @@
         $scope.empleados     = [];
         $scope.empleado     = null;
         $scope.showAlert    = false;
+        $scope.configuracion = null;
 
         var initialize = function(){
             var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null
             if(id){
                 empleadosService.getId(id).then(function (data) {
                     $scope.empleado = data;
+                });
+                empleadosService.getConfiguracion().then(function (data) {
+                    $scope.configuracion = data;
+                    $scope.emailsEmpresa = $scope.configuracion.emails;
+                    $scope.telsEmpresa = $scope.configuracion.telefonos;
                 });
             }else{
                 console.info("no tengo id"+id);

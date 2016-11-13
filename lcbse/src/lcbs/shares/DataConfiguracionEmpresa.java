@@ -12,8 +12,7 @@ public class DataConfiguracionEmpresa{
     private List<DataTelefono> telefonos;
     private List<DataEmail> emails;
     private String urlLdap;
-    private String usuarioLdap;
-    private String claveLdap;
+    private String baseLdap;
     private Boolean activo;
     private Boolean pagoOnlineCoche;
     private Boolean reservaPasajes;
@@ -44,8 +43,7 @@ public class DataConfiguracionEmpresa{
         this.telefonos = tels;
         this.emails = mails;
         this.urlLdap = urlLdap;
-        this.usuarioLdap = usrLdap;
-        this.claveLdap = clLdap;
+        this.baseLdap = clLdap;
         this.activo = act;
         this.pagoOnlineCoche = pagOnCoche;
         this.reservaPasajes = resePas;
@@ -118,20 +116,12 @@ public class DataConfiguracionEmpresa{
         return this.urlLdap;
     }
 
-    public void setUsuarioLdap(String val){
-        this.usuarioLdap = val;
-    }
+    public void setBaseLdap(String val) {
+		this.baseLdap = val;	
+	}
     
-    public String getUsuarioLdap(){
-        return this.usuarioLdap;
-    }
-
-    public void setClaveLdap(String val){
-        this.claveLdap = val;
-    }
-    
-    public String getClaveLdap(){
-        return this.claveLdap;
+    public String getBaseLdap(){
+        return this.baseLdap;
     }
 
     public void setActivo(Boolean val){

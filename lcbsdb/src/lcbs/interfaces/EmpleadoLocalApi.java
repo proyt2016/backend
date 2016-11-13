@@ -14,5 +14,6 @@ public interface EmpleadoLocalApi {
 	public DataEmpleado getEmpleado(String id, DataTenant tenant);
 	public DataEmpleado crearEmpleado(DataEmpleado emp, DataTenant tenant);
 	public void darBajaEmpleado(String idEmpleado, DataTenant tenant);
-	 public DataEmpleado loginUsuario(String mailEmpleado, String clave, DataTenant tenant);
+	public DataEmpleado loginUsuario(String mailEmpleado, String clave, DataTenant tenant);
+	public DataEmpleado empleadoPorIdLdap(String idLdap, DataTenant tenant);
 }

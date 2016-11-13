@@ -27,6 +27,9 @@ public class UsuarioCtrl implements IUsuario {
 
 	@EJB(lookup = "java:app/lcbsdb/PerfilSrv!lcbs.interfaces.PerfilLocalApi")
 	PerfilLocalApi srvPerfil;
+	
+	@EJB(lookup = "java:app/lcbsdb/ConfiguracionEmpresaSrv!lcbs.interfaces.ConfiguracionEmpresaLocalApi")
+	ConfiguracionEmpresaLocalApi srvConfiguracionEmpresa;
 
 	@Override
 	public DataUsuario AltaUsuario(DataUsuario usuario, DataTenant tenant) {
@@ -115,7 +118,17 @@ public class UsuarioCtrl implements IUsuario {
 
 	@Override
 	public DataEmpleado loginEmpleado(String mail, String clave, DataTenant tenant) {
-		return srvEmpleado.loginUsuario(mail, clave, tenant);
+		DataEmpleado result = new DataEmpleado();
+		DataConfiguracionEmpresa conf = srvConfiguracionEmpresa.getConfiguracionEmpresa(tenant);
+		if(conf.getUrlLdap() != null){
+			result = srvEmpleado.loginUsuario(mail, clave, tenant);
+		}else{
+			result= srvEmpleado.empleadoPorIdLdap(mail, tenant);
+		}
+		if(conf.getUrlLdap() != null && !ldapconnection.validarCredenciales(conf.getUrlLdap(), conf.getBaseLdap(), result.getIdEmpleadoLdap(), result.getClave())){
+			return null;
+		}
+		return result;
 	}
 
 	@Override

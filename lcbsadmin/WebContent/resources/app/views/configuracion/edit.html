@@ -25,20 +25,14 @@
         <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="urlLDAP">URL de servidor LDAP</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="urlLDAP" class="form-control col-md-7 col-xs-12" ng-model="configuracion.urlLdap">
+            <input type="text" id="urlLDAP" class="form-control col-md-7 col-xs-12" ng-model="configuracion.urlLdap" placeholder="ldap://IP o DOMINIO:389">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuarioLdap">Usuario de acceso de servidor LDAP
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="baseLdap">Dominio LDAP
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="usuarioLdap" class="form-control col-md-7 col-xs-12" ng-model="configuracion.usuarioLdap">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="claveLdap">Clave de acceso de servidor LDAP</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="password" id="claveLdap" class="form-control col-md-7 col-xs-12" ng-model="configuracion.claveLdap">
+            <input type="text" id="baseLdap" class="form-control col-md-7 col-xs-12" ng-model="configuracion.baseLdap" placeholder="servidorldap.dominio.com">
           </div>
         </div>
         <div class="form-group">

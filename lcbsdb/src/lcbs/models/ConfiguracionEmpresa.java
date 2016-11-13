@@ -42,8 +42,7 @@ public class ConfiguracionEmpresa implements Serializable{
     @IndexColumn(name="LIST_INDEX")
     private List<Email> emails;
     private String urlLdap;
-    private String usuarioLdap;
-    private String claveLdap;
+    private String baseLdap;
     private Boolean activo;
     private Boolean pagoOnlineCoche;
     private Boolean reservaPasajes;
@@ -75,8 +74,7 @@ public class ConfiguracionEmpresa implements Serializable{
         this.telefonos = tels;
         this.emails = mails;
         this.urlLdap = urlLdap;
-        this.usuarioLdap = usrLdap;
-        this.claveLdap = clLdap;
+        this.baseLdap = clLdap;
         this.activo = act;
         this.pagoOnlineCoche = pagOnCoche;
         this.reservaPasajes = resePas;
@@ -115,8 +113,7 @@ public class ConfiguracionEmpresa implements Serializable{
 	        this.setEmails(auxEm);
         }
         this.setUrlLdap(dt.getUrlLdap());
-        this.setUsuarioLdap(dt.getUsuarioLdap());
-        this.setClaveLdap(dt.getClaveLdap());
+        this.setBaseLdap(dt.getBaseLdap());
         this.setActivo(dt.getActivo());
         this.setPagoOnlineCoche(dt.getPagoOnlineCoche());
         this.setReservaPasajes(dt.getReservaPasajes());
@@ -155,8 +152,7 @@ public class ConfiguracionEmpresa implements Serializable{
 	    	result.setEmails(auxEm);
     	}
     	result.setUrlLdap(this.getUrlLdap());
-    	result.setUsuarioLdap(this.getUsuarioLdap());
-    	result.setClaveLdap(this.getClaveLdap());
+    	result.setBaseLdap(this.getBaseLdap());
     	result.setActivo(this.getActivo());
     	result.setPagoOnlineCoche(this.getPagoOnlineCoche());
     	result.setReservaPasajes(this.getReservaPasajes());
@@ -231,20 +227,12 @@ public class ConfiguracionEmpresa implements Serializable{
         return this.urlLdap;
     }
 
-    public void setUsuarioLdap(String val){
-        this.usuarioLdap = val;
+    public void setBaseLdap(String val){
+        this.baseLdap = val;
     }
     
-    public String getUsuarioLdap(){
-        return this.usuarioLdap;
-    }
-
-    public void setClaveLdap(String val){
-        this.claveLdap = val;
-    }
-    
-    public String getClaveLdap(){
-        return this.claveLdap;
+    public String getBaseLdap(){
+        return this.baseLdap;
     }
 
     public void setActivo(Boolean val){

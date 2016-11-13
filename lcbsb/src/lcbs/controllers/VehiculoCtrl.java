@@ -66,6 +66,11 @@ public class VehiculoCtrl implements IVehiculo {
 	public List<DataVehiculo> obtenerVehiculosEnMantenimiento(Integer pagina, Integer elementosPagina, DataTenant tenant){
 		return srvVehiculo.obtenerVehiculosEnMantenimiento(pagina, elementosPagina, tenant);
 	}
+	
+	@Override
+	public int getMenorCantAsientos(Integer pagina, Integer elementosPagina, DataTenant tenant){
+		return srvVehiculo.getMenorCantAsientos(pagina, elementosPagina, tenant);
+	}
 
 
 }

@@ -16,6 +16,7 @@ public interface IVehiculo {
 	public DataVehiculo obtenerVehiculo(String idVehiculo, DataTenant tenant);
 	public void altaMantenimiento(DataMantenimientoVehiculo mante,String id, DataTenant tenant);
 	public List<DataVehiculo> obtenerVehiculosEnMantenimiento(Integer pagina, Integer elementosPagina, DataTenant tenant);
+	public int getMenorCantAsientos(Integer pagina, Integer elementosPagina, DataTenant tenant);
 
 
 }

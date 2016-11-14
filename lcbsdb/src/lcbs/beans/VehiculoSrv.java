@@ -77,7 +77,6 @@ public class VehiculoSrv implements VehiculoLocalApi {
 	public int getMenorCantAsientos(Integer pagina, Integer elementosPagina, DataTenant tenant){
 		int pos = 0;
 		int menor = 0;
-		
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(Vehiculo.class);
 		criteria.add(Restrictions.eq("eliminado", false));

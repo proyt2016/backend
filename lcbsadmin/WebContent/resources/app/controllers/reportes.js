@@ -9,6 +9,7 @@
     	
         var dataPorNuevo = [];
         var ArrayPasajes = [];
+          var arrayOrdenado = [];
         $scope.dataNuevoFilter = [];
         var dataPorSesion = [];
         $scope.dataSesionFilter = [];
@@ -54,83 +55,40 @@
 
 
 if($location.path() == '/reportes/reportesPasajes'){
+    arrayOrdenado = [];
         reportesService.getPasajesVendidos().then(function (data) {
-                    dataPorNuevo = data;
-                       
-                   dibujarGraficaNuevos();
-                 //  arrayPasajes();
+            dataPorNuevo = data;
+            for(var p in dataPorNuevo){
+                var nodo = dataPorNuevo[p];
+                var fecha = moment(nodo['fechaCompra']);
 
-            });
+                var key = fecha.format('DDMMYYYY');
 
-       /* var arrayPasajes = function () { 
-
-            var grupo = [];
-            var canti = 1;
-
-            for(var dp in dataPorNuevo){
-                var nodo = dataPorNuevo[dp];
-                
-                array[nodo.fechaCompra] = canti;
-
-                console.log(array);
-
-
-
-                
-            }
-
-
-
-        };*/
-
-       /* var ordenarArray = function () {
-
-                var arrayOrdenado = [];
-                var cant = 0;
-                //ITERO SOBRE TODOS LOS PASAJES
-                for(var p in dataPorNuevo){
-                    var nodo = dataPorNuevo[p];
-                    var fechaNodo = moment(nodo['fechaCompra'], 'DD-MM-YY')
-                    //SI EL ARRAY ORDENADO NO TIENE ELEMENTOS LE AGREGO EL PRIMER PASAJE
-                    if(arrayOrdenado.length == 0){
-                        arrayOrdenado.push({'cantidad' : 1, 'fecha' : fechaNodo});
-                    }else
-                        {   
-                            //ITERO SOBRE LA LISTA ORDENADA 
-                            for(var p2 in arrayOrdenado){
-                                var nodo2 = arrayOrdenado[p2];
-                                var fechaNodo2 = moment(nodo2['fechaCompra'], 'DD-MM-YY');
-                                    //SI LA FECHA DEL PASAJE EN ARRAY ORDENADO ES LA MISMA QUE LA FECHA DEL PASAJE SIGUIENTE 
-                                    //TENGO QUE MODIFICAR LA CANTIDAD DEL ELEMENTO YA AGREGADO YA QUE LAS FECHAS SON IGUALES
-                                    if(fechaNodo2 == fechaNodo){
-                                        cant++;
-                                        nodo2['cantidad' : cant, 'fecha' : fechaNodo2];//ESTO ESTA MAL LO SE COMO MODIFICO EL NODO TENGO Q AGREGARLE 1 A CANTIDAD
-
-                                        console.log("--------------> NODOOOOOOOO"nodo);
-                                    }else{
-                                            //SI LA FECHA DEL PASAJE DEL ARRAY ODENADO ES DISTINTA A LA FECHA DEL PASAJE SIGUIENTE
-                                            //AGREGO UN NUEVO ELEMNTEO A EL ARRAY ORDENADO
-                                            arrayOrdenado.push({'cantidad' : 1, 'fecha' : fechaNodo2});
-                                        }
-                            }
-                        }
+                if(arrayOrdenado[key]){
+                    arrayOrdenado[key]['cantidad'] += 1;
+                }else{
+                    arrayOrdenado[key] = {
+                        fechaCompra : fecha,
+                        cantidad : 1
+                    };
                 }
-                console.log("arrayyyyy ordenado------------->"arrayOrdenado);
-
-        };*/
+            }
+           
+           dibujarGraficaNuevos();
+        });
        
         var dataByRangoNuevos = function () {
 
             var dataArray = [];
-                    for (var d in dataPorNuevo) {
-                        var item = dataPorNuevo[d];
-                        var date = moment(item['fechaCompra'], 'YYYY-MM-DD');
+                    for (var d in arrayOrdenado) {
+                        var item = arrayOrdenado[d];
+                        var date = item['fechaCompra'];
                         if (date.isBetween(startDateNuevos, endDateNuevos) || date.isSame(startDateNuevos) || date.isSame(endDateNuevos)) {
-                            dataArray.push({ 'monto': item.precio.monto, 'fechaCompra': moment(item.fechaCompra).format('DD/MM/YY') });
+                            dataArray.push({ 'cantidad': item.cantidad, 'fechaCompra': item.fechaCompra.format('DD/MM/YY') });
                         }
                     }
                     if (dataArray.length == 0) {
-                        dataArray.push({ 'monto' : 0, 'fechaCompra' : 'No data' });
+                        dataArray.push({ 'cantidad' : 0, 'fechaCompra' : 'No data' });
                     }
                     $scope.dataNuevoFilter = dataArray;
                     return dataArray;
@@ -145,8 +103,8 @@ if($location.path() == '/reportes/reportesPasajes'){
                 xkey: 'fechaCompra',
                 hideHover: 'auto',
                 barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
-                ykeys: ['monto'],
-                labels: ['Precio'],
+                ykeys: ['cantidad'],
+                labels: ['Cantidad'],
                 xLabelAngle: 60,
                 resize: true
             });
@@ -172,28 +130,43 @@ if($location.path() == '/reportes/reportesPasajes'){
         }
 }
 if($location.path() == '/reportes/reportesEncomiendas'){
+     arrayOrdenado = [];
     reportesService.getEncomiendasPagas().then(function (data) {
-                    dataPorNuevo = data;
-                       dibujarGraficaNuevos();
+                dataPorNuevo = data;
+           
+                for(var p in dataPorNuevo){
+                var nodo = dataPorNuevo[p];
+                var fecha = moment(nodo['fechaEntrega']);
+                var key = fecha.format('DDMMYYYY');
+                if(arrayOrdenado[key]){
+                    arrayOrdenado[key]['cantidad'] += 1;
+                }else{
+                    arrayOrdenado[key] = {
+                        fechaEntrega : fecha,
+                        cantidad : 1
+                    };
+                }
+            }
+                 dibujarGraficaNuevos();
 
 
             });
 
+    
+
+       
         var dataByRangoNuevos = function () {
 
             var dataArray = [];
-                    for (var d in dataPorNuevo) {
-                        var item = dataPorNuevo[d];
-                        var date = moment(item['fechaEntrega'], 'YYYY-MM-DD');
+                    for (var d in arrayOrdenado) {
+                        var item = arrayOrdenado[d];
+                        var date = item['fechaEntrega'];
                         if (date.isBetween(startDateNuevos, endDateNuevos) || date.isSame(startDateNuevos) || date.isSame(endDateNuevos)) {
-                            
-                            dataArray.push({ 'monto': item.monto, 'fechaEntrega': moment(item.fechaEntrega).format('DD/MM/YY') });
-                            console.log(item.fechaEntrega);
-                        }   
+                            dataArray.push({ 'cantidad': item.cantidad, 'fechaEntrega': item.fechaEntrega.format('DD/MM/YY') });
+                        }
                     }
-                    console.log(item);
                     if (dataArray.length == 0) {
-                        dataArray.push({ 'monto' : 0, 'fechaEntrega' : 'No data' });
+                        dataArray.push({ 'cantidad' : 0, 'fechaEntrega' : 'No data' });
                     }
                     $scope.dataNuevoFilter = dataArray;
                     return dataArray;
@@ -208,8 +181,8 @@ if($location.path() == '/reportes/reportesEncomiendas'){
                 xkey: 'fechaEntrega',
                 hideHover: 'auto',
                 barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
-                ykeys: ['monto'],
-                labels: ['Monto'],
+                ykeys: ['cantidad'],
+                labels: ['Cantidad'],
                 xLabelAngle: 60,
                 resize: true
             });

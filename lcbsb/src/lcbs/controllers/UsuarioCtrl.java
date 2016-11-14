@@ -121,12 +121,15 @@ public class UsuarioCtrl implements IUsuario {
 		DataEmpleado result = new DataEmpleado();
 		DataConfiguracionEmpresa conf = srvConfiguracionEmpresa.getConfiguracionEmpresa(tenant);
 		if(conf.getUrlLdap() != null){
-			result = srvEmpleado.loginUsuario(mail, clave, tenant);
-		}else{
 			result= srvEmpleado.empleadoPorIdLdap(mail, tenant);
+			if(result == null)
+				result = srvEmpleado.loginUsuario(mail, clave, tenant);
+		}else{
+			result = srvEmpleado.loginUsuario(mail, clave, tenant);
 		}
 		if(conf.getUrlLdap() != null && !ldapconnection.validarCredenciales(conf.getUrlLdap(), conf.getBaseLdap(), result.getIdEmpleadoLdap(), result.getClave())){
-			return null;
+			if(result.getIdEmpleadoLdap() != null)
+				return null;
 		}
 		return result;
 	}

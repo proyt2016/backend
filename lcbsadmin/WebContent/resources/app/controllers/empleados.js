@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').controller('empleadosCtrl', ['$scope', '$routeParams', 'empleadosService', '$localStorage', '$location', empleadosCtrl]);
+    angular.module('lacbus').controller('empleadosCtrl', ['$scope', '$routeParams', 'empleadosService', 'configuracionService', '$localStorage', '$location', empleadosCtrl]);
 
-    function empleadosCtrl($scope, $routeParams, empleadosService, $localStorage, $location) {
+    function empleadosCtrl($scope, $routeParams, empleadosService, configuracionService, $localStorage, $location) {
     	if(!$localStorage.empleadoLogueado){
 			$location.url('/login');
 		}
@@ -11,6 +11,10 @@
         $scope.empleado     = null;
         $scope.showAlert    = false;
         $scope.configuracion = null;
+        
+        configuracionService.getConfiguracion().then(function (data) {
+            $scope.configuracion = data;
+        });
 
         var initialize = function(){
             var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null
@@ -18,11 +22,7 @@
                 empleadosService.getId(id).then(function (data) {
                     $scope.empleado = data;
                 });
-                empleadosService.getConfiguracion().then(function (data) {
-                    $scope.configuracion = data;
-                    $scope.emailsEmpresa = $scope.configuracion.emails;
-                    $scope.telsEmpresa = $scope.configuracion.telefonos;
-                });
+                
             }else{
                 console.info("no tengo id"+id);
                 empleadosService.getAll().then(function (data) {

@@ -74,27 +74,12 @@
             return defer.promise;
         };
 
-        var getConfiguracion = function(){
-            var defer = $q.defer();
-
-            $http.get('/lcbsapi/rest/empresa/getconfirguacionempresa/')
-            .success(function (configuracion) {
-                defer.resolve(configuracion);
-            })
-            .error(function(){
-                defer.reject('server error')
-            });
-
-            return defer.promise;
-        };
-
         return {
             getAll  : getAll,
             getId   : getId,
             add     : add,
             borrar  : borrar,
             edit    : edit,
-            getConfiguracion : getConfiguracion
         }
 
     }

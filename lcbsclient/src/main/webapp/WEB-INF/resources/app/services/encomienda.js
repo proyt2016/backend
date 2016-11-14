@@ -1,13 +1,13 @@
 (function () {
     'use strict';
-    angular.module('lacbus').service('encomiendaService', ['$http', '$q', encomiendaService]);
+    angular.module('lacbus').service('encomiendaService', ['$http', '$q', 'CONFIGURACION', encomiendaService]);
 
-    function encomiendaService($http, $q) {
+    function encomiendaService($http, $q, CONFIGURACION) {
 
         var getAll = function(usuarioId){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/encomiendas/listarencomiendasusuario/' + usuarioId + '/1/1000')
+            $http.get(CONFIGURACION.url + 'encomiendas/listarencomiendasusuario/' + usuarioId + '/1/1000')
             .success(function (datos) {
                 defer.resolve(datos);
             })

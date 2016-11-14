@@ -60,6 +60,7 @@
                     id : destino.id,
                     tipo : destino.tipo
                 },
+                pago : true,
 	    		fechaCompra : moment().format('YYYY-MM-DD') 
 	    	}
 	    	

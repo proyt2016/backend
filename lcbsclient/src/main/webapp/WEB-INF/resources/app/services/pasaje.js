@@ -1,13 +1,13 @@
 (function () {
     'use strict';
-    angular.module('lacbus').service('pasajeService', ['$http', '$q', pasajeService]);
+    angular.module('lacbus').service('pasajeService', ['$http', '$q', 'CONFIGURACION', pasajeService]);
 
-    function pasajeService($http, $q) {
+    function pasajeService($http, $q, CONFIGURACION) {
 
         var getAll = function(usuarioId){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/listarhistorialpasajes/' + usuarioId + '/1/1000')
+            $http.get(CONFIGURACION.url + 'viajes/listarhistorialpasajes/' + usuarioId + '/1/1000')
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -21,7 +21,7 @@
         var getId = function(id){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/verdetallepasaje/' + id)
+            $http.get(CONFIGURACION.url + 'viajes/verdetallepasaje/' + id)
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -35,7 +35,7 @@
         var comprar = function(pasaje){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/viajes/comprarpasaje', pasaje)
+            $http.post(CONFIGURACION.url + 'viajes/comprarpasaje', pasaje)
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -49,7 +49,7 @@
         var cambiarHorario = function(pasaje){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/viajes/cambiarhorariopasaje', pasaje)
+            $http.post(CONFIGURACION.url + 'viajes/cambiarhorariopasaje', pasaje)
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -63,7 +63,7 @@
         var transferir = function(pasaje){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/viajes/transferirpasaje', pasaje)
+            $http.post(CONFIGURACION.url + 'viajes/transferirpasaje', pasaje)
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -77,7 +77,7 @@
         var reservar = function(pasaje){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/viajes/reservapasaje', pasaje)
+            $http.post(CONFIGURACION.url + 'viajes/reservapasaje', pasaje)
             .success(function (datos) {
                 defer.resolve(datos);
             })

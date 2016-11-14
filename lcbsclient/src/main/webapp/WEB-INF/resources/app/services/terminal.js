@@ -1,13 +1,13 @@
 (function () {
     'use strict';
-    angular.module('lacbus').service('terminalService', ['$http', '$q', terminalService]);
+    angular.module('lacbus').service('terminalService', ['$http', '$q', 'CONFIGURACION', terminalService]);
 
-    function terminalService($http, $q) {
+    function terminalService($http, $q, CONFIGURACION) {
 
         var getAll = function(){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/getterminales/1/1000')
+            $http.get(CONFIGURACION.url + 'viajes/getterminales/1/1000')
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -21,7 +21,7 @@
         var getId = function(id){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/getterminal/' + id)
+            $http.get(CONFIGURACION.url + 'viajes/getterminal/' + id)
             .success(function (dato) {
                 defer.resolve(dato);
             })

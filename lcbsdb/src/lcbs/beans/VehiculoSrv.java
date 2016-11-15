@@ -74,23 +74,18 @@ public class VehiculoSrv implements VehiculoLocalApi {
 		em.merge(realObj);
 	}
 	
-	public int getMenorCantAsientos(Integer pagina, Integer elementosPagina, DataTenant tenant){
-		int pos = 0;
-		int menor = 0;
+
+	public Integer getMenorCantAsientos(DataTenant tenant){
+		Integer menor = 0;
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(Vehiculo.class);
 		criteria.add(Restrictions.eq("eliminado", false));
-		criteria.add(Restrictions.eq("enMantenimiento", false));
-		criteria.setFirstResult((pagina - 1) * elementosPagina);
-		criteria.setMaxResults(elementosPagina);
 		List<Vehiculo> listVeh = new ArrayList<Vehiculo>(new LinkedHashSet(criteria.list()));
-			menor = listVeh.get(0).getCantidadAsientos();
-			for(int i=1; i < listVeh.size(); i++){
-				if(listVeh.get(i).getCantidadAsientos() < menor){
-					menor = listVeh.get(i).getCantidadAsientos();
-					pos = i;
-				}
+		for(Integer i=1; i < listVeh.size(); i++){
+			if(listVeh.get(i).getCantidadAsientos() < menor){
+				menor = listVeh.get(i).getCantidadAsientos();
 			}
+		}
 		return menor;
 	}
 

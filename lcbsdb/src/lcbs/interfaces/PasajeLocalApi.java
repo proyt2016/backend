@@ -19,5 +19,5 @@ public interface PasajeLocalApi {
 	public DataPasaje getpasajeXcodigo(Integer codigoPasaje, DataTenant tenant);
 	public List<DataPasajeConvertor> obtenerPasajesPorPersona(String idUsuario, Integer pagina, Integer elementosPagina, DataTenant tenant);
 	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina, DataTenant tenant);
-
+	public List<DataPasajeConvertor> obtenerPasajesPorViaje(String idViaje, DataTenant tenant);
 }

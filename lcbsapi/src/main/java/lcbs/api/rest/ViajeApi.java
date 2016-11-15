@@ -369,5 +369,12 @@ public class ViajeApi extends BaseApi{
 		repo.crearViajesParaRecorridos(tenant);
 	}
 	
+	@GET
+	@Path("/getcantidaddepasaesdisponibles/{idViaje}/{idOrigen}/{idDestino}")
+	public Integer cantidadAsientosDisponibles(@PathParam("idViaje") final String idViaje, @PathParam("idOrigen") final String idOrigen, @PathParam("idDestino") final String idDestino){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.cantidadAsientosDisponibles(idViaje, idOrigen, idDestino, tenant);
+	}
+	
 	
 }

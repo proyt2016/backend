@@ -63,7 +63,4 @@ public class VehiculoRepo {
 	public List<DataVehiculo> obtenerVehiculosEnMantenimiento(Integer pagina, Integer elementosPagina, DataTenant tenant){
 		return ctrVehiculo.obtenerVehiculosEnMantenimiento(pagina, elementosPagina, tenant);
 	}
-	public int getMenorCantAsientos(Integer pagina, Integer elementosPagina, DataTenant tenant){
-		return ctrVehiculo.getMenorCantAsientos(pagina, elementosPagina, tenant);
-	}
 }

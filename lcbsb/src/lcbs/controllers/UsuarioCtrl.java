@@ -1,5 +1,7 @@
 package lcbs.controllers;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +38,22 @@ public class UsuarioCtrl implements IUsuario {
 		DataCuponera cuponera = new DataCuponera();
 		cuponera.setSaldo(0.0f);
 		usuario.setCuponera(cuponera);
+		MessageDigest md;
+		StringBuffer sb = new StringBuffer();
+		try {
+			md = MessageDigest.getInstance("MD5");
+			md.update(usuario.getClave().getBytes());
+
+			byte byteData[] = md.digest();
+			sb = new StringBuffer();
+			for (int i = 0; i < byteData.length; i++) {
+				sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+			}
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+
+		usuario.setClave(sb.toString());
 		return srvUsuario.crearUsuario(usuario, tenant);
 	}
 
@@ -65,6 +83,22 @@ public class UsuarioCtrl implements IUsuario {
 
 	@Override
 	public DataEmpleado AltaEmpleado(DataEmpleado empleado, DataTenant tenant) {
+		MessageDigest md;
+		StringBuffer sb = new StringBuffer();
+		try {
+			md = MessageDigest.getInstance("MD5");
+			md.update(empleado.getClave().getBytes());
+
+			byte byteData[] = md.digest();
+			sb = new StringBuffer();
+			for (int i = 0; i < byteData.length; i++) {
+				sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+			}
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+
+		empleado.setClave(sb.toString());
 		return srvEmpleado.crearEmpleado(empleado, tenant);
 	}
 
@@ -108,6 +142,22 @@ public class UsuarioCtrl implements IUsuario {
 
 	@Override
 	public DataUsuario loginUsuario(String usuario, String clave, DataTenant tenant) {
+		MessageDigest md;
+		StringBuffer sb = new StringBuffer();
+		try {
+			md = MessageDigest.getInstance("MD5");
+			md.update(clave.getBytes());
+
+			byte byteData[] = md.digest();
+			sb = new StringBuffer();
+			for (int i = 0; i < byteData.length; i++) {
+				sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+			}
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+
+		clave = sb.toString();
 		return srvUsuario.loginUsuario(usuario, clave, tenant);
 	}
 
@@ -125,6 +175,22 @@ public class UsuarioCtrl implements IUsuario {
 			if(result == null)
 				result = srvEmpleado.loginUsuario(mail, clave, tenant);
 		}else{
+			MessageDigest md;
+			StringBuffer sb = new StringBuffer();
+			try {
+				md = MessageDigest.getInstance("MD5");
+				md.update(clave.getBytes());
+
+				byte byteData[] = md.digest();
+				sb = new StringBuffer();
+				for (int i = 0; i < byteData.length; i++) {
+					sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+				}
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			}
+
+			clave = sb.toString();
 			result = srvEmpleado.loginUsuario(mail, clave, tenant);
 		}
 		if(conf.getUrlLdap() != null && !ldapconnection.validarCredenciales(conf.getUrlLdap(), conf.getBaseLdap(), result.getIdEmpleadoLdap(), result.getClave())){

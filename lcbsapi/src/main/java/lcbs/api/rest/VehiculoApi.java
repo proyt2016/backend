@@ -81,12 +81,6 @@ public class VehiculoApi extends BaseApi{
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		return repo.listarVehiculos(pagina, elementosPagina, tenant );
 	}
-	@GET
-	@Path("/menorcantidadasientos/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
-	public int getMenorCantAsientos(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar") final Integer elementosPagina) {
-		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
-		return repo.getMenorCantAsientos(pagina, elementosPagina, tenant );
-	}
 	
 	@GET
 	@Path("/listarmantenimientosporvehiculo/{idVehiculo}")

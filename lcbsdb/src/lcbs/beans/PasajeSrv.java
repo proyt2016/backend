@@ -123,6 +123,22 @@ public class PasajeSrv implements PasajeLocalApi {
 		});
 		return Pasajes;
 	}
+	
+	public List<DataPasajeConvertor> obtenerPasajesPorViaje(String idViaje, DataTenant tenant) {
+		List<DataPasajeConvertor> Pasajes = new ArrayList();
+		// obtengo todos los Pasajes de la bd
+		Session session = (Session) em.getDelegate();
+		Criteria criteria = session.createCriteria(Pasaje.class);
+		criteria.add(Restrictions.eq("eliminado", false));
+		criteria.add(Restrictions.eq("viaje.id", idViaje));
+		List<Pasaje> listPsj = new ArrayList<Pasaje>(new LinkedHashSet(criteria.list()));
+
+		listPsj.stream().forEach((psj) -> {
+			Pasajes.add(psj.getDatatype().genConvertor());
+		});
+		return Pasajes;
+	}
+	
 	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina, DataTenant tenant){
 		List<DataPasajeConvertor> pasajesVendidos = new ArrayList();
 		

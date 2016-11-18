@@ -55,6 +55,9 @@ public class ViajeCtrl implements IViaje {
 	@EJB(lookup = "java:app/lcbsdb/ConfiguracionEmpresaSrv!lcbs.interfaces.ConfiguracionEmpresaLocalApi")
 	ConfiguracionEmpresaLocalApi srvConfiguracion;
 	
+	@EJB(lookup = "java:app/lcbsdb/VehiculoSrv!lcbs.interfaces.VehiculoLocalApi")
+	VehiculoLocalApi srvVehiculo;
+	
 	@Override
 	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina, DataTenant tenant){
 		return srvPasaje.obtenerTotalPasajesVendidos(fecha, pagina, elementosPagina, tenant);
@@ -318,6 +321,33 @@ public class ViajeCtrl implements IViaje {
 		horarioList.set(aux, horario);
 		rec.setHorarios(horarioList);
 		srvRecorrido.modificarRecorrido(rec, tenant);
+	}
+	
+	@Override
+	public Integer cantidadAsientosDisponibles(String idViaje, String idOrigen, String idDestino, DataTenant tenant){
+		DataViaje viaje = srvViaje.getViaje(idViaje, tenant);
+		Integer cant = 0;
+		List<DataVehiculo> vehiculos = viaje.getCoches();
+		if(vehiculos.size() == 0){
+			cant = srvVehiculo.getMenorCantAsientos(tenant);
+		}else{
+			for(Integer i = 0; i < vehiculos.size(); i++){
+				cant += vehiculos.get(i).getCantidadAsientos();
+			}
+		}
+		List<DataPuntoRecorrido> puntos = viaje.getRecorrido().getPuntosDeRecorrido();
+		Map<String, Integer> indiceDePunto = new HashMap<String, Integer>();
+		for(Integer i = 0; i < puntos.size(); i++){
+			indiceDePunto.put(puntos.get(i).getId(),i);
+		}
+		List<DataPasajeConvertor> pasajesEnViaje = srvPasaje.obtenerPasajesPorViaje(idViaje,tenant);
+		for(Integer i = 0; i < pasajesEnViaje.size(); i++){
+			if(indiceDePunto.get(pasajesEnViaje.get(i).getDestino().getId()) > indiceDePunto.get(idOrigen) && indiceDePunto.get(pasajesEnViaje.get(i).getDestino().getId()) <= indiceDePunto.get(idDestino) ||
+					indiceDePunto.get(pasajesEnViaje.get(i).getOrigen().getId()) >= indiceDePunto.get(idOrigen) && indiceDePunto.get(pasajesEnViaje.get(i).getOrigen().getId()) < indiceDePunto.get(idDestino)){
+				cant = cant -1;
+			}
+		}
+		return cant;
 	}
 
 	@Override

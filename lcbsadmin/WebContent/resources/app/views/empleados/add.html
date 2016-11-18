@@ -54,6 +54,16 @@
             </div>
           </div>
         </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="perfil">Perfil <span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <select class="form-control" style="width: 100%;" required name="perfil" ng-model="empleado.perfil.id">
+              <option></option>
+                <option ng-repeat="iter in perfiles" value="{{ iter.id }}" ng-selected="iter.id == empleado.perfil.id">{{iter.nombrePerfil}}</option>
+            </select>
+          </div>
+        </div>
         <div class="ln_solid"></div>
         <div class="form-group">
           <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

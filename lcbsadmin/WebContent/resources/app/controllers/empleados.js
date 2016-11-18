@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').controller('empleadosCtrl', ['$scope', '$routeParams', 'empleadosService', 'configuracionService', '$localStorage', '$location', empleadosCtrl]);
+    angular.module('lacbus').controller('empleadosCtrl', ['$scope', '$routeParams', 'empleadosService', 'configuracionService', 'perfilService', '$localStorage', '$location', empleadosCtrl]);
 
-    function empleadosCtrl($scope, $routeParams, empleadosService, configuracionService, $localStorage, $location) {
+    function empleadosCtrl($scope, $routeParams, empleadosService, configuracionService, perfilService, $localStorage, $location) {
     	if(!$localStorage.empleadoLogueado){
 			$location.url('/login');
 		}
@@ -11,9 +11,14 @@
         $scope.empleado     = null;
         $scope.showAlert    = false;
         $scope.configuracion = null;
+        $scope.perfiles     = [];
         
         configuracionService.getConfiguracion().then(function (data) {
             $scope.configuracion = data;
+        });
+
+        perfilService.getAll().then(function (data) {
+            $scope.perfiles = data;
         });
 
         var initialize = function(){

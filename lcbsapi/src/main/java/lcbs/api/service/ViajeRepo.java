@@ -208,4 +208,8 @@ public class ViajeRepo {
 	public void crearViajesParaRecorridos(DataTenant tenant) throws ParseException{
 		ctrViaje.crearViajesParaRecorridos(tenant);
 	}
+	
+	public Integer cantidadAsientosDisponibles(String idViaje, String idOrigen, String idDestino, DataTenant tenant){
+		return ctrViaje.cantidadAsientosDisponibles(idViaje, idOrigen, idDestino, tenant);
+	}
 }

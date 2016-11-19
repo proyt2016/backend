@@ -23,6 +23,8 @@
             configuracion.emails 	= $scope.emailsEmpresa;
             configuracion.telefonos = $scope.telsEmpresa;
             
+            console.log(configuracion)
+            
             configuracionService.updateConfig(configuracion).then(
                 function (data) {
                 	$scope.saving = false;
@@ -91,7 +93,12 @@
         }
         
         $( document ).ready(function() {
-        	$('.colorpicker').colorpicker();
+        	$('.colorpicker').colorpicker().on('changeColor',
+        		function(evt) {
+        			var input = $(evt.currentTarget).find('input')[0];
+        			$scope.configuracion[input.name] = input.value
+            	}
+        	);
         });
 
     }

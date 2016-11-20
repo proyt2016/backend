@@ -1,8 +1,8 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('comprarReservaCtrl', ['$scope', '$routeParams', '$localStorage', '$location', 'toastr', 'reservaService', comprarReservaCtrl]);
+    angular.module('lacbus').controller('comprarReservaCtrl', ['$scope', '$routeParams', '$localStorage', '$location', 'toastr', 'viajeService', 'reservaService', comprarReservaCtrl]);
 
-    function comprarReservaCtrl($scope, $routeParams, $localStorage, $location, toastr, reservaService) {
+    function comprarReservaCtrl($scope, $routeParams, $localStorage, $location, toastr, viajeService, reservaService) {
         var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null;
 		$scope.usuarioLogueado = $localStorage.usuarioLogueado;
     	
@@ -17,6 +17,13 @@
 
             $scope.comprar['origen']    = '0';
             $scope.comprar['destino']   = datos.viaje.recorrido.puntosDeRecorrido.length - 1 + '';
+            
+            var origen = datos.viaje.recorrido.puntosDeRecorrido[$scope.comprar['origen']];
+            var destino = datos.viaje.recorrido.puntosDeRecorrido[$scope.comprar['destino']];
+            
+            viajeService.getPrecio(origen.id,destino.id, datos.viaje.recorrido.id).then(function (prc){
+            	$scope.precio = prc;
+            });
         });
 
         $scope.procesarCompra = function () {

@@ -12,7 +12,6 @@
             <th>Linea</th>
             <th>Origen</th>
             <th>Destino</th>
-            <th>Asientos</th>
             <th>Estado</th>
             <th></th>
           </tr>
@@ -21,7 +20,6 @@
             <td>{{ reserva.viaje.recorrido.nombre }}</td>
             <td>{{ reserva.origen.nombre }}</td>
             <td>{{ reserva.destino.nombre }}</td>
-            <td>{{ reserva.cantidad }}</td>
             <td>{{ reserva.eliminada ? 'Eliminada' : reserva.utilizada ? 'Utilizada' : 'Activa' }}</td>
             <td>
               <a ng-if="!reserva.eliminada && !reserva.utilizada" class="btn btn-danger btn-flat btn-sm" title="cancelar reserva" ng-click="cancelar(reserva)"><i class="fa fa-remove"></i></a>

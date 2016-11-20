@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import interfaces.IUsuario;
 import lcbs.interfaces.*;
 import lcbs.shares.*;
+import lcbs.utils.NotificationHandler;
 
 import javax.ejb.Stateless;
 
@@ -47,6 +48,8 @@ public class UsuarioCtrl implements IUsuario {
 		DataCuponera cuponera = usuario.getCuponera();
 		cuponera.setSaldo(cuponera.getSaldo() + saldo);
 		srvCuponera.modificarCuponera(cuponera, tenant);
+		NotificationHandler.sendNotification(usuario, "Cuponera", "recarga-saldo", "Su acredito su recarga de" + saldo,
+				tenant);
 	}
 
 	@Override

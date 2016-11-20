@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.11" icons="true" automaticImage="PNG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
+  router="FAN">  
+  <class id="1" language="java" name="lcbs.beans.ReservaSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/ReservaSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="202" width="296" x="3521" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="2" language="java" name="lcbs.interfaces.ConfiguracionEmpresaLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/ConfiguracionEmpresaLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="112" width="429" x="5694" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" language="java" name="lcbs.beans.EntityManagerProducer" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/EntityManagerProducer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="130" width="274" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="lcbs.beans.EncomiendaSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/EncomiendaSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="256" width="394" x="3857" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="lcbs.beans.ReglaCobroEncomiendaSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/ReglaCobroEncomiendaSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="202" width="464" x="2669" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="lcbs.beans.UsuarioSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/UsuarioSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="220" width="290" x="4922" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="7" language="java" name="lcbs.interfaces.PasajeLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/PasajeLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="184" width="398" x="1829" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="8" language="java" name="lcbs.interfaces.ReglaCobroEncomiendaLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/ReglaCobroEncomiendaLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="166" width="464" x="2669" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="9" language="java" name="lcbs.beans.EmpleadoSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/EmpleadoSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="202" width="308" x="3173" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="10" language="java" name="lcbs.interfaces.TenantLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/TenantLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="184" width="168" x="4663" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="11" language="java" name="lcbs.interfaces.ReservaLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/ReservaLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="166" width="296" x="3521" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="12" language="java" name="lcbs.beans.VehiculoSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/VehiculoSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="184" width="294" x="7142" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="13" language="java" name="lcbs.interfaces.EmpleadoLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/EmpleadoLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="166" width="308" x="3173" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="14" language="java" name="lcbs.interfaces.GrupoHorarioLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/GrupoHorarioLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="148" width="331" x="1150" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="15" language="java" name="lcbs.interfaces.ParadaLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/ParadaLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="166" width="300" x="6802" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="16" language="java" name="lcbs.beans.CuponeraSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/CuponeraSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="166" width="301" x="809" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="lcbs.beans.GrupoHorarioSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/GrupoHorarioSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="184" width="331" x="1150" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="lcbs.beans.PasajeSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/PasajeSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="238" width="398" x="1829" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="19" language="java" name="lcbs.interfaces.CuponeraLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/CuponeraLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="112" width="301" x="809" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="20" language="java" name="lcbs.beans.TerminalSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/TerminalSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="220" width="306" x="6163" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="21" language="java" name="lcbs.interfaces.PerfilLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/PerfilLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="148" width="268" x="1521" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="22" language="java" name="lcbs.interfaces.ISchemaHandler" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/ISchemaHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="76" width="136" x="6509" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="23" language="java" name="lcbs.interfaces.VehiculoLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/VehiculoLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="148" width="294" x="7142" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="24" language="java" name="lcbs.interfaces.RecorridoLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/RecorridoLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="166" width="362" x="2267" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="25" language="java" name="lcbs.beans.RecorridoSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/RecorridoSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="238" width="362" x="2267" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="lcbs.beans.TenantSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/TenantSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="256" width="219" x="4663" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="27" language="java" name="lcbs.interfaces.ViajeLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/ViajeLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="202" width="332" x="4291" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="28" language="java" name="lcbs.schema.SchemaHandler" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/schema/SchemaHandler.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="202" width="253" x="6509" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="lcbs.beans.ParadaSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/ParadaSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="202" width="300" x="6802" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="lcbs.beans.EstadosEncomiendaSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/EstadosEncomiendaSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="184" width="402" x="5252" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="lcbs.exceptions.SchemaException" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/exceptions/SchemaException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="76" width="131" x="355" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="lcbs.beans.ConfiguracionEmpresaSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/ConfiguracionEmpresaSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="148" width="429" x="5694" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="33" language="java" name="lcbs.interfaces.UsuarioLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/UsuarioLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="184" width="290" x="4922" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="34" language="java" name="lcbs.interfaces.TerminalLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/TerminalLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="166" width="306" x="6163" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="35" language="java" name="lcbs.beans.PerfilSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/PerfilSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="184" width="268" x="1521" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="36" language="java" name="lcbs.interfaces.EncomiendaLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/EncomiendaLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="202" width="394" x="3857" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="37" language="java" name="lcbs.beans.ViajeSrv" project="lcbsdb" file="/lcbsdb/src/lcbs/beans/ViajeSrv.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="256" width="332" x="4291" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="lcbs.interceptors.TenantIntercept" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interceptors/TenantIntercept.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="130" width="243" x="526" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="39" language="java" name="lcbs.interfaces.EstadosEncomiendaLocalApi" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/interfaces/EstadosEncomiendaLocalApi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="148" width="402" x="5252" y="333"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <realization id="40">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <realization id="41">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="42">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="43">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <realization id="44">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <realization id="45">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="34"/>  
+  </realization>  
+  <realization id="46">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="39"/>  
+  </realization>  
+  <realization id="47">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="23"/>  
+  </realization>  
+  <realization id="48">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <realization id="49">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="22"/>  
+  </realization>  
+  <realization id="50">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <realization id="51">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="33"/>  
+  </realization>  
+  <realization id="52">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="53">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <realization id="54">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <realization id="55">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <realization id="56">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="27"/>  
+  </realization>  
+  <realization id="57">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="19"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

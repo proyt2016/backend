@@ -1,16 +1,29 @@
 package lcbs.controllers;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import interfaces.IEncomienda;
-import lcbs.interfaces.*;
-import lcbs.shares.*;
+import lcbs.interfaces.EncomiendaLocalApi;
+import lcbs.interfaces.EstadosEncomiendaLocalApi;
+import lcbs.interfaces.RecorridoLocalApi;
+import lcbs.interfaces.ReglaCobroEncomiendaLocalApi;
+import lcbs.interfaces.TerminalLocalApi;
+import lcbs.interfaces.UsuarioLocalApi;
+import lcbs.interfaces.VehiculoLocalApi;
+import lcbs.interfaces.ViajeLocalApi;
+import lcbs.shares.DataEncomienda;
+import lcbs.shares.DataEncomiendaConvertor;
+import lcbs.shares.DataEstadosEncomienda;
+import lcbs.shares.DataHistorialEstadosEncomienda;
+import lcbs.shares.DataReglaCobroEncomienda;
+import lcbs.shares.DataTenant;
+import lcbs.shares.DataVehiculo;
+import lcbs.shares.DataViaje;
+import lcbs.utils.NotificationHandler;
 
 /**
  * Session Bean implementation class EncomiendaSrv
@@ -90,7 +103,8 @@ public class EncomiendaCtrl implements IEncomienda {
 	}
 
 	@Override
-	public List<DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina, DataTenant tenant) {
+	public List<DataEstadosEncomienda> listarEstadoEncomienda(Integer pagina, Integer elementosPagina,
+			DataTenant tenant) {
 		return srvEstadosEncomienda.obtenerEstadosEncomienda(pagina, elementosPagina, tenant);
 	}
 
@@ -109,6 +123,11 @@ public class EncomiendaCtrl implements IEncomienda {
 		historialEstados.setFecha(fecha);
 		encomienda.getEstados().add(historialEstados);
 		srvEncomienda.modificarEncomienda(encomienda, tenant);
+		if (!encomienda.getEmisor().equals(null)) {
+			NotificationHandler.sendNotification(encomienda.getEmisor(), "Encomiendas", "cambio-estado",
+					"Encomienda  #" + idEncomienda + " estado " + dataEstado.getNombre(), tenant);
+
+		}
 	}
 
 	@Override
@@ -129,6 +148,10 @@ public class EncomiendaCtrl implements IEncomienda {
 		encomienda.setCocheAsignado(coche);
 		srvEncomienda.modificarEncomienda(encomienda, tenant);
 		srvVehiculo.modificarVehiculo(coche, tenant);
+		if (!encomienda.getEmisor().equals(null)) {
+			NotificationHandler.sendNotification(encomienda.getEmisor(), "Encomiendas", "asigna-coche",
+					"Encomienda  #" + IdEncomienda + " en coche " + coche.getMatricula(), tenant);
+		}
 	}
 
 	@Override
@@ -148,12 +171,14 @@ public class EncomiendaCtrl implements IEncomienda {
 	}
 
 	@Override
-	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina, DataTenant tenant) {
+	public List<DataEncomienda> buscarEncomienda(DataEncomienda filtro, Integer pagina, Integer ElementosPagina,
+			DataTenant tenant) {
 		return srvEncomienda.buscarEncomienda(filtro, pagina, ElementosPagina, tenant);
 	}
 
 	@Override
-	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina, DataTenant tenant) {
+	public List<DataEncomienda> listarEncomiendasPorUsuario(String idUsuario, Integer pagina, Integer elementosPagina,
+			DataTenant tenant) {
 		return srvEncomienda.listarEncomiendasPorUsuario(idUsuario, pagina, elementosPagina, tenant);
 	}
 

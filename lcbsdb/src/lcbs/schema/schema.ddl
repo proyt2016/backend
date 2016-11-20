@@ -73,8 +73,10 @@ CREATE TABLE encomienda (
     pagareceptor boolean,
     precio real,
     retiraensucursal boolean,
-    descripcion character varying(255),
-    telefono character varying(255),
+    desctelemisor character varying(255),
+    telemisor character varying(255),
+    desctelreceptor character varying(255),
+    telreceptor character varying(255),
     cocheasignado_id character varying(255),
     destino_id character varying(255),
     emisor_id character varying(255),
@@ -895,7 +897,7 @@ INSERT INTO perfil (id, gestionEncomiendas, gestionPasajes, ConfiguracionEmpresa
 INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', 'd1826b85-4527-4bd9-98d1-9dbad268ce5e', 'Perez', false, NULL, 'juan.perez@lacbus.tenant.com', NULL, 'Juan', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', '52897d2a-49af-40cc-939c-e6a300f720e7', 'Sosa', false, NULL, 'julio.sosa@lacbus.tenant.com', NULL, 'Julio', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', '2f769c0c-6ea4-4d67-a50b-b3167344bfce', 'Pacheco', false, NULL, 'antonio.pacheco@lacbus.tenant.com', NULL, 'Antonio', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', 'c726c21c-f2e4-4094-a9b6-bb5811cf2e0e', 'Admin', false, NULL, 'admin', NULL, 'System', 'a4fd8e6fa9fbf9a6f2c99e7b70aa9ef2', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', 'c726c21c-f2e4-4094-a9b6-bb5811cf2e0e', 'Admin', false, NULL, 'admin', NULL, 'System', 'a4fd8e6fa9fbf9a6f2c99e7b70aa9ef2', NULL, NULL, NULL, NULL, 'ecefa62b-185a-4e48-a019-f67521e2b9cd');
 
 
 

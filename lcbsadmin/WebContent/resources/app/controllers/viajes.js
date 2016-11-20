@@ -104,7 +104,7 @@
         }
         
         $scope.buscar = function(){
-            var filtro = $scope.filtro;
+            var filtro = angular.copy($scope.filtro);
             
             if(!filtro['fechaSalida']){
                 mostrarNotificacion('error', 'Debe seleccionar una fecha');

@@ -6,6 +6,8 @@
     
     angular.module('lacbus').controller('appCtrl', ['$scope', '$location', '$localStorage', appCtrl]);
 
+    angular.module('lacbus').run(['$templateCache', function ( $templateCache ) { $templateCache.removeAll(); }]);
+
     /*@ngInject*/
     function configFunction($routeProvider, uiGmapGoogleMapApiProvider) {
     	uiGmapGoogleMapApiProvider.configure({

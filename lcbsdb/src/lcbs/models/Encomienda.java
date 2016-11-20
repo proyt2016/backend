@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -46,10 +49,17 @@ public class Encomienda implements Serializable{
     private String ciEmisor;
     @ManyToOne
     private Vehiculo cocheAsignado;
-    /*@Embedded
-    private Telefono telEmisor;
-        */
     @Embedded
+    @AttributeOverrides( {
+        @AttributeOverride(name="descripcion", column = @Column(name="descTelEmisor") ),
+        @AttributeOverride(name="telefono", column = @Column(name="telEmisor") )
+	} )
+    private Telefono telEmisor;
+    @Embedded
+    @AttributeOverrides( {
+        @AttributeOverride(name="descripcion", column = @Column(name="descTelReceptor") ),
+        @AttributeOverride(name="telefono", column = @Column(name="telReceptor") )
+	} )
     private Telefono telReceptor;
     @ManyToOne
     private Usuario receptor;
@@ -85,9 +95,10 @@ public class Encomienda implements Serializable{
         this.destino = dest;
         this.emisor = emi;
         this.ciEmisor = ciEm;
+        this.telEmisor = telEm;
         this.receptor = rec;
         this.ciReceptor = ciRec;
-        this.telReceptor = telEm;
+        this.telReceptor = telRec;
         this.direccionReceptor = dirRec;
         this.reglaCobro = regCob;
         this.monto = mont;
@@ -131,6 +142,8 @@ public class Encomienda implements Serializable{
     	this.setCiEmisor(dt.getCiEmisor());
     	if(dt.getReceptor() != null)
     		this.setReceptor(new Usuario(dt.getReceptor()));
+    	if(dt.getTelEmisor() != null)
+    		this.setTelEmisor(new Telefono(dt.getTelEmisor()));
     	this.setCiReceptor(dt.getCiReceptor());
     	if(dt.getTelReceptor() != null)
     		this.setTelReceptor(new Telefono(dt.getTelReceptor()));
@@ -182,6 +195,8 @@ public class Encomienda implements Serializable{
     	if(this.getEmisor()!=null)
     		result.setEmisor(this.getEmisor().getDatatype(false));
     	result.setCiEmisor(this.getCiEmisor());
+    	if(this.getTelEmisor()!=null)
+    		result.setTelEmisor(this.getTelEmisor().getDatatype());
     	if(this.getReceptor()!=null)
     		result.setReceptor(this.getReceptor().getDatatype(false));
     	result.setCiReceptor(this.getCiReceptor());
@@ -267,6 +282,14 @@ public class Encomienda implements Serializable{
     
     public String getCiEmisor(){
         return this.ciEmisor;
+    }
+    
+    public void setTelEmisor(Telefono val){
+        this.telEmisor = val;
+    }
+    
+    public Telefono getTelEmisor(){
+        return this.telEmisor;
     }
     
     public void setReceptor(Usuario val){

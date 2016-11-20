@@ -39,7 +39,9 @@
         $scope.add = function(){
             $scope.saving   = true;
             var empleado     = this.empleado;
-            console.info(empleado);
+            var perfilSeleccionado = empleado.perfil;
+            empleado.perfil = {"id":null};
+            empleado.perfil.id = perfilSeleccionado;
             empleadosService.add(empleado).then(
                 function (data) {
                     $scope.saving = false;
@@ -57,6 +59,9 @@
         $scope.edit = function(){
             $scope.saving   = true;
             var empleado     = this.empleado;
+            var perfilSeleccionado = empleado.perfil;
+            empleado.perfil = {"id":null};
+            empleado.perfil.id = perfilSeleccionado;
             empleadosService.edit(empleado).then(
                 function (data) {
                     $scope.saving = false;

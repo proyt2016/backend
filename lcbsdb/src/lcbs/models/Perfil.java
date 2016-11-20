@@ -31,7 +31,7 @@ public class Perfil implements Serializable{
     private String nombrePerfil;
     private Boolean gestionEncomiendas;
     private Boolean gestionPasajes;
-    private Boolean ConfiguracionEmpresa;
+    private Boolean configuracionEmpresa;
     private Boolean gestionReportes;
     private Boolean mantenimientoFlota;
 
@@ -46,7 +46,7 @@ public class Perfil implements Serializable{
         this.nombrePerfil = nom;
         this.gestionEncomiendas = gestionEncomiendas;
         this.gestionPasajes = gestionPasajes;
-        this.ConfiguracionEmpresa = ConfiguracionEmpresa;
+        this.configuracionEmpresa = ConfiguracionEmpresa;
         this.gestionReportes = gestionResportes;
         this.mantenimientoFlota = mantenimientoFlota;
         this.empleados = emp;
@@ -57,7 +57,7 @@ public class Perfil implements Serializable{
     	this.setNombrePerfil(dt.getNombrePerfil());
     	this.setGestionEncomiendas(dt.getGestionEncomiendas());
     	this.setGestionPasajes(dt.getGestionPasajes());
-    	this.setConfiguracionEmpresa(dt.getConfigruacionEmpresa());
+    	this.setConfiguracionEmpresa(dt.getConfiguracionEmpresa());
     	this.setGestionReportes(dt.getGestionReportes());
     	this.setMantenimientoFlota(dt.getMantenimientoFlota());
     	if(dt.getEmpleados() != null && conHijos){
@@ -75,7 +75,7 @@ public class Perfil implements Serializable{
     	result.setNombrePerfil(this.getNombrePerfil());
     	result.setGestionEncomiendas((this.getGestionEncomiendas()));
     	result.setGestionPasajes(this.getGestionPasajes());
-    	result.setConfiguracionEmpresa(this.getConfigruacionEmpresa());
+    	result.setConfiguracionEmpresa(this.getConfiguracionEmpresa());
     	result.setGestionReportes(this.getGestionReportes());
     	result.setMantenimientoFlota(this.getMantenimientoFlota());
     	if(result.getEmpleados()!=null && conHijos){
@@ -121,11 +121,11 @@ public class Perfil implements Serializable{
     }
 
     public void setConfiguracionEmpresa(Boolean val){
-        this.ConfiguracionEmpresa = val;
+        this.configuracionEmpresa = val;
     }
     
-    public Boolean getConfigruacionEmpresa(){
-        return this.ConfiguracionEmpresa;
+    public Boolean getConfiguracionEmpresa(){
+        return this.configuracionEmpresa;
     }
 
     public void setGestionReportes(Boolean val){

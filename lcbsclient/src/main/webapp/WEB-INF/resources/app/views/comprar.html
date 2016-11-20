@@ -7,11 +7,11 @@
       <div class="box-body">
         <p><strong><i class="fa fa-map margin-r-5"></i> Origien y Destino</strong></p>
         <p class="text-center">
-          <select class="form-control select2" style="width: 100%;" ng-model="comprar.origen" required>
+          <select class="form-control" ng-change="recalcularPrecio()" ng-model="comprar.origen">
             <option ng-repeat="recorrido in viaje.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
           </select> 
           <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> 
-          <select class="form-control select2" style="width: 100%;" ng-model="comprar.destino" required>
+          <select class="form-control" ng-change="recalcularPrecio()" ng-model="comprar.destino">
             <option ng-repeat="recorrido in viaje.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
           </select>
         </p>
@@ -80,7 +80,7 @@
                 </tr>
                 <tr>
                   <th>Total:</th>
-                  <td>${{precio}}</td>
+                  <td>${{(precio * comprar.cantidad)}}</td>
                 </tr>
               </tbody>
             </table>
@@ -89,7 +89,7 @@
         </div>
       </div>
       <div class="box-footer">
-        <a ng-if="usuarioLogueado" class="btn btn-success pull-right" ng-click="procesarCompra()">Confirmar Pago</a>
+        <a ng-if="usuarioLogueado" class="btn btn-success pull-right" ng-click="procesarCompra()" ng-disabled="saving">Confirmar Pago</a>
       </div>
     </div>
   </div>

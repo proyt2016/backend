@@ -42,12 +42,13 @@ public class DataEncomienda {
     private Date fechaEntrega;
     private Boolean retiraEnSucursal;
     private Boolean eliminada;
+    private Boolean paga;
 
  
 
     public DataEncomienda() {}
     
-    public DataEncomienda(String id, DataPuntoRecorrido orig, DataPuntoRecorrido dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, DataVehiculo codCoche, Integer codEnco) {
+    public DataEncomienda(String id, DataPuntoRecorrido orig, DataPuntoRecorrido dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, DataVehiculo codCoche, Integer codEnco, Boolean paga) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -71,6 +72,7 @@ public class DataEncomienda {
         this.eliminada = elim;
         this.codigoEncomienda = codEnco;
         this.cocheAsignado = codCoche;
+        this.paga = paga;
     }
     
     public DataEncomiendaConvertor genConvertor(){
@@ -137,7 +139,7 @@ public class DataEncomienda {
     	}
     	result.setRetiraEnSucursal(this.getRetiraEnSucursal());
     	result.setEliminada(this.getEliminada());
-      	
+    	result.setPaga(this.getPaga());
     	return result;
     }
     
@@ -322,5 +324,13 @@ public class DataEncomienda {
     
     public Boolean getEliminada(){
         return this.eliminada;
+    }
+    
+    public void setPaga(Boolean val){
+        this.paga = val;
+    }
+    
+    public Boolean getPaga(){
+        return this.paga;
     }
 }

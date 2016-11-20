@@ -211,4 +211,9 @@ public class EncomiendaCtrl implements IEncomienda {
 	public Float getPrecioDeEncomienda(String codigoReglaCobro, Float monto, DataTenant tenant) {
 		return srvReglaCobro.getPrecioDeEncomienda(codigoReglaCobro, monto, tenant);
 	}
+	
+	@Override
+	public List<DataEncomiendaConvertor> getEncomiendasPagas(String fecha, Integer pagina, Integer elemPagina, DataTenant tenant){
+		return srvEncomienda.getEncomiendasPagas(fecha, pagina, elemPagina, tenant);
+	}
 }

@@ -11,7 +11,6 @@ public class DataEmpleado extends DataPersona{
  
 
     public DataEmpleado() {
-        idEmpleadoLdap = "";
     }
     
     public DataEmpleado(String id, String nm, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, String idEmpLdap, DataPerfil perf, Boolean elim, String clv) {

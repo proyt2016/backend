@@ -220,5 +220,10 @@ public class EncomiendaApi extends BaseApi{
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		return repo.getPrecioDeEncomienda(codigoReglaCobro, monto, tenant);
 	}
-
+	@GET
+	@Path("/getencomiendaspagas/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}/{fecha}")
+	public List<DataEncomiendaConvertor> getEncomiendasEntregadas(@PathParam("pagina") final Integer pagina,@PathParam("pagina") final Integer elementosAMostrar, @PathParam("fecha") final String fecha){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.getEncomiendasPagas(fecha, pagina, elementosAMostrar, tenant);
+	}
 }

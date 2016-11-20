@@ -67,5 +67,4 @@ public class VehiculoCtrl implements IVehiculo {
 		return srvVehiculo.obtenerVehiculosEnMantenimiento(pagina, elementosPagina, tenant);
 	}
 
-
 }

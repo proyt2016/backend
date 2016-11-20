@@ -141,5 +141,8 @@ public class EncomiendaRepo {
 	public Float getPrecioDeEncomienda(String codigoReglaCobro, Float monto, DataTenant tenant) {
 		return ctrEncomienda.getPrecioDeEncomienda(codigoReglaCobro, monto, tenant);
 	}
-
+	
+	public List<DataEncomiendaConvertor> getEncomiendasPagas(String fecha, Integer pagina, Integer elemPagina, DataTenant tenant){
+		return ctrEncomienda.getEncomiendasPagas(fecha, pagina, elemPagina, tenant);
+	}
 }

@@ -1,737 +1,880 @@
+CREATE TABLE configuracionempresa (
+    id character varying(255) NOT NULL,
+    aceptacuponera boolean,
+    activo boolean,
+    baseldap character varying(255),
+    colorboton character varying(255),
+    colorfondolista character varying(255),
+    colorfondosdepantalla character varying(255),
+    colorletras character varying(255),
+    colortextolista character varying(255),
+    colortitulo character varying(255),
+    css text,
+    diascreacionviaje integer,
+    iconoempresa character varying(255),
+    nombre character varying(255),
+    pagoonlinecoche boolean,
+    reservapasajes boolean,
+    trasferirpasajes boolean,
+    ultimacreaciondeviajes timestamp without time zone,
+    urlacceso character varying(255),
+    urlldap character varying(255),
+    validesreservashoras integer
+);
+
+
+CREATE TABLE configuracionempresa_emails (
+    configuracionempresa_id character varying(255) NOT NULL,
+    descripcion character varying(255),
+    email character varying(255),
+    list_index integer NOT NULL
+);
+
+
+CREATE TABLE configuracionempresa_telefonos (
+    configuracionempresa_id character varying(255) NOT NULL,
+    descripcion character varying(255),
+    telefono character varying(255),
+    list_index integer NOT NULL
+);
+
+
+CREATE TABLE cuponera (
+    id character varying(255) NOT NULL,
+    saldo real
+);
+
+
+CREATE TABLE dias (
+    grupohorarioid character varying(255) NOT NULL,
+    diassemana character varying(255),
+    list_index integer NOT NULL
+);
+
+
+CREATE TABLE diasgruposhorarios (
+    grupohorarioid character varying(255) NOT NULL,
+    diasespecificos timestamp without time zone,
+    list_index integer NOT NULL
+);
+
+
+CREATE TABLE encomienda (
+    id character varying(255) NOT NULL,
+    codigoencomienda integer NOT NULL,
+    ciemisor character varying(255),
+    cireceptor character varying(255),
+    direccionreceptor character varying(255),
+    eliminada boolean,
+    fechaentrega timestamp without time zone,
+    fechaingreso timestamp without time zone,
+    monto real,
+    paga boolean,
+    pagareceptor boolean,
+    precio real,
+    retiraensucursal boolean,
+    descripcion character varying(255),
+    telefono character varying(255),
+    cocheasignado_id character varying(255),
+    destino_id character varying(255),
+    emisor_id character varying(255),
+    estadoactual_id character varying(255),
+    origen_id character varying(255),
+    receptor_id character varying(255),
+    reglacobro_id character varying(255),
+    viajeasignado_id character varying(255)
+);
+
+
+CREATE TABLE encomienda_historialestadosencomienda (
+    encomienda_id character varying(255) NOT NULL,
+    encomienda_codigoencomienda integer NOT NULL,
+    estados_id character varying(255) NOT NULL,
+    list_index integer NOT NULL
+);
+
+
+CREATE TABLE estadosencomienda (
+    id character varying(255) NOT NULL,
+    nombre character varying(255)
+);
+
 
-    create table ConfiguracionEmpresa (
-        id varchar(255) not null,
-        aceptaCuponera boolean,
-        activo boolean,
-        claveLdap varchar(255),
-        colorBoton varchar(255),
-        colorFondoLista varchar(255),
-        colorFondosDePantalla varchar(255),
-        colorLetras varchar(255),
-        colorTextoLista varchar(255),
-        colorTitulo varchar(255),
-        css Text,
-        diasCreacionViaje int4,
-        iconoEmpresa varchar(255),
-        nombre varchar(255),
-        pagoOnlineCoche boolean,
-        reservaPasajes boolean,
-        trasferirPasajes boolean,
-        ultimaCreacionDeViajes timestamp,
-        urlAcceso varchar(255),
-        urlLdap varchar(255),
-        usuarioLdap varchar(255),
-        validesReservasHoras int4,
-        primary key (id)
-    );
-
-    create table ConfiguracionEmpresa_emails (
-        ConfiguracionEmpresa_id varchar(255) not null,
-        descripcion varchar(255),
-        email varchar(255),
-        LIST_INDEX int4 not null,
-        primary key (ConfiguracionEmpresa_id, LIST_INDEX)
-    );
-
-    create table ConfiguracionEmpresa_telefonos (
-        ConfiguracionEmpresa_id varchar(255) not null,
-        descripcion varchar(255),
-        telefono varchar(255),
-        LIST_INDEX int4 not null,
-        primary key (ConfiguracionEmpresa_id, LIST_INDEX)
-    );
-
-    create table Cuponera (
-        id varchar(255) not null,
-        saldo float4,
-        primary key (id)
-    );
-
-    create table DiasGruposHorarios (
-        GrupoHorarioId varchar(255) not null,
-        DiasEspecificos timestamp,
-        LIST_INDEX int4 not null,
-        primary key (GrupoHorarioId, LIST_INDEX)
-    );
-
-    create table Encomienda (
-        id varchar(255) not null,
-        codigoEncomienda int4 not null,
-        ciEmisor varchar(255),
-        ciReceptor varchar(255),
-        direccionReceptor varchar(255),
-        eliminada boolean,
-        fechaEntrega timestamp,
-        fechaIngreso timestamp,
-        monto float4,
-        pagaReceptor boolean,
-        precio float4,
-        retiraEnSucursal boolean,
-        descripcion varchar(255),
-        telefono varchar(255),
-        cocheAsignado_id varchar(255),
-        destino_id varchar(255),
-        emisor_id varchar(255),
-        estadoActual_id varchar(255),
-        origen_id varchar(255),
-        receptor_id varchar(255),
-        reglaCobro_id varchar(255),
-        viajeAsignado_id varchar(255),
-        primary key (id, codigoEncomienda)
-    );
-
-    create table Encomienda_HistorialEstadosEncomienda (
-        Encomienda_id varchar(255) not null,
-        Encomienda_codigoEncomienda int4 not null,
-        estados_id varchar(255) not null,
-        LIST_INDEX int4 not null,
-        primary key (Encomienda_id, Encomienda_codigoEncomienda, LIST_INDEX)
-    );
-
-    create table EstadosEncomienda (
-        id varchar(255) not null,
-        nombre varchar(255),
-        primary key (id)
-    );
-
-    create table GrupoHorario (
-        id varchar(255) not null,
-        nombre varchar(255),
-        tipo varchar(255),
-        primary key (id)
-    );
-
-    create table GrupoHorario_Horario (
-        GrupoHorario_id varchar(255) not null,
-        horarios_id varchar(255) not null,
-        LIST_INDEX int4 not null,
-        primary key (GrupoHorario_id, LIST_INDEX)
-    );
-
-    create table HistorialEstadosEncomienda (
-        id varchar(255) not null,
-        fecha timestamp,
-        estado_id varchar(255),
-        primary key (id)
-    );
-
-    create table Horario (
-        id varchar(255) not null,
-        nombre varchar(255),
-        primary key (id)
-    );
-
-    create table MantenimientoVehiculo (
-        id varchar(255) not null,
-        costo float4,
-        descripcionCompleta varchar(255),
-        descripcionReducida varchar(255),
-        fechaCompleado timestamp,
-        fechaIngreso timestamp,
-        primary key (id)
-    );
-
-    create table MedioDePago (
-        id varchar(255) not null,
-        activo boolean,
-        clave varchar(255),
-        cuenta varchar(255),
-        nombre varchar(255),
-        usuario varchar(255),
-        primary key (id)
-    );
-
-    create table Pasaje (
-        id varchar(255) not null,
-        codigoPasaje int4 not null,
-        ciPersona varchar(255),
-        eliminado boolean,
-        fechaCompra timestamp,
-        pago boolean,
-        usado boolean,
-        comprador_id varchar(255),
-        destino_id varchar(255),
-        origen_id varchar(255),
-        precio_id varchar(255),
-        vendedor_id varchar(255),
-        viaje_id varchar(255),
-        primary key (id, codigoPasaje)
-    );
-
-    create table Perfil (
-        id varchar(255) not null,
-        modulo1 boolean,
-        modulo2 boolean,
-        modulo3 boolean,
-        modulo4 boolean,
-        modulo5 boolean,
-        modulo6 boolean,
-        modulo7 boolean,
-        modulo8 boolean,
-        nombrePerfil varchar(255),
-        primary key (id)
-    );
-
-    create table Perfil_Persona (
-        Perfil_id varchar(255) not null,
-        empleados_id varchar(255) not null,
-        LIST_INDEX int4 not null,
-        primary key (Perfil_id, LIST_INDEX)
-    );
-
-    create table Persona (
-        DTYPE varchar(31) not null,
-        id varchar(255) not null,
-        apellido varchar(255),
-        clave varchar(255),
-        eliminado boolean,
-        descripcion varchar(255),
-        email varchar(255),
-        fechaNacimiento date,
-        nombrePila varchar(255),
-        idRedSocial varchar(255),
-        redSocialUsada varchar(255),
-        idEmpleadoLdap varchar(255),
-        cuponera_id varchar(255),
-        perfil_id varchar(255),
-        primary key (id)
-    );
-
-    create table Persona_Encomienda (
-        Persona_id varchar(255) not null,
-        encomiendas_id varchar(255) not null,
-        encomiendas_codigoEncomienda int4 not null,
-        LIST_INDEX int4 not null,
-        primary key (Persona_id, LIST_INDEX)
-    );
-
-    create table Persona_telefonosContacto (
-        Persona_id varchar(255) not null,
-        descripcion varchar(255),
-        telefono varchar(255),
-        LIST_INDEX int4 not null,
-        primary key (Persona_id, LIST_INDEX)
-    );
-
-    create table Precio (
-        id varchar(255) not null,
-        monto float4,
-        destino_id varchar(255),
-        origen_id varchar(255),
-        primary key (id)
-    );
-
-    create table PuntoRecorrido (
-        DTYPE varchar(31) not null,
-        id varchar(255) not null,
-        eliminado boolean,
-        nombre varchar(255),
-        ubicacionMapa varchar(255),
-        aceptaEncomiendas boolean,
-        primary key (id)
-    );
-
-    create table Recorrido (
-        id varchar(255) not null,
-        eliminado boolean,
-        nombre varchar(255),
-        primary key (id)
-    );
-
-    create table Recorrido_GrupoHorario (
-        Recorrido_id varchar(255) not null,
-        horarios_id varchar(255) not null,
-        LIST_INDEX int4 not null,
-        primary key (Recorrido_id, LIST_INDEX)
-    );
-
-    create table Recorrido_Precio (
-        Recorrido_id varchar(255) not null,
-        precios_id varchar(255) not null,
-        LIST_INDEX int4 not null,
-        primary key (Recorrido_id, LIST_INDEX)
-    );
-
-    create table Recorrido_PuntoRecorrido (
-        Recorrido_id varchar(255) not null,
-        puntosDeRecorrido_id varchar(255) not null,
-        LIST_INDEX int4 not null,
-        primary key (Recorrido_id, LIST_INDEX)
-    );
-
-    create table ReglaCobroEncomienda (
-        id varchar(255) not null,
-        nombre varchar(255),
-        precioExactoOCalculo boolean,
-        primary key (id)
-    );
-
-    create table ReglaCobroEncomiendaCriteria (
-        id varchar(255) not null,
-        operador varchar(255),
-        precio float4,
-        valor int4,
-        primary key (id)
-    );
-
-    create table ReglaCobroEncomienda_ReglaCobroEncomiendaCriteria (
-        ReglaCobroEncomienda_id varchar(255) not null,
-        criterias_id varchar(255) not null,
-        LIST_INDEX int4 not null,
-        primary key (ReglaCobroEncomienda_id, LIST_INDEX)
-    );
-
-    create table Reserva (
-        id varchar(255) not null,
-        ciPersona varchar(255),
-        eliminada boolean,
-        fechaReserva timestamp,
-        utilizada boolean,
-        destino_id varchar(255),
-        empleado_id varchar(255),
-        origen_id varchar(255),
-        precio_id varchar(255),
-        usuarioReserva_id varchar(255),
-        viaje_id varchar(255),
-        primary key (id)
-    );
-
-    create table Tenant (
-        id varchar(255) not null,
-        domain varchar(255),
-        isActive boolean,
-        isDelete boolean,
-        name varchar(255),
-        primary key (id)
-    );
-
-    create table Terminal_mailsDeContacto (
-        Terminal_id varchar(255) not null,
-        descripcion varchar(255),
-        email varchar(255),
-        LIST_INDEX int4 not null,
-        primary key (Terminal_id, LIST_INDEX)
-    );
-
-    create table Terminal_telefonosContacto (
-        Terminal_id varchar(255) not null,
-        descripcion varchar(255),
-        telefono varchar(255),
-        LIST_INDEX int4 not null,
-        primary key (Terminal_id, LIST_INDEX)
-    );
-
-    create table Usuario_notificaciones (
-        Usuario_id varchar(255) not null,
-        fecha timestamp,
-        mensaje varchar(255),
-        LIST_INDEX int4 not null,
-        primary key (Usuario_id, LIST_INDEX)
-    );
-
-    create table Vehiculo (
-        id varchar(255) not null,
-        anioFabricacion int4,
-        cantidadAsientos int4,
-        conGuarda boolean,
-        eliminado boolean,
-        fechaAlta date,
-        marca varchar(255),
-        matricula varchar(255),
-        modelo varchar(255),
-        numeroVehiculo varchar(255),
-        enMantenimiento boolean,
-        primary key (id)
-    );
-
-    create table Vehiculo_Encomienda (
-        Vehiculo_id varchar(255) not null,
-        encomiendas_id varchar(255) not null,
-        encomiendas_codigoEncomienda int4 not null,
-        LIST_INDEX int4 not null,
-        primary key (Vehiculo_id, LIST_INDEX)
-    );
-
-    create table Vehiculo_MantenimientoVehiculo (
-        Vehiculo_id varchar(255) not null,
-        mantenimientos_id varchar(255) not null,
-        LIST_INDEX int4 not null,
-        primary key (Vehiculo_id, LIST_INDEX)
-    );
-
-    create table Viaje (
-        id varchar(255) not null,
-        fechaSalida timestamp,
-        horario_id varchar(255),
-        recorrido_id varchar(255),
-        primary key (id)
-    );
-
-    create table Viaje_Persona (
-        Viaje_id varchar(255) not null,
-        empleados_id varchar(255) not null,
-        LIST_INDEX int4 not null,
-        primary key (Viaje_id, LIST_INDEX)
-    );
-
-    create table Viaje_Reserva (
-        Viaje_id varchar(255) not null,
-        reservas_id varchar(255) not null,
-        LIST_INDEX int4 not null,
-        primary key (Viaje_id, LIST_INDEX)
-    );
-
-    create table Viaje_Vehiculo (
-        Viaje_id varchar(255) not null,
-        coches_id varchar(255) not null,
-        LIST_INDEX int4 not null,
-        primary key (Viaje_id, LIST_INDEX)
-    );
-
-    create table dias (
-        GrupoHorarioId varchar(255) not null,
-        diasSemana varchar(255),
-        LIST_INDEX int4 not null,
-        primary key (GrupoHorarioId, LIST_INDEX)
-    );
-
-    alter table Encomienda_HistorialEstadosEncomienda 
-        add constraint UK_o4ifqp9wtuyh6yyrj2y7dtunw  unique (estados_id);
-
-    alter table GrupoHorario_Horario 
-        add constraint UK_i8vwfxybh0quda0tavoaodq1q  unique (horarios_id);
-
-    alter table Perfil_Persona 
-        add constraint UK_72x6tlk8weghwf7fg7kwv6ggo  unique (empleados_id);
-
-    alter table Persona_Encomienda 
-        add constraint UK_ob0glgv6x5261k1a82wbu9r4a  unique (encomiendas_id, encomiendas_codigoEncomienda);
-
-    alter table Recorrido_GrupoHorario 
-        add constraint UK_3irwqpu998d89noj694x1aswh  unique (horarios_id);
-
-    alter table Recorrido_Precio 
-        add constraint UK_b0188ldsu72xkho27163gi1vr  unique (precios_id);
-
-    alter table ReglaCobroEncomienda_ReglaCobroEncomiendaCriteria 
-        add constraint UK_arpe4vnc33o327gr1s5t2ttmw  unique (criterias_id);
-
-    alter table Vehiculo_Encomienda 
-        add constraint UK_p1qpltmjq3qchbxp10kgg4x0q  unique (encomiendas_id, encomiendas_codigoEncomienda);
-
-    alter table Vehiculo_MantenimientoVehiculo 
-        add constraint UK_myj2cqpd205do48yrvsg77nnn  unique (mantenimientos_id);
-
-    alter table Viaje_Persona 
-        add constraint UK_bc581nw2fuo8wooi6xklfjrg8  unique (empleados_id);
-
-    alter table Viaje_Reserva 
-        add constraint UK_nhxrsaq5q7iaebnhe0csko754  unique (reservas_id);
-
-    alter table ConfiguracionEmpresa_emails 
-        add constraint FK_1gy1wh0twl8d5pdpmkbc35rwc 
-        foreign key (ConfiguracionEmpresa_id) 
-        references ConfiguracionEmpresa;
-
-    alter table ConfiguracionEmpresa_telefonos 
-        add constraint FK_eq1skmvw0ahcnj2jjcg6jtqsv 
-        foreign key (ConfiguracionEmpresa_id) 
-        references ConfiguracionEmpresa;
-
-    alter table DiasGruposHorarios 
-        add constraint FK_j0fo4hou9o2cjpvscwql9otx8 
-        foreign key (GrupoHorarioId) 
-        references GrupoHorario;
-
-    alter table Encomienda 
-        add constraint FK_ndhmq6wiggedgn0716fq6hrxq 
-        foreign key (cocheAsignado_id) 
-        references Vehiculo;
-
-    alter table Encomienda 
-        add constraint FK_lu2t6lvkhos8kqv2mvkqqk5cl 
-        foreign key (destino_id) 
-        references PuntoRecorrido;
-
-    alter table Encomienda 
-        add constraint FK_sw3mg6bcaqxiehk012t7ljbkd 
-        foreign key (emisor_id) 
-        references Persona;
-
-    alter table Encomienda 
-        add constraint FK_m385yqv0o0i48aa1eghl2jqx6 
-        foreign key (estadoActual_id) 
-        references EstadosEncomienda;
-
-    alter table Encomienda 
-        add constraint FK_5x2u7bttkbkm5f80dm56pf59s 
-        foreign key (origen_id) 
-        references PuntoRecorrido;
-
-    alter table Encomienda 
-        add constraint FK_70r54agnflhmfrifumhap86xd 
-        foreign key (receptor_id) 
-        references Persona;
-
-    alter table Encomienda 
-        add constraint FK_5tvkuor274t22xm4ph1dp1aqb 
-        foreign key (reglaCobro_id) 
-        references ReglaCobroEncomienda;
-
-    alter table Encomienda 
-        add constraint FK_k9y4bsstq94qvbkstxqpm4itd 
-        foreign key (viajeAsignado_id) 
-        references Viaje;
-
-    alter table Encomienda_HistorialEstadosEncomienda 
-        add constraint FK_o4ifqp9wtuyh6yyrj2y7dtunw 
-        foreign key (estados_id) 
-        references HistorialEstadosEncomienda;
-
-    alter table Encomienda_HistorialEstadosEncomienda 
-        add constraint FK_qvyk31c31mj1toumyi9ivga4f 
-        foreign key (Encomienda_id, Encomienda_codigoEncomienda) 
-        references Encomienda;
-
-    alter table GrupoHorario_Horario 
-        add constraint FK_i8vwfxybh0quda0tavoaodq1q 
-        foreign key (horarios_id) 
-        references Horario;
-
-    alter table GrupoHorario_Horario 
-        add constraint FK_hdk3ibt2x2e3u7s8kr5tgxcwn 
-        foreign key (GrupoHorario_id) 
-        references GrupoHorario;
-
-    alter table HistorialEstadosEncomienda 
-        add constraint FK_iv2bin3afihjpwyullr559i59 
-        foreign key (estado_id) 
-        references EstadosEncomienda;
-
-    alter table Pasaje 
-        add constraint FK_qypdlnb5jm65d9i5d7724ic2y 
-        foreign key (comprador_id) 
-        references Persona;
-
-    alter table Pasaje 
-        add constraint FK_osxop9oh3av3oyg6l2phjie6e 
-        foreign key (destino_id) 
-        references PuntoRecorrido;
-
-    alter table Pasaje 
-        add constraint FK_tgrk1toib3l43ymmcp3rllen9 
-        foreign key (origen_id) 
-        references PuntoRecorrido;
-
-    alter table Pasaje 
-        add constraint FK_lrv16svbya50dn4j8fyjg4rxp 
-        foreign key (precio_id) 
-        references Precio;
-
-    alter table Pasaje 
-        add constraint FK_8eddxbxbrcyl1sjjs5b9bi8s9 
-        foreign key (vendedor_id) 
-        references Persona;
-
-    alter table Pasaje 
-        add constraint FK_45tgxw544atj8lq6oyo9ly3kg 
-        foreign key (viaje_id) 
-        references Viaje;
-
-    alter table Perfil_Persona 
-        add constraint FK_72x6tlk8weghwf7fg7kwv6ggo 
-        foreign key (empleados_id) 
-        references Persona;
-
-    alter table Perfil_Persona 
-        add constraint FK_3uqsd0g7qbuuatp8fyuomq0vj 
-        foreign key (Perfil_id) 
-        references Perfil;
-
-    alter table Persona 
-        add constraint FK_3mmokvoe2m3hovhc6bb603if8 
-        foreign key (cuponera_id) 
-        references Cuponera;
-
-    alter table Persona 
-        add constraint FK_nsjd0asvtjy77jmuqukhdqa8a 
-        foreign key (perfil_id) 
-        references Perfil;
-
-    alter table Persona_Encomienda 
-        add constraint FK_ob0glgv6x5261k1a82wbu9r4a 
-        foreign key (encomiendas_id, encomiendas_codigoEncomienda) 
-        references Encomienda;
-
-    alter table Persona_Encomienda 
-        add constraint FK_brofvaqxcvhk5v4beg5rsl4bm 
-        foreign key (Persona_id) 
-        references Persona;
-
-    alter table Persona_telefonosContacto 
-        add constraint FK_64rj9xfvsrdxq0ohep3u85q54 
-        foreign key (Persona_id) 
-        references Persona;
-
-    alter table Precio 
-        add constraint FK_syilby562ubf2nf5b3f25f4bw 
-        foreign key (destino_id) 
-        references PuntoRecorrido;
-
-    alter table Precio 
-        add constraint FK_rmk9yovcmawvj5nd0mloeipoj 
-        foreign key (origen_id) 
-        references PuntoRecorrido;
-
-    alter table Recorrido_GrupoHorario 
-        add constraint FK_3irwqpu998d89noj694x1aswh 
-        foreign key (horarios_id) 
-        references GrupoHorario;
-
-    alter table Recorrido_GrupoHorario 
-        add constraint FK_gjqvoynoi8mg61x1wf56vckhw 
-        foreign key (Recorrido_id) 
-        references Recorrido;
-
-    alter table Recorrido_Precio 
-        add constraint FK_b0188ldsu72xkho27163gi1vr 
-        foreign key (precios_id) 
-        references Precio;
-
-    alter table Recorrido_Precio 
-        add constraint FK_qq2b4r9uw7ovs7acdhnbh74po 
-        foreign key (Recorrido_id) 
-        references Recorrido;
-
-    alter table Recorrido_PuntoRecorrido 
-        add constraint FK_ee5p44tsn9dco5l0dxf6u2p0o 
-        foreign key (puntosDeRecorrido_id) 
-        references PuntoRecorrido;
-
-    alter table Recorrido_PuntoRecorrido 
-        add constraint FK_5fo8vfw5v601xd5ffw17rkfqs 
-        foreign key (Recorrido_id) 
-        references Recorrido;
-
-    alter table ReglaCobroEncomienda_ReglaCobroEncomiendaCriteria 
-        add constraint FK_arpe4vnc33o327gr1s5t2ttmw 
-        foreign key (criterias_id) 
-        references ReglaCobroEncomiendaCriteria;
-
-    alter table ReglaCobroEncomienda_ReglaCobroEncomiendaCriteria 
-        add constraint FK_f7phejn833mjnj8hpsekkovc3 
-        foreign key (ReglaCobroEncomienda_id) 
-        references ReglaCobroEncomienda;
-
-    alter table Reserva 
-        add constraint FK_p6k2oyyml1fny5w4on9compj3 
-        foreign key (destino_id) 
-        references PuntoRecorrido;
-
-    alter table Reserva 
-        add constraint FK_7cv1rsnw8180t5ixp1nk0gbsn 
-        foreign key (empleado_id) 
-        references Persona;
-
-    alter table Reserva 
-        add constraint FK_dhrmid2rwsgmg6wfqy8oekua3 
-        foreign key (origen_id) 
-        references PuntoRecorrido;
-
-    alter table Reserva 
-        add constraint FK_a585lpkv2x3oq2xo16iijouu7 
-        foreign key (precio_id) 
-        references Precio;
-
-    alter table Reserva 
-        add constraint FK_gj6mwu7px9cdeq4spnm660su2 
-        foreign key (usuarioReserva_id) 
-        references Persona;
-
-    alter table Reserva 
-        add constraint FK_km77kynwhjjp437juk8ln5n6n 
-        foreign key (viaje_id) 
-        references Viaje;
-
-    alter table Terminal_mailsDeContacto 
-        add constraint FK_jrq99b4vla9j195p014p9r1bk 
-        foreign key (Terminal_id) 
-        references PuntoRecorrido;
-
-    alter table Terminal_telefonosContacto 
-        add constraint FK_pcss06xxddygc7c2vek340hkc 
-        foreign key (Terminal_id) 
-        references PuntoRecorrido;
-
-    alter table Usuario_notificaciones 
-        add constraint FK_ta692fdsg4mr0iaige255tfff 
-        foreign key (Usuario_id) 
-        references Persona;
-
-    alter table Vehiculo_Encomienda 
-        add constraint FK_p1qpltmjq3qchbxp10kgg4x0q 
-        foreign key (encomiendas_id, encomiendas_codigoEncomienda) 
-        references Encomienda;
-
-    alter table Vehiculo_Encomienda 
-        add constraint FK_c1gkg84183qbjqdw819p0sre4 
-        foreign key (Vehiculo_id) 
-        references Vehiculo;
-
-    alter table Vehiculo_MantenimientoVehiculo 
-        add constraint FK_myj2cqpd205do48yrvsg77nnn 
-        foreign key (mantenimientos_id) 
-        references MantenimientoVehiculo;
-
-    alter table Vehiculo_MantenimientoVehiculo 
-        add constraint FK_skcvsf2gy026guw5nom5jcuwf 
-        foreign key (Vehiculo_id) 
-        references Vehiculo;
-
-    alter table Viaje 
-        add constraint FK_l6exsxsgca9wo889gpl7os1ff 
-        foreign key (horario_id) 
-        references Horario;
-
-    alter table Viaje 
-        add constraint FK_s7a40spa1k4vgmf1i42boyb46 
-        foreign key (recorrido_id) 
-        references Recorrido;
-
-    alter table Viaje_Persona 
-        add constraint FK_bc581nw2fuo8wooi6xklfjrg8 
-        foreign key (empleados_id) 
-        references Persona;
-
-    alter table Viaje_Persona 
-        add constraint FK_ot5d3wyxfudo29ub3a8y100eu 
-        foreign key (Viaje_id) 
-        references Viaje;
-
-    alter table Viaje_Reserva 
-        add constraint FK_nhxrsaq5q7iaebnhe0csko754 
-        foreign key (reservas_id) 
-        references Reserva;
-
-    alter table Viaje_Reserva 
-        add constraint FK_hfinyo80vii4dt8h6nvdmp80l 
-        foreign key (Viaje_id) 
-        references Viaje;
-
-    alter table Viaje_Vehiculo 
-        add constraint FK_gfjj2ndw3v3b1aimy7bomb2bh 
-        foreign key (coches_id) 
-        references Vehiculo;
-
-    alter table Viaje_Vehiculo 
-        add constraint FK_kygwggiv599v0v7h8ljainla3 
-        foreign key (Viaje_id) 
-        references Viaje;
-
-    alter table dias 
-        add constraint FK_hbh26sy6gwvgixbk380fa5im2 
-        foreign key (GrupoHorarioId) 
-        references GrupoHorario;
+CREATE TABLE grupohorario (
+    id character varying(255) NOT NULL,
+    nombre character varying(255),
+    tipo character varying(255)
+);
+
+CREATE TABLE grupohorario_horario (
+    grupohorario_id character varying(255) NOT NULL,
+    horarios_id character varying(255) NOT NULL,
+    list_index integer NOT NULL
+);
+
+
+CREATE TABLE historialestadosencomienda (
+    id character varying(255) NOT NULL,
+    fecha timestamp without time zone,
+    estado_id character varying(255)
+);
+
+
+CREATE TABLE horario (
+    id character varying(255) NOT NULL,
+    nombre character varying(255)
+);
+
+
+CREATE TABLE mantenimientovehiculo (
+    id character varying(255) NOT NULL,
+    costo real,
+    descripcioncompleta character varying(255),
+    descripcionreducida character varying(255),
+    fechacompleado timestamp without time zone,
+    fechaingreso timestamp without time zone
+);
+
+
+CREATE TABLE mediodepago (
+    id character varying(255) NOT NULL,
+    activo boolean,
+    clave character varying(255),
+    cuenta character varying(255),
+    nombre character varying(255),
+    usuario character varying(255)
+);
+
+
+CREATE TABLE pasaje (
+    id character varying(255) NOT NULL,
+    codigopasaje integer NOT NULL,
+    cipersona character varying(255),
+    eliminado boolean,
+    fechacompra timestamp without time zone,
+    pago boolean,
+    usado boolean,
+    comprador_id character varying(255),
+    destino_id character varying(255),
+    origen_id character varying(255),
+    precio_id character varying(255),
+    vendedor_id character varying(255),
+    viaje_id character varying(255)
+);
+
+
+CREATE TABLE perfil (
+    id character varying(255) NOT NULL,
+    configuracionempresa boolean,
+    gestionencomiendas boolean,
+    gestionpasajes boolean,
+    gestionreportes boolean,
+    mantenimientoflota boolean,
+    nombreperfil character varying(255)
+);
+
+CREATE TABLE perfil_persona (
+    perfil_id character varying(255) NOT NULL,
+    empleados_id character varying(255) NOT NULL,
+    list_index integer NOT NULL
+);
+
+CREATE TABLE persona (
+    dtype character varying(31) NOT NULL,
+    id character varying(255) NOT NULL,
+    apellido character varying(255),
+    clave character varying(255),
+    eliminado boolean,
+    descripcion character varying(255),
+    email character varying(255),
+    fechanacimiento date,
+    nombrepila character varying(255),
+    idredsocial character varying(255),
+    redsocialusada character varying(255),
+    idempleadoldap character varying(255),
+    cuponera_id character varying(255),
+    perfil_id character varying(255)
+);
+
+CREATE TABLE persona_encomienda (
+    usuario_id character varying(255) NOT NULL,
+    encomiendas_id character varying(255) NOT NULL,
+    encomiendas_codigoencomienda integer NOT NULL,
+    list_index integer NOT NULL
+);
+
+CREATE TABLE persona_telefonoscontacto (
+    persona_id character varying(255) NOT NULL,
+    descripcion character varying(255),
+    telefono character varying(255),
+    list_index integer NOT NULL
+);
+
+CREATE TABLE precio (
+    id character varying(255) NOT NULL,
+    monto real,
+    destino_id character varying(255),
+    origen_id character varying(255)
+);
+
+CREATE TABLE puntorecorrido (
+    dtype character varying(31) NOT NULL,
+    id character varying(255) NOT NULL,
+    eliminado boolean,
+    nombre character varying(255),
+    ubicacionmapa character varying(255),
+    aceptaencomiendas boolean
+);
+
+CREATE TABLE recorrido (
+    id character varying(255) NOT NULL,
+    eliminado boolean,
+    nombre character varying(255)
+);
+
+CREATE TABLE recorrido_grupohorario (
+    recorrido_id character varying(255) NOT NULL,
+    horarios_id character varying(255) NOT NULL,
+    list_index integer NOT NULL
+);
+
+CREATE TABLE recorrido_precio (
+    recorrido_id character varying(255) NOT NULL,
+    precios_id character varying(255) NOT NULL,
+    list_index integer NOT NULL
+);
+
+CREATE TABLE recorrido_puntorecorrido (
+    recorrido_id character varying(255) NOT NULL,
+    puntosderecorrido_id character varying(255) NOT NULL,
+    list_index integer NOT NULL
+);
+
+CREATE TABLE reglacobroencomienda (
+    id character varying(255) NOT NULL,
+    nombre character varying(255),
+    precioexactoocalculo boolean
+);
+
+CREATE TABLE reglacobroencomienda_reglacobroencomiendacriteria (
+    reglacobroencomienda_id character varying(255) NOT NULL,
+    criterias_id character varying(255) NOT NULL,
+    list_index integer NOT NULL
+);
+
+CREATE TABLE reglacobroencomiendacriteria (
+    id character varying(255) NOT NULL,
+    operador character varying(255),
+    precio real,
+    valor integer
+);
+
+CREATE TABLE reserva (
+    id character varying(255) NOT NULL,
+    cipersona character varying(255),
+    eliminada boolean,
+    fechareserva timestamp without time zone,
+    utilizada boolean,
+    destino_id character varying(255),
+    empleado_id character varying(255),
+    origen_id character varying(255),
+    precio_id character varying(255),
+    usuarioreserva_id character varying(255),
+    viaje_id character varying(255)
+);
+
+CREATE TABLE terminal_mailsdecontacto (
+    terminal_id character varying(255) NOT NULL,
+    descripcion character varying(255),
+    email character varying(255),
+    list_index integer NOT NULL
+);
+
+CREATE TABLE terminal_telefonoscontacto (
+    terminal_id character varying(255) NOT NULL,
+    descripcion character varying(255),
+    telefono character varying(255),
+    list_index integer NOT NULL
+);
+
+CREATE TABLE usuario_notificaciones (
+    usuario_id character varying(255) NOT NULL,
+    fecha timestamp without time zone,
+    mensaje character varying(255),
+    list_index integer NOT NULL
+);
+
+CREATE TABLE vehiculo (
+    id character varying(255) NOT NULL,
+    aniofabricacion integer,
+    cantidadasientos integer,
+    conguarda boolean,
+    eliminado boolean,
+    enmantenimiento boolean,
+    fechaalta date,
+    marca character varying(255),
+    matricula character varying(255),
+    modelo character varying(255),
+    numerovehiculo character varying(255)
+);
+
+CREATE TABLE vehiculo_encomienda (
+    vehiculo_id character varying(255) NOT NULL,
+    encomiendas_id character varying(255) NOT NULL,
+    encomiendas_codigoencomienda integer NOT NULL,
+    list_index integer NOT NULL
+);
+
+CREATE TABLE vehiculo_mantenimientovehiculo (
+    vehiculo_id character varying(255) NOT NULL,
+    mantenimientos_id character varying(255) NOT NULL,
+    list_index integer NOT NULL
+);
+
+CREATE TABLE viaje (
+    id character varying(255) NOT NULL,
+    fechasalida timestamp without time zone,
+    horario_id character varying(255),
+    recorrido_id character varying(255)
+);
+
+CREATE TABLE viaje_persona (
+    viaje_id character varying(255) NOT NULL,
+    empleados_id character varying(255) NOT NULL,
+    list_index integer NOT NULL
+);
+
+CREATE TABLE viaje_reserva (
+    viaje_id character varying(255) NOT NULL,
+    reservas_id character varying(255) NOT NULL,
+    list_index integer NOT NULL
+);
+
+CREATE TABLE viaje_vehiculo (
+    viaje_id character varying(255) NOT NULL,
+    coches_id character varying(255) NOT NULL,
+    list_index integer NOT NULL
+);
+
+ALTER TABLE ONLY configuracionempresa_emails
+    ADD CONSTRAINT configuracionempresa_emails_pkey PRIMARY KEY (configuracionempresa_id, list_index);
+
+ALTER TABLE ONLY configuracionempresa
+    ADD CONSTRAINT configuracionempresa_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY configuracionempresa_telefonos
+    ADD CONSTRAINT configuracionempresa_telefonos_pkey PRIMARY KEY (configuracionempresa_id, list_index);
+
+ALTER TABLE ONLY cuponera
+    ADD CONSTRAINT cuponera_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY dias
+    ADD CONSTRAINT dias_pkey PRIMARY KEY (grupohorarioid, list_index);
+
+ALTER TABLE ONLY diasgruposhorarios
+    ADD CONSTRAINT diasgruposhorarios_pkey PRIMARY KEY (grupohorarioid, list_index);
+
+ALTER TABLE ONLY encomienda_historialestadosencomienda
+    ADD CONSTRAINT encomienda_historialestadosencomienda_pkey PRIMARY KEY (encomienda_id, encomienda_codigoencomienda, list_index);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT encomienda_pkey PRIMARY KEY (id, codigoencomienda);
+
+ALTER TABLE ONLY estadosencomienda
+    ADD CONSTRAINT estadosencomienda_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY grupohorario_horario
+    ADD CONSTRAINT grupohorario_horario_pkey PRIMARY KEY (grupohorario_id, list_index);
+
+ALTER TABLE ONLY grupohorario
+    ADD CONSTRAINT grupohorario_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY historialestadosencomienda
+    ADD CONSTRAINT historialestadosencomienda_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY horario
+    ADD CONSTRAINT horario_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY mantenimientovehiculo
+    ADD CONSTRAINT mantenimientovehiculo_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY mediodepago
+    ADD CONSTRAINT mediodepago_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY pasaje
+    ADD CONSTRAINT pasaje_pkey PRIMARY KEY (id, codigopasaje);
+
+ALTER TABLE ONLY perfil_persona
+    ADD CONSTRAINT perfil_persona_pkey PRIMARY KEY (perfil_id, list_index);
+
+ALTER TABLE ONLY perfil
+    ADD CONSTRAINT perfil_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY persona_encomienda
+    ADD CONSTRAINT persona_encomienda_pkey PRIMARY KEY (usuario_id, list_index);
+
+ALTER TABLE ONLY persona
+    ADD CONSTRAINT persona_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY persona_telefonoscontacto
+    ADD CONSTRAINT persona_telefonoscontacto_pkey PRIMARY KEY (persona_id, list_index);
+
+ALTER TABLE ONLY precio
+    ADD CONSTRAINT precio_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY puntorecorrido
+    ADD CONSTRAINT puntorecorrido_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY recorrido_grupohorario
+    ADD CONSTRAINT recorrido_grupohorario_pkey PRIMARY KEY (recorrido_id, list_index);
+
+ALTER TABLE ONLY recorrido
+    ADD CONSTRAINT recorrido_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY recorrido_precio
+    ADD CONSTRAINT recorrido_precio_pkey PRIMARY KEY (recorrido_id, list_index);
+
+ALTER TABLE ONLY recorrido_puntorecorrido
+    ADD CONSTRAINT recorrido_puntorecorrido_pkey PRIMARY KEY (recorrido_id, list_index);
+
+ALTER TABLE ONLY reglacobroencomienda
+    ADD CONSTRAINT reglacobroencomienda_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY reglacobroencomienda_reglacobroencomiendacriteria
+    ADD CONSTRAINT reglacobroencomienda_reglacobroencomiendacriteria_pkey PRIMARY KEY (reglacobroencomienda_id, list_index);
+
+ALTER TABLE ONLY reglacobroencomiendacriteria
+    ADD CONSTRAINT reglacobroencomiendacriteria_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT reserva_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY terminal_mailsdecontacto
+    ADD CONSTRAINT terminal_mailsdecontacto_pkey PRIMARY KEY (terminal_id, list_index);
+
+ALTER TABLE ONLY terminal_telefonoscontacto
+    ADD CONSTRAINT terminal_telefonoscontacto_pkey PRIMARY KEY (terminal_id, list_index);
+
+ALTER TABLE ONLY recorrido_grupohorario
+    ADD CONSTRAINT uk_3irwqpu998d89noj694x1aswh UNIQUE (horarios_id);
+
+ALTER TABLE ONLY perfil_persona
+    ADD CONSTRAINT uk_72x6tlk8weghwf7fg7kwv6ggo UNIQUE (empleados_id);
+
+ALTER TABLE ONLY reglacobroencomienda_reglacobroencomiendacriteria
+    ADD CONSTRAINT uk_arpe4vnc33o327gr1s5t2ttmw UNIQUE (criterias_id);
+
+ALTER TABLE ONLY recorrido_precio
+    ADD CONSTRAINT uk_b0188ldsu72xkho27163gi1vr UNIQUE (precios_id);
+
+ALTER TABLE ONLY viaje_persona
+    ADD CONSTRAINT uk_bc581nw2fuo8wooi6xklfjrg8 UNIQUE (empleados_id);
+
+ALTER TABLE ONLY grupohorario_horario
+    ADD CONSTRAINT uk_i8vwfxybh0quda0tavoaodq1q UNIQUE (horarios_id);
+
+ALTER TABLE ONLY vehiculo_mantenimientovehiculo
+    ADD CONSTRAINT uk_myj2cqpd205do48yrvsg77nnn UNIQUE (mantenimientos_id);
+
+ALTER TABLE ONLY viaje_reserva
+    ADD CONSTRAINT uk_nhxrsaq5q7iaebnhe0csko754 UNIQUE (reservas_id);
+
+ALTER TABLE ONLY encomienda_historialestadosencomienda
+    ADD CONSTRAINT uk_o4ifqp9wtuyh6yyrj2y7dtunw UNIQUE (estados_id);
+
+ALTER TABLE ONLY persona_encomienda
+    ADD CONSTRAINT uk_ob0glgv6x5261k1a82wbu9r4a UNIQUE (encomiendas_id, encomiendas_codigoencomienda);
+
+ALTER TABLE ONLY vehiculo_encomienda
+    ADD CONSTRAINT uk_p1qpltmjq3qchbxp10kgg4x0q UNIQUE (encomiendas_id, encomiendas_codigoencomienda);
+
+ALTER TABLE ONLY usuario_notificaciones
+    ADD CONSTRAINT usuario_notificaciones_pkey PRIMARY KEY (usuario_id, list_index);
+
+ALTER TABLE ONLY vehiculo_encomienda
+    ADD CONSTRAINT vehiculo_encomienda_pkey PRIMARY KEY (vehiculo_id, list_index);
+
+ALTER TABLE ONLY vehiculo_mantenimientovehiculo
+    ADD CONSTRAINT vehiculo_mantenimientovehiculo_pkey PRIMARY KEY (vehiculo_id, list_index);
+
+ALTER TABLE ONLY vehiculo
+    ADD CONSTRAINT vehiculo_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY viaje_persona
+    ADD CONSTRAINT viaje_persona_pkey PRIMARY KEY (viaje_id, list_index);
+
+ALTER TABLE ONLY viaje
+    ADD CONSTRAINT viaje_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY viaje_reserva
+    ADD CONSTRAINT viaje_reserva_pkey PRIMARY KEY (viaje_id, list_index);
+
+ALTER TABLE ONLY viaje_vehiculo
+    ADD CONSTRAINT viaje_vehiculo_pkey PRIMARY KEY (viaje_id, list_index);
+
+ALTER TABLE ONLY grupohorario_horario
+    ADD CONSTRAINT fk1cyopb1pfn3a1q1vyvtc5n2a3 FOREIGN KEY (grupohorario_id) REFERENCES grupohorario(id);
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT fk1dy6gx31gvo63wox77vdlr80d FOREIGN KEY (destino_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY recorrido_grupohorario
+    ADD CONSTRAINT fk1rr26mlyl638rck1eph61krsq FOREIGN KEY (horarios_id) REFERENCES grupohorario(id);
+
+ALTER TABLE ONLY encomienda_historialestadosencomienda
+    ADD CONSTRAINT fk2b1rqix9pkvvh8le9c6h6caw8 FOREIGN KEY (encomienda_id, encomienda_codigoencomienda) REFERENCES encomienda(id, codigoencomienda);
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT fk3tcemn8ibirmyvmtolpnkpl15 FOREIGN KEY (origen_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY dias
+    ADD CONSTRAINT fk44ae9x4ajct36d3lk81ch8s9m FOREIGN KEY (grupohorarioid) REFERENCES grupohorario(id);
+
+ALTER TABLE ONLY perfil_persona
+    ADD CONSTRAINT fk4likmo431b1vjm7oigsl2rwqk FOREIGN KEY (empleados_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY viaje_persona
+    ADD CONSTRAINT fk4xn4rtjc98fyux3tovm5yipji FOREIGN KEY (viaje_id) REFERENCES viaje(id);
+
+ALTER TABLE ONLY vehiculo_mantenimientovehiculo
+    ADD CONSTRAINT fk75qefbakv93w3acylg5nt410q FOREIGN KEY (mantenimientos_id) REFERENCES mantenimientovehiculo(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fk7nlpyvdcc7ux28bcs7g2v2lwv FOREIGN KEY (reglacobro_id) REFERENCES reglacobroencomienda(id);
+
+ALTER TABLE ONLY pasaje
+    ADD CONSTRAINT fk84ju01i74icxfr4rt2o8lmey5 FOREIGN KEY (vendedor_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY viaje_vehiculo
+    ADD CONSTRAINT fk8cxbf5ttw8s5nuyhtxpp5v672 FOREIGN KEY (coches_id) REFERENCES vehiculo(id);
+
+ALTER TABLE ONLY terminal_mailsdecontacto
+    ADD CONSTRAINT fk8idds4kvvca8ds54b54i5igf5 FOREIGN KEY (terminal_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY persona
+    ADD CONSTRAINT fk8l6bc0b161m6u65tpyn74pwmk FOREIGN KEY (perfil_id) REFERENCES perfil(id);
+
+ALTER TABLE ONLY configuracionempresa_emails
+    ADD CONSTRAINT fk_1gy1wh0twl8d5pdpmkbc35rwc FOREIGN KEY (configuracionempresa_id) REFERENCES configuracionempresa(id);
+
+ALTER TABLE ONLY recorrido_grupohorario
+    ADD CONSTRAINT fk_3irwqpu998d89noj694x1aswh FOREIGN KEY (horarios_id) REFERENCES grupohorario(id);
+
+ALTER TABLE ONLY persona
+    ADD CONSTRAINT fk_3mmokvoe2m3hovhc6bb603if8 FOREIGN KEY (cuponera_id) REFERENCES cuponera(id);
+
+ALTER TABLE ONLY perfil_persona
+    ADD CONSTRAINT fk_3uqsd0g7qbuuatp8fyuomq0vj FOREIGN KEY (perfil_id) REFERENCES perfil(id);
+
+ALTER TABLE ONLY pasaje
+    ADD CONSTRAINT fk_45tgxw544atj8lq6oyo9ly3kg FOREIGN KEY (viaje_id) REFERENCES viaje(id);
+
+ALTER TABLE ONLY recorrido_puntorecorrido
+    ADD CONSTRAINT fk_5fo8vfw5v601xd5ffw17rkfqs FOREIGN KEY (recorrido_id) REFERENCES recorrido(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fk_5tvkuor274t22xm4ph1dp1aqb FOREIGN KEY (reglacobro_id) REFERENCES reglacobroencomienda(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fk_5x2u7bttkbkm5f80dm56pf59s FOREIGN KEY (origen_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY persona_telefonoscontacto
+    ADD CONSTRAINT fk_64rj9xfvsrdxq0ohep3u85q54 FOREIGN KEY (persona_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fk_70r54agnflhmfrifumhap86xd FOREIGN KEY (receptor_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY perfil_persona
+    ADD CONSTRAINT fk_72x6tlk8weghwf7fg7kwv6ggo FOREIGN KEY (empleados_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT fk_7cv1rsnw8180t5ixp1nk0gbsn FOREIGN KEY (empleado_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY pasaje
+    ADD CONSTRAINT fk_8eddxbxbrcyl1sjjs5b9bi8s9 FOREIGN KEY (vendedor_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT fk_a585lpkv2x3oq2xo16iijouu7 FOREIGN KEY (precio_id) REFERENCES precio(id);
+
+ALTER TABLE ONLY reglacobroencomienda_reglacobroencomiendacriteria
+    ADD CONSTRAINT fk_arpe4vnc33o327gr1s5t2ttmw FOREIGN KEY (criterias_id) REFERENCES reglacobroencomiendacriteria(id);
+
+ALTER TABLE ONLY recorrido_precio
+    ADD CONSTRAINT fk_b0188ldsu72xkho27163gi1vr FOREIGN KEY (precios_id) REFERENCES precio(id);
+
+ALTER TABLE ONLY viaje_persona
+    ADD CONSTRAINT fk_bc581nw2fuo8wooi6xklfjrg8 FOREIGN KEY (empleados_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY vehiculo_encomienda
+    ADD CONSTRAINT fk_c1gkg84183qbjqdw819p0sre4 FOREIGN KEY (vehiculo_id) REFERENCES vehiculo(id);
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT fk_dhrmid2rwsgmg6wfqy8oekua3 FOREIGN KEY (origen_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY recorrido_puntorecorrido
+    ADD CONSTRAINT fk_ee5p44tsn9dco5l0dxf6u2p0o FOREIGN KEY (puntosderecorrido_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY configuracionempresa_telefonos
+    ADD CONSTRAINT fk_eq1skmvw0ahcnj2jjcg6jtqsv FOREIGN KEY (configuracionempresa_id) REFERENCES configuracionempresa(id);
+
+ALTER TABLE ONLY reglacobroencomienda_reglacobroencomiendacriteria
+    ADD CONSTRAINT fk_f7phejn833mjnj8hpsekkovc3 FOREIGN KEY (reglacobroencomienda_id) REFERENCES reglacobroencomienda(id);
+
+ALTER TABLE ONLY viaje_vehiculo
+    ADD CONSTRAINT fk_gfjj2ndw3v3b1aimy7bomb2bh FOREIGN KEY (coches_id) REFERENCES vehiculo(id);
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT fk_gj6mwu7px9cdeq4spnm660su2 FOREIGN KEY (usuarioreserva_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY recorrido_grupohorario
+    ADD CONSTRAINT fk_gjqvoynoi8mg61x1wf56vckhw FOREIGN KEY (recorrido_id) REFERENCES recorrido(id);
+
+ALTER TABLE ONLY dias
+    ADD CONSTRAINT fk_hbh26sy6gwvgixbk380fa5im2 FOREIGN KEY (grupohorarioid) REFERENCES grupohorario(id);
+
+ALTER TABLE ONLY grupohorario_horario
+    ADD CONSTRAINT fk_hdk3ibt2x2e3u7s8kr5tgxcwn FOREIGN KEY (grupohorario_id) REFERENCES grupohorario(id);
+
+ALTER TABLE ONLY viaje_reserva
+    ADD CONSTRAINT fk_hfinyo80vii4dt8h6nvdmp80l FOREIGN KEY (viaje_id) REFERENCES viaje(id);
+
+ALTER TABLE ONLY grupohorario_horario
+    ADD CONSTRAINT fk_i8vwfxybh0quda0tavoaodq1q FOREIGN KEY (horarios_id) REFERENCES horario(id);
+
+ALTER TABLE ONLY historialestadosencomienda
+    ADD CONSTRAINT fk_iv2bin3afihjpwyullr559i59 FOREIGN KEY (estado_id) REFERENCES estadosencomienda(id);
+
+ALTER TABLE ONLY diasgruposhorarios
+    ADD CONSTRAINT fk_j0fo4hou9o2cjpvscwql9otx8 FOREIGN KEY (grupohorarioid) REFERENCES grupohorario(id);
+
+ALTER TABLE ONLY terminal_mailsdecontacto
+    ADD CONSTRAINT fk_jrq99b4vla9j195p014p9r1bk FOREIGN KEY (terminal_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fk_k9y4bsstq94qvbkstxqpm4itd FOREIGN KEY (viajeasignado_id) REFERENCES viaje(id);
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT fk_km77kynwhjjp437juk8ln5n6n FOREIGN KEY (viaje_id) REFERENCES viaje(id);
+
+ALTER TABLE ONLY viaje_vehiculo
+    ADD CONSTRAINT fk_kygwggiv599v0v7h8ljainla3 FOREIGN KEY (viaje_id) REFERENCES viaje(id);
+
+ALTER TABLE ONLY viaje
+    ADD CONSTRAINT fk_l6exsxsgca9wo889gpl7os1ff FOREIGN KEY (horario_id) REFERENCES horario(id);
+
+ALTER TABLE ONLY pasaje
+    ADD CONSTRAINT fk_lrv16svbya50dn4j8fyjg4rxp FOREIGN KEY (precio_id) REFERENCES precio(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fk_lu2t6lvkhos8kqv2mvkqqk5cl FOREIGN KEY (destino_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fk_m385yqv0o0i48aa1eghl2jqx6 FOREIGN KEY (estadoactual_id) REFERENCES estadosencomienda(id);
+
+ALTER TABLE ONLY vehiculo_mantenimientovehiculo
+    ADD CONSTRAINT fk_myj2cqpd205do48yrvsg77nnn FOREIGN KEY (mantenimientos_id) REFERENCES mantenimientovehiculo(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fk_ndhmq6wiggedgn0716fq6hrxq FOREIGN KEY (cocheasignado_id) REFERENCES vehiculo(id);
+
+ALTER TABLE ONLY viaje_reserva
+    ADD CONSTRAINT fk_nhxrsaq5q7iaebnhe0csko754 FOREIGN KEY (reservas_id) REFERENCES reserva(id);
+
+ALTER TABLE ONLY persona
+    ADD CONSTRAINT fk_nsjd0asvtjy77jmuqukhdqa8a FOREIGN KEY (perfil_id) REFERENCES perfil(id);
+
+ALTER TABLE ONLY encomienda_historialestadosencomienda
+    ADD CONSTRAINT fk_o4ifqp9wtuyh6yyrj2y7dtunw FOREIGN KEY (estados_id) REFERENCES historialestadosencomienda(id);
+
+ALTER TABLE ONLY persona_encomienda
+    ADD CONSTRAINT fk_ob0glgv6x5261k1a82wbu9r4a FOREIGN KEY (encomiendas_id, encomiendas_codigoencomienda) REFERENCES encomienda(id, codigoencomienda);
+
+ALTER TABLE ONLY pasaje
+    ADD CONSTRAINT fk_osxop9oh3av3oyg6l2phjie6e FOREIGN KEY (destino_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY viaje_persona
+    ADD CONSTRAINT fk_ot5d3wyxfudo29ub3a8y100eu FOREIGN KEY (viaje_id) REFERENCES viaje(id);
+
+ALTER TABLE ONLY vehiculo_encomienda
+    ADD CONSTRAINT fk_p1qpltmjq3qchbxp10kgg4x0q FOREIGN KEY (encomiendas_id, encomiendas_codigoencomienda) REFERENCES encomienda(id, codigoencomienda);
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT fk_p6k2oyyml1fny5w4on9compj3 FOREIGN KEY (destino_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY terminal_telefonoscontacto
+    ADD CONSTRAINT fk_pcss06xxddygc7c2vek340hkc FOREIGN KEY (terminal_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY recorrido_precio
+    ADD CONSTRAINT fk_qq2b4r9uw7ovs7acdhnbh74po FOREIGN KEY (recorrido_id) REFERENCES recorrido(id);
+
+ALTER TABLE ONLY encomienda_historialestadosencomienda
+    ADD CONSTRAINT fk_qvyk31c31mj1toumyi9ivga4f FOREIGN KEY (encomienda_id, encomienda_codigoencomienda) REFERENCES encomienda(id, codigoencomienda);
+
+ALTER TABLE ONLY pasaje
+    ADD CONSTRAINT fk_qypdlnb5jm65d9i5d7724ic2y FOREIGN KEY (comprador_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY precio
+    ADD CONSTRAINT fk_rmk9yovcmawvj5nd0mloeipoj FOREIGN KEY (origen_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY viaje
+    ADD CONSTRAINT fk_s7a40spa1k4vgmf1i42boyb46 FOREIGN KEY (recorrido_id) REFERENCES recorrido(id);
+
+ALTER TABLE ONLY vehiculo_mantenimientovehiculo
+    ADD CONSTRAINT fk_skcvsf2gy026guw5nom5jcuwf FOREIGN KEY (vehiculo_id) REFERENCES vehiculo(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fk_sw3mg6bcaqxiehk012t7ljbkd FOREIGN KEY (emisor_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY precio
+    ADD CONSTRAINT fk_syilby562ubf2nf5b3f25f4bw FOREIGN KEY (destino_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY usuario_notificaciones
+    ADD CONSTRAINT fk_ta692fdsg4mr0iaige255tfff FOREIGN KEY (usuario_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY pasaje
+    ADD CONSTRAINT fk_tgrk1toib3l43ymmcp3rllen9 FOREIGN KEY (origen_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY pasaje
+    ADD CONSTRAINT fkadlybik3bbin8blyhyrk1ca2x FOREIGN KEY (comprador_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY usuario_notificaciones
+    ADD CONSTRAINT fkaskrwwhftv4hqdadxdre4hohk FOREIGN KEY (usuario_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY recorrido_puntorecorrido
+    ADD CONSTRAINT fkbdqtykjw051sc93h3qdlee9pd FOREIGN KEY (puntosderecorrido_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY persona_encomienda
+    ADD CONSTRAINT fkbek63w7057p9fiayixcm6cqcu FOREIGN KEY (usuario_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY perfil_persona
+    ADD CONSTRAINT fkbiy8i4lqst7aw41d7agjcgkhf FOREIGN KEY (perfil_id) REFERENCES perfil(id);
+
+ALTER TABLE ONLY recorrido_precio
+    ADD CONSTRAINT fkcepbfyow62myvwiragfelgghv FOREIGN KEY (recorrido_id) REFERENCES recorrido(id);
+
+ALTER TABLE ONLY reglacobroencomienda_reglacobroencomiendacriteria
+    ADD CONSTRAINT fkctsnhshcy4yy0shjltk0t571y FOREIGN KEY (reglacobroencomienda_id) REFERENCES reglacobroencomienda(id);
+
+ALTER TABLE ONLY recorrido_grupohorario
+    ADD CONSTRAINT fkcwp7c9lvgm27kj2gqmei5bqgt FOREIGN KEY (recorrido_id) REFERENCES recorrido(id);
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT fkevhpbu6mht53aotnvfyy5rntg FOREIGN KEY (usuarioreserva_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY terminal_telefonoscontacto
+    ADD CONSTRAINT fkfgjvdh59pallrgs6ri0uqgkky FOREIGN KEY (terminal_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY recorrido_puntorecorrido
+    ADD CONSTRAINT fkfmqpb2so6dksahp82hrl1qwdm FOREIGN KEY (recorrido_id) REFERENCES recorrido(id);
+
+ALTER TABLE ONLY reglacobroencomienda_reglacobroencomiendacriteria
+    ADD CONSTRAINT fkfpxn2m9katkfbk9e478uxwole FOREIGN KEY (criterias_id) REFERENCES reglacobroencomiendacriteria(id);
+
+ALTER TABLE ONLY precio
+    ADD CONSTRAINT fkg2n1ulm6xoybntytanqohqc5m FOREIGN KEY (origen_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY configuracionempresa_telefonos
+    ADD CONSTRAINT fkg5uofhi1cswc81poii1gvd0n3 FOREIGN KEY (configuracionempresa_id) REFERENCES configuracionempresa(id);
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT fkg7s5u2p6qmk8i09is63kjjcd2 FOREIGN KEY (viaje_id) REFERENCES viaje(id);
+
+ALTER TABLE ONLY persona
+    ADD CONSTRAINT fkgay6gqg2ndwcc7nwrg7ydfnht FOREIGN KEY (cuponera_id) REFERENCES cuponera(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fkgg9ayhfk4b5ecqq5bbh0iyuv1 FOREIGN KEY (destino_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY viaje_reserva
+    ADD CONSTRAINT fkh8nvl9s263q1i9rff8e5ttylr FOREIGN KEY (viaje_id) REFERENCES viaje(id);
+
+ALTER TABLE ONLY recorrido_precio
+    ADD CONSTRAINT fkhqnjehhf54cwgh4dy7ld2d482 FOREIGN KEY (precios_id) REFERENCES precio(id);
+
+ALTER TABLE ONLY pasaje
+    ADD CONSTRAINT fki4atco3nerg3or6mr3l5fxrwa FOREIGN KEY (destino_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY pasaje
+    ADD CONSTRAINT fkifcoej3ctn1craextk4f0c6sc FOREIGN KEY (origen_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY precio
+    ADD CONSTRAINT fkiysfc29ourld6rox6ee9hsjyk FOREIGN KEY (destino_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY encomienda_historialestadosencomienda
+    ADD CONSTRAINT fkj406jrseiphrc3ae5qcth1uup FOREIGN KEY (estados_id) REFERENCES historialestadosencomienda(id);
+
+ALTER TABLE ONLY persona_encomienda
+    ADD CONSTRAINT fkjimmraevpudwjgn93u7bffeto FOREIGN KEY (encomiendas_id, encomiendas_codigoencomienda) REFERENCES encomienda(id, codigoencomienda);
+
+ALTER TABLE ONLY historialestadosencomienda
+    ADD CONSTRAINT fkjkjxbs1ophkv0md3je43atefm FOREIGN KEY (estado_id) REFERENCES estadosencomienda(id);
+
+ALTER TABLE ONLY viaje
+    ADD CONSTRAINT fkjukb51oc98jxwyb3fvr59kl4n FOREIGN KEY (recorrido_id) REFERENCES recorrido(id);
+
+ALTER TABLE ONLY viaje
+    ADD CONSTRAINT fkk2pxxyxhm64f1bdcgaxeupc9u FOREIGN KEY (horario_id) REFERENCES horario(id);
+
+ALTER TABLE ONLY persona_telefonoscontacto
+    ADD CONSTRAINT fkk40w7lbc0hpiolhkh845krknh FOREIGN KEY (persona_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY vehiculo_mantenimientovehiculo
+    ADD CONSTRAINT fkk8cyby29bqq3h2kous1yihdtp FOREIGN KEY (vehiculo_id) REFERENCES vehiculo(id);
+
+ALTER TABLE ONLY pasaje
+    ADD CONSTRAINT fkka66fsg7t708wnwt3vfugyivc FOREIGN KEY (precio_id) REFERENCES precio(id);
+
+ALTER TABLE ONLY diasgruposhorarios
+    ADD CONSTRAINT fkl2xrstmymc4hnolttc7g5t20n FOREIGN KEY (grupohorarioid) REFERENCES grupohorario(id);
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT fkloxv9lqeerovxbsu00ux0hc9o FOREIGN KEY (precio_id) REFERENCES precio(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fkm2rbiwdbnc4ese65q603avlq FOREIGN KEY (receptor_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY vehiculo_encomienda
+    ADD CONSTRAINT fkmylbx8oekv06tqi6xhic2u1lu FOREIGN KEY (vehiculo_id) REFERENCES vehiculo(id);
+
+ALTER TABLE ONLY viaje_persona
+    ADD CONSTRAINT fkndyqko0drn7t64khiu5tbugp9 FOREIGN KEY (empleados_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY vehiculo_encomienda
+    ADD CONSTRAINT fknobn5sun1w69alr5cjtp040tm FOREIGN KEY (encomiendas_id, encomiendas_codigoencomienda) REFERENCES encomienda(id, codigoencomienda);
+
+ALTER TABLE ONLY viaje_vehiculo
+    ADD CONSTRAINT fknr4y4v0cfx6u06gw7fsy8cojl FOREIGN KEY (viaje_id) REFERENCES viaje(id);
+
+ALTER TABLE ONLY viaje_reserva
+    ADD CONSTRAINT fko11qfryjp9cuipejwultc8kfg FOREIGN KEY (reservas_id) REFERENCES reserva(id);
+
+ALTER TABLE ONLY grupohorario_horario
+    ADD CONSTRAINT fkp6xs8loi38ysmdmqjfu6h2d2g FOREIGN KEY (horarios_id) REFERENCES horario(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fkq2toppcywxqwikjrhy3yqu9a4 FOREIGN KEY (origen_id) REFERENCES puntorecorrido(id);
+
+ALTER TABLE ONLY pasaje
+    ADD CONSTRAINT fkr0p6gsh3jvupyh930dgcns31y FOREIGN KEY (viaje_id) REFERENCES viaje(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fkr5glnig2snpkq3x3m8t88bacx FOREIGN KEY (cocheasignado_id) REFERENCES vehiculo(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fkrhqly5oh43m5qonjqqjchmjq9 FOREIGN KEY (estadoactual_id) REFERENCES estadosencomienda(id);
+
+ALTER TABLE ONLY configuracionempresa_emails
+    ADD CONSTRAINT fkrmrscppq0a4bd8ov2ajfjao54 FOREIGN KEY (configuracionempresa_id) REFERENCES configuracionempresa(id);
+
+ALTER TABLE ONLY reserva
+    ADD CONSTRAINT fksm6ebd7b2rlof3a3t2skfd6ax FOREIGN KEY (empleado_id) REFERENCES persona(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fkta165wh9q7n089mxqd553wpgn FOREIGN KEY (viajeasignado_id) REFERENCES viaje(id);
+
+ALTER TABLE ONLY encomienda
+    ADD CONSTRAINT fkti4ao76euxqqxch93965kr0ox FOREIGN KEY (emisor_id) REFERENCES persona(id);
+
         
     INSERT INTO estadosencomienda (id, nombre) VALUES ('9a265943-ab81-4a19-a752-03b2db475fed', 'Recibida');
 INSERT INTO estadosencomienda (id, nombre) VALUES ('c1423557-e9fb-472a-92f6-023328107117', 'Enviada');
@@ -743,16 +886,17 @@ INSERT INTO estadosencomienda (id, nombre) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35
 
 
 
-INSERT INTO perfil (id, modulo1, modulo2, modulo3, modulo4, modulo5, modulo6, modulo7, modulo8, nombreperfil) VALUES ('ecefa62b-185a-4e48-a019-f67521e2b9cd', true, true, true, true, true, true, true, true, 'Admin');
-INSERT INTO perfil (id, modulo1, modulo2, modulo3, modulo4, modulo5, modulo6, modulo7, modulo8, nombreperfil) VALUES ('40b64aed-ae63-4908-914d-b011188c171a', true, true, true, true, false, false, true, true, 'Vendedor');
-INSERT INTO perfil (id, modulo1, modulo2, modulo3, modulo4, modulo5, modulo6, modulo7, modulo8, nombreperfil) VALUES ('49b26bf8-1be4-4405-a0d7-0356f644440d', false, false, true, false, true, true, false, false, 'Encargado Deposito');
-INSERT INTO perfil (id, modulo1, modulo2, modulo3, modulo4, modulo5, modulo6, modulo7, modulo8, nombreperfil) VALUES ('fb192132-7a5c-427a-9c55-bc4b339e1ffd', false, false, false, false, true, true, false, true, 'Guarda');
-INSERT INTO perfil (id, modulo1, modulo2, modulo3, modulo4, modulo5, modulo6, modulo7, modulo8, nombreperfil) VALUES ('d4d86bd5-60e5-4b45-abd4-58ea63af3b84', false, false, false, true, true, true, false, false, 'Encargado Taller');
+INSERT INTO perfil (id, gestionEncomiendas, gestionPasajes, ConfiguracionEmpresa, gestionReportes, mantenimientoFlota, nombreperfil) VALUES ('ecefa62b-185a-4e48-a019-f67521e2b9cd', true, true, true, true, true, 'Admin');
+INSERT INTO perfil (id, gestionEncomiendas, gestionPasajes, ConfiguracionEmpresa, gestionReportes, mantenimientoFlota, nombreperfil) VALUES ('40b64aed-ae63-4908-914d-b011188c171a', true, true, false, false, false, 'Vendedor');
+INSERT INTO perfil (id, gestionEncomiendas, gestionPasajes, ConfiguracionEmpresa, gestionReportes, mantenimientoFlota, nombreperfil) VALUES ('49b26bf8-1be4-4405-a0d7-0356f644440d', true, false, false, false, false, 'Encargado Deposito');
+INSERT INTO perfil (id, gestionEncomiendas, gestionPasajes, ConfiguracionEmpresa, gestionReportes, mantenimientoFlota, nombreperfil) VALUES ('fb192132-7a5c-427a-9c55-bc4b339e1ffd', false, true, false, false, false, 'Guarda');
+INSERT INTO perfil (id, gestionEncomiendas, gestionPasajes, ConfiguracionEmpresa, gestionReportes, mantenimientoFlota, nombreperfil) VALUES ('d4d86bd5-60e5-4b45-abd4-58ea63af3b84', false, false, false, true, true, 'Encargado Taller');
 
-INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', 'd1826b85-4527-4bd9-98d1-9dbad268ce5e', 'Perez', false, NULL, 'juan.perez@lacbus.tenant.com', NULL, 'Juan', NULL, NULL, NULL, '', NULL, NULL);
-INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', '52897d2a-49af-40cc-939c-e6a300f720e7', 'Sosa', false, NULL, 'julio.sosa@lacbus.tenant.com', NULL, 'Julio', NULL, NULL, NULL, '', NULL, NULL);
-INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', '2f769c0c-6ea4-4d67-a50b-b3167344bfce', 'Pacheco', false, NULL, 'antonio.pacheco@lacbus.tenant.com', NULL, 'Antonio', NULL, NULL, NULL, '', NULL, NULL);
-INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', 'c726c21c-f2e4-4094-a9b6-bb5811cf2e0e', 'Paez', false, NULL, 'ruben.paez@lacbus.tenant.com', NULL, 'Ruben', NULL, NULL, NULL, '', NULL, NULL);
+INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', 'd1826b85-4527-4bd9-98d1-9dbad268ce5e', 'Perez', false, NULL, 'juan.perez@lacbus.tenant.com', NULL, 'Juan', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', '52897d2a-49af-40cc-939c-e6a300f720e7', 'Sosa', false, NULL, 'julio.sosa@lacbus.tenant.com', NULL, 'Julio', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', '2f769c0c-6ea4-4d67-a50b-b3167344bfce', 'Pacheco', false, NULL, 'antonio.pacheco@lacbus.tenant.com', NULL, 'Antonio', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO persona (dtype, id, apellido, eliminado, descripcion, email, fechanacimiento, nombrepila, clave, idredsocial, redsocialusada, idempleadoldap, cuponera_id, perfil_id) VALUES ('Empleado', 'c726c21c-f2e4-4094-a9b6-bb5811cf2e0e', 'Admin', false, NULL, 'admin', NULL, 'System', 'a4fd8e6fa9fbf9a6f2c99e7b70aa9ef2', NULL, NULL, NULL, NULL, NULL);
+
 
 
 
@@ -1039,7 +1183,12 @@ INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('83cac1e7-4
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('cc9b5ea9-fb86-4f6a-a949-302ab8fdc024', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
 INSERT INTO viaje_vehiculo (viaje_id, coches_id, list_index) VALUES ('8d957d43-1997-4617-9375-381e73b04024', '7e7024fb-4cef-4133-95be-22ec7eb4448c',  0);
 
-INSERT INTO encomienda (id, codigoencomienda, eliminada, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235b',1,false, 'c6253122-990a-4891-9456-6d5c68f0c2a9', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO encomienda (id, codigoencomienda, eliminada,paga, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235b',1,false,true, 'c6253122-990a-4891-9456-6d5c68f0c2a9', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO encomienda (id, codigoencomienda, eliminada,paga, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235c',2,false,true, '016ec03e-d5a2-493e-ada1-06007aeb5b5e', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO encomienda (id, codigoencomienda, eliminada,paga, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235e',3,false,true, 'c6253122-990a-4891-9456-6d5c68f0c2a9', '82bc4ed2-043b-44e5-833d-20f07b740392');
+INSERT INTO encomienda (id, codigoencomienda, eliminada,paga, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235h',4,false,true, '63b84f4b-9b50-40d3-8eed-4e8c0203244d', 'b61d2464-77e3-47f7-bc18-aa75871de5c6');
+INSERT INTO encomienda (id, codigoencomienda, eliminada,paga, destino_id, origen_id) VALUES ('f7036bc6-a43e-4d14-ac9c-cb35f182235j',5,false,true, 'b61d2464-77e3-47f7-bc18-aa75871de5c6', '82bc4ed2-043b-44e5-833d-20f07b740392');
+
 
 INSERT INTO grupohorario (id, nombre, tipo) VALUES ('3f205ba5-126c-4715-b264-4ac838641149', 'Diario', 'diasSemana');
 INSERT INTO grupohorario (id, nombre, tipo) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'Diario', 'diasSemana');

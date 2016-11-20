@@ -40,12 +40,13 @@ public class DataEncomiendaConvertor {
     private Date fechaEntrega;
     private Boolean retiraEnSucursal;
     private Boolean eliminada;
+    private Boolean paga;
 
  
 
     public DataEncomiendaConvertor() {}
     
-    public DataEncomiendaConvertor(String id, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, DataVehiculo codCoche, Integer codEnco) {
+    public DataEncomiendaConvertor(String id, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, DataViaje viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, DataVehiculo codCoche, Integer codEnco, Boolean paga) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -69,6 +70,7 @@ public class DataEncomiendaConvertor {
         this.eliminada = elim;
         this.codigoEncomienda = codEnco;
         this.cocheAsignado = codCoche;
+        this.paga = paga;
     }
     
     public DataEncomienda getDataEncomienda(){
@@ -142,6 +144,7 @@ public class DataEncomiendaConvertor {
     	}
     	result.setRetiraEnSucursal(this.getRetiraEnSucursal());
     	result.setEliminada(this.getEliminada());
+    	result.setPaga(this.getPaga());
        	return result;
     }
     
@@ -326,6 +329,14 @@ public class DataEncomiendaConvertor {
     
     public Boolean getEliminada(){
         return this.eliminada;
+    }
+    
+    public void setPaga(Boolean val){
+        this.paga = val;
+    }
+    
+    public Boolean getPaga(){
+        return this.paga;
     }
 
 }

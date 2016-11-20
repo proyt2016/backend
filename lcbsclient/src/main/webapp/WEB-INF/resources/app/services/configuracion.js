@@ -1,13 +1,13 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').service('configuracionService', ["$http", "$q", configuracionService]);
+    angular.module('lacbus').service('configuracionService', ["$http", "$q", "CONFIGURACION", configuracionService]);
 
-    function configuracionService($http, $q) {
+    function configuracionService($http, $q, CONFIGURACION) {
 
         var getConfiguracion = function(){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/empresa/getconfirguacionempresa/')
+            $http.get(CONFIGURACION.url + 'empresa/getconfirguacionempresa/')
             .success(function (configuracion) {
                 defer.resolve(configuracion);
             })

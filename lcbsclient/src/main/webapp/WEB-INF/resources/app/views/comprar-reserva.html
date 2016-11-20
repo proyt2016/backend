@@ -7,21 +7,18 @@
       <div class="box-body">
         <p><strong><i class="fa fa-map margin-r-5"></i> Origien y Destino</strong></p>
         <p class="text-center">
-          <select class="form-control select2" style="width: 100%;" ng-model="comprar.origen" required disabled>
+          <select class="form-control select2" style="width: 100%;" ng-model="comprar.origen" disabled>
             <option ng-repeat="recorrido in reserva.viaje.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
           </select> 
           <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> 
-          <select class="form-control select2" style="width: 100%;" ng-model="comprar.destino" required disabled>
+          <select class="form-control select2" style="width: 100%;" ng-model="comprar.destino" disabled>
             <option ng-repeat="recorrido in reserva.viaje.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
           </select>
         </p>
         <hr>
         <p><i class="fa fa-map-marker margin-r-5"></i> {{ reserva.viaje.recorrido.nombre }}</p>
         <hr>
-        <p><i class="fa fa-calendar margin-r-5"></i> {{ reserva.viaje.salida }} a {{ viaje.llegada }}</p>
-        <hr>
-        <strong><i class="fa fa-file-text-o margin-r-5"></i> Descripci&oacute;n</strong>
-        <p>{{ reserva.viaje.descripcion }}</p>
+        <p><i class="fa fa-calendar margin-r-5"></i> {{ reserva.viaje.fechaSalida | date : 'dd/MM/yy' }} - {{ reserva.viaje.horario.nombre }}</p>
       </div>
     </div>
   </div>
@@ -74,16 +71,8 @@
             <table class="table">
               <tbody>
                 <tr>
-                  <th style="width:50%">Precio por pasaje:</th>
-                  <td>${{ reserva.viaje.precio.monto }}</td>
-                </tr>
-                <tr>
-                  <th>Cantidad de pasajes</th>
-                  <td>3</td>
-                </tr>
-                <tr>
                   <th>Total:</th>
-                  <td>${{ reserva.viaje.precio.monto }}</td>
+                  <td>${{ precio }}</td>
                 </tr>
               </tbody>
             </table>

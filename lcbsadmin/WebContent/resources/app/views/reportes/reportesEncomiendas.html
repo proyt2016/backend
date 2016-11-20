@@ -1,0 +1,46 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Reportes</h3>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="row x_title">
+            <div class="col-md-6">
+                <h3>Encomiendas</h3>
+            </div>
+            <div class="col-md-6">
+                <div id="dateRangeNuevos" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                    <span></span> <b class="caret"></b>
+                </div>
+            </div>
+        </div>
+
+        <div class="x_content">
+            <div style="width: 100%;">
+                <div id="porNuevos" class="demo-placeholder" style="width: 100%; height:250px;"></div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <table class="table table-striped responsive-utilities jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+                                <th>Fecha</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="dataN in dataNuevoFilter">
+                                <td>{{dataN.fechaEntrega}}</td>
+                                <td>{{dataN.cantidad}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

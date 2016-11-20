@@ -1,13 +1,13 @@
 (function () {
     'use strict';
-    angular.module('lacbus').service('viajeService', ['$http', '$q', viajeService]);
+    angular.module('lacbus').service('viajeService', ['$http', '$q', 'CONFIGURACION', viajeService]);
 
-    function viajeService($http, $q) {
+    function viajeService($http, $q, CONFIGURACION) {
 
         var buscar = function(filtro){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/viajes/buscarviaje/1/1000', filtro)
+            $http.post(CONFIGURACION.url + 'viajes/buscarviaje/1/1000', filtro)
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -21,7 +21,7 @@
         var getId = function(id){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/getviaje/' + id)
+            $http.get(CONFIGURACION.url + 'viajes/getviaje/' + id)
             .success(function (dato) {
                 defer.resolve(dato);
             })
@@ -35,7 +35,7 @@
         var getPrecio = function(origenId, destinoId, recorridoId){
         	var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/getpreciodepasaje/' + origenId+"/"+destinoId+"/"+recorridoId)
+            $http.get(CONFIGURACION.url + 'viajes/getpreciodepasaje/' + origenId + '/' + destinoId + '/' + recorridoId)
             .success(function (dato) {
                 defer.resolve(dato);
             })

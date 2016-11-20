@@ -1,13 +1,13 @@
 (function () {
     'use strict';
-    angular.module('lacbus').service('notificacionService', ['$http', '$q', notificacionService]);
+    angular.module('lacbus').service('notificacionService', ['$http', '$q', 'CONFIGURACION', notificacionService]);
 
-    function notificacionService($http, $q) {
+    function notificacionService($http, $q, CONFIGURACION) {
 
         var getAll = function(usuarioId){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/usuarios/listanotificaciones/' + usuarioId)
+            $http.get(CONFIGURACION.url + 'usuarios/listanotificaciones/' + usuarioId)
             .success(function (datos) {
                 defer.resolve(datos);
             })

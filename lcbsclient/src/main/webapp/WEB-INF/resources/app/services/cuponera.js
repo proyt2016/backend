@@ -1,13 +1,13 @@
 (function () {
     'use strict';
-    angular.module('lacbus').service('cuponeraService', ['$http', '$q', cuponeraService]);
+    angular.module('lacbus').service('cuponeraService', ['$http', '$q', 'CONFIGURACION', cuponeraService]);
 
-    function cuponeraService($http, $q) {
+    function cuponeraService($http, $q, CONFIGURACION) {
 
         var recargar = function(recarga){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/usuarios/cargarcuponera', recarga)
+            $http.post(CONFIGURACION.url + 'usuarios/cargarcuponera', recarga)
             .success(function (datos) {
                 defer.resolve(datos);
             })

@@ -16,4 +16,5 @@ public interface VehiculoLocalApi {
 	public DataVehiculo crearVehiculo(DataVehiculo veh, DataTenant tenant);
 	public void darBajaVehiculo(String idVeiculo, DataTenant tenant);
 	public List<DataVehiculo> obtenerVehiculosEnMantenimiento(Integer pagina, Integer elementosPagina, DataTenant tenant);
+	public Integer getMenorCantAsientos(DataTenant tenant);
 }

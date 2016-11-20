@@ -73,12 +73,13 @@ public class Encomienda implements Serializable{
     private Date fechaEntrega;
     private Boolean retiraEnSucursal;
     private Boolean eliminada;
+    private Boolean paga;
 
  
 
     public Encomienda() {}
     
-    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, Vehiculo cod_coche, Integer codEnco) {
+    public Encomienda(String id, PuntoRecorrido orig, PuntoRecorrido dest, Usuario emi, String ciEm, Telefono telEm, Usuario rec, String ciRec, Telefono telRec, String dirRec, ReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, Viaje viajeAs, List<HistorialEstadosEncomienda> estds, EstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, Vehiculo cod_coche, Integer codEnco, Boolean paga) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -101,6 +102,7 @@ public class Encomienda implements Serializable{
         this.eliminada = elim;
         this.cocheAsignado = cod_coche;
         this.codigoEncomienda = codEnco;
+        this.paga = paga;
     }
     
     public Encomienda(DataEncomienda dt, Boolean conHijos){
@@ -153,6 +155,8 @@ public class Encomienda implements Serializable{
     	this.setFechaEntrega(dt.getFechaEntrega());
     	this.setRetiraEnSucursal(dt.getRetiraEnSucursal());	
     	this.setEliminada(dt.getEliminada());
+    	this.setPaga(dt.getPaga());
+    	
     }
     
     public DataEncomienda getDatatype(Boolean conHijos){
@@ -204,6 +208,8 @@ public class Encomienda implements Serializable{
     	result.setFechaEntrega(this.getFechaEntrega());
     	result.setRetiraEnSucursal(this.getRetiraEnSucursal());
     	result.setEliminada(this.getEliminada());
+    	result.setPaga(this.getPaga());
+    
     	return result;
     }
     
@@ -381,5 +387,13 @@ public class Encomienda implements Serializable{
     
     public Boolean getEliminada(){
         return this.eliminada;
+    }
+    
+    public void setPaga(Boolean val){
+        this.paga = val;
+    }
+    
+    public Boolean getPaga(){
+        return this.paga;
     }
 }

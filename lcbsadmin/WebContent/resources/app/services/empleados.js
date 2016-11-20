@@ -79,7 +79,7 @@
             getId   : getId,
             add     : add,
             borrar  : borrar,
-            edit    : edit
+            edit    : edit,
         }
 
     }

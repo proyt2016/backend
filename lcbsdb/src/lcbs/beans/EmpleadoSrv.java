@@ -74,6 +74,18 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
 		}
 		return null;
 	}
+	
+	public DataEmpleado empleadoPorIdLdap(String idLdap, DataTenant tenant) {
+		Session session = (Session) em.getDelegate();
+		Criteria criteria = session.createCriteria(Empleado.class);
+		criteria.add(Restrictions.eq("idEmpleadoLdap", idLdap));
+		List<Empleado> listEmp = new ArrayList<Empleado>(new LinkedHashSet(criteria.list()));
+		if (listEmp.size() == 1) {
+			DataEmpleado empleado = listEmp.get(0).getDatatype(true);
+			return empleado;
+		}
+		return null;
+	}
 
 	public DataEmpleado crearEmpleado(DataEmpleado emp, DataTenant tenant) {
 		Empleado realObj = new Empleado(emp, true);

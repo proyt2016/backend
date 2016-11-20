@@ -1,13 +1,13 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').service('usuarioService', ['$http', '$q', usuarioService]);
+    angular.module('lacbus').service('usuarioService', ['$http', '$q', 'CONFIGURACION', usuarioService]);
 
-    function usuarioService($http, $q) {
+    function usuarioService($http, $q, CONFIGURACION) {
     	
     	var getAll = function(id){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/usuarios/listarusuarios/1/1000')
+            $http.get(CONFIGURACION.url + 'usuarios/listarusuarios/1/1000')
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -21,7 +21,7 @@
         var add = function(usuario){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/usuarios/altausuario', usuario)
+            $http.post(CONFIGURACION.url + 'usuarios/altausuario', usuario)
             .success(function (usuario) {
                 defer.resolve(usuario);
             })
@@ -35,7 +35,7 @@
         var edit = function(usuario){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/usuarios/editarusuario', usuario)
+            $http.post(CONFIGURACION.url + 'usuarios/editarusuario', usuario)
             .success(function (usuario) {
                 defer.resolve(usuario);
             })
@@ -49,7 +49,7 @@
         var getId = function(id){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/usuarios/getusuario/' + id)
+            $http.get(CONFIGURACION.url + 'usuarios/getusuario/' + id)
             .success(function (usuario) {
                 defer.resolve(usuario);
             })
@@ -63,7 +63,7 @@
         var login = function(usuario){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/usuarios/loginusuario', usuario)
+            $http.post(CONFIGURACION.url + 'usuarios/loginusuario', usuario)
             .success(function (dato) {
                 defer.resolve(dato);
             })

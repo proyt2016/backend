@@ -24,6 +24,7 @@ import lcbs.models.Pasaje;
 import lcbs.models.Viaje;
 
 import java.util.Map;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +60,36 @@ public class EncomiendaSrv implements EncomiendaLocalApi {
 
 		listEnc.stream().forEach((enc) -> {
 			encomiendas.add(enc.getDatatype(true).genConvertor());
+		});
+		return encomiendas;
+	}
+	
+	public List<DataEncomiendaConvertor> getEncomiendasPagas(String fecha, Integer pagina, Integer elementosPagina ,DataTenant tenant) {
+		List<DataEncomiendaConvertor> encomiendas = new ArrayList();
+		// obtengo todas las encomiendas de la bd
+		Session session = (Session) em.getDelegate();
+		Criteria criteria = session.createCriteria(Encomienda.class);
+		criteria.add(Restrictions.eq("eliminada", false));
+		criteria.add(Restrictions.eq("paga", true));
+		
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date fromDate = new Date();
+		Date toDate = new Date();
+		try {
+			fromDate = df.parse(fecha + " 00:00:00");
+			 toDate = df.parse(fecha + " 23:59:59");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		criteria.add(Restrictions.between("fechaEntrega", fromDate, toDate));
+		criteria.setFirstResult((pagina - 1) * elementosPagina);
+		criteria.setMaxResults(elementosPagina);
+		List<Encomienda> listEnc = new ArrayList<Encomienda>(new LinkedHashSet(criteria.list()));
+
+		listEnc.stream().forEach((enc) -> {
+			encomiendas.add(enc.getDatatype(true).genConvertor());
+			log.info("-------------------------------------->"+enc.getCodigoEncomienda());
 		});
 		return encomiendas;
 	}

@@ -1,4 +1,4 @@
-(function () {
+    (function () {
     'use strict';
     angular.module('lacbus').controller('mantenimientoVehiculoCtrl', ['$scope', '$routeParams', 'vehiculosService', '$localStorage', '$location', mantenimientoVehiculoCtrl]);
 

@@ -53,5 +53,6 @@ public interface IViaje {
 	public void crearViajesNuevoRecorrido(String recorridoId, DataTenant tenant);
 	public void crearViajesParaRecorridos(DataTenant tenant) throws ParseException;
 	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina, DataTenant tenant);
+	public Integer cantidadAsientosDisponibles(String idViaje, String idOrigen, String idDestino, DataTenant tenant);
 
 }

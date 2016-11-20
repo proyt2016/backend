@@ -1,13 +1,13 @@
 (function () {
     'use strict';
-    angular.module('lacbus').service('reservaService', ['$http', '$q', reservaService]);
+    angular.module('lacbus').service('reservaService', ['$http', '$q', 'CONFIGURACION', reservaService]);
 
-    function reservaService($http, $q) {
+    function reservaService($http, $q, CONFIGURACION) {
 
         var getAll = function(usuarioId){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/listarreservas/' + usuarioId)
+            $http.get(CONFIGURACION.url + 'viajes/listarreservas/' + usuarioId)
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -21,7 +21,7 @@
         var getId = function(id){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/viajes/getreserva/' + id)
+            $http.get(CONFIGURACION.url + 'viajes/getreserva/' + id)
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -35,7 +35,7 @@
         var cancelar = function(id){
             var defer = $q.defer();
 
-            $http.delete('/lcbsapi/rest/viajes/cancelarreserva/' + id)
+            $http.delete(CONFIGURACION.url + 'viajes/cancelarreserva/' + id)
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -49,7 +49,7 @@
         var comprar = function(reserva){
             var defer = $q.defer();
 
-            $http.post('/lcbsapi/rest/viajes/comprarpasajereservado', reserva)
+            $http.post(CONFIGURACION.url + 'viajes/comprarpasajereservado', reserva)
             .success(function (datos) {
                 defer.resolve(datos);
             })

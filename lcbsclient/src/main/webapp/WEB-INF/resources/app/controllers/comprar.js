@@ -7,6 +7,7 @@
         $scope.usuarioLogueado = $localStorage.usuarioLogueado;
         
     	$scope.viaje 	= null;
+    	$scope.saving = false;
         $scope.comprar  = {
             pagos : 'paypal',
             cantidad : 1
@@ -18,13 +19,27 @@
 
             $scope.comprar['origen']    = '0';
             $scope.comprar['destino']   = datos.recorrido.puntosDeRecorrido.length - 1 + '';
-            console.info($scope.viaje);
-            viajeService.getPrecio($scope.viaje.recorrido.puntosDeRecorrido[0].id,$scope.viaje.recorrido.puntosDeRecorrido[$scope.viaje.recorrido.puntosDeRecorrido.length - 1].id, $scope.viaje.recorrido.id).then(function (prc){
+            
+            var origen = datos.recorrido.puntosDeRecorrido[$scope.comprar['origen']];
+            var destino = datos.recorrido.puntosDeRecorrido[$scope.comprar['destino']];
+            
+            viajeService.getPrecio(origen.id,destino.id, $scope.viaje.recorrido.id).then(function (prc){
             	$scope.precio = prc;
             });
         });
+        
+        $scope.recalcularPrecio = function () {
+        	var viaje = $scope.viaje;
+        	var origen = viaje.recorrido.puntosDeRecorrido[this.comprar.origen];
+            var destino = viaje.recorrido.puntosDeRecorrido[this.comprar.destino];
+            
+        	viajeService.getPrecio(origen.id,destino.id, $scope.viaje.recorrido.id).then(function (prc){
+            	$scope.precio = prc;
+            });
+        }
 
         $scope.procesarCompra = function () {
+        	$scope.saving = true;
 	    	var viaje = $scope.viaje;
 
             if(!this.comprar['origen']){

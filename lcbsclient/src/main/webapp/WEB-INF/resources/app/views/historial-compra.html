@@ -12,7 +12,6 @@
             <th>Linea</th>
             <th>Origen</th>
             <th>Destino</th>
-            <th>Asientos</th>
             <th>Precio</th>
             <th></th>
           </tr>
@@ -21,8 +20,7 @@
             <td>{{ compra.viaje.recorrido.nombre }}</td>
             <td>{{ compra.origen.nombre }}</td>
             <td>{{ compra.destino.nombre }}</td>
-            <td>{{ compra.cantidad }}</td>
-            <td>${{ compra.precio }}</td>
+            <td>${{ compra.precio.monto }}</td>
             <td>
               <a class="btn btn-primary btn-flat btn-sm" title="detalle" ng-click="mostrarInfo(compra)"><i class="fa fa-search"></i></a>
               <a class="btn btn-info btn-flat btn-sm" title="cambiar horario" ng-click="mostrarHorarios(compra)"><i class="fa fa-calendar"></i></a>

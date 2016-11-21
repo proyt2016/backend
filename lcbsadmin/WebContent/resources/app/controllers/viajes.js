@@ -193,8 +193,6 @@
             	pasaje['ciPersona'] = $scope.ciUsuario;
             };
             
-            console.log('aaaa');
-            
             viajeService.reservar(pasaje).then(function (datos) {
             	mostrarNotificacion('success', 'El pasaje fue reservado con exito.');
             	$location.url('/viajes');

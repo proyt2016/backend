@@ -92,10 +92,10 @@
                 <li>
                   <a href="#/"><i class="fa fa-home"></i> Inicio </a>
                 </li>
-                <li ng-show="{{ empleadoLogueado.perfil.gestionPasajes == true }}">
+                <li ng-show="{{ empleadoLogueado.perfil.gestionPasajes }}">
                   <a href="#/viajes"><i class="fa fa-bus"></i> Viajes </a>
                 </li>
-                <ul class="nav side-menu" ng-show="{{ empleadoLogueado.perfil.gestionReportes == true}}">
+                <ul class="nav side-menu" ng-show="{{ empleadoLogueado.perfil.gestionReportes }}">
                   <li>
                     <a><i class="fa fa-bar-chart"></i> Reportes <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none">
@@ -108,7 +108,7 @@
                    </ul>
                   </li>
                 </ul>
-                <ul class="nav side-menu" ng-show="{{ empleadoLogueado.perfil.gestionEncomiendas == true }}">
+                <ul class="nav side-menu" ng-show="{{ empleadoLogueado.perfil.gestionEncomiendas }}">
                   <li>
                     <a><i class="fa fa-cubes"></i> Encomiendas <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none">
@@ -121,7 +121,7 @@
                     </ul>
                   </li>
                 </ul>
-                <ul class="nav side-menu" ng-show="{{ empleadoLogueado.perfil.mantenimientoFlota == true }}">
+                <ul class="nav side-menu" ng-show="{{ empleadoLogueado.perfil.mantenimientoFlota }}">
                   <li>
                     <a><i class="fa fa-wrench"></i> Mantenimiento de Flota <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none">
@@ -135,7 +135,7 @@
                     </ul>
                   </li>
                 </ul>
-                <ul class="nav side-menu" ng-show="{{ empleadoLogueado.perfil.configuracionEmpresa == true }}">
+                <ul class="nav side-menu" ng-show="{{ empleadoLogueado.perfil.configuracionEmpresa }}">
                   <li>
                     <a><i class="fa fa-magic"></i> Cofiguraciones <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none">

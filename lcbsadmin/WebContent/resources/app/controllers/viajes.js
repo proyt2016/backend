@@ -233,6 +233,14 @@
             }).on("select2:unselect", function (evt) { 
               $scope.filtro[evt.currentTarget.name] = null;
             });
+            
+            $('.datepicker').daterangepicker({
+            	singleDatePicker : true,
+            	calender_style : "picker_2",
+            	format : 'DD/MM/YYYY',
+            }).on('apply.daterangepicker', function(ev, picker) {
+            	$scope.filtro[ev.currentTarget.name] = picker.startDate.format('DD/MM/YYYY');
+        	});
         });
     }
 

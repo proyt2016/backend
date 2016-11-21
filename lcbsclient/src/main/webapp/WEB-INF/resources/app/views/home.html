@@ -137,9 +137,7 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="modal fade" id="modal-reservar">
+  <div class="modal fade" id="modal-reservar">
     <div class="modal-dialog">
         <div class="modal-content">
           <form name="reservarForm" ng-submit="reservarForm.$valid && reservar()" novalidate>
@@ -151,28 +149,27 @@
             </div>
             <div class="modal-body">
               <div class="row">
-                <div class="col-xs-4">
-                  <p><strong>Origien y Destino</strong></p>
-                  <p>{{ info.recorrido.puntosDeRecorrido[0].nombre }} <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> {{ info.recorrido.puntosDeRecorrido[info.recorrido.puntosDeRecorrido.length - 1].nombre }}</p>
-                </div>
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                   <p><strong>Linea</strong></p>
                   <p>{{ info.recorrido.nombre }}</p>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                   <p><strong>Horario</strong></p>
-                  <p>{{ info.fechaSalida | date : 'dd/MM/yy' }} a {{ info.llegada }}</p>
+                  <p>{{ info.fechaSalida | date : 'dd/MM/yy' }} - {{ info.horario.nombre }}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <select class="form-control" ng-model="reservaData.origen">
+		            <option ng-repeat="recorrido in info.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
+		          </select> 
+		          <i class="fa fa-arrow-right margin-r-5 margin-l-5"></i> 
+		          <select class="form-control" ng-model="reservaData.destino">
+		            <option ng-repeat="recorrido in info.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
+		          </select>
                 </div>
               </div>
               <hr>
-              <!-- <div class="row">
-                <div class="col-xs-12">
-                  <div class="form-group" ng-class="{ 'has-error' : submitted && reservarForm.cantidad.$invalid }">
-                    <label>Cantidad de pasajes</label>
-                    <input class="form-control" type="number" name="cantida" value="1" align="right" ng-model="reservarData.cantidad" required/>
-                  </div>
-                </div>
-              </div> -->
             </div>
             <div class="box-footer">
               <button type="submit" class="btn btn-success pull-right" ng-click="submitted=true">Reservar</button>
@@ -180,4 +177,6 @@
           </form>
         </div>
     </div>
+  </div>
 </div>
+

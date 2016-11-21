@@ -7,8 +7,7 @@
         	usuarioService.login(this.usuario).then(function (datos) {
         		if(datos){
         			$localStorage.empleadoLogueado = datos;
-            		$rootScope.$broadcast('localStorage:changed');
-            		$location.url('/');
+            		$rootScope.$broadcast('localStorage:changed', datos);
         		}else{
         			mostrarNotificacion('error', 'El usuario no existe o las credenciales no son las correctas');
         		}

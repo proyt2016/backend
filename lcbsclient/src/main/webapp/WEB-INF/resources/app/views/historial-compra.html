@@ -22,7 +22,6 @@
             <td>{{ compra.destino.nombre }}</td>
             <td>${{ compra.precio.monto }}</td>
             <td>
-              <a class="btn btn-primary btn-flat btn-sm" title="detalle" ng-click="mostrarInfo(compra)"><i class="fa fa-search"></i></a>
               <a class="btn btn-info btn-flat btn-sm" title="cambiar horario" ng-click="mostrarHorarios(compra)"><i class="fa fa-calendar"></i></a>
               <a class="btn btn-success btn-flat btn-sm" title="transferir pasaje" ng-click="mostrarPasajes(compra)"><i class="fa fa-exchange"></i></a>
             </td>
@@ -34,25 +33,6 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="modal fade" id="modal-info">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4>Detalle</h4>
-            </div>
-            <div class="modal-body">
-                <p><strong><i class="fa fa-dollar margin-r-5"></i> Medio de pago</strong></p>
-                <p>{{ info.medioPago }}</p>
-                <hr>
-                <p><i class="fa fa-calendar margin-r-5"></i> {{ info.viaje.fechaSalida | date : 'dd/MM/yy' }} a {{ info.llegada }}</p>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div class="modal fade" id="modal-cambiar-horario">

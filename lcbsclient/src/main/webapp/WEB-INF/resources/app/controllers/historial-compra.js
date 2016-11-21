@@ -12,16 +12,17 @@
             $scope.compras = datos;
         });
 
-        $scope.cambiarHorario = function (pasajeId, horario) {
+        $scope.cambiarHorario = function (pasajeId, viajeId) {
             var r = confirm("Seguro que quiere cambiar el horario?");
             if (r == true) {
                 var pasaje = {
                     idPasaje    : pasajeId,
-                    idViaje     : horario
+                    idViaje     : viajeId
                 }
 
                 pasajeService.cambiarHorario(pasaje).then(function (datos) {
-                    console.log('CAMBIAR HORARIO PRONTO')
+                	toastr.success('El cambio de horario se realizo con exito.', 'Cambio de horario exitosa.');
+                	$('#modal-cambiar-horario').modal('hide');
                 });
             }
         }
@@ -43,11 +44,6 @@
 
                 transferirA = null;
             }
-        }
-
-        $scope.mostrarInfo = function (info) {
-            $scope.info = info;
-            $('#modal-info').modal('show');
         }
 
         $scope.mostrarHorarios = function (info) {

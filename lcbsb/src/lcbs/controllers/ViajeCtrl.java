@@ -72,7 +72,8 @@ public class ViajeCtrl implements IViaje {
 
 	@Override
 	public DataPasaje ComprarPasaje(DataPasaje pasaje, DataTenant tenant) {
-		DataPrecio precioPasae = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), pasaje.getViaje().getRecorrido().getId(), tenant);
+		DataViaje viaje = srvViaje.getViaje(pasaje.getViaje().getId(), tenant);
+		DataPrecio precioPasae = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
 		pasaje.setPrecio(precioPasae);
 		DataPasaje nuevoPasaje = srvPasaje.crearPasaje(pasaje, tenant);
 		return nuevoPasaje;
@@ -106,7 +107,8 @@ public class ViajeCtrl implements IViaje {
 
 	@Override
 	public DataReserva ReservarPasaje(DataReserva reserva, DataTenant tenant) {
-		DataPrecio precioPasae = getPrecioDePasaje(reserva.getOrigen().getId(), reserva.getDestino().getId(), reserva.getViaje().getRecorrido().getId(), tenant);
+		DataViaje viaje = srvViaje.getViaje(reserva.getViaje().getId(), tenant);
+		DataPrecio precioPasae = getPrecioDePasaje(reserva.getOrigen().getId(), reserva.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
 		reserva.setPrecio(precioPasae);
 		DataReserva nuevaReserva = srvReserva.crearReserva(reserva, tenant);
 		return nuevaReserva;

@@ -12,15 +12,17 @@
             $scope.compras = datos;
         });
 
-        $scope.cambiarHorario = function (pasajeId, viajeId) {
+        $scope.cambiarHorario = function (pasaje, viaje) {
+        	var index = $scope.compras.indexOf(pasaje);
             var r = confirm("Seguro que quiere cambiar el horario?");
             if (r == true) {
-                var pasaje = {
-                    idPasaje    : pasajeId,
-                    idViaje     : viajeId
+                var pasajeData = {
+                    idPasaje	: pasaje.id,
+                    idViaje     : viaje.id
                 }
 
-                pasajeService.cambiarHorario(pasaje).then(function (datos) {
+                pasajeService.cambiarHorario(pasajeData).then(function (datos) {
+                	$scope.compras[index]['viaje'] = viaje;
                 	toastr.success('El cambio de horario se realizo con exito.', 'Cambio de horario exitosa.');
                 	$('#modal-cambiar-horario').modal('hide');
                 });
@@ -48,7 +50,10 @@
 
         $scope.mostrarHorarios = function (info) {
         	$scope.info = info;
-            $('#modal-cambiar-horario').modal('show');
+        	pasajeService.listarHorarios(info.id).then(function (datos) {
+        		$scope.info['listaHorarios'] = datos;
+        		$('#modal-cambiar-horario').modal('show');
+            });
         }
 
         $scope.mostrarPasajes = function (info) {

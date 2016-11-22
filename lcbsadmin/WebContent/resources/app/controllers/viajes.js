@@ -176,9 +176,21 @@
         }
         
         $scope.procesarReservar = function() {
+        	var viaje = $scope.viaje;
+        	var origen = viaje.recorrido.puntosDeRecorrido[this.comprar.origen];
+            var destino = viaje.recorrido.puntosDeRecorrido[this.comprar.destino];
+
             var pasaje = {
                 viaje : {
                     id : $scope.viaje.id
+                },
+                origen : {
+                    id : origen.id,
+                    tipo : origen.tipo
+                },
+                destino : {
+                    id : destino.id,
+                    tipo : destino.tipo
                 },
                 fechaReserva : moment().format('YYYY-MM-DD')
             };

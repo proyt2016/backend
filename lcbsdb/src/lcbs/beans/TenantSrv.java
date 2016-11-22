@@ -8,6 +8,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
@@ -74,6 +75,7 @@ public class TenantSrv implements TenantLocalApi {
 	}
 
 	@Override
+	@RequestScoped
 	public DataTenant create(DataTenant tenant) {
 		Tenant realObj = new Tenant(tenant);
         em.persist(realObj);

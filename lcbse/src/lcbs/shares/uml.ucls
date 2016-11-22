@@ -1,0 +1,1141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.11" icons="true" automaticImage="PNG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
+  router="FAN">  
+  <class id="1" language="java" name="lcbs.shares.DataReservaConvertor" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataReservaConvertor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="598" width="779" x="889" y="1470"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="lcbs.shares.DataPasajeConvertor" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataPasajeConvertor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="706" width="839" x="810" y="-328"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="lcbs.shares.DataUsuario" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataUsuario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="310" width="717" x="3695" y="2216"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="lcbs.shares.DataConfiguracionEmpresa" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataConfiguracionEmpresa.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1354" width="940" x="1639" y="3240"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="lcbs.shares.DataGrupoHorario" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataGrupoHorario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="382" width="412" x="889" y="2216"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="lcbs.shares.DataNotificacion" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataNotificacion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="202" width="148" x="3695" y="2674"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="lcbs.shares.DataPuntoRecorridoConverter" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataPuntoRecorridoConverter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="354" y="2875"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="lcbs.shares.DataPuntoRecorrido" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataPuntoRecorrido.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="310" width="216" x="2044" y="2674"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="lcbs.shares.DataRecorridoConvertor" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataRecorridoConvertor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="544" width="618" x="168" y="1470"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="lcbs.shares.DataEmail" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataEmail.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="202" width="138" x="2337" y="4634"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="lcbs.shares.DataHistorialEstadosEncomienda" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataHistorialEstadosEncomienda.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="238" width="326" x="3161" y="868"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="lcbs.shares.DataCuponera" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataCuponera.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="202" width="140" x="3883" y="2674"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="lcbs.shares.DataParada" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataParada.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="148" width="216" x="3071" y="3240"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="lcbs.shares.DataTelefono" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataTelefono.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="220" width="138" x="3613" y="4634"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="lcbs.shares.DataPrecioConvertor" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataPrecioConvertor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="401" y="2213"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="lcbs.shares.DataPersona" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataPersona.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="472" width="223" x="3327" y="1470"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="lcbs.shares.DateAdapter" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DateAdapter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="130" width="336" x="-118" y="-328"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="18" language="java" name="lcbs.shares.DataDiasSemana" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataDiasSemana.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="202" width="145" x="1314" y="2674"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="19" language="java" name="lcbs.shares.DataTerminal" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataTerminal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="274" width="391" x="2640" y="3240"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="lcbs.shares.DataViajeConvertor" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataViajeConvertor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="562" width="692" x="889" y="868"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="lcbs.shares.DataViaje" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataViaje.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="562" width="570" x="2432" y="868"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="lcbs.shares.DataHorario" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataHorario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="202" width="133" x="1499" y="2674"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="lcbs.shares.DataReglaCobroEncomienda" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataReglaCobroEncomienda.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="292" width="417" x="4309" y="868"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="lcbs.shares.DataEmpleado" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataEmpleado.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="184" width="457" x="2453" y="2216"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="lcbs.shares.DataPerfil" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataPerfil.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="670" width="501" x="2744" y="1470"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="lcbs.shares.DataEncomienda" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataEncomienda.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1156" width="1340" x="4566" y="-328"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="lcbs.shares.DataVehiculo" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataVehiculo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="706" width="617" x="3758" y="1470"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="lcbs.shares.DataMantenimientoVehiculo" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataMantenimientoVehiculo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="418" width="295" x="4452" y="2216"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="lcbs.shares.DataPrecio" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataPrecio.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="292" width="273" x="1729" y="2216"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="lcbs.shares.DataPasaje" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataPasaje.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="706" width="678" x="1689" y="-328"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="lcbs.shares.DataTenant" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataTenant.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="364" width="194" x="258" y="-328"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="lcbs.shares.DataReglaCobroEncomiendaCriteria" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataReglaCobroEncomiendaCriteria.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="310" width="288" x="4436" y="1470"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="lcbs.shares.DataEncomiendaConvertor" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataEncomiendaConvertor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1156" width="1461" x="3065" y="-328"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="lcbs.shares.DataEstadosEncomienda" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataEstadosEncomienda.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="202" width="188" x="2516" y="1470"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="lcbs.shares.DataMedioDePago" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataMedioDePago.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="418" width="278" x="492" y="-328"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="lcbs.shares.DataRecorrido" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataRecorrido.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="544" width="495" x="1855" y="1470"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="lcbs.shares.DataReserva" project="lcbse" 
+    file="/lcbse/src/lcbs/shares/DataReserva.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="598" width="618" x="2407" y="-328"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="38">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="39" name="notificaciones"/>      
+      <multiplicity id="40" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="41">    
+    <bendpoint x="4278" y="868"/>    
+    <bendpoint x="4405" y="1470"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="42" name="emisor"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="44">    
+    <bendpoint x="3130" y="868"/>    
+    <bendpoint x="3580" y="1470"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="45" name="comprador"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="47">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="48">    
+    <bendpoint x="1824" y="868"/>    
+    <bendpoint x="1761" y="1470"/>    
+    <bendpoint x="1677" y="2216"/>    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="49" name="origen"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <bendpoint x="3706" y="868"/>    
+    <bendpoint x="3706" y="1470"/>    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="52" name="receptor"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="55" name="usuarioReserva"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="58" name="estado"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <bendpoint x="1803" y="1470"/>    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="61" name="empleados"/>      
+      <multiplicity id="62" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="64" name="destino"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="66">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="67" name="diasSemana"/>      
+      <multiplicity id="68" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="69">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="70" name="origen"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="72">    
+    <bendpoint x="3032" y="868"/>    
+    <bendpoint x="2485" y="1470"/>    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="73" name="empleado"/>      
+      <multiplicity id="74" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="75">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="76" name="horarios"/>      
+      <multiplicity id="77" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="78">    
+    <bendpoint x="2053" y="2216"/>    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="79" name="puntosDeRecorrido"/>      
+      <multiplicity id="80" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="81">    
+    <bendpoint x="3517" y="868"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="82" name="estadoActual"/>      
+      <multiplicity id="83" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="84">    
+    <bendpoint x="3053" y="868"/>    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="85" name="estadoActual"/>      
+      <multiplicity id="86" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="87">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="88" name="reservas"/>      
+      <multiplicity id="89" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="90">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="91" name="destino"/>      
+      <multiplicity id="92" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="93">    
+    <bendpoint x="858" y="868"/>    
+    <bendpoint x="858" y="1470"/>    
+    <bendpoint x="1331" y="2216"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="94" name="origen"/>      
+      <multiplicity id="95" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="96">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="97" name="precios"/>      
+      <multiplicity id="98" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="99">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="100" name="viaje"/>      
+      <multiplicity id="101" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="102">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="103" name="mantenimientos"/>      
+      <multiplicity id="104" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="105">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="106" name="estados"/>      
+      <multiplicity id="107" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="108">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="109" name="viajeAsignado"/>      
+      <multiplicity id="110" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="111">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="112" name="emails"/>      
+      <multiplicity id="113" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="114">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="115" name="criterias"/>      
+      <multiplicity id="116" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="117">    
+    <bendpoint x="4181" y="868"/>    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="118" name="encomiendas"/>      
+      <multiplicity id="119" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="120">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="121" name="empleados"/>      
+      <multiplicity id="122" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="123">    
+    <bendpoint x="2422" y="1470"/>    
+    <bendpoint x="2422" y="2216"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="124" name="horario"/>      
+      <multiplicity id="125" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="126">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="127" name="viajeAsignado"/>      
+      <multiplicity id="128" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="129">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="130" name="perfil"/>      
+      <multiplicity id="131" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="132">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="133" name="horarios"/>      
+      <multiplicity id="134" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="135">    
+    <bendpoint x="4160" y="868"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="136" name="cocheAsignado"/>      
+      <multiplicity id="137" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="138">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="139" name="telefonosContacto"/>      
+      <multiplicity id="140" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="141">    
+    <bendpoint x="3622" y="868"/>    
+    <bendpoint x="3622" y="1470"/>    
+    <bendpoint x="3622" y="2216"/>    
+    <bendpoint x="3622" y="2674"/>    
+    <bendpoint x="3622" y="3240"/>    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="142" name="telEmisor"/>      
+      <multiplicity id="143" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="144">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="145" name="horarios"/>      
+      <multiplicity id="146" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="147">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="148" name="origen"/>      
+      <multiplicity id="149" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="150">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="151" name="cuponera"/>      
+      <multiplicity id="152" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="153">    
+    <bendpoint x="3685" y="868"/>    
+    <bendpoint x="3685" y="1470"/>    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="154" name="emisor"/>      
+      <multiplicity id="155" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="156">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="157">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="158" name="telefonos"/>      
+      <multiplicity id="159" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="160">    
+    <bendpoint x="116" y="868"/>    
+    <bendpoint x="116" y="1470"/>    
+    <bendpoint x="116" y="2216"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="161" name="destino"/>      
+      <multiplicity id="162" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="163">    
+    <bendpoint x="1719" y="868"/>    
+    <bendpoint x="837" y="1470"/>    
+    <bendpoint x="795" y="2216"/>    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="164" name="destino"/>      
+      <multiplicity id="165" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="166">    
+    <bendpoint x="1571" y="3240"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="167" name="mailsDeContacto"/>      
+      <multiplicity id="168" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="169">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="170" name="estados"/>      
+      <multiplicity id="171" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="172">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="173" name="precios"/>      
+      <multiplicity id="174" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="175">    
+    <bendpoint x="2380" y="868"/>    
+    <bendpoint x="2380" y="1470"/>    
+    <bendpoint x="2380" y="2216"/>    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="176" name="destino"/>      
+      <multiplicity id="177" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="178">    
+    <bendpoint x="3479" y="2216"/>    
+    <bendpoint x="3479" y="2674"/>    
+    <bendpoint x="3479" y="3240"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="179" name="telefonosContacto"/>      
+      <multiplicity id="180" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="181">    
+    <bendpoint x="4798" y="868"/>    
+    <bendpoint x="4798" y="1470"/>    
+    <bendpoint x="4798" y="2216"/>    
+    <bendpoint x="4798" y="2674"/>    
+    <bendpoint x="4798" y="3240"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="182" name="telReceptor"/>      
+      <multiplicity id="183" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="184">    
+    <bendpoint x="1740" y="868"/>    
+    <bendpoint x="1740" y="1470"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="185" name="precio"/>      
+      <multiplicity id="186" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="187">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="188" name="reglaCobro"/>      
+      <multiplicity id="189" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="190">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="191" name="empleado"/>      
+      <multiplicity id="192" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="193">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="194" name="recorrido"/>      
+      <multiplicity id="195" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="196">    
+    <bendpoint x="3559" y="868"/>    
+    <bendpoint x="3275" y="1470"/>    
+    <bendpoint x="3275" y="2216"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="197" name="origen"/>      
+      <multiplicity id="198" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="199">    
+    <bendpoint x="1845" y="868"/>    
+    <bendpoint x="1824" y="1470"/>    
+    <bendpoint x="2032" y="2216"/>    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="200" name="origen"/>      
+      <multiplicity id="201" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="202">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="203" name="precio"/>      
+      <multiplicity id="204" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="205">    
+    <bendpoint x="3317" y="2216"/>    
+    <bendpoint x="3317" y="2674"/>    
+    <bendpoint x="3317" y="3240"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="206" name="email"/>      
+      <multiplicity id="207" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="208">    
+    <bendpoint x="2464" y="1470"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="209" name="empleados"/>      
+      <multiplicity id="210" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="211">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="212" name="viaje"/>      
+      <multiplicity id="213" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="214">    
+    <bendpoint x="816" y="1470"/>    
+    <bendpoint x="816" y="2216"/>    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="215" name="horario"/>      
+      <multiplicity id="216" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="217">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="218" name="reservas"/>      
+      <multiplicity id="219" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="220">    
+    <bendpoint x="3601" y="868"/>    
+    <bendpoint x="3296" y="1470"/>    
+    <bendpoint x="3296" y="2216"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="221" name="destino"/>      
+      <multiplicity id="222" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="223">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="224" name="coches"/>      
+      <multiplicity id="225" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="226">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <generalization id="227">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <association id="228">    
+    <bendpoint x="3727" y="868"/>    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="229" name="cocheAsignado"/>      
+      <multiplicity id="230" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="231">    
+    <bendpoint x="1677" y="868"/>    
+    <bendpoint x="1719" y="1470"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="232" name="precio"/>      
+      <multiplicity id="233" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="234">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="235" name="recorrido"/>      
+      <multiplicity id="236" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="237">    
+    <bendpoint x="774" y="2216"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="238" name="puntosDeRecorrido"/>      
+      <multiplicity id="239" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="240">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="241" name="viaje"/>      
+      <multiplicity id="242" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="243">    
+    <bendpoint x="3538" y="868"/>    
+    <bendpoint x="3601" y="1470"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="244" name="comprador"/>      
+      <multiplicity id="245" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="246">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="247" name="mailsDeContacto"/>      
+      <multiplicity id="248" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="249">    
+    <bendpoint x="3748" y="868"/>    
+    <bendpoint x="3727" y="1470"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="250" name="receptor"/>      
+      <multiplicity id="251" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="252">    
+    <bendpoint x="137" y="868"/>    
+    <bendpoint x="137" y="1470"/>    
+    <bendpoint x="137" y="2216"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="253" name="origen"/>      
+      <multiplicity id="254" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="255">    
+    <bendpoint x="3664" y="868"/>    
+    <bendpoint x="3664" y="1470"/>    
+    <bendpoint x="3664" y="2216"/>    
+    <bendpoint x="3664" y="2674"/>    
+    <bendpoint x="3664" y="3240"/>    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="256" name="telReceptor"/>      
+      <multiplicity id="257" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="258">    
+    <bendpoint x="4777" y="868"/>    
+    <bendpoint x="4777" y="1470"/>    
+    <bendpoint x="4777" y="2216"/>    
+    <bendpoint x="4777" y="2674"/>    
+    <bendpoint x="4777" y="3240"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="259" name="telEmisor"/>      
+      <multiplicity id="260" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="261">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="262" name="coches"/>      
+      <multiplicity id="263" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="264">    
+    <bendpoint x="837" y="2216"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="265" name="origen"/>      
+      <multiplicity id="266" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="267">    
+    <bendpoint x="1698" y="868"/>    
+    <bendpoint x="1698" y="1470"/>    
+    <bendpoint x="1698" y="2216"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="268" name="destino"/>      
+      <multiplicity id="269" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="270">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="271" name="reglaCobro"/>      
+      <multiplicity id="272" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="273">    
+    <bendpoint x="2609" y="3240"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="274" name="telefonosContacto"/>      
+      <multiplicity id="275" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="276">    
+    <bendpoint x="4756" y="1470"/>    
+    <bendpoint x="4756" y="868"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="277" name="encomiendas"/>      
+      <multiplicity id="278" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="279">    
+    <bendpoint x="1782" y="868"/>    
+    <bendpoint x="1782" y="1470"/>    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="280" name="precio"/>      
+      <multiplicity id="281" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="282">    
+    <bendpoint x="3580" y="868"/>    
+    <bendpoint x="3643" y="1470"/>    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="283" name="usuarioReserva"/>      
+      <multiplicity id="284" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="285">    
+    <bendpoint x="1803" y="868"/>    
+    <bendpoint x="2401" y="1470"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="286" name="vendedor"/>      
+      <multiplicity id="287" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="288">    
+    <bendpoint x="858" y="2216"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="289" name="destino"/>      
+      <multiplicity id="290" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="291">    
+    <bendpoint x="2401" y="868"/>    
+    <bendpoint x="2443" y="1470"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="292" name="vendedor"/>      
+      <multiplicity id="293" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="294">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="295" name="viaje"/>      
+      <multiplicity id="296" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

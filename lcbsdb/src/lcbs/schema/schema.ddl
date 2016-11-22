@@ -876,7 +876,7 @@ ALTER TABLE ONLY encomienda
     ADD CONSTRAINT fkti4ao76euxqqxch93965kr0ox FOREIGN KEY (emisor_id) REFERENCES persona(id);
 
         
-    INSERT INTO estadosencomienda (id, nombre) VALUES ('9a265943-ab81-4a19-a752-03b2db475fed', 'Recibida');
+INSERT INTO estadosencomienda (id, nombre) VALUES ('9a265943-ab81-4a19-a752-03b2db475fed', 'Recibida');
 INSERT INTO estadosencomienda (id, nombre) VALUES ('c1423557-e9fb-472a-92f6-023328107117', 'Enviada');
 INSERT INTO estadosencomienda (id, nombre) VALUES ('f8be0436-76f0-44b0-88d8-4051bb844b41', 'Perdida');
 INSERT INTO estadosencomienda (id, nombre) VALUES ('cc9bf2f4-e09a-4067-82ab-4bd4e800c7a3', 'En viaje');
@@ -1232,7 +1232,3 @@ INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALU
 INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', 'f0f4e1a8-0ba0-4376-8f87-ebe8ae1d3bb9', 4);
 INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', '2642a5ab-23fb-4a97-88b8-d12e00a7f932', 5);
 INSERT INTO grupohorario_horario (grupohorario_id, horarios_id, list_index) VALUES ('28393733-6222-433d-850a-92dd7cdd8703', '7c110f0d-b980-4811-912c-79bcb40a0936', 6);
-
-
-
-    create sequence hibernate_sequence;

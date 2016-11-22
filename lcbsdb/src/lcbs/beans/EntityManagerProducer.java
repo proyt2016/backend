@@ -28,6 +28,7 @@ public class EntityManagerProducer {
     @Produces
     @RequestScoped
     public EntityManager getEntityManager() {
+    	log.info("::::::::::emcreated::::::::::::");
         em.createNativeQuery("SET SCHEMA 'public'").executeUpdate();
 		em.createNativeQuery("SET search_path TO public").executeUpdate();
 		return em;

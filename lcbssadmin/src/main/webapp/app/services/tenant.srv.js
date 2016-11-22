@@ -4,13 +4,16 @@
     angular.module('lacbus').factory('tenantFry', tenantFactory); 
    
     var tenantFactory = function(){
-   	 return function(name, domain, id, isActive, isDelete){
+   	 return function(name, domain, id, isActive, isDelete, email){
        	return{
        		"name": name,
  		  	"domain": domain,
  		  	"id": id,
  		  	"isActive": isActive,
- 		  	"isDelete": isDelete
+ 		  	"isDelete": isDelete,
+ 		  	"email": {
+ 		  		"email": email
+ 		  	}
        	};		  
    	 };
     };

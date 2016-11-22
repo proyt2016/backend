@@ -35,7 +35,7 @@ import lcbs.shares.DataTenant;
 public class PasajeSrv implements PasajeLocalApi {
 	@Inject
 	EntityManager em;
-	private static final Log log = LogFactory.getLog(EntityManagerProducer.class);
+	private static final Log log = LogFactory.getLog(PasajeSrv.class);
 
 	public PasajeSrv() {
 
@@ -96,7 +96,7 @@ public class PasajeSrv implements PasajeLocalApi {
 		Pasaje realObj = new Pasaje(psj);
 		realObj.setEliminado(false);
 		// guardo el Pasaje en bd
-		em.persist(realObj);
+		realObj = em.merge(realObj);
 		return realObj.getDatatype();
 	}
 

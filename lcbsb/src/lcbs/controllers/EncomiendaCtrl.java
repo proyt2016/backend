@@ -47,7 +47,9 @@ public class EncomiendaCtrl implements IEncomienda {
 	EstadosEncomiendaLocalApi srvEstadosEncomienda;
 	@EJB(lookup = "java:app/lcbsdb/ViajeSrv!lcbs.interfaces.ViajeLocalApi")
 	ViajeLocalApi srvViaje;
-
+	
+	@EJB
+	NotificationHandler nHandler;
 	@Override
 	public List<DataEncomiendaConvertor> ListarEncomiendas(Integer pagina, Integer elementosPagina, DataTenant tenant) {
 		return srvEncomienda.obtenerEncomiendas(pagina, elementosPagina, tenant);
@@ -124,7 +126,7 @@ public class EncomiendaCtrl implements IEncomienda {
 		encomienda.getEstados().add(historialEstados);
 		srvEncomienda.modificarEncomienda(encomienda, tenant);
 		if (!encomienda.getEmisor().equals(null)) {
-			NotificationHandler.sendNotification(encomienda.getEmisor(), "Encomiendas", "cambio-estado",
+			nHandler.sendNotification(encomienda.getEmisor(), "Encomiendas", "cambio-estado",
 					"Encomienda  #" + idEncomienda + " estado " + dataEstado.getNombre(), tenant);
 
 		}
@@ -149,7 +151,7 @@ public class EncomiendaCtrl implements IEncomienda {
 		srvEncomienda.modificarEncomienda(encomienda, tenant);
 		srvVehiculo.modificarVehiculo(coche, tenant);
 		if (!encomienda.getEmisor().equals(null)) {
-			NotificationHandler.sendNotification(encomienda.getEmisor(), "Encomiendas", "asigna-coche",
+			nHandler.sendNotification(encomienda.getEmisor(), "Encomiendas", "asigna-coche",
 					"Encomienda  #" + IdEncomienda + " en coche " + coche.getMatricula(), tenant);
 		}
 	}

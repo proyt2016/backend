@@ -109,13 +109,13 @@
     	method		: 'GET',
     	dataType 	: 'json',
     	headers		: {
-            'lcbs-tenant' : '0622f3d2-1753-454e-bc40-1a231defa3a4'
+            'lcbs-tenant' : 'f2b21f34-2554-4b83-9bab-4bb3e5e7b03d'
         }
 	}).done(function( configuracion ) {
 		$('head').append('<style>' + configuracion.css + '</style>');
 		
 		configuracion['url'] 		= '/lcbsapi/rest/'; //http://192.168.43.49:8080/lcbsapi/rest/
-		configuracion['tenant_id'] 	= '0622f3d2-1753-454e-bc40-1a231defa3a4';
+		configuracion['tenant_id'] 	= 'f2b21f34-2554-4b83-9bab-4bb3e5e7b03d';
 				
 		angular.element(document).ready(function() {
 	    	app.constant('CONFIGURACION', configuracion);

@@ -87,6 +87,20 @@
 
             return defer.promise;
         };
+        
+        var listarHorarios = function(pasajeId){
+            var defer = $q.defer();
+
+            $http.get(CONFIGURACION.url + 'viajes/listarviajescambiohorario/' + pasajeId)
+            .success(function (datos) {
+                defer.resolve(datos);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
+
+            return defer.promise;
+        };
 
         return {
             getAll          : getAll,
@@ -95,6 +109,7 @@
             cambiarHorario  : cambiarHorario,
             transferir      : transferir,
             reservar        : reservar,
+            listarHorarios 	: listarHorarios,
         }
 
     }

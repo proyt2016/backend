@@ -27,9 +27,7 @@
                 empleadosService.getId(id).then(function (data) {
                     $scope.empleado = data;
                 });
-                
             }else{
-                console.info("no tengo id"+id);
                 empleadosService.getAll().then(function (data) {
                     $scope.empleados = data;
                 });

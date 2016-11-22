@@ -517,7 +517,7 @@ CREATE TABLE viaje_vehiculo (
 
 ALTER TABLE viaje_vehiculo OWNER TO lcbsadmin;
 
-
+create sequence hibernate_sequence;
 
 INSERT INTO estadosencomienda (id, nombre) VALUES ('9a265943-ab81-4a19-a752-03b2db475fed', 'Recibida');
 INSERT INTO estadosencomienda (id, nombre) VALUES ('c1423557-e9fb-472a-92f6-023328107117', 'Enviada');

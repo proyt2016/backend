@@ -8,16 +8,20 @@
 
     	$scope.recargar = function () {
 	    	var saldo = this.recarga;
+	    	
+	    	if(!saldo){
+                toastr.warning('Debe ingresar el saldo a recargar', 'Ups');
+                return;
+            }
+	    	
 	    	var recarga = {
 	    		idUsuario 	: $scope.usuarioLogueado.id,
-	    		saldo 		: this.recarga + ''
+	    		saldo 		: saldo + ''
 	    	};
 
 	        cuponeraService.recargar(recarga).then(function (datos) {
 	        	$scope.usuarioLogueado.cuponera.saldo += saldo;
 	        	$scope.recarga = null;
-	        	
-	        	toastr.success('Su cuponera se recargo con exito!', 'Recarga exitosa');
 	        });
         }
     }

@@ -84,8 +84,6 @@
         });
     }
     
-    
-    
     function appCtrl($scope, $location, $localStorage, $pusher, toastr) {
         $scope.usuarioLogueado = $localStorage.usuarioLogueado;
         
@@ -122,7 +120,6 @@
     }
     
     $.ajax({
-     
     	url			: '/lcbsapi/rest/empresa/getconfirguacionempresa/',
     	method		: 'GET',
     	dataType 	: 'json'

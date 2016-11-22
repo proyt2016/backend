@@ -115,6 +115,20 @@
 
             return defer.promise;
         };
+        
+        var getPrecio = function(origenId, destinoId, recorridoId){
+        	var defer = $q.defer();
+
+            $http.get('/lcbsapi/rest/viajes/getpreciodepasaje/' + origenId + '/' + destinoId + '/' + recorridoId)
+            .success(function (dato) {
+                defer.resolve(dato);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
+
+            return defer.promise;
+        };
 
         return {
             buscar : buscar,
@@ -125,6 +139,7 @@
             reservar : reservar,
             getTerminales : getTerminales,
             buscarUsuario : buscarUsuario,
+            getPrecio : getPrecio,
         }
 
     }

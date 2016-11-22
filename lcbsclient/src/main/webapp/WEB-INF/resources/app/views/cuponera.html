@@ -1,65 +1,50 @@
 <div class="row">
   <div class="col-md-12">
-    <form name="cuponeraForm" ng-submit="cuponeraForm.$valid && recargar()" novalidate>
+    <form name="cuponeraForm" ng-submit="recargar()" novalidate>
       <div class="box box-info">
         <div class="box-header with-border">
           <h3 class="box-title">Recargar cuponera</h3>
         </div>
         <div class="box-body">
-          <div class="row">
-            <div class="col-xs-7">
-              <p class="lead">Cuponera</p>
-              <div class="table-responsive">
-                <table class="table">
-                  <tbody>
-                    <tr>
-                      <th style="width:30%"><p class="text-success">Monto actual:</p></th>
-                      <td><p class="text-success"><strong>${{ usuarioLogueado.cuponera.saldo }}</strong></p></td>
-                    </tr>
-                    <tr>
-                      <th>Recargar:</th>
-                      <td>
-                        <div class="input-group">
-                          <span class="input-group-addon" style="padding:6px 12px 4px 12px; border:0;"><i class="fa fa-dollar"></i></span>
-                          <input type="number" name="recarga" align="right" ng-model="recarga" required />
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="col-xs-5">
-              <p class="lead">Metodos de pago:</p>
-              <div class="form-group">
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="pagos" value="paypal" ng-model="pagos">
-                    <img src="dist/img/credit/paypal2.png" alt="Paypal">
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="pagos" value="visa" ng-model="pagos">
-                    <img src="dist/img/credit/visa.png" alt="Visa">
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="pagos" value="master" ng-model="pagos">
-                    <img src="dist/img/credit/mastercard.png" alt="Mastercard">
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="pagos" value="amex" ng-model="pagos">
-                    <img src="dist/img/credit/american-express.png" alt="American Express">
-                  </label>
-                </div>
-              </div>  
-            </div>
-          </div>
-        </div>
+           <table class="table">
+             <tbody>
+               <tr>
+                 <th style="width:30%"><p class="text-success">Monto actual:</p></th>
+                 <td><p class="text-success"><strong>${{ usuarioLogueado.cuponera.saldo }}</strong></p></td>
+               </tr>
+               <tr>
+                 <th>Recargar:</th>
+                 <td>
+                   <div class="input-group">
+                     <span class="input-group-addon" style="padding:6px 12px 4px 12px; border:0;"><i class="fa fa-dollar"></i></span>
+                     <input type="number" name="recarga" align="right" ng-model="recarga" />
+                   </div>
+                 </td>
+               </tr>
+             </tbody>
+           </table>
+         	<div class='form-row'>
+	          <div class='col-xs-12 form-group card required'>
+	            <label class='control-label'>Numero de tarjeta</label>
+	            <input autocomplete='off' class='form-control card-number' size='20' type='text' ng-model='tarjeta.numero'>
+	          </div>
+	        </div>
+	        <div class='form-row'>
+	          <div class='col-xs-4 form-group cvc required'>
+	            <label class='control-label'>CVC</label>
+	            <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 123' size='4' type='text' ng-model='tarjeta.cvc'>
+	          </div>
+	          <div class='col-xs-4 form-group expiration required'>
+	            <label class='control-label'>Vencimiento</label>
+	            <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text' ng-model='tarjeta.mm'>
+	          </div>
+	          <div class='col-xs-4 form-group expiration required'>
+	            <label class='control-label'> </label>
+	            <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text' ng-model='tarjeta.yyyy'>
+	          </div>
+	        </div>
+         </div>  
+       </div>
         <div class="box-footer">
           <button type="submit" class="btn btn-success pull-right" ng-click="submitted=true">Recargar</button>
         </div>

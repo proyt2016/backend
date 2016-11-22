@@ -27,13 +27,13 @@
            <ul class="list-inline">
              <li style="width: 100%;">
              		<label>Origen</label>
-                	<select class="form-control select2" style="width: 100%;" ng-model="comprar.origen" ng-blur="calcularPrecio()">
+                	<select class="form-control" style="width: 100%;" ng-model="comprar.origen" ng-change="calcularPrecio()">
                   		<option ng-repeat="recorrido in viaje.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
                 	</select> 
              </li>
              <li style="width: 100%;">
              		<label>Destino</label>
-                	<select class="form-control select2" style="width: 100%;" ng-model="comprar.destino" ng-blur="calcularPrecio()">
+                	<select class="form-control" style="width: 100%;" ng-model="comprar.destino" ng-change="calcularPrecio()">
                   		<option ng-repeat="recorrido in viaje.recorrido.puntosDeRecorrido" value="{{ $index }}">{{recorrido.nombre}}</option>
                 	</select>
              </li>

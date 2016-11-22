@@ -87,15 +87,13 @@
         $scope.calcularPrecio = function(){
         	var viaje = this.viaje;
         	var puntosDeRecorrido = viaje.recorrido.puntosDeRecorrido;
+
         	var origen = puntosDeRecorrido[$scope.comprar.origen];
             var destino = puntosDeRecorrido[$scope.comprar.destino];
-            for(var i in viaje.recorrido.precios){
-                var precio = viaje.recorrido.precios[i];
-                
-                if(precio['origen'].id == origen.id && precio['destino'].id == destino.id){
-                	$scope.comprar['precio'] = precio['monto'];
-                }
-            }
+            
+        	viajeService.getPrecio(origen.id, destino.id, viaje.recorrido.id).then(function (prc){
+        		$scope.comprar['precio'] = prc;
+            });
         }
 
         $scope.buscarUsuario = function(){

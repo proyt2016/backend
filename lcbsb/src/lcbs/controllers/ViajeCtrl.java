@@ -99,7 +99,7 @@ public class ViajeCtrl implements IViaje {
 		DataPrecio precioPasae = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
 		pasaje.setPrecio(precioPasae);
 		DataPasaje nuevoPasaje = srvPasaje.crearPasaje(pasaje, tenant);
-		if(!nuevoPasaje.getComprador().equals(null)){
+		if(nuevoPasaje.getComprador() != null){
 			nHandler.sendNotification(nuevoPasaje.getComprador(), "Pasajes", "compra", "Compra realizada con exito: " + nuevoPasaje.getDestino().getNombre(),
 					tenant);
 		}
@@ -129,7 +129,7 @@ public class ViajeCtrl implements IViaje {
 		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje, tenant);
 		pasajeAModificar.setViaje(viajeAAsignar);
 		srvPasaje.modificarPasaje(pasajeAModificar, tenant);
-		if(!pasajeAModificar.getComprador().equals(null)){
+		if(pasajeAModificar.getComprador() != null){
 			nHandler.sendNotification(pasajeAModificar.getComprador(), "Pasajes", "cambio-horario", "Horario modificado con exito: " + pasajeAModificar.getDestino().getNombre(),
 					tenant);
 		}
@@ -141,7 +141,7 @@ public class ViajeCtrl implements IViaje {
 		DataPrecio precioPasae = getPrecioDePasaje(reserva.getOrigen().getId(), reserva.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
 		reserva.setPrecio(precioPasae);
 		DataReserva nuevaReserva = srvReserva.crearReserva(reserva, tenant);
-		if(!nuevaReserva.getUsuarioReserva().equals(null)){
+		if(nuevaReserva.getUsuarioReserva() != null){
 			nHandler.sendNotification(nuevaReserva.getUsuarioReserva(), "Pasajes", "reserva", "Reserva realizada con exito: " + nuevaReserva.getDestino().getNombre(),
 					tenant);
 		}
@@ -172,11 +172,11 @@ public class ViajeCtrl implements IViaje {
 		DataUsuario anterior = pasajeAModificar.getComprador();
 		pasajeAModificar.setComprador(usuarioAAsignar);
 		srvPasaje.modificarPasaje(pasajeAModificar, tenant);
-		if(!anterior.equals(null)){
+		if(anterior != null){
 			nHandler.sendNotification(anterior, "Pasajes", "transferencia", "Uds transfirio el pasaje a: " + pasajeAModificar.getDestino().getNombre() + " a "+usuarioAAsignar.getEmail(),
 					tenant);
 		}
-		if(!usuarioAAsignar.equals(null)){
+		if(usuarioAAsignar != null){
 			nHandler.sendNotification(usuarioAAsignar, "Pasajes", "transferencia", "Uds recibio un pasaje a: " + pasajeAModificar.getDestino().getNombre() + " de "+anterior.getEmail(),
 					tenant);
 		}
@@ -186,7 +186,7 @@ public class ViajeCtrl implements IViaje {
 	public void CancelarReserva(String idReserva, DataTenant tenant) {
 		DataReserva recerva = srvReserva.getReserva(idReserva, tenant);
 		srvReserva.darBajaReserva(idReserva, tenant);
-		if(!recerva.getUsuarioReserva().equals(null)){
+		if(recerva.getUsuarioReserva() != null){
 			nHandler.sendNotification(recerva.getUsuarioReserva(), "Pasajes", "reserva", "Uds cancelo: " + recerva.getDestino().getNombre(),
 					tenant);
 		}
@@ -203,7 +203,7 @@ public class ViajeCtrl implements IViaje {
 		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje, tenant);
 		pasajeAModificar.setUsado(true);
 		pasajeAModificar.setPago(true);
-		if(!pasajeAModificar.getComprador().equals(null)){
+		if(pasajeAModificar.getComprador() != null){
 			nHandler.sendNotification(pasajeAModificar.getComprador(), "Pasajes", "uso", "Uds viajo: " + pasajeAModificar.getDestino().getNombre(),
 					tenant);
 		}
@@ -296,7 +296,7 @@ public class ViajeCtrl implements IViaje {
 		reserva.setUtilizada(true);
 		srvReserva.modificarReserva(reserva, tenant);
 		pasajeACrear = srvPasaje.crearPasaje(pasajeACrear, tenant);
-		if(!pasajeACrear.getComprador().equals(null)){
+		if(pasajeACrear.getComprador() != null){
 			nHandler.sendNotification(pasajeACrear.getComprador(), "Pasajes", "reserva", "Uds compro el pasaje a : " + pasajeACrear.getDestino().getNombre(),
 					tenant);
 		}

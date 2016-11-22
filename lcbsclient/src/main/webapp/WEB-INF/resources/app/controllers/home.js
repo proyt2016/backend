@@ -130,6 +130,8 @@
             $('.datepicker').datepicker({
                 autoclose : true,
                 format: 'dd/mm/yyyy',
+                disableTouchKeyboard : true,
+                clearBtn : true
             }).on('changeDate', function(evt) {
                 $scope.filter[evt.currentTarget.name] = evt.currentTarget.value
             });

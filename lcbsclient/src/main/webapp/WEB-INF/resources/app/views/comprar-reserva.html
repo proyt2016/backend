@@ -35,35 +35,17 @@
             <div class="form-group">
               <div class="radio">
                 <label>
-                  <input type="radio" name="pagos" value="paypal" ng-model="comprar.pagos">
-                  <img src="dist/img/credit/paypal2.png" alt="Paypal">
+                  <input type="radio" name="pagos" value="stripe" ng-model="comprar.pagos">
+                  <img src="dist/img/credit/stripe.png" alt="Stripe" width="51" heigth="32">
                 </label>
               </div>
               <div class="radio">
                 <label>
-                  <input type="radio" name="pagos" value="visa" ng-model="comprar.pagos">
-                  <img src="dist/img/credit/visa.png" alt="Visa">
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="pagos" value="master" ng-model="comprar.pagos">
-                  <img src="dist/img/credit/mastercard.png" alt="Mastercard">
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="pagos" value="amex" ng-model="comprar.pagos">
-                  <img src="dist/img/credit/american-express.png" alt="American Express">
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="pagos" value="comprar.cuponera">
+                  <input type="radio" name="pagos" value="cuponera" ng-model="comprar.pagos">
                   <strong>Cuponera ${{ usuarioLogueado.cuponera.saldo }}</strong>
                 </label>
               </div>
-            </div>  
+            </div> 
           </div>
           <div class="col-xs-8">
           <p class="lead">Monto a pagar</p>
@@ -85,4 +67,48 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal fade" id="modal-stripe">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <form>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4>Ingresar Tarjeta</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-xs-12">
+		            <div class='form-row'>
+		              <div class='col-xs-12 form-group card required'>
+		                <label class='control-label'>Numero de tarjeta</label>
+		                <input autocomplete='off' class='form-control card-number' size='20' type='text' ng-model='tarjeta.numero'>
+		              </div>
+		            </div>
+		            <div class='form-row'>
+		              <div class='col-xs-4 form-group cvc required'>
+		                <label class='control-label'>CVC</label>
+		                <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 123' size='4' type='text' ng-model='tarjeta.cvc'>
+		              </div>
+		              <div class='col-xs-4 form-group expiration required'>
+		                <label class='control-label'>Fecha de vencimiento</label>
+		                <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text' ng-model='tarjeta.mm'>
+		              </div>
+		              <div class='col-xs-4 form-group expiration required'>
+		                <label class='control-label'> </label>
+		                <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text' ng-model='tarjeta.yyyy'>
+		              </div>
+		            </div>
+                </div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <a class="btn btn-success pull-right" ng-click="guardarTarjeta()">Guardar</a>
+            </div>
+          </form>
+        </div>
+    </div>
 </div>

@@ -73,13 +73,28 @@
 
             return defer.promise;
         };
+        
+        var guardarTarjeta = function(usuario){
+            var defer = $q.defer();
+
+            $http.post(CONFIGURACION.URL + 'usuarios/guardartokenusuario/', usuario)
+            .success(function (datos) {
+                defer.resolve(datos);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
+
+            return defer.promise;
+        };
 
         return {
-            getId   : getId,
-            getAll  : getAll,
-            add     : add,
-            edit    : edit,
-            login   : login
+            getId   		: getId,
+            getAll  		: getAll,
+            add     		: add,
+            edit    		: edit,
+            login   		: login,
+            guardarTarjeta 	: guardarTarjeta
         }
 
     }

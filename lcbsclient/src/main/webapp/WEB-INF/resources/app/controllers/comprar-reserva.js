@@ -8,7 +8,7 @@
     	
         $scope.reserva 	= null;
         $scope.comprar  = {
-            pagos : 'paypal',
+            pagos : 'cuponera',
             cantidad : 1
         };
     	
@@ -25,8 +25,19 @@
             	$scope.precio = prc;
             });
         });
-
+        
         $scope.procesarCompra = function () {
+        	var comprar = this.comprar;
+        	
+        	if($scope.comprar.pagos == 'stripe'){
+        		$('#modal-stripe').modal('show');
+            	return;
+        	}
+        	
+        	$scope.procesarPago();
+        };
+
+        $scope.procesarPago = function () {
 	    	var reserva = $scope.reserva;
 
             if(!this.comprar['origen']){
@@ -43,9 +54,6 @@
                 toastr.warning('Debe seleccionar la cantidad de pasajes', 'Ups');
             }
 
-//            var origen = viaje.recorrido.puntosDeRecorrido[this.comprar.origen];
-//            var destino = viaje.recorrido.puntosDeRecorrido[this.comprar.destino];
-
 	    	var pasaje = {
 	    		id : reserva.id
 	    	}
@@ -55,6 +63,42 @@
 	            setTimeout(function(){ 
 	            	$location.url('/');
 	            }, 3000);
+	        });
+        }
+        
+        $scope.guardarTarjeta = function(){
+	        var pago = this.tarjeta;
+	
+	        Stripe.card.createToken({
+	          cvc       : pago.cvc,
+	          number    : pago.numero,
+	          currency  : 'usd',
+	          exp_month : pago.mm,
+	          exp_year  : pago.yy,
+	        }, function(status, response){
+	          if (response.error) { // Problem!
+	            alert(response.error.message);
+	          } else { // Token was created!
+	            // Get the token ID:
+	            var token = response.id;
+	            var card  = response.card.last4;
+	
+	            var tokenData = {
+	              token                 : token,
+	              idUsuario             : $scope.usuarioLogueado.id,
+	              ultimosDigitosTarjeta : card
+	            }
+	
+	            usuarioService.agregarTarjeta(tokenData).then(function (response) {
+	              //usuario['tokenTarjeta']           = token;
+	              //usuario['ultimosNumerosTarjeta']  = card;
+	              
+	            	$scope.procesarPago();
+	            	
+	            }, function(err) {
+	              alert(err.message);
+	            });
+	          }
 	        });
         }
     }

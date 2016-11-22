@@ -6,6 +6,10 @@
     
     app.controller('appCtrl', ['$scope', '$location', '$localStorage', '$pusher', 'toastr', appCtrl]);
     
+    app.run(function(CONFIGURACION) {
+	  Stripe.setPublishableKey(CONFIGURACION.STRIPE_KEY);
+	});
+    
     /*@ngInject*/
     function configFunction($routeProvider, $httpProvider, toastrConfig, uiGmapGoogleMapApiProvider, CONFIGURACION) {
     	$httpProvider.defaults.headers.common['lcbs-tenant'] = CONFIGURACION.tenant_id;

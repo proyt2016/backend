@@ -36,18 +36,22 @@ public class Usuario extends Persona implements Serializable{
     @ElementCollection
     @IndexColumn(name="LIST_INDEX")
     private List<Notificacion> notificaciones;
+    private String stripeCustomerId;
+    private Integer ultimosCuatroDigitos;
 
  
 
     public Usuario() {}
     
-    public Usuario(String id, String nm, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim, String clave, String redSoc, String idRedsoc, Cuponera cup, List<Encomienda> enc, List<Notificacion> not) {
+    public Usuario(String id, String nm, String ape, Email mail, List<Telefono> tels, Date fecNac, Boolean elim, String clave, String redSoc, String idRedsoc, Cuponera cup, List<Encomienda> enc, List<Notificacion> not, String sci, Integer ucd) {
         super(id,clave, nm, ape, mail, tels, fecNac, elim);
         this.redSocialUsada = redSoc;
         this.idRedSocial = idRedsoc;
         this.cuponera = cup;
         this.encomiendas = enc;
         this.notificaciones = not;
+        this.stripeCustomerId = sci;
+        this.ultimosCuatroDigitos = ucd;
     }
     
     public Usuario(DataUsuario dt){
@@ -66,7 +70,7 @@ public class Usuario extends Persona implements Serializable{
     	}
     	this.setFechaNacimiento(dt.getFechaNacimiento());
     	this.setEliminado(dt.getEliminado());
-    	this.setClave(dt.getClave());
+    	this.setClave(dt.genClave());
     	this.setRedSocialUsada(dt.getRedSocialUsada());
     	this.setIdRedSocial(dt.getIdRedSocial());
     	if(dt.getCuponera() != null){
@@ -86,6 +90,8 @@ public class Usuario extends Persona implements Serializable{
 	        });
 	    	this.setNotificaciones(auxEnc);
     	}
+    	this.setStripeCustomerId(dt.getStripeCustomerId());
+    	this.setUltimosCuatroDigitos(dt.getUltimosCuatroDigitos());
     }
     
     public DataUsuario getDatatype(Boolean conHijos){
@@ -123,6 +129,8 @@ public class Usuario extends Persona implements Serializable{
 	        });
 	    	result.setNotificaciones(auxEnc);
 	    }
+    	result.setStripeCustomerId(this.getStripeCustomerId());
+    	result.setUltimosCuatroDigitos(this.getUltimosCuatroDigitos());
     	return result;
     }
     
@@ -166,5 +174,21 @@ public class Usuario extends Persona implements Serializable{
     
     public List<Notificacion> getNotificaciones(){
         return this.notificaciones;
+    }
+    
+    public void setStripeCustomerId(String val){
+        this.stripeCustomerId = val;
+    }
+    
+    public String getStripeCustomerId(){
+        return this.stripeCustomerId;
+    }
+    
+    public void setUltimosCuatroDigitos(Integer val){
+        this.ultimosCuatroDigitos = val;
+    }
+    
+    public Integer getUltimosCuatroDigitos(){
+        return this.ultimosCuatroDigitos;
     }
 }

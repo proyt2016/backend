@@ -19,6 +19,7 @@
         $scope.usuario = null;
         $scope.comprador = null;
         $scope.resultados = null;
+        $scope.coches = [];
 
         var initialize = function(){
             var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null
@@ -28,6 +29,7 @@
                 uiGmapGoogleMapApi.then(function(){
                     viajeService.getId(id).then(function (datos) {
                         $scope.viaje = datos;
+                        $scope.coches = datos.coches;
 
                         $scope.comprar['origen']    = '0';
                         $scope.comprar['destino']   = datos.recorrido.puntosDeRecorrido.length - 1 + '';
@@ -209,6 +211,15 @@
             	mostrarNotificacion('success', 'El pasaje fue reservado con exito.');
             	$location.url('/viajes');
             });
+        }
+
+        $scope.addRelation = function () {
+            var coche = { 'id' : '' };
+            $scope.coches.push(coche);
+        }
+
+        $scope.removeRelation = function (index) {
+            $scope.coches.splice(index, 1);
         }
 
         initialize();

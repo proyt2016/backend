@@ -61,12 +61,14 @@ public class ConfiguracionEmpresa implements Serializable{
     private String colorLetras;
     private Integer diasCreacionViaje;
     private Date ultimaCreacionDeViajes;
+    private String stripePrivateKey;
+    private String stripePublicKey;
 
     public ConfiguracionEmpresa() {
        
     }
     
-    public ConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<Telefono> tels, List<Email> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css, String icEmp, String colFondPant, String colTit, String colTextLst, String colFondLst, String colBtn, String colorLetras, Integer diasC, Date ultCreaViaje) {
+    public ConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<Telefono> tels, List<Email> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css, String icEmp, String colFondPant, String colTit, String colTextLst, String colFondLst, String colBtn, String colorLetras, Integer diasC, Date ultCreaViaje, String spk, String spubk) {
         this.id = id;
         this.nombre = nom;
         this.aceptaCuponera = acCup;
@@ -90,6 +92,8 @@ public class ConfiguracionEmpresa implements Serializable{
         this.colorLetras = colorLetras;
         this.diasCreacionViaje = diasC;
         this.ultimaCreacionDeViajes = ultCreaViaje;
+        this.stripePrivateKey = spk;
+        this.stripePublicKey = spubk;
     }
     
     public ConfiguracionEmpresa(DataConfiguracionEmpresa dt){
@@ -129,6 +133,8 @@ public class ConfiguracionEmpresa implements Serializable{
         this.setColorLetras(dt.getColorLetras());
         this.setDiasCreacionViaje(dt.getDiasCreacionViaje());
         this.setUltimaCreacionDeViajes(dt.getUltimaCreacionDeViajes());
+        this.setStripePrivateKey(dt.genStripePrivateKey());
+        this.setStripePublicKey(dt.getStripePublicKey());
     }
     
     public DataConfiguracionEmpresa getDatatype(){
@@ -168,6 +174,8 @@ public class ConfiguracionEmpresa implements Serializable{
     	result.setColorLetras(this.getColorLetras());
     	result.setDiasCreacionViaje(this.getDiasCreacionViaje());
     	result.setUltimaCreacionDeViajes(this.getUltimaCreacionDeViajes());
+    	result.setStripePrivateKey(this.getStripePrivateKey());
+    	result.setStripePublicKey(this.getStripePublicKey());
     	return result;
     }
     
@@ -353,5 +361,21 @@ public class ConfiguracionEmpresa implements Serializable{
 	
 	public Date getUltimaCreacionDeViajes(){
 	    return this.ultimaCreacionDeViajes;
+	}
+	
+	public void setStripePrivateKey(String val){
+	    this.stripePrivateKey = val;
+	}
+	
+	public String getStripePrivateKey(){
+	    return this.stripePrivateKey;
+	}
+	
+	public void setStripePublicKey(String val){
+	    this.stripePublicKey = val;
+	}
+	
+	public String getStripePublicKey(){
+		return this.stripePublicKey;
 	}
 }

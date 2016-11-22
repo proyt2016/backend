@@ -43,6 +43,15 @@
 		    controller  : 'viajesCtrl'
 		});
 
+		// ruta de editarViajes
+		$routeProvider.when("/editarViaje", {
+		    templateUrl : "app/views/editarViaje/search.html",
+		    controller  : 'viajesCtrl'
+		}).when("/editarViaje/detalle/:id", {
+		    templateUrl : "app/views/editarViaje/details.html",
+		    controller  : 'viajesCtrl'
+		});
+
 		// ruta de encomiendas
 		$routeProvider.when("/encomiendas/add", {
 		    templateUrl : "app/views/encomiendas/add.html",

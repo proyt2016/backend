@@ -192,4 +192,20 @@ public class UsuarioApi extends BaseApi{
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		return repo.buscarUsuarioPorMail(mailUsuario, tenant);
 	}
+	
+	@POST
+	@Path("/guardartokenusuario/")
+	public void guardarTokenUsuario(String data){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		JSONObject obj = new JSONObject(data);
+		repo.guardarTokenUsuario(obj.getString("idUsuario"), obj.getString("token"), Integer.valueOf(obj.getString("ultimosDigitosTarjeta")), tenant);
+	}
+	
+	@POST
+	@Path("/cargartarjeta/")
+	public void cargarTarjeta(String data){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		JSONObject obj = new JSONObject(data);
+		repo.cargarTarjeta(obj.getString("idUsuario"), Float.valueOf(obj.getString("monto")), tenant);
+	}
 }

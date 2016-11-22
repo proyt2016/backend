@@ -97,6 +97,21 @@ public class VehiculoSrv implements VehiculoLocalApi {
 		Vehiculo realObj = (Vehiculo) session.get(Vehiculo.class, id);
 		return realObj.getDatatype(true);
 	}
+	
+	public DataVehiculo getVehiculoPorNumero(String numeroVehiculo, DataTenant tenant) {
+		List<DataVehiculo> vehiculos = new ArrayList();
+		// obtengo todos los vehiculos de la bd
+		Session session = (Session) em.getDelegate();
+		Criteria criteria = session.createCriteria(Vehiculo.class);
+		criteria.add(Restrictions.eq("eliminado", false));
+		criteria.add(Restrictions.eq("numeroVehiculo", numeroVehiculo));
+		List<Vehiculo> listVeh = new ArrayList<Vehiculo>(new LinkedHashSet(criteria.list()));
+
+		listVeh.stream().forEach((veh) -> {
+			vehiculos.add(veh.getDatatype(true));
+		});
+		return vehiculos.get(0);
+	}
 
 	public DataVehiculo crearVehiculo(DataVehiculo veh, DataTenant tenant) {
 		Vehiculo realObj = new Vehiculo(veh);

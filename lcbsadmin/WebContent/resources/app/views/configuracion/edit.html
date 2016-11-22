@@ -45,6 +45,18 @@
           </div>
         </div>
         <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="stripePrivateKey">Clave privada Stripe</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" class="form-control col-md-7 col-xs-12" ng-model="configuracion.stripePrivateKey">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="stripePublicKey">Clave publica Stripe</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" id="stripePublicKey" class="form-control col-md-7 col-xs-12" ng-model="configuracion.stripePublicKey">
+          </div>
+        </div>
+        <div class="form-group">
           <div class="col-sm-offset-3 col-sm-9">
             <div class="checkbox">
               <label>

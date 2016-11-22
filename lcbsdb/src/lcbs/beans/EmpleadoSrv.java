@@ -69,7 +69,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
 		List<Empleado> listEmp = new ArrayList<Empleado>(new LinkedHashSet(criteria.list()));
 		if (listEmp.size() == 1) {
 			DataEmpleado empleado = listEmp.get(0).getDatatype(true);
-			if (empleado.getClave().equals(clave))
+			if (empleado.genClave().equals(clave))
 				return empleado;
 		}
 		return null;

@@ -55,7 +55,7 @@ public class UsuarioSrv implements UsuarioLocalApi {
 		List<Usuario> listUsu = criteria.list();
 		if (listUsu.size() == 1) {
 			DataUsuario usuario = listUsu.get(0).getDatatype(true);
-			if (usuario.getClave().equals(clave))
+			if (usuario.genClave().equals(clave))
 				return usuario;
 		}
 		return null;

@@ -9,12 +9,14 @@ public class DataUsuario extends DataPersona{
     private DataCuponera cuponera;
     private List<DataEncomienda> encomiendas;
     private List<DataNotificacion> notificaciones;
+    private String stripeCustomerId;
+    private Integer ultimosCuatroDigitos;
 
  
 
     public DataUsuario() {}
     
-    public DataUsuario(String id, String nm, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, Boolean elim, String nomMos, String redSoc, String idRedsoc, DataCuponera cup, List<DataEncomienda> enc, List<DataNotificacion> not, String clv) {
+    public DataUsuario(String id, String nm, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, Boolean elim, String nomMos, String redSoc, String idRedsoc, DataCuponera cup, List<DataEncomienda> enc, List<DataNotificacion> not, String clv, String sci, Integer ucd) {
     	super.setId(id);
         super.setNombrePila(nm);
         super.setApellido(ape);
@@ -28,6 +30,8 @@ public class DataUsuario extends DataPersona{
         this.cuponera = cup;
         this.encomiendas = enc;
         this.notificaciones = not;
+        this.stripeCustomerId = sci;
+        this.ultimosCuatroDigitos = ucd;
     }
 
     public void setRedSocialUsada(String val){
@@ -68,5 +72,21 @@ public class DataUsuario extends DataPersona{
     
     public List<DataNotificacion> getNotificaciones(){
         return this.notificaciones;
+    }
+    
+    public void setStripeCustomerId(String val){
+        this.stripeCustomerId = val;
+    }
+    
+    public String getStripeCustomerId(){
+        return this.stripeCustomerId;
+    }
+    
+    public void setUltimosCuatroDigitos(Integer val){
+        this.ultimosCuatroDigitos = val;
+    }
+    
+    public Integer getUltimosCuatroDigitos(){
+        return this.ultimosCuatroDigitos;
     }
 }

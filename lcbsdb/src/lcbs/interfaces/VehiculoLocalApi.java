@@ -17,4 +17,5 @@ public interface VehiculoLocalApi {
 	public void darBajaVehiculo(String idVeiculo, DataTenant tenant);
 	public List<DataVehiculo> obtenerVehiculosEnMantenimiento(Integer pagina, Integer elementosPagina, DataTenant tenant);
 	public Integer getMenorCantAsientos(DataTenant tenant);
+	public DataVehiculo getVehiculoPorNumero(String numeroVehiculo, DataTenant tenant);
 }

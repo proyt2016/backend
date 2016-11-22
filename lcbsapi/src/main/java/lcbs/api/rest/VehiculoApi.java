@@ -97,6 +97,13 @@ public class VehiculoApi extends BaseApi{
 	}
 	
 	@GET
+	@Path("/getvehiculo/{nroVehiculo}")
+	public DataVehiculo obtenerVehiculoPorNumero(@PathParam("nroVehiculo")final String nroVehiculo){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.obtenerVehiculoPorNumero(nroVehiculo, tenant);
+	}
+	
+	@GET
 	@Path("/vehiculosenmantenimiento/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
 	public List<DataVehiculo> obtenerVehiculosEnMantenimiento(@PathParam("pagina") final Integer pagina, @PathParam("elementosAMostrar") final Integer elementosPagina){
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");

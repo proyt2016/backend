@@ -38,7 +38,7 @@ public class Empleado extends Persona implements Serializable{
     	this.setId(dt.getId());
     	this.setNombrePila(dt.getNombrePila());
     	this.setApellido(dt.getApellido());
-    	this.setClave(dt.getClave());
+    	this.setClave(dt.genClave());
     	
     	if(dt.getEmail() != null)
     		this.setEmail(new Email(dt.getEmail()));

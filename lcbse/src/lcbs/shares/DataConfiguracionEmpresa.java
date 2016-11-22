@@ -30,12 +30,14 @@ public class DataConfiguracionEmpresa{
     private String colorLetras;
     private Integer diasCreacionViaje;
     private Date ultimaCreacionDeViajes;
+    private String stripePrivateKey;
+    private String stripePublicKey;
 
     public DataConfiguracionEmpresa() {
        
     }
     
-    public DataConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<DataTelefono> tels, List<DataEmail> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css, String icEmp, String colFondPant, String colTit, String colTextLst, String colFondLst, String colBtn, String colLetra, Integer diasC, Date ultCreaViaje) {
+    public DataConfiguracionEmpresa(String id, String nom, Boolean acCup, String urlAcc, List<DataTelefono> tels, List<DataEmail> mails, String urlLdap, String usrLdap, String clLdap, Boolean act, Boolean pagOnCoche, Boolean resePas, Integer valResHrs, Boolean trasfPsjs, String css, String icEmp, String colFondPant, String colTit, String colTextLst, String colFondLst, String colBtn, String colLetra, Integer diasC, Date ultCreaViaje, String spk, String spubk) {
         this.id = id;
         this.nombre = nom;
         this.aceptaCuponera = acCup;
@@ -59,6 +61,8 @@ public class DataConfiguracionEmpresa{
         this.colorLetras = colLetra;
         this.diasCreacionViaje = diasC;
         this.ultimaCreacionDeViajes = ultCreaViaje;
+        this.stripePrivateKey = spk;
+        this.stripePublicKey = spubk;
     }
     
     public void setId(String val){
@@ -242,5 +246,21 @@ public class DataConfiguracionEmpresa{
 	
 	public Date getUltimaCreacionDeViajes(){
 	    return this.ultimaCreacionDeViajes;
+	}
+	
+	public void setStripePrivateKey(String val){
+	    this.stripePrivateKey = val;
+	}
+	
+	public String genStripePrivateKey(){
+	    return this.stripePrivateKey;
+	}
+	
+	public void setStripePublicKey(String val){
+	    this.stripePublicKey = val;
+	}
+	
+	public String getStripePublicKey(){
+		return this.stripePublicKey;
 	}
 }

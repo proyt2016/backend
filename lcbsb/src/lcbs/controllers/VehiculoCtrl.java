@@ -45,6 +45,11 @@ public class VehiculoCtrl implements IVehiculo {
 	public DataVehiculo obtenerVehiculo(String idVehiculo, DataTenant tenant) {
 		return srvVehiculo.getVehiculo(idVehiculo, tenant);
 	}
+	
+	@Override
+	public DataVehiculo obtenerVehiculoPorNumero(String numeroVehiculo, DataTenant tenant) {
+		return srvVehiculo.getVehiculoPorNumero(numeroVehiculo, tenant);
+	}
 
 	@Override
 	public List<DataVehiculo> listarVehiculos(Integer pagina, Integer elementosPagina, DataTenant tenant) {

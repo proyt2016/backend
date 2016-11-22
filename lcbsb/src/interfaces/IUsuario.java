@@ -27,5 +27,7 @@ public interface IUsuario {
 	public void AsignarPerfil(String idEmpleado, String perfil, DataTenant tenant);
 	public List<DataUsuario> listarUsuarios(Integer pagina, Integer elementosPagina, DataTenant tenant);
 	public DataUsuario buscarUsuarioPorMail(String mailUsuario, DataTenant tenant);
+	public void guardarTokenUsuario(String idUsuario, String token, Integer ultimosDigitosTarjeta, DataTenant tenant);
+	public void cargarTarjeta(String idUsuario, Float cargo, DataTenant tenant);
 	
 }

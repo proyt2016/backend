@@ -81,7 +81,10 @@ public class VehiculoSrv implements VehiculoLocalApi {
 		Criteria criteria = session.createCriteria(Vehiculo.class);
 		criteria.add(Restrictions.eq("eliminado", false));
 		List<Vehiculo> listVeh = new ArrayList<Vehiculo>(new LinkedHashSet(criteria.list()));
-		for(Integer i=1; i < listVeh.size(); i++){
+		for(Integer i=0; i < listVeh.size(); i++){
+			if(i==0){
+				menor = listVeh.get(i).getCantidadAsientos();
+			}
 			if(listVeh.get(i).getCantidadAsientos() < menor){
 				menor = listVeh.get(i).getCantidadAsientos();
 			}

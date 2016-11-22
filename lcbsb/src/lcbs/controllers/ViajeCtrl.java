@@ -95,6 +95,9 @@ public class ViajeCtrl implements IViaje {
 
 	@Override
 	public DataPasaje ComprarPasaje(DataPasaje pasaje, DataTenant tenant) {
+		DataViaje viaje = srvViaje.getViaje(pasaje.getViaje().getId(), tenant);
+		DataPrecio precioPasae = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
+		pasaje.setPrecio(precioPasae);
 		DataPasaje nuevoPasaje = srvPasaje.crearPasaje(pasaje, tenant);
 		if(!nuevoPasaje.getComprador().equals(null)){
 			nHandler.sendNotification(nuevoPasaje.getComprador(), "Pasajes", "compra", "Compra realizada con exito: " + nuevoPasaje.getDestino().getNombre(),
@@ -134,12 +137,32 @@ public class ViajeCtrl implements IViaje {
 
 	@Override
 	public DataReserva ReservarPasaje(DataReserva reserva, DataTenant tenant) {
+		DataViaje viaje = srvViaje.getViaje(reserva.getViaje().getId(), tenant);
+		DataPrecio precioPasae = getPrecioDePasaje(reserva.getOrigen().getId(), reserva.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
+		reserva.setPrecio(precioPasae);
 		DataReserva nuevaReserva = srvReserva.crearReserva(reserva, tenant);
 		if(!nuevaReserva.getUsuarioReserva().equals(null)){
 			nHandler.sendNotification(nuevaReserva.getUsuarioReserva(), "Pasajes", "reserva", "Reserva realizada con exito: " + nuevaReserva.getDestino().getNombre(),
 					tenant);
 		}
 		return nuevaReserva;
+	}
+	
+	@Override
+	public DataReserva PasajeOnlineAReserva(Integer codigoPasaje, String idUsuario, DataTenant tenant) {
+		DataPasaje pasaje = srvPasaje.getpasajeXcodigo(codigoPasaje, tenant);
+		DataUsuario usuario = srvUsuario.getUsuario(idUsuario, tenant);
+		DataReserva nuevaReserva = new DataReserva();
+		nuevaReserva.setOrigen(pasaje.getOrigen());
+		nuevaReserva.setDestino(pasaje.getDestino());
+		nuevaReserva.setEliminada(false);
+		nuevaReserva.setFechaReserva(pasaje.getFechaCompra());
+		nuevaReserva.setUsuarioReserva(usuario);
+		nuevaReserva.setUtilizada(false);
+		nuevaReserva.setViaje(pasaje.getViaje());
+		srvPasaje.darBajaPasaje(pasaje.getId(), tenant);
+		return srvReserva.crearReserva(nuevaReserva, tenant);
+
 	}
 
 	@Override
@@ -422,7 +445,7 @@ public class ViajeCtrl implements IViaje {
 	}
 
 	@Override
-	public Float getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant) {
+	public DataPrecio getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant) {
 		DataRecorrido rec = srvRecorrido.getRecorrido(codigoRecorrido, tenant);
 		List<DataPrecio> precios = rec.getPrecios();
 		Map<String, Integer> puntosMap = new HashMap<String, Integer>();
@@ -432,7 +455,7 @@ public class ViajeCtrl implements IViaje {
 		List<DataPrecio> aux = new ArrayList<DataPrecio>();
 		DataPrecio elegido = new DataPrecio();
 		precios.stream().forEach((prc) -> {
-			if(puntosMap.get(prc.getOrigen().getId()) >= puntosMap.get(codigoOrigen) && puntosMap.get(prc.getDestino().getId()) <= puntosMap.get(codigoDestino)){
+			if(puntosMap.get(prc.getOrigen().getId()) <= puntosMap.get(codigoOrigen) && puntosMap.get(prc.getDestino().getId()) >= puntosMap.get(codigoDestino)){
 				aux.add(prc);
 			}
 		});
@@ -441,7 +464,7 @@ public class ViajeCtrl implements IViaje {
 				elegido = aux.get(i);
 			}
 		}
-		return elegido.getMonto();
+		return elegido;
 	}
 	
 	@Override
@@ -460,6 +483,21 @@ public class ViajeCtrl implements IViaje {
 		});
 		conf.setUltimaCreacionDeViajes(formatter.parse(formatter.format(new Date())));
 		srvConfiguracion.modificarCuponera(conf, tenant);
+	}
+	
+	@Override
+	public List<DataViaje> listarViajesCambioHorario(String idPasaje, DataTenant tenant){
+		DataPasaje pasaje = srvPasaje.getPasaje(idPasaje, tenant);
+		DataViaje filtro = new DataViaje();
+		filtro.setFechaSalida(pasaje.getViaje().getFechaSalida());
+		filtro.setRecorrido(pasaje.getViaje().getRecorrido());
+		List<DataViaje> viajes = srvViaje.buscarViaje(filtro, null, 1, 1000, tenant);
+		List<DataViaje> result = new ArrayList<DataViaje>();
+		viajes.stream().forEach((viaje) -> {
+			if(viaje.getId() != pasaje.getViaje().getId())
+				result.add(viaje);
+		});
+		return result;
 	}
 	
 	@Override

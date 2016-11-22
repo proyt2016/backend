@@ -8,6 +8,7 @@
         $scope.resultados 		= null;
         $scope.info 			= null;
         $scope.usuarioLogueado 	= $localStorage.usuarioLogueado;
+        $scope.reservaData 		= {};
 
         $scope.filter = {
             origen : null,
@@ -75,10 +76,17 @@
 
         $scope.mostrarReservar = function (resultado) {
         	$scope.info = resultado;
+        	
+        	$scope.reservaData['origen']    = '0';
+            $scope.reservaData['destino']   = resultado.recorrido.puntosDeRecorrido.length - 1 + '';
+            
             $('#modal-reservar').modal('show');
         }
         
         $scope.reservar = function() {
+        	var origen = $scope.info.recorrido.puntosDeRecorrido[this.reservaData.origen];
+            var destino = $scope.info.recorrido.puntosDeRecorrido[this.reservaData.destino];
+            
         	var pasaje = {
     			viaje : {
     				id : $scope.info.id
@@ -86,6 +94,14 @@
         		usuarioReserva : {
         			id : $scope.usuarioLogueado.id
         		},
+        		origen : {
+                    id : origen.id,
+                    tipo : origen.tipo
+                },
+                destino : {
+                    id : destino.id,
+                    tipo : destino.tipo
+                },
         		fechaReserva : moment().format('YYYY-MM-DD')
         	}
         	

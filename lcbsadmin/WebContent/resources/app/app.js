@@ -5,6 +5,12 @@
     angular.module('lacbus').config(['$routeProvider', 'uiGmapGoogleMapApiProvider',  configFunction]);
     
     angular.module('lacbus').controller('appCtrl', ['$scope', '$location', '$localStorage', appCtrl]);
+    
+    angular.module('lacbus').run(function($rootScope, $templateCache) {
+	   $rootScope.$on('$viewContentLoaded', function() {
+	      $templateCache.removeAll();
+	   });
+	});
 
     /*@ngInject*/
     function configFunction($routeProvider, uiGmapGoogleMapApiProvider) {
@@ -173,7 +179,7 @@
 		})
     }
     
-    function appCtrl($scope, $location, $localStorage) {
+    function appCtrl($scope, $location, $localStorage, $route) {
         $scope.empleadoLogueado = $localStorage.empleadoLogueado;
                 
         $scope.logout = function(){
@@ -183,7 +189,8 @@
         }
         
         $scope.$on('localStorage:changed', function(event, data){
-        	$scope.empleadoLogueado = $localStorage.empleadoLogueado;
+        	$location.url('/');
+        	window.location.reload();
         });
     }
     

@@ -49,10 +49,12 @@ public interface IViaje {
 	public void crearHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant);
 	public void editarHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant);
 	public void borrarHorarioRecorrido(String idRecorrido, String idHorario, DataTenant tenant);
-	public Float getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant);
+	public DataPrecio getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant);
 	public void crearViajesNuevoRecorrido(String recorridoId, DataTenant tenant);
 	public void crearViajesParaRecorridos(DataTenant tenant) throws ParseException;
 	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina, DataTenant tenant);
 	public Integer cantidadAsientosDisponibles(String idViaje, String idOrigen, String idDestino, DataTenant tenant);
+	public DataReserva PasajeOnlineAReserva(Integer codigoPasaje, String idUsuario, DataTenant tenant);
+	public List<DataViaje> listarViajesCambioHorario(String idPasaje, DataTenant tenant);
 
 }

@@ -56,9 +56,9 @@ public class DataReservaConvertor{
     	}
     	if(this.getDestino() != null){
 			if(this.getDestino().getTipo().equals("Parada")){
-				result.setOrigen(this.getDestino().genDataParada());
+				result.setDestino(this.getDestino().genDataParada());
 			}else{
-				result.setOrigen(this.getDestino().genDataTerminal());
+				result.setDestino(this.getDestino().genDataTerminal());
 			}
     	}
     	result.setFechaReserva(this.getFechaReserva());

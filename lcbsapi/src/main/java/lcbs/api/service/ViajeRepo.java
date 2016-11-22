@@ -197,7 +197,7 @@ public class ViajeRepo {
 		ctrViaje.borrarHorarioRecorrido(idRecorrido, idHorario, tenant);
 	}
 
-	public Float getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant) {
+	public DataPrecio getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant) {
 		return ctrViaje.getPrecioDePasaje(codigoOrigen, codigoDestino, codigoRecorrido, tenant);
 	}
 	
@@ -211,5 +211,13 @@ public class ViajeRepo {
 	
 	public Integer cantidadAsientosDisponibles(String idViaje, String idOrigen, String idDestino, DataTenant tenant){
 		return ctrViaje.cantidadAsientosDisponibles(idViaje, idOrigen, idDestino, tenant);
+	}
+	
+	public DataReserva PasajeOnlineAReserva(Integer codigoPasaje, String idUsuario, DataTenant tenant){
+		return ctrViaje.PasajeOnlineAReserva(codigoPasaje, idUsuario, tenant);
+	}
+	
+	public List<DataViaje> listarViajesCambioHorario(String idPasaje, DataTenant tenant){
+		return ctrViaje.listarViajesCambioHorario(idPasaje, tenant);
 	}
 }

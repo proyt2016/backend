@@ -101,22 +101,22 @@ public class Reserva implements Serializable{
     	if(this.getPrecio()!=null)
     		result.setPrecio(this.getPrecio().getDatatype());
     	if(this.getOrigen()!=null){
-    	if(this.getOrigen() instanceof Terminal){
-    		if(this.getOrigen()!=null)
-    			result.setOrigen(((Terminal)this.getOrigen()).getDatatype());
-    	}else{
-    		if(this.getOrigen()!=null)
-    			result.setOrigen(((Parada)this.getOrigen()).getDatatype());
-    	}
+    	  if(this.getOrigen() instanceof Terminal){
+    	   	if(this.getOrigen()!=null)
+    	   		result.setOrigen(((Terminal)HibernateUtils.initializeAndUnproxy(this.getOrigen())).getDatatype());
+    	  }else{
+    	   	if(this.getOrigen()!=null)
+    	   		result.setOrigen(((Parada)HibernateUtils.initializeAndUnproxy(this.getOrigen())).getDatatype());
+    	  }
     	}
     	if(this.getDestino()!=null){
-    	if(this.getDestino() instanceof Terminal){
-    		if(this.getDestino()!=null)
-    			result.setDestino(((Terminal)this.getDestino()).getDatatype());
-    	}else{
-    		if(this.getDestino()!=null)
-    			result.setDestino(((Parada)this.getDestino()).getDatatype());
-    	}
+    	  if(this.getDestino() instanceof Terminal){
+    	   	if(this.getDestino()!=null)
+    	   		result.setDestino(((Terminal)HibernateUtils.initializeAndUnproxy(this.getDestino())).getDatatype());
+    	  }else{
+    	   	if(this.getDestino()!=null)
+    	   		result.setDestino(((Parada)HibernateUtils.initializeAndUnproxy(this.getDestino())).getDatatype());
+    	  }
     	}
     	result.setFechaReserva(this.getFechaReserva());
     	if(this.getUsuarioReserva()!=null)

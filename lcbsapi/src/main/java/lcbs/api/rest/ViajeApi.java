@@ -110,7 +110,8 @@ public class ViajeApi extends BaseApi{
 	
 	@POST
 	@Path("/reservapasaje/")
-	public DataReserva ReservarPasaje(DataReserva reserva){
+	public DataReserva ReservarPasaje(DataReservaConvertor pseudoReserva){
+		DataReserva reserva = pseudoReserva.genDataReserva();
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		return repo.ReservarPasaje(reserva, tenant);
 	}
@@ -352,7 +353,7 @@ public class ViajeApi extends BaseApi{
 	@Path("/getpreciodepasaje/{codigoOrigen}/{codigoDestino}/{codigoRecorrido}")
 	public Float getPrecioDePasaje(@PathParam("codigoOrigen") final String codigoOrigen, @PathParam("codigoDestino") final String codigoDestino, @PathParam("codigoRecorrido") final String codigoRecorrido){
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
-		return repo.getPrecioDePasaje(codigoOrigen, codigoDestino, codigoRecorrido,  tenant);
+		return repo.getPrecioDePasaje(codigoOrigen, codigoDestino, codigoRecorrido,  tenant).getMonto();
 	}
 	
 	@GET
@@ -376,5 +377,20 @@ public class ViajeApi extends BaseApi{
 		return repo.cantidadAsientosDisponibles(idViaje, idOrigen, idDestino, tenant);
 	}
 	
+	
+	@POST
+	@Path("/pasajeonlineareserva/")
+	public DataReserva PasajeOnlineAReserva(String data){
+		JSONObject obj = new JSONObject(data);
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.PasajeOnlineAReserva(Integer.valueOf(obj.getString("codigoPasaje")), obj.getString("idUsuario"), tenant);
+	}
+	
+	@GET
+	@Path("/listarviajescambiohorario/{idPasaje}")
+	public List<DataViaje> listarViajesPasajesCambioHorario(@PathParam("idPasaje") final String idPasaje){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.listarViajesCambioHorario(idPasaje, tenant);
+	}
 	
 }

@@ -104,7 +104,7 @@
         }
         
         $scope.buscar = function(){
-            var filtro = $scope.filtro;
+            var filtro = angular.copy($scope.filtro);
             
             if(!filtro['fechaSalida']){
                 mostrarNotificacion('error', 'Debe seleccionar una fecha');
@@ -176,9 +176,21 @@
         }
         
         $scope.procesarReservar = function() {
+        	var viaje = $scope.viaje;
+        	var origen = viaje.recorrido.puntosDeRecorrido[this.comprar.origen];
+            var destino = viaje.recorrido.puntosDeRecorrido[this.comprar.destino];
+
             var pasaje = {
                 viaje : {
                     id : $scope.viaje.id
+                },
+                origen : {
+                    id : origen.id,
+                    tipo : origen.tipo
+                },
+                destino : {
+                    id : destino.id,
+                    tipo : destino.tipo
                 },
                 fechaReserva : moment().format('YYYY-MM-DD')
             };
@@ -192,8 +204,6 @@
             if($scope.ciUsuario){
             	pasaje['ciPersona'] = $scope.ciUsuario;
             };
-            
-            console.log('aaaa');
             
             viajeService.reservar(pasaje).then(function (datos) {
             	mostrarNotificacion('success', 'El pasaje fue reservado con exito.');
@@ -233,6 +243,14 @@
             }).on("select2:unselect", function (evt) { 
               $scope.filtro[evt.currentTarget.name] = null;
             });
+            
+            $('.datepicker').daterangepicker({
+            	singleDatePicker : true,
+            	calender_style : "picker_2",
+            	format : 'DD/MM/YYYY',
+            }).on('apply.daterangepicker', function(ev, picker) {
+            	$scope.filtro[ev.currentTarget.name] = picker.startDate.format('DD/MM/YYYY');
+        	});
         });
     }
 

@@ -186,8 +186,25 @@ public class UsuarioCtrl implements IUsuario {
 		DataConfiguracionEmpresa conf = srvConfiguracionEmpresa.getConfiguracionEmpresa(tenant);
 		if(conf.getUrlLdap() != null){
 			result= srvEmpleado.empleadoPorIdLdap(mail, tenant);
-			if(result == null)
+			if(result == null){
+				MessageDigest md;
+				StringBuffer sb = new StringBuffer();
+				try {
+					md = MessageDigest.getInstance("MD5");
+					md.update(clave.getBytes());
+
+					byte byteData[] = md.digest();
+					sb = new StringBuffer();
+					for (int i = 0; i < byteData.length; i++) {
+						sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+					}
+				} catch (NoSuchAlgorithmException e) {
+					e.printStackTrace();
+				}
+
+				clave = sb.toString();
 				result = srvEmpleado.loginUsuario(mail, clave, tenant);
+			}
 		}else{
 			MessageDigest md;
 			StringBuffer sb = new StringBuffer();

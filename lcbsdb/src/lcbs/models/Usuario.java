@@ -79,6 +79,13 @@ public class Usuario extends Persona implements Serializable{
 	        });
 	    	this.setEncomiendas(auxEnc);
     	}
+    	if(dt.getNotificaciones() != null){
+	    	List<Notificacion> auxEnc = new ArrayList<Notificacion>();
+	    	dt.getNotificaciones().stream().forEach((not) -> {
+	    		auxEnc.add(new Notificacion(not));
+	        });
+	    	this.setNotificaciones(auxEnc);
+    	}
     }
     
     public DataUsuario getDatatype(Boolean conHijos){
@@ -108,6 +115,13 @@ public class Usuario extends Persona implements Serializable{
 	    		auxEnc.add(enc.getDatatype(false));
 	        });
 	    	result.setEncomiendas(auxEnc);
+	    }
+    	if(this.getNotificaciones()!=null){
+	    	List<DataNotificacion> auxEnc = new ArrayList<DataNotificacion>();
+	    	this.getNotificaciones().stream().forEach((not) -> {
+	    		auxEnc.add(not.getDatatype());
+	        });
+	    	result.setNotificaciones(auxEnc);
 	    }
     	return result;
     }

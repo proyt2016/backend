@@ -76,7 +76,7 @@ public class Reserva implements Serializable{
 	    	}
     	}
     	if(dt.getDestino() != null){
-	    	if(this.getDestino() instanceof Terminal){
+	    	if(dt.getDestino() instanceof DataTerminal){
 	    		this.setDestino(new Terminal((DataTerminal)dt.getDestino()));
 	    	}else{
 	    		this.setDestino(new Parada((DataParada)dt.getDestino()));
@@ -101,21 +101,17 @@ public class Reserva implements Serializable{
     	if(this.getPrecio()!=null)
     		result.setPrecio(this.getPrecio().getDatatype());
     	if(this.getOrigen()!=null){
-    	  if(this.getOrigen() instanceof Terminal){
-    	   	if(this.getOrigen()!=null)
-    	   		result.setOrigen(((Terminal)HibernateUtils.initializeAndUnproxy(this.getOrigen())).getDatatype());
+    	  if(HibernateUtils.initializeAndUnproxy(this.getOrigen()) instanceof Terminal){
+	   		result.setOrigen(((Terminal)HibernateUtils.initializeAndUnproxy(this.getOrigen())).getDatatype());
     	  }else{
-    	   	if(this.getOrigen()!=null)
-    	   		result.setOrigen(((Parada)HibernateUtils.initializeAndUnproxy(this.getOrigen())).getDatatype());
+	   		result.setOrigen(((Parada)HibernateUtils.initializeAndUnproxy(this.getOrigen())).getDatatype());
     	  }
     	}
     	if(this.getDestino()!=null){
-    	  if(this.getDestino() instanceof Terminal){
-    	   	if(this.getDestino()!=null)
-    	   		result.setDestino(((Terminal)HibernateUtils.initializeAndUnproxy(this.getDestino())).getDatatype());
+    	  if(HibernateUtils.initializeAndUnproxy(this.getDestino()) instanceof Terminal){
+	   		result.setDestino(((Terminal)HibernateUtils.initializeAndUnproxy(this.getDestino())).getDatatype());
     	  }else{
-    	   	if(this.getDestino()!=null)
-    	   		result.setDestino(((Parada)HibernateUtils.initializeAndUnproxy(this.getDestino())).getDatatype());
+	   		result.setDestino(((Parada)HibernateUtils.initializeAndUnproxy(this.getDestino())).getDatatype());
     	  }
     	}
     	result.setFechaReserva(this.getFechaReserva());

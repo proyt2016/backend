@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    angular.module('lacbus', ['ngRoute', 'ngAnimate', 'toastr']);
+    angular.module('lacbus', ['ngRoute', 'ngAnimate', 'toastr', "pusher-angular"]);
 
     angular.module('lacbus').config(['$routeProvider', 'toastrConfig', configFunction]);
 

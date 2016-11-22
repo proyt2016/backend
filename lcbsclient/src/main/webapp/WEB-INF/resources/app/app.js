@@ -12,7 +12,7 @@
     
     /*@ngInject*/
     function configFunction($routeProvider, $httpProvider, toastrConfig, uiGmapGoogleMapApiProvider, CONFIGURACION) {
-    	$httpProvider.defaults.headers.common['lcbs-tenant'] = CONFIGURACION.tenant_id;
+    	 
     	
         uiGmapGoogleMapApiProvider.configure({
             key: 'AIzaSyBVL227yFvpTa6b0oolhl3PW_BPGLFMnwI',
@@ -84,6 +84,8 @@
         });
     }
     
+    
+    
     function appCtrl($scope, $location, $localStorage, $pusher, toastr) {
         $scope.usuarioLogueado = $localStorage.usuarioLogueado;
         
@@ -93,38 +95,45 @@
         	$location.url('/');
         }
         
-        $scope.$on('localStorage:changed', function(event, data){
-        	$scope.usuarioLogueado = $localStorage.usuarioLogueado;
-        });
-        
-        var client = new Pusher('e782ddf887a873098d22');
-        var pusher = $pusher(client);
-        pusher.subscribe('notificaciones');
-        pusher.bind('nueva-notificacion',
-          function(data) {
-        	toastr.success(data.mensaje, 'Nueva notificacion')
-          }
-        );
+        var binded = false
+		var subscribe = function(usr) {
+			if(binded || !usr)return;
+			binded = true;
+			var client = new Pusher('e782ddf887a873098d22');
+			var pusher = $pusher(client);
+			var tenant = location.hostname.split(".")[0];
+			var channel = btoa(tenant + usr.email.email);
+			pusher.subscribe(channel);
+			var events = [ 'cambio-estado', 'asigna-coche', 'recarga-saldo',
+					'compra', 'cambio-horario', 'transferencia', 'reserva',
+					'uso' ];
+
+			for (var i = 0; i < events.length; i++) {
+				pusher.bind(events[i], function(data) {
+					toastr.success(data.message, data.section);
+				});
+			}
+		}
+		$scope.$on('localStorage:changed', function(event, data) {
+			$scope.usuarioLogueado = $localStorage.usuarioLogueado;
+			subscribe($scope.usuarioLogueado);
+		});
+		subscribe($localStorage.usuarioLogueado);
     }
     
     $.ajax({
-    	//url			: 'http://192.168.43.49:8080/lcbsapi/rest/empresa/getconfirguacionempresa/',
+     
     	url			: '/lcbsapi/rest/empresa/getconfirguacionempresa/',
     	method		: 'GET',
-    	dataType 	: 'json',
-    	headers		: {
-            'lcbs-tenant' : 'f2b21f34-2554-4b83-9bab-4bb3e5e7b03d'
-        }
+    	dataType 	: 'json'
 	}).done(function( configuracion ) {
 		$('head').append('<style>' + configuracion.css + '</style>');
 		
-		configuracion['url'] 		= '/lcbsapi/rest/'; //http://192.168.43.49:8080/lcbsapi/rest/
-		configuracion['tenant_id'] 	= 'f2b21f34-2554-4b83-9bab-4bb3e5e7b03d';
-				
+		configuracion['url'] 		= '/lcbsapi/rest/'; //http://192.168.43.49:8080/lcbsapi/rest/ 
 		angular.element(document).ready(function() {
-	    	app.constant('CONFIGURACION', configuracion);
-	        angular.bootstrap(document, ['lacbus']);
-	    });
+			app.constant('CONFIGURACION', configuracion);
+			angular.bootstrap(document, [ 'lacbus' ]);
+		});
 	});
 
 })();

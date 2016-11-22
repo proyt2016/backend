@@ -6,13 +6,15 @@ public class DataTenant {
 	private String id;
 	private Boolean isActive = true;
 	private Boolean isDelete = false;
+	private DataEmail email;
 	public DataTenant(){}
-	public DataTenant(String id, String name, String domain, Boolean isActive) {
+	public DataTenant(String id, String name, String domain, Boolean isActive, DataEmail email) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.domain = domain;
 		this.isActive = isActive;
+		this.email = email;
 	}
 	public String getName() {
 		return name;
@@ -43,6 +45,12 @@ public class DataTenant {
 	}
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
+	}
+	public DataEmail getEmail() {
+		return email;
+	}
+	public void setEmail(DataEmail email) {
+		this.email = email;
 	}
 	
 }

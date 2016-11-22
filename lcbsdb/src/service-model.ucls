@@ -1,0 +1,800 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.11" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="false" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="lcbs.beans.ReservaSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/ReservaSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="83" x="1774" y="-57"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="lcbs.beans.EntityManagerProducer" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/EntityManagerProducer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="943" y="-35"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="lcbs.beans.EncomiendaSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/EncomiendaSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1243" y="203"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="lcbs.models.ReglaCobroEncomiendaCriteria" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/ReglaCobroEncomiendaCriteria.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="813" y="637"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="lcbs.models.ReglaCobroEncomienda" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/ReglaCobroEncomienda.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="819" y="296"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="lcbs.models.Pasaje" project="lcbsdb" file="/lcbsdb/src/lcbs/models/Pasaje.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1334" y="-21"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="lcbs.beans.VehiculoSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/VehiculoSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="822" y="-35"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="lcbs.beans.GrupoHorarioSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/GrupoHorarioSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1396" y="160"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="lcbs.models.Vehiculo" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/Vehiculo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="818" y="24"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="lcbs.models.HistorialEstadosEncomienda" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/HistorialEstadosEncomienda.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="169" x="1145" y="383"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="lcbs.models.Parada" project="lcbsdb" file="/lcbsdb/src/lcbs/models/Parada.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="1837" y="383"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="lcbs.models.Encomienda" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/Encomienda.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1245" y="297"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="lcbs.models.Reserva" project="lcbsdb" file="/lcbsdb/src/lcbs/models/Reserva.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="1774" y="31"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="lcbs.models.Tenant" project="lcbsdb" file="/lcbsdb/src/lcbs/models/Tenant.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="332" y="31"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="lcbs.beans.ConfiguracionEmpresaSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/ConfiguracionEmpresaSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="194" y="346"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <enumeration id="16" language="java" name="lcbs.models.DiasSemana" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/DiasSemana.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1402" y="616"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </enumeration>  
+  <class id="17" language="java" name="lcbs.models.Cuponera" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/Cuponera.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="456" y="471"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="lcbs.models.Telefono" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/Telefono.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="583" y="635"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="lcbs.models.GrupoHorario" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/GrupoHorario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1398" y="518"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="lcbs.models.Horario" project="lcbsdb" file="/lcbsdb/src/lcbs/models/Horario.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="686" y="429"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="lcbs.models.Recorrido" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/Recorrido.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="1511" y="207"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="lcbs.models.Email" project="lcbsdb" file="/lcbsdb/src/lcbs/models/Email.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="352" y="612"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="lcbs.beans.ReglaCobroEncomiendaSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/ReglaCobroEncomiendaSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="822" y="229"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="lcbs.beans.UsuarioSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/UsuarioSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="558" y="-43"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="lcbs.models.Empleado" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/Empleado.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="354" y="207"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="lcbs.beans.EmpleadoSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/EmpleadoSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="90" x="354" y="119"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="lcbs.models.Precio" project="lcbsdb" file="/lcbsdb/src/lcbs/models/Precio.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="1718" y="295"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="lcbs.beans.CuponeraSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/CuponeraSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="323" y="432"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="lcbs.models.EstadosEncomienda" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/EstadosEncomienda.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1202" y="595"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="lcbs.beans.PasajeSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/PasajeSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="1153" y="-57"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="lcbs.beans.TerminalSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/TerminalSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="83" x="1628" y="207"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="lcbs.models.MantenimientoVehiculo" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/MantenimientoVehiculo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="656" y="23"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="lcbs.models.Usuario" project="lcbsdb" file="/lcbsdb/src/lcbs/models/Usuario.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="523" y="383"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="lcbs.beans.RecorridoSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/RecorridoSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="90" x="1569" y="119"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="lcbs.beans.TenantSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/TenantSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="332" y="-57"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="lcbs.models.PuntoRecorrido" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/PuntoRecorrido.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1858" y="587"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="lcbs.models.ConfiguracionEmpresa" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/ConfiguracionEmpresa.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="190" y="430"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="lcbs.models.Persona" project="lcbsdb" file="/lcbsdb/src/lcbs/models/Persona.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="423" y="305"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="lcbs.beans.ParadaSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/ParadaSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="1877" y="295"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="lcbs.beans.EstadosEncomiendaSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/EstadosEncomiendaSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="143" x="962" y="383"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="lcbs.models.Terminal" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/Terminal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1603" y="416"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="lcbs.models.Perfil" project="lcbsdb" file="/lcbsdb/src/lcbs/models/Perfil.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="-19" y="295"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="lcbs.beans.PerfilSrv" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/beans/PerfilSrv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="-19" y="207"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="lcbs.models.HibernateUtils" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/HibernateUtils.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1605" y="625"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="lcbs.models.Notificacion" project="lcbsdb" 
+    file="/lcbsdb/src/lcbs/models/Notificacion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="85" x="594" y="471"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="lcbs.models.Viaje" project="lcbsdb" file="/lcbsdb/src/lcbs/models/Viaje.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="48" width="77" x="1139" y="119"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="lcbs.beans.ViajeSrv" project="lcbsdb" file="/lcbsdb/src/lcbs/beans/ViajeSrv.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1174" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <dependency id="48">    
+    <bendpoint x="1332" y="119"/>    
+    <bendpoint x="1127" y="207"/>    
+    <bendpoint x="943" y="295"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="33"/>  
+  </dependency>  
+  <dependency id="49">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="33"/>  
+  </dependency>  
+  <dependency id="50">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="51">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="33"/>  
+  </dependency>  
+  <dependency id="52">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <dependency id="53">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="54">    
+    <bendpoint x="964" y="207"/>    
+    <bendpoint x="964" y="295"/>    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="55">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <dependency id="56">    
+    <bendpoint x="931" y="383"/>    
+    <bendpoint x="931" y="471"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="57">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <dependency id="58">    
+    <bendpoint x="1148" y="207"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <dependency id="59">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="41"/>  
+  </dependency>  
+  <dependency id="60">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <dependency id="61">    
+    <bendpoint x="1825" y="119"/>    
+    <bendpoint x="1804" y="207"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <dependency id="62">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="44"/>  
+  </dependency>  
+  <dependency id="63">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="64">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="32"/>  
+  </dependency>  
+  <dependency id="65">    
+    <bendpoint x="1480" y="119"/>    
+    <bendpoint x="1480" y="207"/>    
+    <bendpoint x="1480" y="295"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="41"/>  
+  </dependency>  
+  <dependency id="66">    
+    <bendpoint x="1806" y="383"/>    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="36"/>  
+  </dependency>  
+  <dependency id="67">    
+    <bendpoint x="826" y="119"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <dependency id="68">    
+    <bendpoint x="88" y="295"/>    
+    <bendpoint x="88" y="383"/>    
+    <bendpoint x="88" y="471"/>    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="69">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="70">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="71">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="72">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <dependency id="73">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="37"/>  
+  </dependency>  
+  <dependency id="74">    
+    <bendpoint x="1365" y="383"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="36"/>  
+  </dependency>  
+  <dependency id="75">    
+    <bendpoint x="1666" y="295"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="41"/>  
+  </dependency>  
+  <dependency id="76">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="77">    
+    <bendpoint x="532" y="119"/>    
+    <bendpoint x="532" y="207"/>    
+    <bendpoint x="532" y="295"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="33"/>  
+  </dependency>  
+  <dependency id="78">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="79">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="36"/>  
+  </dependency>  
+  <dependency id="80">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="81">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <dependency id="82">    
+    <bendpoint x="563" y="471"/>    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="83">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="84">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="85">    
+    <bendpoint x="404" y="471"/>    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="86">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="87">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="88">    
+    <bendpoint x="1344" y="383"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="89">    
+    <bendpoint x="1311" y="119"/>    
+    <bendpoint x="1311" y="207"/>    
+    <bendpoint x="1311" y="295"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="44"/>  
+  </dependency>  
+  <dependency id="90">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <dependency id="91">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="92">    
+    <bendpoint x="1958" y="126"/>    
+    <bendpoint x="1992" y="299"/>    
+    <bendpoint x="1996" y="385"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="36"/>  
+  </dependency>  
+  <dependency id="93">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="94">    
+    <bendpoint x="1322" y="471"/>    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="95">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <dependency id="96">    
+    <bendpoint x="1783" y="119"/>    
+    <bendpoint x="1762" y="207"/>    
+    <bendpoint x="1687" y="295"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="41"/>  
+  </dependency>  
+  <dependency id="97">    
+    <bendpoint x="363" y="295"/>    
+    <bendpoint x="363" y="383"/>    
+    <bendpoint x="425" y="471"/>    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="98">    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="46"/>  
+  </dependency>  
+  <dependency id="99">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="38"/>  
+  </dependency>  
+  <dependency id="100">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="101">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="36"/>  
+  </dependency>  
+  <dependency id="102">    
+    <bendpoint x="1804" y="119"/>    
+    <bendpoint x="1825" y="207"/>    
+    <bendpoint x="1984" y="295"/>    
+    <bendpoint x="1984" y="383"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="36"/>  
+  </dependency>  
+  <dependency id="103">    
+    <bendpoint x="1846" y="119"/>    
+    <bendpoint x="1846" y="207"/>    
+    <bendpoint x="1846" y="295"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="104">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="105">    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="42"/>  
+  </dependency>  
+  <dependency id="106">    
+    <bendpoint x="1741" y="119"/>    
+    <bendpoint x="1741" y="207"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <dependency id="107">    
+    <bendpoint x="1301" y="471"/>    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="108">    
+    <bendpoint x="1645" y="295"/>    
+    <bendpoint x="1785" y="383"/>    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="36"/>  
+  </dependency>  
+  <dependency id="109">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="38"/>  
+  </dependency>  
+  <dependency id="110">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="111">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="112">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="113">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="114">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="44"/>  
+  </dependency>  
+  <dependency id="115">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="116">    
+    <bendpoint x="511" y="119"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <dependency id="117">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="118">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="45"/>  
+  </dependency>  
+  <dependency id="119">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="120">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="41"/>  
+  </dependency>  
+  <dependency id="121">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="31"/>  
+  </dependency>  
+  <dependency id="122">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="123">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="14"/>  
+  </dependency>  
+  <dependency id="124">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="42"/>  
+  </dependency>  
+  <dependency id="125">    
+    <bendpoint x="1762" y="119"/>    
+    <bendpoint x="1783" y="207"/>    
+    <bendpoint x="1825" y="295"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false" static="false"/>    
+    <operations public="false" package="false" protected="false" private="false" static="false"/>  
+  </classifier-display>  
+  <association-display labels="false" multiplicity="false"/>
+</class-diagram>

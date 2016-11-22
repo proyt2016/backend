@@ -3,14 +3,24 @@ package lcbs.controllers;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.EJB;
-import interfaces.IUsuario;
-import lcbs.interfaces.*;
-import lcbs.shares.*;
-
 import javax.ejb.Stateless;
+
+import interfaces.IUsuario;
+import lcbs.interfaces.ConfiguracionEmpresaLocalApi;
+import lcbs.interfaces.CuponeraLocalApi;
+import lcbs.interfaces.EmpleadoLocalApi;
+import lcbs.interfaces.PerfilLocalApi;
+import lcbs.interfaces.UsuarioLocalApi;
+import lcbs.shares.DataConfiguracionEmpresa;
+import lcbs.shares.DataCuponera;
+import lcbs.shares.DataEmpleado;
+import lcbs.shares.DataNotificacion;
+import lcbs.shares.DataPerfil;
+import lcbs.shares.DataTenant;
+import lcbs.shares.DataUsuario;
+import lcbs.utils.NotificationHandler;
 
 /**
  * Session Bean implementation class UsuarioSrv
@@ -33,6 +43,8 @@ public class UsuarioCtrl implements IUsuario {
 	@EJB(lookup = "java:app/lcbsdb/ConfiguracionEmpresaSrv!lcbs.interfaces.ConfiguracionEmpresaLocalApi")
 	ConfiguracionEmpresaLocalApi srvConfiguracionEmpresa;
 
+	@EJB
+	NotificationHandler nHandler;
 	@Override
 	public DataUsuario AltaUsuario(DataUsuario usuario, DataTenant tenant) {
 		DataCuponera cuponera = new DataCuponera();
@@ -68,6 +80,8 @@ public class UsuarioCtrl implements IUsuario {
 		DataCuponera cuponera = usuario.getCuponera();
 		cuponera.setSaldo(cuponera.getSaldo() + saldo);
 		srvCuponera.modificarCuponera(cuponera, tenant);
+		nHandler.sendNotification(usuario, "Cuponera", "recarga-saldo", "Se acredito su recarga de: " + saldo,
+				tenant);
 	}
 
 	@Override

@@ -16,7 +16,7 @@
 
         <tbody>
           <tr ng-class-odd="'odd'" ng-class-even="'even'" class="pointer" ng-repeat="tenant in tenants">
-            <td ng-repeat="header in headers">{{tenant[header]}}</td>
+            <td ng-repeat="header in headers">{{(header === "email")?tenant[header].email : tenant[header]}}</td>
             <td class="last">
             	<a href="javascript:void(0)" ng-click="deleteT(tenant);">Delete</a>|
             	<a href="javascript:void(0)" ng-click="toggleActiation(tenant);">{{!tenant.isActive? 'Activate':'Deactivate'}}</a>

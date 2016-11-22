@@ -28,15 +28,17 @@ public class Tenant implements Serializable {
 	private String domain; 
 	private Boolean isActive;
 	private Boolean isDelete; 
+	private Email email;
 	public Tenant(){
 		super();
 	}
-	public Tenant(String id, String name, String domain, Boolean isActive) {
+	public Tenant(String id, String name, String domain, Boolean isActive, Email email) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.domain = domain;
 		this.isActive = isActive;
+		this.email = email;
 	}
 	 public Tenant(DataTenant dt){
 		 this.setId(dt.getId());
@@ -44,10 +46,17 @@ public class Tenant implements Serializable {
 		 this.setIsActive(dt.getIsActive());
 		 this.setIsDelete(dt.getIsDelete());
 		 this.setName(dt.getName());
+		 this.setEmail(new Email(dt.getEmail()));
 	 }
 	    
-    public DataTenant getDatatype(){
-    	DataTenant dt = new DataTenant(this.id, this.name, this.domain, this.isActive);
+    public void setEmail(Email email) {
+    	this.email = email;	
+	}
+    public Email getEmail() {
+    	return this.email;	
+	}
+	public DataTenant getDatatype(){
+    	DataTenant dt = new DataTenant(this.id, this.name, this.domain, this.isActive, this.email.getDatatype());
     	dt.setIsDelete(this.isDelete);
     	return dt;
     }

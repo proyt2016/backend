@@ -29,7 +29,7 @@ import lcbs.shares.DataTenant;
 
 @Interceptors ({TenantIntercept.class})
 public class RecorridoSrv implements RecorridoLocalApi {
-	private static final Log log = LogFactory.getLog(TerminalSrv.class);
+	private static final Log log = LogFactory.getLog(RecorridoSrv.class);
 	@Inject
 	EntityManager em;
 

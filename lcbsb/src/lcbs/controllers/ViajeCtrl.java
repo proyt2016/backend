@@ -12,16 +12,38 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
-import interfaces.IViaje;
-import lcbs.beans.EncomiendaSrv;
-import lcbs.interfaces.*;
-import lcbs.models.DiasSemana;
-import lcbs.shares.*;
-
 import javax.ejb.Stateless;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import interfaces.IViaje;
+import lcbs.interfaces.ConfiguracionEmpresaLocalApi;
+import lcbs.interfaces.ParadaLocalApi;
+import lcbs.interfaces.PasajeLocalApi;
+import lcbs.interfaces.RecorridoLocalApi;
+import lcbs.interfaces.ReservaLocalApi;
+import lcbs.interfaces.TerminalLocalApi;
+import lcbs.interfaces.UsuarioLocalApi;
+import lcbs.interfaces.VehiculoLocalApi;
+import lcbs.interfaces.ViajeLocalApi;
+import lcbs.shares.DataConfiguracionEmpresa;
+import lcbs.shares.DataDiasSemana;
+import lcbs.shares.DataGrupoHorario;
+import lcbs.shares.DataHorario;
+import lcbs.shares.DataParada;
+import lcbs.shares.DataPasaje;
+import lcbs.shares.DataPasajeConvertor;
+import lcbs.shares.DataPrecio;
+import lcbs.shares.DataPuntoRecorrido;
+import lcbs.shares.DataRecorrido;
+import lcbs.shares.DataReserva;
+import lcbs.shares.DataTenant;
+import lcbs.shares.DataTerminal;
+import lcbs.shares.DataUsuario;
+import lcbs.shares.DataVehiculo;
+import lcbs.shares.DataViaje;
+import lcbs.utils.NotificationHandler;
 
 /**
  * Session Bean implementation class ViajeSrv
@@ -57,7 +79,8 @@ public class ViajeCtrl implements IViaje {
 	
 	@EJB(lookup = "java:app/lcbsdb/VehiculoSrv!lcbs.interfaces.VehiculoLocalApi")
 	VehiculoLocalApi srvVehiculo;
-	
+	@EJB
+	NotificationHandler nHandler;
 	@Override
 	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina, DataTenant tenant){
 		return srvPasaje.obtenerTotalPasajesVendidos(fecha, pagina, elementosPagina, tenant);
@@ -76,6 +99,10 @@ public class ViajeCtrl implements IViaje {
 		DataPrecio precioPasae = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
 		pasaje.setPrecio(precioPasae);
 		DataPasaje nuevoPasaje = srvPasaje.crearPasaje(pasaje, tenant);
+		if(!nuevoPasaje.getComprador().equals(null)){
+			nHandler.sendNotification(nuevoPasaje.getComprador(), "Pasajes", "compra", "Compra realizada con exito: " + nuevoPasaje.getDestino().getNombre(),
+					tenant);
+		}
 		return nuevoPasaje;
 
 	}
@@ -102,7 +129,10 @@ public class ViajeCtrl implements IViaje {
 		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje, tenant);
 		pasajeAModificar.setViaje(viajeAAsignar);
 		srvPasaje.modificarPasaje(pasajeAModificar, tenant);
-
+		if(!pasajeAModificar.getComprador().equals(null)){
+			nHandler.sendNotification(pasajeAModificar.getComprador(), "Pasajes", "cambio-horario", "Horario modificado con exito: " + pasajeAModificar.getDestino().getNombre(),
+					tenant);
+		}
 	}
 
 	@Override
@@ -111,8 +141,11 @@ public class ViajeCtrl implements IViaje {
 		DataPrecio precioPasae = getPrecioDePasaje(reserva.getOrigen().getId(), reserva.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
 		reserva.setPrecio(precioPasae);
 		DataReserva nuevaReserva = srvReserva.crearReserva(reserva, tenant);
+		if(!nuevaReserva.getUsuarioReserva().equals(null)){
+			nHandler.sendNotification(nuevaReserva.getUsuarioReserva(), "Pasajes", "reserva", "Reserva realizada con exito: " + nuevaReserva.getDestino().getNombre(),
+					tenant);
+		}
 		return nuevaReserva;
-
 	}
 	
 	@Override
@@ -136,13 +169,28 @@ public class ViajeCtrl implements IViaje {
 	public void TransferirPasajeComprado(String idPasaje, String idUsuario, DataTenant tenant) {
 		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje, tenant);
 		DataUsuario usuarioAAsignar = srvUsuario.getUsuario(idUsuario, tenant);
+		DataUsuario anterior = pasajeAModificar.getComprador();
 		pasajeAModificar.setComprador(usuarioAAsignar);
 		srvPasaje.modificarPasaje(pasajeAModificar, tenant);
+		if(!anterior.equals(null)){
+			nHandler.sendNotification(anterior, "Pasajes", "transferencia", "Uds transfirio el pasaje a: " + pasajeAModificar.getDestino().getNombre() + " a "+usuarioAAsignar.getEmail(),
+					tenant);
+		}
+		if(!usuarioAAsignar.equals(null)){
+			nHandler.sendNotification(usuarioAAsignar, "Pasajes", "transferencia", "Uds recibio un pasaje a: " + pasajeAModificar.getDestino().getNombre() + " de "+anterior.getEmail(),
+					tenant);
+		}
 	}
 
 	@Override
 	public void CancelarReserva(String idReserva, DataTenant tenant) {
+		DataReserva recerva = srvReserva.getReserva(idReserva, tenant);
 		srvReserva.darBajaReserva(idReserva, tenant);
+		if(!recerva.getUsuarioReserva().equals(null)){
+			nHandler.sendNotification(recerva.getUsuarioReserva(), "Pasajes", "reserva", "Uds cancelo: " + recerva.getDestino().getNombre(),
+					tenant);
+		}
+		
 	}
 
 	@Override
@@ -155,6 +203,10 @@ public class ViajeCtrl implements IViaje {
 		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje, tenant);
 		pasajeAModificar.setUsado(true);
 		pasajeAModificar.setPago(true);
+		if(!pasajeAModificar.getComprador().equals(null)){
+			nHandler.sendNotification(pasajeAModificar.getComprador(), "Pasajes", "uso", "Uds viajo: " + pasajeAModificar.getDestino().getNombre(),
+					tenant);
+		}
 		srvPasaje.modificarPasaje(pasajeAModificar, tenant);
 	}
 
@@ -243,7 +295,12 @@ public class ViajeCtrl implements IViaje {
 		pasajeACrear.setViaje(reserva.getViaje());
 		reserva.setUtilizada(true);
 		srvReserva.modificarReserva(reserva, tenant);
-		return srvPasaje.crearPasaje(pasajeACrear, tenant);
+		pasajeACrear = srvPasaje.crearPasaje(pasajeACrear, tenant);
+		if(!pasajeACrear.getComprador().equals(null)){
+			nHandler.sendNotification(pasajeACrear.getComprador(), "Pasajes", "reserva", "Uds compro el pasaje a : " + pasajeACrear.getDestino().getNombre(),
+					tenant);
+		}
+		return pasajeACrear;
 	}
 
 	@Override

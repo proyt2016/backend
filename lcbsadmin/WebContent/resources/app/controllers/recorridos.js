@@ -20,7 +20,8 @@
             if(id){
                 recorridosService.getId(id).then(function (data) {
                     $scope.recorrido = data;
-                    $scope.puntosDelRecorrido = data.puntosDeRecorrido;
+                    if(data.puntosDeRecorrido)
+                      $scope.puntosDelRecorrido = data.puntosDeRecorrido;
                 });
             }else{
                 recorridosService.getAll().then(function (data) {

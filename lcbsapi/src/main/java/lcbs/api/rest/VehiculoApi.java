@@ -89,7 +89,7 @@ import lcbs.shares.DataVehiculo;
 	}
 	
 	@GET
-	@Path("/getvehiculo/{nroVehiculo}")
+	@Path("/obtenervehiculopornumero/{nroVehiculo}")
 	@TenantChecked public DataVehiculo obtenerVehiculoPorNumero(@PathParam("nroVehiculo")final String nroVehiculo){
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		return repo.obtenerVehiculoPorNumero(nroVehiculo, tenant);

@@ -33,15 +33,16 @@
     		service.create($scope.tenantTmp).then(function(data){
     			$scope.tenantTmp = new factory();
     			location.href = "#/tenant";
-    		}, function(){
-    			toastr.error("Error intente más tarde", "Error");
+    			toastr.success("Cambio realizado con exito", "Accion");
+    		}, function(error){
+    			toastr.error(error, "Error");
     		});
     	};
     	$scope.list= function(){
     		service.list().then(function(list){
     			$scope.tenants = list;
-    		}, function(){
-    			toastr.error("Error intente más tarde", "Error");
+    		}, function(error){
+    			toastr.error(error, "Error");
     		});
     	};
     	$scope.toggleActiation = function(tenant){
@@ -57,8 +58,9 @@
 
         			tenant.isActive = status;
     			},0); 
+    			toastr.success("Cambio realizado con exito", "Accion");
     		}, function(){
-    			toastr.error("Error intente más tarde", "Error");
+    			toastr.error(error, "Error");
     		});
     	};
     	var deactivate= function(tenant){
@@ -67,8 +69,9 @@
 
         			tenant.isActive = status;
     			},0); 
+    			toastr.success("Cambio realizado con exito", "Accion");
     		}, function(){
-    			toastr.error("Error intente más tarde", "Error");
+    			toastr.error(error, "Error");
     		});
     	};
     	$scope.deleteT= function(tenant){
@@ -77,8 +80,9 @@
 
         			tenant.isActive = status;
     			},0); 
+    			toastr.success("Cambio realizado con exito", "Accion");
     		}, function(){
-    			toastr.error("Error intente más tarde", "Error");
+    			toastr.error(error, "Error");
     		});
     	};
     	$scope.list();

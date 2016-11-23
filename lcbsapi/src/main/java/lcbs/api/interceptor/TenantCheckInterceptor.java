@@ -30,12 +30,12 @@ public class TenantCheckInterceptor implements javax.ws.rs.container.ContainerRe
 		 try{
 			 DataTenant tenant = repo.get(filter);
 			 if(tenant == null){
-				 throw new ForbiddenException();
+				 throw new ForbiddenException("Servicio no disponible");
 			 }else{
 				 requestContext.setProperty("tenant", tenant);
 			 }
 		 }catch(TenantException e){
-			 throw new ForbiddenException();
+			 throw new ForbiddenException("No permitido");
 		 } 
     } 
 

@@ -127,7 +127,12 @@ public class EncomiendaCtrl implements IEncomienda {
 		srvEncomienda.modificarEncomienda(encomienda, tenant);
 		if (encomienda.getEmisor() != null) {
 			nHandler.sendNotification(encomienda.getEmisor(), "Encomiendas", "cambio-estado",
-					"Encomienda  #" + idEncomienda + " estado " + dataEstado.getNombre(), tenant);
+					"Encomienda  #" +  encomienda.getCodigoEncomienda() + " estado " + dataEstado.getNombre(), tenant);
+
+		}
+		if (encomienda.getReceptor() != null) {
+			nHandler.sendNotification(encomienda.getReceptor(), "Encomiendas", "cambio-estado",
+					"Se le envio la encomienda  #" + encomienda.getCodigoEncomienda() + " estado " + dataEstado.getNombre(), tenant);
 
 		}
 	}
@@ -152,7 +157,11 @@ public class EncomiendaCtrl implements IEncomienda {
 		srvVehiculo.modificarVehiculo(coche, tenant);
 		if (encomienda.getEmisor() != null) {
 			nHandler.sendNotification(encomienda.getEmisor(), "Encomiendas", "asigna-coche",
-					"Encomienda  #" + IdEncomienda + " en coche " + coche.getMatricula(), tenant);
+					"Encomienda  #" + encomienda.getCodigoEncomienda() + " en coche " + coche.getMatricula(), tenant);
+		}
+		if (encomienda.getReceptor() != null) {
+			nHandler.sendNotification(encomienda.getReceptor(), "Encomiendas", "asigna-coche",
+					"Encomienda  #" + encomienda.getCodigoEncomienda() + " en coche " + coche.getMatricula(), tenant);
 		}
 	}
 

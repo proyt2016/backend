@@ -71,6 +71,9 @@ public class UsuarioSrv implements UsuarioLocalApi {
 
 	public DataUsuario getUsuario(String id, DataTenant tenant) {
 		Session session = (Session) em.getDelegate();
+		if (session.get(Usuario.class, id) == null) {
+			throw new IllegalArgumentException("El usuario no existe");
+		}
 		Usuario realObj = (Usuario) session.get(Usuario.class, id);
 		return realObj.getDatatype(true);
 	}

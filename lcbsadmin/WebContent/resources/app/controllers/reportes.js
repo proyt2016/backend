@@ -6,7 +6,7 @@
     	if(!$localStorage.empleadoLogueado){
 			$location.url('/login');
 		}
-    	
+    	$scope.monto = 0;
         var dataPorNuevo = [];
         var ArrayPasajes = [];
           var arrayOrdenado = [];
@@ -58,8 +58,12 @@ if($location.path() == '/reportes/reportesPasajes'){
     arrayOrdenado = [];
         reportesService.getPasajesVendidos().then(function (data) {
             dataPorNuevo = data;
+            var montoTotal = 0;
             for(var p in dataPorNuevo){
                 var nodo = dataPorNuevo[p];
+                if(nodo.pago){
+                	montoTotal+=nodo.precio.monto;	
+                }
                 var fecha = moment(nodo['fechaCompra']);
 
                 var key = fecha.format('DDMMYYYY');
@@ -73,7 +77,7 @@ if($location.path() == '/reportes/reportesPasajes'){
                     };
                 }
             }
-           
+           $scope.monto = montoTotal;
            dibujarGraficaNuevos();
         });
        
@@ -133,9 +137,12 @@ if($location.path() == '/reportes/reportesEncomiendas'){
      arrayOrdenado = [];
     reportesService.getEncomiendasPagas().then(function (data) {
                 dataPorNuevo = data;
-           
+                var montoTotal = 0;
                 for(var p in dataPorNuevo){
                 var nodo = dataPorNuevo[p];
+                if(nodo.paga){
+                	montoTotal+=nodo.precio;
+                }
                 var fecha = moment(nodo['fechaEntrega']);
                 var key = fecha.format('DDMMYYYY');
                 if(arrayOrdenado[key]){
@@ -147,6 +154,8 @@ if($location.path() == '/reportes/reportesEncomiendas'){
                     };
                 }
             }
+
+                $scope.monto = montoTotal;
                  dibujarGraficaNuevos();
 
 

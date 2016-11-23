@@ -26,7 +26,7 @@
                 defer.resolve(tenantList);
             })
             .error(function(){
-                defer.reject('server error')
+                defer.reject('Imposible listar tenants')
             });
 
             return defer.promise;
@@ -39,7 +39,7 @@
                 defer.resolve(tenant);
             })
             .error(function(){
-                defer.reject('server error')
+                defer.reject('Imposible crear tenant')
             });
 
             return defer.promise;
@@ -51,7 +51,7 @@
                 defer.resolve(tenant);
             })
             .error(function(){
-                defer.reject('server error')
+                defer.reject('Imposible ejecutar accion: \'activar\'');
             });
 
             return defer.promise;
@@ -63,7 +63,9 @@
                 defer.resolve(tenant);
             })
             .error(function(){
-                defer.reject('server error')
+
+                defer.reject('Imposible ejecutar accion: \'desactivar\'');
+       
             });
 
             return defer.promise;
@@ -75,7 +77,7 @@
                 defer.resolve(tenant);
             })
             .error(function(){
-                defer.reject('server error')
+                defer.reject('Imposible ejecutar accion: \'borrar\'');
             });
 
             return defer.promise;

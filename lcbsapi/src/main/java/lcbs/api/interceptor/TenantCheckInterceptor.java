@@ -1,20 +1,23 @@
 package lcbs.api.interceptor;
 
 import javax.ejb.EJB;
+import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.ext.Provider;
 
 import lcbs.api.service.TenantRepo;
+import lcbs.exceptions.TenantException;
 import lcbs.shares.DataTenant;
 @Provider
-@TenantChecked
+@TenantChecked 
 public class TenantCheckInterceptor implements javax.ws.rs.container.ContainerRequestFilter {
 	
 	@EJB
 	TenantRepo repo; 
     @Override
     public void filter(ContainerRequestContext requestContext){
-    	 String id = requestContext.getHeaderString("lcbs-tenant");
+     
+    	 String id = requestContext.getHeaderString("lcbs-tenant"); 
     	 String host =  requestContext.getHeaderString("host");
 		 DataTenant filter = new DataTenant();
 		 if(id != null && !id.isEmpty()){
@@ -22,10 +25,18 @@ public class TenantCheckInterceptor implements javax.ws.rs.container.ContainerRe
 		 }else{
 			 filter.setDomain(host); 	 
 		 }
-		 
-		 DataTenant tenant = repo.get(filter);
-		 requestContext.setProperty("tenant", tenant);
-		 //TODO: abort here if not tenant is available for information provided in the header.
+		 filter.setIsActive(true);
+		 filter.setIsDelete(false);
+		 try{
+			 DataTenant tenant = repo.get(filter);
+			 if(tenant == null){
+				 throw new ForbiddenException("Servicio no disponible");
+			 }else{
+				 requestContext.setProperty("tenant", tenant);
+			 }
+		 }catch(TenantException e){
+			 throw new ForbiddenException("No permitido");
+		 } 
     } 
 
 }

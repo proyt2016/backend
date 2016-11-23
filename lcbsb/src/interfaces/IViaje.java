@@ -1,14 +1,24 @@
 package interfaces;
 
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
-import lcbs.shares.*;
+import lcbs.exceptions.UserException;
+import lcbs.exceptions.ViajeException;
+import lcbs.shares.DataGrupoHorario;
+import lcbs.shares.DataParada;
+import lcbs.shares.DataPasaje;
+import lcbs.shares.DataPasajeConvertor;
+import lcbs.shares.DataPrecio;
+import lcbs.shares.DataPuntoRecorrido;
+import lcbs.shares.DataRecorrido;
+import lcbs.shares.DataReserva;
+import lcbs.shares.DataTenant;
+import lcbs.shares.DataTerminal;
+import lcbs.shares.DataViaje;
 public interface IViaje {
 	
-	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant) throws ParseException;
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant) throws ViajeException;
 	public DataPasaje ComprarPasaje(DataPasaje pasaje, DataTenant tenant);
 	public void CambiarHorarioPasaje(String idPasaje, String viaje, DataTenant tenant);
 	public DataReserva ReservarPasaje(DataReserva reserva, DataTenant tenant);
@@ -51,12 +61,12 @@ public interface IViaje {
 	public void borrarHorarioRecorrido(String idRecorrido, String idHorario, DataTenant tenant);
 	public DataPrecio getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant);
 	public void crearViajesNuevoRecorrido(String recorridoId, DataTenant tenant);
-	public void crearViajesParaRecorridos(DataTenant tenant) throws ParseException;
+	public void crearViajesParaRecorridos(DataTenant tenant) throws ViajeException;
 	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina, DataTenant tenant);
 	public Integer cantidadAsientosDisponibles(String idViaje, String idOrigen, String idDestino, DataTenant tenant);
 	public DataReserva PasajeOnlineAReserva(Integer codigoPasaje, String idUsuario, DataTenant tenant);
 	public List<DataViaje> listarViajesCambioHorario(String idPasaje, DataTenant tenant);
-	public DataPasaje comprarPasajeStripe(DataPasaje pasaje, DataTenant tenant);
+	public DataPasaje comprarPasajeStripe(DataPasaje pasaje, DataTenant tenant) throws UserException;
 	public DataPasaje comprarPasajeCuponera(DataPasaje pasaje, DataTenant tenant) throws Exception;
 	public List<DataReserva> buscarReservas(DataReserva filtro, DataTenant tenant);
 	public void cargarTarjeta(String idUsuario, Float cargo, DataTenant tenant);

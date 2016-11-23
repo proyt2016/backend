@@ -1,9 +1,9 @@
 package lcbs.exceptions;
 
-public class TenantException extends Exception {
+public class UserException extends Exception {
 	private static final long serialVersionUID = 1L;
 	public int code = 0 ;
-	public TenantException(String message, int code) {
+	public UserException(String message, int code) {
         super(message);
         this.code = code;
     }

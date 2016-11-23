@@ -1,17 +1,31 @@
 ﻿(function () {
 
     var app = angular.module('lacbus', ['ngRoute', 'ngAnimate', 'toastr', 'ngStorage', 'pusher-angular', 'uiGmapgoogle-maps']);
-
     app.config(['$routeProvider', '$httpProvider', 'toastrConfig', 'uiGmapGoogleMapApiProvider', 'CONFIGURACION', configFunction]);
-    
+   
     app.controller('appCtrl', ['$scope', '$location', '$localStorage', '$pusher', 'toastr', appCtrl]);
     
-    app.run(function(CONFIGURACION) {
-	  Stripe.setPublishableKey(CONFIGURACION.stripePublicKey);
+    app.run(function(CONFIGURACION, toastr) {
+    	if(CONFIGURACION.error){
+    		toastr.error("Aplicacion no habilitada", "Servicio no disponible");
+    	}else{
+    		Stripe.setPublishableKey(CONFIGURACION.stripePublicKey);
+    	}
 	});
     
     /*@ngInject*/
-    function configFunction($routeProvider, $httpProvider, toastrConfig, uiGmapGoogleMapApiProvider, CONFIGURACION) {  	
+ 
+    function configFunction($routeProvider, $httpProvider, toastrConfig, uiGmapGoogleMapApiProvider, CONFIGURACION, errorHandlerProvider) {  	
+    	$httpProvider.interceptors.push(function() { 
+  		  return {
+  		   'requestError': function(config) {
+  			 alert("Servicio no disponible", "Error");
+  		    },
+  		    'responseError': function(response) {
+  		    	alert("Servicio no disponible", "Error");
+  		    }
+  		  };
+  		});
         uiGmapGoogleMapApiProvider.configure({
             key: 'AIzaSyBVL227yFvpTa6b0oolhl3PW_BPGLFMnwI',
             v: '3.20', //defaults to latest 3.X anyhow
@@ -22,64 +36,64 @@
             positionClass: 'toast-top-center',
             timeOut: 2500
         });
+        if(!CONFIGURACION.error){
+        	// Routes
+            $routeProvider.when('/', {
+                templateUrl : 'app/views/home.html',
+                controller  : 'homeCtrl'
+            }).otherwise({
+                redirectTo  : '/'
+            });
 
-        // Routes
-        $routeProvider.when('/', {
-            templateUrl : 'app/views/home.html',
-            controller  : 'homeCtrl'
-        }).otherwise({
-            redirectTo  : '/'
-        });
+            $routeProvider.when('/login', {
+                templateUrl: 'app/views/login.html',
+                controller: 'loginCtrl'
+            });
 
-        $routeProvider.when('/login', {
-            templateUrl: 'app/views/login.html',
-            controller: 'loginCtrl'
-        });
+            $routeProvider.when('/registro', {
+                templateUrl: 'app/views/registro.html',
+                controller: 'registroCtrl'
+            });
 
-        $routeProvider.when('/registro', {
-            templateUrl: 'app/views/registro.html',
-            controller: 'registroCtrl'
-        });
+            $routeProvider.when('/detalle/:id', {
+                templateUrl: 'app/views/detalle.html',
+                controller: 'detalleCtrl'
+            });
 
-        $routeProvider.when('/detalle/:id', {
-            templateUrl: 'app/views/detalle.html',
-            controller: 'detalleCtrl'
-        });
+            $routeProvider.when('/comprar/:id', {
+                templateUrl: 'app/views/comprar.html',
+                controller: 'comprarCtrl'
+            });
 
-        $routeProvider.when('/comprar/:id', {
-            templateUrl: 'app/views/comprar.html',
-            controller: 'comprarCtrl'
-        });
+            $routeProvider.when('/encomiendas', {
+                templateUrl: 'app/views/encomienda.html',
+                controller: 'encomiendaCtrl'
+            });
 
-        $routeProvider.when('/encomiendas', {
-            templateUrl: 'app/views/encomienda.html',
-            controller: 'encomiendaCtrl'
-        });
+            $routeProvider.when('/cuponera', {
+                templateUrl: 'app/views/cuponera.html',
+                controller: 'cuponeraCtrl'
+            });
 
-        $routeProvider.when('/cuponera', {
-            templateUrl: 'app/views/cuponera.html',
-            controller: 'cuponeraCtrl'
-        });
+            $routeProvider.when('/historial-compra', {
+                templateUrl: 'app/views/historial-compra.html',
+                controller: 'historialCompraCtrl'
+            }); 
+            $routeProvider.when('/historial-reserva', {
+                templateUrl: 'app/views/historial-reserva.html',
+                controller: 'historialReservaCtrl'
+            });
 
-        $routeProvider.when('/historial-compra', {
-            templateUrl: 'app/views/historial-compra.html',
-            controller: 'historialCompraCtrl'
-        });
+            $routeProvider.when('/comprar-reserva/:id', {
+                templateUrl: 'app/views/comprar-reserva.html',
+                controller: 'comprarReservaCtrl'
+            });
 
-        $routeProvider.when('/historial-reserva', {
-            templateUrl: 'app/views/historial-reserva.html',
-            controller: 'historialReservaCtrl'
-        });
-
-        $routeProvider.when('/comprar-reserva/:id', {
-            templateUrl: 'app/views/comprar-reserva.html',
-            controller: 'comprarReservaCtrl'
-        });
-
-        $routeProvider.when('/historial-notifacion', {
-            templateUrl: 'app/views/historial-notificacion.html',
-            controller: 'historialNotificacionCtrl'
-        });
+            $routeProvider.when('/historial-notifacion', {
+                templateUrl: 'app/views/historial-notificacion.html',
+                controller: 'historialNotificacionCtrl'
+            });	
+        }
     }
     
     function appCtrl($scope, $location, $localStorage, $pusher, toastr) {
@@ -123,12 +137,18 @@
     	dataType 	: 'json'
 	}).done(function( configuracion ) {
 		$('head').append('<style>' + configuracion.css + '</style>');
-		
 		configuracion['url'] 		= '/lcbsapi/rest/'; //http://192.168.43.49:8080/lcbsapi/rest/ 
 		angular.element(document).ready(function() {
 			app.constant('CONFIGURACION', configuracion);
 			angular.bootstrap(document, [ 'lacbus' ]);
 		});
+	}).error(function(error){
+		if(error.status===403){
+			angular.element(document).ready(function() {
+				app.constant('CONFIGURACION', {error: true});
+				angular.bootstrap(document, [ 'lacbus' ]);
+			});
+		}
 	});
 
 })();

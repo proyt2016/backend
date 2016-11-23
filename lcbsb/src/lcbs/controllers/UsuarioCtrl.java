@@ -138,17 +138,20 @@ public class UsuarioCtrl implements IUsuario {
 	public DataEmpleado AltaEmpleado(DataEmpleado empleado, DataTenant tenant) throws UserException {
 		MessageDigest md;
 		StringBuffer sb = new StringBuffer();
-		try {
-			md = MessageDigest.getInstance("MD5");
-			md.update(empleado.genClave().getBytes());
-
-			byte byteData[] = md.digest();
-			sb = new StringBuffer();
-			for (int i = 0; i < byteData.length; i++) {
-				sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+		DataConfiguracionEmpresa conf = srvConfiguracionEmpresa.getConfiguracionEmpresa(tenant);
+		if (conf.getUrlLdap() != null) {
+			try {
+				md = MessageDigest.getInstance("MD5");
+				md.update(empleado.genClave().getBytes());
+	
+				byte byteData[] = md.digest();
+				sb = new StringBuffer();
+				for (int i = 0; i < byteData.length; i++) {
+					sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+				}
+			} catch (NoSuchAlgorithmException e) {
+				throw new UserException("Contrase invalida", 2);
 			}
-		} catch (NoSuchAlgorithmException e) {
-			throw new UserException("Contrase invalida", 2);
 		}
 
 		empleado.setClave(sb.toString());

@@ -1,33 +1,37 @@
 package interfaces;
 
 import java.util.List;
-import java.util.Map;
 
-import lcbs.shares.*;
+import lcbs.exceptions.UserException;
+import lcbs.shares.DataEmpleado;
+import lcbs.shares.DataNotificacion;
+import lcbs.shares.DataPerfil;
+import lcbs.shares.DataTenant;
+import lcbs.shares.DataUsuario;
 public interface IUsuario {
 	
-	public DataUsuario loginUsuario(String usuario, String clave, DataTenant tenant);
-	public DataUsuario getUsuario(String idUsuario, DataTenant tenant);
-	public DataUsuario AltaUsuario(DataUsuario usuario, DataTenant tenant);
-	public void ModificarUsuario(DataUsuario usuario, DataTenant tenant);
-	public void BajaUsuario(String idUsuario, DataTenant tenant);
-	public DataEmpleado loginEmpleado(String usuario, String clave, DataTenant tenant);
-	public DataEmpleado getEmpleado(String idEmpleado, DataTenant tenant);
-	public DataEmpleado AltaEmpleado(DataEmpleado empleado, DataTenant tenant);
-	public List<DataEmpleado> listarEmpleados(Integer pagina, Integer elementosPagina, DataTenant tenant);
-	public void ModificarEmpleado(DataEmpleado empleado, DataTenant tenant);
-	public void BajaEmpleado(String idEmpleado, DataTenant tenant);
-	public void CargarSaldoCuponera(String idUsuario, Float saldo, DataTenant tenant);
-	public List<DataNotificacion> listarNotificaciones(String idUsuario, DataTenant tenant);
-	public DataPerfil getPerfil(String idPerfil, DataTenant tenant);
-	public DataPerfil AltaPerfil(DataPerfil perfil, DataTenant tenant);
-	public void EditarPerfil(DataPerfil perfil, DataTenant tenant);
-	public void EliminarPerfil(String idPerfil, DataTenant tenant);
-	public List<DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina, DataTenant tenant);
-	public void AsignarPerfil(String idEmpleado, String perfil, DataTenant tenant);
-	public List<DataUsuario> listarUsuarios(Integer pagina, Integer elementosPagina, DataTenant tenant);
-	public DataUsuario buscarUsuarioPorMail(String mailUsuario, DataTenant tenant);
-	public void guardarTokenUsuario(String idUsuario, String token, Integer ultimosDigitosTarjeta, DataTenant tenant);
-	public void cargarTarjeta(String idUsuario, Float cargo, DataTenant tenant);
+	public DataUsuario loginUsuario(String usuario, String clave, DataTenant tenant)throws UserException;
+	public DataUsuario getUsuario(String idUsuario, DataTenant tenant)throws UserException;
+	public DataUsuario AltaUsuario(DataUsuario usuario, DataTenant tenant)throws UserException;
+	public void ModificarUsuario(DataUsuario usuario, DataTenant tenant)throws UserException;
+	public void BajaUsuario(String idUsuario, DataTenant tenant)throws UserException;
+	public DataEmpleado loginEmpleado(String usuario, String clave, DataTenant tenant)throws UserException;
+	public DataEmpleado getEmpleado(String idEmpleado, DataTenant tenant)throws UserException;
+	public DataEmpleado AltaEmpleado(DataEmpleado empleado, DataTenant tenant)throws UserException;
+	public List<DataEmpleado> listarEmpleados(Integer pagina, Integer elementosPagina, DataTenant tenant)throws UserException;
+	public void ModificarEmpleado(DataEmpleado empleado, DataTenant tenant)throws UserException;
+	public void BajaEmpleado(String idEmpleado, DataTenant tenant)throws UserException;
+	public void CargarSaldoCuponera(String idUsuario, Float saldo, DataTenant tenant)throws UserException;
+	public List<DataNotificacion> listarNotificaciones(String idUsuario, DataTenant tenant)throws UserException;
+	public DataPerfil getPerfil(String idPerfil, DataTenant tenant)throws UserException;
+	public DataPerfil AltaPerfil(DataPerfil perfil, DataTenant tenant)throws UserException;
+	public void EditarPerfil(DataPerfil perfil, DataTenant tenant)throws UserException;
+	public void EliminarPerfil(String idPerfil, DataTenant tenant)throws UserException;
+	public List<DataPerfil> listarPerfiles(Integer pagina, Integer elementosPagina, DataTenant tenant)throws UserException;
+	public void AsignarPerfil(String idEmpleado, String perfil, DataTenant tenant)throws UserException;
+	public List<DataUsuario> listarUsuarios(Integer pagina, Integer elementosPagina, DataTenant tenant)throws UserException;
+	public DataUsuario buscarUsuarioPorMail(String mailUsuario, DataTenant tenant)throws UserException;
+	public void guardarTokenUsuario(String idUsuario, String token, Integer ultimosDigitosTarjeta, DataTenant tenant)throws UserException;
+	public void cargarTarjeta(String idUsuario, Float cargo, DataTenant tenant)throws UserException;
 	
 }

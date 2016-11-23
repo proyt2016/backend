@@ -9,12 +9,12 @@ import lcbs.shares.DataTenant;
 @Local
 public interface ITenant {
 	
-	public List<DataTenant> list();	
-	public List<DataTenant> list(DataTenant filter);
+	public List<DataTenant> list() throws TenantException;	
+	public List<DataTenant> list(DataTenant filter) throws TenantException;
 
 	public DataTenant create(DataTenant tenant) throws TenantException, Exception; 
-	public boolean delete(DataTenant tenant); 
-	public boolean deactivate(DataTenant tenant);  
-	Boolean activate(DataTenant tenant);
-	public DataTenant get(DataTenant tenant);
+	public boolean delete(DataTenant tenant) throws TenantException; 
+	public boolean deactivate(DataTenant tenant) throws TenantException;  
+	public Boolean activate(DataTenant tenant) throws TenantException;
+	public DataTenant get(DataTenant tenant) throws TenantException;
 }

@@ -9,57 +9,39 @@ import javax.ejb.Stateless;
 import interfaces.ITenant;
 import lcbs.exceptions.TenantException;
 import lcbs.shares.DataTenant;
+
 @Stateless
 @Remote
 public class TenantRepo {
-	@EJB(lookup =  "java:app/lcbsb/TenantCtrl!interfaces.ITenant")
+	@EJB(lookup = "java:app/lcbsb/TenantCtrl!interfaces.ITenant")
 	ITenant ctrTenant;
-	//TODO: Handle errors propertly 
-	public List<DataTenant> list() { 
-		try{
-			return ctrTenant.list();	
-		}catch(Exception e){
-			
-			throw e;
-		}
+
+	public List<DataTenant> list() throws TenantException {
+		return ctrTenant.list();
 	}
 
 	public DataTenant create(DataTenant tenant) throws TenantException, Exception {
-		try {
-			return ctrTenant.create(tenant);
-		} catch (TenantException e) {
-			 throw e;
-		}
+		return ctrTenant.create(tenant);
 	}
 
-	public boolean delete(DataTenant tenant) {
-		try{
-			return ctrTenant.delete(tenant);
-		}catch(Exception e){
-			throw e;
-		} 
+	public boolean delete(DataTenant tenant) throws TenantException{
+		return ctrTenant.delete(tenant);
+
 	}
 
-	public boolean deactivate(DataTenant tenant) { 
-		try{
-			return ctrTenant.deactivate(tenant);
-		}catch(Exception e){
-			throw e;
-		}  
+	public boolean deactivate(DataTenant tenant) throws TenantException{
+		return ctrTenant.deactivate(tenant);
+
 	}
-	public boolean activate(DataTenant tenant) { 
-		try{
-			return ctrTenant.activate(tenant);
-		}catch(Exception e){
-			throw e;
-		}  
+
+	public boolean activate(DataTenant tenant) throws TenantException{
+		return ctrTenant.activate(tenant);
+
 	}
-	public DataTenant get(DataTenant tenant) { 
-		try{
-			return ctrTenant.get(tenant);
-		}catch(Exception e){
-			throw e;
-		} 
+
+	public DataTenant get(DataTenant tenant) throws TenantException{
+		return ctrTenant.get(tenant);
+
 	}
 
 }

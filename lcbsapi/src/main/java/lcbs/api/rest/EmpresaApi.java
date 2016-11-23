@@ -7,9 +7,12 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 import lcbs.api.service.EmpresaRepo;
 import lcbs.shares.DataConfiguracionEmpresa;
@@ -31,24 +34,36 @@ public class EmpresaApi extends BaseApi {
 	@Path("/altaconfiguracion/")
 
 	public void AltaConfiguracionEmpresa(DataConfiguracionEmpresa empresa) {
-		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
-		repo.altaConfiguracionEmpresa(empresa, tenant);
+		try{
+
+			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+			repo.altaConfiguracionEmpresa(empresa, tenant);
+		}catch(Exception e){
+			throw new WebApplicationException(Response.Status.SERVICE_UNAVAILABLE);
+		}
 
 	}
 
 	@POST
 	@Path("/editarconfiguracion/")
 	public void editarConfiguracionEmpresa(DataConfiguracionEmpresa empresa) {
-		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
-		repo.editarConfiguracionEmpresa(empresa, tenant);
-
+		try{
+			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+			repo.editarConfiguracionEmpresa(empresa, tenant);
+		}catch(IllegalArgumentException e){
+			throw new NotFoundException();
+		}
 	}
 
 	@GET
 	@Path("/getconfirguacionempresa/")
 	public DataConfiguracionEmpresa obtenerConfiguracion() {
-		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
-		return repo.obtenerConfiguracionEmpresa(tenant);
+		try{
+			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+			return repo.obtenerConfiguracionEmpresa(tenant);
+		}catch(Exception e){
+			throw new WebApplicationException(Response.Status.SERVICE_UNAVAILABLE);
+		}
 	}
 
 }

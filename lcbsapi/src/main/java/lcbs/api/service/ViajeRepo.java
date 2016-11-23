@@ -16,20 +16,25 @@
  */
 package lcbs.api.service;
 
-import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 
-import interfaces.*;
-import lcbs.shares.*;
+import interfaces.IViaje;
+import lcbs.exceptions.ViajeException;
+import lcbs.shares.DataGrupoHorario;
+import lcbs.shares.DataParada;
+import lcbs.shares.DataPasaje;
+import lcbs.shares.DataPasajeConvertor;
+import lcbs.shares.DataPrecio;
+import lcbs.shares.DataPuntoRecorrido;
+import lcbs.shares.DataRecorrido;
+import lcbs.shares.DataReserva;
+import lcbs.shares.DataTenant;
+import lcbs.shares.DataTerminal;
+import lcbs.shares.DataViaje;
 
 // The @Stateless annotation eliminates the need for manual transaction demarcation
 @Stateless
@@ -42,7 +47,7 @@ public class ViajeRepo {
 		return ctrViaje.obtenerTotalPasajesVendidos(fecha, pagina, elementosPagina, tenant);
 	}
 	
-	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant) throws ParseException{
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant) throws ViajeException{
 		return ctrViaje.BuscarViaje(filtro, cantidadDias, pagina, ElementosPagina, tenant );
 	}
 
@@ -205,7 +210,7 @@ public class ViajeRepo {
 		ctrViaje.crearViajesNuevoRecorrido(recorridoId, tenant);
 	}
 	
-	public void crearViajesParaRecorridos(DataTenant tenant) throws ParseException{
+	public void crearViajesParaRecorridos(DataTenant tenant) throws ViajeException{
 		ctrViaje.crearViajesParaRecorridos(tenant);
 	}
 	

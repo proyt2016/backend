@@ -15,9 +15,7 @@ import org.hibernate.criterion.Restrictions;
 
 import lcbs.interceptors.TenantIntercept;
 import lcbs.interfaces.VehiculoLocalApi;
-import lcbs.models.MantenimientoVehiculo;
 import lcbs.models.Vehiculo;
-import lcbs.shares.DataMantenimientoVehiculo;
 import lcbs.shares.DataTenant;
 import lcbs.shares.DataVehiculo;
 

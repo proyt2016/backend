@@ -13,7 +13,16 @@
     /*@ngInject*/
     function configFunction($routeProvider, $httpProvider, toastrConfig, uiGmapGoogleMapApiProvider, CONFIGURACION) {
     	 
-    	
+    	$httpProvider.interceptors.push(function($q, dependency1, dependency2) {
+    		  return {
+    		   'requestError': function(config) {
+    		       console.error(config);
+    		    },
+    		    'responseError': function(response) {
+    		    	console.error(config);
+    		    }
+    		  };
+    		});
         uiGmapGoogleMapApiProvider.configure({
             key: 'AIzaSyBVL227yFvpTa6b0oolhl3PW_BPGLFMnwI',
             v: '3.20', //defaults to latest 3.X anyhow

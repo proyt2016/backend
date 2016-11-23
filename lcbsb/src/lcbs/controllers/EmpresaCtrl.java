@@ -44,7 +44,7 @@ public class EmpresaCtrl implements IEmpresa{
 	@Override
 	public void editarConfiguracionEmpresa(DataConfiguracionEmpresa empresa, DataTenant tenant){
 		empresa.setStripePrivateKey(Encriptar(empresa.genStripePrivateKey()));
-		srvEmpresa.modificarCuponera(empresa, tenant);
+		srvEmpresa.editarConfiguracionEmpresa(empresa, tenant);
 	}
 	
 	public static String Encriptar(String texto) {

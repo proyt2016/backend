@@ -18,6 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import interfaces.IViaje;
+import lcbs.exceptions.ViajeException;
 import lcbs.interfaces.ConfiguracionEmpresaLocalApi;
 import lcbs.interfaces.ParadaLocalApi;
 import lcbs.interfaces.PasajeLocalApi;
@@ -50,7 +51,7 @@ import lcbs.utils.NotificationHandler;
  */
 @Stateless
 public class ViajeCtrl implements IViaje {
-	
+
 	private static final Log log = LogFactory.getLog(ViajeCtrl.class);
 
 	@EJB(lookup = "java:app/lcbsdb/ViajeSrv!lcbs.interfaces.ViajeLocalApi")
@@ -73,22 +74,24 @@ public class ViajeCtrl implements IViaje {
 
 	@EJB(lookup = "java:app/lcbsdb/RecorridoSrv!lcbs.interfaces.RecorridoLocalApi")
 	RecorridoLocalApi srvRecorrido;
-	
+
 	@EJB(lookup = "java:app/lcbsdb/ConfiguracionEmpresaSrv!lcbs.interfaces.ConfiguracionEmpresaLocalApi")
 	ConfiguracionEmpresaLocalApi srvConfiguracion;
-	
+
 	@EJB(lookup = "java:app/lcbsdb/VehiculoSrv!lcbs.interfaces.VehiculoLocalApi")
 	VehiculoLocalApi srvVehiculo;
 	@EJB
 	NotificationHandler nHandler;
+
 	@Override
-	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina, DataTenant tenant){
+	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina,
+			DataTenant tenant) {
 		return srvPasaje.obtenerTotalPasajesVendidos(fecha, pagina, elementosPagina, tenant);
 	}
 
-
 	@Override
-	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant) throws ParseException {
+	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina,
+			DataTenant tenant) throws ViajeException {
 		crearViajesParaRecorridos(tenant);
 		return srvViaje.buscarViaje(filtro, cantidadDias, pagina, ElementosPagina, tenant);
 	}
@@ -96,25 +99,27 @@ public class ViajeCtrl implements IViaje {
 	@Override
 	public DataPasaje ComprarPasaje(DataPasaje pasaje, DataTenant tenant) {
 		DataViaje viaje = srvViaje.getViaje(pasaje.getViaje().getId(), tenant);
-		DataPrecio precioPasae = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
+		DataPrecio precioPasae = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(),
+				viaje.getRecorrido().getId(), tenant);
 		pasaje.setPrecio(precioPasae);
 		DataPasaje nuevoPasaje = srvPasaje.crearPasaje(pasaje, tenant);
-		if(nuevoPasaje.getComprador() != null){
-			nHandler.sendNotification(nuevoPasaje.getComprador(), "Pasajes", "compra", "Compra realizada con exito: " + nuevoPasaje.getDestino().getNombre(),
-					tenant);
+		if (nuevoPasaje.getComprador() != null) {
+			nHandler.sendNotification(nuevoPasaje.getComprador(), "Pasajes", "compra",
+					"Compra realizada con exito: " + nuevoPasaje.getDestino().getNombre(), tenant);
 		}
 		return nuevoPasaje;
 
 	}
 
 	@Override
-	public List<DataViaje> viajesPorTerminal(String idterminal, Integer pagina, Integer ElementosPagina, DataTenant tenant) {
+	public List<DataViaje> viajesPorTerminal(String idterminal, Integer pagina, Integer ElementosPagina,
+			DataTenant tenant) {
 		return srvViaje.viajesPorTerminal(idterminal, pagina, ElementosPagina, tenant);
 	}
 
 	@Override
-	public List<DataPasajeConvertor> obtenerHistorialPasajes(String idUsuario, Integer pagina,
-			Integer elementosPagina, DataTenant tenant) {
+	public List<DataPasajeConvertor> obtenerHistorialPasajes(String idUsuario, Integer pagina, Integer elementosPagina,
+			DataTenant tenant) {
 		return srvPasaje.obtenerPasajesPorPersona(idUsuario, pagina, elementosPagina, tenant);
 	}
 
@@ -129,25 +134,26 @@ public class ViajeCtrl implements IViaje {
 		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje, tenant);
 		pasajeAModificar.setViaje(viajeAAsignar);
 		srvPasaje.modificarPasaje(pasajeAModificar, tenant);
-		if(pasajeAModificar.getComprador() != null){
-			nHandler.sendNotification(pasajeAModificar.getComprador(), "Pasajes", "cambio-horario", "Horario modificado con exito: " + pasajeAModificar.getDestino().getNombre(),
-					tenant);
+		if (pasajeAModificar.getComprador() != null) {
+			nHandler.sendNotification(pasajeAModificar.getComprador(), "Pasajes", "cambio-horario",
+					"Horario modificado con exito: " + pasajeAModificar.getDestino().getNombre(), tenant);
 		}
 	}
 
 	@Override
 	public DataReserva ReservarPasaje(DataReserva reserva, DataTenant tenant) {
 		DataViaje viaje = srvViaje.getViaje(reserva.getViaje().getId(), tenant);
-		DataPrecio precioPasae = getPrecioDePasaje(reserva.getOrigen().getId(), reserva.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
+		DataPrecio precioPasae = getPrecioDePasaje(reserva.getOrigen().getId(), reserva.getDestino().getId(),
+				viaje.getRecorrido().getId(), tenant);
 		reserva.setPrecio(precioPasae);
 		DataReserva nuevaReserva = srvReserva.crearReserva(reserva, tenant);
-		if(nuevaReserva.getUsuarioReserva() != null){
-			nHandler.sendNotification(nuevaReserva.getUsuarioReserva(), "Pasajes", "reserva", "Reserva realizada con exito: " + nuevaReserva.getDestino().getNombre(),
-					tenant);
+		if (nuevaReserva.getUsuarioReserva() != null) {
+			nHandler.sendNotification(nuevaReserva.getUsuarioReserva(), "Pasajes", "reserva",
+					"Reserva realizada con exito: " + nuevaReserva.getDestino().getNombre(), tenant);
 		}
 		return nuevaReserva;
 	}
-	
+
 	@Override
 	public DataReserva PasajeOnlineAReserva(Integer codigoPasaje, String idUsuario, DataTenant tenant) {
 		DataPasaje pasaje = srvPasaje.getpasajeXcodigo(codigoPasaje, tenant);
@@ -172,13 +178,13 @@ public class ViajeCtrl implements IViaje {
 		DataUsuario anterior = pasajeAModificar.getComprador();
 		pasajeAModificar.setComprador(usuarioAAsignar);
 		srvPasaje.modificarPasaje(pasajeAModificar, tenant);
-		if(anterior != null){
-			nHandler.sendNotification(anterior, "Pasajes", "transferencia", "Uds transfirio el pasaje a: " + pasajeAModificar.getDestino().getNombre() + " a "+usuarioAAsignar.getEmail(),
-					tenant);
+		if (anterior != null) {
+			nHandler.sendNotification(anterior, "Pasajes", "transferencia", "Uds transfirio el pasaje a: "
+					+ pasajeAModificar.getDestino().getNombre() + " a " + usuarioAAsignar.getEmail(), tenant);
 		}
-		if(usuarioAAsignar != null){
-			nHandler.sendNotification(usuarioAAsignar, "Pasajes", "transferencia", "Uds recibio un pasaje a: " + pasajeAModificar.getDestino().getNombre() + " de "+anterior.getEmail(),
-					tenant);
+		if (usuarioAAsignar != null) {
+			nHandler.sendNotification(usuarioAAsignar, "Pasajes", "transferencia", "Uds recibio un pasaje a: "
+					+ pasajeAModificar.getDestino().getNombre() + " de " + anterior.getEmail(), tenant);
 		}
 	}
 
@@ -186,11 +192,11 @@ public class ViajeCtrl implements IViaje {
 	public void CancelarReserva(String idReserva, DataTenant tenant) {
 		DataReserva recerva = srvReserva.getReserva(idReserva, tenant);
 		srvReserva.darBajaReserva(idReserva, tenant);
-		if(recerva.getUsuarioReserva() != null){
-			nHandler.sendNotification(recerva.getUsuarioReserva(), "Pasajes", "reserva", "Uds cancelo: " + recerva.getDestino().getNombre(),
-					tenant);
+		if (recerva.getUsuarioReserva() != null) {
+			nHandler.sendNotification(recerva.getUsuarioReserva(), "Pasajes", "reserva",
+					"Uds cancelo: " + recerva.getDestino().getNombre(), tenant);
 		}
-		
+
 	}
 
 	@Override
@@ -203,9 +209,9 @@ public class ViajeCtrl implements IViaje {
 		DataPasaje pasajeAModificar = srvPasaje.getPasaje(idPasaje, tenant);
 		pasajeAModificar.setUsado(true);
 		pasajeAModificar.setPago(true);
-		if(pasajeAModificar.getComprador() != null){
-			nHandler.sendNotification(pasajeAModificar.getComprador(), "Pasajes", "uso", "Uds viajo: " + pasajeAModificar.getDestino().getNombre(),
-					tenant);
+		if (pasajeAModificar.getComprador() != null) {
+			nHandler.sendNotification(pasajeAModificar.getComprador(), "Pasajes", "uso",
+					"Uds viajo: " + pasajeAModificar.getDestino().getNombre(), tenant);
 		}
 		srvPasaje.modificarPasaje(pasajeAModificar, tenant);
 	}
@@ -296,9 +302,9 @@ public class ViajeCtrl implements IViaje {
 		reserva.setUtilizada(true);
 		srvReserva.modificarReserva(reserva, tenant);
 		pasajeACrear = srvPasaje.crearPasaje(pasajeACrear, tenant);
-		if(pasajeACrear.getComprador() != null){
-			nHandler.sendNotification(pasajeACrear.getComprador(), "Pasajes", "reserva", "Uds compro el pasaje a : " + pasajeACrear.getDestino().getNombre(),
-					tenant);
+		if (pasajeACrear.getComprador() != null) {
+			nHandler.sendNotification(pasajeACrear.getComprador(), "Pasajes", "reserva",
+					"Uds compro el pasaje a : " + pasajeACrear.getDestino().getNombre(), tenant);
 		}
 		return pasajeACrear;
 	}
@@ -370,7 +376,8 @@ public class ViajeCtrl implements IViaje {
 	}
 
 	@Override
-	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina, DataTenant tenant) {
+	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina,
+			DataTenant tenant) {
 		return srvRecorrido.BuscarRecorrido(filtro, pagina, elementosPagina, tenant);
 	}
 
@@ -378,9 +385,9 @@ public class ViajeCtrl implements IViaje {
 	public DataReserva obtenerReserva(String idReserva, DataTenant tenant) {
 		return srvReserva.getReserva(idReserva, tenant);
 	}
-	
+
 	@Override
-	public void crearHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant){
+	public void crearHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant) {
 		DataRecorrido rec = srvRecorrido.getRecorrido(idRecorrido, tenant);
 		List<DataGrupoHorario> horarioList = rec.getHorarios();
 		horarioList.add(horario);
@@ -389,12 +396,12 @@ public class ViajeCtrl implements IViaje {
 	}
 
 	@Override
-	public void editarHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant){
+	public void editarHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant) {
 		DataRecorrido rec = srvRecorrido.getRecorrido(idRecorrido, tenant);
 		List<DataGrupoHorario> horarioList = rec.getHorarios();
 		Integer aux = 0;
-		for(Integer i = 0; i < horarioList.size(); i++){
-			if(horario.getId() == horarioList.get(i).getId()){
+		for (Integer i = 0; i < horarioList.size(); i++) {
+			if (horario.getId() == horarioList.get(i).getId()) {
 				aux = i;
 			}
 		}
@@ -402,41 +409,44 @@ public class ViajeCtrl implements IViaje {
 		rec.setHorarios(horarioList);
 		srvRecorrido.modificarRecorrido(rec, tenant);
 	}
-	
+
 	@Override
-	public Integer cantidadAsientosDisponibles(String idViaje, String idOrigen, String idDestino, DataTenant tenant){
+	public Integer cantidadAsientosDisponibles(String idViaje, String idOrigen, String idDestino, DataTenant tenant) {
 		DataViaje viaje = srvViaje.getViaje(idViaje, tenant);
 		Integer cant = 0;
 		List<DataVehiculo> vehiculos = viaje.getCoches();
-		if(vehiculos.size() == 0){
+		if (vehiculos.size() == 0) {
 			cant = srvVehiculo.getMenorCantAsientos(tenant);
-		}else{
-			for(Integer i = 0; i < vehiculos.size(); i++){
+		} else {
+			for (Integer i = 0; i < vehiculos.size(); i++) {
 				cant += vehiculos.get(i).getCantidadAsientos();
 			}
 		}
 		List<DataPuntoRecorrido> puntos = viaje.getRecorrido().getPuntosDeRecorrido();
 		Map<String, Integer> indiceDePunto = new HashMap<String, Integer>();
-		for(Integer i = 0; i < puntos.size(); i++){
-			indiceDePunto.put(puntos.get(i).getId(),i);
+		for (Integer i = 0; i < puntos.size(); i++) {
+			indiceDePunto.put(puntos.get(i).getId(), i);
 		}
-		List<DataPasajeConvertor> pasajesEnViaje = srvPasaje.obtenerPasajesPorViaje(idViaje,tenant);
-		for(Integer i = 0; i < pasajesEnViaje.size(); i++){
-			if(indiceDePunto.get(pasajesEnViaje.get(i).getDestino().getId()) > indiceDePunto.get(idOrigen) && indiceDePunto.get(pasajesEnViaje.get(i).getDestino().getId()) <= indiceDePunto.get(idDestino) ||
-					indiceDePunto.get(pasajesEnViaje.get(i).getOrigen().getId()) >= indiceDePunto.get(idOrigen) && indiceDePunto.get(pasajesEnViaje.get(i).getOrigen().getId()) < indiceDePunto.get(idDestino)){
-				cant = cant -1;
+		List<DataPasajeConvertor> pasajesEnViaje = srvPasaje.obtenerPasajesPorViaje(idViaje, tenant);
+		for (Integer i = 0; i < pasajesEnViaje.size(); i++) {
+			if (indiceDePunto.get(pasajesEnViaje.get(i).getDestino().getId()) > indiceDePunto.get(idOrigen)
+					&& indiceDePunto.get(pasajesEnViaje.get(i).getDestino().getId()) <= indiceDePunto.get(idDestino)
+					|| indiceDePunto.get(pasajesEnViaje.get(i).getOrigen().getId()) >= indiceDePunto.get(idOrigen)
+							&& indiceDePunto.get(pasajesEnViaje.get(i).getOrigen().getId()) < indiceDePunto
+									.get(idDestino)) {
+				cant = cant - 1;
 			}
 		}
 		return cant;
 	}
 
 	@Override
-	public void borrarHorarioRecorrido(String idRecorrido, String idHorario, DataTenant tenant){
+	public void borrarHorarioRecorrido(String idRecorrido, String idHorario, DataTenant tenant) {
 		DataRecorrido rec = srvRecorrido.getRecorrido(idRecorrido, tenant);
 		List<DataGrupoHorario> horarioList = rec.getHorarios();
 		List<DataGrupoHorario> result = new ArrayList<DataGrupoHorario>();
-		for(Integer i = 0; i < horarioList.size(); i++){
-			if(!idHorario.equals(horarioList.get(i).getId())){
+		for (Integer i = 0; i < horarioList.size(); i++) {
+			if (!idHorario.equals(horarioList.get(i).getId())) {
 				result.add(horarioList.get(i));
 			}
 		}
@@ -445,48 +455,53 @@ public class ViajeCtrl implements IViaje {
 	}
 
 	@Override
-	public DataPrecio getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido, DataTenant tenant) {
+	public DataPrecio getPrecioDePasaje(String codigoOrigen, String codigoDestino, String codigoRecorrido,
+			DataTenant tenant) {
 		DataRecorrido rec = srvRecorrido.getRecorrido(codigoRecorrido, tenant);
 		List<DataPrecio> precios = rec.getPrecios();
 		Map<String, Integer> puntosMap = new HashMap<String, Integer>();
-		for(Integer i = 0; i < rec.getPuntosDeRecorrido().size();i++){
+		for (Integer i = 0; i < rec.getPuntosDeRecorrido().size(); i++) {
 			puntosMap.put(rec.getPuntosDeRecorrido().get(i).getId(), i);
 		}
 		List<DataPrecio> aux = new ArrayList<DataPrecio>();
 		DataPrecio elegido = new DataPrecio();
 		precios.stream().forEach((prc) -> {
-			if(puntosMap.get(prc.getOrigen().getId()) <= puntosMap.get(codigoOrigen) && puntosMap.get(prc.getDestino().getId()) >= puntosMap.get(codigoDestino)){
+			if (puntosMap.get(prc.getOrigen().getId()) <= puntosMap.get(codigoOrigen)
+					&& puntosMap.get(prc.getDestino().getId()) >= puntosMap.get(codigoDestino)) {
 				aux.add(prc);
 			}
 		});
-		for(Integer i = 0; i < aux.size();i++){
-			if(elegido.getMonto() == null || elegido.getMonto()>aux.get(i).getMonto()){
+		for (Integer i = 0; i < aux.size(); i++) {
+			if (elegido.getMonto() == null || elegido.getMonto() > aux.get(i).getMonto()) {
 				elegido = aux.get(i);
 			}
 		}
 		return elegido;
 	}
-	
+
 	@Override
-	public void crearViajesParaRecorridos(DataTenant tenant) throws ParseException{
+	public void crearViajesParaRecorridos(DataTenant tenant) throws ViajeException {
 		List<DataRecorrido> recs = srvRecorrido.obtenerRecorridos(1, 99999, tenant);
 		DataConfiguracionEmpresa conf = srvConfiguracion.getConfiguracionEmpresa(tenant);
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		if(conf.getUltimaCreacionDeViajes() != null && formatter.parse(formatter.format(conf.getUltimaCreacionDeViajes())).equals(formatter.parse(formatter.format(new Date()))))
-			return;
-		recs.stream().forEach((rec) -> {
-			try {
-				crearViajesNuevoRecorrido(rec.getId(),tenant);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-		conf.setUltimaCreacionDeViajes(formatter.parse(formatter.format(new Date())));
-		srvConfiguracion.modificarCuponera(conf, tenant);
+		try {
+			if (conf.getUltimaCreacionDeViajes() != null
+					&& formatter.parse(formatter.format(conf.getUltimaCreacionDeViajes()))
+							.equals(formatter.parse(formatter.format(new Date()))))
+				return;
+			
+			recs.stream().forEach((rec) -> {
+				crearViajesNuevoRecorrido(rec.getId(), tenant);
+			});
+			conf.setUltimaCreacionDeViajes(formatter.parse(formatter.format(new Date())));
+			srvConfiguracion.editarConfiguracionEmpresa(conf, tenant);
+		} catch (Exception e) {
+			throw new ViajeException("Imposible crear viajes para el recorrido", 0);
+		}
 	}
-	
+
 	@Override
-	public List<DataViaje> listarViajesCambioHorario(String idPasaje, DataTenant tenant){
+	public List<DataViaje> listarViajesCambioHorario(String idPasaje, DataTenant tenant) {
 		DataPasaje pasaje = srvPasaje.getPasaje(idPasaje, tenant);
 		DataViaje filtro = new DataViaje();
 		filtro.setFechaSalida(pasaje.getViaje().getFechaSalida());
@@ -494,21 +509,21 @@ public class ViajeCtrl implements IViaje {
 		List<DataViaje> viajes = srvViaje.buscarViaje(filtro, null, 1, 1000, tenant);
 		List<DataViaje> result = new ArrayList<DataViaje>();
 		viajes.stream().forEach((viaje) -> {
-			if(viaje.getId() != pasaje.getViaje().getId())
+			if (viaje.getId() != pasaje.getViaje().getId())
 				result.add(viaje);
 		});
 		return result;
 	}
-	
+
 	@Override
-	public void crearViajesNuevoRecorrido(String recorridoId, DataTenant tenant){
+	public void crearViajesNuevoRecorrido(String recorridoId, DataTenant tenant) {
 		List<DataViaje> aInsertar = new ArrayList<DataViaje>();
 		DataRecorrido rec = srvRecorrido.getRecorrido(recorridoId, tenant);
 		DataConfiguracionEmpresa conf = srvConfiguracion.getConfiguracionEmpresa(tenant);
 		Integer diasACrear = conf.getDiasCreacionViaje();
 		Date fechaDesde = new Date();
-		Calendar c = Calendar.getInstance(); 
-		c.setTime(fechaDesde); 
+		Calendar c = Calendar.getInstance();
+		c.setTime(fechaDesde);
 		c.add(Calendar.DATE, diasACrear);
 		Date fechaHasta = c.getTime();
 		List<Date> listaDias = getDaysBetweenDates(fechaDesde, fechaHasta);
@@ -520,21 +535,23 @@ public class ViajeCtrl implements IViaje {
 		List<DataViaje> viajesExistentes = srvViaje.buscarViaje(filtro, diasACrear, 1, 99999, tenant);
 		viajesExistentes.stream().forEach((day) -> {
 			try {
-				if(!yaAgregados.contains(formatter.parse(formatter.format(day.getFechaSalida())))){
+				if (!yaAgregados.contains(formatter.parse(formatter.format(day.getFechaSalida())))) {
 					yaAgregados.add(formatter.parse(formatter.format(day.getFechaSalida())));
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
-		
+
 		rec.getHorarios().stream().forEach((hor) -> {
 			listaDias.stream().forEach((day) -> {
-				if(hor.getDiasEspecificos().size() > 0){
+				if (hor.getDiasEspecificos().size() > 0) {
 					hor.getDiasEspecificos().stream().forEach((dEsp) -> {
 						try {
-							if(formatter.parse(formatter.format(day)).equals(formatter.parse(formatter.format(dEsp))) && !yaAgregados.contains(formatter.parse(formatter.format(day)))){
-								aInsertar.addAll(generarViajes(rec, formatter.parse(formatter.format(day)), hor.getHorarios()));
+							if (formatter.parse(formatter.format(day)).equals(formatter.parse(formatter.format(dEsp)))
+									&& !yaAgregados.contains(formatter.parse(formatter.format(day)))) {
+								aInsertar.addAll(
+										generarViajes(rec, formatter.parse(formatter.format(day)), hor.getHorarios()));
 								yaAgregados.add(formatter.parse(formatter.format(day)));
 							}
 						} catch (Exception e) {
@@ -545,9 +562,18 @@ public class ViajeCtrl implements IViaje {
 			});
 			listaDias.stream().forEach((day) -> {
 				try {
-					if(hor.getDiasSemana().size() > 0 && !yaAgregados.contains(formatter.parse(formatter.format(day)))){
-						if((hor.getDiasSemana().contains(DataDiasSemana.Lunes) && getDayOfTheWeek(day) == 2)||(hor.getDiasSemana().contains(DataDiasSemana.Martes) && getDayOfTheWeek(day) == 3)||(hor.getDiasSemana().contains(DataDiasSemana.Miercoles) && getDayOfTheWeek(day) == 4)||(hor.getDiasSemana().contains(DataDiasSemana.Jueves) && getDayOfTheWeek(day) == 5)||(hor.getDiasSemana().contains(DataDiasSemana.Viernes) && getDayOfTheWeek(day) == 6)||(hor.getDiasSemana().contains(DataDiasSemana.Sabado) && getDayOfTheWeek(day) == 7)||(hor.getDiasSemana().contains(DataDiasSemana.Domingo) && getDayOfTheWeek(day) == 1)){
-							aInsertar.addAll(generarViajes(rec, formatter.parse(formatter.format(day)), hor.getHorarios()));
+					if (hor.getDiasSemana().size() > 0
+							&& !yaAgregados.contains(formatter.parse(formatter.format(day)))) {
+						if ((hor.getDiasSemana().contains(DataDiasSemana.Lunes) && getDayOfTheWeek(day) == 2)
+								|| (hor.getDiasSemana().contains(DataDiasSemana.Martes) && getDayOfTheWeek(day) == 3)
+								|| (hor.getDiasSemana().contains(DataDiasSemana.Miercoles) && getDayOfTheWeek(day) == 4)
+								|| (hor.getDiasSemana().contains(DataDiasSemana.Jueves) && getDayOfTheWeek(day) == 5)
+								|| (hor.getDiasSemana().contains(DataDiasSemana.Viernes) && getDayOfTheWeek(day) == 6)
+								|| (hor.getDiasSemana().contains(DataDiasSemana.Sabado) && getDayOfTheWeek(day) == 7)
+								|| (hor.getDiasSemana().contains(DataDiasSemana.Domingo)
+										&& getDayOfTheWeek(day) == 1)) {
+							aInsertar.addAll(
+									generarViajes(rec, formatter.parse(formatter.format(day)), hor.getHorarios()));
 						}
 					}
 				} catch (Exception e) {
@@ -557,7 +583,8 @@ public class ViajeCtrl implements IViaje {
 		});
 		srvViaje.crearViajes(aInsertar, tenant);
 	}
-	public static List<DataViaje> generarViajes(DataRecorrido rec, Date fecha, List<DataHorario> hor){
+
+	public static List<DataViaje> generarViajes(DataRecorrido rec, Date fecha, List<DataHorario> hor) {
 		List<DataViaje> result = new ArrayList<DataViaje>();
 		hor.stream().forEach((horario) -> {
 			DataViaje nuevoViaje = new DataViaje();
@@ -568,26 +595,24 @@ public class ViajeCtrl implements IViaje {
 		});
 		return result;
 	}
-	
-	public static Integer getDayOfTheWeek(Date fecha){
+
+	public static Integer getDayOfTheWeek(Date fecha) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(fecha);
 		return c.get(Calendar.DAY_OF_WEEK);
 	}
-	
-	public static List<Date> getDaysBetweenDates(Date startdate, Date enddate)
-	{
-	    List<Date> dates = new ArrayList<Date>();
-	    Calendar calendar = new GregorianCalendar();
-	    calendar.setTime(startdate);
 
-	    while (calendar.getTime().before(enddate))
-	    {
-	        Date result = calendar.getTime();
-	        dates.add(result);
-	        calendar.add(Calendar.DATE, 1);
-	    }
-	    return dates;
+	public static List<Date> getDaysBetweenDates(Date startdate, Date enddate) {
+		List<Date> dates = new ArrayList<Date>();
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(startdate);
+
+		while (calendar.getTime().before(enddate)) {
+			Date result = calendar.getTime();
+			dates.add(result);
+			calendar.add(Calendar.DATE, 1);
+		}
+		return dates;
 	}
 
 }

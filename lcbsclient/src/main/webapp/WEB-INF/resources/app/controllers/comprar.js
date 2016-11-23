@@ -130,6 +130,8 @@
 	
 	            usuarioService.agregarTarjeta(tokenData).then(function (response) {
 	            	$scope.usuarioLogueado['ultimosCuatroDigitos']  = card;
+	            	
+	            	$('#modal-stripe').modal('hide');
 	           
 	            	$scope.procesarPago();
 	            	

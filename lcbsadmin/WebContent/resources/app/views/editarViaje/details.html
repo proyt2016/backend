@@ -28,18 +28,16 @@
                <h4> Coches <a class="btn btn-default btn-xs" ng-click="addRelation()"><i class="fa fa-plus"></i></a></h4>
                <div class="clearfix"></div>
            </div>
-           <div class="form-group">
-              <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="coche in coches" style="margin-top:10px;">
-                  <div class="form-group">
-                    <label>N&uacute;mero de coche</label>
-                    <input type="text" class="form-control" ng-model="coche.id">
-                  </div>
-                  <a class="btn btn-default" style="margin:0;" ng-click="removeRelation($index)"><i class="fa fa-remove"></i></a>
-              </div>
+           <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="coche in coches" style="margin-top:10px;">
+               <div class="form-group">
+                 <label>N&uacute;mero de coche</label>
+                 <input type="text" class="form-control" ng-blur="buscarCoche({{$index}})">
+               </div>
+               <a class="btn btn-default" style="margin:0;" ng-click="removeRelation($index)"><i class="fa fa-remove"></i></a>
            </div>
 
-           <div class="">
-             <button type="button" class="btn btn-success btn-lg pull-right" ng-click="editarViaje()">Guardar</button>
+           <div>
+             <button type="button" style="margin-top: 10px;" class="btn btn-success btn-lg pull-right" ng-click="editarViaje()">Guardar</button>
            </div>
 
          </div>

@@ -100,7 +100,20 @@
             return defer.promise;
         };
 
+        var buscarCoche = function(usuario){
+            var defer = $q.defer();
 
+            $http.get('/lcbsapi/rest/vehiculo/obtenervehiculopornumero/' + usuario)
+            .success(function (usr) {
+                defer.resolve(usr);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
+
+            return defer.promise;
+        };
+        
         return {
             getAll  : getAll,
             getId   : getId,
@@ -108,7 +121,8 @@
             borrar  : borrar,
             edit    : edit,
             guardarMantenimiento : guardarMantenimiento,
-            getVehiculoMantenimiento : getVehiculoMantenimiento
+            getVehiculoMantenimiento : getVehiculoMantenimiento,
+            buscarCoche : buscarCoche
         }
 
     }

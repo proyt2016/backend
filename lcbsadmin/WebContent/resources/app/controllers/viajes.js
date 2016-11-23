@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').controller('viajesCtrl', ['$scope', '$routeParams', 'viajeService', '$location', 'uiGmapGoogleMapApi', '$localStorage', viajesCtrl]);
+    angular.module('lacbus').controller('viajesCtrl', ['$scope', '$routeParams', 'viajeService', '$location', 'uiGmapGoogleMapApi', '$localStorage', 'vehiculosService', viajesCtrl]);
 
-    function viajesCtrl($scope, $routeParams, viajeService, $location, uiGmapGoogleMapApi, $localStorage) {
+    function viajesCtrl($scope, $routeParams, viajeService, $location, uiGmapGoogleMapApi, $localStorage, vehiculosService) {
     	if(!$localStorage.empleadoLogueado){
 			$location.url('/login');
 		}
@@ -16,6 +16,7 @@
         $scope.usuario = null;
         $scope.comprador = null;
         $scope.resultados = null;
+        $scope.cocheStr = null;
         $scope.coches = [];
 
         var initialize = function(){
@@ -27,8 +28,6 @@
                     viajeService.getId(id).then(function (datos) {
                         $scope.viaje = datos;
                         $scope.coches = datos.coches;
-                        
-                        console.log(datos, $scope.comprar)
 
                         $scope.comprar['origen']    = '0';
                         $scope.comprar['destino']   = datos.recorrido.puntosDeRecorrido.length - 1 + '';
@@ -201,6 +200,30 @@
             	$location.url('/viajes');
             });
         }
+        
+        $scope.buscarCoche = function(index){
+        	var coche = $scope.cocheStr;
+        	vehiculosService.buscarCoche(coche).then(function (data) {
+                $scope.emisor = data;
+                $scope['cocheStr'] = null;
+            });
+        }
+        
+        $scope.buscar = function(){
+            var filtro = {
+            	ciPersona : this.ciPersona
+            };
+
+            if($scope.emisor != null && $scope.emisor != ''){
+            	filtro['usuarioReserva'] = {
+                	id : $scope.emisor.id
+                };
+            }
+
+            reservaService.buscarReserva(filtro).then(function (data) {
+                $scope.resultados = data;
+            });
+        } 
 
         $scope.addRelation = function () {
             var coche = { 'id' : '' };

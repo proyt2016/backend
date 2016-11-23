@@ -48,8 +48,7 @@
             var vehiculo     = this.vehiculo;
             var mantenimiento = this.mantenimiento;
             
-            console.info(vehiculo);
-            console.info(mantenimiento);
+            mantenimiento['fechaIngreso'] = moment().format('YYYY-MM-DD');
 
             vehiculosService.guardarMantenimiento(vehiculo.id, mantenimiento).then(
                 function (data) {

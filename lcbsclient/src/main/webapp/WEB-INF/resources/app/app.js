@@ -12,17 +12,16 @@
     
     /*@ngInject*/
     function configFunction($routeProvider, $httpProvider, toastrConfig, uiGmapGoogleMapApiProvider, CONFIGURACION) {
-    	 
-    	$httpProvider.interceptors.push(function($q, dependency1, dependency2) {
-    		  return {
-    		   'requestError': function(config) {
-    		       console.error(config);
-    		    },
-    		    'responseError': function(response) {
-    		    	console.error(config);
-    		    }
-    		  };
-    		});
+    	$httpProvider.interceptors.push(function() {
+		  return {
+		   'requestError': function(config) {
+			  // $rootScope.$error("Servicio no disponible", "Error");
+		    },
+		    'responseError': function(response) {
+		    	//$rootScope.error("Servicio no disponible", "Error");
+		    }
+		  };
+		});
         uiGmapGoogleMapApiProvider.configure({
             key: 'AIzaSyBVL227yFvpTa6b0oolhl3PW_BPGLFMnwI',
             v: '3.20', //defaults to latest 3.X anyhow
@@ -134,12 +133,17 @@
     	dataType 	: 'json'
 	}).done(function( configuracion ) {
 		$('head').append('<style>' + configuracion.css + '</style>');
-		
 		configuracion['url'] 		= '/lcbsapi/rest/'; //http://192.168.43.49:8080/lcbsapi/rest/ 
 		angular.element(document).ready(function() {
 			app.constant('CONFIGURACION', configuracion);
 			angular.bootstrap(document, [ 'lacbus' ]);
 		});
+	}).error(function(error){
+		if(error.status===403){
+			if(confirm("No se encuentra el servicio.\n")){
+				
+			}
+		}
 	});
 
 })();

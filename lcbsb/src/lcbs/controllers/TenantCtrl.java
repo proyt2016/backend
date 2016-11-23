@@ -94,8 +94,9 @@ public class TenantCtrl implements ITenant {
 
 	}
 
-	private void insertConfigs(DataTenant tenant) throws SecurityException, IllegalStateException, RollbackException,
-			HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException, TenantException {
+	private void insertConfigs(DataTenant tenant)
+			throws SecurityException, IllegalStateException, RollbackException, HeuristicMixedException,
+			HeuristicRollbackException, SystemException, NotSupportedException, TenantException {
 		DataEmpleado usr = new DataEmpleado();
 		String psw = ROLE_SUFIX + tenant.getName();
 		usr.setEliminado(false);
@@ -113,19 +114,15 @@ public class TenantCtrl implements ITenant {
 		profile.setMantenimientoFlota(true);
 		ut.begin();
 		try {
-			usrCtrl.AltaPerfil(profile, tenant);
+			usr = usrCtrl.AltaEmpleado(usr, tenant);
+			ArrayList<DataEmpleado> da = new ArrayList<DataEmpleado>();
+			da.add(usr);
+			profile.setEmpleados(da);
+			profile = usrCtrl.AltaPerfil(profile, tenant);
+			usr.setPerfil(profile);
+			usrCtrl.ModificarEmpleado(usr, tenant);
 		} catch (UserException e) {
 			throw new TenantException("Algo marcho mal creando perfil administrador", 1);
-		}
-		ut.commit();
-		ut.begin();
-		ArrayList<DataEmpleado> da = new ArrayList<DataEmpleado>();
-		da.add(usr);
-		profile.setEmpleados(da);
-		try {
-			usrCtrl.AltaEmpleado(usr, tenant);
-		} catch (UserException e) { 
-			throw new TenantException("Algo marcho mal creado admin", 1);
 		}
 		ut.commit();
 		ut.begin();

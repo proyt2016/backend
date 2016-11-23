@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
+import lcbs.api.interceptor.TenantChecked;
 import lcbs.api.service.EmpresaRepo;
 import lcbs.shares.DataConfiguracionEmpresa;
 import lcbs.shares.DataTenant;
@@ -26,14 +27,14 @@ import lcbs.shares.DataTenant;
 @Path("/empresa")
 @Produces({ "application/json" })
 @Consumes({ "application/json" })
-public class EmpresaApi extends BaseApi {
+@TenantChecked public class EmpresaApi extends BaseApi {
 	@EJB
 	EmpresaRepo repo;
 
 	@POST
 	@Path("/altaconfiguracion/")
 
-	public void AltaConfiguracionEmpresa(DataConfiguracionEmpresa empresa) {
+	@TenantChecked public void AltaConfiguracionEmpresa(DataConfiguracionEmpresa empresa) {
 		try{
 
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
@@ -46,7 +47,7 @@ public class EmpresaApi extends BaseApi {
 
 	@POST
 	@Path("/editarconfiguracion/")
-	public void editarConfiguracionEmpresa(DataConfiguracionEmpresa empresa) {
+	@TenantChecked public void editarConfiguracionEmpresa(DataConfiguracionEmpresa empresa) {
 		try{
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			repo.editarConfiguracionEmpresa(empresa, tenant);
@@ -57,7 +58,7 @@ public class EmpresaApi extends BaseApi {
 
 	@GET
 	@Path("/getconfirguacionempresa/")
-	public DataConfiguracionEmpresa obtenerConfiguracion() {
+	@TenantChecked public DataConfiguracionEmpresa obtenerConfiguracion() {
 		try{
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			return repo.obtenerConfiguracionEmpresa(tenant);

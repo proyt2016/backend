@@ -29,16 +29,16 @@ public class TenantApi {
 	private void errorHandler(TenantException e) {
 		switch (e.code) {
 		case 0:
-			throw new NotFoundException(e.getMessage());
+			throw new NotFoundException(e);
 
 		case 1:
-			throw new InternalServerErrorException(e.getMessage());
+			throw new InternalServerErrorException(e);
 
 		case 2:
 			throw new ServiceUnavailableException(e.getMessage());
 
 		case 3:
-			throw new NotFoundException(e.getMessage());
+			throw new NotFoundException(e);
 
 		}
 	}

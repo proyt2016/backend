@@ -91,7 +91,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
 		Empleado realObj = new Empleado(emp, true);
 		realObj.setEliminado(false);
 		// guardo al empleado en bd
-		em.persist(realObj);
+		realObj = em.merge(realObj);
 		return realObj.getDatatype(true);
 	}
 

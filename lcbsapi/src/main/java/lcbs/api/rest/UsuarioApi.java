@@ -202,10 +202,10 @@ public class UsuarioApi extends BaseApi{
 	}
 	
 	@POST
-	@Path("/cargartarjeta/")
-	public void cargarTarjeta(String data){
+	@Path("/cargarsaldocuponerastripe/")
+	public void CargarSaldoCuponeraStripe(String data){
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		JSONObject obj = new JSONObject(data);
-		repo.cargarTarjeta(obj.getString("idUsuario"), Float.valueOf(obj.getString("monto")), tenant);
+		repo.CargarSaldoCuponeraStripe(obj.getString("idUsuario"), Float.valueOf(obj.getString("saldo")), tenant);
 	}
 }

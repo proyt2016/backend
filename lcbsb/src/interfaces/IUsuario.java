@@ -29,5 +29,6 @@ public interface IUsuario {
 	public DataUsuario buscarUsuarioPorMail(String mailUsuario, DataTenant tenant);
 	public void guardarTokenUsuario(String idUsuario, String token, Integer ultimosDigitosTarjeta, DataTenant tenant);
 	public void cargarTarjeta(String idUsuario, Float cargo, DataTenant tenant);
+	public void CargarSaldoCuponeraStripe(String idUsuario, Float saldo, DataTenant tenant);
 	
 }

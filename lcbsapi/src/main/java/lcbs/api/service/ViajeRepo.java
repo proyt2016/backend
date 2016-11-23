@@ -220,4 +220,16 @@ public class ViajeRepo {
 	public List<DataViaje> listarViajesCambioHorario(String idPasaje, DataTenant tenant){
 		return ctrViaje.listarViajesCambioHorario(idPasaje, tenant);
 	}
+	
+	public DataPasaje comprarPasajeStripe(DataPasaje pasaje, DataTenant tenant){
+		return ctrViaje.comprarPasajeStripe(pasaje, tenant);
+	}
+	
+	public DataPasaje comprarPasajeCuponera(DataPasaje pasaje, DataTenant tenant) throws Exception{
+		return ctrViaje.comprarPasajeCuponera(pasaje, tenant);
+	}
+	
+	public DataReserva obtenerReservaPorCi(String ciUsuario, DataTenant tenant){
+		return ctrViaje.obtenerReservaPorCi(ciUsuario, tenant);
+	}
 }

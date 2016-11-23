@@ -126,7 +126,7 @@ public class UsuarioRepo {
 		ctrUsuario.guardarTokenUsuario(idUsuario, token, ultimosDigitosTarjeta, tenant);
 	}
 	
-	public void cargarTarjeta(String idUsuario, Float cargo, DataTenant tenant){
-		ctrUsuario.cargarTarjeta(idUsuario, cargo, tenant);
+	public void CargarSaldoCuponeraStripe(String idUsuario, Float saldo, DataTenant tenant){
+		ctrUsuario.CargarSaldoCuponeraStripe(idUsuario, saldo, tenant);
 	}
 }

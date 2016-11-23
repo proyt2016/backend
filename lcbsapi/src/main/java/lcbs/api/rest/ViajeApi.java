@@ -393,4 +393,28 @@ public class ViajeApi extends BaseApi{
 		return repo.listarViajesCambioHorario(idPasaje, tenant);
 	}
 	
+	
+	@POST
+	@Path("/comprarpasajestripe/")
+	public DataPasaje comprarPasajeStripe(DataPasajeConvertor pseudoPasaje){
+		DataPasaje pasaje = pseudoPasaje.genDataPasaje();
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.comprarPasajeStripe(pasaje, tenant);
+	}
+	
+	@POST
+	@Path("/comparapasajecuponera/")
+	public DataPasaje comprarPasajeCuponera(DataPasajeConvertor pseudoPasaje) throws Exception{
+		DataPasaje pasaje = pseudoPasaje.genDataPasaje();
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.comprarPasajeCuponera(pasaje, tenant);
+	}
+	
+	@GET
+	@Path("/obtenerreservaporci/{ciUsuario}")
+	public DataReserva obtenerReservaPorCi(@PathParam("ciUsuario") final String ciUsuario){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.obtenerReservaPorCi(ciUsuario, tenant);
+	}
+	
 }

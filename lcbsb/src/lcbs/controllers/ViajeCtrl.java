@@ -17,32 +17,10 @@ import javax.ejb.Stateless;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import interfaces.IUsuario;
 import interfaces.IViaje;
-import lcbs.interfaces.ConfiguracionEmpresaLocalApi;
-import lcbs.interfaces.ParadaLocalApi;
-import lcbs.interfaces.PasajeLocalApi;
-import lcbs.interfaces.RecorridoLocalApi;
-import lcbs.interfaces.ReservaLocalApi;
-import lcbs.interfaces.TerminalLocalApi;
-import lcbs.interfaces.UsuarioLocalApi;
-import lcbs.interfaces.VehiculoLocalApi;
-import lcbs.interfaces.ViajeLocalApi;
-import lcbs.shares.DataConfiguracionEmpresa;
-import lcbs.shares.DataDiasSemana;
-import lcbs.shares.DataGrupoHorario;
-import lcbs.shares.DataHorario;
-import lcbs.shares.DataParada;
-import lcbs.shares.DataPasaje;
-import lcbs.shares.DataPasajeConvertor;
-import lcbs.shares.DataPrecio;
-import lcbs.shares.DataPuntoRecorrido;
-import lcbs.shares.DataRecorrido;
-import lcbs.shares.DataReserva;
-import lcbs.shares.DataTenant;
-import lcbs.shares.DataTerminal;
-import lcbs.shares.DataUsuario;
-import lcbs.shares.DataVehiculo;
-import lcbs.shares.DataViaje;
+import lcbs.interfaces.*;
+import lcbs.shares.*;
 import lcbs.utils.NotificationHandler;
 
 /**
@@ -79,8 +57,15 @@ public class ViajeCtrl implements IViaje {
 	
 	@EJB(lookup = "java:app/lcbsdb/VehiculoSrv!lcbs.interfaces.VehiculoLocalApi")
 	VehiculoLocalApi srvVehiculo;
+	
+	@EJB(lookup = "java:app/lcbsdb/CuponeraSrv!lcbs.interfaces.CuponeraLocalApi")
+	CuponeraLocalApi srvCuponera;
+	
 	@EJB
 	NotificationHandler nHandler;
+	
+	IUsuario usrController;
+	
 	@Override
 	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina, DataTenant tenant){
 		return srvPasaje.obtenerTotalPasajesVendidos(fecha, pagina, elementosPagina, tenant);
@@ -96,15 +81,36 @@ public class ViajeCtrl implements IViaje {
 	@Override
 	public DataPasaje ComprarPasaje(DataPasaje pasaje, DataTenant tenant) {
 		DataViaje viaje = srvViaje.getViaje(pasaje.getViaje().getId(), tenant);
-		DataPrecio precioPasae = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
-		pasaje.setPrecio(precioPasae);
+		DataPrecio precioPasaje = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
+		pasaje.setPrecio(precioPasaje);
 		DataPasaje nuevoPasaje = srvPasaje.crearPasaje(pasaje, tenant);
 		if(nuevoPasaje.getComprador() != null){
 			nHandler.sendNotification(nuevoPasaje.getComprador(), "Pasajes", "compra", "Compra realizada con exito: " + nuevoPasaje.getDestino().getNombre(),
 					tenant);
 		}
 		return nuevoPasaje;
-
+	}
+	
+	@Override
+	public DataPasaje comprarPasajeStripe(DataPasaje pasaje, DataTenant tenant){
+		DataViaje viaje = srvViaje.getViaje(pasaje.getViaje().getId(), tenant);
+		DataPrecio precioPasaje = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
+		usrController.cargarTarjeta(pasaje.getComprador().getId(), precioPasaje.getMonto(), tenant);
+		return ComprarPasaje(pasaje, tenant);
+	}
+	
+	@Override
+	public DataPasaje comprarPasajeCuponera(DataPasaje pasaje, DataTenant tenant) throws Exception{
+		DataViaje viaje = srvViaje.getViaje(pasaje.getViaje().getId(), tenant);
+		DataPrecio precioPasaje = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
+		DataCuponera cuponera = srvUsuario.getUsuario(pasaje.getComprador().getId(), tenant).getCuponera();
+		Float saldoActual = cuponera.getSaldo();
+		if(saldoActual < precioPasaje.getMonto()){
+			throw new Exception("El saldo de la cuponera no es suficiente");
+		}
+		cuponera.setSaldo(saldoActual - precioPasaje.getMonto());
+		srvCuponera.modificarCuponera(cuponera, tenant);
+		return ComprarPasaje(pasaje, tenant);
 	}
 
 	@Override
@@ -589,6 +595,12 @@ public class ViajeCtrl implements IViaje {
 	        calendar.add(Calendar.DATE, 1);
 	    }
 	    return dates;
+	}
+
+
+	@Override
+	public DataReserva obtenerReservaPorCi(String ciUsuario, DataTenant tenant) {
+		return srvReserva.getReservaPorCi(ciUsuario, tenant);
 	}
 
 }

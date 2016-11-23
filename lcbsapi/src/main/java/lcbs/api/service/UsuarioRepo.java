@@ -129,14 +129,8 @@ public class UsuarioRepo {
 			throws UserException {
 		ctrUsuario.guardarTokenUsuario(idUsuario, token, ultimosDigitosTarjeta, tenant);
 	}
-<<<<<<< HEAD
-
-	public void cargarTarjeta(String idUsuario, Float cargo, DataTenant tenant) throws UserException {
-		ctrUsuario.cargarTarjeta(idUsuario, cargo, tenant);
-=======
 	
-	public void CargarSaldoCuponeraStripe(String idUsuario, Float saldo, DataTenant tenant){
+	public void CargarSaldoCuponeraStripe(String idUsuario, Float saldo, DataTenant tenant) throws UserException{
 		ctrUsuario.CargarSaldoCuponeraStripe(idUsuario, saldo, tenant);
->>>>>>> master
 	}
 }

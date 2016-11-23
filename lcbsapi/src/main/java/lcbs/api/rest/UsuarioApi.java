@@ -30,7 +30,8 @@ import lcbs.shares.DataUsuario;
 @Path("/usuarios/")
 @Produces({ "application/json" })
 @Consumes({ "application/json" })
-@TenantChecked public class UsuarioApi extends BaseApi {
+@TenantChecked
+public class UsuarioApi extends BaseApi {
 
 	@EJB
 	UsuarioRepo repo;
@@ -51,7 +52,8 @@ import lcbs.shares.DataUsuario;
 
 	@POST
 	@Path("/altausuario/")
-	@TenantChecked public DataUsuario AltaUsuario(DataUsuario usuario) {
+	@TenantChecked
+	public DataUsuario AltaUsuario(DataUsuario usuario) {
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		try {
 			return repo.AltaUsuario(usuario, tenant);
@@ -63,7 +65,8 @@ import lcbs.shares.DataUsuario;
 
 	@POST
 	@Path("/editarusuario/")
-	@TenantChecked public void ModificarUsuario(DataUsuario usuario) {
+	@TenantChecked
+	public void ModificarUsuario(DataUsuario usuario) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			repo.ModificarUsuario(usuario, tenant);
@@ -74,7 +77,8 @@ import lcbs.shares.DataUsuario;
 
 	@POST
 	@Path("/bajausuario/")
-	@TenantChecked public void BajaUsuario(String idUsuario) {
+	@TenantChecked
+	public void BajaUsuario(String idUsuario) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			repo.BajaUsuario(idUsuario, tenant);
@@ -85,7 +89,8 @@ import lcbs.shares.DataUsuario;
 
 	@POST
 	@Path("/altaempleado/")
-	@TenantChecked public DataEmpleado AltaEmpleado(DataEmpleado empleado) {
+	@TenantChecked
+	public DataEmpleado AltaEmpleado(DataEmpleado empleado) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			return repo.AltaEmpleado(empleado, tenant);
@@ -97,7 +102,8 @@ import lcbs.shares.DataUsuario;
 
 	@POST
 	@Path("/editarempleado/")
-	@TenantChecked public void ModificarEmpleado(DataEmpleado empleado) {
+	@TenantChecked
+	public void ModificarEmpleado(DataEmpleado empleado) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			repo.ModificarEmpleado(empleado, tenant);
@@ -108,7 +114,8 @@ import lcbs.shares.DataUsuario;
 
 	@POST
 	@Path("/bajaempleado/")
-	@TenantChecked public void BajaEmpleado(String data) {
+	@TenantChecked
+	public void BajaEmpleado(String data) {
 		try {
 			JSONObject obj = new JSONObject(data);
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
@@ -120,7 +127,8 @@ import lcbs.shares.DataUsuario;
 
 	@POST
 	@Path("/cargarcuponera/")
-	@TenantChecked public void CargarSaldoCuponera(String data) {
+	@TenantChecked
+	public void CargarSaldoCuponera(String data) {
 		try {
 			JSONObject obj = new JSONObject(data);
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
@@ -133,7 +141,8 @@ import lcbs.shares.DataUsuario;
 
 	@GET
 	@Path("/listanotificaciones/{idUsuario}")
-	@TenantChecked public List<DataNotificacion> listarNotificaciones(@PathParam("idUsuario") final String idUsuario) {
+	@TenantChecked
+	public List<DataNotificacion> listarNotificaciones(@PathParam("idUsuario") final String idUsuario) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			return repo.listarNotificaciones(idUsuario, tenant);
@@ -147,7 +156,8 @@ import lcbs.shares.DataUsuario;
 	// tested
 	@POST
 	@Path("/altaperfil/")
-	@TenantChecked public DataPerfil AltaPerfil(final DataPerfil perfil) {
+	@TenantChecked
+	public DataPerfil AltaPerfil(final DataPerfil perfil) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			return repo.AltaPerfil(perfil, tenant);
@@ -159,7 +169,8 @@ import lcbs.shares.DataUsuario;
 
 	@POST
 	@Path("/editarperfil/")
-	@TenantChecked public void EditarPerfil(final DataPerfil perfil) {
+	@TenantChecked
+	public void EditarPerfil(final DataPerfil perfil) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			repo.EditarPerfil(perfil, tenant);
@@ -170,7 +181,8 @@ import lcbs.shares.DataUsuario;
 
 	@DELETE
 	@Path("/eliminarperfil/{idPerfil}")
-	@TenantChecked public void EliminarPerfil(@PathParam("idPerfil") String idPerfil) {
+	@TenantChecked
+	public void EliminarPerfil(@PathParam("idPerfil") String idPerfil) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			repo.EliminarPerfil(idPerfil, tenant);
@@ -182,7 +194,8 @@ import lcbs.shares.DataUsuario;
 	// tested
 	@POST
 	@Path("/asignarperfil/")
-	@TenantChecked public void AsignarPerfil(String data) {
+	@TenantChecked
+	public void AsignarPerfil(String data) {
 		try {
 			JSONObject obj = new JSONObject(data);
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
@@ -194,7 +207,8 @@ import lcbs.shares.DataUsuario;
 
 	@POST
 	@Path("/loginusuario/")
-	@TenantChecked public DataUsuario loginUsuario(String data) {
+	@TenantChecked
+	public DataUsuario loginUsuario(String data) {
 		try {
 			JSONObject obj = new JSONObject(data);
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
@@ -207,7 +221,8 @@ import lcbs.shares.DataUsuario;
 
 	@GET
 	@Path("/getusuario/{idUsuario}")
-	@TenantChecked public DataUsuario getUsuario(@PathParam("idUsuario") final String idUsuario) {
+	@TenantChecked
+	public DataUsuario getUsuario(@PathParam("idUsuario") final String idUsuario) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			return repo.getUsuario(idUsuario, tenant);
@@ -219,7 +234,8 @@ import lcbs.shares.DataUsuario;
 
 	@POST
 	@Path("/loginempleado/")
-	@TenantChecked public DataEmpleado loginEmpleado(String data) {
+	@TenantChecked
+	public DataEmpleado loginEmpleado(String data) {
 		try {
 			JSONObject obj = new JSONObject(data);
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
@@ -232,7 +248,8 @@ import lcbs.shares.DataUsuario;
 
 	@GET
 	@Path("/getempleado/{idEmpleado}")
-	@TenantChecked public DataEmpleado getEmpleado(@PathParam("idEmpleado") final String idEmpleado) {
+	@TenantChecked
+	public DataEmpleado getEmpleado(@PathParam("idEmpleado") final String idEmpleado) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			return repo.getEmpleado(idEmpleado, tenant);
@@ -244,7 +261,8 @@ import lcbs.shares.DataUsuario;
 
 	@GET
 	@Path("/listarempleados/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
-	@TenantChecked public List<DataEmpleado> listarEmpleados(@PathParam("pagina") final Integer pagina,
+	@TenantChecked
+	public List<DataEmpleado> listarEmpleados(@PathParam("pagina") final Integer pagina,
 			@PathParam("elementosAMostrar") final Integer elementosPagina) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
@@ -257,7 +275,8 @@ import lcbs.shares.DataUsuario;
 
 	@GET
 	@Path("/listarusuarios/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
-	@TenantChecked public List<DataUsuario> listarUsuarios(@PathParam("pagina") final Integer pagina,
+	@TenantChecked
+	public List<DataUsuario> listarUsuarios(@PathParam("pagina") final Integer pagina,
 			@PathParam("elementosAMostrar") final Integer elementosPagina) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
@@ -266,12 +285,13 @@ import lcbs.shares.DataUsuario;
 			handleError(e);
 		}
 		return null;
-		
+
 	}
 
 	@GET
 	@Path("/getperfil/{idPerfil}")
-	@TenantChecked public DataPerfil getPerfil(@PathParam("idPerfil") final String idPerfil) {
+	@TenantChecked
+	public DataPerfil getPerfil(@PathParam("idPerfil") final String idPerfil) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			return repo.getPerfil(idPerfil, tenant);
@@ -279,12 +299,13 @@ import lcbs.shares.DataUsuario;
 			handleError(e);
 		}
 		return null;
-		
+
 	}
 
 	@GET
 	@Path("/listarperfiles/{pagina:[0-9][0-9]*}/{elementosAMostrar:[0-9][0-9]*}")
-	@TenantChecked public List<DataPerfil> listarPerfiles(@PathParam("pagina") final Integer pagina,
+	@TenantChecked
+	public List<DataPerfil> listarPerfiles(@PathParam("pagina") final Integer pagina,
 			@PathParam("elementosAMostrar") final Integer elementosPagina) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
@@ -292,24 +313,26 @@ import lcbs.shares.DataUsuario;
 		} catch (UserException e) {
 			handleError(e);
 		}
-		return null;	
+		return null;
 	}
 
 	@POST
 	@Path("/buscarusuariopormail/")
-	@TenantChecked public DataUsuario buscarUsuarioPorMail(String mailUsuario) {
+	@TenantChecked
+	public DataUsuario buscarUsuarioPorMail(String mailUsuario) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			return repo.buscarUsuarioPorMail(mailUsuario, tenant);
 		} catch (UserException e) {
 			handleError(e);
 		}
-		return null;	
+		return null;
 	}
 
 	@POST
 	@Path("/guardartokenusuario/")
-	@TenantChecked public void guardarTokenUsuario(String data) {
+	@TenantChecked
+	public void guardarTokenUsuario(String data) {
 		try {
 			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 			JSONObject obj = new JSONObject(data);
@@ -322,10 +345,14 @@ import lcbs.shares.DataUsuario;
 
 	@POST
 	@Path("/cargarsaldocuponerastripe/")
-	public void CargarSaldoCuponeraStripe(String data){
-		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
-		JSONObject obj = new JSONObject(data);
-		repo.CargarSaldoCuponeraStripe(obj.getString("idUsuario"), Float.valueOf(obj.getString("saldo")), tenant);
-		
+	public void CargarSaldoCuponeraStripe(String data) {
+		try {
+			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+			JSONObject obj = new JSONObject(data);
+			repo.CargarSaldoCuponeraStripe(obj.getString("idUsuario"), Float.valueOf(obj.getString("saldo")), tenant);
+		} catch (UserException e) {
+			handleError(e);
+		}
+
 	}
 }

@@ -10,6 +10,7 @@ import lcbs.shares.DataTenant;
 import lcbs.shares.DataUsuario;
 public interface IUsuario {
 	
+ 
 	public DataUsuario loginUsuario(String usuario, String clave, DataTenant tenant)throws UserException;
 	public DataUsuario getUsuario(String idUsuario, DataTenant tenant)throws UserException;
 	public DataUsuario AltaUsuario(DataUsuario usuario, DataTenant tenant)throws UserException;
@@ -33,5 +34,8 @@ public interface IUsuario {
 	public DataUsuario buscarUsuarioPorMail(String mailUsuario, DataTenant tenant)throws UserException;
 	public void guardarTokenUsuario(String idUsuario, String token, Integer ultimosDigitosTarjeta, DataTenant tenant)throws UserException;
 	public void cargarTarjeta(String idUsuario, Float cargo, DataTenant tenant)throws UserException;
+ 
+	public void CargarSaldoCuponeraStripe(String idUsuario, Float saldo, DataTenant tenant) throws UserException;
+ 
 	
 }

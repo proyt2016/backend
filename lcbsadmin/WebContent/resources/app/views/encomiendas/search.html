@@ -88,6 +88,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="encomienda in encomiendas">
+          <td>{{ encomienda.codigoEncomienda }}</td>
           	<td>{{ getEmisor(encomienda) }}</td>
             <td>{{ getReceptor(encomienda) }}</td>
             <td>

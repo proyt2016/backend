@@ -111,6 +111,17 @@ public class UsuarioCtrl implements IUsuario {
 		srvCuponera.modificarCuponera(cuponera, tenant);
 		nHandler.sendNotification(usuario, "Cuponera", "recarga-saldo", "Se acredito su recarga de: " + saldo, tenant);
 	}
+	
+	@Override
+	public void CargarSaldoCuponeraStripe(String idUsuario, Float saldo, DataTenant tenant) throws UserException {
+		DataUsuario usuario = srvUsuario.getUsuario(idUsuario, tenant);
+		DataCuponera cuponera = usuario.getCuponera();
+		cargarTarjeta(idUsuario, saldo, tenant);
+		cuponera.setSaldo(cuponera.getSaldo() + saldo);
+		srvCuponera.modificarCuponera(cuponera, tenant);
+		nHandler.sendNotification(usuario, "Cuponera", "recarga-saldo", "Se acredito su recarga de: " + saldo,
+				tenant);
+	}
 
 	@Override
 	public List<DataNotificacion> listarNotificaciones(String idUsuario, DataTenant tenant) throws UserException {

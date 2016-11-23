@@ -7,21 +7,22 @@
     app.controller('appCtrl', ['$scope', '$location', '$localStorage', '$pusher', 'toastr', appCtrl]);
     
     app.run(function(CONFIGURACION) {
-	  Stripe.setPublishableKey(CONFIGURACION.STRIPE_KEY);
+	  Stripe.setPublishableKey(CONFIGURACION.stripePublicKey);
 	});
     
     /*@ngInject*/
-    function configFunction($routeProvider, $httpProvider, toastrConfig, uiGmapGoogleMapApiProvider, CONFIGURACION) {
+ 
+    function configFunction($routeProvider, $httpProvider, toastrConfig, uiGmapGoogleMapApiProvider, CONFIGURACION) {  	
     	$httpProvider.interceptors.push(function() {
-		  return {
-		   'requestError': function(config) {
-			  // $rootScope.$error("Servicio no disponible", "Error");
-		    },
-		    'responseError': function(response) {
-		    	//$rootScope.error("Servicio no disponible", "Error");
-		    }
-		  };
-		});
+  		  return {
+  		   'requestError': function(config) {
+  			  // $rootScope.$error("Servicio no disponible", "Error");
+  		    },
+  		    'responseError': function(response) {
+  		    	//$rootScope.error("Servicio no disponible", "Error");
+  		    }
+  		  };
+  		});
         uiGmapGoogleMapApiProvider.configure({
             key: 'AIzaSyBVL227yFvpTa6b0oolhl3PW_BPGLFMnwI',
             v: '3.20', //defaults to latest 3.X anyhow

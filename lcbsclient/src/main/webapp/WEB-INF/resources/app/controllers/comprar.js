@@ -41,7 +41,7 @@
         $scope.procesarCompra = function () {
         	var comprar = this.comprar;
         	
-        	if($scope.comprar.pagos == 'stripe'){
+        	if($scope.comprar.pagos == 'stripe' && !$scope.usuarioLogueado.ultimosCuatroDigitos){
         		$('#modal-stripe').modal('show');
             	return;
         	}
@@ -91,9 +91,7 @@
 	    	}
 	    	
 	        pasajeService.comprar(pasaje).then(function (datos) {
-	            setTimeout(function(){ 
-	            	$location.url('/');
-	            }, 3000);
+	        	$location.url('/');
 	        });
         };
         
@@ -121,9 +119,8 @@
 	            }
 	
 	            usuarioService.agregarTarjeta(tokenData).then(function (response) {
-	              //usuario['tokenTarjeta']           = token;
-	              //usuario['ultimosNumerosTarjeta']  = card;
-	              
+	            	$scope.usuarioLogueado['ultimosCuatroDigitos']  = card;
+	           
 	            	$scope.procesarPago();
 	            	
 	            }, function(err) {

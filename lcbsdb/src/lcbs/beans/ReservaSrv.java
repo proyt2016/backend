@@ -55,8 +55,7 @@ public class ReservaSrv implements ReservaLocalApi {
 		Session session = (Session) em.getDelegate();
 
 		Criteria c = session.createCriteria(Reserva.class);
-		c.add(Restrictions.eq("usuarioReserva.id", idUsuario)); // TODO: Fixear
-																// filtro
+		c.add(Restrictions.eq("usuarioReserva.id", idUsuario)); 
 		List<Reserva> listRes = new ArrayList<Reserva>(new LinkedHashSet(c.list()));
 
 		listRes.stream().forEach((rec) -> {
@@ -93,5 +92,20 @@ public class ReservaSrv implements ReservaLocalApi {
 		this.modificarReserva(res, tenant);
 	}
 
-	// TODO filtrar reservas por usuario
+	@Override
+	public DataReserva getReservaPorCi(String ciUsuario, DataTenant tenant) {
+		List<DataReserva> reservas = new ArrayList();
+		// obtengo todas las Reservas de la bd
+		Session session = (Session) em.getDelegate();
+		Criteria criteria = session.createCriteria(Reserva.class);
+		criteria.add(Restrictions.eq("eliminada", false));
+		criteria.add(Restrictions.eq("ciPersona", ciUsuario));
+		List<Reserva> listRes = new ArrayList<Reserva>(new LinkedHashSet(criteria.list()));
+
+		listRes.stream().forEach((rec) -> {
+			reservas.add(rec.getDatatype());
+		});
+		return reservas.get(0);
+	}
+
 }

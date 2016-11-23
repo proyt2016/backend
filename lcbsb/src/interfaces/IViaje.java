@@ -3,6 +3,7 @@ package interfaces;
 import java.text.ParseException;
 import java.util.List;
 
+import lcbs.exceptions.UserException;
 import lcbs.exceptions.ViajeException;
 import lcbs.shares.DataGrupoHorario;
 import lcbs.shares.DataParada;
@@ -55,6 +56,7 @@ public interface IViaje {
 	public List<DataViaje> getViajes(Integer pagina, Integer elementos, DataTenant tenant);
 	public List<DataRecorrido> BuscarRecorrido(DataRecorrido filtro, Integer pagina, Integer elementosPagina, DataTenant tenant);
 	public DataReserva obtenerReserva(String idReserva, DataTenant tenant);
+	public DataReserva obtenerReservaPorCi(String ciUsuario, DataTenant tenant);
 	public void crearHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant);
 	public void editarHorarioRecorrido(DataGrupoHorario horario, String idRecorrido, DataTenant tenant);
 	public void borrarHorarioRecorrido(String idRecorrido, String idHorario, DataTenant tenant);
@@ -65,5 +67,7 @@ public interface IViaje {
 	public Integer cantidadAsientosDisponibles(String idViaje, String idOrigen, String idDestino, DataTenant tenant);
 	public DataReserva PasajeOnlineAReserva(Integer codigoPasaje, String idUsuario, DataTenant tenant);
 	public List<DataViaje> listarViajesCambioHorario(String idPasaje, DataTenant tenant);
+	public DataPasaje comprarPasajeStripe(DataPasaje pasaje, DataTenant tenant) throws UserException;
+	public DataPasaje comprarPasajeCuponera(DataPasaje pasaje, DataTenant tenant) throws Exception;
 
 }

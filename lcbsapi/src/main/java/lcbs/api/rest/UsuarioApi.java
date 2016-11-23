@@ -321,14 +321,11 @@ import lcbs.shares.DataUsuario;
 	}
 
 	@POST
-	@Path("/cargartarjeta/")
-	@TenantChecked public void cargarTarjeta(String data) {
-		try {
-			DataTenant tenant = (DataTenant) request.getAttribute("tenant");
-			JSONObject obj = new JSONObject(data);
-			repo.cargarTarjeta(obj.getString("idUsuario"), Float.valueOf(obj.getString("monto")), tenant);
-		} catch (UserException e) {
-			handleError(e);
-		}
+	@Path("/cargarsaldocuponerastripe/")
+	public void CargarSaldoCuponeraStripe(String data){
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		JSONObject obj = new JSONObject(data);
+		repo.CargarSaldoCuponeraStripe(obj.getString("idUsuario"), Float.valueOf(obj.getString("saldo")), tenant);
+		
 	}
 }

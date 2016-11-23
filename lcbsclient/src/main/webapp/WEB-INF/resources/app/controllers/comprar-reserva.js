@@ -1,8 +1,8 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('comprarReservaCtrl', ['$scope', '$routeParams', '$localStorage', '$location', 'toastr', 'viajeService', 'reservaService', comprarReservaCtrl]);
+    angular.module('lacbus').controller('comprarReservaCtrl', ['$scope', '$routeParams', '$localStorage', '$location', 'toastr', 'viajeService', 'reservaService', 'usuarioService', comprarReservaCtrl]);
 
-    function comprarReservaCtrl($scope, $routeParams, $localStorage, $location, toastr, viajeService, reservaService) {
+    function comprarReservaCtrl($scope, $routeParams, $localStorage, $location, toastr, viajeService, reservaService, usuarioService) {
         var id = $routeParams && $routeParams['id'] ? $routeParams['id'] : null;
 		$scope.usuarioLogueado = $localStorage.usuarioLogueado;
     	
@@ -29,7 +29,7 @@
         $scope.procesarCompra = function () {
         	var comprar = this.comprar;
         	
-        	if($scope.comprar.pagos == 'stripe'){
+        	if($scope.comprar.pagos == 'stripe' && !$scope.usuarioLogueado.ultimosCuatroDigitos){
         		$('#modal-stripe').modal('show');
             	return;
         	}
@@ -90,8 +90,7 @@
 	            }
 	
 	            usuarioService.agregarTarjeta(tokenData).then(function (response) {
-	              //usuario['tokenTarjeta']           = token;
-	              //usuario['ultimosNumerosTarjeta']  = card;
+	            	$scope.usuarioLogueado['ultimosCuatroDigitos']  = card;
 	              
 	            	$scope.procesarPago();
 	            	

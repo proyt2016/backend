@@ -1,7 +1,6 @@
 package lcbs.controllers;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,9 +16,12 @@ import javax.ejb.Stateless;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import interfaces.IUsuario;
 import interfaces.IViaje;
+import lcbs.exceptions.UserException;
 import lcbs.exceptions.ViajeException;
 import lcbs.interfaces.ConfiguracionEmpresaLocalApi;
+import lcbs.interfaces.CuponeraLocalApi;
 import lcbs.interfaces.ParadaLocalApi;
 import lcbs.interfaces.PasajeLocalApi;
 import lcbs.interfaces.RecorridoLocalApi;
@@ -29,6 +31,7 @@ import lcbs.interfaces.UsuarioLocalApi;
 import lcbs.interfaces.VehiculoLocalApi;
 import lcbs.interfaces.ViajeLocalApi;
 import lcbs.shares.DataConfiguracionEmpresa;
+import lcbs.shares.DataCuponera;
 import lcbs.shares.DataDiasSemana;
 import lcbs.shares.DataGrupoHorario;
 import lcbs.shares.DataHorario;
@@ -80,8 +83,14 @@ public class ViajeCtrl implements IViaje {
 
 	@EJB(lookup = "java:app/lcbsdb/VehiculoSrv!lcbs.interfaces.VehiculoLocalApi")
 	VehiculoLocalApi srvVehiculo;
+	
+	@EJB(lookup = "java:app/lcbsdb/CuponeraSrv!lcbs.interfaces.CuponeraLocalApi")
+	CuponeraLocalApi srvCuponera;
+	
 	@EJB
 	NotificationHandler nHandler;
+	IUsuario usrController;
+	
 
 	@Override
 	public List<DataPasajeConvertor> obtenerTotalPasajesVendidos(String fecha, Integer pagina, Integer elementosPagina,
@@ -99,16 +108,38 @@ public class ViajeCtrl implements IViaje {
 	@Override
 	public DataPasaje ComprarPasaje(DataPasaje pasaje, DataTenant tenant) {
 		DataViaje viaje = srvViaje.getViaje(pasaje.getViaje().getId(), tenant);
-		DataPrecio precioPasae = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(),
-				viaje.getRecorrido().getId(), tenant);
-		pasaje.setPrecio(precioPasae);
+
+		DataPrecio precioPasaje = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
+		pasaje.setPrecio(precioPasaje);
+
 		DataPasaje nuevoPasaje = srvPasaje.crearPasaje(pasaje, tenant);
 		if (nuevoPasaje.getComprador() != null) {
 			nHandler.sendNotification(nuevoPasaje.getComprador(), "Pasajes", "compra",
 					"Compra realizada con exito: " + nuevoPasaje.getDestino().getNombre(), tenant);
 		}
 		return nuevoPasaje;
-
+	}
+	
+	@Override
+	public DataPasaje comprarPasajeStripe(DataPasaje pasaje, DataTenant tenant) throws UserException{
+		DataViaje viaje = srvViaje.getViaje(pasaje.getViaje().getId(), tenant);
+		DataPrecio precioPasaje = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
+		usrController.cargarTarjeta(pasaje.getComprador().getId(), precioPasaje.getMonto(), tenant);
+		return ComprarPasaje(pasaje, tenant);
+	}
+	
+	@Override
+	public DataPasaje comprarPasajeCuponera(DataPasaje pasaje, DataTenant tenant) throws Exception{
+		DataViaje viaje = srvViaje.getViaje(pasaje.getViaje().getId(), tenant);
+		DataPrecio precioPasaje = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
+		DataCuponera cuponera = srvUsuario.getUsuario(pasaje.getComprador().getId(), tenant).getCuponera();
+		Float saldoActual = cuponera.getSaldo();
+		if(saldoActual < precioPasaje.getMonto()){
+			throw new Exception("El saldo de la cuponera no es suficiente");
+		}
+		cuponera.setSaldo(saldoActual - precioPasaje.getMonto());
+		srvCuponera.modificarCuponera(cuponera, tenant);
+		return ComprarPasaje(pasaje, tenant);
 	}
 
 	@Override
@@ -147,9 +178,11 @@ public class ViajeCtrl implements IViaje {
 				viaje.getRecorrido().getId(), tenant);
 		reserva.setPrecio(precioPasae);
 		DataReserva nuevaReserva = srvReserva.crearReserva(reserva, tenant);
-		if (nuevaReserva.getUsuarioReserva() != null) {
-			nHandler.sendNotification(nuevaReserva.getUsuarioReserva(), "Pasajes", "reserva",
-					"Reserva realizada con exito: " + nuevaReserva.getDestino().getNombre(), tenant);
+ 
+		DataUsuario usuario = srvUsuario.getUsuario(nuevaReserva.getUsuarioReserva().getId(), tenant);
+		if(nuevaReserva.getUsuarioReserva() != null){
+			nHandler.sendNotification(usuario, "Pasajes", "reserva", "Reserva realizada con exito: " + nuevaReserva.getDestino().getNombre(),
+					tenant);
 		}
 		return nuevaReserva;
 	}
@@ -613,6 +646,12 @@ public class ViajeCtrl implements IViaje {
 			calendar.add(Calendar.DATE, 1);
 		}
 		return dates;
+	}
+
+
+	@Override
+	public DataReserva obtenerReservaPorCi(String ciUsuario, DataTenant tenant) {
+		return srvReserva.getReservaPorCi(ciUsuario, tenant);
 	}
 
 }

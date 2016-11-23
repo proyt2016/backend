@@ -93,19 +93,21 @@ public class ReservaSrv implements ReservaLocalApi {
 	}
 
 	@Override
-	public DataReserva getReservaPorCi(String ciUsuario, DataTenant tenant) {
+	public List<DataReserva> buscarReserva(DataReserva filtro, DataTenant tenant) {
 		List<DataReserva> reservas = new ArrayList();
-		// obtengo todas las Reservas de la bd
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(Reserva.class);
 		criteria.add(Restrictions.eq("eliminada", false));
-		criteria.add(Restrictions.eq("ciPersona", ciUsuario));
+		if(filtro.getCiPersona() != null)
+			criteria.add(Restrictions.eq("ciPersona", filtro.getCiPersona()));
+		if(filtro.getUsuarioReserva() != null)
+			criteria.add(Restrictions.eq("usuarioReserva.id", filtro.getUsuarioReserva().getId()));
 		List<Reserva> listRes = new ArrayList<Reserva>(new LinkedHashSet(criteria.list()));
 
 		listRes.stream().forEach((rec) -> {
 			reservas.add(rec.getDatatype());
 		});
-		return reservas.get(0);
+		return reservas;
 	}
 
 }

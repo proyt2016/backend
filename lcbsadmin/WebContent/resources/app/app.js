@@ -41,6 +41,15 @@
 		}).when("/viajes/detalle/:id", {
 		    templateUrl : "app/views/viajes/details.html",
 		    controller  : 'viajesCtrl'
+		}).when("/reservas", {
+		    templateUrl : "app/views/reservas/search.html",
+		    controller  : 'reservasCtrl'
+		}).when("/reservas/detalle/:id", {
+		    templateUrl : "app/views/reservas/details.html",
+		    controller  : 'reservasCtrl'
+		}).when("/cuponera", {
+		    templateUrl : "app/views/cuponera/recarga.html",
+		    controller  : 'cuponeraCtrl'
 		});
 
 		// ruta de editarViajes

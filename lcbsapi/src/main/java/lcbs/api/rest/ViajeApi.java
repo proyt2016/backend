@@ -410,11 +410,11 @@ public class ViajeApi extends BaseApi{
 		return repo.comprarPasajeCuponera(pasaje, tenant);
 	}
 	
-	@GET
-	@Path("/obtenerreservaporci/{ciUsuario}")
-	public DataReserva obtenerReservaPorCi(@PathParam("ciUsuario") final String ciUsuario){
+	@POST
+	@Path("/buscarreservas/")
+	public List<DataReserva> buscarReservas(DataReserva filtro){
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
-		return repo.obtenerReservaPorCi(ciUsuario, tenant);
+		return repo.buscarReservas(filtro, tenant);
 	}
 	
 }

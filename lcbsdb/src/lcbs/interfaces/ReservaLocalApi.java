@@ -15,5 +15,5 @@ public interface ReservaLocalApi {
 	public DataReserva getReserva(String rce, DataTenant tenant);
 	public DataReserva crearReserva(DataReserva rce, DataTenant tenant);
 	public void darBajaReserva(String idReserva, DataTenant tenant);
-	public DataReserva getReservaPorCi(String ciUsuario, DataTenant tenant);
+	public List<DataReserva> buscarReserva(DataReserva filtro, DataTenant tenant);
 }

@@ -229,7 +229,7 @@ public class ViajeRepo {
 		return ctrViaje.comprarPasajeCuponera(pasaje, tenant);
 	}
 	
-	public DataReserva obtenerReservaPorCi(String ciUsuario, DataTenant tenant){
-		return ctrViaje.obtenerReservaPorCi(ciUsuario, tenant);
+	public List<DataReserva> buscarReservas(DataReserva filtro, DataTenant tenant){
+		return ctrViaje.buscarReservas(filtro, tenant);
 	}
 }

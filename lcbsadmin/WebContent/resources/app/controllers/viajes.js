@@ -11,11 +11,8 @@
             idOrigen : null,
             idDestino : null
         }
+        $scope.comprar = {};
         $scope.viaje = null;
-        $scope.comprar  = {
-            pagos : 'paypal',
-            cantidad : 1
-        };
         $scope.usuario = null;
         $scope.comprador = null;
         $scope.resultados = null;
@@ -30,19 +27,11 @@
                     viajeService.getId(id).then(function (datos) {
                         $scope.viaje = datos;
                         $scope.coches = datos.coches;
+                        
+                        console.log(datos, $scope.comprar)
 
                         $scope.comprar['origen']    = '0';
                         $scope.comprar['destino']   = datos.recorrido.puntosDeRecorrido.length - 1 + '';
-                        
-                        var origen = datos.recorrido.puntosDeRecorrido[$scope.comprar.origen];
-                        var destino = datos.recorrido.puntosDeRecorrido[$scope.comprar.destino];
-                        for(var i in datos.recorrido.precios){
-                            var precio = datos.recorrido.precios[i];
-                            
-                            if(precio['origen'].id == origen.id && precio['destino'].id == destino.id){
-                            	$scope.comprar['precio'] = precio['monto'];
-                            }
-                        }
                         
                         $scope.recorrido = {
                             visible: true,
@@ -75,6 +64,8 @@
                                 longitude: coords[1]
                             });
                         }
+                        
+                        $scope.calcularPrecio();
                     });
                 });
             }

@@ -52,19 +52,29 @@
         $scope.procesarPago = function () {
         	$scope.saving = true;
 	    	var viaje = $scope.viaje;
+	    	var pago = $scope.comprar.pagos;
 
             if(!this.comprar['origen']){
                 toastr.warning('Debe seleccionar un origen', 'Ups');
+                $scope.saving = false;
                 return;
             }
 
             if(!this.comprar['destino']){
                 toastr.warning('Debe seleccionar un destino', 'Ups');
+                $scope.saving = false;
                 return;
             }
 
             if(!this.comprar['cantidad']){
                 toastr.warning('Debe seleccionar la cantidad de pasajes', 'Ups');
+                $scope.saving = false;
+                return;
+            }
+            
+            if(this.comprar['pagos'] == 'cuponera' && $scope.usuarioLogueado.cuponera.saldo < $scope.precio){
+                toastr.warning('No tiene saldo en la cuponera para realizar el pago', 'Ups');
+                $scope.saving = false;
                 return;
             }
 
@@ -90,7 +100,7 @@
 	    		fechaCompra : moment().format('YYYY-MM-DD') 
 	    	}
 	    	
-	        pasajeService.comprar(pasaje).then(function (datos) {
+	        pasajeService.comprar(pasaje, pago).then(function (datos) {
 	        	$location.url('/');
 	        });
         };

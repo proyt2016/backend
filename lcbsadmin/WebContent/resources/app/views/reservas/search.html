@@ -1,0 +1,60 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Busqueda de Reservas</h3>
+    </div>
+  </div>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+      <form class="form-horizontal form-label-left">
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Usuario</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" id="nombre" class="form-control col-md-7 col-xs-12" ng-model="emisorStrg" ng-blur="buscarUsuario()">
+            <p class="help-block">Ingrese el email para buscar sus datos</p>
+          </div>
+        </div>
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ciEmisor">Cedula de la persona <span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" id="ciEmisor" class="form-control col-md-7 col-xs-12" ng-model="ciPersona">
+          </div>
+        </div>
+        <div class="ln_solid"></div>
+        <div class="form-group">
+          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <button class="btn btn-success" ng-click="buscar()">Buscar</button>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12" ng-if="resultados.length">
+	<div class="x_panel">
+	    <div class="x_title">
+	      <h2>Resultado de busqueda</h2>
+	      <div class="clearfix"></div>
+	    </div>
+	    <div class="x_content">
+	      <table class="table table-hover table-striped">
+	        <tr>
+	          <th>Salida</th>
+	          <th>Horario</th>
+	          <th>Origen</th>
+	          <th>Destino</th>
+	          <th></th>
+	        </tr>
+	        <tr ng-repeat="resultado in resultados">
+	          <td>{{ resultado.fechaSalida | date : 'dd/MM/yy' }}</td>
+	          <td>{{ resultado.horario.nombre }}</td>
+	          <td>{{ resultado.recorrido.puntosDeRecorrido[0].nombre }}</td>
+	          <td>{{ resultado.recorrido.puntosDeRecorrido[resultado.recorrido.puntosDeRecorrido.length - 1].nombre }}</td>
+	          <td>
+	            <a href="#/viajes/detalle/{{ resultado.id }}" class="btn btn-info btn-xs" title="detalle"><i class="fa fa-search"></i></a>
+	          </td>
+	        </tr>
+	      </table>
+	   </div>
+	</div>
+</div>

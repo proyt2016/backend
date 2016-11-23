@@ -7,7 +7,7 @@
         var recargar = function(recarga){
             var defer = $q.defer();
 
-            $http.post(CONFIGURACION.url + 'usuarios/cargarcuponera', recarga)
+            $http.post(CONFIGURACION.url + 'usuarios/cargarsaldocuponerastripe', recarga)
             .success(function (datos) {
                 defer.resolve(datos);
             })

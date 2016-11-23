@@ -32,10 +32,15 @@
             return defer.promise;
         };
 
-        var comprar = function(pasaje){
+        var comprar = function(pasaje, tipo){
             var defer = $q.defer();
+            
+            var url = CONFIGURACION.url + 'viajes/comparapasajecuponera';
+            if(tipo == 'stripe'){
+            	url = CONFIGURACION.url + 'viajes/comprarpasajestripe'
+            }
 
-            $http.post(CONFIGURACION.url + 'viajes/comprarpasaje', pasaje)
+            $http.post(url, pasaje)
             .success(function (datos) {
                 defer.resolve(datos);
             })

@@ -70,7 +70,7 @@
         <div class="left_col scroll-view">
 
           <div class="navbar nav_title" style="border: 0;">
-            <a href="#" class="site_title"><i class="fa fa-gamepad"></i> <span>Lacbus - Admin</span></a>
+            <a href="#" class="site_title"><i class="fa fa-bus"></i> <span>Lacbus - Admin</span></a>
           </div>
           <div class="clearfix"></div>
 
@@ -92,18 +92,32 @@
                 <li>
                   <a href="#/"><i class="fa fa-home"></i> Inicio </a>
                 </li>
-                <li ng-show="{{ empleadoLogueado.perfil.gestionPasajes }}">
-                  <a href="#/viajes"><i class="fa fa-bus"></i> Viajes </a>
-                </li>
+                <ul class="nav side-menu" ng-show="{{ empleadoLogueado.perfil.gestionPasajes }}">
+                  <li>
+                    <a><i class="fa fa-database"></i> Ventanilla <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none">
+                      <li>
+                        <a href="#/viajes">Viajes </a>
+                      </li>
+                      <li>
+                        <a href="#/reservas"> Reservas </a>
+                      </li>
+                      <li>
+                        <a href="#/cuponera"> Cuponera </a>
+                      </li>
+                   </ul>
+                  </li>
+                </ul>
+                
                 <ul class="nav side-menu" ng-show="{{ empleadoLogueado.perfil.gestionReportes }}">
                   <li>
                     <a><i class="fa fa-bar-chart"></i> Reportes <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none">
                       <li>
-                        <a href="#/reportes/reportesPasajes"><i class="fa fa-home"></i> Arqueo Pasajes </a>
+                        <a href="#/reportes/reportesPasajes"> Arqueo Pasajes </a>
                       </li>
                       <li>
-                        <a href="#/reportes/reportesEncomiendas"><i class="fa fa-home"></i> Arqueo Encomiendas </a>
+                        <a href="#/reportes/reportesEncomiendas"> Arqueo Encomiendas </a>
                       </li>
                    </ul>
                   </li>
@@ -113,10 +127,10 @@
                     <a><i class="fa fa-cubes"></i> Encomiendas <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none">
                       <li>
-                        <a href="#/encomiendas/add"><i class="fa fa-home"></i> Alta </a>
+                        <a href="#/encomiendas/add"> Alta </a>
                       </li>
                       <li>
-                        <a href="#/encomiendas/search"><i class="fa fa-home"></i> Busqueda </a>
+                        <a href="#/encomiendas/search"> Busqueda </a>
                       </li>
                     </ul>
                   </li>
@@ -126,10 +140,10 @@
                     <a><i class="fa fa-wrench"></i> Mantenimiento de Flota <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none">
                      <li>
-                        <a href="#/vehiculos"><i class="fa fa-home"></i> Vehiculos </a>
+                        <a href="#/vehiculos"> Vehiculos </a>
                       </li>
                      <li>
-                        <a href="#/mantenimiento"><i class="fa fa-home"></i> Mantenimiento </a>
+                        <a href="#/mantenimiento"> Mantenimiento </a>
                       </li>
                      
                     </ul>
@@ -137,31 +151,31 @@
                 </ul>
                 <ul class="nav side-menu" ng-show="{{ empleadoLogueado.perfil.configuracionEmpresa }}">
                   <li>
-                    <a><i class="fa fa-magic"></i> Cofiguraciones <span class="fa fa-chevron-down"></span></a>
+                    <a><i class="fa fa-gears"></i> Cofiguraciones <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none">
                       <li>
-                        <a href="#/configuracion"><i class="fa fa-home"></i> Basicas </a>
+                        <a href="#/configuracion"> Basicas </a>
                       </li>
                       <li>
-                        <a href="#/estadosencomienda"><i class="fa fa-home"></i> Estados de encomienda </a>
+                        <a href="#/estadosencomienda"> Estados de encomienda </a>
                       </li>
                       <li>
-                        <a href="#/reglacobroencomienda"><i class="fa fa-home"></i> Reglas de cobro de encomiendas </a>
+                        <a href="#/reglacobroencomienda"> Reglas de cobro de encomiendas </a>
                       </li>
                       <li>
-                        <a href="#/perfil"><i class="fa fa-home"></i> Perfiles </a>
+                        <a href="#/perfil"> Perfiles </a>
                       </li>
                       <li>
-                        <a href="#/empleados"><i class="fa fa-home"></i> Empleados </a>
+                        <a href="#/empleados"> Empleados </a>
                       </li>
                       <li>
-                        <a href="#/puntosrecorrido"><i class="fa fa-home"></i> Puntos de recorridos </a>
+                        <a href="#/puntosrecorrido"> Puntos de recorridos </a>
                       </li>
                       <li>
-                        <a href="#/editarViaje"><i class="fa fa-home"></i> Editar Viajes </a>
+                        <a href="#/editarViaje"> Editar Viajes </a>
                       </li>
                       <li>
-                        <a href="#/recorridos"><i class="fa fa-home"></i> Recorridos </a>
+                        <a href="#/recorridos"> Recorridos </a>
                       </li>
                     </ul>
                   </li>
@@ -260,6 +274,7 @@
   <script src="app/services/reglacobroencomienda.js"></script>
   <script src="app/services/horariorecorrido.js"></script>
   <script src="app/services/usuario.js"></script>
+  <script src="app/services/reserva.js"></script>
   
   <!-- controllers -->
   <script src="app/controllers/home.js"></script>
@@ -278,6 +293,8 @@
   <script src="app/controllers/horariorecorrido.js"></script>
   <script src="app/controllers/mantenimientovehiculo.js"></script>
   <script src="app/controllers/login.js"></script>
+  <script src="app/controllers/cuponera.js"></script>
+  <script src="app/controllers/reservas.js"></script>
   
   <script type="text/javascript" src="js/notify/pnotify.core.js"></script>
   <script type="text/javascript" src="js/notify/pnotify.buttons.js"></script>

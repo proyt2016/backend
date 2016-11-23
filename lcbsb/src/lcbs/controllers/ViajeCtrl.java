@@ -1,9 +1,11 @@
 package lcbs.controllers;
 
+import java.security.MessageDigest;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -11,11 +13,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.stripe.Stripe;
+import com.stripe.model.Charge;
 
 import interfaces.IUsuario;
 import interfaces.IViaje;
@@ -71,7 +80,6 @@ public class ViajeCtrl implements IViaje {
 		return srvPasaje.obtenerTotalPasajesVendidos(fecha, pagina, elementosPagina, tenant);
 	}
 
-
 	@Override
 	public List<DataViaje> BuscarViaje(DataViaje filtro, Integer cantidadDias, Integer pagina, Integer ElementosPagina, DataTenant tenant) throws ParseException {
 		crearViajesParaRecorridos(tenant);
@@ -95,7 +103,7 @@ public class ViajeCtrl implements IViaje {
 	public DataPasaje comprarPasajeStripe(DataPasaje pasaje, DataTenant tenant){
 		DataViaje viaje = srvViaje.getViaje(pasaje.getViaje().getId(), tenant);
 		DataPrecio precioPasaje = getPrecioDePasaje(pasaje.getOrigen().getId(), pasaje.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
-		usrController.cargarTarjeta(pasaje.getComprador().getId(), precioPasaje.getMonto(), tenant);
+		cargarTarjeta(pasaje.getComprador().getId(), precioPasaje.getMonto(), tenant);
 		return ComprarPasaje(pasaje, tenant);
 	}
 	
@@ -147,8 +155,9 @@ public class ViajeCtrl implements IViaje {
 		DataPrecio precioPasae = getPrecioDePasaje(reserva.getOrigen().getId(), reserva.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
 		reserva.setPrecio(precioPasae);
 		DataReserva nuevaReserva = srvReserva.crearReserva(reserva, tenant);
-		DataUsuario usuario = srvUsuario.getUsuario(nuevaReserva.getUsuarioReserva().getId(), tenant);
+
 		if(nuevaReserva.getUsuarioReserva() != null){
+			DataUsuario usuario = srvUsuario.getUsuario(nuevaReserva.getUsuarioReserva().getId(), tenant);
 			nHandler.sendNotification(usuario, "Pasajes", "reserva", "Reserva realizada con exito: " + nuevaReserva.getDestino().getNombre(),
 					tenant);
 		}
@@ -599,8 +608,65 @@ public class ViajeCtrl implements IViaje {
 
 
 	@Override
-	public DataReserva obtenerReservaPorCi(String ciUsuario, DataTenant tenant) {
-		return srvReserva.getReservaPorCi(ciUsuario, tenant);
+	public List<DataReserva> buscarReservas(DataReserva filtro, DataTenant tenant) {
+		return srvReserva.buscarReserva(filtro, tenant);
+	}
+	
+	@Override
+	public void cargarTarjeta(String idUsuario, Float cargo, DataTenant tenant) {
+		DataConfiguracionEmpresa conf = srvConfiguracion.getConfiguracionEmpresa(tenant);
+		try {
+			Stripe.apiKey = Desencriptar(conf.genStripePrivateKey());
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
+		// Get the credit card details submitted by the form
+		// String token = request.getParameter("stripeToken");
+		DataUsuario usu = srvUsuario.getUsuario(idUsuario, tenant);
+		String cusId = usu.getStripeCustomerId();
+		String emailUsuario = usu.getEmail().getEmail();
+
+		// Create a charge: this will charge the user's card
+		try {
+			Map<String, Object> chargeParams = new HashMap<String, Object>();
+			chargeParams.put("amount", Math.round(cargo * 100)); // Amount in
+																	// cents
+			chargeParams.put("currency", "usd");
+			chargeParams.put("customer", cusId);
+			chargeParams.put("description", "Cargo para: " + emailUsuario);
+
+			// Charge charge = Charge.create(chargeParams);
+			Charge.create(chargeParams);
+
+		} catch (Exception e) {
+			
+		}
+
+	}
+	
+	public static String Desencriptar(String textoEncriptado) throws Exception {
+
+        String secretKey = "ck4VC453FDGDFgdgdf";
+        String base64EncryptedString = "";
+
+        try {
+            byte[] message = Base64.decodeBase64(textoEncriptado.getBytes("utf-8"));
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
+            byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
+            SecretKey key = new SecretKeySpec(keyBytes, "DESede");
+
+            Cipher decipher = Cipher.getInstance("DESede");
+            decipher.init(Cipher.DECRYPT_MODE, key);
+
+            byte[] plainText = decipher.doFinal(message);
+
+            base64EncryptedString = new String(plainText, "UTF-8");
+
+        } catch (Exception ex) {
+        }
+        return base64EncryptedString;
 	}
 
 }

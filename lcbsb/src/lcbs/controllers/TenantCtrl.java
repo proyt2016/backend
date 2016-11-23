@@ -22,6 +22,7 @@ import interfaces.ITenant;
 import interfaces.IUsuario;
 import lcbs.exceptions.SchemaException;
 import lcbs.exceptions.TenantException;
+import lcbs.exceptions.UserException;
 import lcbs.interfaces.ISchemaHandler;
 import lcbs.interfaces.PerfilLocalApi;
 import lcbs.interfaces.TenantLocalApi;
@@ -53,12 +54,20 @@ public class TenantCtrl implements ITenant {
 	@Inject
 	UserTransaction ut;
 
-	public List<DataTenant> list() {
-		return srvTenant.list();
+	public List<DataTenant> list() throws TenantException {
+		try {
+			return srvTenant.list();
+		} catch (Exception e) {
+			throw new TenantException("No se encuentra este tenant", 3);
+		}
 	}
 
-	public DataTenant get(DataTenant tenant) {
-		return srvTenant.get(tenant);
+	public DataTenant get(DataTenant tenant) throws TenantException {
+		try {
+			return srvTenant.get(tenant);
+		} catch (Exception e) {
+			throw new TenantException("Tenant no existe", 3);
+		}
 	}
 
 	public DataTenant create(DataTenant tenant) throws TenantException, Exception {
@@ -70,29 +79,31 @@ public class TenantCtrl implements ITenant {
 				DataTenant res = srvTenant.create(tenant);
 				ut.commit();
 				srvSchemaHandler.createSchema(tenant.getName());
-				
-				insertConfigs(tenant); 
+
+				insertConfigs(tenant);
 				return res;
 			} else {
-				throw new TenantException("Tenant Already Exist");
+				throw new TenantException("Tenant ya existe", 0);
 			}
 		} catch (SchemaException e) {
 			ut.begin();
 			srvTenant.delete(tenant);
 			ut.commit();
-			throw e;// new TenantException("Something went wrong");
+			throw new TenantException("Algo marcho mal", 1);
 		}
 
 	}
 
-	private void insertConfigs(DataTenant tenant) throws SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException {
+	private void insertConfigs(DataTenant tenant)
+			throws SecurityException, IllegalStateException, RollbackException, HeuristicMixedException,
+			HeuristicRollbackException, SystemException, NotSupportedException, TenantException {
 		DataEmpleado usr = new DataEmpleado();
 		String psw = ROLE_SUFIX + tenant.getName();
 		usr.setEliminado(false);
 		usr.setEmail(tenant.getEmail());
 		usr.setNombrePila(ROLE_SUFIX);
 		usr.setClave(psw);
-		
+
 		DataPerfil profile = new DataPerfil();
 		profile.setNombrePerfil("Admin");
 		profile.setConfiguracionEmpresa(true);
@@ -102,62 +113,65 @@ public class TenantCtrl implements ITenant {
 		profile.setGestionReportes(true);
 		profile.setMantenimientoFlota(true);
 		ut.begin();
-		usrCtrl.AltaPerfil(profile, tenant);
+		try {
+			usr = usrCtrl.AltaEmpleado(usr, tenant);
+			ArrayList<DataEmpleado> da = new ArrayList<DataEmpleado>();
+			da.add(usr);
+			profile.setEmpleados(da);
+			profile = usrCtrl.AltaPerfil(profile, tenant);
+			usr.setPerfil(profile);
+			usrCtrl.ModificarEmpleado(usr, tenant);
+		} catch (UserException e) {
+			throw new TenantException("Algo marcho mal creando perfil administrador", 1);
+		}
 		ut.commit();
 		ut.begin();
-		ArrayList<DataEmpleado> da = new ArrayList<DataEmpleado>();
-		da.add(usr);
-		profile.setEmpleados(da);
-		usrCtrl.AltaEmpleado(usr, tenant);
-		ut.commit();
-		ut.begin();
-		nHandler.sendNotification(usr.getEmail().getEmail(), "sadmin", "creado",
-				"Servicio disponible: " + tenant.getDomain() + " Usuario: " + usr.getEmail().getEmail() + " Contraseña: " + psw,
-				tenant);
+		nHandler.sendNotification(usr.getEmail().getEmail(), "sadmin", "creado", "Servicio disponible: "
+				+ tenant.getDomain() + " Usuario: " + usr.getEmail().getEmail() + " Contraseña: " + psw, tenant);
 		ut.commit();
 	}
 
-	public boolean delete(DataTenant tenant) {
+	public boolean delete(DataTenant tenant) throws TenantException {
 		try {
 			ut.begin();
 			Boolean l = srvTenant.delete(tenant);
 			ut.commit();
 			return l;
 		} catch (Exception e) {
-			return false;
+			throw new TenantException("Imposible ejecutar accion en este momento", 2);
 		}
 	}
 
-	public boolean deactivate(DataTenant tenant) {
+	public boolean deactivate(DataTenant tenant) throws TenantException {
 		try {
 			ut.begin();
 			Boolean l = srvTenant.deactivate(tenant);
 			ut.commit();
 			return l;
 		} catch (Exception e) {
-			return false;
+			throw new TenantException("Imposible ejecutar accion en este momento", 2);
 		}
 	}
 
-	public Boolean activate(DataTenant tenant) {
+	public Boolean activate(DataTenant tenant) throws TenantException {
 		try {
 			ut.begin();
 			Boolean l = srvTenant.activate(tenant);
 			ut.commit();
 			return l;
 		} catch (Exception e) {
-			return false;
+			throw new TenantException("Imposible ejecutar accion en este momento", 2);
 		}
 	}
 
-	public List<DataTenant> list(DataTenant filter) {
+	public List<DataTenant> list(DataTenant filter) throws TenantException {
 		try {
 			ut.begin();
 			List<DataTenant> l = srvTenant.list(filter);
 			ut.commit();
 			return l;
 		} catch (Exception e) {
-			return null;
+			throw new TenantException("No se encuentra este tenant", 3);
 		}
 
 	}

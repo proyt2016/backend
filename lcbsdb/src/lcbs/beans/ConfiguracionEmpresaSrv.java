@@ -48,7 +48,7 @@ public class ConfiguracionEmpresaSrv implements ConfiguracionEmpresaLocalApi {
         return conf.getDatatype();
     }
     
-    public void modificarCuponera(DataConfiguracionEmpresa conf, DataTenant tenant){
+    public void editarConfiguracionEmpresa(DataConfiguracionEmpresa conf, DataTenant tenant){
     	ConfiguracionEmpresa realObj = new ConfiguracionEmpresa(conf);
     	if(em.find(ConfiguracionEmpresa.class, realObj.getId()) == null){
            throw new IllegalArgumentException("La configuracion no existe");

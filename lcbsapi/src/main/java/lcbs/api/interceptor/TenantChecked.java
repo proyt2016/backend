@@ -7,11 +7,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import javax.interceptor.InterceptorBinding;
+import javax.ws.rs.NameBinding;
 
 @Inherited
 @InterceptorBinding
 @Target({ ElementType.TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
+@NameBinding
 public @interface TenantChecked {
 
 }

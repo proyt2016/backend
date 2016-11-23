@@ -23,6 +23,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import interfaces.IViaje;
+import lcbs.exceptions.UserException;
 import lcbs.exceptions.ViajeException;
 import lcbs.shares.DataGrupoHorario;
 import lcbs.shares.DataParada;
@@ -226,7 +227,7 @@ public class ViajeRepo {
 		return ctrViaje.listarViajesCambioHorario(idPasaje, tenant);
 	}
 	
-	public DataPasaje comprarPasajeStripe(DataPasaje pasaje, DataTenant tenant){
+	public DataPasaje comprarPasajeStripe(DataPasaje pasaje, DataTenant tenant) throws UserException{
 		return ctrViaje.comprarPasajeStripe(pasaje, tenant);
 	}
 	

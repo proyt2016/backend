@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import lcbs.api.interceptor.TenantChecked;
 import lcbs.api.service.ViajeRepo;
+import lcbs.exceptions.UserException;
 import lcbs.exceptions.ViajeException;
 import lcbs.shares.DataGrupoHorario;
 import lcbs.shares.DataParada;
@@ -418,7 +419,7 @@ import lcbs.shares.DataViajeConvertor;
 	
 	@POST
 	@Path("/comprarpasajestripe/")
-	public DataPasaje comprarPasajeStripe(DataPasajeConvertor pseudoPasaje){
+	public DataPasaje comprarPasajeStripe(DataPasajeConvertor pseudoPasaje) throws UserException{
 		DataPasaje pasaje = pseudoPasaje.genDataPasaje();
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		return repo.comprarPasajeStripe(pasaje, tenant);

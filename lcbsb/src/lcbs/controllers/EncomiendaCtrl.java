@@ -79,6 +79,7 @@ public class EncomiendaCtrl implements IEncomienda {
 
 	@Override
 	public DataEncomienda AltaEncomienda(DataEncomienda encomienda, DataTenant tenant) {
+		encomienda.setPrecio(getPrecioDeEncomienda(encomienda.getReglaCobro().getId(), encomienda.getMonto(), tenant));
 		return srvEncomienda.crearEncomienda(encomienda, tenant);
 	}
 

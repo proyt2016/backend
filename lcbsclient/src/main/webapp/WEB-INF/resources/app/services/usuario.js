@@ -74,10 +74,10 @@
             return defer.promise;
         };
         
-        var guardarTarjeta = function(usuario){
+        var agregarTarjeta = function(usuario){
             var defer = $q.defer();
 
-            $http.post(CONFIGURACION.URL + 'usuarios/guardartokenusuario/', usuario)
+            $http.post(CONFIGURACION.url + 'usuarios/guardartokenusuario/', usuario)
             .success(function (datos) {
                 defer.resolve(datos);
             })
@@ -94,7 +94,7 @@
             add     		: add,
             edit    		: edit,
             login   		: login,
-            guardarTarjeta 	: guardarTarjeta
+            agregarTarjeta 	: agregarTarjeta
         }
 
     }

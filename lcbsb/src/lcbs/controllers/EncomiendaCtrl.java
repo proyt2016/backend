@@ -125,7 +125,7 @@ public class EncomiendaCtrl implements IEncomienda {
 		historialEstados.setFecha(fecha);
 		encomienda.getEstados().add(historialEstados);
 		srvEncomienda.modificarEncomienda(encomienda, tenant);
-		if (!encomienda.getEmisor().equals(null)) {
+		if (encomienda.getEmisor() != null) {
 			nHandler.sendNotification(encomienda.getEmisor(), "Encomiendas", "cambio-estado",
 					"Encomienda  #" + idEncomienda + " estado " + dataEstado.getNombre(), tenant);
 
@@ -150,7 +150,7 @@ public class EncomiendaCtrl implements IEncomienda {
 		encomienda.setCocheAsignado(coche);
 		srvEncomienda.modificarEncomienda(encomienda, tenant);
 		srvVehiculo.modificarVehiculo(coche, tenant);
-		if (!encomienda.getEmisor().equals(null)) {
+		if (encomienda.getEmisor() != null) {
 			nHandler.sendNotification(encomienda.getEmisor(), "Encomiendas", "asigna-coche",
 					"Encomienda  #" + IdEncomienda + " en coche " + coche.getMatricula(), tenant);
 		}

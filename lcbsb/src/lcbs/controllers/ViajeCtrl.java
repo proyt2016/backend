@@ -141,8 +141,9 @@ public class ViajeCtrl implements IViaje {
 		DataPrecio precioPasae = getPrecioDePasaje(reserva.getOrigen().getId(), reserva.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
 		reserva.setPrecio(precioPasae);
 		DataReserva nuevaReserva = srvReserva.crearReserva(reserva, tenant);
+		DataUsuario usuario = srvUsuario.getUsuario(nuevaReserva.getUsuarioReserva().getId(), tenant);
 		if(nuevaReserva.getUsuarioReserva() != null){
-			nHandler.sendNotification(nuevaReserva.getUsuarioReserva(), "Pasajes", "reserva", "Reserva realizada con exito: " + nuevaReserva.getDestino().getNombre(),
+			nHandler.sendNotification(usuario, "Pasajes", "reserva", "Reserva realizada con exito: " + nuevaReserva.getDestino().getNombre(),
 					tenant);
 		}
 		return nuevaReserva;

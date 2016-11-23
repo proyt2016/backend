@@ -8,17 +8,15 @@
       <div class="box-body table-responsive">
         <table class="table table-hover">
           <tr>
+          	<th>#</th>
             <th>Fecha Ingreso</th>
             <th>Estado</th>
-            <th>&Uacute;ltima Actualizaci&oacute;n</th>
-            <th>Ubicaci&oacute;n</th>
             <th></th>
           </tr>
           <tr ng-repeat="encomienda in encomiendas">
-            <td>{{ encomienda.fecha | date : 'dd/MM/yy' }}</td>
-            <td>{{ encomienda.estado }}</td>
-            <td>{{ encomienda.estadoFecha | date : 'dd/MM/yy' }}</td>
-            <td>{{ encomienda.ubicacion }}</td>
+          	<td>{{ encomienda.codigoEncomienda }}</td>
+            <td>{{ encomienda.fechaIngreso | date : 'dd/MM/yy' }}</td>
+            <td>{{ encomienda.estadoActual.nombre }}</td>
             <td>
               <a class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
             </td>

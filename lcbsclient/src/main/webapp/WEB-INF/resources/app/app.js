@@ -7,13 +7,11 @@
     app.controller('appCtrl', ['$scope', '$location', '$localStorage', '$pusher', 'toastr', appCtrl]);
     
     app.run(function(CONFIGURACION) {
-	  Stripe.setPublishableKey(CONFIGURACION.STRIPE_KEY);
+	  Stripe.setPublishableKey(CONFIGURACION.stripePublicKey);
 	});
     
     /*@ngInject*/
-    function configFunction($routeProvider, $httpProvider, toastrConfig, uiGmapGoogleMapApiProvider, CONFIGURACION) {
-    	 
-    	
+    function configFunction($routeProvider, $httpProvider, toastrConfig, uiGmapGoogleMapApiProvider, CONFIGURACION) {  	
         uiGmapGoogleMapApiProvider.configure({
             key: 'AIzaSyBVL227yFvpTa6b0oolhl3PW_BPGLFMnwI',
             v: '3.20', //defaults to latest 3.X anyhow

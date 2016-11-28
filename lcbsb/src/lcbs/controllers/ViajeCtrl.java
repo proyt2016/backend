@@ -208,6 +208,7 @@ public class ViajeCtrl implements IViaje {
 		nuevaReserva.setUsuarioReserva(usuario);
 		nuevaReserva.setUtilizada(false);
 		nuevaReserva.setViaje(pasaje.getViaje());
+		nuevaReserva.setPrecio(pasaje.getPrecio());
 		srvPasaje.darBajaPasaje(pasaje.getId(), tenant);
 		return srvReserva.crearReserva(nuevaReserva, tenant);
 
@@ -349,6 +350,30 @@ public class ViajeCtrl implements IViaje {
 					"Uds compro el pasaje a : " + pasajeACrear.getDestino().getNombre(), tenant);
 		}
 		return pasajeACrear;
+	}
+	
+	@Override
+	public DataPasaje comprarPasajeReservadoStripe(DataReserva filtro, DataTenant tenant) throws UserException{
+		DataReserva reserva = srvReserva.getReserva(filtro.getId(), tenant);
+		DataViaje viaje = srvViaje.getViaje(reserva.getViaje().getId(), tenant);
+		DataPrecio precioPasaje = getPrecioDePasaje(reserva.getOrigen().getId(), reserva.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
+		cargarTarjeta(reserva.getUsuarioReserva().getId(), precioPasaje.getMonto(), tenant);
+		return ComprarPasajeReservado(reserva, tenant);
+	}
+	
+	@Override
+	public DataPasaje comprarPasajeReservadoCuponera(DataReserva filtro, DataTenant tenant) throws Exception{
+		DataReserva reserva = srvReserva.getReserva(filtro.getId(), tenant);
+		DataViaje viaje = srvViaje.getViaje(reserva.getViaje().getId(), tenant);
+		DataPrecio precioPasaje = getPrecioDePasaje(reserva.getOrigen().getId(), reserva.getDestino().getId(), viaje.getRecorrido().getId(), tenant);
+		DataCuponera cuponera = srvUsuario.getUsuario(reserva.getUsuarioReserva().getId(), tenant).getCuponera();
+		Float saldoActual = cuponera.getSaldo();
+		if(saldoActual < precioPasaje.getMonto()){
+			throw new Exception("El saldo de la cuponera no es suficiente");
+		}
+		cuponera.setSaldo(saldoActual - precioPasaje.getMonto());
+		srvCuponera.modificarCuponera(cuponera, tenant);
+		return ComprarPasajeReservado(reserva, tenant);
 	}
 
 	@Override

@@ -238,4 +238,12 @@ public class ViajeRepo {
 	public List<DataReserva> buscarReservas(DataReserva filtro, DataTenant tenant){
 		return ctrViaje.buscarReservas(filtro, tenant);
 	}
+	
+	public DataPasaje comprarPasajeReservadoStripe(DataReserva filtro, DataTenant tenant) throws UserException{
+		return ctrViaje.comprarPasajeReservadoStripe(filtro, tenant);
+	}
+	
+	public DataPasaje comprarPasajeReservadoCuponera(DataReserva filtro, DataTenant tenant) throws Exception{
+		return ctrViaje.comprarPasajeReservadoCuponera(filtro, tenant);
+	}
 }

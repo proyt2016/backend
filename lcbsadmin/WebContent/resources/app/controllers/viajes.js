@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').controller('viajesCtrl', ['$scope', '$routeParams', 'viajeService', '$location', 'uiGmapGoogleMapApi', '$localStorage', 'vehiculosService', viajesCtrl]);
+    angular.module('lacbus').controller('viajesCtrl', ['$scope', '$routeParams', 'viajeService', '$location', 'uiGmapGoogleMapApi', '$localStorage', 'vehiculosService', 'reservaService', viajesCtrl]);
 
-    function viajesCtrl($scope, $routeParams, viajeService, $location, uiGmapGoogleMapApi, $localStorage, vehiculosService) {
+    function viajesCtrl($scope, $routeParams, viajeService, $location, uiGmapGoogleMapApi, $localStorage, vehiculosService, reservaService) {
     	if(!$localStorage.empleadoLogueado){
 			$location.url('/login');
 		}
@@ -28,7 +28,6 @@
                     viajeService.getId(id).then(function (datos) {
                         $scope.viaje = datos;
                         $scope.coches = datos.coches;
-
                         $scope.comprar['origen']    = '0';
                         $scope.comprar['destino']   = datos.recorrido.puntosDeRecorrido.length - 1 + '';
                         
@@ -117,6 +116,13 @@
                 $scope.resultados = data;
             });
         } 
+        
+        $scope.editarViaje = function(){
+        	var viaje = this.viaje;
+        	viajeService.editarViaje(viaje).then(function (data) {
+        		mostrarNotificacion('success', 'Viaje actualizado con exito!');
+            });
+        }
 
         $scope.procesarCompra = function () {
             var viaje = $scope.viaje;
@@ -201,15 +207,16 @@
             });
         }
         
-        $scope.buscarCoche = function(index){
-        	var coche = $scope.cocheStr;
+        $scope.buscarCoche = function(event, index){
+        	var coche = event.currentTarget.value;
         	vehiculosService.buscarCoche(coche).then(function (data) {
-                $scope.emisor = data;
-                $scope['cocheStr'] = null;
+                $scope.coches[index] = data;
+            },function(){
+            	mostrarNotificacion('error', 'El vehiculo no existe!');
             });
         }
         
-        $scope.buscar = function(){
+        $scope.buscarReserva = function(){
             var filtro = {
             	ciPersona : this.ciPersona
             };

@@ -31,7 +31,7 @@
            <div class="col-md-12 col-sm-12 col-xs-12 form-inline" ng-repeat="coche in coches" style="margin-top:10px;">
                <div class="form-group">
                  <label>N&uacute;mero de coche</label>
-                 <input type="text" class="form-control" ng-blur="buscarCoche({{$index}})">
+                 <input type="text" class="form-control" ng-model="coche.numeroVehiculo" ng-blur="buscarCoche($event, $index)">
                </div>
                <a class="btn btn-default" style="margin:0;" ng-click="removeRelation($index)"><i class="fa fa-remove"></i></a>
            </div>

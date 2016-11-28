@@ -66,6 +66,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(Empleado.class);
 		criteria.add(Restrictions.eq("email.email", mailEmpleado));
+		criteria.add(Restrictions.eq("eliminado", false));
 		List<Empleado> listEmp = new ArrayList<Empleado>(new LinkedHashSet(criteria.list()));
 		if (listEmp.size() == 1) {
 			DataEmpleado empleado = listEmp.get(0).getDatatype(true);
@@ -79,6 +80,7 @@ public class EmpleadoSrv implements EmpleadoLocalApi {
 		Session session = (Session) em.getDelegate();
 		Criteria criteria = session.createCriteria(Empleado.class);
 		criteria.add(Restrictions.eq("idEmpleadoLdap", idLdap));
+		criteria.add(Restrictions.eq("eliminado", false));
 		List<Empleado> listEmp = new ArrayList<Empleado>(new LinkedHashSet(criteria.list()));
 		if (listEmp.size() == 1) {
 			DataEmpleado empleado = listEmp.get(0).getDatatype(true);

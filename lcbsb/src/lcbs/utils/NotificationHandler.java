@@ -29,7 +29,7 @@ import lcbs.shares.DataNotificacion;
 import lcbs.shares.DataTenant;
 import lcbs.shares.DataUsuario;
 
-@Singleton
+@Stateless
 public class NotificationHandler {
 
 	private static final Log log = LogFactory.getLog(NotificationHandler.class);

@@ -129,6 +129,20 @@
 
             return defer.promise;
         };
+        
+        var editarViaje = function (viaje){
+        	var defer = $q.defer();
+
+            $http.post('/lcbsapi/rest/viajes/editarviaje/', viaje)
+            .success(function (dato) {
+                defer.resolve(dato);
+            })
+            .error(function(){
+                defer.reject('server error')
+            });
+
+            return defer.promise;
+        }
 
         return {
             buscar : buscar,
@@ -140,6 +154,7 @@
             getTerminales : getTerminales,
             buscarUsuario : buscarUsuario,
             getPrecio : getPrecio,
+            editarViaje: editarViaje
         }
 
     }

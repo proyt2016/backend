@@ -14,7 +14,6 @@
             var r = confirm("Seguro que quiere cancelar la reserva?");
             if (r == true) {
                 reservaService.cancelar(pasaje.id).then(function () {
-                	toastr.success('La reserva se cancelo con exito.', 'Reserva Cancelada.');
                 	pasaje.eliminada = true;
                 });
             }

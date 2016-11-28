@@ -11,15 +11,11 @@
           	<th>#</th>
             <th>Fecha Ingreso</th>
             <th>Estado</th>
-            <th></th>
           </tr>
           <tr ng-repeat="encomienda in encomiendas">
           	<td>{{ encomienda.codigoEncomienda }}</td>
             <td>{{ encomienda.fechaIngreso | date : 'dd/MM/yy' }}</td>
             <td>{{ encomienda.estadoActual.nombre }}</td>
-            <td>
-              <a class="btn btn-primary btn-flat btn-sm" title="detalle"><i class="fa fa-search"></i></a>
-            </td>
           </tr>
           <tr ng-if="!encomiendas.length">
           	<td colspan="5" class="text-center"><h4>No hay encomiendas asociadas a usted.</h4></td>

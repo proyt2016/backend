@@ -106,7 +106,6 @@
         	}
         	
         	pasajeService.reservar(pasaje).then(function (datos) {
-                toastr.success('El pasaje fue reservado con exito.', 'Reserva de pasaje');
                 $('#modal-reservar').modal('hide');
             });
         }

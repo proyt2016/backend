@@ -23,7 +23,6 @@
 
                 pasajeService.cambiarHorario(pasajeData).then(function (datos) {
                 	$scope.compras[index]['viaje'] = viaje;
-                	toastr.success('El cambio de horario se realizo con exito.', 'Cambio de horario exitosa.');
                 	$('#modal-cambiar-horario').modal('hide');
                 });
             }
@@ -39,7 +38,6 @@
                 }
 
                 pasajeService.transferir(pasaje).then(function () {
-                	toastr.success('La transferencia se realizo con exito.', 'Trasnferencia exitosa.');
                 	$scope.compras.splice(index, 1);
                 	$('#modal-transferir-pasaje').modal('hide');
                 });

@@ -103,7 +103,7 @@
         var buscarCoche = function(usuario){
             var defer = $q.defer();
 
-            $http.get('/lcbsapi/rest/vehiculo/obtenervehiculopornumero/' + usuario)
+            $http.get('/lcbsapi/rest/vehiculos/obtenervehiculopornumero/' + usuario)
             .success(function (usr) {
                 defer.resolve(usr);
             })

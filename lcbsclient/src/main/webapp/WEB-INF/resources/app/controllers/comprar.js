@@ -101,6 +101,10 @@
 	    	}
 	    	
 	        pasajeService.comprar(pasaje, pago).then(function (datos) {
+	        	if($scope.comprar.pagos == 'cuponera'){
+	    			$scope.usuarioLogueado.cuponera.saldo -= $scope.precio;
+	    		}
+	        	
 	        	$location.url('/');
 	        });
         };

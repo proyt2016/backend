@@ -5,12 +5,14 @@
    
     app.controller('appCtrl', ['$scope', '$location', '$localStorage', '$pusher', 'toastr', appCtrl]);
     
-    app.run(function(CONFIGURACION, toastr) {
+    app.run(function(CONFIGURACION, toastr, $rootScope) {
     	if(CONFIGURACION.error){
     		toastr.error("Aplicacion no habilitada", "Servicio no disponible");
     	}else{
     		Stripe.setPublishableKey(CONFIGURACION.stripePublicKey);
     	}
+    	
+    	$rootScope.nombreEmpresa = CONFIGURACION.nombre;
 	});
     
     /*@ngInject*/

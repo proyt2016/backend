@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
-    angular.module('lacbus').controller('cuponeraCtrl', ['$scope', '$routeParams', 'usuarioService', '$localStorage', cuponeraCtrl]);
+    angular.module('lacbus').controller('cuponeraCtrl', ['$scope', '$routeParams', 'usuarioService', '$localStorage', '$location', cuponeraCtrl]);
 
-    function cuponeraCtrl($scope, $routeParams, usuarioService, $localStorage) {
+    function cuponeraCtrl($scope, $routeParams, usuarioService, $localStorage, $location) {
     	if(!$localStorage.empleadoLogueado){
 			$location.url('/login');
 		}

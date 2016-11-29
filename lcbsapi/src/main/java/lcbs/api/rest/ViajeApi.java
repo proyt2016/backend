@@ -246,6 +246,22 @@ import lcbs.shares.DataViajeConvertor;
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
 		return repo.ComprarPasajeReservado(reserva, tenant);
 	}
+	
+	@POST
+	@Path("/comprarpasajereservadostripe/")
+	public DataPasaje comprarPasajeReservadoStripe(DataReservaConvertor pseudoReserva) throws UserException{
+		DataReserva reserva = pseudoReserva.genDataReserva();
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.comprarPasajeReservadoStripe(reserva, tenant);
+	}
+	
+	@POST
+	@Path("/comprarpasajereservadocuponera/")
+	public DataPasaje comprarPasajeReservadoCuponera(DataReservaConvertor pseudoReserva) throws Exception{
+		DataReserva reserva = pseudoReserva.genDataReserva();
+		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
+		return repo.comprarPasajeReservadoCuponera(reserva, tenant);
+	}
 
 	// tested
 	@GET
@@ -308,9 +324,9 @@ import lcbs.shares.DataViajeConvertor;
 
 	@POST
 	@Path("/editarviaje/")
-	@TenantChecked public void editarViaje(DataViaje viaje) {
+	@TenantChecked public void editarViaje(DataViajeConvertor viaje) {
 		DataTenant tenant = (DataTenant) request.getAttribute("tenant");
-		repo.editarViaje(viaje, tenant);
+		repo.editarViaje(viaje.genDataViaje(), tenant);
 	}
 
 	@POST

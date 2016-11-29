@@ -274,9 +274,8 @@ public class UsuarioCtrl implements IUsuario {
 			clave = sb.toString();
 			result = srvEmpleado.loginUsuario(mail, clave, tenant);
 		}
-		if (conf.getUrlLdap() != null && !ldapconnection.validarCredenciales(conf.getUrlLdap(), conf.getBaseLdap(),
-				result.getIdEmpleadoLdap(), result.genClave())) {
-			if (result.getIdEmpleadoLdap() != null)
+		if (conf.getUrlLdap() != null && (result == null || !ldapconnection.validarCredenciales(conf.getUrlLdap(), conf.getBaseLdap(), result.getIdEmpleadoLdap(), clave))) {
+			if (result == null || result.getIdEmpleadoLdap() != null)
 				return null;
 		}
 		return result;

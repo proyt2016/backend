@@ -70,5 +70,7 @@ public interface IViaje {
 	public DataPasaje comprarPasajeCuponera(DataPasaje pasaje, DataTenant tenant) throws Exception;
 	public List<DataReserva> buscarReservas(DataReserva filtro, DataTenant tenant);
 	public void cargarTarjeta(String idUsuario, Float cargo, DataTenant tenant);
+	public DataPasaje comprarPasajeReservadoStripe(DataReserva filtro, DataTenant tenant) throws UserException;
+	public DataPasaje comprarPasajeReservadoCuponera(DataReserva filtro, DataTenant tenant) throws Exception;
 
 }

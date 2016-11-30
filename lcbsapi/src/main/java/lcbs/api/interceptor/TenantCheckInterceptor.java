@@ -23,8 +23,11 @@ public class TenantCheckInterceptor implements javax.ws.rs.container.ContainerRe
 		String id = requestContext.getHeaderString("lcbs-tenant");
 		// String host = requestContext.getHeaderString("host");
 		String referer = requestContext.getHeaderString("Referer");
-		String[] sp = referer.replaceAll("http://", "").split("/");
-		String host = sp.length > 0 ? sp[0] : null;
+		String host = null;
+		if(referer != null){
+			String[] sp = referer.replaceAll("http://", "").split("/");
+			host = sp.length > 0 ? sp[0] : null;
+		}
 		requestContext.getHeaders().keySet().forEach((key) -> {
 			rs += key + ":" + requestContext.getHeaders().get(key) + "/";
 		});
@@ -32,6 +35,9 @@ public class TenantCheckInterceptor implements javax.ws.rs.container.ContainerRe
 		if (id != null && !id.isEmpty()) {
 			filter.setId(id);
 		} else {
+			if(host == null){
+				throw new ForbiddenException("Servicio no disponible: " + host + " / " + rs);
+			}
 			filter.setDomain(host);
 		}
 		filter.setIsActive(true);

@@ -70,6 +70,18 @@
 
             return defer.promise;
         };
+        var healt = function(tenant){
+        	var defer = $q.defer();
+            $http.post(routesUrls.tenant.healt, tenant)
+            .success(function (tenant) {
+                defer.resolve(tenant);
+            })
+            .error(function(){
+                defer.reject('Tenant no habilitado o con problemas');
+            });
+
+            return defer.promise;
+    	};
         var deleteTenant = function(tenant){
             var defer = $q.defer();
             $http.post(routesUrls.tenant.delete, tenant)
@@ -84,6 +96,7 @@
         };
         
         return {
+        	healt: healt,
         	list: list,
         	create: create,
             activate: activate,

@@ -40,7 +40,7 @@
 </head>
 
 
-<body class="nav-md" ng-app="lacbus">
+<body class="nav-md" ng-controller="appCtrl">
 
   <div class="container body">
 
@@ -73,12 +73,14 @@
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
             <div class="menu_section">
-              <ul class="nav side-menu">
+              <ul class="nav side-menu" ng-show="usuarioLogueado">
                 <li><a><i class="fa fa-cubes"></i> Instancias <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="display: none">
-                    <li><a href="#/tenant/">Listar</a>
+                  <ul class="nav child_menu">
+                    <li>
+                    	<a href="#/tenant/">Listar</a>
                     </li>
-                    <li><a href="#/tenant/create">Agregar</a>
+                    <li>
+                    	<a href="#/tenant/create">Agregar</a>
                     </li> 
                   </ul>
                 </li>
@@ -95,12 +97,17 @@
 
         <div class="nav_menu">
           <nav class="" role="navigation">
-            <div class="nav toggle">
-              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-            </div>
 
+            <ul class="nav navbar-nav navbar-right" ng-show="usuarioLogueado">
+              <li class="">
+                <a class="user-profile dropdown-toggle"  ng-click="logout()">
+                  {{ usuarioLogueado.nombrePila + ' ' +  usuarioLogueado.apellido }}
+                </a>
+              </li>
+            </ul>
           
           </nav>
+
         </div>
 
       </div>
@@ -154,6 +161,7 @@
   <script src="dist/js/angular-route.min.js"></script>
   <script src="dist/js/angular-animate.min.js"></script>
   <script src="dist/js/angular-toastr.tpls.min.js"></script>
+  <script src="dist/js/ngStorage.min.js"></script>
 
   <!-- jQuery 2.2.0 -->
   <script src="libs/jQuery/jQuery-2.2.0.min.js"></script>
@@ -179,6 +187,7 @@
  
   
    <script src="app/controllers/tenant.js"></script>
+   <script src="app/controllers/login.js"></script>
   <!-- /datepicker -->
   <!-- /footer content -->
 </body>

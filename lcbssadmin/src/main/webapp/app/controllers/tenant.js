@@ -1,8 +1,12 @@
 (function () {
     'use strict';
-    angular.module('lacbus').controller('tenantCtrl', ['$scope','$timeout','tenantSrv', '$pusher', 'toastr', tenantCtrl]);
+    angular.module('lacbus').controller('tenantCtrl', ['$scope','$timeout','tenantSrv', '$pusher', 'toastr', '$localStorage', '$location',  tenantCtrl]);
    
-    function tenantCtrl($scope,$timeout, service, $pusher, toastr) {
+    function tenantCtrl($scope,$timeout, service, $pusher, toastr, $localStorage, $location) {
+    	if(!$localStorage.usuarioLogueado){
+			$location.url('/login');
+		}
+    	
     	$scope.tenants = [];
     	var client = new Pusher('e782ddf887a873098d22');
 		var pusher = $pusher(client);
@@ -34,6 +38,13 @@
     			$scope.tenantTmp = new factory();
     			location.href = "#/tenant";
     			toastr.success("Cambio realizado con exito", "Accion");
+    		}, function(error){
+    			toastr.error(error, "Error");
+    		});
+    	};
+    	$scope.healt= function(tenant){
+    		service.healt(tenant).then(function(list){
+    			toastr.success("Tenant funcionando correctamente", "Estado");
     		}, function(error){
     			toastr.error(error, "Error");
     		});

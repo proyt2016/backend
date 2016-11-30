@@ -67,6 +67,12 @@ public class TenantSrv implements TenantLocalApi {
 	public List<DataTenant> list(DataTenant filtro) {
 		return filter(filtro);
 	}
+//	@Override
+//	public DataTenant healt(DataTenant filtro) {
+//		List<DataTenant> li = filter(filtro);
+//		DataTenant dt = li.size()>0 ? li.get(0) : null;
+//		return dt;
+//	}
 	@Override
 	public DataTenant get(DataTenant filtro) {
 		List<DataTenant> li = filter(filtro);

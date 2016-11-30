@@ -21,10 +21,10 @@ public class TenantIntercept {
 	{ 
 		int l = ctx.getParameters().length;
 		DataTenant tenant = (DataTenant) ctx.getParameters()[l - 1];
-		log.debug(tenant.getName());
-		em.createNativeQuery("SET SCHEMA '"+ tenant.getName()+"'").executeUpdate();
-		em.createNativeQuery("SET search_path TO "+ tenant.getName()).executeUpdate();
-		
+		if(tenant != null){
+			em.createNativeQuery("SET SCHEMA '"+ tenant.getName()+"'").executeUpdate();
+			em.createNativeQuery("SET search_path TO "+ tenant.getName()).executeUpdate();	
+		}
 	   return ctx.proceed();
 	}
 		
